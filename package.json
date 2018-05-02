@@ -4,9 +4,9 @@
   "description": "CodeHire",
   "main": "index.js",
   "scripts": {
-      "start": "webpack-dev-server --mode development --open",
-      "react-dev": "webpack -d --watch",
-      "build": "webpack --mode production"
+    "start": "webpack-dev-server --mode development --open",
+    "react-dev": "webpack -d --watch",
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -19,8 +19,20 @@
   },
   "homepage": "https://github.com/wkimak/CodeHire#readme",
   "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
+    "d3": "^5.1.0",
+    "express": "^4.16.3",
+    "passport": "^0.4.0",
     "react": "^16.3.2",
-    "react-dom": "^16.3.2"
+    "react-dom": "^16.3.2",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.2.0",
+    "redux": "^4.0.0",
+    "redux-form": "^7.3.0",
+    "redux-thunk": "^2.2.0",
+    "socket.io": "^2.1.0",
+    "socket.io-client": "^2.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
