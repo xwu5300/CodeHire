@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
 
-class App extends Component {
+import Navbar from './Navbar.jsx';
+import Login from './Login.jsx';
+import CompanySignup from './CompanySignup.jsx';
+import UserSignup from './UserSignup.jsx';
 
+import AdminDashboardView from './AdminView/AdminDashboardView.jsx';
+
+
+
+
+class App extends Component {
   render() {
     return (
       <div>
-       Testing meeooww!!!
+       <Navbar />
+       <Login />
+       <CompanySignup />
+       <UserSignup />
+       <AdminDashboardView />  
       </div>
     );
   }

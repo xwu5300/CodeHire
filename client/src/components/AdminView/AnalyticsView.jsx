@@ -8,7 +8,9 @@ class AnalyticsView extends Component {
 
   render() {
     return (
-      <div></div>
+      <div className='analytics_container'>
+        <h1>Analytics</h1>
+      </div>
     )
   }
 }

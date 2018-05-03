@@ -1,0 +1,197 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	margin-top: -15px;
+}
+
+/* -------- Navbar ---------- */
+.navbar_container {
+	background-color: black;
+	height: 65px;
+	color: white;
+}
+
+.navbar_container p {
+	position: relative;
+	top: 20px;
+	margin-left: 50px;
+	font-size: 22px;
+}
+
+.navbar_container ul {
+	list-style: none;
+	font-size: 18px;
+}
+
+.navbar_container li {
+	display: inline-block;
+	float: right;
+	margin-right: 30px;
+	position: relative;
+	bottom: 25px;
+}
+
+/* --------- Login Form -------- */
+.login_form {
+	margin-top: 125px;
+}
+
+.login_form input, .company_signup_form input, .user_signup_form input{
+  display: block;
+  width: 40%;
+  height: 50px;
+  margin: auto;
+}
+
+
+.login_form button, .company_signup_form button, .user_signup_form button {
+	text-align: center;
+	display: block;
+	margin: auto;
+	width: 40%;
+	height: 30px;
+	background-color: rgba(0,0,0,0.7);
+	color: white;
+}
+
+/* ------ Company signup form ------- */
+
+.company_signup_form {
+	margin-top: 30px;
+}
+
+.company_signup_form textarea {
+	width: 40%;
+	height: 100px;
+	display: block;
+	margin: auto;
+}
+
+/* -------- User signup form --------- */
+.user_signup_form {
+	margin-top: 30px;
+}
+
+/* -------- Admin Dashboard ------ */
+
+.view_profile_btn {
+	float: right;
+	display: block;
+	height: 35px;
+	width: 100px;
+}
+
+.company_challenge_btn {
+  clear: right;
+  display: block;
+  width: 60%;
+  height: 50px;
+  background-color: black;
+  color: white;
+  margin: auto;
+  margin-bottom: 50px;
+}
+
+.company_dashboard {
+	margin-top: 100px;
+	display: block;
+	background-color: rgba(0,0,0,0.3);
+	width: 80%;
+	height: 800px;
+}
+
+.company_calendar {
+	background-color: white;
+	position: relative;
+	top: 50px;
+	width: 90%;
+	height: 450px;
+	margin: auto;
+}
+
+/* ---------- Challenge List View --------- */
+.challenge_list_container, .analytics_container {
+	margin-top: 30px;
+	background-color: rgba(0,0,0,0.3);
+	height: 800px;
+	width: 60%;
+}
+
+.challenge_list_container ul {
+	list-style: none;
+	margin: auto;
+}
+
+.challenge_list_container li {
+	background-color: white;
+	height: 60px;
+	width: 80%;
+	margin-bottom: 20px;
+}
+
+/* --------- Analytics View --------- */
+
+
+/* -------- Company Profile View --------- */
+.company_profile_container, .live_coding_container {
+	margin-top: 100px;
+	display: block;
+	background-color: rgba(0,0,0,0.3);
+	width: 80%;
+	height: 800px;
+}
+
+
+.company_logo {
+	width: 30%;
+	margin: auto;
+}
+
+.company_logo input {
+	width: 70%;
+	height: 40px;
+}
+
+.company_logo button , .company_info button {
+	height: 40px;
+	background-color: black;
+	color: white;
+}
+
+.company_logo img {
+	width: 300px;
+	height: auto;
+	display: block;
+	text-align: center;
+}
+
+.company_info {
+	width: 70%;
+	margin: auto;
+}
+
+.company_info textarea {
+	margin-top: 30px;
+	height: 250px;
+	width: 100%;
+}
+
+/* ------- company live coding view --------- */
+.active_users {
+	background-color: black;
+	width: 30%;
+	height: 100%;
+	float: right;
+	color: white;
+	text-align: center;
+	position: relative;
+	bottom: 60px;
+}
+
+
+
+
+
