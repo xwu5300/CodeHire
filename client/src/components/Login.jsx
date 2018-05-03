@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {withRouter} from 'react-router-dom';
 
 //stateful
 class Login extends Component {
@@ -16,12 +16,13 @@ class Login extends Component {
       <form className='login_form'>
         <input type='text' placeholder='Username' />
         <input type='password' placeholder='Password' />
-        <button type='submit'>Login</button>
-        <button type='button'>Register</button>
+        <button type='submit' onClick={() => {this.props.history.push('/admin')}}>Login Company</button>
+        <button type='submit' onClick={() => {this.props.history.push('/user')}}>Login User</button>
+        <button type='button' onClick={() => {this.props.history.push('/registration')}}>Register</button>
       </form>
     );
   }
 }
 
 
-export default Login;
+export default withRouter(Login);

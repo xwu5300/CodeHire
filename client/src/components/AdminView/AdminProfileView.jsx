@@ -7,7 +7,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-class AdminProfile extends Component {
+class AdminProfileView extends Component {
   constructor() {
     super();
 
@@ -32,4 +32,4 @@ class AdminProfile extends Component {
 }
 //const AdminProfile = connect(null, mapDispatchToProps)(AdminProfile); //can change out dispatch to props if not needed
 
-export default AdminProfile;
+export default AdminProfileView;

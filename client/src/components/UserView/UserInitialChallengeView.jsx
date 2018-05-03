@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 
-class UserInitialChallenge extends Component {
+class UserInitialChallengeView extends Component {
   constructor() {
     super();
   }
 
   render() {
     return (
-      <div></div>
+      <div>
+      <h4>Initial Challenge</h4>
+      don't fail.
+      </div>
     )
   }
 }
