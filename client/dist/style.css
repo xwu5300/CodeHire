@@ -64,7 +64,15 @@ body {
 
 /* -------- Admin Dashboard ------ */
 
-.company_dashboard button {
+.view_profile_btn {
+	float: right;
+	display: block;
+	height: 35px;
+	width: 100px;
+}
+
+.company_challenge_btn {
+  clear: right;
   display: block;
   width: 60%;
   height: 50px;
@@ -76,7 +84,6 @@ body {
 
 .company_dashboard {
 	margin-top: 100px;
-	padding-top: 70px;
 	display: block;
 	background-color: rgba(0,0,0,0.3);
 	width: 80%;
@@ -93,7 +100,7 @@ body {
 }
 
 /* ---------- Challenge List View --------- */
-.challenge_list_container {
+.challenge_list_container, .analytics_container {
 	margin-top: 30px;
 	background-color: rgba(0,0,0,0.3);
 	height: 800px;
@@ -111,3 +118,54 @@ body {
 	width: 80%;
 	margin-bottom: 20px;
 }
+
+/* --------- Analytics View --------- */
+
+
+/* -------- Company Profile View --------- */
+.company_profile_container {
+	margin-top: 100px;
+	display: block;
+	background-color: rgba(0,0,0,0.3);
+	width: 80%;
+	height: 800px;
+}
+
+
+.company_logo {
+	border: 1px solid black;
+	width: 30%;
+	margin: auto;
+}
+
+.company_logo input {
+	width: 50%;
+	height: 40px;
+}
+
+.company_logo button , .company_info button {
+	height: 40px;
+	background-color: black;
+	color: white;
+}
+
+.company_logo img {
+	width: 300px;
+	height: auto;
+	display: block;
+	text-align: center;
+}
+
+.company_info {
+	border: 1px solid black;
+	width: 70%;
+	margin: auto;
+}
+
+.company_info textarea {
+	height: 250px;
+	width: 100%;
+}
+
+
+
