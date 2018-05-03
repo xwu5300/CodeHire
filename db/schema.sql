@@ -29,28 +29,28 @@ CREATE TABLE all_challenges (
   title VARCHAR(30) NOT NULL UNIQUE,
   details TEXT NOT NULL,
   timelimit TIME NOT NULL,
-  company_id SMALLINT REFERENCES companies(id)
+  company_id SMALLINT REFERENCES users(id)
 );
 
 CREATE TABLE company_schedule (
   id SERIAL PRIMARY KEY,
   created_at TIMESTAMP NOT NULL,
   challenge_id SMALLINT REFERENCES all_challenges(id),
-  company_id SMALLINT REFERENCES companies(id)
+  company_id SMALLINT REFERENCES users(id)
 );
 
 CREATE TABLE user_schedule (
   id SERIAL PRIMARY KEY,
   created_at TIMESTAMP NOT NULL,
-  user_id SMALLINT REFERENCES users(id),
+  candidate_id SMALLINT REFERENCES users(id),
   challenge_id SMALLINT REFERENCES all_challenges(id),
-  company_id SMALLINT REFERENCES companies(id)
+  company_id SMALLINT REFERENCES users(id)
 );
 
 CREATE TABLE initial_challenges (
   id SERIAL PRIMARY KEY,
   challenge_id SMALLINT REFERENCES all_challenges(id),
-  company_id SMALLINT REFERENCES companies(id)
+  company_id SMALLINT REFERENCES users(id) UNIQUE
 );
 
 
@@ -59,8 +59,8 @@ CREATE TABLE results (
   userPassed BOOLEAN NOT NULL,
   completed_at TIMESTAMP NOT NULL,
   challenge_id SMALLINT REFERENCES all_challenges(id),
-  user_id SMALLINT REFERENCES users(id),
-  company_id SMALLINT REFERENCES companies(id)
+  candidate_id SMALLINT REFERENCES users(id),
+  company_id SMALLINT REFERENCES users(id)
 );
 
-INSERT INTO users (username, password, name, email, ) VALUES ('admin', 'admin', 'password', 'klingon@gmail.com');
+INSERT INTO users (username, password, name, email ) VALUES ('admin', 'admin', 'password', 'klingon@gmail.com');
