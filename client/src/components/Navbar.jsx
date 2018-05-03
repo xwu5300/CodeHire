@@ -6,7 +6,6 @@ const Navbar = () => {
       <p> CodeHire </p>
       <ul>
         <li>Login</li>
-        <li>Dashboard</li>
       </ul>
     </div>
   );

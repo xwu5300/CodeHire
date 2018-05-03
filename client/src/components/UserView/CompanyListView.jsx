@@ -5,7 +5,9 @@ import { connect } from "react-redux";
 
 const CompanyListView = (props) => {
   return (
-    <div></div>
+    <div className='company_list_container'>
+
+    </div>
   )
 }
 
