@@ -11,7 +11,19 @@ class ChallengeListView extends Component {
 
   render() {
     return (
-      <div></div>
+      <div className='challenge_list_container'>
+        <h1>Challenges</h1>
+        <ul>
+          <li> Challenge 1 </li>
+          <li> Challenge 2 </li>
+          <li> Challenge 1 </li>
+          <li> Challenge 2 </li>
+          <li> Challenge 1 </li>
+          <li> Challenge 2 </li>
+          <li> Challenge 1 </li>
+          <li> Challenge 2 </li>
+        </ul>
+      </div>
     )
   }
 }
