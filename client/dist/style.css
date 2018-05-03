@@ -2,6 +2,25 @@
 	box-sizing: border-box;
 }
 
+body {
+	margin: 0;
+	margin-top: -15px;
+}
+
+/* -------- Navbar ---------- */
+.navbar_container {
+	background-color: black;
+	height: 65px;
+	color: white;
+}
+
+.navbar_container p {
+	position: relative;
+	top: 20px;
+	margin-left: 50px;
+	font-size: 22px;
+}
+
 /* --------- Login Form -------- */
 .login_form {
 	margin-top: 125px;
