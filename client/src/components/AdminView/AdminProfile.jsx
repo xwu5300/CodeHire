@@ -16,6 +16,6 @@ class AdminProfile extends Component {
     <div></div>
   }
 }
-const AdminProfileView = connect(null, mapDispatchToProps)(AdminProfile); //can change out dispatch to props if not needed
+const AdminProfile = connect(null, mapDispatchToProps)(AdminProfile); //can change out dispatch to props if not needed
 
-export default AdminProfileView;
+export default AdminProfile;
