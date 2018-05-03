@@ -4,13 +4,12 @@ CREATE DATABASE code_hire;
 
 \c code_hire;
 
-DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS company_schedule;
 DROP TABLE IF EXISTS user_schedule;
-DROP TABLE IF EXISTS all_challenges;
 DROP TABLE IF EXISTS initial_challenges;
 DROP TABLE IF EXISTS results;
-
+DROP TABLE IF EXISTS all_challenges;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
@@ -20,16 +19,18 @@ CREATE TABLE users (
   email VARCHAR(50) NOT NULL UNIQUE,
   phone VARCHAR(20) NULL UNIQUE,
   information VARCHAR(255) NULL,
-  logoURL VARCHAR(255) NULL,
+  logo_url VARCHAR(255) NULL,
   role VARCHAR(30) NULL
 );
 
 CREATE TABLE all_challenges (
   id SERIAL PRIMARY KEY,
-  title VARCHAR(30) NOT NULL UNIQUE,
-  details TEXT NOT NULL,
+  title VARCHAR(30) NOT NULL,
+  instruction TEXT NOT NULL,
+  test_cases TEXT,
   timelimit TIME NOT NULL,
-  company_id SMALLINT REFERENCES users(id)
+  company_id SMALLINT REFERENCES users(id),
+  difficulty VARCHAR(30)
 );
 
 CREATE TABLE company_schedule (
@@ -56,11 +57,13 @@ CREATE TABLE initial_challenges (
 
 CREATE TABLE results (
   id SERIAL PRIMARY KEY,
-  userPassed BOOLEAN NOT NULL,
+  user_passed BOOLEAN NOT NULL,
+  code TEXT,
   completed_at TIMESTAMP NOT NULL,
+  ini_challenges_id SMALLINT REFERENCES ini_challenges_id,
   challenge_id SMALLINT REFERENCES all_challenges(id),
   candidate_id SMALLINT REFERENCES users(id),
   company_id SMALLINT REFERENCES users(id)
 );
 
-INSERT INTO users (username, password, name, email ) VALUES ('admin', 'admin', 'password', 'klingon@gmail.com');
+INSERT INTO users (username, password, name, email, role ) VALUES ('admin', 'admin', 'password', 'klingon@gmail.com', 'admin');
