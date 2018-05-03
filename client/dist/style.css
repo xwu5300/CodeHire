@@ -1,0 +1,44 @@
+* {
+	box-sizing: border-box;
+}
+
+/* --------- Login Form -------- */
+.login_form {
+	margin-top: 125px;
+}
+
+.login_form input, .company_signup_form input, .user_signup_form input{
+  display: block;
+  width: 40%;
+  height: 50px;
+  margin: auto;
+}
+
+
+.login_form button, .company_signup_form button, .user_signup_form button {
+	text-align: center;
+	display: block;
+	margin: auto;
+	width: 40%;
+	height: 30px;
+	background-color: rgba(0,0,0,0.7);
+	color: white;
+}
+
+/* ------ Company signup form ------- */
+
+.company_signup_form {
+	margin-top: 30px;
+}
+
+.company_signup_form textarea {
+	width: 40%;
+	height: 100px;
+	display: block;
+	margin: auto;
+}
+
+/* -------- User signup form --------- */
+.user_signup_form {
+	margin-top: 30px;
+}

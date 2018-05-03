@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
+import Login from './Login.jsx';
+import CompanySignup from './CompanySignup.jsx';
+import UserSignup from './UserSignup.jsx';
 
 class App extends Component {
 
   render() {
     return (
       <div>
-       Testing meeooww!!!
+       <Login />
+       <CompanySignup />
+       <UserSignup />
       </div>
     );
   }
