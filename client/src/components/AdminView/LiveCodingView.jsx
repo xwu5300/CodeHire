@@ -12,7 +12,12 @@ class LiveCodingView extends Component {
 
   render() {
     return (
-      <div></div>
+      <div className='live_coding_container'>
+        <h1>Live Coding</h1>
+        <div className='active_users'>
+          <h3>Active Users</h3>
+        </div>
+      </div>
     )
   }
 }

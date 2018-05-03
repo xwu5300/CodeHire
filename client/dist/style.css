@@ -21,6 +21,19 @@ body {
 	font-size: 22px;
 }
 
+.navbar_container ul {
+	list-style: none;
+	font-size: 18px;
+}
+
+.navbar_container li {
+	display: inline-block;
+	float: right;
+	margin-right: 30px;
+	position: relative;
+	bottom: 25px;
+}
+
 /* --------- Login Form -------- */
 .login_form {
 	margin-top: 125px;
@@ -123,7 +136,7 @@ body {
 
 
 /* -------- Company Profile View --------- */
-.company_profile_container {
+.company_profile_container, .live_coding_container {
 	margin-top: 100px;
 	display: block;
 	background-color: rgba(0,0,0,0.3);
@@ -133,13 +146,12 @@ body {
 
 
 .company_logo {
-	border: 1px solid black;
 	width: 30%;
 	margin: auto;
 }
 
 .company_logo input {
-	width: 50%;
+	width: 70%;
 	height: 40px;
 }
 
@@ -157,14 +169,26 @@ body {
 }
 
 .company_info {
-	border: 1px solid black;
 	width: 70%;
 	margin: auto;
 }
 
 .company_info textarea {
+	margin-top: 30px;
 	height: 250px;
 	width: 100%;
+}
+
+/* ------- company live coding view --------- */
+.active_users {
+	background-color: black;
+	width: 30%;
+	height: 100%;
+	float: right;
+	color: white;
+	text-align: center;
+	position: relative;
+	bottom: 60px;
 }
 
 
