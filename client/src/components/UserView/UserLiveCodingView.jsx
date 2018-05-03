@@ -9,7 +9,10 @@ class UserLiveCodingView extends Component {
 
   render() {
     return (
-      <div></div>
+      <div>
+        <h4>Live Challenge</h4>
+        this is the live coding room
+      </div>
     )
   }
 }

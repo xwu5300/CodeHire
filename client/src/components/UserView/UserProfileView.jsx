@@ -11,7 +11,11 @@ class UserProfileView extends Component {
 
   render() {
     return (
-      <div></div>
+      <div>
+      <h4>User Profile</h4>
+      Name:
+      Skills: none
+      </div>
     )
   }
 }
