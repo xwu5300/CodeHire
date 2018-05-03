@@ -8,8 +8,6 @@ import UserSignup from './UserSignup.jsx';
 import AdminDashboardView from './AdminView/AdminDashboardView.jsx';
 
 
-
-
 class App extends Component {
   render() {
     return (
