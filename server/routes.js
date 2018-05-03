@@ -1,5 +1,7 @@
 const router = require('express').Router();
 
+const userControllers = require('./controllers/users');
+
 
 /* ------- User Routes --------- */
 
@@ -75,7 +77,7 @@ router.patch('/api/userCalendar:date', (req, res) => {
 router.get('/api/companyCalendar', (req, res) => {
 
 
-}
+})
 // update company Calendar
 router.post('/api/companyCalendar', (req, res) => {
 
