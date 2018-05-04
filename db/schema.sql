@@ -10,7 +10,6 @@ DROP TABLE IF EXISTS user_schedule CASCADE;
 DROP TABLE IF EXISTS all_challenges CASCADE;
 DROP TABLE IF EXISTS results CASCADE;
 
-
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   username VARCHAR(30) NOT NULL UNIQUE,
@@ -29,8 +28,9 @@ CREATE TABLE all_challenges (
   instruction TEXT NOT NULL,
   test_cases TEXT,
   timelimit TIME,
-  company_id SMALLINT REFERENCES users(id),
-  difficulty VARCHAR(30)
+  difficulty VARCHAR(30),
+  initial BOOLEAN NOT NULL,
+  company_id SMALLINT REFERENCES users(id)
 );
 
 CREATE TABLE company_schedule (
@@ -61,8 +61,9 @@ CREATE TABLE results (
 
 INSERT INTO users (username, password, name, email, role ) VALUES ('admin', 'admin', 'password', 'klingon@gmail.com', 'admin');
 INSERT INTO users (username, password, name, email) VALUES ('google', 'google', 'larry', 'larry@google.com');
-INSERT INTO all_challenges (title, details, timelimit, initial, company_id) VALUES ('QuickSort', 'sorty', null, false, 1);
-INSERT INTO all_challenges (title, details, timelimit, initial, company_id) VALUES ('BubbleSort', 'bubble god', null, false, 1);
-INSERT INTO all_challenges (title, details, timelimit, initial, company_id) VALUES ('Two Sum', 'Find the sum...', null, false, 2);
+INSERT INTO all_challenges (title, instruction, test_cases, timelimit, difficulty, initial, company_id) VALUES ('QuickSort', 'sorty', null, null, null, false, 1);
+INSERT INTO all_challenges (title, instruction, test_cases, timelimit, difficulty, initial, company_id) VALUES ('BubbleSort', 'bubble god', null, null, null, false, 1);
+INSERT INTO all_challenges (title, instruction, test_cases, timelimit, difficulty, initial, company_id) VALUES ('Two Sum', 'Find the sum...', null, null, null, false, 2);
+INSERT INTO all_challenges (title, instruction, test_cases, timelimit, difficulty, initial, company_id) VALUES ('Anagram Solver', 'Find all anagrams...', null, null, null, false, 2);
 
 /* psql < db/schema.sql */

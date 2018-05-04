@@ -49,10 +49,12 @@ router.get('/api/defaultChallenges', (req, res) => {
 
 router.post('/api/challenges', (req, res) => {
   let title = "Three Sum";
-  let details = 'these are details';
+  let instruction = 'these are details';
+  let testCases = null;
   let timelimit = null;
+  let difficulty = null;
   let companyId = 2;
-  challengeControllers.saveDefaultChallenge(title, details, timelimit, companyId)
+  challengeControllers.saveDefaultChallenge(title, instruction, testCases, timelimit, difficulty, companyId)
   .then(() => {
     res.send('Successfully saved challenge');
   })

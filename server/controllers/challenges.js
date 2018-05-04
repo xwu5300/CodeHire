@@ -1,7 +1,7 @@
 const knex = require('../../db/index.js');
 
 //saves a default challenge to company challenge list
-module.exports.saveDefaultChallenge = (title, details, timelimit, companyId) => {
+module.exports.saveDefaultChallenge = (title, instruction, testCases, timelimit, difficulty, companyId) => {
   return knex('all_challenges')
   .where({
     company_id: companyId,
@@ -9,15 +9,16 @@ module.exports.saveDefaultChallenge = (title, details, timelimit, companyId) => 
   })
   .update({
     title: title,
-    details: details
+    instruction: instruction
   })
   .then((res) => {
     if (res === 0) {
-      console.log(title, details, timelimit, companyId);
       return knex('all_challenges').insert({
         title: title,
-        details: details,
+        instruction: instruction,
+        test_cases: testCases,
         timelimit: timelimit,
+        difficulty: difficulty,
         initial: false,
         company_id: companyId
       })
