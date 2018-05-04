@@ -58,6 +58,7 @@ router.get('/api/defaultChallenges', (req, res) => {
     res.send(data);
   })
 })
+<<<<<<< HEAD
 
 router.post('/api/challenges', (req, res) => {
   let title = "Three Sum";
@@ -79,6 +80,13 @@ router.delete('/api/challenges', (req, res) => {
   challengeControllers.deleteCompanyChallenge(title, companyId)
   .then(() => {
     res.send('Successfully deleted challenge');
+=======
+
+router.post('/api/callenges', (req, res) => {
+  challengeControllers.saveDefaultChallenge()
+  .then((data) => {
+    res.send(data);
+>>>>>>> server can retrieve company and default challenges
   })
 })
 
@@ -98,6 +106,14 @@ router.get('/api/initialChallenge', (req, res) => {
 
 })
 
+<<<<<<< HEAD
+=======
+// delete company challenge from 'all_challenges' table
+router.delete('./api/challenges/:challengeid', (req, res) => {
+
+})
+
+>>>>>>> server can retrieve company and default challenges
 /* ---------- Schedule Routes -------- */
 
 // get user schedule
