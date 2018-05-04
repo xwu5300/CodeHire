@@ -82,11 +82,32 @@ router.delete('/api/challenges', (req, res) => {
     res.send('Successfully deleted challenge');
 =======
 
+<<<<<<< HEAD
 router.post('/api/callenges', (req, res) => {
   challengeControllers.saveDefaultChallenge()
   .then((data) => {
     res.send(data);
 >>>>>>> server can retrieve company and default challenges
+=======
+router.post('/api/challenges', (req, res) => {
+  let title = "Three Sum";
+  let details = 'these are details';
+  let timelimit = null;
+  let companyId = 2;
+  challengeControllers.saveDefaultChallenge(title, details, timelimit, companyId)
+  .then(() => {
+    res.send('Successfully saved challenge');
+  })
+})
+
+// delete company challenge from 'all_challenges' table
+router.delete('/api/challenges', (req, res) => {
+  let title = 'Three Sum';
+  let companyId = 2;
+  challengeControllers.deleteCompanyChallenge(title, companyId)
+  .then(() => {
+    res.send('Successfully deleted challenge');
+>>>>>>> server can save and remove challenges from db
   })
 })
 
@@ -112,6 +133,7 @@ router.delete('./api/challenges/:challengeid', (req, res) => {
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 // delete company challenge from 'all_challenges' table
 router.delete('./api/challenges/:challengeid', (req, res) => {
@@ -119,6 +141,8 @@ router.delete('./api/challenges/:challengeid', (req, res) => {
 })
 
 >>>>>>> server can retrieve company and default challenges
+=======
+>>>>>>> server can save and remove challenges from db
 /* ---------- Schedule Routes -------- */
 
 // get user schedule
