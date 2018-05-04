@@ -1,13 +1,15 @@
-const pg = require('pg');
+const config = require('../config.js');
+
 const knex = require('knex')({
   client: 'pg',
   connection: {
     host : 'localhost',
-    user : 'root',
-    port: '3000',
-    password : '',
+    user : config.name || 'root',
+    password : config.password || '',
     database : 'code_hire'
   }
 });
 
-module.exports = { knex };
+
+
+module.exports = knex;

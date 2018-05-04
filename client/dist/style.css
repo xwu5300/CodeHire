@@ -116,7 +116,9 @@ body {
 	margin-top: 30px;
 	background-color: rgba(0,0,0,0.3);
 	height: 800px;
-	width: 60%;
+  width: 40%;
+  float: left;
+  margin-right: 100px;
 }
 
 .challenge_list_container ul {

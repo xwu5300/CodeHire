@@ -10,14 +10,14 @@ const AdminDashboardView = (props) => {
 
   return (
     <div>
-    <div className='company_dashboard'>
-      <button className='view_profile_btn' type='button' onClick={() => {props.history.push('/admin/profile')}}>Edit Profile</button>
-      <button className='view_profile_btn' type='button' onClick={() => {props.history.push('/admin/data')}}>View Analytics</button>
-      <button className='view_profile_btn' type='button' onClick={() => {props.history.push('/admin/live')}}>Live Coding</button>
-      <button className='company_challenge_btn' type='button' onClick={() => {props.history.push('/admin/challenges')}}>Initial Challenge</button>
-      <button className='company_challenge_btn' type='button' onClick={() => {props.history.push('/admin/challenges')}}>Schedule Challenge</button>
-      <div className='company_calendar'></div>
-    </div>
+      <div className='company_dashboard'>
+        <button className='view_profile_btn' type='button' onClick={() => {props.history.push('/admin/profile')}}>Edit Profile</button>
+        <button className='view_profile_btn' type='button' onClick={() => {props.history.push('/admin/data')}}>View Analytics</button>
+        <button className='view_profile_btn' type='button' onClick={() => {props.history.push('/admin/live')}}>Live Coding</button>
+        <button className='company_challenge_btn' type='button' onClick={() => {props.history.push('/admin/challenges')}}>Initial Challenge</button>
+        <button className='company_challenge_btn' type='button' onClick={() => {props.history.push('/admin/challenges')}}>Schedule Challenge</button>
+        <div className='company_calendar'></div>
+      </div>
     </div>
   )
 }
