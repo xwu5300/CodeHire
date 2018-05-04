@@ -59,3 +59,9 @@ CREATE TABLE results (
 );
 
 INSERT INTO users (username, password, name, email, role ) VALUES ('admin', 'admin', 'password', 'klingon@gmail.com', 'admin');
+INSERT INTO users (username, password, name, email) VALUES ('google', 'google', 'larry', 'larry@google.com');
+INSERT INTO all_challenges (title, details, timelimit, initial, company_id) VALUES ('QuickSort', 'sorty', null, false, 1);
+INSERT INTO all_challenges (title, details, timelimit, initial, company_id) VALUES ('BubbleSort', 'bubble god', null, false, 1);
+INSERT INTO all_challenges (title, details, timelimit, initial, company_id) VALUES ('Two Sum', 'Find the sum...', null, false, 2);
+
+/* psql < db/schema.sql */

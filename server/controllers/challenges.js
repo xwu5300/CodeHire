@@ -25,6 +25,8 @@ module.exports.saveDefaultChallenge = (title, details, timelimit, companyId) => 
       .catch((err) => {
         console.log(err);
       })
+    } else {
+      console.log('Challenge is already saved in the db')
     }
   })
   .catch((err) => {
@@ -47,12 +49,26 @@ module.exports.deleteCompanyChallenge = (title, companyId) => {
 
 //get all company challenges
 module.exports.getCompanyChallenges = (companyId) => {
-  return knex('all_challenges').where('id', companyId);
+  return knex('all_challenges').where('company_id', companyId)
+  .then((res) => {
+    console.log('Company challenges successfully received from db');
+    return res;
+  })
+  .catch((err) => {
+    console.log('Could not retrieve company challenges from db:', err);
+  })
 };
 
 //get all default challenges
 module.exports.getDefaultChallenges = () => {
-  return knex('all_challenges').where('id', 1);
+  return knex('all_challenges').where('company_id', 1)
+  .then((res) => {
+    console.log('Default challenges successfully received from db');
+    return res;
+  })
+  .catch((err) => {
+    console.log('Could not retrieve default challenges from db:', err);
+  })
 };
 
 

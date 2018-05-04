@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const userControllers = require('./controllers/users');
-
+const challengeControllers = require('./controllers/challenges');
 
 /* ------- User Routes --------- */
 
@@ -30,9 +30,28 @@ router.post('/api/register', (req, res) => {
 
 /* ---------- Challenge Routes --------- */
 
-// get challenges from 'all_challenges' table
+// get all challenges from 'all_challenges' table
 router.get('/api/challenges', (req, res) => {
+  let companyId = 2;
+  challengeControllers.getCompanyChallenges(companyId)
+  .then((data) => {
+    res.send(data);
+  })
+})
 
+// get default challenges from 'all_challenges' table
+router.get('/api/defaultChallenges', (req, res) => {
+  challengeControllers.getDefaultChallenges()
+  .then((data) => {
+    res.send(data);
+  })
+})
+
+router.post('/api/callenges', (req, res) => {
+  challengeControllers.saveDefaultChallenge()
+  .then((data) => {
+    res.send(data);
+  })
 })
 
 // post initial challenge info into 'intiial_challenges table'
@@ -40,8 +59,8 @@ router.post('/api/initialChallenge', (req, res) => {
 
 })
 
-// updare initial challenge from 'intitial_challenges table'
-router.patch('/api/initialChallenge:challengeid', (req, res) => {
+// update initial challenge from 'intitial_challenges table'
+router.patch('/api/initialChallenge/:challengeid', (req, res) => {
 
 })
 
@@ -52,7 +71,7 @@ router.get('/api/initialChallenge', (req, res) => {
 })
 
 // delete company challenge from 'all_challenges' table
-router.delete('./api/challenges:challengeid', (req, res) => {
+router.delete('./api/challenges/:challengeid', (req, res) => {
 
 })
 
