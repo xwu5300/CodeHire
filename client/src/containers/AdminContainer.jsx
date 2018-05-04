@@ -6,10 +6,10 @@ import AnalyticsView from '../components/AdminView/AnalyticsView.jsx';
 import ChallengeListView from '../components/AdminView/ChallengeListView.jsx';
 import LiveCodingView from '../components/AdminView/LiveCodingView.jsx';
 
-import {BrowserRouter as Router, Route, Link, Switch, History} from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 class AdminContainer extends Component {
-
   render() {
     return (
       <Switch>
@@ -22,5 +22,19 @@ class AdminContainer extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+   return {
+      
+   }
+};
+
+const mapStateToProps = (state) => {
+   return {
+       
+   };
+};
+
+//export default connect(mapStateToProps, mapDispatchToProps)(AdminContainer);
 
 export default AdminContainer;
