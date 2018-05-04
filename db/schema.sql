@@ -48,19 +48,12 @@ CREATE TABLE user_schedule (
   company_id SMALLINT REFERENCES users(id)
 );
 
-CREATE TABLE initial_challenges (
-  id SERIAL PRIMARY KEY,
-  challenge_id SMALLINT REFERENCES all_challenges(id),
-  company_id SMALLINT REFERENCES users(id) UNIQUE
-);
-
-
 CREATE TABLE results (
   id SERIAL PRIMARY KEY,
   user_passed BOOLEAN NOT NULL,
   code TEXT,
+  score SMALLINT,
   completed_at TIMESTAMP NOT NULL,
-  ini_challenges_id SMALLINT REFERENCES ini_challenges_id,
   challenge_id SMALLINT REFERENCES all_challenges(id),
   candidate_id SMALLINT REFERENCES users(id),
   company_id SMALLINT REFERENCES users(id)
