@@ -6,7 +6,6 @@ CREATE DATABASE code_hire;
 
 DROP TABLE IF EXISTS company_schedule;
 DROP TABLE IF EXISTS user_schedule;
-DROP TABLE IF EXISTS initial_challenges;
 DROP TABLE IF EXISTS results;
 DROP TABLE IF EXISTS all_challenges;
 DROP TABLE IF EXISTS users;
@@ -28,7 +27,7 @@ CREATE TABLE all_challenges (
   title VARCHAR(30) NOT NULL,
   instruction TEXT NOT NULL,
   test_cases TEXT,
-  timelimit TIME NOT NULL,
+  timelimit TIME,
   company_id SMALLINT REFERENCES users(id),
   difficulty VARCHAR(30)
 );
