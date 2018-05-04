@@ -4,11 +4,12 @@ CREATE DATABASE code_hire;
 
 \c code_hire;
 
-DROP TABLE IF EXISTS company_schedule;
-DROP TABLE IF EXISTS user_schedule;
-DROP TABLE IF EXISTS results;
-DROP TABLE IF EXISTS all_challenges;
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS company_schedule CASCADE;
+DROP TABLE IF EXISTS user_schedule CASCADE;
+DROP TABLE IF EXISTS all_challenges CASCADE;
+DROP TABLE IF EXISTS results CASCADE;
+
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,

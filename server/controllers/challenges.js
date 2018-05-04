@@ -8,22 +8,24 @@ module.exports.saveDefaultChallenge = (title, details, timelimit, companyId) => 
     title: title
   })
   .update({
-    title: title
+    title: title,
+    details: details
   })
   .then((res) => {
-    if (res.length === 0) {
-      return knex('all_challenges').insert([
-        {title: title},
-        {details: details},
-        {timelimit: timelimit},
-        {initial: false},
-        {company_id: companyId} 
-      ])
+    if (res === 0) {
+      console.log(title, details, timelimit, companyId);
+      return knex('all_challenges').insert({
+        title: title,
+        details: details,
+        timelimit: timelimit,
+        initial: false,
+        company_id: companyId
+      })
       .then((res) => {
-        console.log(res);
+        console.log('Saved challenge to db');
       })
       .catch((err) => {
-        console.log(err);
+        console.log('Unable to save challenge to db', err);
       })
     } else {
       console.log('Challenge is already saved in the db')
@@ -37,13 +39,13 @@ module.exports.saveDefaultChallenge = (title, details, timelimit, companyId) => 
 //removes a challenge from company challenge list
 module.exports.deleteCompanyChallenge = (title, companyId) => {
   return knex('all_challenges')
-  .where({title: title}, {company_id: companyId})
+  .where({title: title, company_id: companyId})
   .del()
   .then((res) => {
-    console.log(res);
+    console.log('Deleted challenge from database');
   })
   .catch((err) => {
-    console.log(err);
+    console.log('Unable to delete challenge from db', err);
   })
 };
 

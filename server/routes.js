@@ -47,10 +47,24 @@ router.get('/api/defaultChallenges', (req, res) => {
   })
 })
 
-router.post('/api/callenges', (req, res) => {
-  challengeControllers.saveDefaultChallenge()
-  .then((data) => {
-    res.send(data);
+router.post('/api/challenges', (req, res) => {
+  let title = "Three Sum";
+  let details = 'these are details';
+  let timelimit = null;
+  let companyId = 2;
+  challengeControllers.saveDefaultChallenge(title, details, timelimit, companyId)
+  .then(() => {
+    res.send('Successfully saved challenge');
+  })
+})
+
+// delete company challenge from 'all_challenges' table
+router.delete('/api/challenges', (req, res) => {
+  let title = 'Three Sum';
+  let companyId = 2;
+  challengeControllers.deleteCompanyChallenge(title, companyId)
+  .then(() => {
+    res.send('Successfully deleted challenge');
   })
 })
 
@@ -67,11 +81,6 @@ router.patch('/api/initialChallenge/:challengeid', (req, res) => {
 // get initial challenge for company
 router.get('/api/initialChallenge', (req, res) => {
 
-
-})
-
-// delete company challenge from 'all_challenges' table
-router.delete('./api/challenges/:challengeid', (req, res) => {
 
 })
 
