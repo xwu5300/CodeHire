@@ -9,31 +9,24 @@ import LiveCodingView from '../components/AdminView/LiveCodingView.jsx';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { fetchChallenges } from '../actions/adminActions.jsx'; 
-import { getDefaultChallenges } from '../constants/actionTypes.jsx';
+import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge } from '../actions/adminActions'; 
+
 
 import axios from 'axios';
 
 class AdminContainer extends Component {
 
-  constructor(props) {
-    super(props);
-    //this.fetchChallenges = this.fetchChallenges.bind(this);
-  }
-
   componentDidMount() {
-    this.props.fetchChallenges();
+    this.props.fetchDefaultChallenges();
   }
 
-  // fetchChallenges(props) {
-  //   this.props.fetchChallenges();
-  // }
 
   render() {
+    console.log('CHALLENGES', this.props);
     return (
       <Switch>
         <Route exact path='/admin' render={ () => (
-          <AdminDashboardView />
+          <AdminDashboardView fetchDefaultChallenges={ this.props.fetchDefaultChallenges } />
         )} />
         <Route exact path='/admin/profile' component={AdminProfileView}/>
         <Route exact path='/admin/challenges' component={ChallengeListView}/>
@@ -46,9 +39,11 @@ class AdminContainer extends Component {
 
 
 const mapStateToProps = (state) => {
-   challenges: state.challenges
+  console.log('STATE', state);
+   default_challenges: state.default_challenges
+   all_challenges: state.all_challenges
 };
 
-export default connect(mapStateToProps, { fetchChallenges })(AdminContainer);
+export default connect(mapStateToProps, { fetchDefaultChallenges, fetchAllChallenges })(AdminContainer);
 
 //export default AdminContainer;
