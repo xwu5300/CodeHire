@@ -1,7 +1,8 @@
 const router = require('express').Router();
 
-const userControllers = require('./controllers/users');
+
 const challengeControllers = require('./controllers/challenges');
+const authControllers = require('./controllers/auth');
 
 /* ------- User Routes --------- */
 
@@ -13,7 +14,6 @@ router.get('/api/users', (req, res) => {
 // update company profile information in 'users' table
 router.patch('/api/users', (req, res) => {
 
-
 })
 
 // authentication route for logging in, check 'users' table for credentials
@@ -22,9 +22,21 @@ router.post('/api/login', (req, res) => {
 })
 
 
-// post user information into 'users' table
-router.post('/api/register', (req, res) => {
+// post candidate register info to 'users' table
+router.post('/api/registerCandidate', (req, res) => {
 
+  authControllers.saveCandidate(req.body.fullName, req.body.username, req.body.password, req.body.email, req.body.phone)
+  .catch((err) => {
+    console.log(err);
+  })
+})
+
+// post company register information into 'users' table
+router.post('/api/registerCompany', (req, res) => {
+  authControllers.saveCompany(req.body.companyName, req.body.username, req.body.password, req.body.email, req.body.phone, req.body.logoUrl)
+  .catch((err) => {
+    console.log(err);
+  })
 })
 
 
