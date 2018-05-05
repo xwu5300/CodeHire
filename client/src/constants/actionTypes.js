@@ -9,7 +9,9 @@ export const GET_DEFAULT_CHALLENGES = 'GET_DEFAULT_CHALLENGES';
 export const SAVE_CHALLENGE = 'SAVE_CHALLENGE';
 
 /* -------- Authentication -------- */
-export const SAVE_USER = 'SAVE_USER';
+export const SAVE_COMPANY = 'SAVE_COMPANY';
+
+export const SAVE_CANDIDATE = 'SAVE_CANDIDATE';
 
 export const CHECK_USER = 'CHECK_USER';
 
