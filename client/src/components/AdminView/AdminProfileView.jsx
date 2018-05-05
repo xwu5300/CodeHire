@@ -12,6 +12,11 @@ class AdminProfileView extends Component {
     super();
 
   }
+
+  componentDidMount() {
+    console.log(this.props);
+  }
+  
   render() {
     return (
       <div className='company_profile_container'>
