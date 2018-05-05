@@ -128,12 +128,12 @@ body {
   margin-right: 100px;
 }
 
-.challenge_list_container ul {
+.challenge_list_container {
 	list-style: none;
 	margin: auto;
 }
 
-.challenge_list_container li {
+.challenge_list_container .challenges {
 	background-color: white;
 	height: 60px;
 	width: 80%;
