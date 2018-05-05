@@ -103,17 +103,11 @@ router.delete('./api/challenges/:challengeid', (req, res) => {
 
 })
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 // delete company challenge from 'all_challenges' table
 router.delete('./api/challenges/:challengeid', (req, res) => {
 
 })
 
->>>>>>> server can retrieve company and default challenges
-=======
->>>>>>> server can save and remove challenges from db
 /* ---------- Schedule Routes -------- */
 
 // get user schedule
