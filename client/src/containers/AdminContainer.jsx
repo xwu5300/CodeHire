@@ -6,7 +6,7 @@ import AnalyticsView from '../components/AdminView/AnalyticsView.jsx';
 import ChallengeListView from '../components/AdminView/ChallengeListView.jsx';
 import LiveCodingView from '../components/AdminView/LiveCodingView.jsx';
 
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge } from '../actions/adminActions'; 
@@ -22,11 +22,10 @@ class AdminContainer extends Component {
 
 
   render() {
-    console.log('CHALLENGES', this.props);
     return (
       <Switch>
         <Route exact path='/admin' render={ () => (
-          <AdminDashboardView fetchDefaultChallenges={ this.props.fetchDefaultChallenges } />
+          <AdminDashboardView />
         )} />
         <Route exact path='/admin/profile' component={AdminProfileView}/>
         <Route exact path='/admin/challenges' component={ChallengeListView}/>
@@ -44,6 +43,8 @@ const mapStateToProps = (state) => {
    all_challenges: state.all_challenges
 };
 
-export default connect(mapStateToProps, { fetchDefaultChallenges, fetchAllChallenges })(AdminContainer);
 
-//export default AdminContainer;
+const connectComponent = connect(mapStateToProps, { fetchDefaultChallenges, fetchAllChallenges })(AdminContainer);
+const routeComponent = withRouter(connectComponent);
+export default routeComponent;
+
