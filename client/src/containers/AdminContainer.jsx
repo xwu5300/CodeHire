@@ -18,8 +18,8 @@ class AdminContainer extends Component {
 
   componentDidMount() {
     this.props.fetchDefaultChallenges();
+    this.props.fetchAllChallenges();
   }
-
 
   render() {
     return (

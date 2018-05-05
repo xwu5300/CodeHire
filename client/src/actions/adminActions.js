@@ -4,8 +4,9 @@ import axios from 'axios';
 
 export const fetchDefaultChallenges = () => (dispatch) => {
   axios.get('/api/defaultChallenges')
-  .then((challenges) => {
-    dispatch({ type: GET_DEFAULT_CHALLENGES, payload: challenges })
+  .then(({data}) => {
+    console.log('default challenges', data)
+    dispatch({ type: GET_DEFAULT_CHALLENGES, payload: data })
   })
   .catch((err) => {
     console.log(err);
@@ -14,17 +15,17 @@ export const fetchDefaultChallenges = () => (dispatch) => {
 
 export const fetchAllChallenges = () => (dispatch) => {
 	axios.get('/api/challenges')
-	.then((challenges) => {
-		console.log(challenges);
-    dispatch({ type: GET_ALL_CHALLENGES, payload: challenges })
+	.then(({data}) => {
+    console.log('challenges fetched', data)
+    dispatch({ type: GET_ALL_CHALLENGES, payload: data })
 	})
 	.catch((err) => {
 		console.log(err);
 	})
 }
 
-export const saveChallenge = () => (dispatch) => {
-  axios.post('/api/challenges')
+export const saveChallenge = (challenge) => (dispatch) => {
+  axios.post('/api/challenges', {challenge: challenge})
   .then(() => {
     console.log('Saved to your challenges')
   })
@@ -33,8 +34,8 @@ export const saveChallenge = () => (dispatch) => {
   })
 }
 
-export const deleteChallenge = () => (dispatch) => {
-  axios.delete('/api/challenges')
+export const deleteChallenge = (challenge) => (dispatch) => {
+  axios.delete('/api/challenges', {params: {challenge: challenge}})
   .then(() => {
     console.log('Removed from your challenges')
   })

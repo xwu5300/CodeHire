@@ -6,21 +6,17 @@ import DefaultChallenges from './ChallengeListView/DefaultChallenges.jsx';
 class ChallengeListView extends Component {
   constructor() {
     super();
-    this.state = {
-
-    }
   }
 
   componentDidMount() {
-    console.log('this is', this.props)
+    console.log(this.props)
   }
 
   render() {
     return (
       <div>
-        <h1>Select a Challenge:</h1>
-        <CompanyChallenges/>
-        <DefaultChallenges/>
+        <CompanyChallenges allChallenges={this.props.all_challenges.all_challenges} delete={this.props.deleteChallenge}/>
+        <DefaultChallenges defaultChallenges={this.props.default_challenges.default_challenges} save={this.props.saveChallenge}/>
       </div>
     )
   }

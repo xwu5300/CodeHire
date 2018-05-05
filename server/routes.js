@@ -60,11 +60,11 @@ router.get('/api/defaultChallenges', (req, res) => {
 })
 
 router.post('/api/challenges', (req, res) => {
-  let title = "Three Sum";
-  let instruction = 'these are details';
-  let testCases = null;
-  let timelimit = null;
-  let difficulty = null;
+  let title = req.body.challenge.title;
+  let instruction = req.body.challenge.instruction;
+  let testCases = req.body.challenge.test_cases || null;
+  let timelimit = req.body.challenge.timelimit || null;
+  let difficulty = req.body.challenge.difficulty || null;
   let companyId = 2;
   challengeControllers.saveDefaultChallenge(title, instruction, testCases, timelimit, difficulty, companyId)
   .then(() => {
@@ -74,7 +74,8 @@ router.post('/api/challenges', (req, res) => {
 
 // delete company challenge from 'all_challenges' table
 router.delete('/api/challenges', (req, res) => {
-  let title = 'Three Sum';
+  let query = JSON.parse(req.query.challenge)
+  let title = query.title;
   let companyId = 2;
   challengeControllers.deleteCompanyChallenge(title, companyId)
   .then(() => {
