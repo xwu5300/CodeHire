@@ -10,17 +10,16 @@ class CompanyChallenges extends Component {
     return (
       <div className='challenge_list_container'>
       <h1>Your Saved Challenges</h1>
-      <ul>
-        <li> Challenge 1 </li>
-        <li> Challenge 2 </li>
-        <li> Challenge 1 </li>
-        <li> Challenge 2 </li>
-        <li> Challenge 1 </li>
-        <li> Challenge 2 </li>
-        <li> Challenge 1 </li>
-        <li> Challenge 2 </li>
-      </ul>
-    </div>
+      {this.props.allChallenges.map((challenge) => {
+        return (
+          <div className="challenges">
+            <div key={challenge.id}>{challenge.title}</div>
+            <div>{challenge.instruction}</div>
+            <button onClick={() => {this.props.delete(challenge)}}>Remove from challenges</button>
+          </div>
+        )
+      })}
+      </div>
     )
   }
 }

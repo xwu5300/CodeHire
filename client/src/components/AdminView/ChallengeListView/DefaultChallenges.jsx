@@ -12,14 +12,15 @@ class DefaultChallenges extends Component {
       <div className='challenge_list_container'>
       <h1>Default Challenges</h1>
       <ul>
-        <li> Challenge 1 </li>
-        <li> Challenge 2 </li>
-        <li> Challenge 1 </li>
-        <li> Challenge 2 </li>
-        <li> Challenge 1 </li>
-        <li> Challenge 2 </li>
-        <li> Challenge 1 </li>
-        <li> Challenge 2 </li>
+      {this.props.defaultChallenges.map((challenge) => {
+        return (
+          <div className="challenges">
+            <div key={challenge.id}>{challenge.title}</div>
+            <div>{challenge.description}</div>
+            <button onClick={() => {this.props.save(challenge)}}>Add to your challenges</button>
+          </div>
+        )
+      })}
       </ul>
     </div>
     )
