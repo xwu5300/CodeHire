@@ -13,5 +13,8 @@ export const checkUser = () => (dispatch) => {
 	axios.post('/api/login')
 	.catch((err) => {
 		console.log('Error checking user', err);
-	})
+	}
+ )
 }
+
+

@@ -16,8 +16,7 @@ class Login extends Component {
       <form className='login_form'>
         <input type='text' placeholder='Username' />
         <input type='password' placeholder='Password' />
-        <button type='submit' onClick={() => {this.props.history.push('/admin')}}>Login Company</button>
-        <button type='submit' onClick={() => {this.props.history.push('/user')}}>Login User</button>
+        <button type='submit' onClick={() => {this.props.history.push('/user')}}>Login</button>
         <button type='button' onClick={() => {this.props.history.push('/registration')}}>Register</button>
       </form>
     );
