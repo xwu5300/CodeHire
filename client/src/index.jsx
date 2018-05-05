@@ -6,11 +6,12 @@ import rootReducer from "./reducers/rootReducer.jsx";
 import { Provider } from "react-redux";
 import { BrowserRouter } from 'react-router-dom';
 
-const store = createStore(rootReducer);
+import store from './store/index.js';
+
 
 //below: store={store}
 ReactDOM.render(
-  <Provider> 
+  <Provider store={store}> 
     <App />
   </Provider>,
   document.getElementById('app'));
