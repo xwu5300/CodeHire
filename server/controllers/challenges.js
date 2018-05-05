@@ -54,6 +54,7 @@ module.exports.deleteCompanyChallenge = (title, companyId) => {
 module.exports.getCompanyChallenges = (companyId) => {
   return knex('all_challenges').where('company_id', companyId)
   .then((res) => {
+    console.log(res);
     console.log('Company challenges successfully received from db');
     return res;
   })
