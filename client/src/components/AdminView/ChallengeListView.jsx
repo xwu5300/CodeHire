@@ -15,8 +15,8 @@ class ChallengeListView extends Component {
   render() {
     return (
       <div>
-        <CompanyChallenges allChallenges={this.props.all_challenges.all_challenges} delete={this.props.deleteChallenge}/>
-        <DefaultChallenges defaultChallenges={this.props.default_challenges.default_challenges} save={this.props.saveChallenge}/>
+        <CompanyChallenges allChallenges={this.props.all_challenges} delete={this.props.deleteChallenge}/>
+        <DefaultChallenges defaultChallenges={this.props.default_challenges} save={this.props.saveChallenge}/>
       </div>
     )
   }

@@ -38,8 +38,8 @@ class AdminContainer extends Component {
 
 
 const mapStateToProps = (state) => ({
-   default_challenges: state.default_challenges,
-   all_challenges: state.all_challenges
+   default_challenges: state.default_challenges.default_challenges,
+   all_challenges: state.all_challenges.all_challenges
 });
 
 // const AdminProfileViewContainer = withRouter(connect(mapStateToProps)(AdminProfileView))
