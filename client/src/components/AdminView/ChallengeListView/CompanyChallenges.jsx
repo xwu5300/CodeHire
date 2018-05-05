@@ -12,8 +12,8 @@ class CompanyChallenges extends Component {
       <h1>Your Saved Challenges</h1>
       {this.props.allChallenges.map((challenge) => {
         return (
-          <div className="challenges">
-            <div key={challenge.id}>{challenge.title}</div>
+          <div className="challenges" key={challenge.id}>
+            <div>{challenge.title}</div>
             <div>{challenge.instruction}</div>
             <button onClick={() => {this.props.delete(challenge)}}>Remove from challenges</button>
           </div>

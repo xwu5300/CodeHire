@@ -14,8 +14,8 @@ class DefaultChallenges extends Component {
       <ul>
       {this.props.defaultChallenges.map((challenge) => {
         return (
-          <div className="challenges">
-            <div key={challenge.id}>{challenge.title}</div>
+          <div className="challenges" key={challenge.id}>
+            <div>{challenge.title}</div>
             <div>{challenge.description}</div>
             <button onClick={() => {this.props.save(challenge)}}>Add to your challenges</button>
           </div>

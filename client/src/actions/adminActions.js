@@ -17,6 +17,9 @@ export const fetchAllChallenges = () => (dispatch) => {
 	axios.get('/api/challenges')
 	.then(({data}) => {
     console.log('challenges fetched', data)
+    data.sort((a, b) => {
+      return a.id - b.id;
+    })
     dispatch({ type: GET_ALL_CHALLENGES, payload: data })
 	})
 	.catch((err) => {
@@ -27,6 +30,7 @@ export const fetchAllChallenges = () => (dispatch) => {
 export const saveChallenge = (challenge) => (dispatch) => {
   axios.post('/api/challenges', {challenge: challenge})
   .then(() => {
+    dispatch(fetchAllChallenges());
     console.log('Saved to your challenges')
   })
   .catch((err) => {
@@ -37,6 +41,7 @@ export const saveChallenge = (challenge) => (dispatch) => {
 export const deleteChallenge = (challenge) => (dispatch) => {
   axios.delete('/api/challenges', {params: {challenge: challenge}})
   .then(() => {
+    dispatch(fetchAllChallenges());
     console.log('Removed from your challenges')
   })
 	.catch((err) => {
