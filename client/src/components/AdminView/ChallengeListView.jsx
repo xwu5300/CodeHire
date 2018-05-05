@@ -11,6 +11,10 @@ class ChallengeListView extends Component {
     }
   }
 
+  componentDidMount() {
+    console.log('this is', this.props)
+  }
+
   render() {
     return (
       <div>

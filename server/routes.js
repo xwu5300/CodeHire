@@ -98,6 +98,16 @@ router.get('/api/initialChallenge', (req, res) => {
 
 })
 
+// delete company challenge from 'all_challenges' table
+router.delete('./api/challenges/:challengeid', (req, res) => {
+
+})
+
+// delete company challenge from 'all_challenges' table
+router.delete('./api/challenges/:challengeid', (req, res) => {
+
+})
+
 /* ---------- Schedule Routes -------- */
 
 // get user schedule
