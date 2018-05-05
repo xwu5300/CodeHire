@@ -17,6 +17,9 @@ export const fetchAllChallenges = () => (dispatch) => {
 	axios.get('/api/challenges')
 	.then(({data}) => {
     console.log('challenges fetched', data)
+    data.sort((a, b) => {
+      return a.id - b.id;
+    })
     dispatch({ type: GET_ALL_CHALLENGES, payload: data })
 	})
 	.catch((err) => {
