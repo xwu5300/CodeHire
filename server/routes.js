@@ -18,8 +18,8 @@ router.patch('/api/users', (req, res) => {
 
 // authentication route for logging in, check 'users' table for credentials
 router.post('/api/login', (req, res) => {
-  authControllers.handleLogin(req.body.username, req.body.password, (role) => {
-    res.status(201).send(role);
+  authControllers.handleLogin(req.body.username, req.body.password, (status) => {
+    res.status(201).send(status);
   })
   .catch((err) => {
     console.log(err);

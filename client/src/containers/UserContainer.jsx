@@ -6,7 +6,7 @@ import UserProfileView from '../components/UserView/UserProfileView.jsx';
 import CompanyListView from '../components/UserView/CompanyListView.jsx';
 import CompanyScheduleView from '../components/UserView/CompanyScheduleView.jsx';
 
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class UserContainer extends Component {
@@ -26,18 +26,12 @@ class UserContainer extends Component {
 
 
 
-const mapDispatchToProps = (dispatch) => {
-   return {
-      
-   }
-};
-
 const mapStateToProps = (state) => {
    return {
        
    };
 };
 
-//export default connect(mapStateToProps, mapDispatchToProps)(UserContainer);
 
-export default UserContainer;
+const connectUserContainer = connect(mapStateToProps, {})(UserContainer);
+export default withRouter(connectUserContainer);

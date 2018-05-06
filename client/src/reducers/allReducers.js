@@ -4,7 +4,7 @@ import { GET_DEFAULT_CHALLENGES, GET_ALL_CHALLENGES, CHECK_USER } from '../const
 const initialState = {
   default_challenges: [],
   all_challenges: [],
-  user_role: 'candidate'
+  user_role: 'company'
 }
 
 
@@ -32,11 +32,11 @@ const allChallenges = (state = [], action) => {
   }
 }
 
-const getUserRole = (state = 'candidate', action) => {
+const loginStatus = (state = 'company', action) => {
   switch(action.type) {
     case 'CHECK_USER':
       return {
-        user_role: action.payload
+        login_status: action.payload
       }
     default:
       return state;  
@@ -45,6 +45,6 @@ const getUserRole = (state = 'candidate', action) => {
 
 
 
-export default { defaultChallenges, allChallenges, getUserRole };
+export default { defaultChallenges, allChallenges, loginStatus };
 
 

@@ -19,9 +19,7 @@ export const saveCompany = (companyName, username, password, email, phone, logoU
 export const handleLogin = (username, password) => (dispatch) => {
 	axios.post('/api/login', {username: username, password: password })
 	.then((response) => {
-		console.log('response', response);
 		dispatch({ type: CHECK_USER, payload: response.data })
-		console.log('RESPONSEEE', response);
 	})
 	.catch((err) => {
 		console.log('Error checking user', err);

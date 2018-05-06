@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
-//stateful
+
 class Login extends Component {
 
   constructor(props) {
@@ -10,6 +10,7 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
+      showStatus: false
     };
     
     this.handleChange = this.handleChange.bind(this);
@@ -25,10 +26,12 @@ class Login extends Component {
   handleSubmit(e) {
     e.preventDefault();
     
-    if(this.props.user_role.user_role === 'company') {
+    if(this.props.login_status.login_status === 'company') {
       this.props.history.push('/admin');
-    } else if(this.props.user_role.user_role === 'candidate') {
+    } else if(this.props.login_status.login_status === 'candidate') {
       this.props.history.push('/user');
+    } else {
+      this.setState({ showStatus: !this.state.showStatus });
     }
     this.props.handleLogin(this.state.username, this.state.password);
   }
@@ -36,22 +39,30 @@ class Login extends Component {
 
   render() {
     return (
-      <div className='ui centered grid'>
-        <form className='ui form six wide column' onSubmit={ (e) => this.handleSubmit(e) }>
-          <div className='field'>
-            <input onChange={ (e) => this.handleChange(e) } name='username' type='text' placeholder='Username' />
-          </div>
-          <div className='field'>
-            <input onChange={ (e) => this.handleChange(e) }name='password' type='password' placeholder='Password' />
-          </div>
-         
-          <button className='ui button' type='submit'>Login</button>
-          <button className='ui button three column row' type='button' onClick={() => {this.props.history.push('/registration')}}>Register</button>
-         
-        </form>
-      </div>
+      <div>
+      {this.state.showStatus ?
+      <div className='login_status'>{this.props.login_status.login_status}</div>
+      : null }
 
-    );
+      <div className='login_container'>
+        <div className='ui centered raised padded container segment' style={{ width: '60%', height: '300px', paddingTop: '70px' }}>
+          <div className='ui centered grid'>
+            <form className='ui form ten wide column' onSubmit={ (e) => this.handleSubmit(e) }>
+              <div className='field'>
+                <input onChange={ (e) => this.handleChange(e) } name='username' type='text' placeholder='Username' required />
+              </div>
+              <div className='field'>
+                <input onChange={ (e) => this.handleChange(e) }name='password' type='password' placeholder='Password' required />
+              </div>
+         
+              <button className='ui green button login_btn' type='submit'>Login</button>
+              <button className='ui yellow button login_btn' type='button' onClick={() => {this.props.history.push('/registration')}}>Register</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      </div>
+    )
   }
 }
 

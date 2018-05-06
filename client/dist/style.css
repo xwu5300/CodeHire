@@ -6,12 +6,42 @@ body {
 	padding: 5px;
 }
 
-form {
+
+/* ------ Login ----- */
+.login_container {
+	margin-top: 125px;
+}
+
+.login_btn {
+	width: 40%;
+	position: relative;
+	left: 40px;
+	top: 20px;
+}
+
+.login_status {
+	background-color: rgba(200,0,0,0.8);
+	color: white;
+	height: 50px;
+	width: 100%;
+	text-align: center;
+	padding-top: 15px;
+}
+
+
+/* ------- Company calendar -------- */
+.company_calendar {
+	margin-top: 100px;
+	height: 600px;
+}
+
+/* ------ Admin Dashboard -------- */
+.admin_dashboard, .company_profile, .challenge_list {
 	margin-top: 75px;
 }
 
-.company_calendar {
-	margin-top: 100px;
+/* ----- Challenege List ------- */
+.challenge_list {
 	height: 600px;
 }
 

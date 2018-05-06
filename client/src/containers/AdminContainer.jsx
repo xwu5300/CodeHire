@@ -1,38 +1,38 @@
 import React, { Component } from 'react';
-
 import AdminDashboardView from '../components/AdminView/AdminDashboardView.jsx';
 import AdminProfileView from '../components/AdminView/AdminProfileView.jsx';
 import AnalyticsView from '../components/AdminView/AnalyticsView.jsx';
 import ChallengeListView from '../components/AdminView/ChallengeListView.jsx';
 import LiveCodingView from '../components/AdminView/LiveCodingView.jsx';
 
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
+
 import { connect } from 'react-redux';
 
 import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge } from '../actions/adminActions'; 
 
 
-import axios from 'axios';
-
 class AdminContainer extends Component {
 
   componentDidMount() {
-    this.props.fetchDefaultChallenges();
     this.props.fetchAllChallenges();
+    this.props.fetchDefaultChallenges();
   }
+
 
   render() {
     return (
       <Switch>
-        <Route exact path='/admin' component={ AdminDashboardView } />
-        <Route exact path='/admin/profile' component={AdminProfileView}/>
-        <Route exact path='/admin/challenges' component={ChallengeListViewContainer} />
-        <Route exact path='/admin/live' component={LiveCodingView}/>
-        <Route exact path='/admin/data' component={AnalyticsView}/>
+        <Route exact path='/admin' component={ AdminDashboardComponent } />
+        <Route exact path='/admin/profile' component={ AdminProfileComponent }/>
+        <Route exact path='/admin/challenges' component={ ChallengeListComponent } />
+        <Route exact path='/admin/live' component={ LiveCodingComponent }/>
+        <Route exact path='/admin/data' component={ AnalyticsComponent }/>
       </Switch>
-    );
+    )
   }
 }
+
 
 
 const mapStateToProps = (state) => ({
@@ -40,9 +40,14 @@ const mapStateToProps = (state) => ({
    all_challenges: state.all_challenges.all_challenges
 });
 
-// const AdminProfileViewContainer = withRouter(connect(mapStateToProps)(AdminProfileView))
 
-const connectComponent = connect(mapStateToProps, { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge })(AdminContainer); 
-const ChallengeListViewContainer = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge })(ChallengeListView);
-const routeComponent = withRouter(connectComponent);
-export default routeComponent;
+
+const ChallengeListComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge })(ChallengeListView);
+const AdminDashboardComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge })(AdminDashboardView);
+const AnalyticsComponent= connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge })(AnalyticsView);
+const LiveCodingComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge })(LiveCodingView);
+const AdminProfileComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge })(AdminProfileView);
+
+const connectAdminContainer = connect(mapStateToProps, {fetchAllChallenges, fetchDefaultChallenges})(AdminContainer);
+export default withRouter(connectAdminContainer);
+

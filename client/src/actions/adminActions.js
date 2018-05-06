@@ -5,7 +5,6 @@ import axios from 'axios';
 export const fetchDefaultChallenges = () => (dispatch) => {
   axios.get('/api/defaultChallenges')
   .then(({data}) => {
-    console.log('default challenges', data)
     dispatch({ type: GET_DEFAULT_CHALLENGES, payload: data })
   })
   .catch((err) => {
@@ -16,7 +15,6 @@ export const fetchDefaultChallenges = () => (dispatch) => {
 export const fetchAllChallenges = () => (dispatch) => {
 	axios.get('/api/challenges')
 	.then(({data}) => {
-    console.log('challenges fetched', data)
     data.sort((a, b) => {
       return a.id - b.id;
     })

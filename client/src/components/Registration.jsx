@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { History } from 'react-router-dom';
+
 
 class Registration extends Component {
 
@@ -15,7 +17,8 @@ class Registration extends Component {
       email: '',
       phone: '',
       logoUrl: '',
-      fullName: ''
+      fullName: '',
+      companyInfo: ''
     };
 
     this.switchForm = this.switchForm.bind(this);
@@ -44,61 +47,67 @@ class Registration extends Component {
 
   render() {
     return (
-      <div className='ui centered grid'>
-        <div className='ui two buttons'>
+      <div className='ui centered padded grid'>
+        <div className='ui two buttons top' style={{ marginTop: '20px' }} >
           <button value='company' onClick={ (e) => this.switchForm(e.target.value) } className="ui active button">Company</button>
           <button value='candidate' onClick={ (e) => this.switchForm(e.target.value) } className="ui button">Candidate</button>
         </div>
 
       {this.state.formView === 'company' ?
-          <form name='companyForm' className='ui form seven wide column' onSubmit={ (e) => this.handleSubmit(e, e.target.name) }>
+      
+          <form name='companyForm' className='ui form seven wide column' onSubmit={ (e) => this.handleSubmit(e, e.target.name) } style={{ marginTop: '75px' }} >
             <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } name='companyName' type='text' placeholder='Company Name' />
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.companyName } name='companyName' type='text' placeholder='Company Name' required />
             </div>
             <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } name='username' type='text' placeholder='Username' />
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.username } name='username' type='text' placeholder='Username' required />
             </div>
             <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } name='password' type='password' placeholder='Password' />
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.password } name='password' type='password' placeholder='Password' required />
             </div>
             <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } name='confirmPassword' type='password' placeholder='Confirm Password' />
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.confirmPassword } name='confirmPassword' type='password' placeholder='Confirm Password' required />
             </div>
             <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } name='email' type='email' placeholder='Email' />
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.email } name='email' type='email' placeholder='Email' />
             </div>
             <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } name='phone' type='text' placeholder='Phone #' />
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.phone } name='phone' type='text' placeholder='Phone #' />
             </div>
             <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } name='logoUrl' type='text' placeholder='Logo URL' />
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.logoUrl } name='logoUrl' type='text' placeholder='Logo URL' />
             </div>
-            <textArea type='text'>Company Information</textArea>
-            <button className='ui button' type='submit'>Register</button>
+            <textarea type='text' onChange={ (e) => this.handleChange(e) } value={ this.state.companyInfo }></textarea>
+            <button className='ui yellow button' type='submit'>Register</button>
+            <button className='ui green button' onClick={ () => this.props.history.push('/') }>To Login</button>
           </form>
+         
         
         :
-          <form name='candidateForm' className='ui form seven wide column' onSubmit={ (e) => this.handleSubmit(e, e.target.name) }>
+         
+          <form name='candidateForm' className='ui form seven wide column' onSubmit={ (e) => this.handleSubmit(e, e.target.name) } style={{ marginTop: '75px' }} >
             <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } name='fullName' type='text' placeholder='Full Name' />
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.fullName } name='fullName' type='text' placeholder='Full Name' required />
             </div>
             <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } name='username' type='text' placeholder='Username' />
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.username } name='username' type='text' placeholder='Username' required />
             </div>
             <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } name='password' type='password' placeholder='Password' />
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.password } name='password' type='password' placeholder='Password' required />
             </div>
             <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } name='confirmPassword' type='password' placeholder='Confirm Password' />
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.confirmPassword } name='confirmPassword' type='password' placeholder='Confirm Password' required />
             </div>
             <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } name='email' type='email' placeholder='Email' />
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.email } name='email' type='email' placeholder='Email' />
             </div>
             <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } name='phone' type='text' placeholder='Phone #' />
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.phone } name='phone' type='text' placeholder='Phone #' />
             </div>
-            <button className='ui button' type='submit'>Register</button>
+            <button className='ui yellow button' type='submit'>Register</button>
+            <button className='ui green button' onClick={ () => this.props.history.push('/') } >To Login</button>
           </form>
+         
       }
       </div>
     );

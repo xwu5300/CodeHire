@@ -36,6 +36,7 @@ module.exports.handleLogin = (username, password, callback) => {
             callback(user[0].role);
           } else {
             console.log('Wrong password');
+            callback('Wrong Password');
           }
         })
       })
@@ -45,6 +46,7 @@ module.exports.handleLogin = (username, password, callback) => {
   })
   .catch((err) => {
     console.log('Username does not match');
+    callback('Username Not Found');
   })
 }
 

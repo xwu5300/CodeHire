@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 
 class AuthContainer extends Component {
   render() {
+
     return (
       <Switch>
         <Route exact path='/' component={ LoginComponent }/>
@@ -20,12 +21,11 @@ class AuthContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  user_role: state.user_role
+  login_status: state.login_status
 })
 
-const connectComponent = connect(mapStateToProps, {})(AuthContainer);
-const RegistrationComponent = connect(null, { saveCompany, saveCandidate })(Registration);
+const connectAuthContainer = connect(mapStateToProps, {})(AuthContainer);
+const RegistrationComponent = connect(mapStateToProps, { saveCompany, saveCandidate })(Registration);
 const LoginComponent = connect(mapStateToProps, { handleLogin })(Login);
-//const routeComponent = withRouter(connectComponent);
 
-export default connectComponent;
+export default withRouter(connectAuthContainer);
