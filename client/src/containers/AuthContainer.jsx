@@ -5,12 +5,12 @@ import Registration from '../components/Registration.jsx';
 
 import { saveCompany, saveCandidate, handleLogin } from '../actions/authActions';
 
-import {BrowserRouter as Router, Route, Link, Switch, History} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link, Switch, History, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class AuthContainer extends Component {
-  
   render() {
+    console.log('USERROLE', this.props.user_role);
     return (
       <Switch>
         <Route exact path='/' component={ LoginComponent }/>
@@ -20,7 +20,13 @@ class AuthContainer extends Component {
   }
 }
 
-const RegistrationComponent = connect(null, { saveCompany, saveCandidate })(Registration);
-const LoginComponent = connect(null, { handleLogin })(Login);
+const mapStateToProps = (state) => ({
+  user_role: state.user_role
+})
 
-export default AuthContainer;
+const connectComponent = connect(mapStateToProps, {})(AuthContainer);
+const RegistrationComponent = connect(null, { saveCompany, saveCandidate })(Registration);
+const LoginComponent = connect(mapStateToProps, { handleLogin })(Login);
+//const routeComponent = withRouter(connectComponent);
+
+export default connectComponent;

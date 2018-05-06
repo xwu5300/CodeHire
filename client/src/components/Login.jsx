@@ -25,7 +25,13 @@ class Login extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    this.props.history.push('/admin');
+    console.log('PROPPPPS', this.props.user_role);
+    
+    if(this.props.user_role.user_role === 'company') {
+      this.props.history.push('/admin');
+    } else if(this.props.user_role.user_role === 'candidate') {
+      this.props.history.push('/user');
+    }
     this.props.handleLogin(this.state.username, this.state.password);
   }
 

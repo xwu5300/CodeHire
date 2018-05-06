@@ -18,7 +18,9 @@ router.patch('/api/users', (req, res) => {
 
 // authentication route for logging in, check 'users' table for credentials
 router.post('/api/login', (req, res) => {
-  authControllers.handleLogin(req.body.username, req.body.password)
+  authControllers.handleLogin(req.body.username, req.body.password, (role) => {
+    res.status(201).send(role);
+  })
   .catch((err) => {
     console.log(err);
   })
@@ -27,7 +29,6 @@ router.post('/api/login', (req, res) => {
 
 // post candidate register info to 'users' table
 router.post('/api/registerCandidate', (req, res) => {
-
   authControllers.saveCandidate(req.body.fullName, req.body.username, req.body.password, req.body.email, req.body.phone)
   .catch((err) => {
     console.log(err);
@@ -37,9 +38,6 @@ router.post('/api/registerCandidate', (req, res) => {
 // post company register information into 'users' table
 router.post('/api/registerCompany', (req, res) => {
   authControllers.saveCompany(req.body.companyName, req.body.username, req.body.password, req.body.email, req.body.phone, req.body.logoUrl)
-  .catch((err) => {
-    console.log(err);
-  })
 })
 
 
