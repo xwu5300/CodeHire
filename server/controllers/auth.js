@@ -24,6 +24,29 @@ module.exports.saveCompany = (companyName, username, password, email, phone, log
 
 }
 
+module.exports.handleLogin = (username, password) => {
+  return knex('users')
+  .select('username')
+  .where({ username: username })
+  .then((user) => {
+    knex('users').select('password').where({ username: user[0].username })
+      .then((hashed) => {
+        bcrypt.compare(password, hashed[0].password, (err, response) => {
+          if(response === true) {
+            console.log('password matched!');
+          } else {
+            console.log('Wrong password');
+          }
+        })
+      })
+      .catch((err) => {
+        console.log('Error matching password', err);
+      }) 
+  })
+  .catch((err) => {
+    console.log('Username does not match');
+  })
+}
 
 
 
