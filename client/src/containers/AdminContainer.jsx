@@ -9,7 +9,8 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge } from '../actions/adminActions'; 
+import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo } from '../actions/adminActions'; 
+import { fetchCompanyInfo } from '../actions/authActions';
 
 
 class AdminContainer extends Component {
@@ -37,7 +38,10 @@ class AdminContainer extends Component {
 
 const mapStateToProps = (state) => ({
    default_challenges: state.default_challenges.default_challenges,
-   all_challenges: state.all_challenges.all_challenges
+   all_challenges: state.all_challenges.all_challenges,
+   username: state.username.username,
+   logo_url: state.logo_url.logo_url,
+   information: state.information.information
 });
 
 
@@ -46,8 +50,8 @@ const ChallengeListComponent = connect(mapStateToProps, { fetchAllChallenges, fe
 const AdminDashboardComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge })(AdminDashboardView);
 const AnalyticsComponent= connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge })(AnalyticsView);
 const LiveCodingComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge })(LiveCodingView);
-const AdminProfileComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge })(AdminProfileView);
+const AdminProfileComponent = connect(mapStateToProps, { updateInfo, fetchCompanyInfo })(AdminProfileView);
 
-const connectAdminContainer = connect(mapStateToProps, {fetchAllChallenges, fetchDefaultChallenges})(AdminContainer);
+const connectAdminContainer = connect(mapStateToProps, {fetchAllChallenges, fetchDefaultChallenges, fetchCompanyInfo })(AdminContainer);
 export default withRouter(connectAdminContainer);
 

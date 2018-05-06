@@ -14,9 +14,9 @@ const AdminDashboardView = (props) => {
           <button className='ui button' type='button' onClick={() => {props.history.push('/admin/profile')}}>Edit Profile</button>
           <button className='ui button' type='button' onClick={() => {props.history.push('/admin/data')}}>View Analytics</button>
           <button className='ui button' type='button' onClick={() => {props.history.push('/admin/live')}}>Live Coding</button>
-          <div className='row centered'>
-            <button className='ui button' type='button' onClick={() => {props.history.push('/admin/challenges')}}>Initial Challenge</button>
-            <button className='ui button' type='button' onClick={() => {props.history.push('/admin/challenges')}}>Schedule Challenge</button>
+          <div className='row centered challenge_btns'>
+            <button className='ui button' type='button' onClick={() => {props.history.push('/admin/challenges')}}>Choose Initial Challenge</button>
+            <button className='ui button' type='button' onClick={() => {props.history.push('/admin/challenges')}}>Choose Scheduled Challenges</button>   
           </div>
           <div className='company_calendar row ui raised container segment'></div>
         </div>

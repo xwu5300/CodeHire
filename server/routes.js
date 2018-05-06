@@ -6,13 +6,21 @@ const authControllers = require('./controllers/auth');
 
 /* ------- User Routes --------- */
 
-// get active users and registered companies
+// get company Information
 router.get('/api/users', (req, res) => {
-	
+  authControllers.getCompanyInfo(req.query.username, (data) => {
+    res.status(200).send(data);
+  })
 })
 
+
 // update company profile information in 'users' table
-router.patch('/api/users', (req, res) => {
+router.patch('/api/users/:username', (req, res) => {
+
+  authControllers.updateCompanyInfo(req.body.username, req.body.logo_url, req.body.information)
+  .catch((err) => {
+    console.log(err);
+  })
 
 })
 
@@ -29,7 +37,9 @@ router.post('/api/login', (req, res) => {
 
 // post candidate register info to 'users' table
 router.post('/api/registerCandidate', (req, res) => {
-  authControllers.saveCandidate(req.body.fullName, req.body.username, req.body.password, req.body.email, req.body.phone)
+  authControllers.saveCandidate(req.body.fullName, req.body.username, req.body.password, req.body.email, req.body.phone, (status) => {
+    res.status(201).send(status);
+  })
   .catch((err) => {
     console.log(err);
   })
@@ -37,7 +47,9 @@ router.post('/api/registerCandidate', (req, res) => {
 
 // post company register information into 'users' table
 router.post('/api/registerCompany', (req, res) => {
-  authControllers.saveCompany(req.body.companyName, req.body.username, req.body.password, req.body.email, req.body.phone, req.body.logoUrl)
+  authControllers.saveCompany(req.body.companyName, req.body.username, req.body.password, req.body.email, req.body.phone, req.body.logoUrl, (status) => {
+    res.status(201).send(status);
+  })
 })
 
 

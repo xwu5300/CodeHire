@@ -17,6 +17,8 @@ export const CHECK_USER = 'CHECK_USER';
 
 export const GET_USER = 'GET_USER';
 
+export const GET_INFO = 'GET_INFO';
+
 /* --------- Calendar --------- */
 export const UPDATE_USER_CALENDAR = 'UPDATE_USER_CALENDAR';
 

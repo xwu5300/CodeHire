@@ -1,20 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fillme: 'in later'
-  }
-}
 
 class AdminProfileView extends Component {
   constructor() {
     super();
 
+    this.state = {
+      logo_url: '',
+      information: ''
+    }
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    console.log(this.props);
+    this.props.fetchCompanyInfo(this.props.username);
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  handleSubmit() {
+    this.props.updateInfo(this.props.username, this.state.logo_url, this.state.information);
   }
   
   render() {
@@ -24,18 +36,18 @@ class AdminProfileView extends Component {
           <div className='ui centered grid'>
             <h1>Company Profile</h1>
             <div className='row'>
-              <img src='http://static1.squarespace.com/static/522a22cbe4b04681b0bff826/t/581cc65fe4fcb5a68ecd940c/1478280803080/hrhq-avatar.png?format=1000w' />
+              <img src={ this.props.logo_url } />
             </div>
             <div className='row'>
-              <input className='ui input' type='text' placeholder='Change Image' />
-              <button type='ui button'>Save Changes</button>
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.logo_url } style={{ width: '60%' }} name='logo_url' className='ui input' type='text' placeholder='Logo Url' />
+              <button onClick={ () => this.handleSubmit() } type='ui button'>Save Changes</button>
             </div>
             
-            <div className='row'>
-              <textArea>Current Info will show here</textArea>
+            <div className='row info_textarea'>
+              <textarea onChange={ (e) => this.handleChange(e) } value={ this.state.information } style={{ width: '80%', height: '300px'}} name='information'>Current Info will show here</textarea>
             </div>
             <div className='row six column'>  
-              <button type='ui button'>Save Changes</button>
+              <button onClick={ () => this.handleSubmit() } type='ui button'>Save Changes</button>
             </div>
           </div>
         </div> 
@@ -43,6 +55,6 @@ class AdminProfileView extends Component {
     )
   }
 }
-//const AdminProfile = connect(null, mapDispatchToProps)(AdminProfile); //can change out dispatch to props if not needed
+
 
 export default AdminProfileView;
