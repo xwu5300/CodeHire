@@ -21,7 +21,6 @@ module.exports.saveCompany = (companyName, username, password, email, phone, log
       console.log('Error saving company', err);
     })
   })
-
 }
 
 module.exports.handleLogin = (username, password, callback) => {

@@ -24,8 +24,6 @@ class Login extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
-    console.log('PROPPPPS', this.props.user_role);
     
     if(this.props.user_role.user_role === 'company') {
       this.props.history.push('/admin');
@@ -38,12 +36,21 @@ class Login extends Component {
 
   render() {
     return (
-      <form className='login_form' onSubmit={ (e) => this.handleSubmit(e) }>
-        <input onChange={ (e) => this.handleChange(e) } name='username' type='text' placeholder='Username' />
-        <input onChange={ (e) => this.handleChange(e) }name='password' type='password' placeholder='Password' />
-        <button type='submit'>Login</button>
-        <button type='button' onClick={() => {this.props.history.push('/registration')}}>Register</button>
-      </form>
+      <div className='ui centered grid'>
+        <form className='ui form six wide column' onSubmit={ (e) => this.handleSubmit(e) }>
+          <div className='field'>
+            <input onChange={ (e) => this.handleChange(e) } name='username' type='text' placeholder='Username' />
+          </div>
+          <div className='field'>
+            <input onChange={ (e) => this.handleChange(e) }name='password' type='password' placeholder='Password' />
+          </div>
+         
+          <button className='ui button' type='submit'>Login</button>
+          <button className='ui button three column row' type='button' onClick={() => {this.props.history.push('/registration')}}>Register</button>
+         
+        </form>
+      </div>
+
     );
   }
 }

@@ -19,19 +19,26 @@ class AdminProfileView extends Component {
   
   render() {
     return (
-      <div className='company_profile_container'>
-        <h1>Company Profile</h1>
-        <div className='company_logo'>
-          <img src='http://static1.squarespace.com/static/522a22cbe4b04681b0bff826/t/581cc65fe4fcb5a68ecd940c/1478280803080/hrhq-avatar.png?format=1000w' />
-          <input type='text' placeholder='Change Image' />
-          <button type='button'>Save Changes</button>
-        </div>
-        <div className='company_info'>
+      <div className='ui centered raised padded container segment'>
+        <div className='ui centered grid'>
+          <h1>Company Profile</h1>
+          <div className='row'>
+            <img src='http://static1.squarespace.com/static/522a22cbe4b04681b0bff826/t/581cc65fe4fcb5a68ecd940c/1478280803080/hrhq-avatar.png?format=1000w' />
+          </div>
+          <div className='row'>
+            <input className='ui input' type='text' placeholder='Change Image' />
+            <button type='ui button'>Save Changes</button>
+          </div>
+            
+        <div className='row'>
           <textArea>Current Info will show here</textArea>
-          <button type='button'>Save Changes</button>
         </div>
-        <div></div>
-      </div>
+        <div className='row six column'>  
+          <button type='ui button'>Save Changes</button>
+        </div>
+        </div>
+
+      </div> 
    );
   }
 }

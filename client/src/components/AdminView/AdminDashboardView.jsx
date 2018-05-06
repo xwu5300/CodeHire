@@ -9,16 +9,21 @@ import {withRouter} from 'react-router-dom';
 const AdminDashboardView = (props) => {
 
   return (
-    <div>
-      <div className='company_dashboard'>
-        <button className='view_profile_btn' type='button' onClick={() => {props.history.push('/admin/profile')}}>Edit Profile</button>
-        <button className='view_profile_btn' type='button' onClick={() => {props.history.push('/admin/data')}}>View Analytics</button>
-        <button className='view_profile_btn' type='button' onClick={() => {props.history.push('/admin/live')}}>Live Coding</button>
-        <button className='company_challenge_btn' type='button' onClick={() => {props.history.push('/admin/challenges')}}>Initial Challenge</button>
-        <button className='company_challenge_btn' type='button' onClick={() => {props.history.push('/admin/challenges')}}>Schedule Challenge</button>
-        <div className='company_calendar'></div>
+    
+    <div className='ui raised padded centered container segment'>
+      <div className='ui grid'>
+      <button className='ui button' type='button' onClick={() => {props.history.push('/admin/profile')}}>Edit Profile</button>
+      <button className='ui button' type='button' onClick={() => {props.history.push('/admin/data')}}>View Analytics</button>
+      <button className='ui button' type='button' onClick={() => {props.history.push('/admin/live')}}>Live Coding</button>
+       <div className='row centered'>
+        <button className='ui button' type='button' onClick={() => {props.history.push('/admin/challenges')}}>Initial Challenge</button>
+     
+        <button className='ui button' type='button' onClick={() => {props.history.push('/admin/challenges')}}>Schedule Challenge</button>
+      </div>
+      <div className='company_calendar row ui raised container segment'></div>
       </div>
     </div>
+   
   )
 }
 

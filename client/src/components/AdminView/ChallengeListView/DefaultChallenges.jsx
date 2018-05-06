@@ -9,7 +9,7 @@ class DefaultChallenges extends Component {
 
   render() {
     return (
-      <div className='challenge_list_container'>
+      <div className='ui segment'>
       <h1>Default Challenges</h1>
       <ul>
       {this.props.defaultChallenges.map((challenge) => {

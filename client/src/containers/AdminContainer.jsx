@@ -24,9 +24,7 @@ class AdminContainer extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path='/admin' render={ () => (
-          <AdminDashboardView />
-        )} />
+        <Route exact path='/admin' component={ AdminDashboardView } />
         <Route exact path='/admin/profile' component={AdminProfileView}/>
         <Route exact path='/admin/challenges' component={ChallengeListViewContainer} />
         <Route exact path='/admin/live' component={LiveCodingView}/>

@@ -33,7 +33,6 @@ const allChallenges = (state = [], action) => {
 }
 
 const getUserRole = (state = 'candidate', action) => {
-  console.log('paylog', action.payload);
   switch(action.type) {
     case 'CHECK_USER':
       return {

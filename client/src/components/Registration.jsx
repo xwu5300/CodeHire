@@ -44,34 +44,61 @@ class Registration extends Component {
 
   render() {
     return (
-      <div>
-        <select className='form_view_select' onChange={ (e) => this.switchForm(e.target.value) }>
-          <option value='company'>Company</option>
-          <option value='candidate'>Candidate</option>
-        </select>
+      <div className='ui centered grid'>
+        <div className='ui two buttons'>
+          <button value='company' onClick={ (e) => this.switchForm(e.target.value) } className="ui active button">Company</button>
+          <button value='candidate' onClick={ (e) => this.switchForm(e.target.value) } className="ui button">Candidate</button>
+        </div>
 
       {this.state.formView === 'company' ?
-        <form name='companyForm' className='company_signup_form' onSubmit={ (e) => this.handleSubmit(e, e.target.name) }>
-          <input onChange={ (e) => this.handleChange(e) } name='companyName' type='text' placeholder='Company Name' />
-          <input onChange={ (e) => this.handleChange(e) } name='username' type='text' placeholder='Username' />
-          <input onChange={ (e) => this.handleChange(e) } name='password' type='password' placeholder='Password' />
-          <input onChange={ (e) => this.handleChange(e) } name='confirmPassword' type='password' placeholder='Confirm Password' />
-          <input onChange={ (e) => this.handleChange(e) } name='email' type='email' placeholder='Email' />
-          <input onChange={ (e) => this.handleChange(e) } name='phone' type='text' placeholder='Phone #' />
-          <input onChange={ (e) => this.handleChange(e) } name='logoUrl' type='text' placeholder='Logo URL' />
-          <textArea type='text'>Company Information</textArea>
-          <button type='submit'>Register</button>
-        </form>
+          <form name='companyForm' className='ui form seven wide column' onSubmit={ (e) => this.handleSubmit(e, e.target.name) }>
+            <div className='field'>
+              <input onChange={ (e) => this.handleChange(e) } name='companyName' type='text' placeholder='Company Name' />
+            </div>
+            <div className='field'>
+              <input onChange={ (e) => this.handleChange(e) } name='username' type='text' placeholder='Username' />
+            </div>
+            <div className='field'>
+              <input onChange={ (e) => this.handleChange(e) } name='password' type='password' placeholder='Password' />
+            </div>
+            <div className='field'>
+              <input onChange={ (e) => this.handleChange(e) } name='confirmPassword' type='password' placeholder='Confirm Password' />
+            </div>
+            <div className='field'>
+              <input onChange={ (e) => this.handleChange(e) } name='email' type='email' placeholder='Email' />
+            </div>
+            <div className='field'>
+              <input onChange={ (e) => this.handleChange(e) } name='phone' type='text' placeholder='Phone #' />
+            </div>
+            <div className='field'>
+              <input onChange={ (e) => this.handleChange(e) } name='logoUrl' type='text' placeholder='Logo URL' />
+            </div>
+            <textArea type='text'>Company Information</textArea>
+            <button className='ui button' type='submit'>Register</button>
+          </form>
+        
         :
-        <form name='candidateForm' className='user_signup_form' onSubmit={ (e) => this.handleSubmit(e, e.target.name) }>
-          <input onChange={ (e) => this.handleChange(e) } name='fullName' type='text' placeholder='Full Name' />
-          <input onChange={ (e) => this.handleChange(e) } name='username' type='text' placeholder='Username' />
-          <input onChange={ (e) => this.handleChange(e) } name='password' type='password' placeholder='Password' />
-          <input onChange={ (e) => this.handleChange(e) } name='confirmPassword' type='password' placeholder='Confirm Password' />
-          <input onChange={ (e) => this.handleChange(e) } name='email' type='email' placeholder='Email' />
-          <input onChange={ (e) => this.handleChange(e) } name='phone' type='text' placeholder='Phone #' />
-          <button type='submit'>Register</button>
-        </form>
+          <form name='candidateForm' className='ui form seven wide column' onSubmit={ (e) => this.handleSubmit(e, e.target.name) }>
+            <div className='field'>
+              <input onChange={ (e) => this.handleChange(e) } name='fullName' type='text' placeholder='Full Name' />
+            </div>
+            <div className='field'>
+              <input onChange={ (e) => this.handleChange(e) } name='username' type='text' placeholder='Username' />
+            </div>
+            <div className='field'>
+              <input onChange={ (e) => this.handleChange(e) } name='password' type='password' placeholder='Password' />
+            </div>
+            <div className='field'>
+              <input onChange={ (e) => this.handleChange(e) } name='confirmPassword' type='password' placeholder='Confirm Password' />
+            </div>
+            <div className='field'>
+              <input onChange={ (e) => this.handleChange(e) } name='email' type='email' placeholder='Email' />
+            </div>
+            <div className='field'>
+              <input onChange={ (e) => this.handleChange(e) } name='phone' type='text' placeholder='Phone #' />
+            </div>
+            <button className='ui button' type='submit'>Register</button>
+          </form>
       }
       </div>
     );

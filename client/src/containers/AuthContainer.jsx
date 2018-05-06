@@ -10,7 +10,6 @@ import { connect } from 'react-redux';
 
 class AuthContainer extends Component {
   render() {
-    console.log('USERROLE', this.props.user_role);
     return (
       <Switch>
         <Route exact path='/' component={ LoginComponent }/>
