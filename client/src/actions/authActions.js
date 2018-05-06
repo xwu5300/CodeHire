@@ -16,8 +16,8 @@ export const saveCompany = (companyName, username, password, email, phone, logoU
 	})
 }
 
-export const checkUser = () => (dispatch) => {
-	axios.post('/api/login')
+export const handleLogin = (username, password) => (dispatch) => {
+	axios.post('/api/login', {username: username, password: password })
 	.catch((err) => {
 		console.log('Error checking user', err);
 	}
