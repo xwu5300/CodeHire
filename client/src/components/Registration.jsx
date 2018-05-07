@@ -38,7 +38,7 @@ class Registration extends Component {
   handleSubmit(e, form) {
     e.preventDefault();
     if(form === 'companyForm') {
-      this.props.saveCompany(this.state.formView, this.state.companyName, this.state.username, this.state.password, this.state.email, this.state.phone, this.state.logoUrl);
+      this.props.saveCompany(this.state.companyName, this.state.username, this.state.password, this.state.email, this.state.phone, this.state.logoUrl);
     } else if(form === 'candidateForm') {
       this.props.saveCandidate(this.state.fullName, this.state.username, this.state.password, this.state.email, this.state.phone);
     }
