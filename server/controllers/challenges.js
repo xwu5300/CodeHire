@@ -20,6 +20,10 @@ module.exports.saveChallenge = (title, instruction, functionName, params, testCa
         function_name: functionName,
         parameters: params,
         test_cases: testCases,
+<<<<<<< HEAD
+=======
+        timelimit: null,
+>>>>>>> companies can submit their own challenges
         examples: examples,
         difficulty: difficulty,
         initial: false,
