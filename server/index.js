@@ -9,7 +9,6 @@ const routes = require('./routes');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
-
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/../client/dist'));
