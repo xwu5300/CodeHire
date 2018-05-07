@@ -9,8 +9,8 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo } from '../actions/adminActions'; 
-import { fetchCompanyInfo } from '../actions/authActions';
+import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo } from '../actions/adminActions'; 
+//import { fetchCompanyInfo } from '../actions/authActions';
 
 
 class AdminContainer extends Component {
