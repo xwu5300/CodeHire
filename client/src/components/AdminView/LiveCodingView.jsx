@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import AceEditor from 'react-ace';
+import brace from 'brace';
+import socketClient from 'socket.io-client';
 
+import 'brace/mode/javascript';
+import 'brace/theme/monokai';
 
 class LiveCodingView extends Component {
   constructor() {
