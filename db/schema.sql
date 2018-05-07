@@ -63,9 +63,9 @@ CREATE TABLE results (
 
 INSERT INTO users (username, password, name, email, role ) VALUES ('admin', 'admin', 'password', 'klingon@gmail.com', 'admin');
 INSERT INTO users (username, password, name, email) VALUES ('google', 'google', 'larry', 'larry@google.com');
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, timelimit, examples, difficulty, initial, company_id) VALUES ('QuickSort', 'sorty', 'quickSort', 'arr', null, null, null, 'medium', false, 1);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, timelimit, examples, difficulty, initial, company_id) VALUES ('BubbleSort', 'bubble god', 'sortBubbles', 'arr', null, null, null, 'medium', false, 1);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, timelimit, examples, difficulty, initial, company_id) VALUES ('Two Sum', 'Find the sum...', 'twoSum', 'arr, target', null, null, null, 'easy', false, 2);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, timelimit, examples, difficulty, initial, company_id) VALUES ('Anagram Solver', 'Find all anagrams...', 'getAnagrams', 'string', null, null, null, 'medium', false, 2);
+INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('QuickSort', 'sorty', 'quickSort', 'arr', null, null, 'medium', false, 1);
+INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('BubbleSort', 'bubble god', 'sortBubbles', 'arr', null, null, 'medium', false, 1);
+INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('Two Sum', 'Find the sum...', 'twoSum', 'arr, target', null, null, 'easy', false, 2);
+INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('Anagram Solver', 'Find all anagrams...', 'getAnagrams', 'string', null, null, 'medium', false, 2);
 
 /* psql < db/schema.sql */

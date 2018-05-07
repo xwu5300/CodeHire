@@ -20,7 +20,6 @@ module.exports.saveChallenge = (title, instruction, functionName, params, testCa
         function_name: functionName,
         parameters: params,
         test_cases: testCases,
-        timelimit: null,
         examples: examples,
         difficulty: difficulty,
         initial: false,

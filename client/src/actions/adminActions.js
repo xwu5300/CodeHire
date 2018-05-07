@@ -25,11 +25,14 @@ export const fetchAllChallenges = () => (dispatch) => {
 	})
 }
 
-export const saveChallenge = (challenge) => (dispatch) => {
+export const saveChallenge = (challenge, cb) => (dispatch) => {
   axios.post('/api/challenges', {challenge: challenge})
   .then(() => {
     dispatch(fetchAllChallenges());
     console.log('Saved to your challenges')
+    if (cb) {
+      cb();
+    }
   })
   .catch((err) => {
   	console.log('Error saving challenge', err);

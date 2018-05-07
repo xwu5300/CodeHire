@@ -17,11 +17,30 @@ class Form extends Component {
       }
     }
     this.handleChange = this.handleChange.bind(this);
+    this.save = this.save.bind(this);
   }
 
   handleChange(event) {
     this.state.challenge[event.target.name] = event.target.value;
     this.setState({challenge: this.state.challenge});
+  }
+
+  save() {
+    this.props.save(this.state.challenge, () => {
+      this.setState({
+        challenge: {
+          title: '',
+          instruction: '',
+          function_name: '',
+          parameters: '',
+          testInput: '',
+          testOutput: '',
+          exampleInput: '',
+          exampleOutput: '',
+          difficulty: ''
+        }
+      })
+    })
   }
 
   render() {
@@ -73,7 +92,7 @@ class Form extends Component {
               <option value="hard">Hard</option>
             </select>
           </div>
-          <div className="ui submit button" onClick={() => {this.props.save(this.state.challenge)}}>Submit</div>
+          <div className="ui submit button" onClick={() => {this.save()}}>Submit</div>
         </form>
       </div>
     )
