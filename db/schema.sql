@@ -61,11 +61,19 @@ CREATE TABLE results (
   company_id SMALLINT REFERENCES users(id)
 );
 
-INSERT INTO users (username, password, name, email, role ) VALUES ('admin', 'admin', 'password', 'klingon@gmail.com', 'admin');
-INSERT INTO users (username, password, name, email) VALUES ('google', 'google', 'larry', 'larry@google.com');
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('QuickSort', 'sorty', 'quickSort', 'arr', null, null, 'medium', false, 1);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('BubbleSort', 'bubble god', 'sortBubbles', 'arr', null, null, 'medium', false, 1);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('Two Sum', 'Find the sum...', 'twoSum', 'arr, target', null, null, 'easy', false, 2);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('Anagram Solver', 'Find all anagrams...', 'getAnagrams', 'string', null, null, 'medium', false, 2);
+INSERT INTO users (username, password, name, email, role ) VALUES ('admin', 'password', 'admin', 'klingon@gmail.com', 'admin');
+INSERT INTO users (username, password, name, email, role, information, logo_url) VALUES ('google', 'google', 'google', 'larry@google.com', 'company', 'Welcome to our company page. We are like google but less good, less googly, and more likely to hire you.', 'http://icons.iconarchive.com/icons/danleech/simple/1024/google-icon.png');
+INSERT INTO users (username, password, name, email, role, information, logo_url) VALUES ('amazon', 'amazon', 'amazon', 'rory@google.com', 'company', 'Amazon (Amazon.com) is the world’s largest online retailer and a prominent cloud services provider.', 'http://www.paymentscardsandmobile.com/wp-content/uploads/2018/03/Amazon-icon.png');
+INSERT INTO users (username, password, name, email, role) VALUES ('engineer', 'engineer', 'eric', 'eric@gmail.com', 'candidate');
+INSERT INTO all_challenges (title, instruction, test_cases, timelimit, difficulty, initial, company_id) VALUES ('QuickSort', 'sorty', 'test1...\ntest2...\ntest3', '30 minutes', 'hard', false, 1);
+INSERT INTO all_challenges (title, instruction, test_cases, timelimit, difficulty, initial, company_id) VALUES ('BubbleSort', 'bubble god', 'test1...\ntest2...\ntest3', '30 minutes', 'hard', false, 1);
+INSERT INTO all_challenges (title, instruction, test_cases, timelimit, difficulty, initial, company_id) VALUES ('Two Sum', 'Find the sum...', null, null, null, false, 2);
+INSERT INTO all_challenges (title, instruction, test_cases, timelimit, difficulty, initial, company_id) VALUES ('Anagram Solver', 'Find all anagrams...', null, null, null, false, 2);
+INSERT INTO all_challenges (title, instruction, test_cases, timelimit, difficulty, initial, company_id) VALUES ('isSubArray', 'return boolean', null, null, null, false, 3);
+INSERT INTO all_challenges (title, instruction, test_cases, timelimit, difficulty, initial, company_id) VALUES ('Permutation', 'Find all ...', 'test1...\ntest2...\ntest3', '1 hour', 'hard' , true, 2);
+INSERT INTO all_challenges (title, instruction, test_cases, timelimit, difficulty, initial, company_id) VALUES ('Permute', 'Find all ...', 'test1...\ntest2...\ntest3', '1 hour', 'medium', true, 3);
+INSERT INTO company_schedule (created_at, challenge_id, company_id) VALUES ('2018-5-19 11:00:00', 2, 2);
+INSERT INTO company_schedule (created_at, challenge_id, company_id) VALUES ('2018-5-19 10:00:00', 3, 2);
+INSERT INTO company_schedule (created_at, challenge_id, company_id) VALUES ('2018-5-19 12:00:00', 5, 3);
 
 /* psql < db/schema.sql */
