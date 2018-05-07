@@ -21,9 +21,12 @@ module.exports.saveChallenge = (title, instruction, functionName, params, testCa
         parameters: params,
         test_cases: testCases,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         timelimit: null,
 >>>>>>> companies can submit their own challenges
+=======
+>>>>>>> update db tables to remove timelimit
         examples: examples,
         difficulty: difficulty,
         initial: false,

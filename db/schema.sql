@@ -29,16 +29,7 @@ CREATE TABLE all_challenges (
   function_name VARCHAR (255) NOT NULL,
   parameters VARCHAR(255) NOT NULL,
   test_cases TEXT,
-<<<<<<< HEAD
   examples TEXT,
-=======
-<<<<<<< HEAD
-  timelimit VARCHAR(30),
-=======
-  timelimit TIME,
-  examples TEXT,
->>>>>>> companies can submit their own challenges
->>>>>>> companies can submit their own challenges
   difficulty VARCHAR(30),
   initial BOOLEAN NOT NULL,
   company_id SMALLINT REFERENCES users(id)
@@ -72,16 +63,9 @@ CREATE TABLE results (
 
 INSERT INTO users (username, password, name, email, role ) VALUES ('admin', 'admin', 'password', 'klingon@gmail.com', 'admin');
 INSERT INTO users (username, password, name, email) VALUES ('google', 'google', 'larry', 'larry@google.com');
-<<<<<<< HEAD
 INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('QuickSort', 'sorty', 'quickSort', 'arr', null, null, 'medium', false, 1);
 INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('BubbleSort', 'bubble god', 'sortBubbles', 'arr', null, null, 'medium', false, 1);
 INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('Two Sum', 'Find the sum...', 'twoSum', 'arr, target', null, null, 'easy', false, 2);
 INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('Anagram Solver', 'Find all anagrams...', 'getAnagrams', 'string', null, null, 'medium', false, 2);
-=======
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, timelimit, examples, difficulty, initial, company_id) VALUES ('QuickSort', 'sorty', 'quickSort', 'arr', null, null, null, 'medium', false, 1);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, timelimit, examples, difficulty, initial, company_id) VALUES ('BubbleSort', 'bubble god', 'sortBubbles', 'arr', null, null, null, 'medium', false, 1);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, timelimit, examples, difficulty, initial, company_id) VALUES ('Two Sum', 'Find the sum...', 'twoSum', 'arr, target', null, null, null, 'easy', false, 2);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, timelimit, examples, difficulty, initial, company_id) VALUES ('Anagram Solver', 'Find all anagrams...', 'getAnagrams', 'string', null, null, null, 'medium', false, 2);
->>>>>>> companies can submit their own challenges
 
 /* psql < db/schema.sql */
