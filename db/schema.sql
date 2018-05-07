@@ -27,7 +27,7 @@ CREATE TABLE all_challenges (
   title VARCHAR(30) NOT NULL,
   instruction TEXT NOT NULL,
   test_cases TEXT,
-  timelimit TIME,
+  timelimit VARCHAR(30),
   difficulty VARCHAR(30),
   initial BOOLEAN NOT NULL,
   company_id SMALLINT REFERENCES users(id)
@@ -59,11 +59,19 @@ CREATE TABLE results (
   company_id SMALLINT REFERENCES users(id)
 );
 
-INSERT INTO users (username, password, name, email, role ) VALUES ('admin', 'admin', 'password', 'klingon@gmail.com', 'admin');
-INSERT INTO users (username, password, name, email) VALUES ('google', 'google', 'larry', 'larry@google.com');
-INSERT INTO all_challenges (title, instruction, test_cases, timelimit, difficulty, initial, company_id) VALUES ('QuickSort', 'sorty', null, null, null, false, 1);
-INSERT INTO all_challenges (title, instruction, test_cases, timelimit, difficulty, initial, company_id) VALUES ('BubbleSort', 'bubble god', null, null, null, false, 1);
+INSERT INTO users (username, password, name, email, role ) VALUES ('admin', 'password', 'admin', 'klingon@gmail.com', 'admin');
+INSERT INTO users (username, password, name, email, role, information) VALUES ('google', 'google', 'google', 'larry@google.com', 'company', 'Welcome to our company page. We are like google but less good, less googly, and more likely to hire you.');
+INSERT INTO users (username, password, name, email, role, information) VALUES ('amazon', 'amazon', 'amazon', 'rory@google.com', 'company', 'Amazon (Amazon.com) is the world’s largest online retailer and a prominent cloud services provider. ');
+INSERT INTO users (username, password, name, email, role) VALUES ('engineer', 'engineer', 'eric', 'eric@gmail.com', 'candidate');
+INSERT INTO all_challenges (title, instruction, test_cases, timelimit, difficulty, initial, company_id) VALUES ('QuickSort', 'sorty', 'test1...\ntest2...\ntest3', '30 minutes', 'hard', false, 1);
+INSERT INTO all_challenges (title, instruction, test_cases, timelimit, difficulty, initial, company_id) VALUES ('BubbleSort', 'bubble god', 'test1...\ntest2...\ntest3', '30 minutes', 'hard', false, 1);
 INSERT INTO all_challenges (title, instruction, test_cases, timelimit, difficulty, initial, company_id) VALUES ('Two Sum', 'Find the sum...', null, null, null, false, 2);
 INSERT INTO all_challenges (title, instruction, test_cases, timelimit, difficulty, initial, company_id) VALUES ('Anagram Solver', 'Find all anagrams...', null, null, null, false, 2);
+INSERT INTO all_challenges (title, instruction, test_cases, timelimit, difficulty, initial, company_id) VALUES ('isSubArray', 'return boolean', null, null, null, false, 3);
+INSERT INTO all_challenges (title, instruction, test_cases, timelimit, difficulty, initial, company_id) VALUES ('Permutation', 'Find all ...', 'test1...\ntest2...\ntest3', '1 hour', 'hard' , true, 2);
+INSERT INTO all_challenges (title, instruction, test_cases, timelimit, difficulty, initial, company_id) VALUES ('Permute', 'Find all ...', 'test1...\ntest2...\ntest3', '1 hour', 'medium', true, 3);
+INSERT INTO company_schedule (created_at, challenge_id, company_id) VALUES ('2018-5-19 11:00:00', 2, 2);
+INSERT INTO company_schedule (created_at, challenge_id, company_id) VALUES ('2018-5-19 10:00:00', 3, 2);
+INSERT INTO company_schedule (created_at, challenge_id, company_id) VALUES ('2018-5-19 12:00:00', 5, 3);
 
 /* psql < db/schema.sql */

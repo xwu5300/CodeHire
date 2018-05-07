@@ -3,6 +3,7 @@ const router = require('express').Router();
 
 const challengeControllers = require('./controllers/challenges');
 const authControllers = require('./controllers/auth');
+const calendarControllers = require('./controllers/calendar');
 
 /* ------- User Routes --------- */
 
@@ -108,8 +109,11 @@ router.patch('/api/initialChallenge/:challengeid', (req, res) => {
 
 // get initial challenge for company
 router.get('/api/initialChallenge', (req, res) => {
-
-
+  let company_id = req.query.company_id;
+  challengeControllers.getInitialChallenge(company_id)
+  .then((data) => {
+    res.send(data);
+  })
 })
 
 // delete company challenge from 'all_challenges' table
@@ -140,9 +144,11 @@ router.patch('/api/userCalendar:date', (req, res) => {
 })
 
 // get company schedule
-router.get('/api/companyCalendar', (req, res) => {
-
-
+router.get('/api/companyCalendars', (req, res) => {
+  calendarControllers.getAllCompanyCalendars()
+  .then((data) => {
+    res.send(data);
+  })
 })
 // update company Calendar
 router.post('/api/companyCalendar', (req, res) => {

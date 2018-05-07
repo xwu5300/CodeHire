@@ -8,6 +8,8 @@ export const GET_DEFAULT_CHALLENGES = 'GET_DEFAULT_CHALLENGES';
 
 export const SAVE_CHALLENGE = 'SAVE_CHALLENGE';
 
+export const GET_INITIAL_CHALLENGE = 'GET_INITIAL_CHALLENGE';
+
 /* -------- Authentication -------- */
 export const SAVE_COMPANY = 'SAVE_COMPANY';
 
@@ -24,6 +26,7 @@ export const UPDATE_USER_CALENDAR = 'UPDATE_USER_CALENDAR';
 
 export const UPDATE_COMPANY_CALENDAR = 'UPDATE_COMPANY_CALENDAR';
 
+export const GET_ALL_COMPANY_CALENDARS = 'GET_ALL_COMPANY_CALENDARS';
 
 /* --------- Results -------- */
 export const SAVE_RESULTS = 'SAVE_RESULTS';
