@@ -20,7 +20,7 @@ class CompanyListView extends Component {
               <img className='company-logo' src={`${company.logo_url || 'http://dev.jobkhoji.com/assets/images/default_company_icon.png'}`} />
               {company.name}
               <div>
-              {company.created_at}
+              {company.time}
               </div>
               <p> </p>
               <button onClick={() => {
