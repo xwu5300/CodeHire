@@ -10,7 +10,7 @@ const initialState = {
 }
 
 
-const defaultChallenges = (state = [], action) => {
+const defaultChallenges = (state = initialState, action) => {
   switch (action.type) {
     case 'GET_DEFAULT_CHALLENGES':
       return {
@@ -22,7 +22,7 @@ const defaultChallenges = (state = [], action) => {
   }
 }
 
-const allChallenges = (state = [], action) => {
+const allChallenges = (state = initialState, action) => {
   switch(action.type) {
     case 'GET_ALL_CHALLENGES':
       return {

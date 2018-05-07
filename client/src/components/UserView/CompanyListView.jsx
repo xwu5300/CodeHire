@@ -8,7 +8,6 @@ class CompanyListView extends Component {
   }
 
   render () {
-    // console.log('rendering CompanyListView', this.props)
     return (
       <div>
       <button className='ui green button' onClick={() => {props.history.push('/user/profile')}}>Edit Profile</button>
@@ -18,8 +17,11 @@ class CompanyListView extends Component {
         return (
           <div key={i}>
             <div className='five wide column'> 
-              <img src='https://vignette.wikia.nocookie.net/silicon-valley/images/a/a7/Piedpiperoldlogo.png/revision/latest/zoom-crop/width/320/height/320?cb=20140703205023' />
-              {company.name}: {company.created_at}
+              <img className='company-logo' src={`${company.logo_url || 'http://dev.jobkhoji.com/assets/images/default_company_icon.png'}`} />
+              {company.name}
+              <div>
+              {company.created_at}
+              </div>
               <p> </p>
               <button onClick={() => {
                 this.props.fetchInitialChallenge(company.company_id)

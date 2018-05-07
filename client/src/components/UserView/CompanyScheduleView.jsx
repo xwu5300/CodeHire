@@ -8,7 +8,6 @@ class CompanyScheduleView extends Component {
   }
 
   render() {
-    console.log('Users Company Schedule View props', this.props)
     if (this.props.initial_challenge[0]) {
       return (
         <div>
@@ -30,16 +29,21 @@ class CompanyScheduleView extends Component {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Quick Sort</td>
-              <td>2/4/18 9:30am</td>
-              <td><button className='ui orange button' onClick={() => {props.history.push('/user/live')}}>Add to Schedule</button></td>
+            {this.props.all_company_calendars.filter((schedule) => {
+              return schedule.company_id === this.props.initial_challenge[0].company_id
+            }).map((schedule, i) => {
+              return (
+              <tr key={i} >
+              <td>None</td>
+              <td>{schedule.created_at}</td>
+              <td>
+                <button className='ui orange button' onClick={() => {}}>Add to Schedule
+                </button>
+                <button className='ui orange button' onClick={() => {props.history.push('/user/live')}}>Start
+                </button>
+              </td>
             </tr>
-            <tr>
-              <td>Three Sum</td>
-              <td>1/3/18 12:35pm</td>
-              <td><button className='ui orange button' onClick={() => {props.history.push('/user/live')}}>Add to Schedule</button></td>
-            </tr>
+            )})}
           </tbody>
           <tfoot>
             <tr><th>3 People</th>

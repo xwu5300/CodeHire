@@ -58,7 +58,7 @@ router.post('/api/registerCompany', (req, res) => {
 
 // get all challenges from 'all_challenges' table
 router.get('/api/challenges', (req, res) => {
-  let companyId = 2;
+  let companyId = req.query.companyId || 2;
   challengeControllers.getCompanyChallenges(companyId)
   .then((data) => {
     res.send(data);
@@ -112,8 +112,8 @@ router.patch('/api/initialChallenge/:challengeid', (req, res) => {
 
 // get initial challenge for company
 router.get('/api/initialChallenge', (req, res) => {
-  let company_id = req.query.company_id;
-  challengeControllers.getInitialChallenge(company_id)
+  let companyId = req.query.company_id;
+  challengeControllers.getInitialChallenge(companyId)
   .then((data) => {
     res.send(data);
   })
