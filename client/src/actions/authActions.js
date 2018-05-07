@@ -1,4 +1,4 @@
-import { SAVE_COMPANY, SAVE_CANDIDATE, CHECK_USER, GET_USER, GET_INFO } from '../constants/actionTypes';
+import { SAVE_COMPANY, SAVE_CANDIDATE, CHECK_USER, GET_USER } from '../constants/actionTypes';
 
 import axios from 'axios';
 
@@ -33,15 +33,6 @@ export const handleLogin = (username, password) => (dispatch) => {
  )
 }
 
-export const fetchCompanyInfo = (username) => (dispatch) => {
-	axios.get('/api/users', { params: { username: username }})
-	.then((response) => {
-		dispatch({ type: GET_INFO, logo_url: response.data[0].logo_url, information: response.data[0].information })
-	})
-	.catch((err) => {
-		console.log(err);
-	})
-}
 
 
 

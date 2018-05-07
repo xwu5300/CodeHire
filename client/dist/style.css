@@ -72,10 +72,29 @@ body {
 	margin-top: 100px;
 }
 
+
 .company-logo {
 	height: 200px;
 	width: auto;
 }
+
+
+/* ------- User profile --------- */
+.user_profile_textarea {
+	display: block;
+	width: 50%;
+	margin: auto;
+}
+
+.user_profile_input {
+	display: block;
+	margin: auto;
+}
+
+
+
+
+
 
 
 

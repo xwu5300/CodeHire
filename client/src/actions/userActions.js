@@ -1,4 +1,5 @@
-import { GET_ALL_COMPANY_CALENDARS, GET_INITIAL_CHALLENGE } from '../constants/actionTypes';
+
+import { GET_ALL_COMPANY_CALENDARS, GET_INITIAL_CHALLENGE, GET_CANDIDATE_INFO } from '../constants/actionTypes';
 import axios from 'axios';
 
 export const fetchAllCompanyCalendars =() => (dispatch) => {
@@ -20,3 +21,13 @@ export const fetchInitialChallenge = (company_id) => (dispatch) => {
     console.log(err);
   })
 }
+
+ export const fetchCandidateInfo = (username) => (dispatch) => {
+   axios.get('/api/candidateInfo', { params: { username: username }})
+    .then((info) => {
+        dispatch({ type: GET_CANDIDATE_INFO, information: info.data[0].information, skills: info.data[0].candidate_skills })
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }

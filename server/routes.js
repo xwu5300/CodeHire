@@ -8,8 +8,14 @@ const calendarControllers = require('./controllers/calendar');
 /* ------- User Routes --------- */
 
 // get company Information
-router.get('/api/users', (req, res) => {
+router.get('/api/companyInfo', (req, res) => {
   authControllers.getCompanyInfo(req.query.username, (data) => {
+    res.status(200).send(data);
+  })
+})
+
+router.get('/api/candidateInfo', (req, res) => {
+  authControllers.getCandidateInfo(req.query.username, (data) => {
     res.status(200).send(data);
   })
 })

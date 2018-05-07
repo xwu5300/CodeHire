@@ -1,4 +1,4 @@
-import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE } from '../constants/actionTypes';
+import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO } from '../constants/actionTypes';
 import axios from 'axios';
 
 
@@ -56,6 +56,17 @@ export const updateCalendar = () => (dispatch) => {
 		console.log('Error updating company calendar', err);
 	})
 }
+
+export const fetchCompanyInfo = (username) => (dispatch) => {
+  axios.get('/api/companyInfo', { params: { username: username }})
+  .then((response) => {
+    dispatch({ type: GET_INFO, logo_url: response.data[0].logo_url, information: response.data[0].information })
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
+
 
 export const updateInfo = (username, logoUrl, information) => (dispatch) => {
   axios.patch('/api/users/:username', { username: username, logo_url: logoUrl, information: information })

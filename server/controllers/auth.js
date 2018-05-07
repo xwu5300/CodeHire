@@ -85,6 +85,19 @@ module.exports.getCompanyInfo = (username, callback) => {
 }
 
 
+module.exports.getCandidateInfo = (username, callback) => {
+  return knex('users')
+  .select('username', 'information', 'candidate_skills')
+  .where({ username: username })
+  .then((data) => {
+    callback(data);
+  })
+  .catch((err) => {
+    console.log('Error retrieving candidate info', err);
+  })
+}
+
+
 
 
 

@@ -10,7 +10,7 @@ class CompanyListView extends Component {
   render () {
     return (
       <div>
-      <button className='ui green button' onClick={() => {props.history.push('/user/profile')}}>Edit Profile</button>
+      <button className='ui green button' onClick={() => {this.props.history.push('/user/profile')}}>Edit Profile</button>
       <h2 style={{ textAlign: 'center' }}>Companies</h2>
       <div className='ui centered grid'>
       {this.props.all_company_calendars.map((company, i) => {
