@@ -12,7 +12,7 @@ const ChallengeListView = ({ all_challenges, default_challenges, deleteChallenge
         <CompanyChallenges allChallenges={ all_challenges } delete={ deleteChallenge }/>
         <DefaultChallenges defaultChallenges={ default_challenges } save={ saveChallenge }/>
       </div>
-      <Form/>
+      <Form save={ saveChallenge }/>
     </div>
   )
 }
