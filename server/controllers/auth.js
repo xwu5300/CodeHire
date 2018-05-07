@@ -98,15 +98,29 @@ module.exports.getCandidateInfo = (username, callback) => {
 }
 
 module.exports.updateCandidateInfo = (username, information, skills) => {
-  return knex('users')
-  .where({ username: username })
-  .update({ information: information, candidate_skills: skills })
-  .then((response) => {
-    console.log('Success updating candidate info');
-  })
-  .catch((err) => {
-    console.log('Error updating candidate info', err);
-  })
+
+  if(information === '' && skills !== '') {
+    return knex('users')
+    .where({ username: username })
+    .update({ candidate_skills: skills })
+    .catch((err) => {
+      console.log(err);
+    })
+  } else if( information !== '' && skills === '') {
+    return knex('users')
+    .where({ username: username })
+    .update({ information: information })
+    .catch((err) => {
+      console.log(err);
+    })
+  } else {
+    return knex('users')
+    .where({ username: username })
+    .update({ information: information, candidate_skills: skills})
+    .catch((err) => {
+      console.log(err);
+    })
+  }
 }
 
 
