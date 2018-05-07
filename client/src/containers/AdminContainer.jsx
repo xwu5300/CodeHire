@@ -41,7 +41,7 @@ const mapStateToProps = (state) => ({
    all_challenges: state.all_challenges.all_challenges,
    username: state.username.username,
    logo_url: state.logo_url.logo_url,
-   information: state.information.information
+   company_information: state.company_information.company_information
 });
 
 

@@ -18,6 +18,7 @@ CREATE TABLE users (
   email VARCHAR(50) NULL,
   phone VARCHAR(20) NULL,
   information VARCHAR(255) NULL,
+  candidate_skills TEXT NULL,
   logo_url VARCHAR(255) NULL,
   role VARCHAR(30) NULL
 );

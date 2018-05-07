@@ -13,7 +13,10 @@ export default combineReducers({
   logo_url: adminReducers.companyInfo,
   information: adminReducers.companyInfo,
   all_company_calendars: userReducers.allCompanyCalendars,
-  initial_challenge: userReducers.initialChallenge 
+  initial_challenge: userReducers.initialChallenge, 
+  company_information: adminReducers.companyInfo,
+  candidate_information: userReducers.candidateInfo,
+  candidate_skills: userReducers.candidateInfo
 })
 
 

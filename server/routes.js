@@ -8,21 +8,32 @@ const calendarControllers = require('./controllers/calendar');
 /* ------- User Routes --------- */
 
 // get company Information
-router.get('/api/users', (req, res) => {
+router.get('/api/companyInfo', (req, res) => {
   authControllers.getCompanyInfo(req.query.username, (data) => {
+    res.status(200).send(data);
+  })
+})
+
+router.get('/api/candidateInfo', (req, res) => {
+  authControllers.getCandidateInfo(req.query.username, (data) => {
     res.status(200).send(data);
   })
 })
 
 
 // update company profile information in 'users' table
-router.patch('/api/users/:username', (req, res) => {
-
+router.patch('/api/companyInfo/:username', (req, res) => {
   authControllers.updateCompanyInfo(req.body.username, req.body.logo_url, req.body.information)
   .catch((err) => {
     console.log(err);
   })
+})
 
+router.patch('/api/candidateInfo/:username', (req, res) => {
+  authControllers.updateCandidateInfo(req.body.username, req.body.information, req.body.skills)
+  .catch((err) => {
+    console.log(err);
+  })
 })
 
 // authentication route for logging in, check 'users' table for credentials

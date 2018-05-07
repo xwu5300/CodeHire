@@ -19,7 +19,7 @@ export const CHECK_USER = 'CHECK_USER';
 
 export const GET_USER = 'GET_USER';
 
-export const GET_INFO = 'GET_INFO';
+export const GET_COMPANY_INFO = 'GET_COMPANY_INFO';
 
 /* --------- Calendar --------- */
 export const UPDATE_USER_CALENDAR = 'UPDATE_USER_CALENDAR';
@@ -30,3 +30,7 @@ export const GET_ALL_COMPANY_CALENDARS = 'GET_ALL_COMPANY_CALENDARS';
 
 /* --------- Results -------- */
 export const SAVE_RESULTS = 'SAVE_RESULTS';
+
+
+/* -------- User Profile ------- */
+export const GET_CANDIDATE_INFO = 'GET_CANDIDATE_INFO';

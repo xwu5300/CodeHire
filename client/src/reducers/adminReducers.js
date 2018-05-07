@@ -1,12 +1,12 @@
 import React from 'react';
-import { GET_DEFAULT_CHALLENGES, GET_ALL_CHALLENGES, GET_INFO } from '../constants/actionTypes';
+import { GET_DEFAULT_CHALLENGES, GET_ALL_CHALLENGES, GET_COMPANY_INFO } from '../constants/actionTypes';
 
 
 const initialState = {
   default_challenges: [],
   all_challenges: [],
   logo_url: 'http://static1.squarespace.com/static/522a22cbe4b04681b0bff826/t/581cc65fe4fcb5a68ecd940c/1478280803080/hrhq-avatar.png?format=1000w',
-  information: '',
+  company_information: '',
 }
 
 
@@ -36,14 +36,17 @@ const allChallenges = (state = initialState, action) => {
 
 const companyInfo = (state = '', action) => {
   switch(action.type) {
-    case 'GET_INFO':
+    case 'GET_COMPANY_INFO':
       return {
         logo_url: action.logo_url,
-        information: action.information
+        company_information: action.information
       }
     default:
       return state;
   }
 }
+
+
+
 
 export default { defaultChallenges, allChallenges, companyInfo };

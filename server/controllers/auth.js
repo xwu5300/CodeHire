@@ -85,6 +85,45 @@ module.exports.getCompanyInfo = (username, callback) => {
 }
 
 
+module.exports.getCandidateInfo = (username, callback) => {
+  return knex('users')
+  .select('username', 'information', 'candidate_skills')
+  .where({ username: username })
+  .then((data) => {
+    callback(data);
+  })
+  .catch((err) => {
+    console.log('Error retrieving candidate info', err);
+  })
+}
+
+module.exports.updateCandidateInfo = (username, information, skills) => {
+
+  if(information === '' && skills !== '') {
+    return knex('users')
+    .where({ username: username })
+    .update({ candidate_skills: skills })
+    .catch((err) => {
+      console.log(err);
+    })
+  } else if( information !== '' && skills === '') {
+    return knex('users')
+    .where({ username: username })
+    .update({ information: information })
+    .catch((err) => {
+      console.log(err);
+    })
+  } else {
+    return knex('users')
+    .where({ username: username })
+    .update({ information: information, candidate_skills: skills})
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+}
+
+
 
 
 
