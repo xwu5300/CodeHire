@@ -8,8 +8,8 @@ import 'brace/mode/javascript';
 import 'brace/theme/monokai';
 
 class UserLiveCodingView extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       challengeName: 'greeting',
