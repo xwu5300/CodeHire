@@ -74,13 +74,16 @@ router.get('/api/defaultChallenges', (req, res) => {
 })
 
 router.post('/api/challenges', (req, res) => {
+  console.log(req.body.challenge)
   let title = req.body.challenge.title;
   let instruction = req.body.challenge.instruction;
-  let testCases = req.body.challenge.test_cases || null;
-  let timelimit = req.body.challenge.timelimit || null;
+  let functionName = req.body.challenge.function_name;
+  let params = req.body.challenge.parameters;
+  let testCases = req.body.test_cases || `[${req.body.challenge.testInput}, ${req.body.challenge.testOutput}]`;
+  let examples = req.body.examples || `[${req.body.challenge.exampleInput}, ${req.body.challenge.exampleOutput}]` || null;
   let difficulty = req.body.challenge.difficulty || null;
   let companyId = 2;
-  challengeControllers.saveDefaultChallenge(title, instruction, testCases, timelimit, difficulty, companyId)
+  challengeControllers.saveChallenge(title, instruction, functionName, params, testCases, examples, difficulty, companyId)
   .then(() => {
     res.send('Successfully saved challenge');
   })
