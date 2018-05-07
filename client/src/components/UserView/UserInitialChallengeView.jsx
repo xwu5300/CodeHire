@@ -7,7 +7,7 @@ class UserInitialChallengeView extends Component {
   }
 
   render() {
-    console.log('userinitial challenge props', this.props)
+    // console.log('userinitial challenge props', this.props)
     return (
       <div>
       <h1>{this.props.initial_challenge[0].name  }</h1>

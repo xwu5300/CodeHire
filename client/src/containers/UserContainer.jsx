@@ -35,16 +35,16 @@ class UserContainer extends Component {
 
 const mapStateToProps = function(state){
   return {
-  all_company_calendars: state.all_company_calendars.all_company_calendars,
-  initial_challenge: state.initial_challenge.initial_challenge
+    all_company_calendars: state.all_company_calendars.all_company_calendars,
+    initial_challenge: state.initial_challenge.initial_challenge
 }};
 
-const connectComponent = connect(mapStateToProps, { fetchAllCompanyCalendars, fetchInitialChallenge})(UserContainer);
-const CompanyListViewComponent = connect(mapStateToProps, { fetchAllCompanyCalendars, fetchInitialChallenge})(CompanyListView);
-const CompanyScheduleViewComponent = connect(mapStateToProps, { fetchAllCompanyCalendars, fetchInitialChallenge})(CompanyScheduleView);
-const UserInitialChallengeViewComponent = connect(mapStateToProps, { fetchAllCompanyCalendars, fetchInitialChallenge})(UserInitialChallengeView);
-const UserLiveCodingViewComponent = connect(mapStateToProps, { fetchAllCompanyCalendars, fetchInitialChallenge})(UserLiveCodingView);
-const UserProfileViewComponent = connect(mapStateToProps, { fetchAllCompanyCalendars, fetchInitialChallenge})(UserProfileView);
+const connectComponent = connect(mapStateToProps, { fetchAllCompanyCalendars, fetchInitialChallenge })(UserContainer);
+const CompanyListViewComponent = connect(mapStateToProps, { fetchAllCompanyCalendars, fetchInitialChallenge })(CompanyListView);
+const CompanyScheduleViewComponent = connect(mapStateToProps, { fetchAllCompanyCalendars, fetchInitialChallenge })(CompanyScheduleView);
+const UserInitialChallengeViewComponent = connect(mapStateToProps, { fetchAllCompanyCalendars, fetchInitialChallenge })(UserInitialChallengeView);
+const UserLiveCodingViewComponent = connect(mapStateToProps, { fetchAllCompanyCalendars, fetchInitialChallenge })(UserLiveCodingView);
+const UserProfileViewComponent = connect(mapStateToProps, { fetchAllCompanyCalendars, fetchInitialChallenge })(UserProfileView);
 
 const routeUserComponent = withRouter(connectComponent);
 export default routeUserComponent;

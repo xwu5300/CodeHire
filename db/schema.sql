@@ -60,8 +60,8 @@ CREATE TABLE results (
 );
 
 INSERT INTO users (username, password, name, email, role ) VALUES ('admin', 'password', 'admin', 'klingon@gmail.com', 'admin');
-INSERT INTO users (username, password, name, email, role, information) VALUES ('google', 'google', 'google', 'larry@google.com', 'company', 'Welcome to our company page. We are like google but less good, less googly, and more likely to hire you.');
-INSERT INTO users (username, password, name, email, role, information) VALUES ('amazon', 'amazon', 'amazon', 'rory@google.com', 'company', 'Amazon (Amazon.com) is the world’s largest online retailer and a prominent cloud services provider. ');
+INSERT INTO users (username, password, name, email, role, information, logo_url) VALUES ('google', 'google', 'google', 'larry@google.com', 'company', 'Welcome to our company page. We are like google but less good, less googly, and more likely to hire you.', 'http://icons.iconarchive.com/icons/danleech/simple/1024/google-icon.png');
+INSERT INTO users (username, password, name, email, role, information, logo_url) VALUES ('amazon', 'amazon', 'amazon', 'rory@google.com', 'company', 'Amazon (Amazon.com) is the world’s largest online retailer and a prominent cloud services provider.', 'http://www.paymentscardsandmobile.com/wp-content/uploads/2018/03/Amazon-icon.png');
 INSERT INTO users (username, password, name, email, role) VALUES ('engineer', 'engineer', 'eric', 'eric@gmail.com', 'candidate');
 INSERT INTO all_challenges (title, instruction, test_cases, timelimit, difficulty, initial, company_id) VALUES ('QuickSort', 'sorty', 'test1...\ntest2...\ntest3', '30 minutes', 'hard', false, 1);
 INSERT INTO all_challenges (title, instruction, test_cases, timelimit, difficulty, initial, company_id) VALUES ('BubbleSort', 'bubble god', 'test1...\ntest2...\ntest3', '30 minutes', 'hard', false, 1);
