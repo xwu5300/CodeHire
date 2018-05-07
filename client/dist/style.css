@@ -86,9 +86,16 @@ body {
 	margin: auto;
 }
 
-.user_profile_input {
-	display: block;
-	margin: auto;
+.user_info_div {
+	height: 300px;
+}
+
+.user_skills_div {
+	height: 200px;
+}
+
+.profile_header {
+	text-align: center;
 }
 
 

@@ -31,13 +31,14 @@ class UserProfileView extends Component {
     return (
       <div>
       <h1>{ this.props.username } Profile</h1>
+      <h2 className='profile_header'>Skills</h2>
+      <div className='ui raised container segment user_skills_div'>{this.props.candidate_skills}</div>
+     
+      <textarea value= { this.state.skills } onChange={ (e) => this.handleChange(e) } name='skills' className='user_profile_textarea'></textarea>
 
-      <h2>About Me</h2>
-      <div className='ui raised container segment'>{this.props.candidate_information}</div>
+      <h2 className='profile_header'>About Me</h2>
+      <div className='ui raised container segment user_info_div'>{this.props.candidate_information}</div>
       <textarea value= { this.state.info } onChange={ (e) => this.handleChange(e) } name='information' className='user_profile_textarea'></textarea>
-      <h2>Skills:</h2>
-      <div className='ui raised container segment'>{this.props.candidate_skills}</div>
-      <input value={ this.state.skills } onChange={ (e) => this.handleChange(e) } name='skills' className='user_profile_input' />
       <button onClick={ () => this.handleSubmit() } className='ui button'>Save</button>
       </div>
     )
