@@ -35,7 +35,7 @@ class CompanyScheduleView extends Component {
               return (
               <tr key={i} >
               <td>None</td>
-              <td>{schedule.created_at}</td>
+              <td>{schedule.time}</td>
               <td>
                 <button className='ui orange button' onClick={() => {}}>Add to Schedule
                 </button>

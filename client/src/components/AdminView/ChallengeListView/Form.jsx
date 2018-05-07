@@ -5,15 +5,15 @@ class Form extends Component {
     super(props);
     this.state = {
       challenge: {
-        title: null,
-        instruction: null,
-        function_name: null,
-        parameters: null,
-        testInput: null,
-        testOutput: null,
-        exampleInput: null,
-        exampleOutput: null,
-        difficulty: null
+        title: '',
+        instruction: '',
+        function_name: '',
+        parameters: '',
+        testInput: '',
+        testOutput: '',
+        exampleInput: '',
+        exampleOutput: '',
+        difficulty: ''
       }
     }
     this.handleChange = this.handleChange.bind(this);

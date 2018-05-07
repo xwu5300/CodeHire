@@ -3,23 +3,25 @@ import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 
 class CompanyChallenges extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      showForm: false
+      showForm: this.props.allChallenges.map((item) => false)
     }
     this.toggleForm = this.toggleForm.bind(this);
     this.showCalendar = this.showCalendar.bind(this);
   }
 
-  toggleForm() {
+  toggleForm(i) {
+    let newShowForm = [...this.state.showForm];
+    newShowForm[i] = !this.state.showForm[i];
     this.setState({
-      showForm: !this.state.showForm
+      showForm: newShowForm
     })
   }
 
   showCalendar() {
-    $('#calendar').calendar('show');
+    $('#calendar').calendar('popup', 'show');
   }
 
 
@@ -27,15 +29,15 @@ class CompanyChallenges extends Component {
     return (
       <div className='ui segment'>
         <h1>Your Saved Challenges</h1>
-        {this.props.allChallenges.map((challenge) => {
+        {this.props.allChallenges.map((challenge, i) => {
           return (
             <div className="challenges" key={challenge.id}>
               <div>{challenge.title}</div>
               <div>{challenge.instruction}</div>
               <button onClick={() => {this.props.delete(challenge)}}>Remove from challenges</button>
-              <button onClick={this.toggleForm}>Schedule Challenge</button>
+              <button onClick={() => {this.toggleForm(i)}}>Schedule Challenge</button>
               <br/>
-              {!this.state.showForm ? null : 
+              {!this.state.showForm[i] ? null : 
                 <div className="calendar-container">
                   <div className="ui calendar" id="calendar" onClick={this.showCalendar}>
                     <div className="ui input left icon">
