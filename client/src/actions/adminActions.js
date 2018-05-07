@@ -5,7 +5,6 @@ import axios from 'axios';
 export const fetchDefaultChallenges = () => (dispatch) => {
   axios.get('/api/defaultChallenges')
   .then(({data}) => {
-    console.log('default challenges', data)
     dispatch({ type: GET_DEFAULT_CHALLENGES, payload: data })
   })
   .catch((err) => {
@@ -16,7 +15,6 @@ export const fetchDefaultChallenges = () => (dispatch) => {
 export const fetchAllChallenges = () => (dispatch) => {
 	axios.get('/api/challenges')
 	.then(({data}) => {
-    console.log('challenges fetched', data)
     data.sort((a, b) => {
       return a.id - b.id;
     })
@@ -54,6 +52,16 @@ export const updateCalendar = () => (dispatch) => {
 	.catch((err) => {
 		console.log('Error updating company calendar', err);
 	})
+}
+
+export const updateInfo = (username, logoUrl, information) => (dispatch) => {
+  axios.patch('/api/users/:username', { username: username, logo_url: logoUrl, information: information })
+  .then((response) => {
+    console.log(reponse);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
 }
 
 

@@ -8,17 +8,17 @@ class CompanyChallenges extends Component {
 
   render() {
     return (
-      <div className='challenge_list_container'>
-      <h1>Your Saved Challenges</h1>
-      {this.props.allChallenges.map((challenge) => {
-        return (
-          <div className="challenges" key={challenge.id}>
-            <div>{challenge.title}</div>
-            <div>{challenge.instruction}</div>
-            <button onClick={() => {this.props.delete(challenge)}}>Remove from challenges</button>
-          </div>
-        )
-      })}
+      <div className='ui segment'>
+        <h1>Your Saved Challenges</h1>
+        {this.props.allChallenges.map((challenge) => {
+          return (
+            <div className="challenges" key={challenge.id}>
+              <div>{challenge.title}</div>
+              <div>{challenge.instruction}</div>
+              <button onClick={() => {this.props.delete(challenge)}}>Remove from challenges</button>
+            </div>
+          )
+        })}
       </div>
     )
   }

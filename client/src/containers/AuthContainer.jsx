@@ -3,23 +3,29 @@ import React, { Component } from 'react';
 import Login from '../components/Login.jsx';
 import Registration from '../components/Registration.jsx';
 
-import { saveCompany, saveCandidate } from '../actions/authActions';
+import { saveCompany, saveCandidate, handleLogin } from '../actions/authActions';
 
-import {BrowserRouter as Router, Route, Link, Switch, History} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link, Switch, History, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class AuthContainer extends Component {
-  
   render() {
     return (
       <Switch>
-        <Route exact path='/' component={ Login }/>
-        <Route exact path='/registration' render={ () => <Registration saveCompany={ this.props.saveCompany } saveCandidate={ this.props.saveCandidate } /> } />
+        <Route exact path='/' component={ LoginComponent }/>
+        <Route exact path='/registration' component={ RegistrationComponent } />
       </Switch>
     )
   }
 }
 
+const mapStateToProps = (state) => ({
+  login_status: state.login_status,
+  signup_status: state.signup_status,
+})
 
+const connectAuthContainer = connect(mapStateToProps, {})(AuthContainer);
+const RegistrationComponent = connect(mapStateToProps, { saveCompany, saveCandidate })(Registration);
+const LoginComponent = connect(mapStateToProps, { handleLogin })(Login);
 
-export default connect(null, { saveCompany, saveCandidate })(AuthContainer);
+export default withRouter(connectAuthContainer);

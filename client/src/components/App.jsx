@@ -4,10 +4,12 @@ import {BrowserRouter as Router, Route, Link, Switch, History} from 'react-route
 import AuthContainer from '../containers/AuthContainer.jsx';
 import AdminContainer from '../containers/AdminContainer.jsx';
 import UserContainer from '../containers/UserContainer.jsx';
+import { AdminProfileComponent, AnalyticsComponent, AdminDashboardComponent, LiveCodingComponent, ChallengeListComponent} from '../containers/AdminContainer.jsx';
 
 
 
 class App extends Component {
+
   render() {
     return (
       <Router>
@@ -15,7 +17,7 @@ class App extends Component {
           <AuthContainer />
           <AdminContainer />
           <UserContainer />
-        </div>  
+        </div>
       </Router>
     );
   }
