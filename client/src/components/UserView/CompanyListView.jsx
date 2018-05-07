@@ -30,8 +30,8 @@ const CompanyListView = (props) => {
       </div>
     </div>
 
-
-     <div className='candidate_calendar row ui raised container segment'></div>
+     <h2 style={{ marginTop: '100px', textAlign: 'center' }}>Your Calendar</h2>
+     <div className='candidate_calendar inverted ui raised container segment'></div>
     </div>
   )
 }

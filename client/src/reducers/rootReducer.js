@@ -1,16 +1,17 @@
 import { combineReducers } from 'redux';
-import challengeReducers from './allReducers';
+import adminReducers from './adminReducers';
+import authReducers from './authReducers';
 
 
 
 export default combineReducers({
-  default_challenges: challengeReducers.defaultChallenges,
-  all_challenges: challengeReducers.allChallenges,
-  login_status: challengeReducers.loginStatus,
-  username: challengeReducers.loginStatus,
-  signup_status: challengeReducers.signupStatus,
-  logo_url: challengeReducers.companyInfo,
-  information: challengeReducers.companyInfo
+  default_challenges: adminReducers.defaultChallenges,
+  all_challenges: adminReducers.allChallenges,
+  login_status: authReducers.loginStatus,
+  username: authReducers.loginStatus,
+  signup_status: authReducers.signupStatus,
+  logo_url: adminReducers.companyInfo,
+  information: adminReducers.companyInfo
 })
 
 
