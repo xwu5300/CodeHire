@@ -69,7 +69,7 @@ export const fetchCompanyInfo = (username) => (dispatch) => {
 
 
 export const updateInfo = (username, logoUrl, information) => (dispatch) => {
-  axios.patch('/api/users/:username', { username: username, logo_url: logoUrl, information: information })
+  axios.patch('/api/companyInfo/:username', { username: username, logo_url: logoUrl, information: information })
   .then((response) => {
     console.log(reponse);
   })

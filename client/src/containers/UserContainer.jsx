@@ -9,9 +9,10 @@ import CompanyScheduleView from '../components/UserView/CompanyScheduleView.jsx'
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { fetchAllCompanyCalendars, fetchInitialChallenge, fetchCandidateInfo } from '../actions/userActions';
+import { fetchAllCompanyCalendars, fetchInitialChallenge, fetchCandidateInfo, saveCandidateInfo } from '../actions/userActions';
 
 import axios from 'axios';
+
 
 
 class UserContainer extends Component {
@@ -34,8 +35,7 @@ class UserContainer extends Component {
   }
 }
 
-const mapStateToProps = function(state){
-  console.log('STTTTATE', state);
+const mapStateToProps = function(state) {
   return {
     all_company_calendars: state.all_company_calendars.all_company_calendars,
     initial_challenge: state.initial_challenge.initial_challenge,
@@ -53,5 +53,4 @@ const UserProfileViewComponent = connect(mapStateToProps, { fetchCandidateInfo }
 
 const routeUserComponent = withRouter(connectComponent);
 export default routeUserComponent;
-
 

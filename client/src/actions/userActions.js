@@ -31,3 +31,11 @@ export const fetchInitialChallenge = (company_id) => (dispatch) => {
         console.log(err);
       })
   }
+
+export const saveCandidateInfo = (username, information, skills) => (dispatch) => {
+	axios.patch('/api/candidateInfo/:username', { username: username, information: information, skills: skills })
+	.catch((err) => {
+		console.log(err);
+	})
+}
+

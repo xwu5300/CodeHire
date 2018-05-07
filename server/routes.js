@@ -22,13 +22,18 @@ router.get('/api/candidateInfo', (req, res) => {
 
 
 // update company profile information in 'users' table
-router.patch('/api/users/:username', (req, res) => {
-
+router.patch('/api/companyInfo/:username', (req, res) => {
   authControllers.updateCompanyInfo(req.body.username, req.body.logo_url, req.body.information)
   .catch((err) => {
     console.log(err);
   })
+})
 
+router.patch('/api/candidateInfo/:username', (req, res) => {
+  authControllers.updateCandidateInfo(req.body.username, req.body.information, req.body.skills)
+  .catch((err) => {
+    console.log(err);
+  })
 })
 
 // authentication route for logging in, check 'users' table for credentials

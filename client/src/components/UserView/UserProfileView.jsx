@@ -24,7 +24,7 @@ class UserProfileView extends Component {
   }
 
   handleSubmit() {
-
+    this.props.saveCandidateInfo(this.props.username, this.state.information, this.state.skills);
   }
 
   render() {
@@ -33,12 +33,11 @@ class UserProfileView extends Component {
       <h1>{ this.props.username } Profile</h1>
 
       <h2>About Me</h2>
-      <div className='ui raised container segment'></div>
-      <textarea value= { this.state.info } onChange={ (e) => this.handleChange(e) } className='user_profile_textarea'></textarea>
-      <button onClick={ (this.handleSubmit() )} className='ui button'>Save</button>
+      <div className='ui raised container segment'>{this.props.candidate_information}</div>
+      <textarea value= { this.state.info } onChange={ (e) => this.handleChange(e) } name='information' className='user_profile_textarea'></textarea>
       <h2>Skills:</h2>
-      <div className='ui raised container segment'></div>
-      <input value={ this.state.skills } onChange={ (e) => this.handleChange(e) } className='user_profile_input' />
+      <div className='ui raised container segment'>{this.props.candidate_skills}</div>
+      <input value={ this.state.skills } onChange={ (e) => this.handleChange(e) } name='skills' className='user_profile_input' />
       <button onClick={ () => this.handleSubmit() } className='ui button'>Save</button>
       </div>
     )
