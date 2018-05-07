@@ -49,7 +49,7 @@ const CompanyListViewComponent = connect(mapStateToProps, { fetchAllCompanyCalen
 const CompanyScheduleViewComponent = connect(mapStateToProps, { fetchAllCompanyCalendars, fetchInitialChallenge })(CompanyScheduleView);
 const UserInitialChallengeViewComponent = connect(mapStateToProps, { fetchAllCompanyCalendars, fetchInitialChallenge })(UserInitialChallengeView);
 const UserLiveCodingViewComponent = connect(mapStateToProps, {})(UserLiveCodingView);
-const UserProfileViewComponent = connect(mapStateToProps, { fetchCandidateInfo })(UserProfileView);
+const UserProfileViewComponent = connect(mapStateToProps, { fetchCandidateInfo, saveCandidateInfo })(UserProfileView);
 
 const routeUserComponent = withRouter(connectComponent);
 export default routeUserComponent;
