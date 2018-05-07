@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import adminReducers from './adminReducers';
 import authReducers from './authReducers';
-
+import userReducers from './userReducers';
 
 
 export default combineReducers({
@@ -11,7 +11,9 @@ export default combineReducers({
   username: authReducers.loginStatus,
   signup_status: authReducers.signupStatus,
   logo_url: adminReducers.companyInfo,
-  information: adminReducers.companyInfo
+  information: adminReducers.companyInfo,
+  all_company_calendars: userReducers.allCompanyCalendars,
+  initial_challenge: userReducers.initialChallenge 
 })
 
 

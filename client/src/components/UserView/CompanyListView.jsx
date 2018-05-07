@@ -2,38 +2,39 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import {withRouter} from 'react-router-dom';
 
+class CompanyListView extends Component {
+  constructor() {
+    super();
+  }
 
-const CompanyListView = (props) => {
-  return (
-    <div>
-    <button className='ui green button' onClick={() => {props.history.push('/user/profile')}}>Edit Profile</button>
-     <h2 style={{ textAlign: 'center' }}>Companies</h2>
-    <div className='ui centered grid'>
-     
-     
-      <div className='five wide column'> 
-        <img src='https://vignette.wikia.nocookie.net/silicon-valley/images/a/a7/Piedpiperoldlogo.png/revision/latest/zoom-crop/width/320/height/320?cb=20140703205023' />
-        <p> </p>
-        <button onClick={() => {props.history.push('/user/schedule')}}>View Company Page</button>
+  render () {
+    // console.log('rendering CompanyListView', this.props)
+    return (
+      <div>
+      <button className='ui green button' onClick={() => {props.history.push('/user/profile')}}>Edit Profile</button>
+      <h2 style={{ textAlign: 'center' }}>Companies</h2>
+      <div className='ui centered grid'>
+      {this.props.all_company_calendars.map((company, i) => {
+        return (
+          <div key={i}>
+            <div className='five wide column'> 
+              <img src='https://vignette.wikia.nocookie.net/silicon-valley/images/a/a7/Piedpiperoldlogo.png/revision/latest/zoom-crop/width/320/height/320?cb=20140703205023' />
+              {company.name}: {company.created_at}
+              <p> </p>
+              <button onClick={() => {
+                this.props.fetchInitialChallenge(company.company_id)
+                this.props.history.push('/user/schedule');
+              }}>View Company Page
+              </button>
+            </div>
+          </div>
+        )})}
       </div>
-
-       <div className='five wide column'> 
-        <img src='https://vignette.wikia.nocookie.net/silicon-valley/images/a/a7/Piedpiperoldlogo.png/revision/latest/zoom-crop/width/320/height/320?cb=20140703205023' />
-        <p> </p>
-        <button onClick={() => {props.history.push('/user/schedule')}}>View Company Page</button>
+      <h2 style={{ marginTop: '100px', textAlign: 'center' }}>Your Calendar</h2>
+      <div className='candidate_calendar inverted ui raised container segment'></div>
       </div>
-
-       <div className='five wide column'> 
-        <img src='https://vignette.wikia.nocookie.net/silicon-valley/images/a/a7/Piedpiperoldlogo.png/revision/latest/zoom-crop/width/320/height/320?cb=20140703205023' />
-        <p> </p>
-        <button onClick={() => {props.history.push('/user/schedule')}}>View Company Page</button>
-      </div>
-    </div>
-
-     <h2 style={{ marginTop: '100px', textAlign: 'center' }}>Your Calendar</h2>
-     <div className='candidate_calendar inverted ui raised container segment'></div>
-    </div>
-  )
+    )
+  }
 }
 
 //if you import mapstate to props, be sure to use connect
