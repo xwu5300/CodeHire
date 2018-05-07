@@ -32,6 +32,7 @@
     "psql": "0.0.1",
     "react": "^16.3.2",
     "react-ace": "^6.1.0",
+    "react-day-picker": "^7.1.8",
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
@@ -48,8 +49,10 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "css-loader": "^0.28.11",
     "html-webpack-plugin": "^3.2.0",
     "nodemon": "^1.17.3",
+    "style-loader": "^0.21.0",
     "webpack": "^4.5.0",
     "webpack-cli": "^2.1.2",
     "webpack-dev-server": "^3.1.3"

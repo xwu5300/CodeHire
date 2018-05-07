@@ -63,6 +63,15 @@ body {
   margin-bottom: 50px;
 }
 
+.calendar-container {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.field .dropdown {
+  margin-top: 10px;
+}
+
 /* ------ Company profile ------ */
 
 
