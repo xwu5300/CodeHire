@@ -8,7 +8,6 @@ class CompanyListView extends Component {
   }
 
   render () {
-    console.log('rendering CompanyListView', this.props)
     return (
       <div>
       <button className='ui green button' onClick={() => {props.history.push('/user/profile')}}>Edit Profile</button>

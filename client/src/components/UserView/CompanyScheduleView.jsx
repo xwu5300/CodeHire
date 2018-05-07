@@ -8,8 +8,6 @@ class CompanyScheduleView extends Component {
   }
 
   render() {
-    console.log('Users Company Schedule View props', this.props.all_company_calendars)
-    console.log('Users Company Schedule View ini', this.props.initial_challenge[0])
     if (this.props.initial_challenge[0]) {
       return (
         <div>
