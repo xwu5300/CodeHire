@@ -6,7 +6,7 @@ import moment from 'moment';
 class AdminDashboardView extends Component {
   constructor(props) {
     super(props);
-
+    
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -26,7 +26,6 @@ class AdminDashboardView extends Component {
           <div className='ui grid'>
             <button className='ui button' type='button' onClick={() => {this.props.history.push('/admin/profile')}}>Edit Profile</button>
             <button className='ui button' type='button' onClick={() => {this.props.history.push('/admin/data')}}>View Analytics</button>
-            <button className='ui button' type='button' onClick={() => {this.props.history.push('/admin/live')}}>Live Coding</button>
             <div className='row centered challenge_btns'>
               <button className='ui button' type='button' onClick={this.handleClick}>Choose Initial Challenge</button>
               <button className='ui button' type='button' onClick={() => {this.props.history.push('/admin/challenges')}}>Choose Scheduled Challenges</button>   
@@ -50,6 +49,7 @@ class AdminDashboardView extends Component {
                   <th>Challenge</th>
                   <th>Time</th>
                   <th>Duration</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -59,6 +59,7 @@ class AdminDashboardView extends Component {
                     <td>{item.title}</td>
                     <td>{moment(item.time).format('MMMM Do YYYY, h:mm A')}</td>
                     <td>{item.duration}</td>
+                    <td><button className='ui button' type='button' onClick={() => {this.props.history.push('/admin/live')}}>view challenge</button></td>
                   </tr>
                 )
               })}

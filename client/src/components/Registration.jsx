@@ -38,7 +38,7 @@ class Registration extends Component {
   handleSubmit(e, form) {
     e.preventDefault();
     if(form === 'companyForm') {
-      this.props.saveCompany(this.state.companyName, this.state.username, this.state.password, this.state.email, this.state.phone, this.state.logoUrl);
+      this.props.saveCompany(this.state.companyName, this.state.username, this.state.password, this.state.email, this.state.phone, this.state.logoUrl, this.state.companyInfo);
     } else if(form === 'candidateForm') {
       this.props.saveCandidate(this.state.fullName, this.state.username, this.state.password, this.state.email, this.state.phone);
     }
@@ -77,10 +77,10 @@ class Registration extends Component {
             <div className='field'>
               <input onChange={ (e) => this.handleChange(e) } value={ this.state.logoUrl } name='logoUrl' type='text' placeholder='Logo URL' />
             </div>
-            <textarea type='text' onChange={ (e) => this.handleChange(e) } value={ this.state.companyInfo }></textarea>
+            <textarea type='text' name='companyInfo' onChange={ (e) => this.handleChange(e) } value={ this.state.companyInfo }></textarea>
             <button className='ui yellow button' type='submit'>Register</button>
             <button className='ui green button' onClick={ () => this.props.history.push('/') }>To Login</button>
-            <span>{this.props.signup_status.signup_status}</span>
+            <span>{ this.props.signup_status }</span>
           </form>
          
         
@@ -107,7 +107,7 @@ class Registration extends Component {
             </div>
             <button className='ui yellow button' type='submit'>Register</button>
             <button className='ui green button' onClick={ () => this.props.history.push('/') } >To Login</button>
-            <span>{this.props.signup_status.signup_status}</span>
+            <span>{ this.props.signup_status }</span>
           </form>
       }
     

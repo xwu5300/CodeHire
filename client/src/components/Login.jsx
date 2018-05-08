@@ -26,9 +26,9 @@ class Login extends Component {
   handleSubmit(e) {
     e.preventDefault();
     
-    if(this.props.login_status.login_status === 'company') {
+    if(this.props.login_status === 'company') {
       this.props.history.push('/admin');
-    } else if(this.props.login_status.login_status === 'candidate') {
+    } else if(this.props.login_status === 'candidate') {
       this.props.history.push('/user');
     } else {
       this.setState({ showStatus: !this.state.showStatus });
@@ -41,7 +41,7 @@ class Login extends Component {
     return ( 
       <div>
       {this.state.showStatus ?
-      <div className='login_status'>{this.props.login_status.login_status}</div>
+      <div className='login_status'>{ this.props.login_status }</div>
       : null }
 
       <div className='login_container'>

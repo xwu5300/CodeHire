@@ -13,13 +13,19 @@ app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/../client/dist'));
 
+
 io.sockets.on('connection', (socket)=> {
+  
   socket.on('typing', (newValue, e)=> {
     io.sockets.emit('add char', newValue)
   })
 
   socket.on('room', function(username) {
     socket.join(username)
+  })
+ 
+  socket.on('enter challenge', (username) => {
+  	io.sockets.emit('active user', username);
   })
 
 })
@@ -37,3 +43,5 @@ app.get('*', function(req, res) {
 server.listen(port, function() {
   console.log(`listening on port ${port}`);
 });
+
+

@@ -2,9 +2,22 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import {withRouter} from 'react-router-dom';
 
+
+import socketClient from 'socket.io-client';
+
 class CompanyScheduleView extends Component {
   constructor() {
     super()
+
+    this.enterChallenge = this.enterChallenge.bind(this);
+
+
+    this.socket = socketClient();
+  }
+
+  enterChallenge() {
+    this.props.history.push('/user/live');
+    this.socket.emit('enter challenge', this.props.username);
   }
 
   render() {
@@ -39,7 +52,7 @@ class CompanyScheduleView extends Component {
               <td>
                 <button className='ui orange button' onClick={() => {}}>Add to Schedule
                 </button>
-                <button className='ui orange button' onClick={() => {this.props.history.push('/user/live')}}>Start
+                <button className='ui orange button' onClick={() => { this.enterChallenge() }}>Start
                 </button>
               </td>
             </tr>

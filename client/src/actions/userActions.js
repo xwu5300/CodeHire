@@ -22,10 +22,11 @@ export const fetchInitialChallenge = (company_id) => (dispatch) => {
   })
 }
 
- export const fetchCandidateInfo = (username) => (dispatch) => {
+ export const fetchCandidateInfo = (username, callback) => (dispatch) => {
    axios.get('/api/candidateInfo', { params: { username: username }})
     .then((info) => {
         dispatch({ type: GET_CANDIDATE_INFO, information: info.data[0].information, skills: info.data[0].candidate_skills })
+        callback();
       })
       .catch((err) => {
         console.log(err);

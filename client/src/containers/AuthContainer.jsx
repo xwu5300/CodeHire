@@ -20,8 +20,8 @@ class AuthContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  login_status: state.login_status,
-  signup_status: state.signup_status,
+  login_status: state.login_status.login_status,
+  signup_status: state.signup_status.signup_status
 })
 
 const connectAuthContainer = connect(mapStateToProps, {})(AuthContainer);

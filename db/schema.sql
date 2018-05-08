@@ -38,7 +38,7 @@ CREATE TABLE all_challenges (
 
 CREATE TABLE company_schedule (
   id SERIAL PRIMARY KEY,
-  time TIMESTAMP NOT NULL,
+  time TIMESTAMPTZ NOT NULL,
   duration SMALLINT NOT NULL,
   challenge_id SMALLINT REFERENCES all_challenges(id),
   company_id SMALLINT REFERENCES users(id)
@@ -46,7 +46,7 @@ CREATE TABLE company_schedule (
 
 CREATE TABLE user_schedule (
   id SERIAL PRIMARY KEY,
-  time TIMESTAMP NOT NULL,
+  time TIMESTAMPTZ NOT NULL,
   candidate_id SMALLINT REFERENCES users(id),
   challenge_id SMALLINT REFERENCES all_challenges(id),
   company_id SMALLINT REFERENCES users(id)

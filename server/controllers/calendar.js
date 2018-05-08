@@ -6,6 +6,7 @@ module.exports.getAllCompanyCalendars = () => {
     .innerJoin('company_schedule', 'users.id', 'company_schedule.company_id')
     .orderBy('time', 'asc')
     .then((res) => {
+      console.log(res);
       console.log('All companies schedules successfully received from db');
       return res;
     })
@@ -41,6 +42,6 @@ module.exports.getAllCompanyCalendars = () => {
       return res;
     })
     .catch((err) => {
-      console.log('Could not retrieve schedule from db');
+      console.log('Could not retrieve schedule from db', err);
     })
   }
