@@ -32,9 +32,10 @@ module.exports.getAllCompanyCalendars = () => {
 
   //get single company's schedule
   module.exports.getCompanySchedule = (companyId) => {
-    return knex('company_schedule')
-    .where('company_id', companyId)
-    .orderBy('time', 'desc')
+    return knex.from('all_challenges')
+    .innerJoin('company_schedule', 'all_challenges.id', 'company_schedule.challenge_id')
+    .where({'company_schedule.company_id': companyId})
+    .orderBy('time', 'asc')
     .then((res) => {
       console.log('Successfully retrieved schedule from db');
       return res;

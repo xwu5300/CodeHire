@@ -93,3 +93,7 @@ module.exports.getInitialChallenge = (companyId) => {
   })
 };
 
+//set initial challenge
+// module.exports.setInitialChallenge = (companyId, challengeId) => {
+
+// }

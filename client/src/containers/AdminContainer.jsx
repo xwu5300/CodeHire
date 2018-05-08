@@ -9,7 +9,7 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule } from '../actions/adminActions'; 
+import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitial } from '../actions/adminActions'; 
 //import { fetchCompanyInfo } from '../actions/authActions';
 
 
@@ -43,13 +43,14 @@ const mapStateToProps = (state) => ({
    username: state.username.username,
    logo_url: state.logo_url.logo_url,
    company_information: state.company_information.company_information,
-   company_schedule: state.company_schedule.company_schedule
+   company_schedule: state.company_schedule.company_schedule,
+   is_initial: state.is_initial.is_initial
 });
 
 
 
-const ChallengeListComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge, addToCompanySchedule })(ChallengeListView);
-const AdminDashboardComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge })(AdminDashboardView);
+const ChallengeListComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge, addToCompanySchedule, toggleInitial })(ChallengeListView);
+const AdminDashboardComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge, toggleInitial })(AdminDashboardView);
 const AnalyticsComponent= connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge })(AnalyticsView);
 const LiveCodingComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge })(LiveCodingView);
 const AdminProfileComponent = connect(mapStateToProps, { updateInfo, fetchCompanyInfo })(AdminProfileView);
