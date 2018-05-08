@@ -4,8 +4,9 @@ const knex = require('../../db/index.js');
 module.exports.getAllCompanyCalendars = () => {
     return knex.from('users')
     .innerJoin('company_schedule', 'users.id', 'company_schedule.company_id')
-    .orderBy('time', 'asc')
+    .orderBy('challenge_time', 'asc')
     .then((res) => {
+      console.log(res);
       console.log('All companies schedules successfully received from db');
       return res;
     })

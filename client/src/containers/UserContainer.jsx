@@ -18,7 +18,6 @@ import axios from 'axios';
 class UserContainer extends Component {
 
   componentDidMount() {
-    console.log(this.props);
     this.props.fetchAllCompanyCalendars();
   }
 

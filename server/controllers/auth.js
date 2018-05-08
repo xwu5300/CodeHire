@@ -17,10 +17,10 @@ module.exports.saveCandidate = (fullname, username, password, email, phone, call
   
 }
 
-module.exports.saveCompany = (companyName, username, password, email, phone, logoUrl, callback) => {
+module.exports.saveCompany = (companyName, username, password, email, phone, logoUrl, information, callback) => {
   bcrypt.hash(password, 10, (err, hash) => {
     return knex('users')
-    .insert({ name: companyName, username: username, password: hash, email: email, phone: phone, logo_url: logoUrl, role: 'company'})
+    .insert({ name: companyName, username: username, password: hash, email: email, phone: phone, logo_url: logoUrl, information: information, role: 'company'})
     .then((response) => {
       callback('Company Registration Successful!');
     })
