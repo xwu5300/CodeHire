@@ -60,7 +60,7 @@ export const updateCalendar = () => (dispatch) => {
 export const fetchCompanyInfo = (username) => (dispatch) => {
   axios.get('/api/companyInfo', { params: { username: username }})
   .then((response) => {
-    dispatch({ type: GET_INFO, logo_url: response.data[0].logo_url, information: response.data[0].information })
+    dispatch({ type: GET_COMPANY_INFO, logo_url: response.data[0].logo_url, information: response.data[0].information })
   })
   .catch((err) => {
     console.log(err);
