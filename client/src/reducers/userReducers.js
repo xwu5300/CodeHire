@@ -7,10 +7,11 @@ const initialState = {
     candidate_information: '',
     candidate_skills: ''
   }
-  
+
 const allCompanyCalendars = (state = initialState, action) => {
     switch(action.type) {
       case 'GET_ALL_COMPANY_CALENDARS':
+        console.log(action)
         return {
           ...state,
           all_company_calendars: action.payload
@@ -19,7 +20,7 @@ const allCompanyCalendars = (state = initialState, action) => {
         return state;
     }
   }
-  
+
   const initialChallenge = (state = initialState, action) => {
     switch(action.type) {
       case 'GET_INITIAL_CHALLENGE':
@@ -45,4 +46,3 @@ const allCompanyCalendars = (state = initialState, action) => {
 }
 
 export default { allCompanyCalendars, initialChallenge, candidateInfo };
-

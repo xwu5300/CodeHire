@@ -23,6 +23,7 @@ class UserContainer extends Component {
   }
 
   render() {
+    console.log('PROPS', this.props)
     return (
       <Switch>
         <Route exact path='/user' component={CompanyListViewComponent}/>
@@ -53,4 +54,3 @@ const UserProfileViewComponent = connect(mapStateToProps, { fetchCandidateInfo, 
 
 const routeUserComponent = withRouter(connectComponent);
 export default routeUserComponent;
-

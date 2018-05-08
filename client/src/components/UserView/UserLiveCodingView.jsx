@@ -25,7 +25,7 @@ class UserLiveCodingView extends Component {
 
     let username = 'wkimak'
     this.socket.on('connect', function(){
-      sockit.emit('room', username)
+      this.socket.emit('room', username)
     })
 
     this.socket.on('add char', (chars)=> {
