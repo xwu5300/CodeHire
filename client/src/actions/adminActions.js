@@ -1,5 +1,6 @@
 import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL } from '../constants/actionTypes';
 import axios from 'axios';
+import { fetchInitialChallenge } from './userActions.js';
 
 
 export const fetchDefaultChallenges = () => (dispatch) => {
@@ -98,8 +99,15 @@ export const toggleInitial = (isInitial) => (dispatch) => {
   dispatch( {type: TOGGLE_INITIAL, payload: !isInitial })
 }
 
-export const makeInitial = (challenge) => {
-  axios.patch('/api/')
+export const makeInitial = (challengeId) => {
+  axios.patch('/api/initialChallenge', {challengeId: challengeId})
+  .then(() => {
+    dispatch(fetchInitialChallenge());
+    console.log('Initial challenge set');
+  })
+  .catch((err) => {
+    console.log(err);
+  })
 }
 
 

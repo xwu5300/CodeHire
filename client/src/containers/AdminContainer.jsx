@@ -9,7 +9,8 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitial } from '../actions/adminActions'; 
+import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitial, makeInitial } from '../actions/adminActions'; 
+import { fetchInitialChallenge } from '../actions/userActions';
 //import { fetchCompanyInfo } from '../actions/authActions';
 
 
@@ -19,6 +20,7 @@ class AdminContainer extends Component {
     this.props.fetchAllChallenges();
     this.props.fetchDefaultChallenges();
     this.props.fetchCompanySchedule();
+    this.props.fetchInitialChallenge(2);
   }
 
 
@@ -44,17 +46,18 @@ const mapStateToProps = (state) => ({
    logo_url: state.logo_url.logo_url,
    company_information: state.company_information.company_information,
    company_schedule: state.company_schedule.company_schedule,
-   is_initial: state.is_initial.is_initial
+   is_initial: state.is_initial.is_initial,
+   initial_challenge: state.initial_challenge.initial_challenge
 });
 
 
 
-const ChallengeListComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge, addToCompanySchedule, toggleInitial })(ChallengeListView);
+const ChallengeListComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge, addToCompanySchedule, toggleInitial, makeInitial })(ChallengeListView);
 const AdminDashboardComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge, toggleInitial })(AdminDashboardView);
 const AnalyticsComponent= connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge })(AnalyticsView);
 const LiveCodingComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge })(LiveCodingView);
 const AdminProfileComponent = connect(mapStateToProps, { updateInfo, fetchCompanyInfo })(AdminProfileView);
 
-const connectAdminContainer = connect(mapStateToProps, {fetchAllChallenges, fetchDefaultChallenges, fetchCompanyInfo, fetchCompanySchedule })(AdminContainer);
+const connectAdminContainer = connect(mapStateToProps, {fetchAllChallenges, fetchDefaultChallenges, fetchCompanyInfo, fetchCompanySchedule, fetchInitialChallenge })(AdminContainer);
 export default withRouter(connectAdminContainer);
 

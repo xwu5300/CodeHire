@@ -11,7 +11,7 @@ class AdminDashboardView extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
+    console.log('admin dash1', this.props)
   }
 
   handleClick() {
@@ -38,7 +38,7 @@ class AdminDashboardView extends Component {
               </thead>
               <tbody>
                 <tr>
-                  <td>Initial Challenge</td>
+                {this.props.initial_challenge.length === 0 ? null : <td>{this.props.initial_challenge[0].title}</td>}
                 </tr>
               </tbody>
             </table>

@@ -85,7 +85,6 @@ router.get('/api/defaultChallenges', (req, res) => {
 })
 
 router.post('/api/challenges', (req, res) => {
-  console.log(req.body.challenge)
   let title = req.body.challenge.title;
   let instruction = req.body.challenge.instruction;
   let functionName = req.body.challenge.function_name;
@@ -117,8 +116,16 @@ router.post('/api/initialChallenge', (req, res) => {
 })
 
 // update initial challenge from 'intitial_challenges table'
-router.patch('/api/initialChallenge/:challengeid', (req, res) => {
-
+router.patch('/api/initialChallenge', (req, res) => {
+  console.log(req.body.challengeId)
+  let companyId = 2;
+  challengeControllers.setInitialChallenge(companyId, req.body.challengeId)
+  .then(() => {
+    res.send('Updated initial challenge');
+  })
+  .catch((err) => {
+    console.log('Could not update initial challenge', err);
+  })
 })
 
 // get initial challenge for company

@@ -91,6 +91,31 @@ module.exports.getInitialChallenge = (companyId) => {
 };
 
 //set initial challenge
-// module.exports.setInitialChallenge = (companyId, challengeId) => {
-
-// }
+module.exports.setInitialChallenge = (companyId, challengeId) => {
+  return knex('all_challenges')
+  .where({
+    company_id: companyId
+  })
+  .update({
+    initial: false
+  })
+  .then(() => {
+    return knex('all_challenges')
+    .where({
+      company_id: companyId,
+      id: challengeId
+    })
+    .update({
+      initial: true
+    })
+    .then(() => {
+      console.log('Updated initial challenge')
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
