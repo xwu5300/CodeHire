@@ -1,5 +1,4 @@
-
-import { GET_ALL_COMPANY_CALENDARS, GET_INITIAL_CHALLENGE, GET_CANDIDATE_INFO } from '../constants/actionTypes';
+import { GET_INITIAL_CHALLENGE, GET_ALL_COMPANY_CALENDARS, GET_CANDIDATE_CALENDAR, SAVE_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO } from '../constants/actionTypes';
 import axios from 'axios';
 
 export const fetchAllCompanyCalendars =() => (dispatch) => {
@@ -10,6 +9,20 @@ export const fetchAllCompanyCalendars =() => (dispatch) => {
   .catch((err) => {
     console.log(err);
   })
+}
+
+export const fetchCandidateCalendar = (candidateId) => (dispatch) => {
+  axios.get('/api/candidateCalendar', {params: {candidateId}})
+  .then(({data}) => {
+    dispatch({ type: GET_CANDIDATE_CALENDAR, payload: data })
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
+
+export const saveCandidateCalendar = (candidate_id) => {
+  axios.get('api/')
 }
 
 export const fetchInitialChallenge = (company_id) => (dispatch) => {

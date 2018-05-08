@@ -64,9 +64,8 @@ export const addToCompanySchedule = (time, duration, challengeId) => (dispatch) 
 export const fetchCompanySchedule = (companyId) => (dispatch) => {
   axios.get('/api/companyCalendar', {params: {companyId: companyId}})
   .then(({data}) => {
-    console.log('DAAATAA', data);
-    console.log('Company schedule retrieved');
     dispatch({ type: GET_COMPANY_SCHEDULE, payload: data});
+    // console.log('Company schedule retrieved');
   })
   .catch((err) => {
     console.log('Error retrieving company schedule')

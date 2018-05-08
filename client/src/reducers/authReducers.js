@@ -10,7 +10,6 @@ const initialState = {
 
 
 const loginStatus = (state = initialState, action) => {
-  console.log('ACTION', action);
   switch(action.type) {
     case 'CHECK_USER':
       return {
@@ -23,7 +22,7 @@ const loginStatus = (state = initialState, action) => {
     }
 }
 
-const signupStatus = (state = '', action) => {
+const signupStatus = (state = initialState, action) => {
   switch(action.type) {
     case 'SAVE_COMPANY':
       return {

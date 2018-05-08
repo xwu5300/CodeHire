@@ -78,14 +78,11 @@ module.exports.getDefaultChallenges = () => {
 };
 
 //get a initial challenge from company
-
-//SELECT * FROM USERS INNER JOIN ALL_CHALLENGES ON USERS.ID = ALL_CHALLENGES.COMPANY_ID WHERE ALL_CHALLENGES.INITIAL = TRUE AND 
 module.exports.getInitialChallenge = (companyId) => {
   return knex.from('users')
   .innerJoin('all_challenges', 'users.id', 'all_challenges.company_id')
   .where({'all_challenges.company_id': companyId, 'all_challenges.initial': true})
   .then((res) => {
-    console.log('Initial challenges successfully received from db');
     return res;
   })
   .catch((err) => {

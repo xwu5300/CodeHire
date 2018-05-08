@@ -143,17 +143,21 @@ router.delete('./api/challenges/:challengeid', (req, res) => {
 /* ---------- Schedule Routes -------- */
 
 // get user schedule
-router.get('/api/userCalendar', (req, res) => {
-
+router.get('/api/candidateCalendar', (req, res) => {
+  let candidateId = req.query.candidateId;
+  calendarControllers.getCandidateCalendar(candidateId)
+  .then((data) => {
+    res.send(data)
+  })
 })
 
-// update user calendar
-router.post('/api/userCalendar', (req, res) => {
+// save user calendar
+router.post('/api/candidateCalendar', (req, res) => {
 
 })
 
 // update user Calendar
-router.patch('/api/userCalendar:date', (req, res) => {
+router.patch('/api/candidateCalendar:date', (req, res) => {
 
 })
 

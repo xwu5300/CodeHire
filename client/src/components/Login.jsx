@@ -38,6 +38,7 @@ class Login extends Component {
 
 
   render() {
+    console.log('login props', this.props)
     return ( 
       <div>
       {this.state.showStatus ?
