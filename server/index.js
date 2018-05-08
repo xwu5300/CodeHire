@@ -18,8 +18,8 @@ io.sockets.on('connection', (socket)=> {
     io.sockets.emit('add char', newValue)
   })
 
-  socket.on('room', function(room) {
-    socket.join(room)
+  socket.on('room', function(username) {
+    socket.join(username)
   })
 
 })
