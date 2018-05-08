@@ -72,10 +72,12 @@ export const fetchCompanySchedule = (companyId) => (dispatch) => {
   })
 }
 
-export const fetchCompanyInfo = (username) => (dispatch) => {
+
+export const fetchCompanyInfo = (username, callback) => (dispatch) => {
   axios.get('/api/companyInfo', { params: { username: username }})
   .then((response) => {
     dispatch({ type: GET_COMPANY_INFO, logo_url: response.data[0].logo_url, information: response.data[0].information })
+    callback();
   })
   .catch((err) => {
     console.log(err);

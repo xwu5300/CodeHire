@@ -16,7 +16,9 @@ class AdminProfileView extends Component {
   }
 
   componentWillMount() {
-    this.props.fetchCompanyInfo(this.props.username);
+    this.props.fetchCompanyInfo(this.props.username, () => {
+      this.setState({ logo_url: this.props.logo_url, information: this.props.company_information })
+    });
   }
 
   handleChange(e) {
@@ -36,7 +38,7 @@ class AdminProfileView extends Component {
           <div className='ui centered grid'>
             <h1>Company Profile</h1>
             <div className='row'>
-              <img className='company_profile_logo' src={ this.props.logo_url } />
+              <img className='company_profile_logo' src={ this.state.logo_url } />
             </div>
             <div className='row'>
               <input onChange={ (e) => this.handleChange(e) } value={ this.state.logo_url } style={{ width: '60%' }} name='logo_url' className='ui input' type='text' placeholder='Logo Url' />
