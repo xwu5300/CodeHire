@@ -4,8 +4,8 @@ const knex = require('knex')({
   client: 'pg',
   connection: {
     host : 'localhost',
-    user : config.name || 'root',
-    password : config.password || '',
+    user : config.name || 'Kevin',
+    password : config.password || 'password',
     database : 'code_hire'
   }
 });
