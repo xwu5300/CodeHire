@@ -19,7 +19,8 @@ export default combineReducers({
   initial_challenge: userReducers.initialChallenge, 
   company_information: adminReducers.companyInfo,
   candidate_information: userReducers.candidateInfo,
-  candidate_skills: userReducers.candidateInfo
+  candidate_skills: userReducers.candidateInfo,
+  candidate_calendar: userReducers.candidateCalendar,
 })
 
 

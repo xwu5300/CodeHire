@@ -34,6 +34,10 @@ export const GET_COMPANY_SCHEDULE = 'GET_COMPANY_SCHEDULE';
 
 export const TOGGLE_INITIAL = 'TOGGLE_INITIAL';
 
+export const GET_CANDIDATE_CALENDAR = 'GET_CANDIDATE_CALENDAR';
+
+export const SAVE_CANDIDATE_CALENDER = 'SAVE_CANDIDATE_CALENDAR';
+
 /* --------- Results -------- */
 export const SAVE_RESULTS = 'SAVE_RESULTS';
 

@@ -37,7 +37,8 @@ ${this.props.initial_challenge[0].function_name}()
   render() {
     return (
       <div>
-        <h1>{this.props.initial_challenge[0].title}</h1>
+        <h1>{this.props.initial_challenge[0].name}</h1>
+        <h2>{this.props.initial_challenge[0].title}</h2>
         <div>
           instruction: {this.props.initial_challenge[0].instruction}
         </div>

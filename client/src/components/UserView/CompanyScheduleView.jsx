@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import {withRouter} from 'react-router-dom';
-
-
 import socketClient from 'socket.io-client';
+import ScheduleTableView from './ScheduleTableView.jsx';
 
 class CompanyScheduleView extends Component {
   constructor() {
     super()
-
     this.enterChallenge = this.enterChallenge.bind(this);
-
-
     this.socket = socketClient();
   }
 
@@ -22,8 +18,12 @@ class CompanyScheduleView extends Component {
 
   render() {
     if (this.props.initial_challenge[0]) {
+      const companyCalendar = this.props.all_company_calendars.filter((schedule) => {
+        return schedule.company_id === this.props.initial_challenge[0].company_id
+      })
       return (
         <div>
+        <h1>{this.props.initial_challenge[0].name}</h1> 
         <h2>{this.props.initial_challenge[0].information}</h2> 
         <br/>
         <div className='ui raised very padded container segment'>
@@ -31,41 +31,13 @@ class CompanyScheduleView extends Component {
           <span className='ui container segment'> </span>
         </div>
         <br/>
-        Enter Live challenge:
+        {this.props.initial_challenge[0].name}'s Live Challenge:
         <div className='schedule_container'>
-        <table className='ui inverted table'>
-          <thead>
-            <tr>
-              <th>Challenge</th>
-              <th>Time</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.props.all_company_calendars.filter((schedule) => {
-              return schedule.company_id === this.props.initial_challenge[0].company_id
-            }).map((schedule, i) => {
-              return (
-              <tr key={i} >
-              <td>None</td>
-              <td>{schedule.time}</td>
-              <td>
-                <button className='ui orange button' onClick={() => {}}>Add to Schedule
-                </button>
-                <button className='ui orange button' onClick={() => { this.enterChallenge() }}>Start
-                </button>
-              </td>
-            </tr>
-            )})}
-          </tbody>
-          <tfoot>
-            <tr><th>3 People</th>
-            <th></th>
-            <th></th>
-          </tr></tfoot>
-        </table>
-        </div>
-          
+        {companyCalendar ? 
+        <ScheduleTableView companyCalendar={companyCalendar} /> 
+        : <div> {this.props.initial_challenge[0].name} Does Not Have Any Upcoming Live Challenge </div>
+      }
+        </div> 
         </div>
       )
     } else {

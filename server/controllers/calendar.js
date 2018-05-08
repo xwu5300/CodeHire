@@ -2,12 +2,10 @@ const knex = require('../../db/index.js');
 
 //get all companies' calendars
 module.exports.getAllCompanyCalendars = () => {
-    return knex.from('users')
+  return knex.from('users')
     .innerJoin('company_schedule', 'users.id', 'company_schedule.company_id')
     .orderBy('time', 'asc')
     .then((res) => {
-      console.log(res);
-      console.log('All companies schedules successfully received from db');
       return res;
     })
     .catch((err) => {
@@ -45,3 +43,20 @@ module.exports.getAllCompanyCalendars = () => {
       console.log('Could not retrieve schedule from db', err);
     })
   }
+module.exports.getCandidateCalendar = (candidateId) => {
+  return knex.from('user_schedule')
+    .innerJoin('company_schedule', 'user_schedule.company_schedule_id', 'company_schedule.id')
+    .where({'user_schedule.candidate_id': candidateId})
+    .orderBy('time', 'asc')
+    .then((res) => {
+      console.log('Candidate schedule successfully received from db');
+      return res;
+    })
+    .catch((err) => {
+      console.log('Could not retrieve candidate schedule from db:', err);
+    })
+}
+
+module.exports.saveCandidateCalendar = (candidateId) => {
+  return knex.from('')
+}

@@ -9,7 +9,7 @@ import CompanyScheduleView from '../components/UserView/CompanyScheduleView.jsx'
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { fetchAllCompanyCalendars, fetchInitialChallenge, fetchCandidateInfo, saveCandidateInfo } from '../actions/userActions';
+import { fetchAllCompanyCalendars, fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, saveCandidateInfo } from '../actions/userActions';
 
 import axios from 'axios';
 
@@ -19,10 +19,10 @@ class UserContainer extends Component {
 
   componentDidMount() {
     this.props.fetchAllCompanyCalendars();
+    this.props.fetchCandidateCalendar(1);
   }
 
   render() {
-    console.log('PROPS', this.props)
     return (
       <Switch>
         <Route exact path='/user' component={CompanyListViewComponent}/>
@@ -36,7 +36,6 @@ class UserContainer extends Component {
 }
 
 const mapStateToProps = function(state) {
-  console.log('STATETETTE', state)
   return {
     all_company_calendars: state.all_company_calendars.all_company_calendars,
     initial_challenge: state.initial_challenge.initial_challenge,
@@ -46,11 +45,12 @@ const mapStateToProps = function(state) {
     candidate_skills: state.candidate_skills.candidate_skills
 }};
 
-const connectComponent = connect(mapStateToProps, { fetchAllCompanyCalendars, fetchInitialChallenge })(UserContainer);
-const CompanyListViewComponent = connect(mapStateToProps, { fetchAllCompanyCalendars, fetchInitialChallenge })(CompanyListView);
-const CompanyScheduleViewComponent = connect(mapStateToProps, { fetchAllCompanyCalendars, fetchInitialChallenge })(CompanyScheduleView);
-const UserInitialChallengeViewComponent = connect(mapStateToProps, { fetchAllCompanyCalendars, fetchInitialChallenge })(UserInitialChallengeView);
-const UserLiveCodingViewComponent = connect(mapStateToProps, {})(UserLiveCodingView);
+
+const connectComponent = connect(mapStateToProps, { fetchAllCompanyCalendars, fetchCandidateCalendar })(UserContainer);
+const CompanyListViewComponent = connect(mapStateToProps, { fetchInitialChallenge })(CompanyListView);
+const CompanyScheduleViewComponent = connect(mapStateToProps)(CompanyScheduleView);
+const UserInitialChallengeViewComponent = connect(mapStateToProps)(UserInitialChallengeView);
+const UserLiveCodingViewComponent = connect(mapStateToProps)(UserLiveCodingView);
 const UserProfileViewComponent = connect(mapStateToProps, { fetchCandidateInfo, saveCandidateInfo })(UserProfileView);
 
 const routeUserComponent = withRouter(connectComponent);
