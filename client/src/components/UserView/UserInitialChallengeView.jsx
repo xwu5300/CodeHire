@@ -12,10 +12,12 @@ class UserInitialChallengeView extends Component {
     super(props);
 
     this.state = {
+      theme: 'monokai',
       code: `function ${this.props.initial_challenge[0].function_name}(${this.props.initial_challenge[0].parameters}) {
 }` }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
+    this.handleTheme = this.handleTheme.bind(this)
   }
 
   onChange(newValue, event) {
@@ -24,6 +26,17 @@ class UserInitialChallengeView extends Component {
     }, ()=> console.log(this.state.code))
   }
 
+  handleTheme() {
+    let currentTheme
+    if (this.state.theme === 'monokai') {
+      currentTheme = 'textmate'
+    } else {
+      currentTheme = 'monokai'
+    }
+    this.setState({
+      theme: currentTheme
+    })
+  }
   handleSubmit() {
     let string = `${this.state.code}
 ${this.props.initial_challenge[0].function_name}()
@@ -45,7 +58,7 @@ ${this.props.initial_challenge[0].function_name}()
         </div>
         <AceEditor
           mode="javascript"
-          theme="monokai"
+          theme={this.state.theme}
           name="codehire"
           onLoad={this.onLoad}
           onChange={this.onChange}
@@ -59,7 +72,7 @@ ${this.props.initial_challenge[0].function_name}()
           showLineNumbers: true,
           tabSize: 2,
         }}/>
-
+        <button onClick={this.handleTheme}>Change theme</button>
         <button onClick={this.handleSubmit}> Submit Answer </button>
 
 
