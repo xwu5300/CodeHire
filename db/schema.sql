@@ -38,7 +38,7 @@ CREATE TABLE all_challenges (
 
 CREATE TABLE company_schedule (
   id SERIAL PRIMARY KEY,
-  challenge_time TIMESTAMPTZ NOT NULL,
+  time TIMESTAMPTZ NOT NULL,
   duration SMALLINT NOT NULL,
   challenge_id SMALLINT REFERENCES all_challenges(id),
   company_id SMALLINT REFERENCES users(id)
@@ -46,7 +46,7 @@ CREATE TABLE company_schedule (
 
 CREATE TABLE user_schedule (
   id SERIAL PRIMARY KEY,
-  challenge_time TIMESTAMPTZ NOT NULL,
+  time TIMESTAMPTZ NOT NULL,
   candidate_id SMALLINT REFERENCES users(id),
   challenge_id SMALLINT REFERENCES all_challenges(id),
   company_id SMALLINT REFERENCES users(id)
@@ -77,8 +77,8 @@ INSERT INTO all_challenges (title, instruction, function_name, parameters, test_
 INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('Permutation', 'recursion', 'Permutation', 'arr', null, null, 'medium', true, 2);
 INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('Permute', 'Find the sum...', 'Permute', 'arr, target', null, null, 'easy', true, 3);
 
-INSERT INTO company_schedule (challenge_time, duration, challenge_id, company_id) VALUES ('2018-8-20 11:00:00', 30, 2, 2);
-INSERT INTO company_schedule (challenge_time, duration, challenge_id, company_id) VALUES ('2018-5-19 17:00:00', 15, 3, 2);
-INSERT INTO company_schedule (challenge_time, duration, challenge_id, company_id) VALUES ('2018-11-9 12:00:00', 30, 4, 3);
+INSERT INTO company_schedule (time, duration, challenge_id, company_id) VALUES ('2018-8-20 11:00:00', 30, 2, 2);
+INSERT INTO company_schedule (time, duration, challenge_id, company_id) VALUES ('2018-5-19 17:00:00', 15, 3, 2);
+INSERT INTO company_schedule (time, duration, challenge_id, company_id) VALUES ('2018-11-9 12:00:00', 30, 4, 3);
 
 /* psql < db/schema.sql */

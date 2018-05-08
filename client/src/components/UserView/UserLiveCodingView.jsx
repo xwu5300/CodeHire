@@ -24,10 +24,6 @@ class UserLiveCodingView extends Component {
     this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
 
-    let username = 'wkimak'
-    this.socket.on('connect', function(){
-      this.socket.emit('room', username)
-    })
 
     this.socket.on('add char', (chars)=> {
       this.setState({

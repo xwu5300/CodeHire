@@ -4,7 +4,7 @@ const knex = require('../../db/index.js');
 module.exports.getAllCompanyCalendars = () => {
     return knex.from('users')
     .innerJoin('company_schedule', 'users.id', 'company_schedule.company_id')
-    .orderBy('challenge_time', 'asc')
+    .orderBy('time', 'asc')
     .then((res) => {
       console.log(res);
       console.log('All companies schedules successfully received from db');
@@ -42,6 +42,6 @@ module.exports.getAllCompanyCalendars = () => {
       return res;
     })
     .catch((err) => {
-      console.log('Could not retrieve schedule from db');
+      console.log('Could not retrieve schedule from db', err);
     })
   }

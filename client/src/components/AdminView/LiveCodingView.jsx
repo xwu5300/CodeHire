@@ -8,8 +8,6 @@ import socketClient from 'socket.io-client';
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
 
-import socketClient from 'socket.io-client';
-
 
 class LiveCodingView extends Component {
   constructor() {
