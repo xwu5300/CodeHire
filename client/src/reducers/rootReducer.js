@@ -12,6 +12,7 @@ export default combineReducers({
   signup_status: authReducers.signupStatus,
   logo_url: adminReducers.companyInfo,
   information: adminReducers.companyInfo,
+  company_schedule: adminReducers.companySchedule,
   all_company_calendars: userReducers.allCompanyCalendars,
   initial_challenge: userReducers.initialChallenge, 
   company_information: adminReducers.companyInfo,

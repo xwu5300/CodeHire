@@ -9,6 +9,7 @@ import {withRouter} from 'react-router-dom';
 const AdminDashboardView = (props) => {
   return (
     <div className='admin_dashboard'>
+    {console.log(props)}
       <div className='ui raised padded centered container segment'>
         <div className='ui grid'>
           <button className='ui button' type='button' onClick={() => {props.history.push('/admin/profile')}}>Edit Profile</button>
@@ -23,29 +24,19 @@ const AdminDashboardView = (props) => {
               <tr>
                 <th>Challenge</th>
                 <th>Time</th>
+                <th>Duration</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Quick Sort</td>
-                <td>2/4/18 9:30am</td>
-              </tr>
-              <tr>
-                <td>Three Sum</td>
-                <td>1/3/18 12:35pm</td>
-              </tr>
-              <tr>
-                <td>Three Sum</td>
-                <td>1/3/18 12:35pm</td>
-              </tr>
-              <tr>
-                <td>Three Sum</td>
-                <td>1/3/18 12:35pm</td>
-              </tr>
-              <tr>
-                <td>Three Sum</td>
-                <td>1/3/18 12:35pm</td>
-              </tr>
+            {props.company_schedule.map((item) => {
+              return (
+                <tr>
+                  <td>Sample Name</td>
+                  <td>{item.time}</td>
+                  <td>{item.duration}</td>
+                </tr>
+              )
+            })}
             </tbody>
           </table>
           </div>
@@ -53,8 +44,5 @@ const AdminDashboardView = (props) => {
       </div>
   )
 }
-
-//const AdminDashboard = connect(mapStateToProps)(AdminDashboard);
-//mapstatetoprops --> pull state from the store
 
 export default withRouter(AdminDashboardView);
