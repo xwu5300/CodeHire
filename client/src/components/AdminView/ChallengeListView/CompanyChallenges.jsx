@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import DayPickerInput from 'react-day-picker/DayPickerInput';
-import 'react-day-picker/lib/style.css';
 
 class CompanyChallenges extends Component {
   constructor(props) {
@@ -37,7 +35,7 @@ class CompanyChallenges extends Component {
               <button onClick={() => {this.props.delete(challenge)}}>Remove from challenges</button>
               <button onClick={() => {this.toggleForm(i)}}>Schedule Challenge</button>
               <br/>
-              {!this.state.showForm[i] ? null : 
+              {!this.state.showForm[i] ? null :
                 <div className="calendar-container">
                   <div className="ui calendar" id="calendar" onClick={this.showCalendar}>
                     <div className="ui input left icon">

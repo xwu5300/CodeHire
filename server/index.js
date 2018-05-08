@@ -9,7 +9,6 @@ const routes = require('./routes');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
-
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/../client/dist'));
@@ -18,6 +17,11 @@ io.sockets.on('connection', (socket)=> {
   socket.on('typing', (newValue, e)=> {
     io.sockets.emit('add char', newValue)
   })
+
+  socket.on('room', function(username) {
+    socket.join(username)
+  })
+
 })
 
 app.use('/', routes);

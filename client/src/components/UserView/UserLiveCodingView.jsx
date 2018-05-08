@@ -8,20 +8,25 @@ import 'brace/mode/javascript';
 import 'brace/theme/monokai';
 
 class UserLiveCodingView extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      challengeName: 'greeting',
-      params: [],
+      title: 'greeting',
+      params: 'param strings',
       instructions: `Instructions: buffalo buffalo buffalo buffalo buffalo buffalo`,
       code: `function placeholder(params) {
 
-}`}
-    //will need to access challengeName and parameters from another source
+}` }
+
     this.socket = socketClient()
     this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+
+    let username = 'wkimak'
+    this.socket.on('connect', function(){
+      sockit.emit('room', username)
+    })
 
     this.socket.on('add char', (chars)=> {
       this.setState({
