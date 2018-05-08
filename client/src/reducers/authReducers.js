@@ -3,17 +3,20 @@ import { CHECK_USER, SAVE_CANDIDATE, SAVE_COMPANY } from '../constants/actionTyp
 
 const initialState = {
   username: '',
+  user_id: '',
   login_status: '',
   signup_status: ''
 }
 
 
-const loginStatus = (state = 'company', action) => {
+const loginStatus = (state = initialState, action) => {
+  console.log('ACTION', action);
   switch(action.type) {
     case 'CHECK_USER':
       return {
-        login_status: action.payload,
-        username: action.username
+        login_status: action.payload[0],
+        user_id: action.payload[1],
+        username: action.payload[2]
       }
     default:
       return state;  

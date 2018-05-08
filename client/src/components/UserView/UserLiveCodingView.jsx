@@ -19,7 +19,8 @@ class UserLiveCodingView extends Component {
 
 }` }
 
-    this.socket = socketClient()
+    this.socket = socketClient();
+
     this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
 
@@ -36,8 +37,6 @@ class UserLiveCodingView extends Component {
   }
 
   onChange(newValue, event) {
-    // console.log('my new event is', event)
-    // console.log('THE NEW VALUE IS:', newValue)
     this.socket.emit('typing', newValue, event)
   }
 
