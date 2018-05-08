@@ -39,7 +39,7 @@ class CompanyScheduleView extends Component {
               <td>
                 <button className='ui orange button' onClick={() => {}}>Add to Schedule
                 </button>
-                <button className='ui orange button' onClick={() => {props.history.push('/user/live')}}>Start
+                <button className='ui orange button' onClick={() => {this.props.history.push('/user/live')}}>Start
                 </button>
               </td>
             </tr>

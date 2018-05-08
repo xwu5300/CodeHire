@@ -65,6 +65,11 @@ body {
 
 /* ------ Company profile ------ */
 
+.company_profile_logo {
+  height: 200px;
+  width: auto;
+}
+
 
 /* Candidate Calendar */
 .candidate_calendar {
