@@ -1,4 +1,4 @@
-import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO } from '../constants/actionTypes';
+import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE } from '../constants/actionTypes';
 import axios from 'axios';
 
 
@@ -50,11 +50,26 @@ export const deleteChallenge = (challenge) => (dispatch) => {
 	})
 }
 
-export const updateCalendar = () => (dispatch) => {
-	axios.post('/api/companyCalendar')
+export const addToCompanySchedule = (time, duration, challengeId) => (dispatch) => {
+  axios.post('/api/companyCalendar', {time: time, duration: duration, challengeId: challengeId})
+  .then(() => {
+    dispatch(fetchCompanySchedule());
+    console.log('Added to your upcoming challenges')
+  })
 	.catch((err) => {
 		console.log('Error updating company calendar', err);
 	})
+}
+
+export const fetchCompanySchedule = (companyId) => (dispatch) => {
+  axios.get('/api/companyCalendar', {params: {companyId: companyId}})
+  .then(({data}) => {
+    console.log('Company schedule retrieved');
+    dispatch({ type: GET_COMPANY_SCHEDULE, payload: data});
+  })
+  .catch((err) => {
+    console.log('Error retrieving company schedule')
+  })
 }
 
 export const fetchCompanyInfo = (username) => (dispatch) => {

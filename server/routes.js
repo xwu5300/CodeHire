@@ -164,9 +164,31 @@ router.get('/api/companyCalendars', (req, res) => {
     res.send(data);
   })
 })
-// update company Calendar
+// add to company Calendar
 router.post('/api/companyCalendar', (req, res) => {
+  let time = req.body.time;
+  let duration = Number(req.body.duration);
+  let challengeId = req.body.challengeId;
+  let companyId = 2;
+  calendarControllers.addToCompanySchedule(time, duration, challengeId, companyId)
+  .then(() => {
+    console.log('Successfully saved challenge to schedule');
+  })
+  .catch((err) => {
+    console.log('Could not save to company schedule', err);
+  })
+})
 
+//fetch single company's schedule
+router.get('/api/companyCalendar', (req, res) => {
+  let companyId = 2;
+  calendarControllers.getCompanySchedule(companyId)
+  .then((data) => {
+    res.send(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
 })
 
 

@@ -13,3 +13,33 @@ module.exports.getAllCompanyCalendars = () => {
       console.log('Could not retrieve companies schedules from db:', err);
     })
   }
+
+  //save challenge to company schedule
+  module.exports.addToCompanySchedule = (time, duration, challengeId, companyId) => {
+    return knex('company_schedule').insert({
+      time: time,
+      duration: duration,
+      challenge_id: challengeId,
+      company_id: companyId
+    })
+    .then(() => {
+      console.log('Event added to company schedule');
+    })
+    .catch((err) => {
+      console.log('Error adding to company schedule', err);
+    })
+  }
+
+  //get single company's schedule
+  module.exports.getCompanySchedule = (companyId) => {
+    return knex('company_schedule')
+    .where('company_id', companyId)
+    .orderBy('time', 'desc')
+    .then((res) => {
+      console.log('Successfully retrieved schedule from db');
+      return res;
+    })
+    .catch((err) => {
+      console.log('Could not retrieve schedule from db');
+    })
+  }
