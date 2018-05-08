@@ -11,7 +11,7 @@ class LiveCodingView extends Component {
   constructor() {
     super();
     this.state = {
-
+      
     }
   }
 

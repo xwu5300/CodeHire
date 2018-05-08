@@ -17,6 +17,11 @@ io.sockets.on('connection', (socket)=> {
   socket.on('typing', (newValue, e)=> {
     io.sockets.emit('add char', newValue)
   })
+
+  socket.on('room', function(room) {
+    socket.join(room)
+  })
+
 })
 
 app.use('/', routes);
