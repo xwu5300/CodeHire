@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import {withRouter} from 'react-router-dom';
-// import AnalyticsView from './AnalyticsView.jsx';
-// import ChallengeListView from './ChallengeListView.jsx';
-// import AdminProfileView from './AdminProfileView.jsx';
-// import LiveCodingView from './LiveCodingView.jsx';
+import moment from 'moment';
 
 const AdminDashboardView = (props) => {
   return (
     <div className='admin_dashboard'>
-    {console.log(props)}
       <div className='ui raised padded centered container segment'>
         <div className='ui grid'>
           <button className='ui button' type='button' onClick={() => {props.history.push('/admin/profile')}}>Edit Profile</button>
@@ -31,8 +27,8 @@ const AdminDashboardView = (props) => {
             {props.company_schedule.map((item) => {
               return (
                 <tr>
-                  <td>Sample Name</td>
-                  <td>{item.time}</td>
+                  <td>{item.title}</td>
+                  <td>{moment(item.time).format('MMMM Do YYYY, h:mm')}</td>
                   <td>{item.duration}</td>
                 </tr>
               )
