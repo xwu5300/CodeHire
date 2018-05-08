@@ -1,4 +1,4 @@
-import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE } from '../constants/actionTypes';
+import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL } from '../constants/actionTypes';
 import axios from 'axios';
 
 
@@ -82,7 +82,6 @@ export const fetchCompanyInfo = (username) => (dispatch) => {
   })
 }
 
-
 export const updateInfo = (username, logoUrl, information) => (dispatch) => {
   axios.patch('/api/companyInfo/:username', { username: username, logo_url: logoUrl, information: information })
   .then((response) => {
@@ -91,6 +90,14 @@ export const updateInfo = (username, logoUrl, information) => (dispatch) => {
   .catch((err) => {
     console.log(err);
   })
+}
+
+export const toggleInitial = (isInitial) => (dispatch) => {
+  dispatch( {type: TOGGLE_INITIAL, payload: !isInitial })
+}
+
+export const makeInitial = (challenge) => {
+  axios.patch('/api/')
 }
 
 

@@ -13,6 +13,7 @@ export default combineReducers({
   logo_url: adminReducers.companyInfo,
   information: adminReducers.companyInfo,
   company_schedule: adminReducers.companySchedule,
+  is_initial: adminReducers.isInitial,
   all_company_calendars: userReducers.allCompanyCalendars,
   initial_challenge: userReducers.initialChallenge, 
   company_information: adminReducers.companyInfo,

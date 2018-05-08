@@ -5,11 +5,11 @@ import DefaultChallenges from './ChallengeListView/DefaultChallenges.jsx';
 import Form from './ChallengeListView/Form.jsx';
 
    
-const ChallengeListView = ({ all_challenges, default_challenges, deleteChallenge, saveChallenge, addToCompanySchedule }) => {
+const ChallengeListView = ({ all_challenges, default_challenges, deleteChallenge, saveChallenge, addToCompanySchedule, is_initial, toggleInitial }) => {
   return (
     <div className='challenge_list'>
       <div className='ui padded horizontal segments challenge_list'>
-        <CompanyChallenges allChallenges={ all_challenges } delete={ deleteChallenge } addToSchedule={ addToCompanySchedule }/>
+        <CompanyChallenges allChallenges={ all_challenges } delete={ deleteChallenge } addToSchedule={ addToCompanySchedule } isInitial={is_initial} />
         <DefaultChallenges defaultChallenges={ default_challenges } save={ saveChallenge }/>
       </div>
       <Form save={ saveChallenge }/>

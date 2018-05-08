@@ -32,6 +32,8 @@ export const ADD_TO_COMPANY_SCHEDULE = 'ADD_TO_COMPANY_SCHEDULE';
 
 export const GET_COMPANY_SCHEDULE = 'GET_COMPANY_SCHEDULE';
 
+export const TOGGLE_INITIAL = 'TOGGLE_INITIAL';
+
 /* --------- Results -------- */
 export const SAVE_RESULTS = 'SAVE_RESULTS';
 
