@@ -9,7 +9,6 @@ class AdminDashboardView extends Component {
     
     this.handleClickOn = this.handleClickOn.bind(this);
     this.handleClickOff = this.handleClickOff.bind(this);
-    this.handleClick = this.handleClick.bind(this);
     this.viewChallenge = this.viewChallenge.bind(this);
   }
 
@@ -26,11 +25,6 @@ class AdminDashboardView extends Component {
 
   handleClickOff() {
     this.props.toggleInitialOff();
-  }
-
-
-  handleClick() {
-    this.props.toggleInitial();
     this.props.history.push('/admin/challenges');
   }
 
@@ -79,7 +73,7 @@ class AdminDashboardView extends Component {
                 </tr>
               </thead>
               <tbody>
-              {this.props.company_schedule.map((item) => {
+              {this.props.company_schedule ? this.props.company_schedule.map((item) => {
                 return (
                   <tr key={item.id}>
                     <td>{item.title}</td>
@@ -89,7 +83,7 @@ class AdminDashboardView extends Component {
                     <td><button className='ui button' type='button' onClick={()=>{this.props.deleteFromCompanySchedule(item.id)}}><i className='x icon'></i></button></td>
                   </tr>
                 )
-              })}
+              }) : null }
               </tbody>
             </table>
           </div>

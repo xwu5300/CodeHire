@@ -18,6 +18,7 @@ class AdminContainer extends Component {
   componentDidMount() {
     this.props.fetchAllChallenges();
     this.props.fetchDefaultChallenges();
+    this.props.fetchCompanySchedule();
     this.props.fetchInitialChallenge(2);
   }
 
