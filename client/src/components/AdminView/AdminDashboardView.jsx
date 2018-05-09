@@ -32,9 +32,9 @@ class AdminDashboardView extends Component {
     this.props.history.push('/admin/challenges');
   }
 
-  viewChallenge(title, companyId) {
+  viewChallenge(title, companyId, duration) {
   
-    this.props.setCurrentLiveChallenge(title);
+    this.props.setCurrentLiveChallenge(title, duration);
 
     this.props.currentCompanyCalendar(companyId, () => {
       this.props.history.push('/admin/live')
@@ -87,11 +87,10 @@ class AdminDashboardView extends Component {
                     <td>{moment(item.time).format('MMMM Do YYYY, h:mm A')}</td>
                     <td>{item.duration}</td>
 
-            
                     <td><button className='ui button' type='button'><i className='x icon'></i></button></td>
 
-                    <td><button className='ui button' type='button' onClick={() => { this.viewChallenge(item.title, item.company_id) }}>view challenge</button></td>
 
+                    <td><button className='ui button' type='button' onClick={() => { this.viewChallenge(item.title, item.company_id, item.duration) }}>view challenge</button></td>
                   </tr>
                 )
               })}

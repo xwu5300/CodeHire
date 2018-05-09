@@ -9,7 +9,8 @@ const initialState = {
   company_information: '',
   company_schedule: [],
   is_initial: false,
-  current_live_challenge: ''
+  current_live_challenge_title: '',
+  current_live_challenge_duration: ''
 }
 
 
@@ -83,7 +84,8 @@ const currentLiveChallenge = (state = initialState, action) => {
     case 'SET_CURRENT_LIVE_CHALLENGE':
       return {
         ...state,
-        current_live_challenge: action.title
+        current_live_challenge_title: action.title,
+        current_live_challenge_duration: action.duration
       }
     default:
       return state;

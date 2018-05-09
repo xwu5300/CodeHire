@@ -119,8 +119,8 @@ export const makeInitial = (challengeId, initial) => (dispatch) => {
 }
 
 
-export const setCurrentLiveChallenge = (title) => (dispatch) => {
-  dispatch( { type: SET_CURRENT_LIVE_CHALLENGE, title: title } )
+export const setCurrentLiveChallenge = (title, duration) => (dispatch) => {
+  dispatch( { type: SET_CURRENT_LIVE_CHALLENGE, title: title, duration: duration } )
 }
 
 

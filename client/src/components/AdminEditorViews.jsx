@@ -7,7 +7,7 @@ import socketClient from 'socket.io-client';
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
 
-class Editor extends Component {
+class AdminEditorViews extends Component {
   constructor(props) {
     super(props);
 
@@ -38,6 +38,7 @@ class Editor extends Component {
           name="codehire"
           onLoad={this.onLoad}
           fontSize={14}
+          disabled={true}
           showPrintMargin={true}
           showGutter={true}
           highlightActiveLine={true}
@@ -52,4 +53,4 @@ class Editor extends Component {
   }
 }
 
-export default Editor;
+export default AdminEditorViews;

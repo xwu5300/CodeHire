@@ -57,20 +57,16 @@ io.sockets.on('connection', (socket)=> {
 
      socket.leave('room-' + currentCompanyId);
      
+     if(companyRooms[currentCompanyId]) {
      if(!companyRooms[currentCompanyId].includes([username, userId])) {
        companyRooms[currentCompanyId].splice(companyRooms[currentCompanyId].indexOf([username, userId]));
      }
+   }
     
        io.sockets.emit('active candidates', companyRooms[currentCompanyId]); 
   })
 
 })
-
-
-
-
-
-
 
 
 

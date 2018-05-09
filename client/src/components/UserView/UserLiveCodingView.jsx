@@ -42,6 +42,7 @@ class UserLiveCodingView extends Component {
   }
 
   handleSubmit() {
+
     let string = `${this.state.code}
 
     ${this.props.location.challenge[0].function_name}()
@@ -49,6 +50,11 @@ class UserLiveCodingView extends Component {
     let answer = eval(string)
     console.log('the answer submitted is', answer)
   }
+
+    let codeString = this.state.code
+    // console.log('string of code submitted',codeString)
+    console.log(setTimeout(codeString, 0))
+    }
 
 
   render() {

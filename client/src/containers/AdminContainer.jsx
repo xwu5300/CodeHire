@@ -46,7 +46,8 @@ const mapStateToProps = (state) => ({
    company_schedule: state.company_schedule.company_schedule,
    is_initial: state.is_initial.is_initial,
    initial_challenge: state.initial_challenge.initial_challenge,
-   current_live_challenge: state.current_live_challenge.current_live_challenge,
+   current_live_challenge_title: state.current_live_challenge_title.current_live_challenge_title,
+   current_live_challenge_duration: state.current_live_challenge_duration.current_live_challenge_duration,
    current_company_calendar: state.current_company_calendar.current_company_calendar,
    user_id: state.user_id.user_id
 
