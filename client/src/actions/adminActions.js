@@ -44,6 +44,8 @@ export const deleteChallenge = (challenge) => (dispatch) => {
   axios.delete('/api/challenges', {params: {challenge: challenge}})
   .then(() => {
     dispatch(fetchAllChallenges());
+    dispatch(fetchCompanySchedule());
+    dispatch(fetchInitialChallenge(2));
     console.log('Removed from your challenges')
   })
 	.catch((err) => {
@@ -52,8 +54,10 @@ export const deleteChallenge = (challenge) => (dispatch) => {
 }
 
 export const addToCompanySchedule = (time, duration, challengeId) => (dispatch) => {
+  console.log('addinfg to company schedulelkdjflksdjf kevin!')
   axios.post('/api/companyCalendar', {time: time, duration: duration, challengeId: challengeId})
   .then(() => {
+    console.log('prior to dispatch')
     dispatch(fetchCompanySchedule());
     console.log('Added to your upcoming challenges')
   })
@@ -63,6 +67,7 @@ export const addToCompanySchedule = (time, duration, challengeId) => (dispatch) 
 }
 
 export const fetchCompanySchedule = (companyId) => (dispatch) => {
+  console.log('fetching schedule')
   axios.get('/api/companyCalendar', {params: {companyId: companyId}})
   .then(({data}) => {
     dispatch({ type: GET_COMPANY_SCHEDULE, payload: data});
