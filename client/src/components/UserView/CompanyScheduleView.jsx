@@ -36,13 +36,10 @@ class CompanyScheduleView extends Component {
         <CompanyScheduleTableView userId={this.props.user_id} saveCandidateCalendar={this.props.saveCandidateCalendar}companyCalendar={companyCalendar} />
         : <div> {this.props.initial_challenge[0].name} Does Not Have Any Upcoming Live Challenge </div>
       }
-<<<<<<< HEAD
 
-=======
         </div> 
->>>>>>> fixed all conflicts
+
         </div>
-      </div>
       )
     } else {
       return null;

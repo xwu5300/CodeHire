@@ -59,10 +59,8 @@ class UserLiveCodingView extends Component {
     console.log('the answer submitted is', answer)
   }
 
-    let codeString = this.state.code
-    // console.log('string of code submitted',codeString)
-    console.log(setTimeout(codeString, 0))
-    }
+  
+    
 
 
   render() {

@@ -38,7 +38,6 @@ class UserScheduleTableView extends Component {
 
             <button className='ui orange button' onClick={() => { this.getCalendar(schedule, schedule.company_schedule_id) }}>Start</button>
             <button className='ui orange button' onClick={() => {}}>Cancel</button>
-        </td>
         </tr>
         )})
         }
