@@ -13,7 +13,7 @@ class CompanyScheduleView extends Component {
 
   enterChallenge() {
     this.props.history.push('/user/live');
-    this.socket.emit('enter challenge', this.props.username);
+    this.socket.emit('enter challenge', this.props.username, this.props.user_id);
   }
 
   render() {

@@ -16,16 +16,16 @@ app.use(express.static(__dirname + '/../client/dist'));
 
 io.sockets.on('connection', (socket)=> {
   
-  socket.on('typing', (newValue, e)=> {
-    io.sockets.emit('add char', newValue)
+  socket.on('typing', (newValue, e, userId)=> {
+    io.sockets.emit('add char-' + userId, newValue);
   })
 
   socket.on('room', function(username) {
     socket.join(username)
   })
  
-  socket.on('enter challenge', (username) => {
-  	io.sockets.emit('active user', username);
+  socket.on('enter challenge', (username, userId) => {
+  	io.sockets.emit('active user', username, userId);
   })
 
 })

@@ -21,21 +21,16 @@ class Editor extends Component {
 
     this.socket = socketClient();
 
-    this.onChange = this.onChange.bind(this)
-
-    this.socket.on('add char', (chars)=> {
+    this.socket.on('add char-' + this.props.userIndex, (chars)=> {
       this.setState({
         code: chars
       }, ()=> console.log(this.state.code))
     })
   }
 
-  onChange(newValue, event) {
-    this.socket.emit('typing', newValue, event)
-  }
-
 
   render() {
+    console.log('INDEEXXXX', 'add char-' + this.props.userIndex);
     return (
       <div>
         <AceEditor
@@ -43,7 +38,6 @@ class Editor extends Component {
           theme="monokai"
           name="codehire"
           onLoad={this.onLoad}
-          onChange={this.onChange}
           fontSize={14}
           showPrintMargin={true}
           showGutter={true}
@@ -54,8 +48,6 @@ class Editor extends Component {
           showLineNumbers: true,
           tabSize: 2,
         }}/>
-
-      <div> {this.state.instructions} </div>
       </div>
      )
   }

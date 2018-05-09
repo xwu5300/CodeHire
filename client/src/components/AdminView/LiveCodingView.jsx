@@ -20,35 +20,36 @@ class LiveCodingView extends Component {
 
     this.socket = socketClient();
 
-    this.socket.on('active user', (username) => {
-      this.setState({ active_users: [...this.state.active_users, username] });
+    this.socket.on('active user', (username, userId) => {
+      this.setState({ active_users: [...this.state.active_users, [username, userId]] });
     })
-
   }
 
   render() {
     return (
       <div className='live_coding_container'>
-        <h1>Live Coding - { this.props.current_live_challenge } </h1>
-          <h3>Active Users</h3>
-          <div class="ui bottom attached segment pushable">
-            <div class="ui visible inverted left vertical sidebar menu">
+        <h1 style={{ color: 'white' }}>Live Coding - { this.props.current_live_challenge } </h1>
+          <h3 style={{ color: 'white' }}>Active Users</h3>
+          <div class="ui inverted bottom attached segment pushable">
+            <div className="ui inverted visible inverted left vertical sidebar menu">
             {this.state.active_users.map((user) => {
               return (
-                <div style={{ color: 'white' }}>{ user }</div>
+                <div className='active_users_div'>{ user[0] }</div>
               );
             })}
             </div>
-            <div class="pusher">
-              <div class="ui basic segment">
-              {this.state.active_users.map((user) => {
+            <div className="pusher">
+              <div className="ui inverted basic segment">
+                <div className='ui grid'>
+              {this.state.active_users.map((user, index) => {
                 return(
-                  <div>
-                  <h2> { user } </h2>
-                  <Editor />
+                  <div className='six wide column'>
+                  <h2> { user[0] } </h2>
+                  <Editor userIndex={ user[1]} />
                   </div>
                 );
               })}
+              </div>
               </div>
             </div>
         </div>

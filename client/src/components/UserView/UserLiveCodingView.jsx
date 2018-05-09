@@ -30,7 +30,7 @@ class UserLiveCodingView extends Component {
   }
 
   onChange(newValue, event) {
-    this.socket.emit('typing', newValue, event)
+    this.socket.emit('typing', newValue, event, this.props.user_id);
   }
 
   handleSubmit() {
