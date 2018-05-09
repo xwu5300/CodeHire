@@ -147,16 +147,6 @@ router.get('/api/initialChallenge', (req, res) => {
   })
 })
 
-// delete company challenge from 'all_challenges' table
-router.delete('./api/challenges/:challengeid', (req, res) => {
-
-})
-
-// delete company challenge from 'all_challenges' table
-router.delete('./api/challenges/:challengeid', (req, res) => {
-
-})
-
 /* ---------- Schedule Routes -------- */
 
 // get user schedule
@@ -225,6 +215,17 @@ router.get('/api/companyCalendar', (req, res) => {
   })
 })
 
+//delete item from company schedule
+router.delete('/api/companyCalendar', (req, res) => {
+  calendarControllers.deleteFromCompanySchedule(req.query.scheduleId)
+  .then(() => {
+    console.log('Scheduled challenge removed from list');
+    res.send();
+  })
+  .catch((err) => {
+    console.log('Could remove scheduled challenge from list', err);
+  })
+})
 
 // update company calendar
 router.patch('/api/companyCalendar:date', (req, res) => {

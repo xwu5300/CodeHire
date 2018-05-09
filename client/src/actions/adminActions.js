@@ -64,6 +64,17 @@ export const addToCompanySchedule = (time, duration, challengeId) => (dispatch) 
 	})
 }
 
+export const deleteFromCompanySchedule = (scheduleId) => (dispatch) => {
+  axios.delete('/api/companyCalendar', {params: {scheduleId: scheduleId}})
+  .then(() => {
+    dispatch(fetchCompanySchedule());
+    console.log('Removed from your upcoming challenges');
+  })
+  .catch((err) => {
+    console.log('Error removing from upcoming challenges', err);
+  })
+}
+
 export const fetchCompanySchedule = (companyId) => (dispatch) => {
   axios.get('/api/companyCalendar', {params: {companyId: companyId}})
   .then(({data}) => {
