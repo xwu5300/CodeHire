@@ -1,4 +1,6 @@
+
 import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF } from '../constants/actionTypes';
+
 import axios from 'axios';
 import { fetchInitialChallenge } from './userActions.js';
 
@@ -115,3 +117,12 @@ export const makeInitial = (challengeId, initial) => (dispatch) => {
     console.log(err);
   })
 }
+
+
+export const setCurrentLiveChallenge = (title) => (dispatch) => {
+  dispatch( { type: SET_CURRENT_LIVE_CHALLENGE, title: title } )
+}
+
+
+
+

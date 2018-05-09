@@ -11,6 +11,8 @@ import { connect } from 'react-redux';
 
 import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial } from '../actions/adminActions'; 
 import { fetchInitialChallenge } from '../actions/userActions';
+
+
 //import { fetchCompanyInfo } from '../actions/authActions';
 
 
@@ -46,6 +48,8 @@ const mapStateToProps = (state) => ({
    company_schedule: state.company_schedule.company_schedule,
    is_initial: state.is_initial.is_initial,
    initial_challenge: state.initial_challenge.initial_challenge
+   current_live_challenge: state.current_live_challenge.current_live_challenge
+
 });
 
 

@@ -11,6 +11,7 @@ class AdminDashboardView extends Component {
     this.handleClickOff = this.handleClickOff.bind(this);
   }
 
+
   componentDidMount() {
     console.log(this.props)
   }
@@ -22,7 +23,11 @@ class AdminDashboardView extends Component {
 
   handleClickOff() {
     this.props.toggleInitialOff();
-    this.props.history.push('/admin/challenges');
+  }
+
+  viewChallenge(title) {
+    this.props.history.push('/admin/live')
+    this.props.setCurrentLiveChallenge(title);
   }
 
   render() {

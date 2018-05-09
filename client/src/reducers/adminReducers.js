@@ -8,7 +8,8 @@ const initialState = {
   logo_url: 'http://static1.squarespace.com/static/522a22cbe4b04681b0bff826/t/581cc65fe4fcb5a68ecd940c/1478280803080/hrhq-avatar.png?format=1000w',
   company_information: '',
   company_schedule: [],
-  is_initial: false
+  is_initial: false,
+  current_live_challenge: ''
 }
 
 
@@ -77,9 +78,21 @@ const isInitial = (state = initialState, action) => {
   }
 }
 
+const currentLiveChallenge = (state = initialState, action) => {
+  switch(action.type) {
+    case 'SET_CURRENT_LIVE_CHALLENGE':
+      return {
+        ...state,
+        current_live_challenge: action.title
+      }
+    default:
+      return state;
+  }
+}
 
 
 
 
 
-export default { defaultChallenges, allChallenges, companyInfo, companySchedule, isInitial };
+
+export default { defaultChallenges, allChallenges, companyInfo, companySchedule, isInitial, currentLiveChallenge };

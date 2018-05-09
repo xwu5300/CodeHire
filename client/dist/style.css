@@ -113,6 +113,12 @@ body {
 }
 
 
+/* ------- Admin live coding ------- */
+.live_coding_container {
+	height: 600px;
+}
+
+
 
 
 
