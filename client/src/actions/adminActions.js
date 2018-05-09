@@ -96,12 +96,10 @@ export const updateInfo = (username, logoUrl, information) => (dispatch) => {
 }
 
 export const toggleInitialOn = () => (dispatch) => {
-  console.log('toggle on')
   dispatch( {type: TOGGLE_INITIAL_ON, payload: true })
 }
 
 export const toggleInitialOff = () => (dispatch) => {
-  console.log('toggle off')
   dispatch( {type: TOGGLE_INITIAL_OFF, payload: false })
 }
 

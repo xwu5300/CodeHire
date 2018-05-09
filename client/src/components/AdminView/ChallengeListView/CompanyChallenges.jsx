@@ -53,8 +53,10 @@ class CompanyChallenges extends Component {
             <div className="challenges" key={challenge.id}>
               <div>{challenge.title}</div>
               <div>{challenge.instruction}</div>
-              <button onClick={() => {this.props.delete(challenge)}}>Remove from challenges</button>
-              <button onClick={() => {this.toggleForm(i)}}>Schedule Challenge</button>
+              <button className="ui button" onClick={() => {this.toggleForm(i)}}>Schedule Challenge</button>
+              <button className="ui icon button">
+                <i className="minus icon" onClick={() => {this.props.delete(challenge)}}></i>
+              </button>
               <br/>
               {!this.state.showForm[i] ? null : 
                 <div className="calendar-container">
