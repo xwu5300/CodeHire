@@ -15,14 +15,17 @@ class CompanyScheduleView extends Component {
 
 
   render() {
+    // console.log("comp sche view props", this.props)
     if (this.props.initial_challenge[0]) {
       const companyCalendar = this.props.all_company_calendars.filter((schedule) => {
         return schedule.company_id === this.props.initial_challenge[0].company_id
       })
       return (
         <div>
-        <h1>{this.props.initial_challenge[0].name}</h1>
-        <h2>{this.props.initial_challenge[0].information}</h2>
+        <button className='ui green button' onClick={() => {this.props.history.push('/user/profile')}}>Edit Profile</button>
+        <button className='ui green button' onClick={() => {this.props.history.push('/user')}}>Dash Board</button>
+        <h1>{this.props.initial_challenge[0].name}</h1> 
+        <h2>{this.props.initial_challenge[0].information}</h2> 
         <br/>
         <div className='ui raised very padded container segment'>
         <button onClick={() => {this.props.history.push('/user/challenge')}}>
@@ -42,7 +45,12 @@ class CompanyScheduleView extends Component {
         </div>
       )
     } else {
-      return null;
+      return (
+        <div>
+          <button className='ui green button' onClick={() => {this.props.history.push('/user/profile')}}>Edit Profile</button>
+          <button className='ui green button' onClick={() => {this.props.history.push('/user')}}>Dash Board</button>
+        </div>
+      )
     }
   }
 }
