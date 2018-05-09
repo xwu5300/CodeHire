@@ -6,7 +6,6 @@ class CompanyScheduleTableView extends Component {
   }
 
   render() {
-    console.log('com sche tbl view props', this.props)
     return(
       <table className='ui inverted table'>
         <thead>
@@ -23,8 +22,6 @@ class CompanyScheduleTableView extends Component {
             <td>{schedule.duration} Minutes</td>
             <td>
               <button className='ui orange button' onClick={() =>{ 
-                console.log('com sche tbl view props', this.props);
-                console.log('com sche tbl view schedule', schedule);
                 this.props.saveCandidateCalendar(this.props.userId, schedule.id)
               }}>Add to Schedule
               </button>

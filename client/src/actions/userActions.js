@@ -31,7 +31,6 @@ export const saveCandidateCalendar = (candidateId, companyScheduleId) => (dispat
 export const fetchInitialChallenge = (company_id) => (dispatch) => {
   axios.get('/api/initialChallenge', {params: {company_id}})
   .then(({data}) => {
-    console.log(data)
     dispatch({ type: GET_INITIAL_CHALLENGE, payload: data })
   })
   .catch((err) => {
