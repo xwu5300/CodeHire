@@ -115,7 +115,3 @@ export const makeInitial = (challengeId, initial) => (dispatch) => {
     console.log(err);
   })
 }
-
-
-
-
