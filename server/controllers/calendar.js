@@ -3,15 +3,15 @@ const knex = require('../../db/index.js');
 //get all companies' calendars
 module.exports.getAllCompanyCalendars = () => {
   return knex.from('users')
-    .innerJoin('company_schedule', 'users.id', 'company_schedule.company_id')
-    .orderBy('time', 'asc')
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      console.log('Could not retrieve companies schedules from db:', err);
-    })
-  }
+  .innerJoin('company_schedule', 'users.id', 'company_schedule.company_id')
+  .orderBy('time', 'asc')
+  .then((res) => {
+    return res;
+  })
+  .catch((err) => {
+    console.log('Could not retrieve companies schedules from db:', err);
+  })
+}
 
 //save challenge to company schedule
 module.exports.addToCompanySchedule = (time, duration, challengeId, companyId) => {
@@ -29,6 +29,20 @@ module.exports.addToCompanySchedule = (time, duration, challengeId, companyId) =
   })
 }
 
+module.exports.deleteFromCompanySchedule = (scheduleId) => {
+  return knex('company_schedule')
+  .where({
+    id: scheduleId
+  })
+  .del()
+  .then(() => {
+    console.log('Scheduled challenge removed from db');
+  })
+  .catch((err) => {
+    console.log('Error removing challenge from db', err);
+  })
+}
+
   //get single company's schedule
 module.exports.getCompanySchedule = (companyId) => {
   return knex.from('all_challenges')
@@ -41,7 +55,7 @@ module.exports.getCompanySchedule = (companyId) => {
     return res;
   })
   .catch((err) => {
-    console.log('Could not retrieve schedule from db', err);
+    console.log('Error retrieving schedule from db', err);
   })
 }
 

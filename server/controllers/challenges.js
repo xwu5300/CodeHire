@@ -10,7 +10,12 @@ module.exports.saveChallenge = (title, instruction, functionName, params, testCa
   })
   .update({
     title: title,
-    instruction: instruction
+    instruction: instruction,
+    function_name: functionName,
+    parameters: params,
+    test_cases: testCases,
+    examples: examples,
+    difficulty: difficulty
   })
   .then((res) => {
     if (res === 0) {
@@ -32,7 +37,7 @@ module.exports.saveChallenge = (title, instruction, functionName, params, testCa
         console.log('Unable to save challenge to db', err);
       })
     } else {
-      console.log('Challenge is already saved in the db')
+      console.log('Updated challenge')
     }
   })
   .catch((err) => {

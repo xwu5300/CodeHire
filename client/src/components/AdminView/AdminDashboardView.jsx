@@ -85,11 +85,8 @@ class AdminDashboardView extends Component {
                     <td>{item.title}</td>
                     <td>{moment(item.time).format('MMMM Do YYYY, h:mm A')}</td>
                     <td>{item.duration}</td>
-
-                    <td><button className='ui button' type='button'><i className='x icon'></i></button></td>
-
-
-                    <td><button className='ui button' type='button' onClick={() => { this.viewChallenge(item.title, item.company_id, item.duration) }}>view challenge</button></td>
+                    <td><button className='ui button' type='button' onClick={() => { this.viewChallenge(item.title, item.company_id, item.duration) }}>View challenge</button></td>
+                    <td><button className='ui button' type='button' onClick={()=>{this.props.deleteFromCompanySchedule(item.id)}}><i className='x icon'></i></button></td>
                   </tr>
                 )
               })}
