@@ -117,15 +117,25 @@ router.post('/api/initialChallenge', (req, res) => {
 
 // update initial challenge from 'intitial_challenges table'
 router.patch('/api/initialChallenge', (req, res) => {
-  console.log(req.body.challengeId)
+  console.log(req.body)
   let companyId = 2;
-  challengeControllers.setInitialChallenge(companyId, req.body.challengeId)
-  .then(() => {
-    res.send('Updated initial challenge');
-  })
-  .catch((err) => {
-    console.log('Could not update initial challenge', err);
-  })
+  if (req.body.initial === false) {
+    challengeControllers.setInitialChallenge(companyId, req.body.challengeId)
+    .then(() => {
+      res.send('Updated initial challenge');
+    })
+    .catch((err) => {
+      console.log('Could not update initial challenge', err);
+    })
+  } else {
+    challengeControllers.removeInitialChallenge(companyId, req.body.challengeId)
+    .then(() => {
+      res.send('Removed initial challenge');
+    })
+    .catch((err) => {
+      console.log('Could not remove initial challenge', err);
+    })
+  }
 })
 
 // get initial challenge for company

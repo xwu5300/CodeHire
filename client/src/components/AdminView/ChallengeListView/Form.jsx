@@ -67,21 +67,21 @@ class Form extends Component {
             <div className="field">
               <label>Test Case - Input</label>
               <input name="testInput" type="text" placeholder="[1, 3, 6, 0, -2], 9" value={this.state.challenge.testInput} onChange={this.handleChange}/>
-          ` </div>
+            </div>
             <div className="field">
               <label>Test Case - Output</label>
               <input name="testOutput" type="text" placeholder="[1, 2]" value={this.state.challenge.testOutput} onChange={this.handleChange}/>
-      `     </div>
+            </div>
           </div>
           <div className="two fields">
             <div className="field">
               <label>Example - Input</label>
               <input name="exampleInput" type="text" placeholder="[1, 4, -2, 6, 9], 15" value={this.state.challenge.exampleInput} onChange={this.handleChange}/>
-          ` </div>
+            </div>
             <div className="field">
               <label>Example - Output</label>
               <input name="exampleOutput" type="text" placeholder="[3, 4]" value={this.state.challenge.exampleOutput} onChange={this.handleChange}/>
-      `     </div>
+            </div>
           </div>
           <div className="field">
             <label>Difficulty</label>

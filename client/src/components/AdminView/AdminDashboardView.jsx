@@ -43,9 +43,12 @@ class AdminDashboardView extends Component {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                {this.props.initial_challenge.length === 0 ? null : <td>{this.props.initial_challenge[0].title}</td>}
-                </tr>
+                {this.props.initial_challenge.length === 0 ? null : 
+                  <tr>
+                    <td>{this.props.initial_challenge[0].title}</td>
+                    <td><button className='ui button' type='button' onClick={() => {this.props.makeInitial(this.props.initial_challenge[0].id, this.props.initial_challenge[0].initial)}}><i className='x icon'></i></button></td>
+                  </tr>
+                }
               </tbody>
             </table>
             <br/>
@@ -65,7 +68,8 @@ class AdminDashboardView extends Component {
                     <td>{item.title}</td>
                     <td>{moment(item.time).format('MMMM Do YYYY, h:mm A')}</td>
                     <td>{item.duration}</td>
-                    <td><button className='ui button' type='button' onClick={() => {this.props.history.push('/admin/live')}}>view challenge</button></td>
+                    <td><button className='ui button' type='button' onClick={() => {this.props.history.push('/admin/live')}}>View challenge</button></td>
+                    <td><button className='ui button' type='button'><i className='x icon'></i></button></td>
                   </tr>
                 )
               })}

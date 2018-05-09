@@ -103,10 +103,10 @@ export const toggleInitialOff = () => (dispatch) => {
   dispatch( {type: TOGGLE_INITIAL_OFF, payload: false })
 }
 
-export const makeInitial = (challengeId) => (dispatch) => {
-  axios.patch('/api/initialChallenge', {challengeId: challengeId})
+export const makeInitial = (challengeId, initial) => (dispatch) => {
+  axios.patch('/api/initialChallenge', {challengeId: challengeId, initial: initial})
   .then(() => {
-    dispatch(fetchInitialChallenge());
+    dispatch(fetchInitialChallenge(2));
     console.log('Initial challenge set');
   })
   .catch((err) => {
