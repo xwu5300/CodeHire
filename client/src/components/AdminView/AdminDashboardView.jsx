@@ -11,8 +11,10 @@ class AdminDashboardView extends Component {
     this.handleClickOff = this.handleClickOff.bind(this);
   }
 
+
+
   componentDidMount() {
-    console.log(this.props)
+    this.props.fetchCompanySchedule(this.props.user_id);
   }
   
   handleClickOn() {
@@ -22,7 +24,22 @@ class AdminDashboardView extends Component {
 
   handleClickOff() {
     this.props.toggleInitialOff();
+  }
+
+
+  handleClick() {
+    this.props.toggleInitial();
     this.props.history.push('/admin/challenges');
+  }
+
+  viewChallenge(title, companyId, duration) {
+  
+    this.props.setCurrentLiveChallenge(title, duration);
+
+    this.props.currentCompanyCalendar(companyId, () => {
+      this.props.history.push('/admin/live')
+    });
+
   }
 
   render() {
@@ -68,8 +85,11 @@ class AdminDashboardView extends Component {
                     <td>{item.title}</td>
                     <td>{moment(item.time).format('MMMM Do YYYY, h:mm A')}</td>
                     <td>{item.duration}</td>
-                    <td><button className='ui button' type='button' onClick={() => {this.props.history.push('/admin/live')}}>View challenge</button></td>
+
                     <td><button className='ui button' type='button'><i className='x icon'></i></button></td>
+
+
+                    <td><button className='ui button' type='button' onClick={() => { this.viewChallenge(item.title, item.company_id, item.duration) }}>view challenge</button></td>
                   </tr>
                 )
               })}

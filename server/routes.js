@@ -215,8 +215,8 @@ router.post('/api/companyCalendar', (req, res) => {
 
 //fetch single company's schedule
 router.get('/api/companyCalendar', (req, res) => {
-  let companyId = 2;
-  calendarControllers.getCompanySchedule(companyId)
+
+  calendarControllers.getCompanySchedule(req.query.companyId)
   .then((data) => {
     console.log('this is the data from the company schedule', data)
     res.send(data);

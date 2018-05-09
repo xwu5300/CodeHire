@@ -12,6 +12,9 @@ class UserLiveCodingView extends Component {
     super(props);
 
     this.state = {
+
+      minutes: '',
+      seconds: '',
       code: `function placeholder(params) {
 
 }` }
@@ -27,13 +30,27 @@ class UserLiveCodingView extends Component {
         code: chars
       }, ()=> console.log(this.state.code))
     })
+
+    this.socket.on('show time_limit', (minutes, seconds) => {
+      console.log('TIME', minutes, seconds);
+      this.setState({ minutes: minutes, seconds: seconds });
+    })
+  }
+
+  componentDidMount() {
+     this.socket.emit('candidate enter', this.props.username, this.props.user_id, this.props.current_company_calendar);
+  }
+
+  componentWillUnmount() {
+    this.socket.emit('candidate disconnect', this.props.username, this.props.user_id, this.props.current_company_calendar);
   }
 
   onChange(newValue, event) {
-    this.socket.emit('typing', newValue, event)
+    this.socket.emit('typing', newValue, event, this.props.user_id);
   }
 
   handleSubmit() {
+
     let string = `${this.state.code}
 
     ${this.props.location.challenge[0].function_name}()
@@ -42,18 +59,21 @@ class UserLiveCodingView extends Component {
     console.log('the answer submitted is', answer)
   }
 
+  
+    
+
 
   render() {
-    console.log('live challenge', this.props.location.challenge)
     return (
       <div>
         <h1>{this.props.location.challenge.name}</h1>
-        <h1> LIVE CODING PLACEHOLDER </h1>
         <br/>
         <br/>
         <h2>Title: {this.props.location.challenge.title}</h2>
         <h3>Difficulty: {this.props.location.challenge.difficulty}</h3>
-        <h3>Time Limit: {this.props.location.challenge.duration}</h3>
+     
+
+        <div> Time Limit: { this.state.minutes + ':' + this.state.seconds }</div>
 
         <AceEditor
           mode="javascript"

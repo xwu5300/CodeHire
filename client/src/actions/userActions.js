@@ -1,4 +1,6 @@
-import { GET_INITIAL_CHALLENGE, GET_ALL_COMPANY_CALENDARS, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO } from '../constants/actionTypes';
+
+import { GET_INITIAL_CHALLENGE, GET_ALL_COMPANY_CALENDARS, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO, GET_CURRENT_COMPANY_CALENDAR  } from '../constants/actionTypes';
+
 import axios from 'axios';
 
 export const fetchAllCompanyCalendars =() => (dispatch) => {
@@ -71,5 +73,10 @@ export const saveCandidateInfo = (username, information, skills) => (dispatch) =
 	.catch((err) => {
 		console.log(err);
 	})
+}
+
+export const currentCompanyCalendar = (companyId, callback) => (dispatch) => {
+  dispatch( { type: GET_CURRENT_COMPANY_CALENDAR, company_id: companyId })
+  callback();
 }
 
