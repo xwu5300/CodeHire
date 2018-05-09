@@ -12,9 +12,6 @@ class UserLiveCodingView extends Component {
     super(props);
 
     this.state = {
-      title: 'greeting',
-      params: 'param strings',
-      instructions: `Instructions: buffalo buffalo buffalo buffalo buffalo buffalo`,
       code: `function placeholder(params) {
 
 }` }
@@ -36,11 +33,14 @@ class UserLiveCodingView extends Component {
     this.socket.emit('typing', newValue, event)
   }
 
-    handleSubmit() {
-      let codeString = this.state.code
-      // console.log('string of code submitted',codeString)
-      console.log(setTimeout(codeString, 0))
-    }
+  handleSubmit() {
+    let string = `${this.state.code}
+
+    ${this.props.location.challenge[0].function_name}()
+     `
+    let answer = eval(string)
+    console.log('the answer submitted is', answer)
+  }
 
 
   render() {
@@ -54,7 +54,7 @@ class UserLiveCodingView extends Component {
         <h2>Title: {this.props.location.challenge.title}</h2>
         <h3>Difficulty: {this.props.location.challenge.difficulty}</h3>
         <h3>Time Limit: {this.props.location.challenge.duration}</h3>
-        
+
         <AceEditor
           mode="javascript"
           theme="monokai"

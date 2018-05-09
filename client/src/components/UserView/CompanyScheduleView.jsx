@@ -23,8 +23,8 @@ class CompanyScheduleView extends Component {
       })
       return (
         <div>
-        <h1>{this.props.initial_challenge[0].name}</h1> 
-        <h2>{this.props.initial_challenge[0].information}</h2> 
+        <h1>{this.props.initial_challenge[0].name}</h1>
+        <h2>{this.props.initial_challenge[0].information}</h2>
         <br/>
         <div className='ui raised very padded container segment'>
         <button onClick={() => {this.props.history.push('/user/challenge')}}>
@@ -34,12 +34,12 @@ class CompanyScheduleView extends Component {
         <br/>
         {this.props.initial_challenge[0].name}'s Live Challenge:
         <div className='schedule_container'>
-        {companyCalendar ? 
-        <CompanyScheduleTableView userId={this.props.user_id} saveCandidateCalendar={this.props.saveCandidateCalendar}companyCalendar={companyCalendar} /> 
+        {companyCalendar ?
+        <CompanyScheduleTableView userId={this.props.user_id} saveCandidateCalendar={this.props.saveCandidateCalendar}companyCalendar={companyCalendar} />
         : <div> {this.props.initial_challenge[0].name} Does Not Have Any Upcoming Live Challenge </div>
       }
-        </div> 
         </div>
+      </div>
       )
     } else {
       return null;
