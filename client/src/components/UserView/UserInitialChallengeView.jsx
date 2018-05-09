@@ -37,15 +37,18 @@ class UserInitialChallengeView extends Component {
       theme: currentTheme
     })
   }
+
   handleSubmit() {
     let string = `${this.state.code}
-${this.props.initial_challenge[0].function_name}()
+
+    ${this.props.initial_challenge[0].function_name}()
      `
     let answer = eval(string)
     console.log('the answer submitted is', answer)
   }
 
   render() {
+    console.log('props passed down', this.props)
     return (
       <div>
         <h1>{this.props.initial_challenge[0].name}</h1>
