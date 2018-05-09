@@ -41,7 +41,8 @@ class CompanyListView extends Component {
       <h2 style={{ marginTop: '100px', textAlign: 'center' }}>Your Calendar</h2>
       <div className='candidate_calendar inverted ui raised container segment'>
       {this.props.candidate_calendar.length ? 
-      <UserScheduleTableView candidateCalendar={this.props.candidate_calendar} cancelSchedule={this.props.deleteCandidateSchedule}/>
+      <UserScheduleTableView currentCompanyCalendar={ this.props.currentCompanyCalendar } candidateCalendar={this.props.candidate_calendar} cancelSchedule={this.props.deleteCandidateSchedule}/>
+
       : <div>You Do Not Have Any Scheduled Challenges</div>}
       </div>
       </div>

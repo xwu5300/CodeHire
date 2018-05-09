@@ -80,7 +80,6 @@ class AdminDashboardView extends Component {
               </thead>
               <tbody>
               {this.props.company_schedule.map((item) => {
-                console.log('ITEM', item);
                 return (
                   <tr key={item.id}>
                     <td>{item.title}</td>

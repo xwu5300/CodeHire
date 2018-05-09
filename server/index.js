@@ -21,7 +21,7 @@ io.sockets.on('connection', (socket)=> {
   
   // when candidates enter liveCoding, push their username/id into respective companyId obj parameter
   socket.on('candidate enter', (username, userId, currentCompanyId) => {
-
+   console.log('CANDIDATE', currentCompanyId);
     socket.room = 'room-' + currentCompanyId;
     socket.join(socket.room);
     
@@ -46,6 +46,8 @@ io.sockets.on('connection', (socket)=> {
 
   // When company enters challenge, send them all users in their room
   socket.on('company enter', (currentCompanyId) => {
+    console.log('company', currentCompanyId);
+
     socket.room = 'room-' + currentCompanyId;
     socket.join(socket.room);
     io.sockets.in(socket.room).emit('active candidates', companyRooms[currentCompanyId]);
@@ -54,7 +56,7 @@ io.sockets.on('connection', (socket)=> {
 
   // When candidate disconnects from room, remove username from company room
   socket.on('candidate disconnect', (username, userId, currentCompanyId) => {
-
+    
      socket.leave('room-' + currentCompanyId);
      
      if(companyRooms[currentCompanyId]) {

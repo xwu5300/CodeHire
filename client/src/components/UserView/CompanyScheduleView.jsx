@@ -8,21 +8,10 @@ class CompanyScheduleView extends Component {
   constructor() {
     super()
 
-    this.enterChallenge = this.enterChallenge.bind(this);
+    //this.enterChallenge = this.enterChallenge.bind(this);
     this.socket = socketClient();
-
-
-    this.getCalendar = this.getCalendar.bind(this);
   }
 
-
-  getCalendar(companyId) {
-    
-    this.props.currentCompanyCalendar(companyId, () => {
-      this.props.history.push('/user/live')
-    });
-
-  }
 
 
   render() {
@@ -47,7 +36,11 @@ class CompanyScheduleView extends Component {
         <CompanyScheduleTableView userId={this.props.user_id} saveCandidateCalendar={this.props.saveCandidateCalendar}companyCalendar={companyCalendar} />
         : <div> {this.props.initial_challenge[0].name} Does Not Have Any Upcoming Live Challenge </div>
       }
+<<<<<<< HEAD
 
+=======
+        </div> 
+>>>>>>> fixed all conflicts
         </div>
       </div>
       )
