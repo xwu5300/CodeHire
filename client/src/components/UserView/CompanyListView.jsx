@@ -17,6 +17,8 @@ class CompanyListView extends Component {
     return (
       <div>
       <button className='ui green button' onClick={() => {this.props.history.push('/user/profile')}}>Edit Profile</button>
+      <button className='ui green button' onClick={() => {this.props.history.push('/user')}}>Dash Board</button>
+      <input> Search</input>
       <h2 style={{ textAlign: 'center' }}>Companies</h2>
       <div className='ui centered grid'>
       {this.props.all_company_calendars.map((company, i) => {
@@ -31,6 +33,7 @@ class CompanyListView extends Component {
               </div>
               <button onClick={() => {
                 this.props.fetchInitialChallenge(company.company_id)
+                // this.props.fetchCompanySchedule(company.id)
                 this.props.history.push('/user/schedule');
               }}>View Company Page
               </button>
