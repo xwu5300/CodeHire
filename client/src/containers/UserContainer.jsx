@@ -19,7 +19,7 @@ import axios from 'axios';
 class UserContainer extends Component {
 
   componentDidMount() {
-    this.props.fetchAllCompanyCalendars();
+    // this.props.fetchAllCompanyCalendars();
   }
 
   render() {
@@ -48,7 +48,7 @@ const mapStateToProps = function(state) {
 }};
 
 const connectComponent = connect(mapStateToProps, { fetchAllCompanyCalendars })(UserContainer);
-const CompanyListViewComponent = connect(mapStateToProps, { fetchInitialChallenge, fetchCandidateCalendar, deleteCandidateSchedule, fetchCompanySchedule })(CompanyListView);
+const CompanyListViewComponent = connect(mapStateToProps, { fetchInitialChallenge, fetchCandidateCalendar, deleteCandidateSchedule, fetchAllCompanyCalendars })(CompanyListView);
 const CompanyScheduleViewComponent = connect(mapStateToProps, { saveCandidateCalendar })(CompanyScheduleView);
 const UserInitialChallengeViewComponent = connect(mapStateToProps)(UserInitialChallengeView);
 const UserLiveCodingViewComponent = connect(mapStateToProps)(UserLiveCodingView);
