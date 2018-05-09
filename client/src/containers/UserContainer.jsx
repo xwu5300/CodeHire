@@ -9,7 +9,7 @@ import CompanyScheduleView from '../components/UserView/CompanyScheduleView.jsx'
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { fetchAllCompanyCalendars, fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, saveCandidateInfo, saveCandidateCalendar } from '../actions/userActions';
+import { fetchAllCompanyCalendars, fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, saveCandidateInfo, saveCandidateCalendar, deleteCandidateSchedule } from '../actions/userActions';
 
 import axios from 'axios';
 
@@ -47,7 +47,7 @@ const mapStateToProps = function(state) {
 
 
 const connectComponent = connect(mapStateToProps, { fetchAllCompanyCalendars })(UserContainer);
-const CompanyListViewComponent = connect(mapStateToProps, { fetchInitialChallenge, fetchCandidateCalendar })(CompanyListView);
+const CompanyListViewComponent = connect(mapStateToProps, { fetchInitialChallenge, fetchCandidateCalendar, deleteCandidateSchedule })(CompanyListView);
 const CompanyScheduleViewComponent = connect(mapStateToProps, { saveCandidateCalendar })(CompanyScheduleView);
 const UserInitialChallengeViewComponent = connect(mapStateToProps)(UserInitialChallengeView);
 const UserLiveCodingViewComponent = connect(mapStateToProps)(UserLiveCodingView);
