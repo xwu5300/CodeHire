@@ -109,13 +109,31 @@ module.exports.setInitialChallenge = (companyId, challengeId) => {
       initial: true
     })
     .then(() => {
-      console.log('Updated initial challenge')
+      console.log('Updated initial challenge in db');
     })
     .catch((err) => {
-      console.log(err);
+      console.log('Unable to update initial challenge', err);
     })
   })
   .catch((err) => {
-    console.log(err);
+    console.log('Unable to update initial challenge', err);
+  })
+}
+
+
+module.exports.removeInitialChallenge = (companyId, challengeId) => {
+  return knex('all_challenges')
+  .where({
+    company_id: companyId,
+    id: challengeId
+  })
+  .update({
+    initial: false
+  })
+  .then(() => {
+    console.log('Removed initial challenge from db');
+  })
+  .catch((err) => {
+    console.log('Unable to remove initial challenge from db', err);
   })
 }
