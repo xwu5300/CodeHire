@@ -9,12 +9,7 @@ class AdminDashboardView extends Component {
 
     this.handleClickOn = this.handleClickOn.bind(this);
     this.handleClickOff = this.handleClickOff.bind(this);
-<<<<<<< HEAD
     this.viewChallenge = this.viewChallenge.bind(this);
-=======
-    this.handleClick = this.handleClick.bind(this)
-    this.viewChallenge = this.viewChallenge.bind(this)
->>>>>>> hardcoded companies/changed initial chall
   }
 
 
@@ -89,11 +84,7 @@ class AdminDashboardView extends Component {
                     <td><button className='ui button' type='button' onClick={()=>{this.props.deleteFromCompanySchedule(item.id)}}><i className='x icon'></i></button></td>
                   </tr>
                 )
-<<<<<<< HEAD
               }) : null }
-=======
-              }) : null}
->>>>>>> hardcoded companies/changed initial chall
               </tbody>
             </table>
           </div>
