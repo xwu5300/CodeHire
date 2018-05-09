@@ -23,11 +23,11 @@ class CompanyChallenges extends Component {
     })
   }
 
-  handleClick(challengeId, i) {
+  handleClick(challenge, i) {
     if (this.props.isInitial) {
-      this.props.makeInitial(challengeId)
+      this.props.makeInitial(challenge.id, challenge.initial)
     } else {
-      this.props.addToSchedule($('#date').val(), this.state.duration, challengeId);
+      this.props.addToSchedule($('#date').val(), this.state.duration, challenge.id);
     }
     this.toggleForm(i);
   }
@@ -90,7 +90,7 @@ class CompanyChallenges extends Component {
                   </select>
                 </div> 
                 }
-                  <button onClick={() => {this.handleClick(challenge.id, i)}}>Add to Schedule</button>
+                  <button onClick={() => {this.handleClick(challenge, i)}}>Add to Schedule</button>
                 </div>
               }
             </div>

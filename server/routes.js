@@ -117,15 +117,25 @@ router.post('/api/initialChallenge', (req, res) => {
 
 // update initial challenge from 'intitial_challenges table'
 router.patch('/api/initialChallenge', (req, res) => {
-  console.log(req.body.challengeId)
+  console.log(req.body)
   let companyId = 2;
-  challengeControllers.setInitialChallenge(companyId, req.body.challengeId)
-  .then(() => {
-    res.send('Updated initial challenge');
-  })
-  .catch((err) => {
-    console.log('Could not update initial challenge', err);
-  })
+  if (req.body.initial === false) {
+    challengeControllers.setInitialChallenge(companyId, req.body.challengeId)
+    .then(() => {
+      res.send('Updated initial challenge');
+    })
+    .catch((err) => {
+      console.log('Could not update initial challenge', err);
+    })
+  } else {
+    challengeControllers.removeInitialChallenge(companyId, req.body.challengeId)
+    .then(() => {
+      res.send('Removed initial challenge');
+    })
+    .catch((err) => {
+      console.log('Could not remove initial challenge', err);
+    })
+  }
 })
 
 // get initial challenge for company
@@ -195,6 +205,7 @@ router.post('/api/companyCalendar', (req, res) => {
   calendarControllers.addToCompanySchedule(time, duration, challengeId, companyId)
   .then(() => {
     console.log('Successfully saved challenge to schedule');
+    res.send();
   })
   .catch((err) => {
     console.log('Could not save to company schedule', err);
@@ -206,6 +217,7 @@ router.get('/api/companyCalendar', (req, res) => {
   let companyId = 2;
   calendarControllers.getCompanySchedule(companyId)
   .then((data) => {
+    console.log('this is the data from the company schedule', data)
     res.send(data);
   })
   .catch((err) => {
