@@ -1,4 +1,4 @@
-import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL } from '../constants/actionTypes';
+import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF } from '../constants/actionTypes';
 import axios from 'axios';
 import { fetchInitialChallenge } from './userActions.js';
 
@@ -95,11 +95,17 @@ export const updateInfo = (username, logoUrl, information) => (dispatch) => {
   })
 }
 
-export const toggleInitial = (isInitial) => (dispatch) => {
-  dispatch( {type: TOGGLE_INITIAL, payload: !isInitial })
+export const toggleInitialOn = () => (dispatch) => {
+  console.log('toggle on')
+  dispatch( {type: TOGGLE_INITIAL_ON, payload: true })
 }
 
-export const makeInitial = (challengeId) => {
+export const toggleInitialOff = () => (dispatch) => {
+  console.log('toggle off')
+  dispatch( {type: TOGGLE_INITIAL_OFF, payload: false })
+}
+
+export const makeInitial = (challengeId) => (dispatch) => {
   axios.patch('/api/initialChallenge', {challengeId: challengeId})
   .then(() => {
     dispatch(fetchInitialChallenge());
