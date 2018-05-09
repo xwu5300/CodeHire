@@ -1,5 +1,5 @@
 import React from 'react';
-import { GET_DEFAULT_CHALLENGES, GET_ALL_CHALLENGES, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL } from '../constants/actionTypes';
+import { GET_DEFAULT_CHALLENGES, GET_ALL_CHALLENGES, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF } from '../constants/actionTypes';
 
 
 const initialState = {
@@ -62,7 +62,12 @@ const companySchedule = (state = initialState, action) => {
 
 const isInitial = (state = initialState, action) => {
   switch(action.type) {
-    case 'TOGGLE_INITIAL':
+    case 'TOGGLE_INITIAL_ON':
+      return {
+        ...state,
+        is_initial: action.payload
+      }
+    case 'TOGGLE_INITIAL_OFF':
       return {
         ...state,
         is_initial: action.payload

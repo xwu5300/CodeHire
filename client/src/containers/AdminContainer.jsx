@@ -9,7 +9,7 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitial, makeInitial } from '../actions/adminActions'; 
+import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial } from '../actions/adminActions'; 
 import { fetchInitialChallenge } from '../actions/userActions';
 //import { fetchCompanyInfo } from '../actions/authActions';
 
@@ -37,8 +37,6 @@ class AdminContainer extends Component {
   }
 }
 
-
-
 const mapStateToProps = (state) => ({
    default_challenges: state.default_challenges.default_challenges,
    all_challenges: state.all_challenges.all_challenges,
@@ -52,8 +50,8 @@ const mapStateToProps = (state) => ({
 
 
 
-const ChallengeListComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge, addToCompanySchedule, toggleInitial, makeInitial })(ChallengeListView);
-const AdminDashboardComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge, toggleInitial })(AdminDashboardView);
+const ChallengeListComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge, addToCompanySchedule, makeInitial })(ChallengeListView);
+const AdminDashboardComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge, toggleInitialOn, toggleInitialOff })(AdminDashboardView);
 const AnalyticsComponent= connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge })(AnalyticsView);
 const LiveCodingComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge })(LiveCodingView);
 const AdminProfileComponent = connect(mapStateToProps, { updateInfo, fetchCompanyInfo })(AdminProfileView);
