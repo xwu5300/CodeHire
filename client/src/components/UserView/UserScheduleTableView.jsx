@@ -30,7 +30,10 @@ class UserScheduleTableView extends Component {
                 challenge: schedule
                 })}}>Start
             </button>
-            <button className='ui orange button' onClick={() => {}}>Cancel
+            <button className='ui orange button' 
+            onClick={() => {
+              this.props.cancelSchedule(schedule.id, schedule.candidate_id)
+            }}>Cancel
             </button>
         </td>
         </tr>

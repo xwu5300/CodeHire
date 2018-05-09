@@ -22,7 +22,24 @@ export const fetchCandidateCalendar = (candidateId) => (dispatch) => {
 }
 
 export const saveCandidateCalendar = (candidateId, companyScheduleId) => (dispatch) => {
-  axios.post('/api/candidateCalendar', {candidateId: candidateId, companyScheduleId: companyScheduleId})
+  axios.post('/api/candidateCalendar', {candidateId, companyScheduleId})
+  .then(({data}) => {
+    if (data) {
+      window.alert('Scheduled Live Challenge.')
+    } else {
+      window.alert('You have already scheduled this live challenge.')
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
+
+export const deleteCandidateSchedule = (candidateScheduleId, candidateId) => (dispatch) => {
+  axios.post('/api/cancelCandidateSchedule', {candidateScheduleId, candidateId})
+  .then(() => {
+    dispatch(fetchCandidateCalendar(candidateId))
+  })
   .catch((err) => {
     console.log(err);
   })

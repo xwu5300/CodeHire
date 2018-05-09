@@ -48,10 +48,11 @@ module.exports.getCandidateCalendar = (candidateId) => {
     .innerJoin('company_schedule', 'user_schedule.company_schedule_id', 'company_schedule.id')
     .innerJoin('all_challenges', 'company_schedule.challenge_id', 'all_challenges.id')
     .innerJoin('users', 'company_schedule.company_id', 'users.id')
+    .select('*', 'user_schedule.id')
     .where({'user_schedule.candidate_id': candidateId})
     .orderBy('time', 'asc')
     .then((res) => {
-      console.log('Candidate schedule successfully received from db', res);
+      console.log('Candidate schedule successfully received from db');
       return res;
     })
     .catch((err) => {
@@ -60,14 +61,44 @@ module.exports.getCandidateCalendar = (candidateId) => {
 }
 
 module.exports.saveCandidateCalendar = (candidateId, companyScheduleId) => {
-  return knex('user_schedule').insert({
-    candidate_id: candidateId,
-    company_schedule_id: companyScheduleId
+  return knex.select('*')
+  .from('user_schedule')
+  .where({
+    'company_schedule_id': companyScheduleId, 
+    'candidate_id': candidateId
   })
-  .then(() => {
-    console.log('Event added to user schedule');
+  .then((res) => {
+    if (!res.length) {
+      return knex('user_schedule')
+      .insert({
+        candidate_id: candidateId,
+        company_schedule_id: companyScheduleId
+      })
+      .then((res) => {
+        return res;
+        console.log('Event added to user schedule');
+      })
+      .catch((err) => {
+        console.log('Error adding to user schedule', err);
+      })
+    }
+    else {
+      return false
+    }
   })
   .catch((err) => {
     console.log('Error adding to user schedule', err);
+  })
+}
+
+module.exports.deleteCandidateSchedule = (candidateScheduleId) => {
+  return knex('user_schedule')
+  .where({'id': candidateScheduleId})
+  .del()
+  .then(() => {
+    console.log('Challenge deleted from user schedule');
+  })
+  .catch((err) => {
+    console.log('Error deleting from user schedule', err);
   })
 }

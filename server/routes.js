@@ -110,11 +110,6 @@ router.delete('/api/challenges', (req, res) => {
   })
 })
 
-// post initial challenge info into 'intiial_challenges table'
-router.post('/api/initialChallenge', (req, res) => {
-
-})
-
 // update initial challenge from 'intitial_challenges table'
 router.patch('/api/initialChallenge', (req, res) => {
   console.log(req.body.challengeId)
@@ -156,27 +151,34 @@ router.get('/api/candidateCalendar', (req, res) => {
   .then((data) => {
     res.send(data)
   })
+  .catch((err) => {
+    console.log('Could not get user calendar', err);
+  })
 })
 
 // save user calendar
 router.post('/api/candidateCalendar', (req, res) => {
   let candidateId = req.body.candidateId;
   let companyScheduleId = req.body.companyScheduleId;
-  console.log('route candidateId', candidateId)
-  console.log('route companyScheduleId', companyScheduleId)
-  calendarControllers.saveCandidateCalendar(candidateId, companyScheduleId)
+  let isExist = calendarControllers.saveCandidateCalendar(candidateId, companyScheduleId)
   .then((data) => {
-    console.log('Successfully saved challenge to user schedule');
-    res.send()
+    res.send(data);
   })
   .catch((err) => {
     console.log('Could not save challenge to user schedule', err);
   })
 })
 
-// update user Calendar
-router.patch('/api/candidateCalendar:date', (req, res) => {
-
+// cancel user schedule
+router.post('/api/cancelCandidateSchedule', (req, res) => {
+  let candidateScheduleId = req.body.candidateScheduleId;
+  calendarControllers.deleteCandidateSchedule(candidateScheduleId)
+  .then(() => {
+    res.send('Successfully delete candidate schedule');
+  })
+  .catch((err) => {
+    console.log('Could not delete candidate schedule', err);
+  })
 })
 
 // get company schedule
@@ -194,7 +196,7 @@ router.post('/api/companyCalendar', (req, res) => {
   let companyId = 2;
   calendarControllers.addToCompanySchedule(time, duration, challengeId, companyId)
   .then(() => {
-    console.log('Successfully saved challenge to schedule');
+    res.send('Successfully saved challenge to schedule');
   })
   .catch((err) => {
     console.log('Could not save to company schedule', err);
@@ -232,17 +234,6 @@ router.get('/api/results', (req, res) => {
 router.post('/api/results', (req, res) => {
 
 })
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports = router;
 
