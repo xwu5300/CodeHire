@@ -9,6 +9,8 @@ class AdminDashboardView extends Component {
     
     this.handleClickOn = this.handleClickOn.bind(this);
     this.handleClickOff = this.handleClickOff.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.viewChallenge = this.viewChallenge.bind(this);
   }
 
 
@@ -33,9 +35,7 @@ class AdminDashboardView extends Component {
   }
 
   viewChallenge(title, companyId, duration) {
-  
     this.props.setCurrentLiveChallenge(title, duration);
-
     this.props.currentCompanyCalendar(companyId, () => {
       this.props.history.push('/admin/live')
     });

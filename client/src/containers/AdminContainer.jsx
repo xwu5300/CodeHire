@@ -9,14 +9,8 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-<<<<<<< HEAD
-import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge } from '../actions/adminActions'; 
+import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule } from '../actions/adminActions'; 
 import { fetchInitialChallenge, currentCompanyCalendar } from '../actions/userActions';
-=======
-import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, deleteFromCompanySchedule } from '../actions/adminActions'; 
-import { fetchInitialChallenge } from '../actions/userActions';
-//import { fetchCompanyInfo } from '../actions/authActions';
->>>>>>> feature2
 
 
 class AdminContainer extends Component {
