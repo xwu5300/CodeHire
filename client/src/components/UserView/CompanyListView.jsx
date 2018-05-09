@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import {withRouter} from 'react-router-dom';
+import UserScheduleTableView from './UserScheduleTableView.jsx';
 
 class CompanyListView extends Component {
   constructor() {
     super();
+  }
+
+  componentDidMount() {
+    this.props.fetchCandidateCalendar(this.props.user_id);
   }
 
   render () {
@@ -34,37 +39,9 @@ class CompanyListView extends Component {
       </div>
       <h2 style={{ marginTop: '100px', textAlign: 'center' }}>Your Calendar</h2>
       <div className='candidate_calendar inverted ui raised container segment'>
-      <table className='ui inverted table'>
-          <thead>
-            <tr>
-              <th>Company</th>
-              <th>Time</th>
-              <th>Duration</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.props.all_company_calendars.map((schedule, i) => {
-              return (
-              <tr key={i} >
-              <td>None</td>
-              <td>{schedule.created_at}</td>
-              <td></td>
-              <td>
-                <button className='ui orange button' onClick={() => {props.history.push('/user/live')}}>Start
-                </button>
-                <button className='ui orange button' onClick={() => {}}>Cancel
-                </button>
-              </td>
-            </tr>
-            )})
-            }
-          </tbody>
-          <tfoot>
-            <tr><th>3 People</th>
-            <th></th>
-            <th></th>
-          </tr></tfoot>
-        </table>
+      {this.props.candidate_calendar ? 
+      <UserScheduleTableView candidateCalendar={this.props.candidate_calendar}/>
+      : <div>You Do Not Have Any Scheduled Challenges</div>}
       </div>
       </div>
     )

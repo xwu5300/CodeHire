@@ -1,4 +1,4 @@
-import { GET_INITIAL_CHALLENGE, GET_ALL_COMPANY_CALENDARS, GET_CANDIDATE_CALENDAR, SAVE_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO } from '../constants/actionTypes';
+import { GET_INITIAL_CHALLENGE, GET_ALL_COMPANY_CALENDARS, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO } from '../constants/actionTypes';
 import axios from 'axios';
 
 export const fetchAllCompanyCalendars =() => (dispatch) => {
@@ -21,8 +21,11 @@ export const fetchCandidateCalendar = (candidateId) => (dispatch) => {
   })
 }
 
-export const saveCandidateCalendar = (candidate_id) => {
-  axios.get('api/')
+export const saveCandidateCalendar = (candidateId, companyScheduleId) => (dispatch) => {
+  axios.post('/api/candidateCalendar', {candidateId: candidateId, companyScheduleId: companyScheduleId})
+  .catch((err) => {
+    console.log(err);
+  })
 }
 
 export const fetchInitialChallenge = (company_id) => (dispatch) => {

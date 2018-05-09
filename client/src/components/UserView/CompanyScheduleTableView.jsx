@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 
-class ScheduleTableView extends Component {
+class CompanyScheduleTableView extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
+    console.log('com sche tbl view props', this.props)
     return(
       <table className='ui inverted table'>
         <thead>
@@ -21,7 +22,11 @@ class ScheduleTableView extends Component {
             <td>{schedule.time}</td>
             <td>{schedule.duration} Minutes</td>
             <td>
-              <button className='ui orange button' onClick={() => {}}>Add to Schedule
+              <button className='ui orange button' onClick={() =>{ 
+                console.log('com sche tbl view props', this.props);
+                console.log('com sche tbl view schedule', schedule);
+                this.props.saveCandidateCalendar(this.props.userId, schedule.id)
+              }}>Add to Schedule
               </button>
             </td>
           </tr>
@@ -37,4 +42,4 @@ class ScheduleTableView extends Component {
   }
 }
 
-export default ScheduleTableView;
+export default CompanyScheduleTableView;
