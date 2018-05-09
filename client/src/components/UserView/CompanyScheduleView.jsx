@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import {withRouter} from 'react-router-dom';
 import socketClient from 'socket.io-client';
-import ScheduleTableView from './ScheduleTableView.jsx';
+import CompanyScheduleTableView from './CompanyScheduleTableView.jsx';
 
 class CompanyScheduleView extends Component {
   constructor() {
@@ -27,14 +27,15 @@ class CompanyScheduleView extends Component {
         <h2>{this.props.initial_challenge[0].information}</h2> 
         <br/>
         <div className='ui raised very padded container segment'>
-          <button onClick={() => {this.props.history.push('/user/challenge')}}>Take Initial Challenge</button>
+        <button onClick={() => {this.props.history.push('/user/challenge')}}>
+            Take Initial Challenge</button>
           <span className='ui container segment'> </span>
         </div>
         <br/>
         {this.props.initial_challenge[0].name}'s Live Challenge:
         <div className='schedule_container'>
         {companyCalendar ? 
-        <ScheduleTableView companyCalendar={companyCalendar} /> 
+        <CompanyScheduleTableView userId={this.props.user_id} saveCandidateCalendar={this.props.saveCandidateCalendar}companyCalendar={companyCalendar} /> 
         : <div> {this.props.initial_challenge[0].name} Does Not Have Any Upcoming Live Challenge </div>
       }
         </div> 

@@ -9,7 +9,7 @@ import CompanyScheduleView from '../components/UserView/CompanyScheduleView.jsx'
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { fetchAllCompanyCalendars, fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, saveCandidateInfo } from '../actions/userActions';
+import { fetchAllCompanyCalendars, fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, saveCandidateInfo, saveCandidateCalendar } from '../actions/userActions';
 
 import axios from 'axios';
 
@@ -19,7 +19,6 @@ class UserContainer extends Component {
 
   componentDidMount() {
     this.props.fetchAllCompanyCalendars();
-    this.props.fetchCandidateCalendar(1);
   }
 
   render() {
@@ -42,13 +41,14 @@ const mapStateToProps = function(state) {
     username: state.username.username,
     user_id: state.user_id.user_id,
     candidate_information: state.candidate_information.candidate_information,
-    candidate_skills: state.candidate_skills.candidate_skills
+    candidate_skills: state.candidate_skills.candidate_skills,
+    candidate_calendar: state.candidate_calendar.candidate_calendar
 }};
 
 
-const connectComponent = connect(mapStateToProps, { fetchAllCompanyCalendars, fetchCandidateCalendar })(UserContainer);
-const CompanyListViewComponent = connect(mapStateToProps, { fetchInitialChallenge })(CompanyListView);
-const CompanyScheduleViewComponent = connect(mapStateToProps)(CompanyScheduleView);
+const connectComponent = connect(mapStateToProps, { fetchAllCompanyCalendars })(UserContainer);
+const CompanyListViewComponent = connect(mapStateToProps, { fetchInitialChallenge, fetchCandidateCalendar })(CompanyListView);
+const CompanyScheduleViewComponent = connect(mapStateToProps, { saveCandidateCalendar })(CompanyScheduleView);
 const UserInitialChallengeViewComponent = connect(mapStateToProps)(UserInitialChallengeView);
 const UserLiveCodingViewComponent = connect(mapStateToProps)(UserLiveCodingView);
 const UserProfileViewComponent = connect(mapStateToProps, { fetchCandidateInfo, saveCandidateInfo })(UserProfileView);

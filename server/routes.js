@@ -153,7 +153,18 @@ router.get('/api/candidateCalendar', (req, res) => {
 
 // save user calendar
 router.post('/api/candidateCalendar', (req, res) => {
-
+  let candidateId = req.body.candidateId;
+  let companyScheduleId = req.body.companyScheduleId;
+  console.log('route candidateId', candidateId)
+  console.log('route companyScheduleId', companyScheduleId)
+  calendarControllers.saveCandidateCalendar(candidateId, companyScheduleId)
+  .then((data) => {
+    console.log('Successfully saved challenge to user schedule');
+    res.send()
+  })
+  .catch((err) => {
+    console.log('Could not save challenge to user schedule', err);
+  })
 })
 
 // update user Calendar
