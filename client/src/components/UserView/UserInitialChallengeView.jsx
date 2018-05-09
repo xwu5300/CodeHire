@@ -38,12 +38,21 @@ class UserInitialChallengeView extends Component {
     })
   }
   handleSubmit() {
-    let string = `${this.state.code}
-${this.props.initial_challenge[0].function_name}()
-     `
-    let answer = eval(string)
-    console.log('the answer submitted is', answer)
-  }
+      let func = this.props.initial_challenge[0].parameters
+      let reg = new RegExp(`${func}`, 'g')
+      
+      let testCaseS = this.props.initial_challenge[0].test_cases.replace(/"/g, "'")
+      let testCaseD = this.props.initial_challenge[0].test_cases.replace(/'/g, '"')
+      let input = JSON.parse(testCaseD)[0]
+      let output = JSON.parse(testCaseD)[1]
+
+      let newString = `${this.state.code.replace(reg, `${input}`)}
+  ${this.props.initial_challenge[0].function_name}('${input}')
+      `
+      let answer = eval(newString)
+      // console.log('the answer submitted is', answer)
+      console.log(answer === output)
+    }
 
   render() {
     return (
