@@ -69,8 +69,6 @@ class UserLiveCodingView extends Component {
     return (
       <div>
         <h1>{this.props.location.challenge.name}</h1>
-        <h1> LIVE CODING PLACEHOLDER </h1>
-
         <br/>
         <br/>
         <h2>Title: {this.props.location.challenge.title}</h2>
