@@ -13,7 +13,6 @@ class UserInitialChallengeView extends Component {
 
     this.state = {
       code: `function ${this.props.initial_challenge[0].function_name}(${this.props.initial_challenge[0].parameters}) {
-
 }` }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
@@ -27,7 +26,6 @@ class UserInitialChallengeView extends Component {
 
   handleSubmit() {
     let string = `${this.state.code}
-
 ${this.props.initial_challenge[0].function_name}()
      `
     let answer = eval(string)
@@ -70,23 +68,4 @@ ${this.props.initial_challenge[0].function_name}()
   }
 }
 
-
-//${this.props.initial_challenge[0].name}
-// <div> {this.state.instructions} </div>
-//
-//
-// <h1>{this.props.initial_challenge[0].name  }</h1>
-// <h2>Initial Challenge</h2>
-// <h3>{this.props.initial_challenge[0].title}</h3>
-
-// <div>
-//   instruction: {this.props.initial_challenge[0].instruction}
-// </div>
-// <div>
-// test case: {this.props.initial_challenge[0].test_cases}
-// </div>
-// <div>
-//   timelimit:  {this.props.initial_challenge[0].timelimit}
-// </div>
-// </div>
 export default UserInitialChallengeView;

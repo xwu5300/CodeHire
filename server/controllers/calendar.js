@@ -46,10 +46,12 @@ module.exports.getAllCompanyCalendars = () => {
 module.exports.getCandidateCalendar = (candidateId) => {
   return knex.from('user_schedule')
     .innerJoin('company_schedule', 'user_schedule.company_schedule_id', 'company_schedule.id')
+    .innerJoin('all_challenges', 'company_schedule.challenge_id', 'all_challenges.id')
+    .innerJoin('users', 'company_schedule.company_id', 'users.id')
     .where({'user_schedule.candidate_id': candidateId})
     .orderBy('time', 'asc')
     .then((res) => {
-      console.log('Candidate schedule successfully received from db');
+      console.log('Candidate schedule successfully received from db', res);
       return res;
     })
     .catch((err) => {
@@ -57,6 +59,15 @@ module.exports.getCandidateCalendar = (candidateId) => {
     })
 }
 
-module.exports.saveCandidateCalendar = (candidateId) => {
-  return knex.from('')
+module.exports.saveCandidateCalendar = (candidateId, companyScheduleId) => {
+  return knex('user_schedule').insert({
+    candidate_id: candidateId,
+    company_schedule_id: companyScheduleId
+  })
+  .then(() => {
+    console.log('Event added to user schedule');
+  })
+  .catch((err) => {
+    console.log('Error adding to user schedule', err);
+  })
 }

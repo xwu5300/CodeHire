@@ -44,9 +44,17 @@ class UserLiveCodingView extends Component {
 
 
   render() {
+    console.log('live challenge', this.props.location.challenge)
     return (
       <div>
+        <h1>{this.props.location.challenge.name}</h1>
         <h1> LIVE CODING PLACEHOLDER </h1>
+        <br/>
+        <br/>
+        <h2>Title: {this.props.location.challenge.title}</h2>
+        <h3>Difficulty: {this.props.location.challenge.difficulty}</h3>
+        <h3>Time Limit: {this.props.location.challenge.duration}</h3>
+        
         <AceEditor
           mode="javascript"
           theme="monokai"
@@ -65,7 +73,8 @@ class UserLiveCodingView extends Component {
         }}/>
       <button onClick={this.handleSubmit}> Submit Answer </button>
 
-      <div> {this.state.instructions} </div>
+      <div> Instruction: </div>
+      <div>{this.props.location.challenge.instruction} </div>
       </div>
      )
   }

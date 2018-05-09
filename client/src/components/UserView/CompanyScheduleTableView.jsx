@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class ScheduleTableView extends Component {
+class CompanyScheduleTableView extends Component {
   constructor(props) {
     super(props);
   }
@@ -21,7 +21,9 @@ class ScheduleTableView extends Component {
             <td>{schedule.time}</td>
             <td>{schedule.duration} Minutes</td>
             <td>
-              <button className='ui orange button' onClick={() => {}}>Add to Schedule
+              <button className='ui orange button' onClick={() =>{ 
+                this.props.saveCandidateCalendar(this.props.userId, schedule.id)
+              }}>Add to Schedule
               </button>
             </td>
           </tr>
@@ -37,4 +39,4 @@ class ScheduleTableView extends Component {
   }
 }
 
-export default ScheduleTableView;
+export default CompanyScheduleTableView;
