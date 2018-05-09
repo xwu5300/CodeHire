@@ -17,7 +17,7 @@ class DefaultChallenges extends Component {
           <div className="challenges" key={challenge.id}>
             <div>{challenge.title}</div>
             <div>{challenge.description}</div>
-            <button onClick={() => {this.props.save(challenge)}}>Add to your challenges</button>
+            <button className="ui icon button" onClick={() => {this.props.save(challenge)}}><i className="plus icon"></i></button>
           </div>
         )
       })}

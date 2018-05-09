@@ -5,7 +5,7 @@ import DefaultChallenges from './ChallengeListView/DefaultChallenges.jsx';
 import Form from './ChallengeListView/Form.jsx';
 
    
-const ChallengeListView = ({ all_challenges, default_challenges, deleteChallenge, saveChallenge, addToCompanySchedule, is_initial, toggleInitial, makeInitial }) => {
+const ChallengeListView = ({ all_challenges, default_challenges, deleteChallenge, saveChallenge, addToCompanySchedule, is_initial, makeInitial }) => {
   return (
     <div className='challenge_list'>
       <div className='ui padded horizontal segments challenge_list'>
