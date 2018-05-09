@@ -40,14 +40,14 @@ CREATE TABLE company_schedule (
   id SERIAL PRIMARY KEY,
   time TIMESTAMPTZ NOT NULL,
   duration SMALLINT NOT NULL,
-  challenge_id SMALLINT REFERENCES all_challenges(id),
+  challenge_id SMALLINT REFERENCES all_challenges(id) ON DELETE CASCADE,
   company_id SMALLINT REFERENCES users(id)
 );
 
 CREATE TABLE user_schedule (
   id SERIAL PRIMARY KEY,
   candidate_id SMALLINT REFERENCES users(id),
-  company_schedule_id SMALLINT REFERENCES company_schedule(id)
+  company_schedule_id SMALLINT REFERENCES company_schedule(id) ON DELETE CASCADE
 );
 
 CREATE TABLE results (

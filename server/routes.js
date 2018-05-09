@@ -205,6 +205,7 @@ router.post('/api/companyCalendar', (req, res) => {
   calendarControllers.addToCompanySchedule(time, duration, challengeId, companyId)
   .then(() => {
     console.log('Successfully saved challenge to schedule');
+    res.send();
   })
   .catch((err) => {
     console.log('Could not save to company schedule', err);
@@ -216,6 +217,7 @@ router.get('/api/companyCalendar', (req, res) => {
   let companyId = 2;
   calendarControllers.getCompanySchedule(companyId)
   .then((data) => {
+    console.log('this is the data from the company schedule', data)
     res.send(data);
   })
   .catch((err) => {
