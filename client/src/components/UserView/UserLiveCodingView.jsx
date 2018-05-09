@@ -59,8 +59,8 @@ class UserLiveCodingView extends Component {
     console.log('the answer submitted is', answer)
   }
 
-  
-    
+
+
 
 
   render() {
@@ -71,7 +71,7 @@ class UserLiveCodingView extends Component {
         <br/>
         <h2>Title: {this.props.location.challenge.title}</h2>
         <h3>Difficulty: {this.props.location.challenge.difficulty}</h3>
-     
+
 
         <div> Time Limit: { this.state.minutes + ':' + this.state.seconds }</div>
 
@@ -93,8 +93,7 @@ class UserLiveCodingView extends Component {
         }}/>
       <button onClick={this.handleSubmit}> Submit Answer </button>
 
-      <div> Instruction: </div>
-      <div>{this.props.location.challenge.instruction} </div>
+
       </div>
      )
   }
