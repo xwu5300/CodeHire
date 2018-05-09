@@ -38,7 +38,7 @@ class UserScheduleTableView extends Component {
         }
     </tbody>
     <tfoot>
-        <tr><th>3 People</th>
+        <tr>
         <th></th>
         <th></th>
     </tr></tfoot>
