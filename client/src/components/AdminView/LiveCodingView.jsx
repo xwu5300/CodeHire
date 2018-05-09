@@ -4,7 +4,7 @@ import AceEditor from 'react-ace';
 import brace from 'brace';
 import socketClient from 'socket.io-client';
 
-import Editor from '../AdminEditorViews.jsx';
+import AdminEditorViews from '../AdminEditorViews.jsx';
 
 
 import 'brace/mode/javascript';
@@ -18,7 +18,7 @@ class LiveCodingView extends Component {
       active_candidates: [],
       time_running: false,
       seconds: 0,
-      time_limit: ''
+      minutes: ''
     }
 
     this.startChallenge = this.startChallenge.bind(this);
@@ -34,7 +34,7 @@ class LiveCodingView extends Component {
   componentDidMount() {
     this.socket.emit('company enter', this.props.current_company_calendar);
 
-    this.setState({ time_limit: this.props.current_live_challenge_duration });
+    this.setState({ minutes: this.props.current_live_challenge_duration });
   }
 
 
@@ -45,6 +45,9 @@ class LiveCodingView extends Component {
 
 
   onTick() {
+
+    this.socket.emit('send time_limit', this.state.minutes, this.state.seconds);
+
     if(this.state.time_running) {
       this.setState({ seconds: this.state.seconds - 1 });
     }
@@ -52,7 +55,7 @@ class LiveCodingView extends Component {
     if(this.state.seconds === -1){
       this.setState({
         seconds: 60,
-        time_limit: this.state.time_limit - 1,
+        minutes: this.state.minutes - 1,
       });
   }
 }
@@ -60,7 +63,7 @@ class LiveCodingView extends Component {
 
   onReset() {
     clearInterval(this.onTick);
-    this.setState({ time_limit: this.props.current_live_challenge_duration, seconds: 0, time_running: false })
+    this.setState({ minutes: this.props.current_live_challenge_duration, seconds: 0, time_running: false })
   }
 
   componentWillUnmount() {
@@ -71,7 +74,7 @@ class LiveCodingView extends Component {
     return (
       <div className='live_coding_container'>
         <h1 style={{ color: 'white' }}>Live Coding - { this.props.current_live_challenge_title } </h1>
-        <span style={{ color: 'white' }}> TIME: { this.state.time_limit } : { this.state.seconds } </span>
+        <span style={{ color: 'white' }}> TIME: { this.state.minutes } : { this.state.seconds } </span>
         <button type='button' onClick={ () => this.startChallenge() }> Start Challenge </button>
         <button type='button' onClick={ () => this.onReset() }>Reset Clock</button>
           <div class="ui inverted bottom attached segment pushable">

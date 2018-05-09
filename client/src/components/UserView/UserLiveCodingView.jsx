@@ -12,6 +12,9 @@ class UserLiveCodingView extends Component {
     super(props);
 
     this.state = {
+
+      minutes: '',
+      seconds: '',
       code: `function placeholder(params) {
 
 }` }
@@ -26,6 +29,11 @@ class UserLiveCodingView extends Component {
       this.setState({
         code: chars
       }, ()=> console.log(this.state.code))
+    })
+
+    this.socket.on('show time_limit', (minutes, seconds) => {
+      console.log('TIME', minutes, seconds);
+      this.setState({ minutes: minutes, seconds: seconds });
     })
   }
 
@@ -62,11 +70,14 @@ class UserLiveCodingView extends Component {
       <div>
         <h1>{this.props.location.challenge.name}</h1>
         <h1> LIVE CODING PLACEHOLDER </h1>
+
         <br/>
         <br/>
         <h2>Title: {this.props.location.challenge.title}</h2>
         <h3>Difficulty: {this.props.location.challenge.difficulty}</h3>
-        <h3>Time Limit: {this.props.location.challenge.duration}</h3>
+     
+
+        <div> Time Limit: { this.state.minutes + ':' + this.state.seconds }</div>
 
         <AceEditor
           mode="javascript"

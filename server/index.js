@@ -66,6 +66,11 @@ io.sockets.on('connection', (socket)=> {
        io.sockets.emit('active candidates', companyRooms[currentCompanyId]); 
   })
 
+
+  socket.on('send time_limit', (minutes, seconds) => {
+    io.sockets.in(socket.room).emit('show time_limit', minutes, seconds);
+  })
+
 })
 
 
