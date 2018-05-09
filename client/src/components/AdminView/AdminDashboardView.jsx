@@ -9,6 +9,7 @@ class AdminDashboardView extends Component {
     
     this.handleClickOn = this.handleClickOn.bind(this);
     this.handleClickOff = this.handleClickOff.bind(this);
+    this.viewChallenge = this.viewChallenge.bind(this);
   }
 
 
@@ -24,18 +25,11 @@ class AdminDashboardView extends Component {
 
   handleClickOff() {
     this.props.toggleInitialOff();
-  }
-
-
-  handleClick() {
-    this.props.toggleInitial();
     this.props.history.push('/admin/challenges');
   }
 
   viewChallenge(title, companyId, duration) {
-  
     this.props.setCurrentLiveChallenge(title, duration);
-
     this.props.currentCompanyCalendar(companyId, () => {
       this.props.history.push('/admin/live')
     });
@@ -79,20 +73,17 @@ class AdminDashboardView extends Component {
                 </tr>
               </thead>
               <tbody>
-              {this.props.company_schedule.map((item) => {
+              {this.props.company_schedule ? this.props.company_schedule.map((item) => {
                 return (
                   <tr key={item.id}>
                     <td>{item.title}</td>
                     <td>{moment(item.time).format('MMMM Do YYYY, h:mm A')}</td>
                     <td>{item.duration}</td>
-
-                    <td><button className='ui button' type='button'><i className='x icon'></i></button></td>
-
-
-                    <td><button className='ui button' type='button' onClick={() => { this.viewChallenge(item.title, item.company_id, item.duration) }}>view challenge</button></td>
+                    <td><button className='ui button' type='button' onClick={() => { this.viewChallenge(item.title, item.company_id, item.duration) }}>View challenge</button></td>
+                    <td><button className='ui button' type='button' onClick={()=>{this.props.deleteFromCompanySchedule(item.id)}}><i className='x icon'></i></button></td>
                   </tr>
                 )
-              })}
+              }) : null }
               </tbody>
             </table>
           </div>

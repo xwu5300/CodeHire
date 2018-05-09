@@ -110,6 +110,11 @@ router.delete('/api/challenges', (req, res) => {
   })
 })
 
+// post initial challenge info into 'intiial_challenges table'
+router.post('/api/initialChallenge', (req, res) => {
+
+})
+
 // update initial challenge from 'intitial_challenges table'
 router.patch('/api/initialChallenge', (req, res) => {
   console.log(req.body)
@@ -142,16 +147,6 @@ router.get('/api/initialChallenge', (req, res) => {
   })
 })
 
-// delete company challenge from 'all_challenges' table
-router.delete('./api/challenges/:challengeid', (req, res) => {
-
-})
-
-// delete company challenge from 'all_challenges' table
-router.delete('./api/challenges/:challengeid', (req, res) => {
-
-})
-
 /* ---------- Schedule Routes -------- */
 
 // get user schedule
@@ -161,34 +156,27 @@ router.get('/api/candidateCalendar', (req, res) => {
   .then((data) => {
     res.send(data)
   })
-  .catch((err) => {
-    console.log('Could not get user calendar', err);
-  })
 })
 
 // save user calendar
 router.post('/api/candidateCalendar', (req, res) => {
   let candidateId = req.body.candidateId;
   let companyScheduleId = req.body.companyScheduleId;
-  let isExist = calendarControllers.saveCandidateCalendar(candidateId, companyScheduleId)
+  console.log('route candidateId', candidateId)
+  console.log('route companyScheduleId', companyScheduleId)
+  calendarControllers.saveCandidateCalendar(candidateId, companyScheduleId)
   .then((data) => {
-    res.send(data);
+    console.log('Successfully saved challenge to user schedule');
+    res.send()
   })
   .catch((err) => {
     console.log('Could not save challenge to user schedule', err);
   })
 })
 
-// cancel user schedule
-router.post('/api/cancelCandidateSchedule', (req, res) => {
-  let candidateScheduleId = req.body.candidateScheduleId;
-  calendarControllers.deleteCandidateSchedule(candidateScheduleId)
-  .then(() => {
-    res.send('Successfully delete candidate schedule');
-  })
-  .catch((err) => {
-    console.log('Could not delete candidate schedule', err);
-  })
+// update user Calendar
+router.patch('/api/candidateCalendar:date', (req, res) => {
+
 })
 
 // get company schedule
@@ -206,7 +194,8 @@ router.post('/api/companyCalendar', (req, res) => {
   let companyId = 2;
   calendarControllers.addToCompanySchedule(time, duration, challengeId, companyId)
   .then(() => {
-    res.send('Successfully saved challenge to schedule');
+    console.log('Successfully saved challenge to schedule');
+    res.send();
   })
   .catch((err) => {
     console.log('Could not save to company schedule', err);
@@ -215,8 +204,8 @@ router.post('/api/companyCalendar', (req, res) => {
 
 //fetch single company's schedule
 router.get('/api/companyCalendar', (req, res) => {
-
-  calendarControllers.getCompanySchedule(req.query.companyId)
+  let companyId = 2;
+  calendarControllers.getCompanySchedule(companyId)
   .then((data) => {
     console.log('this is the data from the company schedule', data)
     res.send(data);
@@ -226,6 +215,17 @@ router.get('/api/companyCalendar', (req, res) => {
   })
 })
 
+//delete item from company schedule
+router.delete('/api/companyCalendar', (req, res) => {
+  calendarControllers.deleteFromCompanySchedule(req.query.scheduleId)
+  .then(() => {
+    console.log('Scheduled challenge removed from list');
+    res.send();
+  })
+  .catch((err) => {
+    console.log('Could remove scheduled challenge from list', err);
+  })
+})
 
 // update company calendar
 router.patch('/api/companyCalendar:date', (req, res) => {
@@ -245,6 +245,16 @@ router.get('/api/results', (req, res) => {
 router.post('/api/results', (req, res) => {
 
 })
+
+
+
+
+
+
+
+
+
+
 
 module.exports = router;
 
