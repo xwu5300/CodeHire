@@ -15,14 +15,18 @@ class LiveCodingView extends Component {
   constructor() {
     super();
     this.state = {
-      active_users: []
+      active_candidates: []
     }
 
     this.socket = socketClient();
 
-    this.socket.on('active user', (username, userId) => {
-      this.setState({ active_users: [...this.state.active_users, [username, userId]] });
+    this.socket.on('active candidates', (activeCandidates) => {
+      this.setState({ active_candidates: activeCandidates })
     })
+  }
+
+  componentDidMount() {
+    this.socket.emit('company enter', this.props.current_company_calendar);
   }
 
   render() {
@@ -32,23 +36,23 @@ class LiveCodingView extends Component {
           <h3 style={{ color: 'white' }}>Active Users</h3>
           <div class="ui inverted bottom attached segment pushable">
             <div className="ui inverted visible inverted left vertical sidebar menu">
-            {this.state.active_users.map((user) => {
+            {this.state.active_candidates ? this.state.active_candidates.map((user) => {
               return (
                 <div className='active_users_div'>{ user[0] }</div>
               );
-            })}
+            }) : null}
             </div>
             <div className="pusher">
               <div className="ui inverted basic segment">
                 <div className='ui grid'>
-              {this.state.active_users.map((user, index) => {
+              {this.state.active_candidates ? this.state.active_candidates.map((user, index) => {
                 return(
                   <div className='six wide column'>
                   <h2> { user[0] } </h2>
                   <Editor userIndex={ user[1]} />
                   </div>
                 );
-              })}
+              }) : null}
               </div>
               </div>
             </div>

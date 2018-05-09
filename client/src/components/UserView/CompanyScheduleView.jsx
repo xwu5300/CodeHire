@@ -7,14 +7,23 @@ import CompanyScheduleTableView from './CompanyScheduleTableView.jsx';
 class CompanyScheduleView extends Component {
   constructor() {
     super()
+
     this.enterChallenge = this.enterChallenge.bind(this);
     this.socket = socketClient();
+
+
+    this.getCalendar = this.getCalendar.bind(this);
   }
 
-  enterChallenge() {
-    this.props.history.push('/user/live');
-    this.socket.emit('enter challenge', this.props.username, this.props.user_id);
+
+  getCalendar(companyId) {
+    
+    this.props.currentCompanyCalendar(companyId, () => {
+      this.props.history.push('/user/live')
+    });
+
   }
+
 
   render() {
     if (this.props.initial_challenge[0]) {
@@ -38,6 +47,7 @@ class CompanyScheduleView extends Component {
         <CompanyScheduleTableView userId={this.props.user_id} saveCandidateCalendar={this.props.saveCandidateCalendar}companyCalendar={companyCalendar} />
         : <div> {this.props.initial_challenge[0].name} Does Not Have Any Upcoming Live Challenge </div>
       }
+
         </div>
       </div>
       )

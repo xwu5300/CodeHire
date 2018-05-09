@@ -40,6 +40,8 @@ export const TOGGLE_INITIAL_OFF = 'TOGGLE_INITIAL_OFF';
 
 export const GET_CANDIDATE_CALENDAR = 'GET_CANDIDATE_CALENDAR';
 
+export const GET_CURRENT_COMPANY_CALENDAR = 'GET_CURRENT_COMPANY_CALENDAR';
+
 /* --------- Results -------- */
 export const SAVE_RESULTS = 'SAVE_RESULTS';
 

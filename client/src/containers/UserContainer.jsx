@@ -9,7 +9,9 @@ import CompanyScheduleView from '../components/UserView/CompanyScheduleView.jsx'
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { fetchAllCompanyCalendars, fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, saveCandidateInfo, saveCandidateCalendar, deleteCandidateSchedule } from '../actions/userActions';
+
+import { fetchAllCompanyCalendars, fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, saveCandidateInfo, saveCandidateCalendar, deleteCandidateSchedule, currentCompanyCalendar } from '../actions/userActions';
+
 
 import axios from 'axios';
 
@@ -42,16 +44,18 @@ const mapStateToProps = function(state) {
     user_id: state.user_id.user_id,
     candidate_information: state.candidate_information.candidate_information,
     candidate_skills: state.candidate_skills.candidate_skills,
-    candidate_calendar: state.candidate_calendar.candidate_calendar
+    candidate_calendar: state.candidate_calendar.candidate_calendar,
+    current_company_calendar: state.current_company_calendar.current_company_calendar
 }};
 
 
 const connectComponent = connect(mapStateToProps, { fetchAllCompanyCalendars })(UserContainer);
 const CompanyListViewComponent = connect(mapStateToProps, { fetchInitialChallenge, fetchCandidateCalendar, deleteCandidateSchedule })(CompanyListView);
-const CompanyScheduleViewComponent = connect(mapStateToProps, { saveCandidateCalendar })(CompanyScheduleView);
+const CompanyScheduleViewComponent = connect(mapStateToProps, { saveCandidateCalendar, currentCompanyCalendar })(CompanyScheduleView);
 const UserInitialChallengeViewComponent = connect(mapStateToProps)(UserInitialChallengeView);
 const UserLiveCodingViewComponent = connect(mapStateToProps)(UserLiveCodingView);
 const UserProfileViewComponent = connect(mapStateToProps, { fetchCandidateInfo, saveCandidateInfo })(UserProfileView);
+
 
 const routeUserComponent = withRouter(connectComponent);
 export default routeUserComponent;

@@ -6,8 +6,10 @@ const initialState = {
   initial_challenge: [],
   candidate_calendar: [],
   candidate_information: '',
-  candidate_skills: ''
+  candidate_skills: '',
+  current_company_calendar: ''
 }
+
 
 const allCompanyCalendars = (state = initialState, action) => {
   switch(action.type) {
@@ -57,4 +59,18 @@ const initialChallenge = (state = initialState, action) => {
   }
 }
 
-export default { allCompanyCalendars, initialChallenge, candidateInfo, candidateCalendar };
+
+const currentCompanySchedule = (state = initialState, action) => {
+  switch(action.type) {
+    case 'GET_CURRENT_COMPANY_CALENDAR':
+      return {
+        ...state,
+        current_company_calendar: action.company_id
+      }
+      default: 
+        return state;
+  }
+}
+
+export default { allCompanyCalendars, initialChallenge, candidateInfo, candidateCalendar, currentCompanySchedule };
+

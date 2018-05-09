@@ -29,6 +29,14 @@ class UserLiveCodingView extends Component {
     })
   }
 
+  componentDidMount() {
+     this.socket.emit('candidate enter', this.props.username, this.props.user_id, this.props.current_company_calendar);
+  }
+
+  componentWillUnmount() {
+    this.socket.emit('candidate disconnect', this.props.username, this.props.user_id, this.props.current_company_calendar);
+  }
+
   onChange(newValue, event) {
     this.socket.emit('typing', newValue, event, this.props.user_id);
   }
@@ -44,7 +52,6 @@ class UserLiveCodingView extends Component {
 
 
   render() {
-    console.log('live challenge', this.props.location.challenge)
     return (
       <div>
         <h1>{this.props.location.challenge.name}</h1>

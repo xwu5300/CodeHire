@@ -30,7 +30,6 @@ class Editor extends Component {
 
 
   render() {
-    console.log('INDEEXXXX', 'add char-' + this.props.userIndex);
     return (
       <div>
         <AceEditor

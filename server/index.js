@@ -14,21 +14,65 @@ app.use(parser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/../client/dist'));
 
 
+
+let companyRooms = {};
+
 io.sockets.on('connection', (socket)=> {
   
+  // when candidates enter liveCoding, push their username/id into respective companyId obj parameter
+  socket.on('candidate enter', (username, userId, currentCompanyId) => {
+
+    socket.room = 'room-' + currentCompanyId;
+    socket.join(socket.room);
+    
+    
+    if(!companyRooms[currentCompanyId]) {
+      companyRooms[currentCompanyId] = [[username, userId]];
+    } else {
+      if(!companyRooms[currentCompanyId].includes([username, userId])) {
+        companyRooms[currentCompanyId].push([username,userId]);
+      }
+    }
+
+     io.sockets.in(socket.room).emit('active candidates', companyRooms[currentCompanyId]);
+   
+  })
+
+
   socket.on('typing', (newValue, e, userId)=> {
     io.sockets.emit('add char-' + userId, newValue);
   })
 
-  socket.on('room', function(username) {
-    socket.join(username)
+
+  // When company enters challenge, send them all users in their room
+  socket.on('company enter', (currentCompanyId) => {
+    socket.room = 'room-' + currentCompanyId;
+    socket.join(socket.room);
+    io.sockets.in(socket.room).emit('active candidates', companyRooms[currentCompanyId]);
   })
- 
-  socket.on('enter challenge', (username, userId) => {
-  	io.sockets.emit('active user', username, userId);
+
+
+  // When candidate disconnects from room, remove username from company room
+  socket.on('candidate disconnect', (username, userId, currentCompanyId) => {
+
+     socket.leave('room-' + currentCompanyId);
+     
+     if(!companyRooms[currentCompanyId].includes([username, userId])) {
+       companyRooms[currentCompanyId].splice(companyRooms[currentCompanyId].indexOf([username, userId]));
+     }
+    
+       io.sockets.emit('active candidates', companyRooms[currentCompanyId]); 
   })
 
 })
+
+
+
+
+
+
+
+
 
 app.use('/', routes);
 
