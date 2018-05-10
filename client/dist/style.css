@@ -145,17 +145,40 @@ body {
 
 /* ------- Admin live coding ------- */
 .live_coding_container {
-	height: 1000px;
 	background-color: black;
 }
 
-.active_users_div {
-	color: orange;
-	font-size: 24px;
+.time_limit_btn {
+	display: inline-block;
+}
+
+.live_coding_clock {
+	font-size: 22px;
+	color: white;
+	margin-bottom: 10px;
+}
+
+.active_user_menu {
+	height: 800px;
+}
+
+.active_user_menu h2 {
 	text-align: center;
-	padding-top: 20px;
-	width: 100%;
-	height: 60px;
+}
+
+.active_user_list {
+	list-style: none;
+}
+
+.active_user_list li {
+	font-size: 22px;
+	margin-bottom: 10px;
+}
+
+.user_profile_container {
+	height: 200px;
+	background-color: white;
+	color: black;
 }
 
 

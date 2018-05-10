@@ -85,10 +85,10 @@ module.exports.getCompanyInfo = (username, callback) => {
 }
 
 
-module.exports.getCandidateInfo = (username, callback) => {
+module.exports.getCandidateInfo = (user_id, callback) => {
   return knex('users')
   .select('username', 'information', 'candidate_skills')
-  .where({ username: username })
+  .where({ id: user_id })
   .then((data) => {
     callback(data);
   })

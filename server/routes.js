@@ -15,7 +15,7 @@ router.get('/api/companyInfo', (req, res) => {
 })
 
 router.get('/api/candidateInfo', (req, res) => {
-  authControllers.getCandidateInfo(req.query.username, (data) => {
+  authControllers.getCandidateInfo(req.query.user_id, (data) => {
     res.status(200).send(data);
   })
 })
@@ -232,7 +232,7 @@ router.get('/api/companyCalendar', (req, res) => {
   let companyId = 2;
   calendarControllers.getCompanySchedule(companyId)
   .then((data) => {
-    console.log('this is the data from the company schedule', data)
+    //console.log('this is the data from the company schedule', data)
     res.send(data);
   })
   .catch((err) => {
