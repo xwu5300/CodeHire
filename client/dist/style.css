@@ -58,9 +58,8 @@ body {
 }
 
 .form-container {
-  width: 50%;
-  margin-left: 30px;
-  margin-bottom: 50px;
+  width: 70%;
+  margin: auto;
 }
 
 .calendar-container {

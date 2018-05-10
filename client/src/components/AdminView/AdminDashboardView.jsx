@@ -13,7 +13,6 @@ class AdminDashboardView extends Component {
   }
 
 
-
   componentDidMount() {
     this.props.fetchCompanySchedule(this.props.user_id);
   }
@@ -33,7 +32,6 @@ class AdminDashboardView extends Component {
     this.props.currentCompanyCalendar(companyId, () => {
       this.props.history.push('/admin/live')
     });
-
   }
 
   render() {
