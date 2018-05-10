@@ -23,8 +23,8 @@ class AdminDashboardView extends Component {
 
   componentDidMount() {
     this.props.fetchCompanySchedule(this.props.user_id);
+    this.props.fetchInitialChallenge(2);
     Modal.setAppElement('body');
-    console.log(this.props)
   }
 
   handleClickOn() {
@@ -62,7 +62,6 @@ class AdminDashboardView extends Component {
   }
 
   render() {
-
     return (
       <div className='admin_dashboard'>
         <div className='ui raised padded centered container segment'>
@@ -81,12 +80,14 @@ class AdminDashboardView extends Component {
               <thead>
                 <tr>
                   <th>Initial Challenge</th>
+                  <th>Duration</th>
                 </tr>
               </thead>
               <tbody>
                 {this.props.initial_challenge.length === 0 ? null :
                   <tr>
                     <td>{this.props.initial_challenge[0].title}</td>
+                    <td>{this.props.initial_challenge[0].duration}</td>
                     <td><button className='ui button' type='button' onClick={() => {this.props.makeInitial(this.props.initial_challenge[0].id, this.props.initial_challenge[0].initial)}}><i className='x icon'></i></button></td>
                   </tr>
                 }
