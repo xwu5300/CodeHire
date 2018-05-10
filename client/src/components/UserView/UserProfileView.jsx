@@ -14,7 +14,7 @@ class UserProfileView extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchCandidateInfo(this.props.username, () => {
+    this.props.fetchCandidateInfo(this.props.user_id, () => {
       this.setState({ information: this.props.candidate_information, skills: this.props.candidate_skills })
     });
   }

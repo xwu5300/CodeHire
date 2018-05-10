@@ -20,7 +20,7 @@ class AdminEditorViews extends Component {
 }` }
 
     this.socket = socketClient();
-
+    
     this.socket.on('add char-' + this.props.userIndex, (chars)=> {
       this.setState({
         code: chars
@@ -30,8 +30,16 @@ class AdminEditorViews extends Component {
 
 
   render() {
+     
+
+    if(this.props.activeUserId !== this.props.userIndex) {
+       var display = {display: 'none'}
+    } else {
+       display = {display: 'block'}
+    }
+
     return (
-      <div>
+      <div style={ display }>
         <AceEditor
           mode="javascript"
           theme="monokai"
