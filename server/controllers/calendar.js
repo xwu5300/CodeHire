@@ -51,7 +51,6 @@ module.exports.getCompanySchedule = (companyId) => {
   .orderBy('time', 'asc')
   .then((res) => {
     console.log('Successfully retrieved schedule from db');
-    console.log(res);
     return res;
   })
   .catch((err) => {

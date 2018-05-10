@@ -117,7 +117,6 @@ router.post('/api/initialChallenge', (req, res) => {
 
 // update initial challenge from 'intitial_challenges table'
 router.patch('/api/initialChallenge', (req, res) => {
-  console.log(req.body)
   let companyId = 2;
   if (req.body.initial === false) {
     challengeControllers.setInitialChallenge(companyId, req.body.challengeId)
@@ -162,21 +161,25 @@ router.get('/api/candidateCalendar', (req, res) => {
 router.post('/api/candidateCalendar', (req, res) => {
   let candidateId = req.body.candidateId;
   let companyScheduleId = req.body.companyScheduleId;
-  console.log('route candidateId', candidateId)
-  console.log('route companyScheduleId', companyScheduleId)
-  calendarControllers.saveCandidateCalendar(candidateId, companyScheduleId)
+  let isExist = calendarControllers.saveCandidateCalendar(candidateId, companyScheduleId)
   .then((data) => {
-    console.log('Successfully saved challenge to user schedule');
-    res.send()
+    res.send(data);
   })
   .catch((err) => {
     console.log('Could not save challenge to user schedule', err);
   })
 })
 
-// update user Calendar
-router.patch('/api/candidateCalendar:date', (req, res) => {
-
+// cancel user schedule
+router.post('/api/cancelCandidateSchedule', (req, res) => {
+  let candidateScheduleId = req.body.candidateScheduleId;
+  calendarControllers.deleteCandidateSchedule(candidateScheduleId)
+  .then(() => {
+    res.send('Successfully delete candidate schedule');
+  })
+  .catch((err) => {
+    console.log('Could not delete candidate schedule', err);
+  })
 })
 
 // get company schedule
