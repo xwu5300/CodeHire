@@ -32,8 +32,9 @@ class UserProfileView extends Component {
   render() {
     return (
       <div>
-        <button className='ui green button' onClick={() => {this.props.history.push('/user/profile')}}>Edit Profile</button>
-        <button className='ui green button' onClick={() => {this.props.history.push('/user')}}>Dash Board</button>
+      <button className='ui green button' onClick={() => {this.props.history.push('/user/profile')}}>Edit Profile</button>
+      <button className='ui green button' onClick={() => {this.props.history.push('/user')}}>Dash Board</button>
+      <button className='ui green button' onClick={() => {this.props.history.push('/user/companylist')}}>Company Challenge list</button>
       <h1>{ this.props.username } Profile</h1>
       <h2 className='profile_header'>Skills</h2>
       <div className='ui raised container segment user_skills_div'>{ this.state.skills }</div>
