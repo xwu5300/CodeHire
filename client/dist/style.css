@@ -80,6 +80,25 @@ body {
   margin-right: 30px;
 }
 
+.ui.button.select {
+  float: right;
+  margin-bottom: 30px;
+}
+
+.title {
+  float: left;
+  margin-bottom: 30px;
+}
+
+.clear {
+  clear: both;
+}
+
+.close-button {
+  margin-top: 40%;
+  margin-left: 50% 
+}
+
 /* ------ Company profile ------ */
 
 .company_profile_logo {

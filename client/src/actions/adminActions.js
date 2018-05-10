@@ -16,7 +16,7 @@ export const fetchDefaultChallenges = () => (dispatch) => {
 }
 
 export const fetchAllChallenges = (companyId) => (dispatch) => {
-	axios.get('/api/challenges', {params: {companyId}})
+  axios.get('/api/challenges', {params: {companyId}})
 	.then(({data}) => {
     data.sort((a, b) => {
       return a.id - b.id;
@@ -25,7 +25,7 @@ export const fetchAllChallenges = (companyId) => (dispatch) => {
 	})
 	.catch((err) => {
 		console.log(err);
-	})
+  })
 }
 
 export const saveChallenge = (challenge, cb) => (dispatch) => {

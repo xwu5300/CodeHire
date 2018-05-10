@@ -4,12 +4,23 @@ import React, { Component } from 'react';
 class ScheduleChallengeView extends Component {
   constructor(props){
     super(props);
+    
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
+  componentDidMount() {
+    console.log(this.props);
+  }
 
-componentDidMount() {
-  console.log(this.props);
-}
+  handleClick(challenge) {
+    if (this.props.isInitial) {
+      this.props.makeInitial(challenge.id, challenge.initial)
+    } else {
+      this.props.addToSchedule($('#date').val(), this.state.duration, challenge.id);
+    }
+    this.props.close();
+  }
 
   render() {
     return (
@@ -18,10 +29,15 @@ componentDidMount() {
         return (
           <div key={item.id}>
             <div className="title">{item.title}</div>
-            <button className="ui button select">Select</button>
+            <button className="ui button select" onClick={() => {this.handleClick(item)}}>Select</button>
+            <div className="clear"></div>
+            <br/>
           </div>
         )
       })}
+        <div className="close-button">
+          <button className="ui icon button" onClick={this.props.close}><i className="x icon"></i></button>
+        </div>
       </div>
     )
   }

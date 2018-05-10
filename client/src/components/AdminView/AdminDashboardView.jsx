@@ -3,30 +3,41 @@ import { connect } from "react-redux";
 import {withRouter} from 'react-router-dom';
 import moment from 'moment';
 import ScheduleChallengeView from './ScheduleChallengeView.jsx';
+import Modal from 'react-modal';
 
 class AdminDashboardView extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      modalIsOpen: false
+    }
 
     this.handleClickOn = this.handleClickOn.bind(this);
     this.handleClickOff = this.handleClickOff.bind(this);
     this.viewChallenge = this.viewChallenge.bind(this);
-    this.showModal = this.showModal.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.editChallenges = this.editChallenges.bind(this);
   }
 
 
   componentDidMount() {
     this.props.fetchCompanySchedule(this.props.user_id);
+    Modal.setAppElement('body');
     console.log(this.props)
   }
 
   handleClickOn() {
-    // this.showModal();
     this.props.toggleInitialOn();
-    this.props.history.push('/admin/challenges');
+    this.openModal();
   }
 
   handleClickOff() {
+    this.props.toggleInitialOff();
+    this.openModal();
+  }
+
+  editChallenges() {
     this.props.toggleInitialOff();
     this.props.history.push('/admin/challenges');
   }
@@ -38,12 +49,16 @@ class AdminDashboardView extends Component {
     });
   }
 
-  showModal() {
-    $('.ui.modal')
-    .modal({
-      centered: true
+  openModal() {
+    this.setState({
+      modalIsOpen: true
     })
-    .modal('show')
+  }
+
+  closeModal() {
+    this.setState({
+      modalIsOpen: false
+    })
   }
 
   render() {
@@ -54,17 +69,14 @@ class AdminDashboardView extends Component {
           <div className='ui grid'>
             <button className='ui button' type='button' onClick={() => {this.props.history.push('/admin/profile')}}>Edit Profile</button>
             <button className='ui button' type='button' onClick={() => {this.props.history.push('/admin/data')}}>View Analytics</button>
-            <button className='ui button' type='button' onClick={() => {this.handleClickOff()}}>Edit Challenges</button>
+            <button className='ui button' type='button' onClick={() => {this.editChallenges()}}>Edit Challenges</button>
             <div className='row centered challenge_btns'>
               <button className='ui button' type='button' onClick={this.handleClickOn}>Set Initial Challenge</button>
               <button className='ui button' type='button' onClick={this.handleClickOff}>Schedule Challenge</button>
             </div>
-            <div className="ui modal">
-              <i className="close icon"></i>
-              <div className="scrolling content">
-              <ScheduleChallengeView challenges={this.props.all_challenges}/>
-              </div>
-            </div>
+            <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
+              <ScheduleChallengeView challenges={this.props.all_challenges} close={this.closeModal} makeInitial={this.props.makeInitial} isInitial={this.props.is_initial} addToSchedule={this.props.addToCompanySchedule}/>
+            </Modal>
             <table className='ui inverted table company_calendar'>
               <thead>
                 <tr>
