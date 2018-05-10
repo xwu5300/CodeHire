@@ -71,6 +71,11 @@ body {
   margin-top: 10px;
 }
 
+.ui.button.home {
+  float: right;
+  margin-right: 30px;
+}
+
 /* ------ Company profile ------ */
 
 .company_profile_logo {

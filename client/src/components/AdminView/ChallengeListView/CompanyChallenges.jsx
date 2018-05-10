@@ -58,13 +58,16 @@ class CompanyChallenges extends Component {
   render() {
     return (
       <div className='ui segment'>
-        <h1>Your Saved Challenges</h1>
+        <h1>Saved Challenges</h1>
         {this.props.allChallenges.map((challenge, i) => {
           return (
             <div className="challenges" key={challenge.id}>
               <div>{challenge.title}</div>
               <div>{challenge.instruction}</div>
-              <button className="ui button" onClick={() => {this.toggleForm(i)}}>Schedule Challenge</button>
+              <button className="ui button" onClick={() => {this.toggleForm(i)}}>
+              {this.props.isInitial ? 'Set Initial Challenge' :
+              'Schedule Challenge'}
+              </button>
               <button className="ui icon button" onClick={() => {this.props.delete(challenge)}}>
                 <i className="minus icon"></i>
               </button>
@@ -93,7 +96,7 @@ class CompanyChallenges extends Component {
                       <option value="90">90</option>
                     </select>
                   </div> 
-                  <button onClick={() => {this.handleClick(challenge, i)}}>Add to Schedule</button>
+                       <button onClick={() => {this.handleClick(challenge, i)}}>Save</button>
                 </div>
               }
             </div>
