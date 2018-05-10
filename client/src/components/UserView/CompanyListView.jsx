@@ -2,25 +2,46 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import {withRouter} from 'react-router-dom';
 import UserScheduleTableView from './UserScheduleTableView.jsx';
+import UserSearchView from './UserSearchView.jsx';
 
 class CompanyListView extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.state = {
+      companyCalendar: []
+    }
+
+    this.updateCompanyCalendar = this.updateCompanyCalendar.bind(this);
   }
 
   componentDidMount() {
+    this.props.fetchAllCompanyCalendars(() => {
+      this.setState({
+        companyCalendar: this.props.all_company_calendars
+      })
+    })
     this.props.fetchCandidateCalendar(this.props.user_id);
   }
 
+  updateCompanyCalendar(companyName) {
+    var newList = this.props.all_company_calendars.filter((schedule) => {
+      return schedule.name === companyName;
+    })
+    this.setState({
+      companyCalendar: newList
+    })
+  }
+
   render () {
-    console.log('company list view', this.props)
     return (
       <div>
       <button className='ui green button' onClick={() => {this.props.history.push('/user/profile')}}>Edit Profile</button>
       <button className='ui green button' onClick={() => {this.props.history.push('/user')}}>Dash Board</button>
+      <UserSearchView updateCompanyCalendar={this.updateCompanyCalendar}/>
       <h2 style={{ textAlign: 'center' }}>Companies</h2>
       <div className='ui centered grid'>
-      {this.props.all_company_calendars.map((company, i) => {
+      {this.state.companyCalendar.length ?
+      this.state.companyCalendar.map((company, i) => {
         return (
           <div key={i}>
             <div className='five wide column'> 
@@ -38,7 +59,10 @@ class CompanyListView extends Component {
               </button>
             </div>
           </div>
-        )})}
+        )})
+      : <div>Sorry, we weren't able to find any results</div>
+      }
+      
       </div>
       <h2 style={{ marginTop: '100px', textAlign: 'center' }}>Your Calendar</h2>
       <div className='candidate_calendar inverted ui raised container segment'>

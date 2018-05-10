@@ -3,10 +3,11 @@ import { GET_INITIAL_CHALLENGE, GET_ALL_COMPANY_CALENDARS, GET_CANDIDATE_CALENDA
 
 import axios from 'axios';
 
-export const fetchAllCompanyCalendars =() => (dispatch) => {
+export const fetchAllCompanyCalendars =(cb) => (dispatch) => {
   axios.get('/api/companyCalendars')
   .then(({data}) => {
     dispatch({ type: GET_ALL_COMPANY_CALENDARS, payload: data })
+    cb()
   })
   .catch((err) => {
     console.log(err);
