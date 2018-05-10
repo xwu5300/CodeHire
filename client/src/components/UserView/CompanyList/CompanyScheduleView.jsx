@@ -15,7 +15,6 @@ class CompanyScheduleView extends Component {
 
 
   render() {
-    // console.log("comp sche view props", this.props)
     if (this.props.initial_challenge[0]) {
       const companyCalendar = this.props.all_company_calendars.filter((schedule) => {
         return schedule.company_id === this.props.initial_challenge[0].company_id
@@ -24,6 +23,7 @@ class CompanyScheduleView extends Component {
         <div>
         <button className='ui green button' onClick={() => {this.props.history.push('/user/profile')}}>Edit Profile</button>
         <button className='ui green button' onClick={() => {this.props.history.push('/user')}}>Dash Board</button>
+        <button className='ui green button' onClick={() => {this.props.history.push('/user/companylist')}}>Company Challenge list</button> 
         <h1>{this.props.initial_challenge[0].name}</h1> 
         <h2>{this.props.initial_challenge[0].information}</h2> 
         <br/>

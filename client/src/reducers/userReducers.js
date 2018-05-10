@@ -51,6 +51,7 @@ const initialChallenge = (state = initialState, action) => {
     switch(action.type) {
       case 'GET_CANDIDATE_INFO':
         return {
+          ...state,
           candidate_information: action.information,
           candidate_skills: action.skills
         }

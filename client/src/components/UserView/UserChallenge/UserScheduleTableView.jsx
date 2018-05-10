@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
+import moment from 'moment';
 
 class UserScheduleTableView extends Component {
   constructor() {
     super();
-  }
-
-
-  getCalendar(schedule, companyId) {
-    this.props.currentCompanyCalendar(companyId, () => {
-      this.props.history.push({ pathname: '/user/live', challenge: schedule });
-    });
   }
 
   render() {
@@ -28,8 +22,8 @@ class UserScheduleTableView extends Component {
         return (
         <tr key={i} >
         <td>{schedule.name}</td>
-        <td>{schedule.time}</td>
-        <td>{schedule.duration}</td>
+        <td>{moment(schedule.time).format('MMMM Do YYYY dddd, h:mm A')}</td>
+        <td>{schedule.duration} Minutes</td>
         <button className='ui orange button' 
             onClick={() => {this.props.history.push({
                 pathname: '/user/live',

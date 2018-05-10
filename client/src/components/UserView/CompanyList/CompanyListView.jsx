@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
-import {withRouter} from 'react-router-dom';
-import UserScheduleTableView from './UserScheduleTableView.jsx';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+// import UserScheduleTableView from './UserScheduleTableView.jsx';
 import UserSearchView from './UserSearchView.jsx';
 
 class CompanyListView extends Component {
@@ -20,7 +20,6 @@ class CompanyListView extends Component {
         companyCalendar: this.props.all_company_calendars
       })
     })
-    this.props.fetchCandidateCalendar(this.props.user_id);
   }
 
   updateCompanyCalendar(companyName) {
@@ -37,6 +36,7 @@ class CompanyListView extends Component {
       <div>
       <button className='ui green button' onClick={() => {this.props.history.push('/user/profile')}}>Edit Profile</button>
       <button className='ui green button' onClick={() => {this.props.history.push('/user')}}>Dash Board</button>
+      <button className='ui green button' onClick={() => {this.props.history.push('/user/companylist')}}>Company Challenge list</button> 
       <UserSearchView updateCompanyCalendar={this.updateCompanyCalendar}/>
       <h2 style={{ textAlign: 'center' }}>Companies</h2>
       <div className='ui centered grid'>
@@ -64,13 +64,13 @@ class CompanyListView extends Component {
       }
       
       </div>
-      <h2 style={{ marginTop: '100px', textAlign: 'center' }}>Your Calendar</h2>
+      {/* <h2 style={{ marginTop: '100px', textAlign: 'center' }}>Your Calendar</h2>
       <div className='candidate_calendar inverted ui raised container segment'>
       {this.props.candidate_calendar.length ? 
       <UserScheduleTableView currentCompanyCalendar={ this.props.currentCompanyCalendar } candidateCalendar={this.props.candidate_calendar} cancelSchedule={this.props.deleteCandidateSchedule}/>
 
       : <div>You Do Not Have Any Scheduled Challenges</div>}
-      </div>
+      </div> */}
       </div>
     )
   }
