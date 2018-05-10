@@ -6,7 +6,7 @@ import moment from 'moment';
 class AdminDashboardView extends Component {
   constructor(props) {
     super(props);
-    
+
     this.handleClickOn = this.handleClickOn.bind(this);
     this.handleClickOff = this.handleClickOff.bind(this);
     this.viewChallenge = this.viewChallenge.bind(this);
@@ -17,7 +17,7 @@ class AdminDashboardView extends Component {
   componentDidMount() {
     this.props.fetchCompanySchedule(this.props.user_id);
   }
-  
+
   handleClickOn() {
     this.props.toggleInitialOn();
     this.props.history.push('/admin/challenges');
@@ -37,6 +37,7 @@ class AdminDashboardView extends Component {
   }
 
   render() {
+
     return (
       <div className='admin_dashboard'>
         <div className='ui raised padded centered container segment'>
@@ -45,7 +46,7 @@ class AdminDashboardView extends Component {
             <button className='ui button' type='button' onClick={() => {this.props.history.push('/admin/data')}}>View Analytics</button>
             <div className='row centered challenge_btns'>
               <button className='ui button' type='button' onClick={this.handleClickOn}>Choose Initial Challenge</button>
-              <button className='ui button' type='button' onClick={this.handleClickOff}>Choose Scheduled Challenges</button>   
+              <button className='ui button' type='button' onClick={this.handleClickOff}>Choose Scheduled Challenges</button>
             </div>
             <table className='ui inverted table company_calendar'>
               <thead>
@@ -54,7 +55,7 @@ class AdminDashboardView extends Component {
                 </tr>
               </thead>
               <tbody>
-                {this.props.initial_challenge.length === 0 ? null : 
+                {this.props.initial_challenge.length === 0 ? null :
                   <tr>
                     <td>{this.props.initial_challenge[0].title}</td>
                     <td><button className='ui button' type='button' onClick={() => {this.props.makeInitial(this.props.initial_challenge[0].id, this.props.initial_challenge[0].initial)}}><i className='x icon'></i></button></td>
@@ -92,7 +93,7 @@ class AdminDashboardView extends Component {
     )
   }
 
-}  
+}
 
 
 export default withRouter(AdminDashboardView);

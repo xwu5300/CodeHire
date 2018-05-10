@@ -6,6 +6,11 @@ import socketClient from 'socket.io-client';
 
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
+import 'brace/theme/github';
+import 'brace/theme/twilight';
+import 'brace/theme/solarized_dark';
+import 'brace/theme/terminal';
+
 
 class UserInitialChallengeView extends Component {
   constructor(props) {
@@ -26,47 +31,38 @@ class UserInitialChallengeView extends Component {
     }, ()=> console.log(this.state.code))
   }
 
-  handleTheme() {
-    let currentTheme
-    if (this.state.theme === 'monokai') {
-      currentTheme = 'textmate'
-    } else {
-      currentTheme = 'monokai'
-    }
+  handleTheme(e) {
     this.setState({
-      theme: currentTheme
+      theme: e.target.value
     })
   }
-
   handleSubmit() {
-    let func = this.props.initial_challenge[0].parameters
-    let reg = new RegExp(`${func}`, 'g')
+      let func = this.props.initial_challenge[0].parameters
+      let reg = new RegExp(`${func}`, 'g')
 
-    let testCaseS = this.props.initial_challenge[0].test_cases.replace(/"/g, "'")
-    let testCaseD = this.props.initial_challenge[0].test_cases.replace(/'/g, '"')
-    let input = JSON.parse(testCaseD)[0]
-    let output = JSON.parse(testCaseD)[1]
+      let testCaseS = this.props.initial_challenge[0].test_cases.replace(/"/g, "'")
+      let testCaseD = this.props.initial_challenge[0].test_cases.replace(/'/g, '"')
+      let input = JSON.parse(testCaseD)[0]
+      let output = JSON.parse(testCaseD)[1]
 
-    let newString = `${this.state.code.replace(reg, `${input}`)}
-
-${this.props.initial_challenge[0].function_name}('${input}')
-    `
-    let answer = eval(newString)
-    // console.log('the answer submitted is', answer)
-    console.log(answer === output)
-  }
+      let newString = `${this.state.code.replace(reg, `${input}`)}
+  ${this.props.initial_challenge[0].function_name}('${input}')
+      `
+      let answer = eval(newString)
+      // console.log('the answer submitted is', answer)
+      console.log(answer === output)
+    }
 
   render() {
-    console.log('props passed down', this.props)
     return (
       <div>
         <h1>{this.props.initial_challenge[0].name}</h1>
         <h2>{this.props.initial_challenge[0].title}</h2>
         <div>
-          instruction: {this.props.initial_challenge[0].instruction}
+          difficulty: {this.props.initial_challenge[0].difficulty}
         </div>
         <div>
-          difficulty: {this.props.initial_challenge[0].difficulty}
+          instruction: {this.props.initial_challenge[0].instruction}
         </div>
         <AceEditor
           mode="javascript"
@@ -84,7 +80,13 @@ ${this.props.initial_challenge[0].function_name}('${input}')
           showLineNumbers: true,
           tabSize: 2,
         }}/>
-        <button onClick={this.handleTheme}>Change theme</button>
+        <select value={this.state.theme} onChange={this.handleTheme}>
+          <option value='monokai'>Monokai</option>
+          <option value='github'>Github</option>
+          <option value='twilight'>Twilight</option>
+          <option value='solarized_dark'>Solarized Dark</option>
+          <option value='terminal'>Terminal</option>
+        </select>
         <button onClick={this.handleSubmit}> Submit Answer </button>
 
 
