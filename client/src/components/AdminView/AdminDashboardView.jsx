@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import {withRouter} from 'react-router-dom';
 import moment from 'moment';
+import ScheduleChallengeView from './ScheduleChallengeView.jsx';
 
 class AdminDashboardView extends Component {
   constructor(props) {
@@ -10,14 +11,17 @@ class AdminDashboardView extends Component {
     this.handleClickOn = this.handleClickOn.bind(this);
     this.handleClickOff = this.handleClickOff.bind(this);
     this.viewChallenge = this.viewChallenge.bind(this);
+    this.showModal = this.showModal.bind(this);
   }
 
 
   componentDidMount() {
     this.props.fetchCompanySchedule(this.props.user_id);
+    console.log(this.props)
   }
 
   handleClickOn() {
+    // this.showModal();
     this.props.toggleInitialOn();
     this.props.history.push('/admin/challenges');
   }
@@ -34,6 +38,14 @@ class AdminDashboardView extends Component {
     });
   }
 
+  showModal() {
+    $('.ui.modal')
+    .modal({
+      centered: true
+    })
+    .modal('show')
+  }
+
   render() {
 
     return (
@@ -42,9 +54,16 @@ class AdminDashboardView extends Component {
           <div className='ui grid'>
             <button className='ui button' type='button' onClick={() => {this.props.history.push('/admin/profile')}}>Edit Profile</button>
             <button className='ui button' type='button' onClick={() => {this.props.history.push('/admin/data')}}>View Analytics</button>
+            <button className='ui button' type='button' onClick={() => {this.handleClickOff()}}>Edit Challenges</button>
             <div className='row centered challenge_btns'>
-              <button className='ui button' type='button' onClick={this.handleClickOn}>Choose Initial Challenge</button>
-              <button className='ui button' type='button' onClick={this.handleClickOff}>Choose Scheduled Challenges</button>
+              <button className='ui button' type='button' onClick={this.handleClickOn}>Set Initial Challenge</button>
+              <button className='ui button' type='button' onClick={this.handleClickOff}>Schedule Challenge</button>
+            </div>
+            <div className="ui modal">
+              <i className="close icon"></i>
+              <div className="scrolling content">
+              <ScheduleChallengeView challenges={this.props.all_challenges}/>
+              </div>
             </div>
             <table className='ui inverted table company_calendar'>
               <thead>

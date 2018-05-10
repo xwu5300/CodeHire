@@ -9,7 +9,7 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule } from '../actions/adminActions'; 
+import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, getChallengeInfo } from '../actions/adminActions'; 
 import { fetchInitialChallenge, currentCompanyCalendar } from '../actions/userActions';
 
 
@@ -48,13 +48,13 @@ const mapStateToProps = (state) => ({
    current_live_challenge_title: state.current_live_challenge_title.current_live_challenge_title,
    current_live_challenge_duration: state.current_live_challenge_duration.current_live_challenge_duration,
    current_company_calendar: state.current_company_calendar.current_company_calendar,
-   user_id: state.user_id.user_id
-
+   user_id: state.user_id.user_id,
+   challenge_info: state.challenge_info.challenge_info
 });
 
 
 
-const ChallengeListComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge, addToCompanySchedule, makeInitial })(ChallengeListView);
+const ChallengeListComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge, addToCompanySchedule, makeInitial, getChallengeInfo })(ChallengeListView);
 const AdminDashboardComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, currentCompanyCalendar, fetchCompanySchedule, deleteFromCompanySchedule })(AdminDashboardView);
 const AnalyticsComponent= connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge })(AnalyticsView);
 const LiveCodingComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge })(LiveCodingView);

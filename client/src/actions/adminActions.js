@@ -1,5 +1,5 @@
 
-import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF, SET_CURRENT_LIVE_CHALLENGE } from '../constants/actionTypes';
+import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF, SET_CURRENT_LIVE_CHALLENGE, GET_CHALLENGE_INFO } from '../constants/actionTypes';
 
 import axios from 'axios';
 import { fetchInitialChallenge } from './userActions.js';
@@ -48,11 +48,27 @@ export const deleteChallenge = (challenge) => (dispatch) => {
     dispatch(fetchAllChallenges());
     dispatch(fetchCompanySchedule());
     dispatch(fetchInitialChallenge(2));
-    console.log('Removed from your challenges')
+    console.log('Removed from your challenges');
   })
 	.catch((err) => {
 		console.log('Error deleting challenge', err);
 	})
+}
+
+export const getChallengeInfo = (challengeId, cb) => (dispatch) => {
+  axios.get('/api/challenge', {params: {challengeId: challengeId}})
+  .then(({data}) => {
+    dispatch({type: GET_CHALLENGE_INFO, payload: data[0]});
+    console.log('retrieving challenge info', data[0]);
+  })
+  .then(() => {
+    if (cb) {
+      cb();
+    }
+  })
+  .catch((err) => {
+    console.log('Error retrieving challenge info', err);
+  })
 }
 
 export const addToCompanySchedule = (time, duration, challengeId) => (dispatch) => {
@@ -128,7 +144,6 @@ export const makeInitial = (challengeId, initial) => (dispatch) => {
     console.log(err);
   })
 }
-
 
 export const setCurrentLiveChallenge = (title, duration) => (dispatch) => {
   dispatch( { type: SET_CURRENT_LIVE_CHALLENGE, title: title, duration: duration } )

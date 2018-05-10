@@ -42,6 +42,10 @@ body {
 	margin-top: 100px;
 }
 
+.title {
+  font-size: 25px;
+}
+
 /* ------- Company calendar -------- */
 .company_calendar {
 	margin-top: 100px;

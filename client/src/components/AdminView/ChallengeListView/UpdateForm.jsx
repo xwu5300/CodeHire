@@ -1,53 +1,28 @@
 import React, { Component } from 'react';
 
-class Form extends Component {
+class UpdateForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       challenge: {
-        title: '',
-        instruction: '',
-        function_name: '',
-        parameters: '',
+        title: this.props.challengeInfo.title,
+        instruction: this.props.challengeInfo.instruction,
+        function_name: this.props.challengeInfo.function_name,
+        parameters: this.props.challengeInfo.parameters,
         testInput: '',
         testOutput: '',
         exampleInput: '',
         exampleOutput: '',
-        difficulty: ''
+        difficulty: this.props.challengeInfo.difficulty
       }
     }
     this.handleChange = this.handleChange.bind(this);
     this.save = this.save.bind(this);
-    // this.validateForm = this.validateForm.bind(this);
   }
 
-  // validateForm() {
-  //   $('.ui.form')
-  //     .form({
-  //       on: 'blur',
-  //       fields: {
-  //         empty: {
-  //           identifier: 'empty',
-  //           rules: [
-  //             {
-  //               type: 'empty',
-  //               prompt: 'Please enter a value'
-  //             }
-  //           ]
-  //         },
-  //         dropdown: {
-  //           identifier: 'difficulty',
-  //           rules: [
-  //             {
-  //               type: 'empty',
-  //               prompty: 'Please select a dropdown value'
-  //             }
-  //           ]
-  //         }
-  //       }
-  //     })
-  //   ;
-  // }
+  componentDidMount() {
+    console.log(this.props.challengeInfo.test_cases)
+  }
 
   handleChange(event) {
     this.state.challenge[event.target.name] = event.target.value;
@@ -80,38 +55,38 @@ class Form extends Component {
         <form className="ui form">
           <div className="field">
             <label>Title</label>
-            <input id="empty" name="title" type="text" placeholder="Two Sum" value={this.state.challenge.title} onChange={this.handleChange}/>
+            <input id="empty" name="title" type="text" value={this.state.challenge.title} onChange={this.handleChange}/>
           </div>
           <div className="field">
             <label>Instructions</label>
-            <textarea rows="3" id="empty" name="instruction" type="text" value={this.state.challenge.instruction} placeholder="Find the indicies of two items in an array that equal the target value" onChange={this.handleChange}/>
+            <textarea rows="3" id="empty" name="instruction" type="text" value={this.state.challenge.instruction} onChange={this.handleChange}/>
           </div>
           <div className="field">
             <label>Function Name</label>
-            <input id="empty" name="function_name" type="text" placeholder="twoSum" value={this.state.challenge.function_name} onChange={this.handleChange}/>
+            <input id="empty" name="function_name" type="text" value={this.state.challenge.function_name} onChange={this.handleChange}/>
           </div>
           <div className="field">
             <label>Initial Parameters</label>
-            <input id="empty" name="parameters" type="text" placeholder="array, target" value={this.state.challenge.parameters} onChange={this.handleChange}/>
+            <input id="empty" name="parameters" type="text" value={this.state.challenge.parameters} onChange={this.handleChange}/>
           </div>
           <div className="two fields">
             <div className="field">
               <label>Test Case - Input</label>
-              <input id="empty" name="testInput" type="text" placeholder="[1, 3, 6, 0, -2], 9" value={this.state.challenge.testInput} onChange={this.handleChange}/>
+              <input id="empty" name="testInput" type="text" value={this.state.challenge.testInput} onChange={this.handleChange}/>
             </div>
             <div className="field">
               <label>Test Case - Output</label>
-              <input id="empty" name="testOutput" type="text" placeholder="[1, 2]" value={this.state.challenge.testOutput} onChange={this.handleChange}/>
+              <input id="empty" name="testOutput" type="text" value={this.state.challenge.testOutput} onChange={this.handleChange}/>
             </div>
           </div>
           <div className="two fields">
             <div className="field">
               <label>Example - Input</label>
-              <input id="empty" name="exampleInput" type="text" placeholder="[1, 4, -2, 6, 9], 15" value={this.state.challenge.exampleInput} onChange={this.handleChange}/>
+              <input id="empty" name="exampleInput" type="text" value={this.state.challenge.exampleInput} onChange={this.handleChange}/>
             </div>
             <div className="field">
               <label>Example - Output</label>
-              <input id="empty" name="exampleOutput" type="text" placeholder="[3, 4]" value={this.state.challenge.exampleOutput} onChange={this.handleChange}/>
+              <input id="empty" name="exampleOutput" type="text" value={this.state.challenge.exampleOutput} onChange={this.handleChange}/>
             </div>
           </div>
           <div className="field">
@@ -134,4 +109,4 @@ class Form extends Component {
 
 
 
-export default Form;
+export default UpdateForm;

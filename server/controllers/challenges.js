@@ -142,3 +142,19 @@ module.exports.removeInitialChallenge = (companyId, challengeId) => {
     console.log('Unable to remove initial challenge from db', err);
   })
 }
+
+module.exports.getChallengeInfo = (challengeId, companyId) => {
+  console.log(challengeId, companyId)
+  return knex('all_challenges')
+  .where({
+    company_id: companyId,
+    id: challengeId
+  })
+  .then((res) => {
+    console.log('Retrieving previously saved data from db');
+    return res;
+  })
+  .catch((err) => {
+    console.log('Unable to retrieve previously saved data', err);
+  })
+}

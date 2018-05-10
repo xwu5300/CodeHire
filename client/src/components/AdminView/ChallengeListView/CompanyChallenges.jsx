@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Form from './Form.jsx';
+import UpdateForm from './UpdateForm.jsx';
+import Modal from 'react-modal';
 
 class CompanyChallenges extends Component {
   constructor(props) {
@@ -7,23 +8,42 @@ class CompanyChallenges extends Component {
     this.state = {
       showForm: this.props.allChallenges.map((item) => false),
       duration: 0,
-      showUpdateForm: this.props.allChallenges.map((item) => false)
+      modalIsOpen: false
     }
     this.toggleForm = this.toggleForm.bind(this);
-    this.toggleUpdateForm = this.toggleUpdateForm.bind(this);
     this.showCalendar = this.showCalendar.bind(this);
     this.handleDurationChange = this.handleDurationChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.handleModal = this.handleModal.bind(this);
   }
   
   componentDidMount() {
     console.log(this.props)
+    Modal.setAppElement('body');
+  }
+
+  openModal(challengeId) {
+    this.setState({
+      modalIsOpen: true
+    })
+  }
+
+  closeModal() {
+    this.setState({
+      modalIsOpen: false
+    })
   }
 
   handleDurationChange(event) {
     this.setState({
       duration: event.target.value
     })
+  }
+
+  handleModal(challengeId) {
+    this.props.getInfo(challengeId, this.openModal);
   }
 
   handleClick(challenge, i) {
@@ -40,14 +60,6 @@ class CompanyChallenges extends Component {
     newShowForm[i] = !this.state.showForm[i];
     this.setState({
       showForm: newShowForm
-    })
-  }
-
-  toggleUpdateForm(i) {
-    let newShowUpdateForm = [...this.state.showUpdateForm];
-    newShowUpdateForm[i] = !this.state.showUpdateForm[i];
-    this.setState({
-      showUpdateForm: newShowUpdateForm
     })
   }
 
@@ -71,11 +83,15 @@ class CompanyChallenges extends Component {
               <button className="ui icon button" onClick={() => {this.props.delete(challenge)}}>
                 <i className="minus icon"></i>
               </button>
-              <button className="ui icon button" onClick={() => {this.toggleUpdateForm(i)}}>
+              <button className="ui icon button" onClick={() => {this.handleModal(challenge.id)}}>
                 <i className="edit icon"></i>
               </button>
               <br/>
-              {!this.state.showUpdateForm[i] ? null: <Form/>}
+              {!this.props.challengeInfo ? null :
+                <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
+                  <UpdateForm challengeInfo={this.props.challengeInfo} save={this.props.save} close={this.closeModal}/>
+                </Modal>
+                }
               <br/>
               {!this.state.showForm[i] ? null : 
                 <div className="calendar-container">
@@ -96,7 +112,7 @@ class CompanyChallenges extends Component {
                       <option value="90">90</option>
                     </select>
                   </div> 
-                       <button onClick={() => {this.handleClick(challenge, i)}}>Save</button>
+                  <button className="ui button" onClick={() => {this.handleClick(challenge, i)}}>Save</button>
                 </div>
               }
             </div>

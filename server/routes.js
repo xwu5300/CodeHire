@@ -146,6 +146,23 @@ router.get('/api/initialChallenge', (req, res) => {
   })
 })
 
+//get selected challenge info for company
+router.get('/api/challenge', (req, res) => {
+  let companyId = 2;
+  challengeControllers.getChallengeInfo(req.query.challengeId, companyId)
+  .then((data) => {
+    data.map((item) => {
+      let newTest = item.test_cases.replace(/'/g, '"');
+      item.test_cases = newTest
+    })
+    res.send(data);
+  })
+  .catch((err) => {
+    console.log('Could not receive data on this challenge', err);
+  })
+})
+
+
 /* ---------- Schedule Routes -------- */
 
 // get user schedule
