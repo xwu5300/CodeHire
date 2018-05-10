@@ -89,7 +89,9 @@ router.post('/api/challenges', (req, res) => {
   let instruction = req.body.challenge.instruction;
   let functionName = req.body.challenge.function_name;
   let params = req.body.challenge.parameters;
-  let testCases = req.body.test_cases || `[${req.body.challenge.testInput}, ${req.body.challenge.testOutput}]`;
+  console.log('INPUT CASES', req.body.challenge.testInput)
+  console.log('OUTPUT CASES', req.body.challenge.testOutput)
+  let testCases = req.body.test_cases || `[[${req.body.challenge.testInput}], [${req.body.challenge.testOutput}]]`;
   let examples = req.body.examples || `[${req.body.challenge.exampleInput}, ${req.body.challenge.exampleOutput}]` || null;
   let difficulty = req.body.challenge.difficulty || null;
   let companyId = 2;
@@ -258,7 +260,7 @@ router.patch('/api/companyCalendar:date', (req, res) => {
 
 // get results data from 'results' table
 router.get('/api/results', (req, res) => {
-  
+
 })
 
 // post results to 'results' table
@@ -277,4 +279,3 @@ router.post('/api/results', (req, res) => {
 
 
 module.exports = router;
-

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import AceEditor from 'react-ace';
 import brace from 'brace';
 import socketClient from 'socket.io-client';
+import swal from 'sweetalert2'
 
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
@@ -41,19 +42,44 @@ class UserInitialChallengeView extends Component {
       let reg = new RegExp(`${func}`, 'g')
 
       let testCaseS = this.props.initial_challenge[0].test_cases.replace(/"/g, "'")
-      let testCaseD = this.props.initial_challenge[0].test_cases.replace(/'/g, '"')
-      let input = JSON.parse(testCaseD)[0]
-      let output = JSON.parse(testCaseD)[1]
+      let testCaseD = testCaseS.replace(/'/g, '"')
 
-      let newString = `${this.state.code.replace(reg, `${input}`)}
-  ${this.props.initial_challenge[0].function_name}('${input}')
+      console.log('what does test_case look like', testCaseD)
+
+      let tests = JSON.parse(testCaseD)
+
+      let input = tests[0].map((el)=> {
+        return JSON.stringify(el)
+      }).join(',')
+      let output = tests[1].map((el)=> {
+        return JSON.stringify(el)
+      }).join(',')
+      input = input.replace(/'/g, "")
+      output = output.replace(/'/g, "")
+
+      let newString = `${this.state.code.replace(reg, `${func}`)}
+  ${this.props.initial_challenge[0].function_name}(${input})
       `
       let answer = eval(newString)
-      // console.log('the answer submitted is', answer)
-      console.log(answer === output)
+      let result = JSON.stringify(answer) === output
+      if (result === true) {
+        swal(
+          'Success!',
+          'You answered our challenge correctly!',
+          'success'
+        )
+      } else {
+        swal(
+          'Sorry!',
+          'The answer you submitted was not correct',
+          'error'
+        )
+      }
+
     }
 
   render() {
+    console.log(this.props.initial_challenge[0].examples)
     return (
       <div>
         <h1>{this.props.initial_challenge[0].name}</h1>
