@@ -2,8 +2,8 @@ import { SAVE_COMPANY, SAVE_CANDIDATE, CHECK_USER, GET_USER } from '../constants
 
 import axios from 'axios';
 
-export const saveCandidate = (fullName, username, password, email, phone) => (dispatch) => {
-	axios.post('/api/registerCandidate', { fullName: fullName, username: username, password: password, email: email, phone: phone })
+export const saveCandidate = (fullName, username, password, email, phone, github_url) => (dispatch) => {
+	axios.post('/api/registerCandidate', { fullName: fullName, username: username, password: password, email: email, phone: phone, github_url: github_url })
 	.then((response) => {
 		dispatch({ type: SAVE_CANDIDATE, payload: response.data })
 	})

@@ -61,7 +61,12 @@ export const fetchInitialChallenge = (company_id) => (dispatch) => {
  export const fetchCandidateInfo = (userId, callback) => (dispatch) => {
    axios.get('/api/candidateInfo', { params: { user_id: userId }})
     .then((info) => {
+<<<<<<< HEAD
         dispatch({ type: GET_CANDIDATE_INFO, information: info.data[0].information, skills: info.data[0].candidate_skills })
+=======
+      console.log('INFFFO', info);
+        dispatch({ type: GET_CANDIDATE_INFO, information: info.data[0].information, skills: info.data[0].candidate_skills, github_url: info.data[0].github_url })
+>>>>>>> mvp-cleanup
         if(callback) {
           callback();
         }
@@ -71,8 +76,8 @@ export const fetchInitialChallenge = (company_id) => (dispatch) => {
       })
   }
 
-export const saveCandidateInfo = (username, information, skills) => (dispatch) => {
-	axios.patch('/api/candidateInfo/:username', { username: username, information: information, skills: skills })
+export const saveCandidateInfo = (username, information, skills, github_url) => (dispatch) => {
+	axios.patch('/api/candidateInfo/:username', { username: username, information: information, skills: skills, github_url: github_url })
 	.catch((err) => {
 		console.log(err);
 	})

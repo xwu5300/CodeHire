@@ -9,10 +9,8 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-
 import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, getChallengeInfo } from '../actions/adminActions'; 
 import { fetchInitialChallenge, currentCompanyCalendar, fetchCandidateInfo } from '../actions/userActions';
-
 
 
 class AdminContainer extends Component {
@@ -53,7 +51,8 @@ const mapStateToProps = (state) => ({
    user_id: state.user_id.user_id,
    challenge_info: state.challenge_info.challenge_info,
    candidate_information: state.candidate_information.candidate_information,
-   candidate_skills: state.candidate_skills.candidate_skills
+   candidate_skills: state.candidate_skills.candidate_skills,
+   github_url: state.github_url.github_url
 });
 
 

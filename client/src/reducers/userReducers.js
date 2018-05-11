@@ -7,6 +7,7 @@ const initialState = {
   candidate_calendar: [],
   candidate_information: '',
   candidate_skills: '',
+  github_url: '',
   current_company_calendar: ''
 }
 
@@ -53,7 +54,8 @@ const initialChallenge = (state = initialState, action) => {
         return {
           ...state,
           candidate_information: action.information,
-          candidate_skills: action.skills
+          candidate_skills: action.skills,
+          github_url: action.github_url
         }
       default:
         return state;

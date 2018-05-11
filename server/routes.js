@@ -30,7 +30,7 @@ router.patch('/api/companyInfo/:username', (req, res) => {
 })
 
 router.patch('/api/candidateInfo/:username', (req, res) => {
-  authControllers.updateCandidateInfo(req.body.username, req.body.information, req.body.skills)
+  authControllers.updateCandidateInfo(req.body.username, req.body.information, req.body.skills, req.body.github_url)
   .catch((err) => {
     console.log(err);
   })
@@ -49,7 +49,7 @@ router.post('/api/login', (req, res) => {
 
 // post candidate register info to 'users' table
 router.post('/api/registerCandidate', (req, res) => {
-  authControllers.saveCandidate(req.body.fullName, req.body.username, req.body.password, req.body.email, req.body.phone, (status) => {
+  authControllers.saveCandidate(req.body.fullName, req.body.username, req.body.password, req.body.email, req.body.phone, req.body.github_url, (status) => {
     res.status(201).send(status);
   })
   .catch((err) => {

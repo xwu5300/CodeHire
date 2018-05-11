@@ -123,6 +123,7 @@ body {
 }
 
 
+
 /* ------- User profile --------- */
 .user_profile_textarea {
 	display: block;
@@ -140,6 +141,10 @@ body {
 
 .profile_header {
 	text-align: center;
+}
+
+.github_link input {
+	width: 400px;
 }
 
 
@@ -179,6 +184,12 @@ body {
 	height: 200px;
 	background-color: white;
 	color: black;
+	padding: 20px;
+}
+
+.github_icon_livecoding {
+	font-size: 40px;
+	float: right;
 }
 
 

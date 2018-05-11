@@ -64,8 +64,7 @@ io.sockets.on('connection', (socket)=> {
        companyRooms[currentCompanyId].splice(companyRooms[currentCompanyId].indexOf([username, userId]));
      }
    }
-    
-       io.sockets.emit('active candidates', companyRooms[currentCompanyId]); 
+      io.sockets.emit('active candidates', companyRooms[currentCompanyId]); 
   })
 
 
