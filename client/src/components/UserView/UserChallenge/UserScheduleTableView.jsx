@@ -7,6 +7,15 @@ class UserScheduleTableView extends Component {
     super();
   }
 
+
+
+getCalendar(schedule, companyId, duration) {
+    this.props.currentCompanyCalendar(companyId, () => {
+      this.props.history.push({ pathname: '/user/live', challenge: schedule, duration: duration });
+    });
+  }
+
+
   render() {
     return (
     <table className='ui inverted table'>
@@ -25,10 +34,7 @@ class UserScheduleTableView extends Component {
         <td>{moment(schedule.time).format('MMMM Do YYYY dddd, h:mm A')}</td>
         <td>{schedule.duration} Minutes</td>
         <button className='ui orange button' 
-            onClick={() => {this.props.history.push({
-                pathname: '/user/live',
-                challenge: schedule
-                })}}>Start
+            onClick={() => { this.getCalendar(schedule, schedule.company_id, schedule.duration) }}>Start
             </button>
             <button className='ui orange button' 
             onClick={() => {

@@ -1,10 +1,10 @@
 const knex = require('../../db/index.js');
 const bcrypt = require('bcrypt');
 
-module.exports.saveCandidate = (fullname, username, password, email, phone, callback) => {
+module.exports.saveCandidate = (fullname, username, password, email, phone, github_url, callback) => {
   bcrypt.hash(password, 10, (err, hash) => {
     return knex('users')
-    .insert({ name: fullname, username: username, password: hash, email: email, phone: phone, role: 'candidate' })
+    .insert({ name: fullname, username: username, password: hash, email: email, phone: phone, github_url: github_url, role: 'candidate' })
     .then((response) => {
       callback('Candidate Registration Successful!');
     })
@@ -85,11 +85,12 @@ module.exports.getCompanyInfo = (username, callback) => {
 }
 
 
-module.exports.getCandidateInfo = (username, callback) => {
+module.exports.getCandidateInfo = (user_id, callback) => {
   return knex('users')
-  .select('username', 'information', 'candidate_skills')
-  .where({ username: username })
+  .select('username', 'information', 'candidate_skills', 'github_url')
+  .where({ id: user_id })
   .then((data) => {
+    console.log('DATATATATAT', data);
     callback(data);
   })
   .catch((err) => {
@@ -97,26 +98,27 @@ module.exports.getCandidateInfo = (username, callback) => {
   })
 }
 
-module.exports.updateCandidateInfo = (username, information, skills) => {
+module.exports.updateCandidateInfo = (username, information, skills, github_url) => {
+  
 
   if(information === '' && skills !== '') {
     return knex('users')
     .where({ username: username })
-    .update({ candidate_skills: skills })
+    .update({ candidate_skills: skills, github_url: github_url })
     .catch((err) => {
       console.log(err);
     })
   } else if( information !== '' && skills === '') {
     return knex('users')
     .where({ username: username })
-    .update({ information: information })
+    .update({ information: information, github_url: github_url })
     .catch((err) => {
       console.log(err);
     })
   } else {
     return knex('users')
     .where({ username: username })
-    .update({ information: information, candidate_skills: skills})
+    .update({ information: information, candidate_skills: skills, github_url: github_url })
     .catch((err) => {
       console.log(err);
     })

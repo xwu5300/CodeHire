@@ -21,7 +21,6 @@ io.sockets.on('connection', (socket)=> {
   
   // when candidates enter liveCoding, push their username/id into respective companyId obj parameter
   socket.on('candidate enter', (username, userId, currentCompanyId) => {
-   console.log('CANDIDATE', currentCompanyId);
     socket.room = 'room-' + currentCompanyId;
     socket.join(socket.room);
     
@@ -40,6 +39,7 @@ io.sockets.on('connection', (socket)=> {
 
 
   socket.on('typing', (newValue, e, userId)=> {
+    console.log(userId + ' is typing');
     io.sockets.emit('add char-' + userId, newValue);
   })
 
@@ -64,8 +64,7 @@ io.sockets.on('connection', (socket)=> {
        companyRooms[currentCompanyId].splice(companyRooms[currentCompanyId].indexOf([username, userId]));
      }
    }
-    
-       io.sockets.emit('active candidates', companyRooms[currentCompanyId]); 
+      io.sockets.emit('active candidates', companyRooms[currentCompanyId]); 
   })
 
 

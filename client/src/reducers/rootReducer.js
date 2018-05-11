@@ -20,6 +20,7 @@ export default combineReducers({
   company_information: adminReducers.companyInfo,
   candidate_information: userReducers.candidateInfo,
   candidate_skills: userReducers.candidateInfo,
+  github_url: userReducers.candidateInfo,
   candidate_calendar: userReducers.candidateCalendar,
   current_live_challenge_title: adminReducers.currentLiveChallenge,
   current_live_challenge_duration: adminReducers.currentLiveChallenge,

@@ -19,6 +19,7 @@ CREATE TABLE users (
   phone VARCHAR(20) NULL,
   information VARCHAR(255) NULL,
   candidate_skills TEXT NULL,
+  github_url VARCHAR(255) NULL,
   logo_url VARCHAR(255) NULL,
   role VARCHAR(30) NULL
 );
@@ -65,18 +66,14 @@ CREATE TABLE results (
 INSERT INTO users (username, password, name, email, role ) VALUES ('admin', 'password', 'admin', 'klingon@gmail.com', 'admin');
 INSERT INTO users (username, password, name, email, role, information, logo_url) VALUES ('google', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8KKue', 'google', 'larry@google.com', 'company', 'Welcome to our company page. We are like google but less good, less googly, and more likely to hire you.', 'http://icons.iconarchive.com/icons/danleech/simple/1024/google-icon.png');
 INSERT INTO users (username, password, name, email, role, information, logo_url) VALUES ('amazon', '$2b$10$UFYzYH.q36vrRcWFCHVF0.QhWRzpAmWq9HK0XbVtTtCfTNo3A8aVC', 'amazon', 'rory@google.com', 'company', 'Amazon (Amazon.com) is the world’s largest online retailer and a prominent cloud services provider.', 'http://www.paymentscardsandmobile.com/wp-content/uploads/2018/03/Amazon-icon.png');
-INSERT INTO users (username, password, name, email, role) VALUES ('engineer', 'engineer', 'eric', 'eric@gmail.com', 'candidate');
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('QuickSort', 'sorty', 'quickSort', 'arr', null, null, 'medium', false, 1);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('BubbleSort', 'bubble god', 'sortBubbles', 'arr', null, null, 'medium', false, 3);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('Two Sum', 'Find the sum...', 'twoSum', 'arr, target', null, null, 'easy', false, 3);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('Anagram Solver', 'Find all anagrams...', 'getAnagrams', 'string', null, null, 'medium', false, 2);
 
 INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('isSubArray', 'return boolean', 'isSubArray', 'arr', null, null, 'medium', false, 3);
 INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('Permutation', 'recursion', 'Permutation', 'arr', null, null, 'medium', true, 2);
 INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('Permute', 'Find the sum...', 'Permute', 'arr, target', null, null, 'easy', true, 3);
 
-INSERT INTO company_schedule (time, duration, challenge_id, company_id) VALUES ('2018-8-20 11:00am', 30, 2, 2);
+INSERT INTO company_schedule (time, duration, challenge_id, company_id) VALUES ('2018-8-20 11:00am', 30, 2, 1);
 INSERT INTO company_schedule (time, duration, challenge_id, company_id) VALUES ('2018-5-19 5:30pm', 60, 3, 2);
 INSERT INTO company_schedule (time, duration, challenge_id, company_id) VALUES ('2018-11-9 12:00pm', 60, 4, 3);
+
 
 /* psql < db/schema.sql */
