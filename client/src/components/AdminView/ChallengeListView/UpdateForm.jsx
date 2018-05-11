@@ -22,9 +22,9 @@ class UpdateForm extends Component {
     this.handleSave = this.handleSave.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.validateForm();
-  // }
+  componentDidMount() {
+    this.validateForm();
+  }
 
   validateForm() {
     $('.ui.form')
@@ -51,9 +51,9 @@ class UpdateForm extends Component {
 
   handleSave(event) {
     event.preventDefault();
-    // if ($('.ui.form').form('is valid')) {
+    if ($('.ui.form').form('is valid')) {
       this.save();
-    // }
+    }
   }
 
   save() {
@@ -79,7 +79,7 @@ class UpdateForm extends Component {
   render() {
     return (
       <div className="form-container">
-        <form className="ui form" onSubmit={(event)=>this.handleSave(event)}>
+        <form className="ui form" onSubmit={(event) => this.handleSave(event)}>
           <div className="field">
             <label>Title</label>
             <input name="title" type="text" value={this.state.challenge.title} onChange={this.handleChange}/>
