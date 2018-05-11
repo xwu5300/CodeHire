@@ -39,7 +39,7 @@ class LiveCodingView extends Component {
    this.props.fetchCandidateInfo(userId, () => {
     this.setState({ active_user_id: userId });
    });
-   
+
   }
 
   render() {
@@ -52,26 +52,26 @@ class LiveCodingView extends Component {
           </div>
         </div>
 
-        
+
       <div className='four column row'>
           <div className='one column wide'></div>
           <div>
             {this.state.active_candidates ? this.state.active_candidates.map((candidate) => {
               return (
-                <AdminEditorViews github={ this.props.github_url } skills={this.props.candidate_skills} about={ this.props.candidate_information } activeUserId={ this.state.active_user_id} userIndex={ candidate[1] } /> 
+                <AdminEditorViews github={ this.props.github_url } skills={this.props.candidate_skills} about={ this.props.candidate_information } activeUserId={ this.state.active_user_id} userIndex={ candidate[1] } />
               );
-            }) : null}    
+            }) : null}
           </div>
-      
 
-        
+
+
         <div className='right floated column'>
           <div className="ui container segment active_user_menu">
             <h2>Active Users</h2>
             <ul className='active_user_list'>
               {this.state.active_candidates ? this.state.active_candidates.map((user) => {
                 return (
-                  <li style={{ cursor: 'pointer' }} onClick={ () => this.getProfile(user[1]) }><i class="circle green icon"></i>{user[0]}</li>
+                  <li style={{ cursor: 'pointer' }} onClick={ () => this.getProfile(user[1]) }><i className="circle green icon"></i>{user[0]}</li>
                 )
               }) : null}
             </ul>

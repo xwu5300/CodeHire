@@ -29,7 +29,7 @@ class UserInitialChallengeView extends Component {
   onChange(newValue, event) {
     this.setState({
       code: newValue
-    }, ()=> console.log(this.state.code))
+    })
   }
 
   handleTheme(e) {
@@ -38,6 +38,9 @@ class UserInitialChallengeView extends Component {
     })
   }
 
+  handleParse() {
+
+  }
   handleSubmit() {
 
     let func = this.props.initial_challenge[0].parameters
@@ -45,8 +48,6 @@ class UserInitialChallengeView extends Component {
 
     let testCaseS = this.props.initial_challenge[0].test_cases.replace(/"/g, "'")
     let testCaseD = testCaseS.replace(/'/g, '"')
-
-    console.log('what does test_case look like', testCaseD)
 
     let tests = JSON.parse(testCaseD)
     let input = tests[0].map((el)=> {
@@ -93,8 +94,6 @@ class UserInitialChallengeView extends Component {
   }
 
   render() {
-
-
     let examplesS = this.props.initial_challenge[0].examples.replace(/"/g, "'")
     let examplesD = examplesS.replace(/'/g, '"')
     let examples = JSON.parse(examplesD)
@@ -104,8 +103,6 @@ class UserInitialChallengeView extends Component {
     let exampleOutput = examples[1].map((el)=> {
       return JSON.stringify(el)
     }).join(',')
-
-    console.log('example of examples', exampleInput, exampleOutput)
 
     return (
       <div>

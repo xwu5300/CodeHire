@@ -18,7 +18,7 @@ const UserProfile = ({ github, skills, about }) => {
         <p>{ skills }</p>
         <a href={ github }><i className='github icon github_icon_livecoding'></i></a>
       </div>
-    ) 
+    )
   } else if(about && skills) {
     return (
       <div className='user_profile_container'>
