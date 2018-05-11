@@ -6,7 +6,8 @@ class UserProfileView extends Component {
     super();
     this.state = {
       information: '',
-      skills: ''
+      skills: '',
+      github_url: ''
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -15,7 +16,7 @@ class UserProfileView extends Component {
 
   componentDidMount() {
     this.props.fetchCandidateInfo(this.props.user_id, () => {
-      this.setState({ information: this.props.candidate_information, skills: this.props.candidate_skills })
+      this.setState({ information: this.props.candidate_information, skills: this.props.candidate_skills, github_url: this.props.github_url })
     });
   }
 
@@ -26,16 +27,22 @@ class UserProfileView extends Component {
   }
 
   handleSubmit() {
-    this.props.saveCandidateInfo(this.props.username, this.state.information, this.state.skills);
+    this.props.saveCandidateInfo(this.props.username, this.state.information, this.state.skills, this.state.github_url);
   }
 
   render() {
     return (
       <div>
-      <button className='ui green button' onClick={() => {this.props.history.push('/user/profile')}}>Edit Profile</button>
-      <button className='ui green button' onClick={() => {this.props.history.push('/user')}}>Dash Board</button>
-      <button className='ui green button' onClick={() => {this.props.history.push('/user/companylist')}}>Company Challenge list</button>
-      <h1>{ this.props.username } Profile</h1>
+
+        <div className="ui orange three item inverted menu">
+          <div className='ui active item' onClick={ () => { this.props.history.push('/user/profile') } }><i class="user circle icon"></i>{ this.props.username }</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Companies</div> 
+        </div>
+
+      <div className='github_link'><i className="github icon"></i><input name='github_url' value={ this.state.github_url } onChange={ (e) => this.handleChange(e) } type='text' placeholder='github' /></div>
+      
+
       <h2 className='profile_header'>Skills</h2>
       <div className='ui raised container segment user_skills_div'>{ this.state.skills }</div>
      

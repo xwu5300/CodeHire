@@ -34,12 +34,17 @@ class CompanyListView extends Component {
   render () {
     return (
       <div>
-      <button className='ui green button' onClick={() => {this.props.history.push('/user/profile')}}>Edit Profile</button>
-      <button className='ui green button' onClick={() => {this.props.history.push('/user')}}>Dash Board</button>
-      <button className='ui green button' onClick={() => {this.props.history.push('/user/companylist')}}>Company Challenge list</button> 
-      <UserSearchView updateCompanyCalendar={this.updateCompanyCalendar}/>
-      <h2 style={{ textAlign: 'center' }}>Companies</h2>
-      <div className='ui centered grid'>
+        <div className="ui orange three item inverted menu">
+          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i class="user circle icon"></i>{ this.props.username }</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
+          <div className='ui active item' onClick={() => {this.props.history.push('/user/companylist')}}>Companies</div> 
+        </div>
+        <div className='ui centered grid'>
+          <div className='row' style={{marginTop: '40px', marginBottom: '50px'}} >
+            <UserSearchView updateCompanyCalendar={this.updateCompanyCalendar}/>
+          </div>
+       
+          
       {this.state.companyCalendar.length ?
       this.state.companyCalendar.map((company, i) => {
         return (
@@ -60,10 +65,14 @@ class CompanyListView extends Component {
             </div>
           </div>
         )})
+       
+
       : <div>Sorry, we weren't able to find any results</div>
+        
       }
       
       </div>
+
       {/* <h2 style={{ marginTop: '100px', textAlign: 'center' }}>Your Calendar</h2>
       <div className='candidate_calendar inverted ui raised container segment'>
       {this.props.candidate_calendar.length ? 

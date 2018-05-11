@@ -19,8 +19,8 @@ class UserSearchView extends Component {
   render() {
     return (
       <div>
-        <input type='text' value={this.state.input} onChange={this.updateInput}/>
-        <button onClick={() => {
+        <input type='text' value={this.state.input} onChange={this.updateInput} style={{width: '300px', height: '40px'}} />
+        <button className='ui button' onClick={() => {
           this.props.updateCompanyCalendar(this.state.input)
           this.setState({
             input: ''

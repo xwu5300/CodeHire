@@ -4,6 +4,8 @@ import AceEditor from 'react-ace';
 import brace from 'brace';
 import socketClient from 'socket.io-client';
 
+import ChallengeClock from '../../ChallengeClock.jsx';
+
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
 
@@ -12,7 +14,6 @@ class UserLiveCodingView extends Component {
     super(props);
 
     this.state = {
-
       minutes: '',
       seconds: '',
       code: `function placeholder(params) {
@@ -61,6 +62,7 @@ class UserLiveCodingView extends Component {
   
 
   render() {
+    console.log('USER PROPS', this.props);
     return (
       <div>
         <h1>{this.props.location.challenge.name}</h1>
@@ -68,9 +70,9 @@ class UserLiveCodingView extends Component {
         <br/>
         <h2>Title: {this.props.location.challenge.title}</h2>
         <h3>Difficulty: {this.props.location.challenge.difficulty}</h3>
-     
 
-        <div> Time Limit: { this.state.minutes + ':' + this.state.seconds }</div>
+        <h3>Time Limit: { this.props.location.duration} Minutes</h3>
+     
 
         <AceEditor
           mode="javascript"

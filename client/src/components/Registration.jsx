@@ -18,7 +18,8 @@ class Registration extends Component {
       phone: '',
       logoUrl: '',
       fullName: '',
-      companyInfo: ''
+      companyInfo: '',
+      github_url: ''
     };
 
     this.switchForm = this.switchForm.bind(this);
@@ -40,7 +41,7 @@ class Registration extends Component {
     if(form === 'companyForm') {
       this.props.saveCompany(this.state.companyName, this.state.username, this.state.password, this.state.email, this.state.phone, this.state.logoUrl, this.state.companyInfo);
     } else if(form === 'candidateForm') {
-      this.props.saveCandidate(this.state.fullName, this.state.username, this.state.password, this.state.email, this.state.phone);
+      this.props.saveCandidate(this.state.fullName, this.state.username, this.state.password, this.state.email, this.state.phone, this.state.github_url);
     }
   }
 
@@ -104,6 +105,9 @@ class Registration extends Component {
             </div>
             <div className='field'>
               <input onChange={ (e) => this.handleChange(e) } value={ this.state.phone } name='phone' type='text' placeholder='Phone #' />
+            </div>
+            <div className='field'>
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.github_url } name='github_url' type='text' placeholder='github url' />
             </div>
             <button className='ui yellow button' type='submit'>Register</button>
             <button className='ui green button' onClick={ () => this.props.history.push('/') } >To Login</button>

@@ -43,6 +43,7 @@ const mapStateToProps = function(state) {
     user_id: state.user_id.user_id,
     candidate_information: state.candidate_information.candidate_information,
     candidate_skills: state.candidate_skills.candidate_skills,
+    github_url: state.github_url.github_url,
     candidate_calendar: state.candidate_calendar.candidate_calendar,
     company_schedule: state.company_schedule.company_schedule,
     current_company_calendar: state.current_company_calendar.current_company_calendar
@@ -50,12 +51,13 @@ const mapStateToProps = function(state) {
 
 const connectComponent = connect(mapStateToProps, { fetchAllCompanyCalendars })(UserContainer);
 
-const UserDashBoardComponent = connect(mapStateToProps, { fetchCandidateCalendar, deleteCandidateSchedule })(UserDashBoard);
+const UserDashBoardComponent = connect(mapStateToProps, { fetchCandidateCalendar, deleteCandidateSchedule, currentCompanyCalendar })(UserDashBoard);
 const CompanyListViewComponent = connect(mapStateToProps, { fetchInitialChallenge, fetchCandidateCalendar, deleteCandidateSchedule, fetchAllCompanyCalendars, currentCompanyCalendar })(CompanyListView);
 const CompanyScheduleViewComponent = connect(mapStateToProps, { saveCandidateCalendar })(CompanyScheduleView);
 const UserInitialChallengeViewComponent = connect(mapStateToProps)(UserInitialChallengeView);
 const UserLiveCodingViewComponent = connect(mapStateToProps)(UserLiveCodingView);
 const UserProfileViewComponent = connect(mapStateToProps, { fetchCandidateInfo, saveCandidateInfo })(UserProfileView);
+
 
 const routeUserComponent = withRouter(connectComponent);
 export default routeUserComponent;
