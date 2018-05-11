@@ -42,6 +42,31 @@ body {
 	margin-top: 100px;
 }
 
+.ui.button.select {
+  float: right;
+  margin-bottom: 30px;
+}
+
+.title {
+  float: left;
+  margin-bottom: 30px;
+  font-size: 20px;
+}
+
+.clear {
+  clear: both;
+}
+
+.close-button {
+  margin-top: 20%;
+  margin-left: 50% 
+}
+
+.calendar-button {
+  float: left;
+  margin-left: 100px;
+}
+
 /* ------- Company calendar -------- */
 .company_calendar {
 	margin-top: 100px;
@@ -75,6 +100,7 @@ body {
   float: right;
   margin-right: 30px;
 }
+
 
 /* ------ Company profile ------ */
 

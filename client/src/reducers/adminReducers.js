@@ -1,5 +1,5 @@
 import React from 'react';
-import { GET_DEFAULT_CHALLENGES, GET_ALL_CHALLENGES, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF } from '../constants/actionTypes';
+import { GET_DEFAULT_CHALLENGES, GET_ALL_CHALLENGES, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF, GET_CHALLENGE_INFO } from '../constants/actionTypes';
 
 
 const initialState = {
@@ -10,7 +10,8 @@ const initialState = {
   company_schedule: [],
   is_initial: false,
   current_live_challenge_title: '',
-  current_live_challenge_duration: ''
+  current_live_challenge_duration: '',
+  challenge_info: ''
 }
 
 
@@ -92,9 +93,20 @@ const currentLiveChallenge = (state = initialState, action) => {
   }
 }
 
+const challengeInfo = (state = initialState, action) => {
+  switch(action.type) {
+    case 'GET_CHALLENGE_INFO':
+      return {
+        ...state,
+        challenge_info: action.payload
+      }
+    default:
+      return state;
+  }
+}
 
 
 
 
 
-export default { defaultChallenges, allChallenges, companyInfo, companySchedule, isInitial, currentLiveChallenge };
+export default { defaultChallenges, allChallenges, companyInfo, companySchedule, isInitial, currentLiveChallenge, challengeInfo };

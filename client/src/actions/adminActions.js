@@ -1,5 +1,5 @@
 
-import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF, SET_CURRENT_LIVE_CHALLENGE } from '../constants/actionTypes';
+import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF, SET_CURRENT_LIVE_CHALLENGE, GET_CHALLENGE_INFO } from '../constants/actionTypes';
 
 import axios from 'axios';
 import { fetchInitialChallenge } from './userActions.js';
@@ -16,7 +16,7 @@ export const fetchDefaultChallenges = () => (dispatch) => {
 }
 
 export const fetchAllChallenges = (companyId) => (dispatch) => {
-	axios.get('/api/challenges', {params: {companyId}})
+  axios.get('/api/challenges', {params: {companyId}})
 	.then(({data}) => {
     data.sort((a, b) => {
       return a.id - b.id;
@@ -25,7 +25,7 @@ export const fetchAllChallenges = (companyId) => (dispatch) => {
 	})
 	.catch((err) => {
 		console.log(err);
-	})
+  })
 }
 
 export const saveChallenge = (challenge, cb) => (dispatch) => {
@@ -48,18 +48,35 @@ export const deleteChallenge = (challenge) => (dispatch) => {
     dispatch(fetchAllChallenges());
     dispatch(fetchCompanySchedule());
     dispatch(fetchInitialChallenge(2));
-    console.log('Removed from your challenges')
+    console.log('Removed from your challenges');
   })
 	.catch((err) => {
 		console.log('Error deleting challenge', err);
 	})
 }
 
+export const getChallengeInfo = (challengeId, cb) => (dispatch) => {
+  axios.get('/api/challenge', {params: {challengeId: challengeId}})
+  .then(({data}) => {
+    dispatch({type: GET_CHALLENGE_INFO, payload: data[0]});
+    console.log('retrieving challenge info', data[0]);
+  })
+  .then(() => {
+    if (cb) {
+      cb();
+    }
+  })
+  .catch((err) => {
+    console.log('Error retrieving challenge info', err);
+  })
+}
+
 export const addToCompanySchedule = (time, duration, challengeId) => (dispatch) => {
   axios.post('/api/companyCalendar', {time: time, duration: duration, challengeId: challengeId})
   .then(() => {
+    console.log('add to company schedule was called')
     dispatch(fetchCompanySchedule());
-    console.log('Added to your upcoming challenges')
+    // console.log('Added to your upcoming challenges')
   })
 	.catch((err) => {
 		console.log('Error updating company calendar', err);
@@ -121,14 +138,14 @@ export const toggleInitialOff = () => (dispatch) => {
 export const makeInitial = (challengeId, initial) => (dispatch) => {
   axios.patch('/api/initialChallenge', {challengeId: challengeId, initial: initial})
   .then(() => {
+    console.log('make initial function was called')
     dispatch(fetchInitialChallenge(2));
-    console.log('Initial challenge set');
+    // console.log('Initial challenge set');
   })
   .catch((err) => {
     console.log(err);
   })
 }
-
 
 export const setCurrentLiveChallenge = (title, duration) => (dispatch) => {
   dispatch( { type: SET_CURRENT_LIVE_CHALLENGE, title: title, duration: duration } )
