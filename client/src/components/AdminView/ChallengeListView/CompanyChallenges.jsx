@@ -67,6 +67,10 @@ class CompanyChallenges extends Component {
     return (
       <div className='ui segment'>
         <h1>Saved Challenges</h1>
+        {!this.props.challengeInfo ? null :
+          <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
+            <UpdateForm challengeInfo={this.props.challengeInfo} save={this.props.save} close={this.closeModal}/>
+          </Modal>}
         {this.props.allChallenges.map((challenge, i) => {
           return (
             <div className="challenges" key={challenge.id}>
@@ -81,12 +85,6 @@ class CompanyChallenges extends Component {
               <button className="ui icon button" onClick={() => {this.handleModal(challenge.id)}}>
                 <i className="edit icon"></i>
               </button>
-              <br/>
-              {!this.props.challengeInfo ? null :
-                <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
-                  <UpdateForm challengeInfo={this.props.challengeInfo} save={this.props.save} close={this.closeModal}/>
-                </Modal>
-                }
               <br/>
               {!this.state.showForm[i] ? null : 
                 <div className="calendar-container">
