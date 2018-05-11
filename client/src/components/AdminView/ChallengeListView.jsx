@@ -44,7 +44,7 @@ class ChallengeListView extends Component {
       <div className='challenge_list'>
         <button className="ui button" onClick={this.openModal}>Input new challenge</button>
         <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
-            <Form save={this.props.saveChallenge} close={this.closeModal}/>
+            <Form save={this.props.saveChallenge} close={this.closeModal} history={this.props.history}/>
         </Modal>
         <div className='ui padded horizontal segments challenge_list'>
           <CompanyChallenges allChallenges={this.props.all_challenges} delete={this.props.deleteChallenge} addToSchedule={this.props.addToCompanySchedule} isInitial={this.props.is_initial} makeInitial={this.props.makeInitial} getInfo={this.props.getChallengeInfo} challengeInfo={this.props.challenge_info} save={this.props.saveChallenge}/>
