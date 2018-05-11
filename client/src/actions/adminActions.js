@@ -59,8 +59,6 @@ export const getChallengeInfo = (challengeId, cb) => (dispatch) => {
   .then(({data}) => {
     dispatch({type: GET_CHALLENGE_INFO, payload: data[0]});
     console.log('retrieving challenge info', data[0]);
-  })
-  .then(() => {
     if (cb) {
       cb();
     }
