@@ -21,7 +21,7 @@ class ChallengeListView extends Component {
   }
 
   componentDidMount() {
-    Modal.setAppElement('body');
+    // Modal.setAppElement('body');
   }
 
   openModal() {
