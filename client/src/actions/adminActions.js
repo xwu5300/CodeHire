@@ -74,8 +74,9 @@ export const getChallengeInfo = (challengeId, cb) => (dispatch) => {
 export const addToCompanySchedule = (time, duration, challengeId) => (dispatch) => {
   axios.post('/api/companyCalendar', {time: time, duration: duration, challengeId: challengeId})
   .then(() => {
+    console.log('add to company schedule was called')
     dispatch(fetchCompanySchedule());
-    console.log('Added to your upcoming challenges')
+    // console.log('Added to your upcoming challenges')
   })
 	.catch((err) => {
 		console.log('Error updating company calendar', err);
@@ -137,8 +138,9 @@ export const toggleInitialOff = () => (dispatch) => {
 export const makeInitial = (challengeId, initial) => (dispatch) => {
   axios.patch('/api/initialChallenge', {challengeId: challengeId, initial: initial})
   .then(() => {
+    console.log('make initial function was called')
     dispatch(fetchInitialChallenge(2));
-    console.log('Initial challenge set');
+    // console.log('Initial challenge set');
   })
   .catch((err) => {
     console.log(err);

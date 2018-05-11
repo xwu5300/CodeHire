@@ -18,40 +18,51 @@ class Form extends Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.save = this.save.bind(this);
-    // this.validateForm = this.validateForm.bind(this);
+    this.validateForm = this.validateForm.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
 
-  // validateForm() {
-  //   $('.ui.form')
-  //     .form({
-  //       on: 'blur',
-  //       fields: {
-  //         empty: {
-  //           identifier: 'empty',
-  //           rules: [
-  //             {
-  //               type: 'empty',
-  //               prompt: 'Please enter a value'
-  //             }
-  //           ]
-  //         },
-  //         dropdown: {
-  //           identifier: 'difficulty',
-  //           rules: [
-  //             {
-  //               type: 'empty',
-  //               prompty: 'Please select a dropdown value'
-  //             }
-  //           ]
-  //         }
-  //       }
-  //     })
-  //   ;
-  // }
+  componentDidMount() {
+    this.validateForm();
+  }
+
+  validateForm() {
+    $('.ui.form')
+      .form({
+        on: 'blur',
+        fields: {
+          empty: {
+            identifier: 'empty',
+            rules: [
+              {
+                type: 'empty',
+                prompt: 'Please enter a value'
+              }
+            ]
+          },
+          dropdown: {
+            identifier: 'difficulty',
+            rules: [
+              {
+                type: 'empty',
+                prompty: 'Please select a dropdown value'
+              }
+            ]
+          }
+        }
+      })
+    ;
+  }
 
   handleChange(event) {
     this.state.challenge[event.target.name] = event.target.value;
     this.setState({challenge: this.state.challenge});
+  }
+
+  handleSave() {
+    $('.ui.form').form({
+      onSuccess: this.save()
+    })
   }
 
   save() {
@@ -123,7 +134,7 @@ class Form extends Component {
               <option value="hard">Hard</option>
             </select>
           </div>
-          <div className="ui button" type="submit" onClick={() => {this.save()}}>Submit</div>
+          <div className="ui button" type="submit" onClick={() => {this.handleSave()}}>Submit</div>
           <div className="ui error message"></div>
         </form>
       </div>
