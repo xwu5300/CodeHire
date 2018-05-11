@@ -9,8 +9,8 @@ class UpdateForm extends Component {
         instruction: this.props.challengeInfo.instruction,
         function_name: this.props.challengeInfo.function_name,
         parameters: this.props.challengeInfo.parameters,
-        testInput: '',
-        testOutput: '',
+        testInput: JSON.parse(this.props.challengeInfo.test_cases)[0],
+        testOutput: JSON.parse(this.props.challengeInfo.test_cases)[1],
         exampleInput: '',
         exampleOutput: '',
         difficulty: this.props.challengeInfo.difficulty
