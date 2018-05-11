@@ -89,10 +89,13 @@ router.post('/api/challenges', (req, res) => {
   let instruction = req.body.challenge.instruction;
   let functionName = req.body.challenge.function_name;
   let params = req.body.challenge.parameters;
-  console.log('INPUT CASES', req.body.challenge.testInput)
-  console.log('OUTPUT CASES', req.body.challenge.testOutput)
+  // let obj = JSON.parse(req.body.challenge.testInput)
+  // if (typeof obj === 'object'){
+  //   req.body.challenge.testInput = obj
+  // }
+
   let testCases = req.body.test_cases || `[[${req.body.challenge.testInput}], [${req.body.challenge.testOutput}]]`;
-  let examples = req.body.examples || `[${req.body.challenge.exampleInput}, ${req.body.challenge.exampleOutput}]` || null;
+  let examples = req.body.examples || `[[${req.body.challenge.exampleInput}], [${req.body.challenge.exampleOutput}]]` || null;
   let difficulty = req.body.challenge.difficulty || null;
   let companyId = 2;
   challengeControllers.saveChallenge(title, instruction, functionName, params, testCases, examples, difficulty, companyId)
