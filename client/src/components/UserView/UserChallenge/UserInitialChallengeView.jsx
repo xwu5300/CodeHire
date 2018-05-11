@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import AceEditor from 'react-ace';
 import brace from 'brace';
 import socketClient from 'socket.io-client';
+import swal from 'sweetalert2'
 
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
@@ -36,24 +37,76 @@ class UserInitialChallengeView extends Component {
       theme: e.target.value
     })
   }
+
   handleSubmit() {
-      let func = this.props.initial_challenge[0].parameters
-      let reg = new RegExp(`${func}`, 'g')
 
-      let testCaseS = this.props.initial_challenge[0].test_cases.replace(/"/g, "'")
-      let testCaseD = this.props.initial_challenge[0].test_cases.replace(/'/g, '"')
-      let input = JSON.parse(testCaseD)[0]
-      let output = JSON.parse(testCaseD)[1]
+    let func = this.props.initial_challenge[0].parameters
+    let reg = new RegExp(`${func}`, 'g')
 
-      let newString = `${this.state.code.replace(reg, `${input}`)}
-  ${this.props.initial_challenge[0].function_name}('${input}')
-      `
-      let answer = eval(newString)
-      // console.log('the answer submitted is', answer)
-      console.log(answer === output)
-    }
+    let testCaseS = this.props.initial_challenge[0].test_cases.replace(/"/g, "'")
+    let testCaseD = testCaseS.replace(/'/g, '"')
+
+    console.log('what does test_case look like', testCaseD)
+
+    let tests = JSON.parse(testCaseD)
+    let input = tests[0].map((el)=> {
+      return JSON.stringify(el)
+    }).join(',')
+    let output = tests[1].map((el)=> {
+      return JSON.stringify(el)
+    }).join(',')
+    input = input.replace(/'/g, "")
+    output = output.replace(/'/g, "")
+
+    let newString = `${this.state.code.replace(reg, `${func}`)}
+
+    ${this.props.initial_challenge[0].function_name}(${input})
+    `
+    let answer = eval(newString)
+    let result = JSON.stringify(answer) === output
+
+    swal({
+      title: 'Are you sure?',
+      text: "You can only submit once!!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, submit it!'
+    }).then((clickResult) => {
+      if (clickResult.value) {
+        if (result === true) {
+          swal(
+            'Success!',
+            'You answered our challenge correctly!',
+            'success'
+          )
+        } else {
+          swal(
+            'Sorry!',
+            'The answer you submitted was not correct',
+            'error'
+          )
+        }
+      }
+    })
+  }
 
   render() {
+
+
+    let examplesS = this.props.initial_challenge[0].examples.replace(/"/g, "'")
+    let examplesD = examplesS.replace(/'/g, '"')
+    let examples = JSON.parse(examplesD)
+    let exampleInput = examples[0].map((el)=> {
+      return JSON.stringify(el)
+    }).join(',')
+    let exampleOutput = examples[1].map((el)=> {
+      return JSON.stringify(el)
+    }).join(',')
+
+    console.log('example of examples', exampleInput, exampleOutput)
+
     return (
       <div>
         <h1>{this.props.initial_challenge[0].name}</h1>
@@ -63,6 +116,9 @@ class UserInitialChallengeView extends Component {
         </div>
         <div>
           instruction: {this.props.initial_challenge[0].instruction}
+        </div>
+        <div>
+          examples: { `input: ${exampleInput}                 output:${exampleOutput}`}
         </div>
         <AceEditor
           mode="javascript"

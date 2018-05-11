@@ -89,8 +89,13 @@ router.post('/api/challenges', (req, res) => {
   let instruction = req.body.challenge.instruction;
   let functionName = req.body.challenge.function_name;
   let params = req.body.challenge.parameters;
-  let testCases = req.body.test_cases || `[${req.body.challenge.testInput}, ${req.body.challenge.testOutput}]`;
-  let examples = req.body.examples || `[${req.body.challenge.exampleInput}, ${req.body.challenge.exampleOutput}]` || null;
+  // let obj = JSON.parse(req.body.challenge.testInput)
+  // if (typeof obj === 'object'){
+  //   req.body.challenge.testInput = obj
+  // }
+
+  let testCases = req.body.test_cases || `[[${req.body.challenge.testInput}], [${req.body.challenge.testOutput}]]`;
+  let examples = req.body.examples || `[[${req.body.challenge.exampleInput}], [${req.body.challenge.exampleOutput}]]` || null;
   let difficulty = req.body.challenge.difficulty || null;
   let companyId = 2;
   challengeControllers.saveChallenge(title, instruction, functionName, params, testCases, examples, difficulty, companyId)
@@ -258,7 +263,7 @@ router.patch('/api/companyCalendar:date', (req, res) => {
 
 // get results data from 'results' table
 router.get('/api/results', (req, res) => {
-  
+
 })
 
 // post results to 'results' table
@@ -277,4 +282,3 @@ router.post('/api/results', (req, res) => {
 
 
 module.exports = router;
-
