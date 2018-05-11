@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom'
 import AceEditor from 'react-ace';
 import brace from 'brace';
 import socketClient from 'socket.io-client';
 import swal from 'sweetalert2'
+import moment from 'moment';
 
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
@@ -89,12 +91,18 @@ class UserInitialChallengeView extends Component {
           )
         }
       }
+      let score = 90;  //hard coded
+      let isPassed = answer === output;
+      let time = moment(Date.now()).format();
+      this.props.saveResults(isPassed, newString, score, time, this.props.initial_challenge[0].id, this.props.initial_challenge[0].company_id, this.props.user_id, true, this.props.initial_challenge[0].id, () => {
+        this.props.history.push('/user/schedule')
+      })
     })
+
   }
 
   render() {
-
-
+    console.log('this.props.initial_challenge', this.props.initial_challenge)
     let examplesS = this.props.initial_challenge[0].examples.replace(/"/g, "'")
     let examplesD = examplesS.replace(/'/g, '"')
     let examples = JSON.parse(examplesD)
@@ -106,9 +114,11 @@ class UserInitialChallengeView extends Component {
     }).join(',')
 
     console.log('example of examples', exampleInput, exampleOutput)
-
     return (
       <div>
+      <button className='ui green button' onClick={() => {this.props.history.push('/user/profile')}}>Edit Profile</button>
+      <button className='ui green button' onClick={() => {this.props.history.push('/user')}}>Dash Board</button>
+      <button className='ui green button' onClick={() => {this.props.history.push('/user/companylist')}}>Company Challenge list</button> 
         <h1>{this.props.initial_challenge[0].name}</h1>
         <h2>{this.props.initial_challenge[0].title}</h2>
         <div>
@@ -151,4 +161,4 @@ class UserInitialChallengeView extends Component {
   }
 }
 
-export default UserInitialChallengeView;
+export default withRouter(UserInitialChallengeView);

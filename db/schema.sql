@@ -60,7 +60,8 @@ CREATE TABLE results (
   completed_at TIMESTAMP NOT NULL,
   challenge_id SMALLINT REFERENCES all_challenges(id),
   candidate_id SMALLINT REFERENCES users(id),
-  company_id SMALLINT REFERENCES users(id)
+  company_id SMALLINT REFERENCES users(id),
+  initial BOOLEAN NOT NULL
 );
 
 

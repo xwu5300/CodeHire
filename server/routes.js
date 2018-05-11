@@ -1,9 +1,9 @@
 const router = require('express').Router();
 
-
 const challengeControllers = require('./controllers/challenges');
 const authControllers = require('./controllers/auth');
 const calendarControllers = require('./controllers/calendar');
+const resultsControllers = require('./controllers/results');
 
 /* ------- User Routes --------- */
 
@@ -249,7 +249,7 @@ router.delete('/api/companyCalendar', (req, res) => {
     res.send();
   })
   .catch((err) => {
-    console.log('Could remove scheduled challenge from list', err);
+    console.log('Could not remove scheduled challenge from list', err);
   })
 })
 
@@ -264,22 +264,39 @@ router.patch('/api/companyCalendar:date', (req, res) => {
 
 // get results data from 'results' table
 router.get('/api/results', (req, res) => {
+  resultsControllers.getCompanyResults(req.query.companyId, req.query.candidateId)
+  .then((data) => {
+    console.log('Retrieve candidate result from db')
+    res.send(data)
+  })
+  .catch((err) => {
+    console.log('Could not retrieve result from db', err);
+  })
+})
 
+//get candidate list from results table
+router.get('/api/results/candidate', (req, res) => {
+  resultsControllers.getCandidateList(req.query.companyId)
+  .then((data) => {
+    console.log('Retrieve candidate list from db')
+    res.send(data)
+  })
+  .catch((err) => {
+    console.log('Could not retrieve candidate list from db', err);
+  })
 })
 
 // post results to 'results' table
 router.post('/api/results', (req, res) => {
-
+  resultsControllers.saveResults(req.body.isPassed, req.body.code, req.body.score, req.body.completedAt, req.body.challengeId, req.body.companyId, req.body.candidateId, req.body.initial)
+  .then(() => {
+    console.log('Results saved to results table');
+    res.send();
+  })
+  .catch((err) => {
+    console.log('Could not save results to db');
+  })
 })
-
-
-
-
-
-
-
-
-
 
 
 module.exports = router;

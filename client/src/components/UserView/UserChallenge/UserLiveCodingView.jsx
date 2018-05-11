@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import AceEditor from 'react-ace';
 import brace from 'brace';
 import socketClient from 'socket.io-client';
+import moment from 'moment';
 
 import ChallengeClock from '../../ChallengeClock.jsx';
 
@@ -50,13 +52,30 @@ class UserLiveCodingView extends Component {
   }
 
   handleSubmit() {
+    let func = this.props.location.challenge.parameters
+    let reg = new RegExp(`${func}`, 'g')
 
-    let string = `${this.state.code}
+    let testCaseS = this.props.location.challenge.test_cases.replace(/"/g, "'")
+    let testCaseD = this.props.location.challenge.test_cases.replace(/'/g, '"')
+    let input = JSON.parse(testCaseD)[0]
+    let output = JSON.parse(testCaseD)[1]
 
-    ${this.props.location.challenge[0].function_name}()
-     `
-    let answer = eval(string)
-    console.log('the answer submitted is', answer)
+    let newString = `${this.state.code.replace(reg, `${func}`)}
+
+  ${this.props.location.challenge.function_name}('${input}')
+    `
+    console.log('the new string', newString)
+    let answer = eval(newString)
+    console.log('my answer and output', answer, output)
+    console.log(answer === output)
+
+    //saving results to db;
+    let score = 90;  //hard coded
+    let isPassed = answer === output;
+    let time = moment(Date.now()).format();
+    this.props.saveResults(isPassed, newString, score, time,this.props.location.challenge.challenge_id, this.props.location.challenge.company_id, this.props.location.challenge.candidate_id, false, this.props.location.challenge.id, () => {
+      this.props.history.push('/user')
+    })
   }
 
   
@@ -65,14 +84,16 @@ class UserLiveCodingView extends Component {
 
     return (
       <div>
+      <button className='ui green button' onClick={() => {this.props.history.push('/user/profile')}}>Edit Profile</button>
+      <button className='ui green button' onClick={() => {this.props.history.push('/user')}}>Dash Board</button>
+      <button className='ui green button' onClick={() => {this.props.history.push('/user/companylist')}}>Company Challenge list</button> 
         <h1>{this.props.location.challenge.name}</h1>
         <br/>
         <br/>
         <h2>Title: {this.props.location.challenge.title}</h2>
         <h3>Difficulty: {this.props.location.challenge.difficulty}</h3>
-
-        <h3>Time Limit: { this.props.location.duration} Minutes</h3>
-
+        <div> Instructions: {this.props.location.challenge.instruction}</div>
+        <div> Time Limit: {this.props.location.challenge.duration} Minutes</div>
         <AceEditor
           mode="javascript"
           theme="monokai"
@@ -98,4 +119,4 @@ class UserLiveCodingView extends Component {
   }
 }
 
-export default UserLiveCodingView;
+export default withRouter(UserLiveCodingView);
