@@ -135,8 +135,8 @@ export const toggleInitialOff = () => (dispatch) => {
   dispatch( {type: TOGGLE_INITIAL_OFF, payload: false })
 }
 
-export const makeInitial = (challengeId, initial, isInitial) => (dispatch) => {
-  axios.patch('/api/initialChallenge', {challengeId: challengeId, initial: initial, isInitial: isInitial})
+export const makeInitial = (challengeId, initial, duration, isInitial) => (dispatch) => {
+  axios.patch('/api/initialChallenge', {challengeId: challengeId, initial: initial, duration: duration, isInitial: isInitial})
   .then(() => {
     console.log('make initial function was called')
     dispatch(fetchInitialChallenge(2));

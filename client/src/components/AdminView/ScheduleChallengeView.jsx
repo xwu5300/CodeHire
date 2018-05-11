@@ -20,9 +20,8 @@ class ScheduleChallengeView extends Component {
   }
 
   handleClick(challenge, i) {
-    console.log('this is the', challenge.initial)
     if (this.props.isInitial) {
-      this.props.makeInitial(challenge.id, challenge.initial, this.props.isInitial)
+      this.props.makeInitial(challenge.id, challenge.initial, this.state.duration, this.props.isInitial)
     } else {
       this.props.addToSchedule($('#date').val(), this.state.duration, challenge.id);
     }
@@ -99,49 +98,3 @@ class ScheduleChallengeView extends Component {
 
 
 export default ScheduleChallengeView;
-
-
-
-
-// {!this.state.showForm[i] ? null : 
-//   <div className="calendar-container">
-//   {!this.props.isInitial ? 
-//       <div className="ui calendar" id="calendar" onClick={this.showCalendar}>
-//         <div className="ui input left icon">
-//           <i className="calendar icon"></i>
-//           <input name="date" type="text" placeholder="Date/Time" id="date"/>
-//         </div>
-//       </div> : null}
-//     <div className="field dropdown">
-//     <label>Duration (minutes)</label>
-//       <select className="ui dropdown" name="duration" value={this.state.duration} onChange={this.handleDurationChange}>
-//         <option value="">Select</option>
-//         <option value="15">15</option>
-//         <option value="30">30</option>
-//         <option value="60">60</option>
-//         <option value="90">90</option>
-//       </select>
-//     </div> 
-//          <button className="ui button" onClick={() => {this.handleClick(item, i)}}>Select</button>
-//   </div>
-// }
-
-// <div className="calendar-container">
-// {!this.props.isInitial ? 
-//     <div className="ui calendar" id="calendar" onClick={this.showCalendar}>
-//       <div className="ui input left icon">
-//         <i className="calendar icon"></i>
-//         <input name="date" type="text" placeholder="Date/Time" id="date"/>
-//       </div>
-//     </div> : null}
-//     <div className="field dropdown">
-//       <select className="ui dropdown" name="duration" value={this.state.duration} onChange={this.handleDurationChange}>
-//         <option value="">Select</option>
-//         <option value="15">15</option>
-//         <option value="30">30</option>
-//         <option value="60">60</option>
-//         <option value="90">90</option>
-//       </select>
-//     </div> 
-//     <button className="ui button select" onClick={() => {this.handleClick(item)}}>Select</button>
-// </div>

@@ -47,11 +47,7 @@ class CompanyChallenges extends Component {
   }
 
   handleClick(challenge, i) {
-    if (this.props.isInitial) {
-      this.props.makeInitial(challenge.id, challenge.initial)
-    } else {
-      this.props.addToSchedule($('#date').val(), this.state.duration, challenge.id);
-    }
+    this.props.addToSchedule($('#date').val(), this.state.duration, challenge.id);
     this.toggleForm(i);
   }
 
@@ -77,8 +73,7 @@ class CompanyChallenges extends Component {
               <div>{challenge.title}</div>
               <div>{challenge.instruction}</div>
               <button className="ui button" onClick={() => {this.toggleForm(i)}}>
-              {this.props.isInitial ? 'Set Initial Challenge' :
-              'Schedule Challenge'}
+              Schedule Challenge
               </button>
               <button className="ui icon button" onClick={() => {this.props.delete(challenge)}}>
                 <i className="minus icon"></i>
@@ -95,13 +90,12 @@ class CompanyChallenges extends Component {
               <br/>
               {!this.state.showForm[i] ? null : 
                 <div className="calendar-container">
-                {!this.props.isInitial ? 
                     <div className="ui calendar" id="calendar" onClick={this.showCalendar}>
                       <div className="ui input left icon">
                         <i className="calendar icon"></i>
                         <input name="date" type="text" placeholder="Date/Time" id="date"/>
                       </div>
-                    </div> : null}
+                    </div>
                   <div className="field dropdown">
                   <label>Duration (minutes)</label>
                     <select className="ui dropdown" name="duration" value={this.state.duration} onChange={this.handleDurationChange}>

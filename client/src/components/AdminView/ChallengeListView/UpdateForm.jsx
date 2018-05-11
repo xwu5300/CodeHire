@@ -18,15 +18,42 @@ class UpdateForm extends Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.save = this.save.bind(this);
+    this.validateForm = this.validateForm.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
 
   componentDidMount() {
-    console.log(this.props.challengeInfo.test_cases)
+    this.validateForm();
+  }
+
+  validateForm() {
+    $('.ui.form')
+      .form({
+        on: 'blur',
+        fields: {
+          title: 'empty',
+          instruction: 'empty',
+          function_name: 'empty',
+          parameters: 'empty',
+          testInput: 'empty',
+          testOutput: 'empty',
+          exampleInput: 'empty',
+          exampleOutput: 'empty',
+          difficulty: 'empty'
+        }
+      })
   }
 
   handleChange(event) {
     this.state.challenge[event.target.name] = event.target.value;
     this.setState({challenge: this.state.challenge});
+  }
+
+  handleSave(event) {
+    event.preventDefault();
+    if ($('.ui.form').form('is valid')) {
+      this.save();
+    }
   }
 
   save() {
@@ -52,41 +79,41 @@ class UpdateForm extends Component {
   render() {
     return (
       <div className="form-container">
-        <form className="ui form">
+        <form className="ui form" onSubmit={(event) => this.handleSave(event)}>
           <div className="field">
             <label>Title</label>
-            <input id="empty" name="title" type="text" value={this.state.challenge.title} onChange={this.handleChange}/>
+            <input name="title" type="text" value={this.state.challenge.title} onChange={this.handleChange}/>
           </div>
           <div className="field">
             <label>Instructions</label>
-            <textarea rows="3" id="empty" name="instruction" type="text" value={this.state.challenge.instruction} onChange={this.handleChange}/>
+            <textarea rows="3" name="instruction" type="text" value={this.state.challenge.instruction} onChange={this.handleChange}/>
           </div>
           <div className="field">
             <label>Function Name</label>
-            <input id="empty" name="function_name" type="text" value={this.state.challenge.function_name} onChange={this.handleChange}/>
+            <input name="function_name" type="text" value={this.state.challenge.function_name} onChange={this.handleChange}/>
           </div>
           <div className="field">
             <label>Initial Parameters</label>
-            <input id="empty" name="parameters" type="text" value={this.state.challenge.parameters} onChange={this.handleChange}/>
+            <input name="parameters" type="text" value={this.state.challenge.parameters} onChange={this.handleChange}/>
           </div>
           <div className="two fields">
             <div className="field">
               <label>Test Case - Input</label>
-              <input id="empty" name="testInput" type="text" value={this.state.challenge.testInput} onChange={this.handleChange}/>
+              <input name="testInput" type="text" value={this.state.challenge.testInput} onChange={this.handleChange}/>
             </div>
             <div className="field">
               <label>Test Case - Output</label>
-              <input id="empty" name="testOutput" type="text" value={this.state.challenge.testOutput} onChange={this.handleChange}/>
+              <input name="testOutput" type="text" value={this.state.challenge.testOutput} onChange={this.handleChange}/>
             </div>
           </div>
           <div className="two fields">
             <div className="field">
               <label>Example - Input</label>
-              <input id="empty" name="exampleInput" type="text" value={this.state.challenge.exampleInput} onChange={this.handleChange}/>
+              <input name="exampleInput" type="text" value={this.state.challenge.exampleInput} onChange={this.handleChange}/>
             </div>
             <div className="field">
               <label>Example - Output</label>
-              <input id="empty" name="exampleOutput" type="text" value={this.state.challenge.exampleOutput} onChange={this.handleChange}/>
+              <input name="exampleOutput" type="text" value={this.state.challenge.exampleOutput} onChange={this.handleChange}/>
             </div>
           </div>
           <div className="field">
@@ -98,8 +125,15 @@ class UpdateForm extends Component {
               <option value="hard">Hard</option>
             </select>
           </div>
-          <div className="ui button" type="submit" onClick={() => {this.save()}}>Submit</div>
           <div className="ui error message"></div>
+          <div className="actions">
+          <div className="two fluid ui buttons">
+            <button className="ui cancel red basic button" onClick={() => {this.props.close()}}>
+              <i className="remove icon"></i> Cancel
+            </button>
+            <button className="ui ok green basic submit button" type="submit"><i className="checkmark icon"></i>Update</button>
+            </div>
+          </div>
         </form>
       </div>
     )

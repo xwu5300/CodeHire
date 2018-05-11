@@ -125,7 +125,7 @@ router.patch('/api/initialChallenge', (req, res) => {
   console.log('server route', req.body.challengeId);
   let companyId = 2;
   if (req.body.initial === false || req.body.isInitial === true) {
-    challengeControllers.setInitialChallenge(companyId, req.body.challengeId)
+    challengeControllers.setInitialChallenge(companyId, req.body.challengeId, req.body.duration)
     .then(() => {
       res.send('Updated initial challenge');
     })
