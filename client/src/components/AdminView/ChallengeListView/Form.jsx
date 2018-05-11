@@ -31,27 +31,17 @@ class Form extends Component {
       .form({
         on: 'blur',
         fields: {
-          empty: {
-            identifier: 'empty',
-            rules: [
-              {
-                type: 'empty',
-                prompt: 'Please enter a value'
-              }
-            ]
-          },
-          dropdown: {
-            identifier: 'difficulty',
-            rules: [
-              {
-                type: 'empty',
-                prompty: 'Please select a dropdown value'
-              }
-            ]
-          }
+          title: 'empty',
+          instruction: 'empty',
+          function_name: 'empty',
+          parameters: 'empty',
+          testInput: 'empty',
+          testOutput: 'empty',
+          exampleInput: 'empty',
+          exampleOutput: 'empty',
+          difficulty: 'empty'
         }
       })
-    ;
   }
 
   handleChange(event) {
@@ -59,10 +49,11 @@ class Form extends Component {
     this.setState({challenge: this.state.challenge});
   }
 
-  handleSave() {
-    $('.ui.form').form({
-      onSuccess: this.save()
-    })
+  handleSave(event) {
+    event.preventDefault();
+    if ($('.ui.form').form('is valid')) {
+      this.save();
+    }
   }
 
   save() {
@@ -88,41 +79,41 @@ class Form extends Component {
   render() {
     return (
       <div className="form-container">
-        <form className="ui form">
+        <form className="ui form" onSubmit={(event) => this.handleSave(event)}>
           <div className="field">
             <label>Title</label>
-            <input id="empty" name="title" type="text" placeholder="Two Sum" value={this.state.challenge.title} onChange={this.handleChange}/>
+            <input name="title" type="text" placeholder="Two Sum" value={this.state.challenge.title} onChange={this.handleChange}/>
           </div>
           <div className="field">
             <label>Instructions</label>
-            <textarea rows="3" id="empty" name="instruction" type="text" value={this.state.challenge.instruction} placeholder="Find the indicies of two items in an array that equal the target value" onChange={this.handleChange}/>
+            <textarea rows="3" name="instruction" type="text" value={this.state.challenge.instruction} placeholder="Find the indicies of two items in an array that equal the target value" onChange={this.handleChange}/>
           </div>
           <div className="field">
             <label>Function Name</label>
-            <input id="empty" name="function_name" type="text" placeholder="twoSum" value={this.state.challenge.function_name} onChange={this.handleChange}/>
+            <input name="function_name" type="text" placeholder="twoSum" value={this.state.challenge.function_name} onChange={this.handleChange}/>
           </div>
           <div className="field">
             <label>Initial Parameters</label>
-            <input id="empty" name="parameters" type="text" placeholder="array, target" value={this.state.challenge.parameters} onChange={this.handleChange}/>
+            <input name="parameters" type="text" placeholder="array, target" value={this.state.challenge.parameters} onChange={this.handleChange}/>
           </div>
           <div className="two fields">
             <div className="field">
               <label>Test Case - Input</label>
-              <input id="empty" name="testInput" type="text" placeholder="[1, 3, 6, 0, -2], 9" value={this.state.challenge.testInput} onChange={this.handleChange}/>
+              <input name="testInput" type="text" placeholder="[1, 3, 6, 0, -2], 9" value={this.state.challenge.testInput} onChange={this.handleChange}/>
             </div>
             <div className="field">
               <label>Test Case - Output</label>
-              <input id="empty" name="testOutput" type="text" placeholder="[1, 2]" value={this.state.challenge.testOutput} onChange={this.handleChange}/>
+              <input name="testOutput" type="text" placeholder="[1, 2]" value={this.state.challenge.testOutput} onChange={this.handleChange}/>
             </div>
           </div>
           <div className="two fields">
             <div className="field">
               <label>Example - Input</label>
-              <input id="empty" name="exampleInput" type="text" placeholder="[1, 4, -2, 6, 9], 15" value={this.state.challenge.exampleInput} onChange={this.handleChange}/>
+              <input name="exampleInput" type="text" placeholder="[1, 4, -2, 6, 9], 15" value={this.state.challenge.exampleInput} onChange={this.handleChange}/>
             </div>
             <div className="field">
               <label>Example - Output</label>
-              <input id="empty" name="exampleOutput" type="text" placeholder="[3, 4]" value={this.state.challenge.exampleOutput} onChange={this.handleChange}/>
+              <input name="exampleOutput" type="text" placeholder="[3, 4]" value={this.state.challenge.exampleOutput} onChange={this.handleChange}/>
             </div>
           </div>
           <div className="field">
@@ -134,8 +125,15 @@ class Form extends Component {
               <option value="hard">Hard</option>
             </select>
           </div>
-          <div className="ui button" type="submit" onClick={() => {this.handleSave()}}>Submit</div>
           <div className="ui error message"></div>
+          <div className="actions">
+          <div className="two fluid ui buttons">
+            <button className="ui cancel red basic button" onClick={() => {this.props.close()}}>
+              <i className="remove icon"></i> Cancel
+            </button>
+            <button className="ui ok green basic submit button" type="submit"><i className="checkmark icon"></i>Submit</button>
+            </div>
+          </div>
         </form>
       </div>
     )
