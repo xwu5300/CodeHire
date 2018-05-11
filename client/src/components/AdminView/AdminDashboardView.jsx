@@ -22,9 +22,9 @@ class AdminDashboardView extends Component {
 
 
   componentDidMount() {
-    // this.props.fetchCompanySchedule(this.props.user_id);
-    // this.props.fetchInitialChallenge(2);
-    // Modal.setAppElement('body');
+    this.props.fetchCompanySchedule(this.props.user_id);
+    this.props.fetchInitialChallenge(2);
+    Modal.setAppElement('body');
   }
 
   handleClickOn() {

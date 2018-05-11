@@ -21,7 +21,7 @@ class CompanyChallenges extends Component {
   
   componentDidMount() {
     console.log(this.props);
-    // Modal.setAppElement('body');
+    Modal.setAppElement('body');
   }
 
   openModal(challengeId) {
