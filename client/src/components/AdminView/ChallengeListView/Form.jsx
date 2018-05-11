@@ -40,7 +40,8 @@ class Form extends Component {
           exampleInput: 'empty',
           exampleOutput: 'empty',
           difficulty: 'empty'
-        }
+        },
+        inline: true
       })
   }
 
@@ -132,7 +133,7 @@ class Form extends Component {
               <i className="remove icon"></i> Cancel
             </button>
             <button className="ui ok green basic submit button" type="submit"><i className="checkmark icon"></i>Submit</button>
-            </div>
+          </div>
           </div>
         </form>
       </div>
