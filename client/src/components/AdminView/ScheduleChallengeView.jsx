@@ -21,7 +21,7 @@ class ScheduleChallengeView extends Component {
 
   handleClick(challenge, i) {
     if (this.props.isInitial) {
-      this.props.makeInitial(challenge.id, challenge.initial, this.props.isInitial)
+      this.props.makeInitial(challenge.id, challenge.initial, this.state.duration, this.props.isInitial)
     } else {
       this.props.addToSchedule($('#date').val(), this.state.duration, challenge.id);
     }

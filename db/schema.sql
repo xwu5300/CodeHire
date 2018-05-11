@@ -33,6 +33,7 @@ CREATE TABLE all_challenges (
   examples TEXT,
   difficulty VARCHAR(30),
   initial BOOLEAN NOT NULL,
+  duration SMALLINT NULL,
   company_id SMALLINT REFERENCES users(id)
 );
 
@@ -72,7 +73,7 @@ INSERT INTO all_challenges (title, instruction, function_name, parameters, test_
 INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('Anagram Solver', 'Find all anagrams...', 'getAnagrams', 'string', null, null, 'medium', false, 2);
 
 INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('isSubArray', 'return boolean', 'isSubArray', 'arr', null, null, 'medium', false, 3);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('Permutation', 'recursion', 'Permutation', 'arr', null, null, 'medium', true, 2);
+INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, duration, company_id) VALUES ('Permutation', 'recursion', 'Permutation', 'arr', null, null, 'medium', true, 30, 2);
 INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, initial, company_id) VALUES ('Permute', 'Find the sum...', 'Permute', 'arr, target', null, null, 'easy', true, 3);
 
 INSERT INTO company_schedule (time, duration, challenge_id, company_id) VALUES ('2018-8-20 11:00am', 30, 2, 2);

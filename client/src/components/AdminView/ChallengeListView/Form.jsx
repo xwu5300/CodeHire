@@ -14,14 +14,12 @@ class Form extends Component {
         exampleInput: '',
         exampleOutput: '',
         difficulty: ''
-      },
-      errors: ''
+      }
     }
     this.handleChange = this.handleChange.bind(this);
     this.save = this.save.bind(this);
     this.validateForm = this.validateForm.bind(this);
     this.handleSave = this.handleSave.bind(this);
-    // this.handleInvalidForm = this.handleInvalidForm.bind(this);
   }
 
   componentDidMount() {
@@ -31,6 +29,7 @@ class Form extends Component {
   validateForm() {
     $('.ui.form')
       .form({
+        on: 'blur',
         fields: {
           title: 'empty',
           instruction: 'empty',
@@ -129,9 +128,9 @@ class Form extends Component {
           <div className="ui error message"></div>
           <div className="actions">
           <div className="two fluid ui buttons">
-            <div className="ui cancel red basic button">
+            <button className="ui cancel red basic button" onClick={() => {this.props.close()}}>
               <i className="remove icon"></i> Cancel
-            </div>
+            </button>
             <button className="ui ok green basic submit button" type="submit"><i className="checkmark icon"></i>Submit</button>
             </div>
           </div>
