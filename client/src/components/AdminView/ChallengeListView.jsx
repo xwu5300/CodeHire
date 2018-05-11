@@ -1,36 +1,61 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router-dom';
 import { connect } from "react-redux";
+import Modal from 'react-modal';
 import CompanyChallenges from './ChallengeListView/CompanyChallenges.jsx';
 import DefaultChallenges from './ChallengeListView/DefaultChallenges.jsx';
 import Form from './ChallengeListView/Form.jsx';
+import { getChallengeInfo } from '../../actions/adminActions';
 
 
-const showModal = function(){
-  $('.ui.long.modal')
-    .modal({
-      centered: true
+
+class ChallengeListView extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalIsOpen: false
+    }
+
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  componentDidMount() {
+    Modal.setAppElement('body');
+  }
+
+  openModal() {
+    this.setState({
+      modalIsOpen: true
     })
-  .modal('show')
-}
+  }
+
+  closeModal() {
+    this.setState({
+      modalIsOpen: false
+    })
+  }
 
 
-const ChallengeListView = ({ all_challenges, default_challenges, deleteChallenge, saveChallenge, addToCompanySchedule, is_initial, makeInitial }) => {
-  return (
-    <div className='challenge_list'>
-    <button className="ui button" onClick={() => {showModal()}}>Input new challenge</button>
-    <div className="ui long modal" style={{width: '60%'}}>
-      <i className="close icon"></i>
-      <div className="scrolling content">
-        <Form save={ saveChallenge }/>
+  render() {
+    return (
+      <div>
+      <button className="ui button home" onClick={() => {this.props.history.push('/admin')}}>Back to Home</button>
+      <div className='challenge_list'>
+        <button className="ui button" onClick={this.openModal}>Input new challenge</button>
+        <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
+            <Form save={this.props.saveChallenge} close={this.closeModal}/>
+        </Modal>
+        <div className='ui padded horizontal segments challenge_list'>
+          <CompanyChallenges allChallenges={this.props.all_challenges} delete={this.props.deleteChallenge} addToSchedule={this.props.addToCompanySchedule} isInitial={this.props.is_initial} makeInitial={this.props.makeInitial} getInfo={this.props.getChallengeInfo} challengeInfo={this.props.challenge_info} save={this.props.saveChallenge}/>
+          <DefaultChallenges defaultChallenges={this.props.default_challenges} save={this.props.saveChallenge}/>
+        </div>
       </div>
     </div>
-      <div className='ui padded horizontal segments challenge_list'>
-        <CompanyChallenges allChallenges={ all_challenges } delete={ deleteChallenge } addToSchedule={ addToCompanySchedule } isInitial={is_initial} makeInitial={makeInitial} />
-        <DefaultChallenges defaultChallenges={ default_challenges } save={ saveChallenge }/>
-      </div>
-    </div>
-  )
+    )
+  }
 }
+  
 
 
-export default ChallengeListView;
+export default withRouter(ChallengeListView);

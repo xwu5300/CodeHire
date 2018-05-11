@@ -86,6 +86,7 @@ module.exports.getDefaultChallenges = () => {
 module.exports.getInitialChallenge = (companyId) => {
   return knex.from('users')
   .innerJoin('all_challenges', 'users.id', 'all_challenges.company_id')
+  // .innerJoin('company_schedule')
   .where({'all_challenges.company_id': companyId, 'all_challenges.initial': true})
   .then((res) => {
     return res;
@@ -140,5 +141,21 @@ module.exports.removeInitialChallenge = (companyId, challengeId) => {
   })
   .catch((err) => {
     console.log('Unable to remove initial challenge from db', err);
+  })
+}
+
+module.exports.getChallengeInfo = (challengeId, companyId) => {
+  console.log(challengeId, companyId)
+  return knex('all_challenges')
+  .where({
+    company_id: companyId,
+    id: challengeId
+  })
+  .then((res) => {
+    console.log('Retrieving previously saved data from db');
+    return res;
+  })
+  .catch((err) => {
+    console.log('Unable to retrieve previously saved data', err);
   })
 }
