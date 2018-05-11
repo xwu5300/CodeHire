@@ -12,7 +12,6 @@ class UserLiveCodingView extends Component {
     super(props);
 
     this.state = {
-
       minutes: '',
       seconds: '',
       code: `function ${this.props.location.challenge.function_name}(${this.props.location.challenge.parameters}) {
@@ -128,7 +127,7 @@ class UserLiveCodingView extends Component {
     let exampleOutput = examples[1].map((el)=> {
       return JSON.stringify(el)
     }).join(',')
-
+    console.log('renderrrrrrrrrrrrrrrrrrr')
     console.log('props for live coding', this.props.location.challenge)
     return (
       <div>
