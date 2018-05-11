@@ -25,6 +25,7 @@ class AdminDashboardView extends Component {
     this.props.fetchCompanySchedule(this.props.user_id);
     this.props.fetchInitialChallenge(2);
     Modal.setAppElement('body');
+    this.props.fetchCandidateList(2);
   }
 
   handleClickOn() {

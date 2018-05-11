@@ -10,7 +10,7 @@ import UserDashBoard from '../components/UserView/UserDashBoard.jsx';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { fetchAllCompanyCalendars, fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, saveCandidateInfo, saveCandidateCalendar, deleteCandidateSchedule, currentCompanyCalendar } from '../actions/userActions';
+import { fetchAllCompanyCalendars, fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, saveCandidateInfo, saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar } from '../actions/userActions';
 import { fetchCompanySchedule } from '../actions/adminActions' ;
  
 import axios from 'axios';
@@ -46,17 +46,16 @@ const mapStateToProps = function(state) {
     github_url: state.github_url.github_url,
     candidate_calendar: state.candidate_calendar.candidate_calendar,
     company_schedule: state.company_schedule.company_schedule,
-    current_company_calendar: state.current_company_calendar.current_company_calendar
+    current_company_calendar: state.current_company_calendar.current_company_calendar,
+    results: state.results.results
 }};
 
 const connectComponent = connect(mapStateToProps, { fetchAllCompanyCalendars })(UserContainer);
-
-
 const UserDashBoardComponent = connect(mapStateToProps, { fetchCandidateCalendar, deleteCandidateSchedule, currentCompanyCalendar })(UserDashBoard);
-const CompanyListViewComponent = connect(mapStateToProps, { fetchInitialChallenge, fetchCandidateCalendar, deleteCandidateSchedule, fetchAllCompanyCalendars, currentCompanyCalendar })(CompanyListView);
+const CompanyListViewComponent = connect(mapStateToProps, { fetchInitialChallenge,   fetchAllCompanyCalendars, fetchCandidateCalendar, deleteCandidateSchedule, fetchAllCompanyCalendars, currentCompanyCalendar })(CompanyListView);
 const CompanyScheduleViewComponent = connect(mapStateToProps, { saveCandidateCalendar })(CompanyScheduleView);
-const UserInitialChallengeViewComponent = connect(mapStateToProps)(UserInitialChallengeView);
-const UserLiveCodingViewComponent = connect(mapStateToProps)(UserLiveCodingView);
+const UserInitialChallengeViewComponent = connect(mapStateToProps, { saveResults })(UserInitialChallengeView);
+const UserLiveCodingViewComponent = connect(mapStateToProps, { saveResults })(UserLiveCodingView);
 const UserProfileViewComponent = connect(mapStateToProps, { fetchCandidateInfo, saveCandidateInfo })(UserProfileView);
 
 

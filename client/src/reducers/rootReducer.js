@@ -25,7 +25,9 @@ export default combineReducers({
   current_live_challenge_title: adminReducers.currentLiveChallenge,
   current_live_challenge_duration: adminReducers.currentLiveChallenge,
   current_company_calendar: userReducers.currentCompanySchedule,
-  challenge_info: adminReducers.challengeInfo
+  challenge_info: adminReducers.challengeInfo,
+  results: adminReducers.results,
+  candidate_list: adminReducers.candidateList
 })
 
 

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-// import UserScheduleTableView from './UserScheduleTableView.jsx';
 import UserSearchView from './UserSearchView.jsx';
+import moment from 'moment';
 
 class CompanyListView extends Component {
   constructor(props) {
@@ -53,7 +53,7 @@ class CompanyListView extends Component {
               <img className='company-logo' src={`${company.logo_url || 'http://dev.jobkhoji.com/assets/images/default_company_icon.png'}`} />
               {company.name}
               <div>
-                <p>Coming Live Challenge: {company.time}</p>
+                <p>Coming Live Challenge: {moment(company.time).format('MMMM Do YYYY dddd, h:mm A')}</p>
                 <p>Duration: {company.duration} Minutes</p>
               </div>
               <button onClick={() => {

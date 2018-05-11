@@ -1,5 +1,5 @@
 
-import { GET_INITIAL_CHALLENGE, GET_ALL_COMPANY_CALENDARS, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO, GET_CURRENT_COMPANY_CALENDAR  } from '../constants/actionTypes';
+import { GET_INITIAL_CHALLENGE, GET_ALL_COMPANY_CALENDARS, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO, GET_CURRENT_COMPANY_CALENDAR } from '../constants/actionTypes';
 
 import axios from 'axios';
 
@@ -83,5 +83,16 @@ export const currentCompanyCalendar = (companyId, callback) => (dispatch) => {
   if(callback) {
     callback();
  }
+}
+
+export const saveResults = (isPassed, code, score, completedAt, challengeId, companyId, candidateId, initial, candidateScheduleId, cb) => (dispatch) => {
+  axios.post('/api/results', {isPassed, code, score, completedAt, challengeId, companyId, candidateId, initial})
+  .then(() => {
+    dispatch(deleteCandidateSchedule(candidateScheduleId, candidateId))
+    cb();
+  })
+  .catch((err) => {
+    console.log(err);
+  })
 }
 

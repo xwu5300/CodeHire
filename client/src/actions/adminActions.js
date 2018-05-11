@@ -1,5 +1,4 @@
-
-import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF, SET_CURRENT_LIVE_CHALLENGE, GET_CHALLENGE_INFO } from '../constants/actionTypes';
+import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF, SET_CURRENT_LIVE_CHALLENGE, GET_CHALLENGE_INFO, GET_COMPANY_RESULTS, GET_CANDIDATE_LIST } from '../constants/actionTypes';
 
 import axios from 'axios';
 import { fetchInitialChallenge } from './userActions.js';
@@ -151,5 +150,24 @@ export const setCurrentLiveChallenge = (title, duration) => (dispatch) => {
 }
 
 
+export const fetchCompanyResults = (companyId, candidateId) => (dispatch) => {
+  axios.get('/api/results', { params: {companyId: companyId, candidateId: candidateId} })
+  .then(({data}) => {
+    dispatch({ type: GET_COMPANY_RESULTS, payload: data})
+    
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
 
+export const fetchCandidateList = (companyId) => (dispatch) => {
+  axios.get('/api/results/candidate', {params: {companyId: companyId}})
+  .then(({data}) => {
+    dispatch({ type: GET_CANDIDATE_LIST, payload: data})
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
 

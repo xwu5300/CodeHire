@@ -45,8 +45,9 @@ export const GET_CANDIDATE_CALENDAR = 'GET_CANDIDATE_CALENDAR';
 export const GET_CURRENT_COMPANY_CALENDAR = 'GET_CURRENT_COMPANY_CALENDAR';
 
 /* --------- Results -------- */
-export const SAVE_RESULTS = 'SAVE_RESULTS';
+export const GET_COMPANY_RESULTS = 'GET_COMPANY_RESULTS';
 
+export const GET_CANDIDATE_LIST = 'GET_CANDIDATE_LIST';
 
 /* -------- User Profile ------- */
 export const GET_CANDIDATE_INFO = 'GET_CANDIDATE_INFO';
