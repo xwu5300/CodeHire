@@ -61,12 +61,7 @@ export const fetchInitialChallenge = (company_id) => (dispatch) => {
  export const fetchCandidateInfo = (userId, callback) => (dispatch) => {
    axios.get('/api/candidateInfo', { params: { user_id: userId }})
     .then((info) => {
-<<<<<<< HEAD
-        dispatch({ type: GET_CANDIDATE_INFO, information: info.data[0].information, skills: info.data[0].candidate_skills })
-=======
-      console.log('INFFFO', info);
         dispatch({ type: GET_CANDIDATE_INFO, information: info.data[0].information, skills: info.data[0].candidate_skills, github_url: info.data[0].github_url })
->>>>>>> mvp-cleanup
         if(callback) {
           callback();
         }
