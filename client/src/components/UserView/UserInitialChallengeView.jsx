@@ -38,9 +38,6 @@ class UserInitialChallengeView extends Component {
     })
   }
 
-  handleParse() {
-
-  }
   handleSubmit() {
 
     let func = this.props.initial_challenge[0].parameters
@@ -103,7 +100,7 @@ class UserInitialChallengeView extends Component {
     let exampleOutput = examples[1].map((el)=> {
       return JSON.stringify(el)
     }).join(',')
-s
+
     return (
       <div>
         <h1>{this.props.initial_challenge[0].name}</h1>

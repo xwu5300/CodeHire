@@ -22,7 +22,7 @@ class UserInitialChallengeView extends Component {
     this.state = {
       theme: 'monokai',
       code: `function ${this.props.initial_challenge[0].function_name}(${this.props.initial_challenge[0].parameters}) {
-}` 
+}`
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
@@ -124,7 +124,7 @@ class UserInitialChallengeView extends Component {
         <div className="ui orange three item inverted menu">
           <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
           <div className='ui active item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Companies</div> 
+          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Companies</div>
         </div>
         <h1>{this.props.initial_challenge[0].name}</h1>
         <h2>{this.props.initial_challenge[0].title}</h2>
