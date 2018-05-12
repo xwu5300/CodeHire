@@ -26,6 +26,7 @@ class AdminDashboardView extends Component {
     this.props.fetchInitialChallenge(2);
     Modal.setAppElement('body');
     this.props.fetchCandidateList(2);
+    console.log(this.props)
   }
 
   handleClickOn() {
@@ -110,7 +111,7 @@ class AdminDashboardView extends Component {
                 </tr>
               </thead>
               <tbody>
-              {this.props.company_schedule ? this.props.company_schedule.map((item) => {
+              {this.props.company_schedule.length > 0 ? this.props.company_schedule.map((item) => {
                 return (
                   <tr key={item.id}>
                     <td>{item.title}</td>
@@ -120,7 +121,7 @@ class AdminDashboardView extends Component {
                     <td><button className='ui button' type='button' onClick={()=>{this.props.deleteFromCompanySchedule(item.id)}}><i className='x icon'></i></button></td>
                   </tr>
                 )
-              }) : null }
+              }) : <tr><td>You have no scheduled challenges at this time.</td></tr> }
               </tbody>
             </table>
           </div>

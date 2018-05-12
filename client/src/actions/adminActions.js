@@ -32,6 +32,8 @@ export const saveChallenge = (challenge, cb) => (dispatch) => {
   .then(() => {
     dispatch(fetchAllChallenges());
     console.log('Saved to your challenges')
+  })
+  .then(() => {
     if (cb) {
       cb();
     }
@@ -68,12 +70,17 @@ export const getChallengeInfo = (challengeId, cb) => (dispatch) => {
   })
 }
 
-export const addToCompanySchedule = (time, duration, challengeId) => (dispatch) => {
+export const addToCompanySchedule = (time, duration, challengeId, cb) => (dispatch) => {
   axios.post('/api/companyCalendar', {time: time, duration: duration, challengeId: challengeId})
   .then(() => {
     console.log('add to company schedule was called')
     dispatch(fetchCompanySchedule());
     // console.log('Added to your upcoming challenges')
+  })
+  .then(() => {
+    if (cb) {
+      cb();
+    }
   })
 	.catch((err) => {
 		console.log('Error updating company calendar', err);
@@ -132,11 +139,16 @@ export const toggleInitialOff = () => (dispatch) => {
   dispatch( {type: TOGGLE_INITIAL_OFF, payload: false })
 }
 
-export const makeInitial = (challengeId, initial, duration, isInitial) => (dispatch) => {
+export const makeInitial = (challengeId, initial, duration, isInitial, cb) => (dispatch) => {
   axios.patch('/api/initialChallenge', {challengeId: challengeId, initial: initial, duration: duration, isInitial: isInitial})
   .then(() => {
     console.log('make initial function was called')
     dispatch(fetchInitialChallenge(2));
+  })
+  .then(() => {
+    if (cb) {
+      cb();
+    }
   })
   .catch((err) => {
     console.log(err);
