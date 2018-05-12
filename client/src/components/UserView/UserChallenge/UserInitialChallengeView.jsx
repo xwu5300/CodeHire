@@ -70,6 +70,16 @@ class UserInitialChallengeView extends Component {
 
     ${this.props.initial_challenge[0].function_name}(${input})
     `
+    window.onerror = function(msg, url, lineNo, columnNo, error){
+      // let message = error
+      // console.log('my error message', message)
+      swal(
+        'There was an error in submitting your code',
+        'Please double check your syntax and try again',
+        'warning'
+      )
+    };
+
     let answer = eval(newString)
     let result = JSON.stringify(answer) === output
 
@@ -87,6 +97,9 @@ class UserInitialChallengeView extends Component {
       this.saveResults(result, newString, score, time)
       var thatProps = this.props
       if (clickResult.value) {
+        let isPassed = answer === output;
+        let time = moment(Date.now()).format();
+        let score;
         if (result === true) {
           swal(
             {title: 'Success!',
@@ -103,6 +116,10 @@ class UserInitialChallengeView extends Component {
               thatProps.history.push('/user/schedule')
              })
         }
+        let returnToDash = () => (this.props.saveResults(isPassed, newString, score, time, this.props.initial_challenge[0].id, this.props.initial_challenge[0].company_id, this.props.user_id, true, this.props.initial_challenge[0].id, () => {
+          this.props.history.push('/user/schedule')
+        }))
+        setTimeout(returnToDash, 0)
       }
     })
   }
@@ -117,8 +134,6 @@ class UserInitialChallengeView extends Component {
     let exampleOutput = examples[1].map((el)=> {
       return JSON.stringify(el)
     }).join(',')
-
-    console.log('example of examples', exampleInput, exampleOutput)
     return (
       <div>
         <div className="ui orange three item inverted menu">
@@ -135,7 +150,7 @@ class UserInitialChallengeView extends Component {
           instruction: {this.props.initial_challenge[0].instruction}
         </div>
         <div>
-          examples: { `input: ${exampleInput}                 output:${exampleOutput}`}
+          examples: { `input: ${exampleInput}  output:${exampleOutput}`}
         </div>
         <AceEditor
           mode="javascript"
