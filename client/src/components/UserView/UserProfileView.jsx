@@ -30,13 +30,15 @@ class UserProfileView extends Component {
   }
 
   addSkill(new_skill) {
-    if(this.state.all_skills.length > 0) {
-    this.setState({ all_skills: [...this.state.all_skills, new_skill] })
-  } else {
-    this.setState({ all_skills: [new_skill] })
-  }
-
-    this.props.updateCandidateSkills(this.props.username, this.state.skill);
+    if(new_skill !== '') {
+      if(this.state.all_skills) {
+        this.setState({ all_skills: [...this.state.all_skills, new_skill] })
+      } else {
+        this.setState({ all_skills: [new_skill] })
+      }
+      
+      this.props.updateCandidateSkills(this.props.username, this.state.skill);
+    }
   }
 
   updateGithub() {
@@ -55,7 +57,7 @@ class UserProfileView extends Component {
         
         <div className='main_profile_container'>
           <div className='ui padded grid'>
-            <div className='ui raised container segment ten wide column'>
+            <div className='ui raised container segment'>
 
             <div className='row'>
               <div className='github_link'>
@@ -63,7 +65,6 @@ class UserProfileView extends Component {
                 <input name='github_url' value={ this.state.github_url } onChange={ (e) => this.handleChange(e) } type='text' placeholder='github' />
                 <button onClick={ () => this.updateGithub() }>save</button>
               </div>
-
             </div>
 
             <div className='row user_skills_container'>

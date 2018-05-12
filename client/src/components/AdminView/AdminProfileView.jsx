@@ -8,11 +8,13 @@ class AdminProfileView extends Component {
 
     this.state = {
       logo_url: '',
-      information: ''
+      information: '',
+      isTextarea: false
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.toggleInfo = this.toggleInfo.bind(this);
   }
 
   componentWillMount() {
@@ -30,6 +32,10 @@ class AdminProfileView extends Component {
   handleSubmit() {
     this.props.updateInfo(this.props.username, this.state.logo_url, this.state.information);
   }
+
+  toggleInfo() {
+    this.setState({ isTextarea: !this.state.isTextarea })
+  }
   
   render() {
     return (
@@ -40,26 +46,29 @@ class AdminProfileView extends Component {
           <div className='ui item' onClick={() => this.props.history.push('/admin/challenges') }>Edit Challenges</div>
           <div className='ui item' onClick={() => {this.props.history.push('/admin/data')}}>Analytics</div> 
         </div>
+        
+        <div className='company_profile_container'>
+        <div className='ui raised container horizontal segments'>
 
-        <div className='ui centered raised padded container segment'>
-          <div className='ui centered grid'>
-            <h1>Company Profile</h1>
-            <div className='row'>
-              <img className='company_profile_logo' src={ this.state.logo_url } />
-            </div>
-            <div className='row'>
-              <input onChange={ (e) => this.handleChange(e) } value={ this.state.logo_url } style={{ width: '60%' }} name='logo_url' className='ui input' type='text' placeholder='Logo Url' />
-              <button onClick={ () => this.handleSubmit() } type='ui button'>Save Changes</button>
-            </div>
+          <div className='ui segment' style={{ width: '60%' }}>
+            <h2> About {this.props.username} </h2>
+            <i style={{ fontSize: '26px' }} onClick={ () => this.toggleInfo() } className="pencil alternate icon edit_company_info"></i>
+            {this.state.isTextarea ?
+               <textarea onChange={ (e) => this.handleChange(e) } value={ this.state.information } className='company_profile_textarea' name='information'>{ this.state.information }</textarea>
+               :
+               <div className='company_profile_textarea' name='information'>{ this.state.information }</div>
+            }
             
-            <div className='row info_textarea'>
-              <textarea onChange={ (e) => this.handleChange(e) } value={ this.state.information } style={{ width: '80%', height: '300px'}} name='information'>Current Info will show here</textarea>
-            </div>
-            <div className='row six column'>  
-              <button onClick={ () => this.handleSubmit() } type='ui button'>Save Changes</button>
-            </div>
           </div>
-        </div> 
+
+          <div className='ui segment'>
+            <img className='company_profile_logo' src={ this.state.logo_url } />
+            <input onChange={ (e) => this.handleChange(e) } value={ this.state.logo_url } name='logo_url' className='ui input logo_input' type='text' placeholder='Logo Url' />
+          </div> 
+
+        </div>
+        <button onClick={ () => this.handleSubmit() } style={{ display: 'block', margin: 'auto', width: '200px' }} className='ui orange inverted button'>Save Changes</button> 
+        </div>
       </div>
     )
   }
