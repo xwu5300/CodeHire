@@ -1,4 +1,5 @@
 const knex = require('../../db/index.js');
+const pg = require('pg');
 
 /* ------------ Candidate/Company Profiles ---------- */
 module.exports.updateCompanyInfo = (username, logoUrl, information) => {
@@ -43,11 +44,9 @@ module.exports.getCandidateInfo = (user_id, callback) => {
 module.exports.updateCandidateInfo = (username, skill, github_url) => {
   if(skill) {
     return knex('users')
-    .where({ username: username })
-    .update({ candidate_skills: '{' + skill + '}' })
-    .catch((err) => {
-      console.log('Error updating skills', err);
-    })
+        .update({
+            candidate_skills: knex.raw('array_append(candidate_skills, ?)', [skill])
+        })
   } if(github_url === '' || github_url) {
       return knex('users')
       .where({ username: username })

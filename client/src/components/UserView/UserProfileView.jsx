@@ -30,9 +30,11 @@ class UserProfileView extends Component {
   }
 
   addSkill(new_skill) {
-    this.setState({
-      all_skills: [...this.state.all_skills, new_skill]
-    })
+    if(this.state.all_skills.length > 0) {
+    this.setState({ all_skills: [...this.state.all_skills, new_skill] })
+  } else {
+    this.setState({ all_skills: [new_skill] })
+  }
 
     this.props.updateCandidateSkills(this.props.username, this.state.skill);
   }

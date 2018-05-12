@@ -64,12 +64,17 @@ class AdminDashboardView extends Component {
 
   render() {
     return (
-      <div className='admin_dashboard'>
+      <div>
+        <div className="ui orange four item inverted menu">
+          <div className='ui item' onClick={ () => { this.props.history.push('/admin/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
+          <div className='ui active item' onClick={() => {this.props.history.push('/admin')}}>Dashboard</div> 
+          <div className='ui item' onClick={() => this.editChallenges() }>Edit Challenges</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/admin/data')}}>Analytics</div> 
+        </div>
+
         <div className='ui raised padded centered container segment'>
           <div className='ui grid'>
-            <button className='ui button' type='button' onClick={() => {this.props.history.push('/admin/profile')}}>Edit Profile</button>
-            <button className='ui button' type='button' onClick={() => {this.props.history.push('/admin/data')}}>View Analytics</button>
-            <button className='ui button' type='button' onClick={() => {this.editChallenges()}}>Edit Challenges</button>
+           
             <div className='row centered challenge_btns'>
               <button className='ui button' type='button' onClick={this.handleClickOn}>Set Initial Challenge</button>
               <button className='ui button' type='button' onClick={this.handleClickOff}>Schedule Challenge</button>
@@ -120,7 +125,8 @@ class AdminDashboardView extends Component {
             </table>
           </div>
         </div>
-      </div>
+        </div>
+     
     )
   }
 
