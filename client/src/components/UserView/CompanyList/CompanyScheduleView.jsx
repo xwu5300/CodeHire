@@ -25,7 +25,6 @@ class CompanyScheduleView extends Component {
   }
 
   render() {
-    console.log('this.props.pass_initial', this.props.pass_initial)
     if (this.props.initial_challenge[0]) {
       const companyCalendar = this.props.all_company_calendars.filter((schedule) => {
         return schedule.company_id === this.props.initial_challenge[0].company_id
