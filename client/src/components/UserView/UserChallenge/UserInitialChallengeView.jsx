@@ -94,12 +94,13 @@ class UserInitialChallengeView extends Component {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, submit it!'
     }).then((clickResult) => {
-      this.saveResults(result, newString, score, time)
-      var thatProps = this.props
+
       if (clickResult.value) {
         let isPassed = answer === output;
         let time = moment(Date.now()).format();
         let score;
+        this.saveResults(result, newString, score, time)
+        var thatProps = this.props
         if (result === true) {
           swal(
             {title: 'Success!',
