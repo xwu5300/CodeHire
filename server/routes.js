@@ -4,18 +4,19 @@ const challengeControllers = require('./controllers/challenges');
 const authControllers = require('./controllers/auth');
 const calendarControllers = require('./controllers/calendar');
 const resultsControllers = require('./controllers/results');
+const profileControllers = require('./controllers/profiles');
 
 /* ------- User Routes --------- */
 
 // get company Information
 router.get('/api/companyInfo', (req, res) => {
-  authControllers.getCompanyInfo(req.query.username, (data) => {
+  profileControllers.getCompanyInfo(req.query.username, (data) => {
     res.status(200).send(data);
   })
 })
 
 router.get('/api/candidateInfo', (req, res) => {
-  authControllers.getCandidateInfo(req.query.user_id, (data) => {
+  profileControllers.getCandidateInfo(req.query.user_id, (data) => {
     res.status(200).send(data);
   })
 })
@@ -23,18 +24,20 @@ router.get('/api/candidateInfo', (req, res) => {
 
 // update company profile information in 'users' table
 router.patch('/api/companyInfo/:username', (req, res) => {
-  authControllers.updateCompanyInfo(req.body.username, req.body.logo_url, req.body.information)
+  profileControllers.updateCompanyInfo(req.body.username, req.body.logo_url, req.body.information)
   .catch((err) => {
     console.log(err);
   })
 })
 
+// Update Candidate Info, including skills and github URL
 router.patch('/api/candidateInfo/:username', (req, res) => {
-  authControllers.updateCandidateInfo(req.body.username, req.body.information, req.body.skills, req.body.github_url)
+  profileControllers.updateCandidateInfo(req.body.username, req.body.skills, req.body.github_url)
   .catch((err) => {
     console.log(err);
   })
 })
+
 
 // authentication route for logging in, check 'users' table for credentials
 router.post('/api/login', (req, res) => {

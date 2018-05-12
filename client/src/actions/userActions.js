@@ -62,25 +62,7 @@ export const fetchInitialChallenge = (company_id) => (dispatch) => {
   })
 }
 
- export const fetchCandidateInfo = (userId, callback) => (dispatch) => {
-   axios.get('/api/candidateInfo', { params: { user_id: userId }})
-    .then((info) => {
-        dispatch({ type: GET_CANDIDATE_INFO, information: info.data[0].information, skills: info.data[0].candidate_skills, github_url: info.data[0].github_url })
-        if(callback) {
-          callback();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
 
-export const saveCandidateInfo = (username, information, skills, github_url) => (dispatch) => {
-	axios.patch('/api/candidateInfo/:username', { username: username, information: information, skills: skills, github_url: github_url })
-	.catch((err) => {
-		console.log(err);
-	})
-}
 
 export const currentCompanyCalendar = (companyId, callback) => (dispatch) => {
   dispatch( { type: GET_CURRENT_COMPANY_CALENDAR, company_id: companyId })
@@ -109,3 +91,32 @@ export const fetchCandidateInitialResults = (companyId, candidateId) => (dispatc
     console.log(err);
   })
 }
+
+
+/* ----------- User Profile ------------ */
+export const updateCandidateSkills = (username, skill) => (dispatch) => {
+  axios.patch('/api/candidateInfo/:username', { username: username, skills: skill })
+  .catch((err) => {
+    console.log(err);
+  })
+}
+
+export const updateCandidateGithub = (username, github_url) => (dispatch) => {
+  axios.patch('/api/candidateInfo/:username', { username: username, github_url: github_url })
+  .catch((err) => {
+    console.log(err);
+  })
+}
+
+ export const fetchCandidateInfo = (userId, callback) => (dispatch) => {
+   axios.get('/api/candidateInfo', { params: { user_id: userId }})
+    .then((info) => {
+      dispatch({ type: GET_CANDIDATE_INFO, skills: info.data[0].candidate_skills, github_url: info.data[0].github_url })
+        if(callback) {
+          callback();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }

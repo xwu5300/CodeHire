@@ -125,18 +125,25 @@ body {
 
 
 /* ------- User profile --------- */
-.user_profile_textarea {
-	display: block;
-	width: 50%;
-	margin: auto;
+
+.main_profile_container {
+	margin-top: 100px;
 }
 
-.user_info_div {
+.user_skills_container {
+	margin-top: 30px;
+	margin-bottom: 10px;
 	height: 300px;
 }
 
-.user_skills_div {
-	height: 200px;
+.user_skills_input {
+	float: right;
+	font-size: 22px
+}
+
+.user_skills_input input {
+	margin-right: 10px;
+	width: 85%;
 }
 
 .profile_header {
@@ -146,6 +153,11 @@ body {
 .github_link input {
 	width: 400px;
 }
+
+.skill_div {
+	font-size: 20px;
+}
+
 
 
 /* ------- Admin live coding ------- */
