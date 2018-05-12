@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Promise from 'bluebird';
 
 class Form extends Component {
   constructor(props) {
@@ -14,12 +15,14 @@ class Form extends Component {
         exampleInput: '',
         exampleOutput: '',
         difficulty: ''
-      }
+      },
+      invalid: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.save = this.save.bind(this);
     this.validateForm = this.validateForm.bind(this);
     this.handleSave = this.handleSave.bind(this);
+    this.checkIfValid = this.checkIfValid.bind(this);
   }
 
   componentDidMount() {
@@ -50,11 +53,37 @@ class Form extends Component {
     this.setState({challenge: this.state.challenge});
   }
 
-  handleSave(event) {
-    event.preventDefault();
+  handleSave() {
     if ($('.ui.form').form('is valid')) {
       this.save();
     }
+  }
+
+  checkIfValid(event) {
+    event.preventDefault();
+    return Promise
+    .try(() => {
+      JSON.parse(this.state.challenge.testInput);
+      JSON.parse(this.state.challenge.testOutput);
+      JSON.parse(this.state.challenge.exampleInput);
+      JSON.parse(this.state.challenge.exampleOutput);
+    })
+    .then(() => {
+      this.setState({
+        invalid: false
+      }, () => {
+        this.handleSave();
+      })
+    })
+    .catch((err) =>{
+      if (err) {
+        console.log('there was an error', err)
+        this.setState({
+          invalid: true
+        })
+        return false;
+      }
+    })
   }
 
   save() {
@@ -80,7 +109,7 @@ class Form extends Component {
   render() {
     return (
       <div className="form-container">
-        <form className="ui form" onSubmit={(event) => this.handleSave(event)}>
+        <form className="ui form" onSubmit={(event) => this.checkIfValid(event)}>
           <div className="field">
             <label>Title</label>
             <input name="title" type="text" placeholder="Two Sum" value={this.state.challenge.title} onChange={this.handleChange}/>
@@ -97,10 +126,18 @@ class Form extends Component {
             <label>Initial Parameters</label>
             <input name="parameters" type="text" placeholder="array, target" value={this.state.challenge.parameters} onChange={this.handleChange}/>
           </div>
+          <div>The below test cases and examples must be inputted in the following format:</div>
+          <ul>
+            <li>Each parameter must be separated by a comma</li>
+            <li>Enclose all of the parameters in an array</li>
+            <li>When including objects, wrap the keys and values in double quotes</li>
+            <li>{'Example: [[1, 2, 3], {"a":"1"}]'}</li>
+          </ul>
+          <br/>
           <div className="two fields">
             <div className="field">
               <label>Test Case - Input</label>
-              <input name="testInput" type="text" placeholder="[1, 3, 6, 0, -2], 9" value={this.state.challenge.testInput} onChange={this.handleChange}/>
+              <input name="testInput" type="text" placeholder="[[1, 3, 6, 0, -2], 9]" value={this.state.challenge.testInput} onChange={this.handleChange}/>
             </div>
             <div className="field">
               <label>Test Case - Output</label>
@@ -110,7 +147,7 @@ class Form extends Component {
           <div className="two fields">
             <div className="field">
               <label>Example - Input</label>
-              <input name="exampleInput" type="text" placeholder="[1, 4, -2, 6, 9], 15" value={this.state.challenge.exampleInput} onChange={this.handleChange}/>
+              <input name="exampleInput" type="text" placeholder="[[1, 4, -2, 6, 9], 15]" value={this.state.challenge.exampleInput} onChange={this.handleChange}/>
             </div>
             <div className="field">
               <label>Example - Output</label>
@@ -127,6 +164,7 @@ class Form extends Component {
             </select>
           </div>
           <div className="ui error message"></div>
+          {this.state.invalid ? <div style={{color: 'red', fontWeight: 'strong'}}>Either your tests or examples are not in the correct format. Please update and re-sbumit.</div> : null}
           <div className="actions">
           <div className="two fluid ui buttons">
             <button className="ui cancel red basic button" onClick={() => {this.props.close()}}>
