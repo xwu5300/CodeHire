@@ -58,8 +58,9 @@ class CompanyListView extends Component {
               </div>
               <button onClick={() => {
                 this.props.fetchInitialChallenge(company.company_id)
-                this.props.fetchCompanyResults(company.company_id, this.props.user_id)
+                // this.props.fetchCompanyResults(company.company_id, this.props.user_id)
                 this.props.fetchCandidateInitialResults(company.company_id, this.props.user_id)
+                this.props.fetchCompanySchedule(company.company_id)
                 this.props.history.push('/user/schedule');
               }}>View Company Page
               </button>
