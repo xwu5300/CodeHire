@@ -5,7 +5,7 @@ const initialState = {
   all_company_calendars: [],
   initial_challenge: [],
   candidate_calendar: [],
-  candidate_skills: '',
+  candidate_skills: [],
   github_url: '',
   current_company_calendar: '',
   pass_initial: false

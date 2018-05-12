@@ -22,10 +22,12 @@ class UserInitialChallengeView extends Component {
     this.state = {
       theme: 'monokai',
       code: `function ${this.props.initial_challenge[0].function_name}(${this.props.initial_challenge[0].parameters}) {
-}` }
+}` 
+    }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
     this.handleTheme = this.handleTheme.bind(this)
+    this.saveResults = this.saveResults.bind(this)
   }
 
   onChange(newValue, event) {
@@ -40,6 +42,12 @@ class UserInitialChallengeView extends Component {
     })
   }
 
+  saveResults(result, newString, score, time) {
+    this.props.saveResults(result, newString, score, time, this.props.initial_challenge[0].id, this.props.initial_challenge[0].company_id, this.props.user_id, true, this.props.initial_challenge[0].id, () => {
+      this.props.fetchCandidateInitialResults(this.props.initial_challenge[0].company_id, this.props.user_id)
+    })
+  }
+
   handleSubmit() {
 
     let func = this.props.initial_challenge[0].parameters
@@ -47,8 +55,6 @@ class UserInitialChallengeView extends Component {
 
     let testCaseS = this.props.initial_challenge[0].test_cases.replace(/"/g, "'")
     let testCaseD = testCaseS.replace(/'/g, '"')
-
-    console.log('what does test_case look like', testCaseD)
 
     let tests = JSON.parse(testCaseD)
     let input = tests[0].map((el)=> {
@@ -67,6 +73,8 @@ class UserInitialChallengeView extends Component {
     let answer = eval(newString)
     let result = JSON.stringify(answer) === output
 
+    let score = 90;  //hard coded
+    let time = moment(Date.now()).format();
     swal({
       title: 'Are you sure?',
       text: "You can only submit once!!",
@@ -76,32 +84,30 @@ class UserInitialChallengeView extends Component {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, submit it!'
     }).then((clickResult) => {
+      this.saveResults(result, newString, score, time)
+      var thatProps = this.props
       if (clickResult.value) {
         if (result === true) {
           swal(
-            'Success!',
-            'You answered our challenge correctly!',
-            'success'
-          )
+            {title: 'Success!',
+             text: 'You answered our challenge correctly!',
+             type: 'success'}).then(function() {
+              thatProps.history.push('/user/schedule')
+             }
+            )
         } else {
           swal(
-            'Sorry!',
-            'The answer you submitted was not correct',
-            'error'
-          )
+            {title: 'Sorry!',
+             text: 'The answer you submitted was not correct',
+             type: 'error'}).then(function() {
+              thatProps.history.push('/user/schedule')
+             })
         }
       }
-      let score = 90;  //hard coded
-      let time = moment(Date.now()).format();
-      this.props.saveResults(result, newString, score, time, this.props.initial_challenge[0].id, this.props.initial_challenge[0].company_id, this.props.user_id, true, this.props.initial_challenge[0].id, () => {
-        this.props.fetchCandidateInitialResults(this.props.initial_challenge[0].company_id, this.props.user_id)
-        this.props.history.push('/user/schedule')
-      })
     })
   }
 
   render() {
-    console.log('this.props.initial_challenge', this.props.initial_challenge)
     let examplesS = this.props.initial_challenge[0].examples.replace(/"/g, "'")
     let examplesD = examplesS.replace(/'/g, '"')
     let examples = JSON.parse(examplesD)
