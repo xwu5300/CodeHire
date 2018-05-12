@@ -33,6 +33,7 @@ getCalendar(schedule, companyId, duration) {
         <td>{schedule.name}</td>
         <td>{moment(schedule.time).format('MMMM Do YYYY dddd, h:mm A')}</td>
         <td>{schedule.duration} Minutes</td>
+        <td>
         <button className='ui orange button' 
             onClick={() => { this.getCalendar(schedule, schedule.company_id, schedule.duration) }}>Start
             </button>
@@ -41,6 +42,7 @@ getCalendar(schedule, companyId, duration) {
               this.props.cancelSchedule(schedule.id, schedule.candidate_id)
             }}>Cancel
             </button>
+          </td>
         </tr>
         )})
         }

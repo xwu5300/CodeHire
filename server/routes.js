@@ -286,6 +286,21 @@ router.get('/api/results/candidate', (req, res) => {
   })
 })
 
+router.get('/api/results/candidate/initial', (req, res) => {
+  resultsControllers.getCandidateInitialResults(req.query.companyId, req.query.candidateId)
+  .then((data) => {
+    console.log('Retrieve candidate initial result from db')
+    if (!data.length) {
+      res.send(false)
+    } else {
+      res.send(data[0].user_passed)
+    }
+  })
+  .catch((err) => {
+    console.log('Could not retrieve candidate initial result from db', err);
+  })
+})
+
 // post results to 'results' table
 router.post('/api/results', (req, res) => {
   resultsControllers.saveResults(req.body.isPassed, req.body.code, req.body.score, req.body.completedAt, req.body.challengeId, req.body.companyId, req.body.candidateId, req.body.initial)

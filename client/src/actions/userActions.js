@@ -1,7 +1,8 @@
 
-import { GET_INITIAL_CHALLENGE, GET_ALL_COMPANY_CALENDARS, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO, GET_CURRENT_COMPANY_CALENDAR } from '../constants/actionTypes';
+import { GET_INITIAL_CHALLENGE, GET_ALL_COMPANY_CALENDARS, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO, GET_CURRENT_COMPANY_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS } from '../constants/actionTypes';
 
 import axios from 'axios';
+import swal from 'sweetalert2';
 
 export const fetchAllCompanyCalendars =(cb) => (dispatch) => {
   axios.get('/api/companyCalendars')
@@ -28,9 +29,12 @@ export const saveCandidateCalendar = (candidateId, companyScheduleId) => (dispat
   axios.post('/api/candidateCalendar', {candidateId, companyScheduleId})
   .then(({data}) => {
     if (data) {
-      window.alert('Scheduled Live Challenge.')
+      swal('Success!',
+        'Scheduled a Live Challenge.')
     } else {
-      window.alert('You have already scheduled this live challenge.')
+      swal('Sorry!',
+        "You've already scheduled this live challenge.",
+      'error')
     }
   })
   .catch((err) => {
@@ -96,3 +100,12 @@ export const saveResults = (isPassed, code, score, completedAt, challengeId, com
   })
 }
 
+export const fetchCandidateInitialResults = (companyId, candidateId) => (dispatch) => {
+  axios.get('/api/results/candidate/initial', {params: {companyId: companyId, candidateId: candidateId}})
+  .then(({data}) => {
+    dispatch( {type: GET_CANDIDATE_INITIAL_RESULTS, payload: data })
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}

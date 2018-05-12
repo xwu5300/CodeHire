@@ -1,5 +1,5 @@
 import React from 'react';
-import { GET_ALL_COMPANY_CALENDARS, GET_INITIAL_CHALLENGE, GET_CANDIDATE_INFO, GET_CANDIDATE_CALENDAR } from '../constants/actionTypes';
+import { GET_ALL_COMPANY_CALENDARS, GET_INITIAL_CHALLENGE, GET_CANDIDATE_INFO, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS } from '../constants/actionTypes';
 
 const initialState = {
   all_company_calendars: [],
@@ -8,7 +8,8 @@ const initialState = {
   candidate_information: '',
   candidate_skills: '',
   github_url: '',
-  current_company_calendar: ''
+  current_company_calendar: '',
+  pass_initial: false
 }
 
 
@@ -75,5 +76,17 @@ const currentCompanySchedule = (state = initialState, action) => {
   }
 }
 
-export default { allCompanyCalendars, initialChallenge, candidateInfo, candidateCalendar, currentCompanySchedule };
+const candidateInitialResults = (state = initialState, action) => {
+  switch(action.type) {
+    case 'GET_CANDIDATE_INITIAL_RESULTS':
+      return {
+        ...state,
+        pass_initial: action.payload
+      }
+      default:
+        return state;
+  }
+}
+
+export default { allCompanyCalendars, initialChallenge, candidateInfo, candidateCalendar, currentCompanySchedule, candidateInitialResults };
 

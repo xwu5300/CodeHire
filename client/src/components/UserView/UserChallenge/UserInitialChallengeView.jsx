@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import AceEditor from 'react-ace';
 import brace from 'brace';
 import socketClient from 'socket.io-client';
-import swal from 'sweetalert2'
+import swal from 'sweetalert2';
 import moment from 'moment';
 
 import 'brace/mode/javascript';
@@ -92,13 +92,12 @@ class UserInitialChallengeView extends Component {
         }
       }
       let score = 90;  //hard coded
-      let isPassed = answer === output;
       let time = moment(Date.now()).format();
-      this.props.saveResults(isPassed, newString, score, time, this.props.initial_challenge[0].id, this.props.initial_challenge[0].company_id, this.props.user_id, true, this.props.initial_challenge[0].id, () => {
+      this.props.saveResults(result, newString, score, time, this.props.initial_challenge[0].id, this.props.initial_challenge[0].company_id, this.props.user_id, true, this.props.initial_challenge[0].id, () => {
+        this.props.fetchCandidateInitialResults(this.props.initial_challenge[0].company_id, this.props.user_id)
         this.props.history.push('/user/schedule')
       })
     })
-
   }
 
   render() {
@@ -116,9 +115,11 @@ class UserInitialChallengeView extends Component {
     console.log('example of examples', exampleInput, exampleOutput)
     return (
       <div>
-      <button className='ui green button' onClick={() => {this.props.history.push('/user/profile')}}>Edit Profile</button>
-      <button className='ui green button' onClick={() => {this.props.history.push('/user')}}>Dash Board</button>
-      <button className='ui green button' onClick={() => {this.props.history.push('/user/companylist')}}>Company Challenge list</button> 
+        <div className="ui orange three item inverted menu">
+          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
+          <div className='ui active item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Companies</div> 
+        </div>
         <h1>{this.props.initial_challenge[0].name}</h1>
         <h2>{this.props.initial_challenge[0].title}</h2>
         <div>
@@ -154,8 +155,6 @@ class UserInitialChallengeView extends Component {
           <option value='terminal'>Terminal</option>
         </select>
         <button onClick={this.handleSubmit}> Submit Answer </button>
-
-
       </div>
     )
   }

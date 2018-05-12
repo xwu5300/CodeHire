@@ -24,8 +24,8 @@ module.exports.saveResults = (isPassed, code, score, completedAt, challengeId, c
 module.exports.getCompanyResults = (companyId, candidateId) => {
   return knex('results')
   .where({'results.company_id': companyId, 'results.candidate_id' : candidateId})
-  .innerJoin('users', 'results.candidate_id', 'users.id')
-  .innerJoin('all_challenges', 'results.challenge_id', 'all_challenges.id')
+  .leftJoin('users', 'results.candidate_id', 'users.id')
+  .leftJoin('all_challenges', 'results.challenge_id', 'all_challenges.id')
   .select('all_challenges.*', 'results.*', 'users.name', 'users.information', 'users.phone', 'users.email', 'users.candidate_skills', 'users.logo_url')
   .then((res) => {
     console.log('Retrieve candidate result from result table');
@@ -42,8 +42,24 @@ module.exports.getCandidateList = (companyId) => {
   .innerJoin('users', 'results.candidate_id', 'users.id')
   .distinct('users.name', 'users.id')
   .select('users.name', 'users.id')
+  .orderBy('users.name', 'acs')
   .then((res) => {
     console.log('Retrieve candidate list from result table');
+    return res;
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
+
+module.exports.getCandidateInitialResults = (companyId, candidateId) => {
+  return knex('results')
+  .where({'company_id': companyId, 'candidate_id': candidateId, 'initial': true})
+  .orderBy('completed_at', 'desc')
+  .limit(1)
+  .select('user_passed')
+  .then((res) => {
+    console.log('Retrieve candidate initial challenge result')
     return res;
   })
   .catch((err) => {
