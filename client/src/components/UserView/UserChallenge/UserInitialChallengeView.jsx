@@ -75,7 +75,7 @@ class UserInitialChallengeView extends Component {
       // console.log('my error message', message)
       swal(
         'There was an error in submitting your code',
-        'Please double check your syntax and try again',
+        'Double check your syntax and try again!',
         'warning'
       )
     };
@@ -87,7 +87,7 @@ class UserInitialChallengeView extends Component {
     let time = moment(Date.now()).format();
     swal({
       title: 'Are you sure?',
-      text: "You can only submit once!!",
+      text: "You can only submit once!",
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
