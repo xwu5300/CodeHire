@@ -67,6 +67,10 @@ body {
   margin-left: 100px;
 }
 
+.cursor:hover {
+  cursor: pointer;
+}
+
 /* ------- Company calendar -------- */
 .company_calendar {
 	margin-top: 100px;

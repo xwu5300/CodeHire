@@ -26,6 +26,7 @@ class AdminDashboardView extends Component {
     this.props.fetchInitialChallenge(2);
     Modal.setAppElement('body');
     this.props.fetchCandidateList(2);
+    console.log(this.props)
   }
 
   handleClickOn() {
@@ -66,18 +67,18 @@ class AdminDashboardView extends Component {
     return (
       <div>
         <div className="ui orange four item inverted menu">
-          <div className='ui item' onClick={ () => { this.props.history.push('/admin/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
-          <div className='ui active item' onClick={() => {this.props.history.push('/admin')}}>Dashboard</div> 
-          <div className='ui item' onClick={() => this.editChallenges() }>Edit Challenges</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/admin/data')}}>Analytics</div> 
+          <div className='ui item cursor' onClick={ () => { this.props.history.push('/admin/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
+          <div className='ui active item cursor' onClick={() => {this.props.history.push('/admin')}}>Dashboard</div> 
+          <div className='ui item cursor' onClick={() => this.editChallenges() }>Edit Challenges</div>
+          <div className='ui item cursor' onClick={() => {this.props.history.push('/admin/data')}}>Analytics</div> 
         </div>
 
         <div className='ui raised padded centered container segment'>
           <div className='ui grid'>
            
             <div className='row centered challenge_btns'>
-              <button className='ui button' type='button' onClick={this.handleClickOn}>Set Initial Challenge</button>
-              <button className='ui button' type='button' onClick={this.handleClickOff}>Schedule Challenge</button>
+              <button className='ui button cursor' type='button' onClick={this.handleClickOn}>Set Initial Challenge</button>
+              <button className='ui button cursor' type='button' onClick={this.handleClickOff}>Schedule Challenge</button>
             </div>
             <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
               <ScheduleChallengeView challenges={this.props.all_challenges} close={this.closeModal} makeInitial={this.props.makeInitial} isInitial={this.props.is_initial} addToSchedule={this.props.addToCompanySchedule}/>
@@ -110,7 +111,7 @@ class AdminDashboardView extends Component {
                 </tr>
               </thead>
               <tbody>
-              {this.props.company_schedule ? this.props.company_schedule.map((item) => {
+              {this.props.company_schedule.length > 0 ? this.props.company_schedule.map((item) => {
                 return (
                   <tr key={item.id}>
                     <td>{item.title}</td>
@@ -120,7 +121,7 @@ class AdminDashboardView extends Component {
                     <td><button className='ui button' type='button' onClick={()=>{this.props.deleteFromCompanySchedule(item.id)}}><i className='x icon'></i></button></td>
                   </tr>
                 )
-              }) : null }
+              }) : <tr><td>You have no scheduled challenges at this time.</td></tr> }
               </tbody>
             </table>
           </div>
