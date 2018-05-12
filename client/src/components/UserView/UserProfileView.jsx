@@ -30,7 +30,7 @@ class UserProfileView extends Component {
   }
 
   addSkill(new_skill) {
-    if(this.state.all_skills.length > 0) {
+    if(this.state.all_skills) {
     this.setState({ all_skills: [...this.state.all_skills, new_skill] })
   } else {
     this.setState({ all_skills: [new_skill] })
@@ -45,6 +45,7 @@ class UserProfileView extends Component {
 
 
   render() {
+    console.log('user profile prop', this.props)
     return (
       <div>
         <div className="ui orange three item inverted menu">

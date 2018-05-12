@@ -32,6 +32,7 @@ class CompanyListView extends Component {
   }
 
   render () {
+    console.log('compa list view', this.props)
     return (
       <div>
         <div className="ui orange three item inverted menu">
