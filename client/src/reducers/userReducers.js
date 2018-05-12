@@ -5,7 +5,6 @@ const initialState = {
   all_company_calendars: [],
   initial_challenge: [],
   candidate_calendar: [],
-  candidate_information: '',
   candidate_skills: '',
   github_url: '',
   current_company_calendar: '',
@@ -54,7 +53,6 @@ const initialChallenge = (state = initialState, action) => {
       case 'GET_CANDIDATE_INFO':
         return {
           ...state,
-          candidate_information: action.information,
           candidate_skills: action.skills,
           github_url: action.github_url
         }
@@ -87,6 +85,8 @@ const candidateInitialResults = (state = initialState, action) => {
         return state;
   }
 }
+
+
 
 export default { allCompanyCalendars, initialChallenge, candidateInfo, candidateCalendar, currentCompanySchedule, candidateInitialResults };
 

@@ -33,7 +33,14 @@ class AdminProfileView extends Component {
   
   render() {
     return (
-      <div className='company_profile'>
+      <div>
+        <div className="ui orange four item inverted menu">
+          <div className='ui active item' onClick={ () => { this.props.history.push('/admin/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/admin')}}>Dashboard</div> 
+          <div className='ui item' onClick={() => this.props.history.push('/admin/challenges') }>Edit Challenges</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/admin/data')}}>Analytics</div> 
+        </div>
+
         <div className='ui centered raised padded container segment'>
           <div className='ui centered grid'>
             <h1>Company Profile</h1>
