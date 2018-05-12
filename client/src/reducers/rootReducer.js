@@ -27,7 +27,8 @@ export default combineReducers({
   current_company_calendar: userReducers.currentCompanySchedule,
   challenge_info: adminReducers.challengeInfo,
   results: adminReducers.results,
-  candidate_list: adminReducers.candidateList
+  candidate_list: adminReducers.candidateList,
+  pass_initial: userReducers.candidateInitialResults
 })
 
 

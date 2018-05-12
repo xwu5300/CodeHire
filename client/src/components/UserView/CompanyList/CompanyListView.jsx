@@ -35,7 +35,7 @@ class CompanyListView extends Component {
     return (
       <div>
         <div className="ui orange three item inverted menu">
-          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i class="user circle icon"></i>{ this.props.username }</div>
+          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
           <div className='ui active item' onClick={() => {this.props.history.push('/user/companylist')}}>Companies</div> 
         </div>
@@ -58,7 +58,8 @@ class CompanyListView extends Component {
               </div>
               <button onClick={() => {
                 this.props.fetchInitialChallenge(company.company_id)
-                // this.props.fetchCompanySchedule(company.id)
+                this.props.fetchCompanyResults(company.company_id, this.props.user_id)
+                this.props.fetchCandidateInitialResults(company.company_id, this.props.user_id)
                 this.props.history.push('/user/schedule');
               }}>View Company Page
               </button>
@@ -72,14 +73,6 @@ class CompanyListView extends Component {
       }
       
       </div>
-
-      {/* <h2 style={{ marginTop: '100px', textAlign: 'center' }}>Your Calendar</h2>
-      <div className='candidate_calendar inverted ui raised container segment'>
-      {this.props.candidate_calendar.length ? 
-      <UserScheduleTableView currentCompanyCalendar={ this.props.currentCompanyCalendar } candidateCalendar={this.props.candidate_calendar} cancelSchedule={this.props.deleteCandidateSchedule}/>
-
-      : <div>You Do Not Have Any Scheduled Challenges</div>}
-      </div> */}
       </div>
     )
   }

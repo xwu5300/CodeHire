@@ -8,7 +8,6 @@ class AnalyticsView extends Component {
   } 
 
   render() {
-    console.log('ana view', this.props)
     return (
       <div className='analytics_container'>
         <h1>Analytics</h1>
