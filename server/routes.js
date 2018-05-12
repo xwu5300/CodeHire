@@ -93,7 +93,7 @@ router.post('/api/challenges', (req, res) => {
   // if (typeof obj === 'object'){
   //   req.body.challenge.testInput = obj
   // }
-
+  // let test = JSON.stringify(req.body.challenge.testInput)
   let testCases = req.body.test_cases || `[[${req.body.challenge.testInput}], [${req.body.challenge.testOutput}]]`;
   let examples = req.body.examples || `[[${req.body.challenge.exampleInput}], [${req.body.challenge.exampleOutput}]]` || null;
   let difficulty = req.body.challenge.difficulty || null;
@@ -157,10 +157,6 @@ router.get('/api/challenge', (req, res) => {
   let companyId = 2;
   challengeControllers.getChallengeInfo(req.query.challengeId, companyId)
   .then((data) => {
-    data.map((item) => {
-      let newTest = item.test_cases.replace(/'/g, '"');
-      item.test_cases = newTest
-    })
     res.send(data);
   })
   .catch((err) => {
