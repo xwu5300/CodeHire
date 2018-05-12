@@ -5,8 +5,9 @@ class ScheduleChallengeView extends Component {
   constructor(props){
     super(props);
     this.state = {
-      duration: 0,
-      showForm: this.props.challenges.map((item) => false)
+      duration: '',
+      showForm: this.props.challenges.map((item) => false),
+      invalid: false
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -20,12 +21,32 @@ class ScheduleChallengeView extends Component {
   }
 
   handleClick(challenge, i) {
+    let date = $('#date').val()
     if (this.props.isInitial) {
-      this.props.makeInitial(challenge.id, challenge.initial, this.state.duration, this.props.isInitial)
+      if (this.state.duration === '') {
+        this.setState({
+          invalid: true
+        }) 
+      } else {
+        this.setState({
+          invalid: false
+        }, () => {
+          this.props.makeInitial(challenge.id, challenge.initial, this.state.duration, this.props.isInitial, this.props.close)
+        })
+      }
     } else {
-      this.props.addToSchedule($('#date').val(), this.state.duration, challenge.id);
+      if (this.state.duration === '' || !date) {
+        this.setState({
+          invalid: true
+        })
+      } else {
+        this.setState({
+          invalid: false
+        }, () => {
+          this.props.addToSchedule(date, this.state.duration, challenge.id, this.props.close)
+        })
+      }
     }
-    this.props.close();
     this.toggleForm(i);
   }
 
@@ -82,6 +103,7 @@ class ScheduleChallengeView extends Component {
               </div>
             }
             <button className="ui button select" onClick={() => {this.handleClick(item, i)}}>Select</button>
+            {this.state.invalid ? <div style={{color: 'red'}}>Please enter all values and try again</div> : null}
             <div className="clear"></div>
             <br/>
           </div>

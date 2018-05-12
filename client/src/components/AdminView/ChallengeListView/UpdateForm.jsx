@@ -131,7 +131,7 @@ class UpdateForm extends Component {
           <div>The below test cases and examples must be inputted in the following format:</div>
           <ul>
             <li>Each parameter must be separated by a comma</li>
-            <li>Enclose all of the parameters in an array</li>
+            <li>If more than one parameter is included, enclose all of the parameters in an array</li>
             <li>When including objects, wrap the keys and values in double quotes</li>
             <li>{'Example: [[1, 2, 3], {"a":"1"}]'}</li>
           </ul>
