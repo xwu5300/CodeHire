@@ -58,7 +58,7 @@ CREATE TABLE results (
   code TEXT,
   score SMALLINT,
   completed_at TIMESTAMP NOT NULL,
-  challenge_id SMALLINT REFERENCES all_challenges(id),
+  challenge_id SMALLINT REFERENCES all_challenges(id) ON DELETE CASCADE,
   candidate_id SMALLINT REFERENCES users(id),
   company_id SMALLINT REFERENCES users(id),
   initial BOOLEAN NOT NULL
