@@ -81,6 +81,11 @@ body {
 	margin: auto;
 }
 
+.company_logo {
+	width: 200px;
+	height: auto;
+}
+
 /* ----- Challenge List ------- */
 .challenge_list {
 	height: 600px;
@@ -121,9 +126,6 @@ body {
 	margin-top: 100px;
 }
 
-.edit_company_info {
-	
-}
 
 .company_profile_container h2 {
 	font-size: 36px;
