@@ -12,7 +12,7 @@ class UserProfileView extends Component {
     }
 
     this.handleChange = this.handleChange.bind(this);
-   
+
     this.addSkill = this.addSkill.bind(this);
     this.updateGithub = this.updateGithub.bind(this);
   }
@@ -47,14 +47,15 @@ class UserProfileView extends Component {
 
 
   render() {
+    console.log('user profile prop', this.props)
     return (
       <div>
         <div className="ui orange three item inverted menu">
           <div className='ui active item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Companies</div> 
+          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Companies</div>
         </div>
-        
+
         <div className='main_profile_container'>
           <div className='ui padded grid'>
             <div className='ui raised container segment'>
@@ -86,12 +87,12 @@ class UserProfileView extends Component {
                     )
                   }) : null }
                   </div>
-                </div>  
+                </div>
 
               </div>
-              </div> 
-            </div> 
-          </div> 
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )

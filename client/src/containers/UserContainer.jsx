@@ -12,14 +12,10 @@ import { connect } from 'react-redux';
 
 import { fetchAllCompanyCalendars, fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar, fetchCandidateInitialResults } from '../actions/userActions';
 import { fetchCompanySchedule, fetchCompanyResults } from '../actions/adminActions' ;
- 
+
 import axios from 'axios';
 
 class UserContainer extends Component {
-
-  componentDidMount() {
-    // this.props.fetchAllCompanyCalendars();
-  }
 
   render() {
     return (
@@ -51,9 +47,9 @@ const mapStateToProps = function(state) {
     pass_initial: state.pass_initial.pass_initial
 }};
 
-const connectComponent = connect(mapStateToProps, { fetchAllCompanyCalendars })(UserContainer);
+const connectComponent = connect(mapStateToProps)(UserContainer); //code cleaned
 const UserDashBoardComponent = connect(mapStateToProps, { fetchCandidateCalendar, deleteCandidateSchedule, currentCompanyCalendar })(UserDashBoard);
-const CompanyListViewComponent = connect(mapStateToProps, { fetchInitialChallenge,   fetchAllCompanyCalendars, fetchCandidateCalendar, deleteCandidateSchedule, fetchAllCompanyCalendars, currentCompanyCalendar, fetchCompanyResults, fetchCandidateInitialResults })(CompanyListView);
+const CompanyListViewComponent = connect(mapStateToProps, { fetchInitialChallenge,   fetchAllCompanyCalendars, fetchCompanyResults, fetchCandidateInitialResults, fetchCompanySchedule })(CompanyListView); //code cleaned
 const CompanyScheduleViewComponent = connect(mapStateToProps, { saveCandidateCalendar })(CompanyScheduleView);
 const UserInitialChallengeViewComponent = connect(mapStateToProps, { saveResults, fetchCandidateInitialResults })(UserInitialChallengeView);
 const UserLiveCodingViewComponent = connect(mapStateToProps, { saveResults })(UserLiveCodingView);

@@ -7,7 +7,6 @@ class CompanyScheduleTableView extends Component {
   }
 
   render() {
-    console.log('com sch table view prop', this.props)
     return(
       <table className='ui inverted table'>
         <thead>
