@@ -22,7 +22,8 @@ class UserInitialChallengeView extends Component {
     this.state = {
       theme: 'monokai',
       code: `function ${this.props.initial_challenge[0].function_name}(${this.props.initial_challenge[0].parameters}) {
-}`
+}`,
+      inChallenge: true
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
@@ -70,17 +71,18 @@ class UserInitialChallengeView extends Component {
 
     ${this.props.initial_challenge[0].function_name}(${input})
     `
-    window.onerror = function(msg, url, lineNo, columnNo, error){
-      // let message = error
-      // console.log('my error message', message)
-      swal(
-        'There was an error in submitting your code',
-        'Double check your syntax and try again!',
-        'warning'
-      )
-    };
+    if (this.state.inChallenge) {
+      window.onerror = function(msg, url, lineNo, columnNo, error){
+        swal(
+          'There was an error in your code',
+          'Double check your syntax and try again!',
+          'warning'
+        )
+      }
+    }
 
     let answer = eval(newString)
+    console.log('my answer', answer, 'and my output', output)
     let result = JSON.stringify(answer) === output
 
     let score = 90;  //hard coded
@@ -117,10 +119,13 @@ class UserInitialChallengeView extends Component {
               thatProps.history.push('/user/schedule')
              })
         }
+<<<<<<< HEAD
         let returnToDash = () => (this.props.saveResults(isPassed, newString, score, time, this.props.initial_challenge[0].id, this.props.initial_challenge[0].company_id, localStorage.getItem('userId'), true, this.props.initial_challenge[0].id, () => {
           this.props.history.push('/user/schedule')
         }))
         setTimeout(returnToDash, 0)
+=======
+>>>>>>> fixed global window error
       }
     })
   }
