@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import UpdateForm from './UpdateForm.jsx';
 import Modal from 'react-modal';
+import swal from 'sweetalert2';
+
 
 class CompanyChallenges extends Component {
   constructor(props) {
@@ -8,7 +10,7 @@ class CompanyChallenges extends Component {
     this.state = {
       showForm: this.props.allChallenges.map((item) => false),
       duration: 0,
-      modalIsOpen: false
+      modalIsOpen: false,
     }
     this.toggleForm = this.toggleForm.bind(this);
     this.showCalendar = this.showCalendar.bind(this);
@@ -17,8 +19,9 @@ class CompanyChallenges extends Component {
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.handleModal = this.handleModal.bind(this);
+    this.confirmDelete = this.confirmDelete.bind(this)
   }
-  
+
   componentDidMount() {
     console.log(this.props);
     Modal.setAppElement('body');
@@ -59,6 +62,22 @@ class CompanyChallenges extends Component {
     })
   }
 
+  confirmDelete(challenge, id) {
+    swal({
+      title: 'Are you sure you want to delete challenge?',
+      text: "It will be gone forever",
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Delete',
+    }).then((clickResult) => {
+      if (clickResult.value) {
+        this.props.delete(challenge, id)
+      }
+    })
+  }
+
+
   showCalendar() {
     $('#calendar').calendar('popup', 'show');
   }
@@ -79,14 +98,14 @@ class CompanyChallenges extends Component {
               <button className="ui button" onClick={() => {this.toggleForm(i)}}>
               Schedule Challenge
               </button>
-              <button className="ui icon button" onClick={() => {this.props.delete(challenge, this.props.userId)}}>
+              <button className="ui icon button" onClick={() => {this.confirmDelete(challenge, this.props.userId)}}>
                 <i className="minus icon"></i>
               </button>
               <button className="ui icon button" onClick={() => {this.handleModal(challenge.id)}}>
                 <i className="edit icon"></i>
               </button>
               <br/>
-              {!this.state.showForm[i] ? null : 
+              {!this.state.showForm[i] ? null :
                 <div className="calendar-container">
                     <div className="ui calendar" id="calendar" onClick={this.showCalendar}>
                       <div className="ui input left icon">
@@ -103,7 +122,7 @@ class CompanyChallenges extends Component {
                       <option value="60">60</option>
                       <option value="90">90</option>
                     </select>
-                  </div> 
+                  </div>
                   <button className="ui button" onClick={() => {this.handleClick(challenge, i)}}>Save</button>
                 </div>
               }
@@ -118,3 +137,8 @@ class CompanyChallenges extends Component {
 
 
 export default CompanyChallenges;
+
+
+// <button className="ui icon button" onClick={() => {this.props.delete(challenge, this.props.userId)}}>
+//   <i className="minus icon"></i>
+// </button>

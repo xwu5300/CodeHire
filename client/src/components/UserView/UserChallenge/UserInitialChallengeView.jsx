@@ -119,13 +119,6 @@ class UserInitialChallengeView extends Component {
               thatProps.history.push('/user/schedule')
              })
         }
-<<<<<<< HEAD
-        let returnToDash = () => (this.props.saveResults(isPassed, newString, score, time, this.props.initial_challenge[0].id, this.props.initial_challenge[0].company_id, localStorage.getItem('userId'), true, this.props.initial_challenge[0].id, () => {
-          this.props.history.push('/user/schedule')
-        }))
-        setTimeout(returnToDash, 0)
-=======
->>>>>>> fixed global window error
       }
     })
   }
