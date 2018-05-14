@@ -43,11 +43,11 @@ class CompanyChallenges extends Component {
   }
 
   handleModal(challengeId) {
-    this.props.getInfo(challengeId, this.openModal);
+    this.props.getInfo(challengeId, this.props.userId, this.openModal);
   }
 
   handleClick(challenge, i) {
-    this.props.addToSchedule($('#date').val(), this.state.duration, challenge.id);
+    this.props.addToSchedule($('#date').val(), this.state.duration, challenge.id, this.props.userId);
     this.toggleForm(i);
   }
 
@@ -69,7 +69,7 @@ class CompanyChallenges extends Component {
         <h1>Saved Challenges</h1>
         {!this.props.challengeInfo ? null :
           <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
-            <UpdateForm challengeInfo={this.props.challengeInfo} save={this.props.save} close={this.closeModal}/>
+            <UpdateForm challengeInfo={this.props.challengeInfo} save={this.props.save} close={this.closeModal} userId={this.props.userId}/>
           </Modal>}
         {this.props.allChallenges.map((challenge, i) => {
           return (
@@ -79,7 +79,7 @@ class CompanyChallenges extends Component {
               <button className="ui button" onClick={() => {this.toggleForm(i)}}>
               Schedule Challenge
               </button>
-              <button className="ui icon button" onClick={() => {this.props.delete(challenge)}}>
+              <button className="ui icon button" onClick={() => {this.props.delete(challenge, this.props.userId)}}>
                 <i className="minus icon"></i>
               </button>
               <button className="ui icon button" onClick={() => {this.handleModal(challenge.id)}}>

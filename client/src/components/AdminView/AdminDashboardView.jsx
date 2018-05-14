@@ -23,9 +23,10 @@ class AdminDashboardView extends Component {
 
   componentDidMount() {
     this.props.fetchCompanySchedule(this.props.user_id);
-    this.props.fetchInitialChallenge(2);
+    this.props.fetchInitialChallenge(this.props.user_id);
+    this.props.fetchCandidateList(this.props.user_id);
+    this.props.fetchAllChallenges(this.props.user_id);
     Modal.setAppElement('body');
-    this.props.fetchCandidateList(2);
     console.log(this.props)
   }
 
@@ -81,7 +82,7 @@ class AdminDashboardView extends Component {
               <button className='ui button cursor' type='button' onClick={this.handleClickOff}>Schedule Challenge</button>
             </div>
             <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
-              <ScheduleChallengeView challenges={this.props.all_challenges} close={this.closeModal} makeInitial={this.props.makeInitial} isInitial={this.props.is_initial} addToSchedule={this.props.addToCompanySchedule}/>
+              <ScheduleChallengeView userId={this.props.user_id} challenges={this.props.all_challenges} close={this.closeModal} makeInitial={this.props.makeInitial} isInitial={this.props.is_initial} addToSchedule={this.props.addToCompanySchedule}/>
             </Modal>
             <table className='ui inverted table company_calendar'>
               <thead>
@@ -95,7 +96,7 @@ class AdminDashboardView extends Component {
                   <tr>
                     <td>{this.props.initial_challenge[0].title}</td>
                     <td>{this.props.initial_challenge[0].duration}</td>
-                    <td><button className='ui button' type='button' onClick={() => {this.props.makeInitial(this.props.initial_challenge[0].id, this.props.initial_challenge[0].initial)}}><i className='x icon'></i></button></td>
+                    <td><button className='ui button' type='button' onClick={() => {this.props.makeInitial(this.props.initial_challenge[0].id, this.props.initial_challenge[0].initial, null, null, this.props.user_id)}}><i className='x icon'></i></button></td>
                   </tr>
                 }
               </tbody>
@@ -118,7 +119,7 @@ class AdminDashboardView extends Component {
                     <td>{moment(item.time).format('MMMM Do YYYY, h:mm A')}</td>
                     <td>{item.duration}</td>
                     <td><button className='ui button' type='button' onClick={() => { this.viewChallenge(item.title, item.company_id, item.duration) }}>View challenge</button></td>
-                    <td><button className='ui button' type='button' onClick={()=>{this.props.deleteFromCompanySchedule(item.id)}}><i className='x icon'></i></button></td>
+                    <td><button className='ui button' type='button' onClick={()=>{this.props.deleteFromCompanySchedule(item.id, this.props.user_id)}}><i className='x icon'></i></button></td>
                   </tr>
                 )
               }) : <tr><td>You have no scheduled challenges at this time.</td></tr> }

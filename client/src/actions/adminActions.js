@@ -27,10 +27,10 @@ export const fetchAllChallenges = (companyId) => (dispatch) => {
   })
 }
 
-export const saveChallenge = (challenge, cb) => (dispatch) => {
-  axios.post('/api/challenges', { challenge })
+export const saveChallenge = (challenge, companyId, cb) => (dispatch) => {
+  axios.post('/api/challenges', { challenge, companyId })
   .then(() => {
-    dispatch(fetchAllChallenges());
+    dispatch(fetchAllChallenges(companyId));
     console.log('Saved to your challenges')
   })
   .then(() => {
@@ -43,12 +43,12 @@ export const saveChallenge = (challenge, cb) => (dispatch) => {
   })
 }
 
-export const deleteChallenge = (challenge) => (dispatch) => {
-  axios.delete('/api/challenges', {params: { challenge }})
+export const deleteChallenge = (challenge, companyId) => (dispatch) => {
+  axios.delete('/api/challenges', {params: { challenge, companyId }})
   .then(() => {
-    dispatch(fetchAllChallenges());
-    dispatch(fetchCompanySchedule());
-    dispatch(fetchInitialChallenge(2));
+    dispatch(fetchAllChallenges(companyId));
+    dispatch(fetchCompanySchedule(companyId));
+    dispatch(fetchInitialChallenge(companyId));
     console.log('Removed from your challenges');
   })
 	.catch((err) => {
@@ -56,8 +56,8 @@ export const deleteChallenge = (challenge) => (dispatch) => {
 	})
 }
 
-export const getChallengeInfo = (challengeId, cb) => (dispatch) => {
-  axios.get('/api/challenge', {params: { challengeId }})
+export const getChallengeInfo = (challengeId, companyId, cb) => (dispatch) => {
+  axios.get('/api/challenge', {params: { challengeId, companyId }})
   .then(({data}) => {
     dispatch({type: GET_CHALLENGE_INFO, payload: data[0]});
     console.log('retrieving challenge info', data[0]);
@@ -70,11 +70,11 @@ export const getChallengeInfo = (challengeId, cb) => (dispatch) => {
   })
 }
 
-export const addToCompanySchedule = (time, duration, challengeId, cb) => (dispatch) => {
-  axios.post('/api/companyCalendar', { time, duration, challengeId })
+export const addToCompanySchedule = (time, duration, challengeId, companyId, cb) => (dispatch) => {
+  axios.post('/api/companyCalendar', { time, duration, challengeId, companyId })
   .then(() => {
     console.log('add to company schedule was called')
-    dispatch(fetchCompanySchedule());
+    dispatch(fetchCompanySchedule(companyId));
     // console.log('Added to your upcoming challenges')
   })
   .then(() => {
@@ -87,10 +87,10 @@ export const addToCompanySchedule = (time, duration, challengeId, cb) => (dispat
 	})
 }
 
-export const deleteFromCompanySchedule = (scheduleId) => (dispatch) => {
+export const deleteFromCompanySchedule = (scheduleId, companyId) => (dispatch) => {
   axios.delete('/api/companyCalendar', {params: { scheduleId }})
   .then(() => {
-    dispatch(fetchCompanySchedule());
+    dispatch(fetchCompanySchedule(companyId));
     console.log('Removed from your upcoming challenges');
   })
   .catch((err) => {
@@ -139,10 +139,11 @@ export const toggleInitialOff = () => (dispatch) => {
   dispatch( {type: TOGGLE_INITIAL_OFF, payload: false })
 }
 
-export const makeInitial = (challengeId, initial, duration, isInitial, cb) => (dispatch) => {
-  axios.patch('/api/initialChallenge', { challengeId, initial, duration, isInitial})
+export const makeInitial = (challengeId, initial, duration, isInitial, companyId, cb) => (dispatch) => {
+  axios.patch('/api/initialChallenge', { challengeId, initial, duration, isInitial, companyId })
   .then(() => {
-    dispatch(fetchInitialChallenge(2));
+    console.log('make initial function was called')
+    dispatch(fetchInitialChallenge(companyId));
   })
   .then(() => {
     if (cb) {

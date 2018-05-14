@@ -31,7 +31,7 @@ class ScheduleChallengeView extends Component {
         this.setState({
           invalid: false
         }, () => {
-          this.props.makeInitial(challenge.id, challenge.initial, this.state.duration, this.props.isInitial, this.props.close)
+          this.props.makeInitial(challenge.id, challenge.initial, this.state.duration, this.props.isInitial, this.props.userId, this.props.close)
         })
       }
     } else {
@@ -43,7 +43,7 @@ class ScheduleChallengeView extends Component {
         this.setState({
           invalid: false
         }, () => {
-          this.props.addToSchedule(date, this.state.duration, challenge.id, this.props.close)
+          this.props.addToSchedule(date, this.state.duration, challenge.id, this.props.userId, this.props.close)
         })
       }
     }

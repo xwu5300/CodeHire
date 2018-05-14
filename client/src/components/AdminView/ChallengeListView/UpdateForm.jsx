@@ -28,7 +28,6 @@ class UpdateForm extends Component {
 
   componentDidMount() {
     this.validateForm();
-    console.log(this.props.challengeInfo.test_cases)
   }
 
   validateForm() {
@@ -89,7 +88,7 @@ class UpdateForm extends Component {
   }
 
   save() {
-    this.props.save(this.state.challenge, () => {
+    this.props.save(this.state.challenge, this.props.userId, () => {
       this.setState({
         challenge: {
           title: '',
