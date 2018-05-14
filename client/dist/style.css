@@ -30,12 +30,8 @@ body {
 
 
 /* ------ Admin Dashboard -------- */
-.admin_dashboard, .company_profile, .challenge_list {
-	margin-top: 75px;
-}
-
-.admin_dashboard {
-	height: 900px;
+.company_dashboard_container {
+	margin-top: 100px;
 }
 
 .challenge_btns {
@@ -71,24 +67,11 @@ body {
   cursor: pointer;
 }
 
-/* ------- Company calendar -------- */
-.company_calendar {
-	margin-top: 100px;
-}
-
-.schedule_container {
-	width: 80%;
-	margin: auto;
-}
-
-.company_logo {
-	width: 200px;
-	height: auto;
-}
 
 /* ----- Challenge List ------- */
 .challenge_list {
 	height: 600px;
+	margin: 100px 50px;
 }
 
 .form-container {
@@ -110,7 +93,19 @@ body {
   margin-right: 30px;
 }
 
+.input_challenge_btn {
+	position: absolute;
+	bottom: 10px;
+	text-align: center;
+}
 
+.saved_challenges_btns {
+	float: right;
+}
+
+.challenge_content div {
+  margin-bottom: 10px;
+}
 /* ------ Company profile ------ */
 
 .company_profile_logo {
@@ -156,8 +151,6 @@ body {
 
 
 
-
-
 /* ------- User profile --------- */
 
 .main_profile_container {
@@ -186,12 +179,14 @@ body {
 }
 
 .github_link input {
-	width: 400px;
+	width: 60%;
+	height: 35px;
 }
 
 .skill_div {
 	font-size: 20px;
 }
+
 
 /* -------- User Coding ---------- */
 .examples {
@@ -205,6 +200,26 @@ body {
 .examples .output {
 	margin-left: 80px
 }
+
+.user_resume_container {
+	margin-top: 15px;
+	margin-left: 25px;
+}
+
+.user_resume_container button {
+	margin-top: 10px;
+}
+
+.resume_div {
+	width: 40%;
+	height: 50px;
+	border: 3px solid orange;
+	border-radius: 10px;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+
 
 
 /* ------- Admin live coding ------- */
@@ -222,11 +237,8 @@ body {
 	margin-bottom: 10px;
 }
 
-.active_user_menu {
+.active_user_menu, .active_user_menu h2 {
 	height: 800px;
-}
-
-.active_user_menu h2 {
 	text-align: center;
 }
 
@@ -250,3 +262,23 @@ body {
 	font-size: 40px;
 	float: right;
 }
+
+
+/* -------- Company List View --------- */
+.schedule_container {
+	width: 80%;
+	margin: auto;
+}
+
+.company_logo {
+	width: 200px;
+	height: auto;
+}
+
+
+
+
+
+
+
+

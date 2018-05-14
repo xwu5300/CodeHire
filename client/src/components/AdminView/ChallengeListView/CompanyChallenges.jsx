@@ -12,7 +12,7 @@ class CompanyChallenges extends Component {
       duration: 0,
       modalIsOpen: false,
     }
-    this.toggleForm = this.toggleForm.bind(this);
+
     this.showCalendar = this.showCalendar.bind(this);
     this.handleDurationChange = this.handleDurationChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -23,7 +23,6 @@ class CompanyChallenges extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
     Modal.setAppElement('body');
   }
 
@@ -53,6 +52,7 @@ class CompanyChallenges extends Component {
     this.props.addToSchedule($('#date').val(), this.state.duration, challenge.id, this.props.userId);
     this.toggleForm(i);
   }
+
 
   toggleForm(i) {
     let newShowForm = [...this.state.showForm];
@@ -84,12 +84,13 @@ class CompanyChallenges extends Component {
 
   render() {
     return (
-      <div className='ui segment'>
+      <div className='ui segment' style={{ overlow: 'scroll' }}>
         <h1>Saved Challenges</h1>
         {!this.props.challengeInfo ? null :
           <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
             <UpdateForm challengeInfo={this.props.challengeInfo} save={this.props.save} close={this.closeModal} userId={this.props.userId}/>
           </Modal>}
+
         {this.props.allChallenges.map((challenge, i) => {
           return (
             <div className="challenges" key={challenge.id}>
@@ -124,21 +125,41 @@ class CompanyChallenges extends Component {
                     </select>
                   </div>
                   <button className="ui button" onClick={() => {this.handleClick(challenge, i)}}>Save</button>
+
+
+      
+          {this.props.allChallenges.map((challenge, i) => {
+            return (
+              <div className="ui fluid orange card" key={challenge.id}>
+                <div className='content challenge_content'>
+                <div>Title: {challenge.title}</div>
+                <div>Description: {challenge.instruction}</div>
+                <div>Difficulty: {challenge.difficulty}</div>
+                <div className='saved_challenges_btns'>
+                  <button className="ui icon button" onClick={() => {this.props.delete(challenge, this.props.userId)}}>
+                    <i className="minus icon"></i>
+                  </button>
+                  <button className="ui icon button" onClick={() => {this.handleModal(challenge.id)}}>
+                    <i className="edit icon"></i>
+                  </button>
+
                 </div>
-              }
+              </div>
             </div>
           )
         })}
+         <button className="input_challenge_btn ui orange basic button" onClick={ this.props.openModal }>Create new challenge</button>
       </div>
+      
+      
     )
   }
 }
 
 
 
+
 export default CompanyChallenges;
 
 
-// <button className="ui icon button" onClick={() => {this.props.delete(challenge, this.props.userId)}}>
-//   <i className="minus icon"></i>
-// </button>
+

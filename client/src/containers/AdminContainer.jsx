@@ -51,15 +51,23 @@ const mapStateToProps = (state) => ({
    candidate_list: state.candidate_list.candidate_list
 });
 
+const mapDispatchToProps = {
+  fetchInitialChallenge, currentCompanyCalendar, fetchCandidateInfo,
+  fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge,
+  updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn,
+  toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, 
+  fetchCompanyResults, fetchCandidateList, getChallengeInfo, getUsername
+}
 
 
 
-const ChallengeListComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge, addToCompanySchedule, makeInitial, getChallengeInfo, getUsername })(ChallengeListView);
-const AdminDashboardComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, currentCompanyCalendar, fetchCompanySchedule, deleteFromCompanySchedule, addToCompanySchedule, fetchInitialChallenge, getUsername })(AdminDashboardView);
-const AnalyticsComponent= connect(mapStateToProps, { fetchCandidateList, fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge, fetchCompanyResults, getUsername })(AnalyticsView);
-const LiveCodingComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge, fetchCandidateInfo, getUsername })(LiveCodingView);
-const AdminProfileComponent = connect(mapStateToProps, { updateInfo, fetchCompanyInfo, getUsername })(AdminProfileView);
-const UserResultsComponent = connect(mapStateToProps)(UserResults)
+const ChallengeListComponent = connect(mapStateToProps, mapDispatchToProps)(ChallengeListView);
+const AdminDashboardComponent = connect(mapStateToProps, mapDispatchToProps)(AdminDashboardView);
+const AnalyticsComponent= connect(mapStateToProps, mapDispatchToProps)(AnalyticsView);
+const LiveCodingComponent = connect(mapStateToProps, mapDispatchToProps)(LiveCodingView);
+const AdminProfileComponent = connect(mapStateToProps, mapDispatchToProps)(AdminProfileView);
+
+const UserResultsComponent = connect(mapStateToProps, mapDispatchToProps)(UserResults)
 
 const connectAdminContainer = connect(mapStateToProps)(AdminContainer);
 export default withRouter(connectAdminContainer);

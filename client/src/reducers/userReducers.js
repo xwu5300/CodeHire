@@ -1,5 +1,3 @@
-import React from 'react';
-import { GET_ALL_COMPANY_CALENDARS, GET_INITIAL_CHALLENGE, GET_CANDIDATE_INFO, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS } from '../constants/actionTypes';
 
 const initialState = {
   all_company_calendars: [],

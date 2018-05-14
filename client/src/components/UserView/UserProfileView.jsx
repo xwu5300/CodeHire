@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 
+import Dropbox from './Dropbox.jsx';
+
 class UserProfileView extends Component {
   constructor() {
     super();
@@ -39,6 +41,7 @@ class UserProfileView extends Component {
       }
       
       this.props.updateCandidateSkills(localStorage.getItem('userId'), this.state.skill);
+      this.setState({ skill: '' })
     }
   }
 
@@ -68,10 +71,13 @@ class UserProfileView extends Component {
             <div className='ui raised container segment'>
 
             <div className='row'>
-              <div className='github_link'>
-                <i className="github icon"></i>
-                <input name='github_url' value={ this.state.github_url } onChange={ (e) => this.handleChange(e) } type='text' placeholder='github' />
-                <button onClick={ () => this.updateGithub() }>save</button>
+              <div className='ui padded raised container segment'>
+                <div className='github_link'>
+                  <i style={{ fontSize: '22px' }} className="github icon"></i>
+                  <input name='github_url' value={ this.state.github_url } onChange={ (e) => this.handleChange(e) } type='text' placeholder='github' />
+                  <button style={{ height: '35px', width:'15%', marginLeft:'5px' }} className='ui orange basic button' onClick={ () => this.updateGithub() }>save</button>
+                </div>
+                <Dropbox />
               </div>
             </div>
 
@@ -84,18 +90,18 @@ class UserProfileView extends Component {
                 </div>
 
                 <div className='row'>
+                  <h2>Skills</h2>
                   <div className='ui small horizontal list'>
                   {this.state.all_skills ? this.state.all_skills.map((skill, i) => {
                     return (
                       <div key={ i } className='item'>
-                        <i onClick={ () => this.deleteSkill(skill) } className="times circle icon orange"></i>
+                        <i onClick={ () => this.deleteSkill(skill) } className="remove icon orange"></i>
                         <div className='content skill_div'> { skill } </div>
                       </div>
                     )
                   }) : null }
                   </div>
                 </div>
-
               </div>
               </div>
             </div>

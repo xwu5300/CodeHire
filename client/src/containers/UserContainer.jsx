@@ -47,13 +47,21 @@ const mapStateToProps = function(state) {
     pass_initial: state.pass_initial.pass_initial
 }};
 
+const mapDispatchToProps = {
+  fetchAllCompanyCalendars, fetchCandidateCalendar, fetchInitialChallenge,
+  fetchCandidateInfo, updateCandidateSkills, deleteCandidateSkill,
+  updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, 
+  saveResults, currentCompanyCalendar, fetchCandidateInitialResults, 
+  fetchCompanySchedule, fetchCompanyResults  
+}
+
 const connectComponent = connect(mapStateToProps)(UserContainer); //code cleaned
-const UserDashBoardComponent = connect(mapStateToProps, { fetchCandidateCalendar, deleteCandidateSchedule, currentCompanyCalendar })(UserDashBoard);
-const CompanyListViewComponent = connect(mapStateToProps, { fetchInitialChallenge,   fetchAllCompanyCalendars, fetchCompanyResults, fetchCandidateInitialResults, fetchCompanySchedule })(CompanyListView); //code cleaned
-const CompanyScheduleViewComponent = connect(mapStateToProps, { saveCandidateCalendar })(CompanyScheduleView);
-const UserInitialChallengeViewComponent = connect(mapStateToProps, { saveResults, fetchCandidateInitialResults })(UserInitialChallengeView);
-const UserLiveCodingViewComponent = connect(mapStateToProps, { saveResults })(UserLiveCodingView);
-const UserProfileViewComponent = connect(mapStateToProps, { fetchCandidateInfo, updateCandidateSkills, updateCandidateGithub, deleteCandidateSkill })(UserProfileView);
+const UserDashBoardComponent = connect(mapStateToProps, mapDispatchToProps)(UserDashBoard);
+const CompanyListViewComponent = connect(mapStateToProps, mapDispatchToProps)(CompanyListView); //code cleaned
+const CompanyScheduleViewComponent = connect(mapStateToProps, mapDispatchToProps)(CompanyScheduleView);
+const UserInitialChallengeViewComponent = connect(mapStateToProps, mapDispatchToProps)(UserInitialChallengeView);
+const UserLiveCodingViewComponent = connect(mapStateToProps, mapDispatchToProps)(UserLiveCodingView);
+const UserProfileViewComponent = connect(mapStateToProps, mapDispatchToProps)(UserProfileView);
 
 
 const routeUserComponent = withRouter(connectComponent);

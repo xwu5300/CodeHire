@@ -84,7 +84,7 @@ export const saveResults = (isPassed, code, score, completedAt, challengeId, com
 }
 
 export const fetchCandidateInitialResults = (companyId, candidateId) => (dispatch) => {
-  axios.get('/api/results/candidate/initial', {params: {companyId: companyId, candidateId: candidateId}})
+  axios.get('/api/results/candidate/initial', {params: { companyId, candidateId}})
   .then(({data}) => {
     dispatch( {type: GET_CANDIDATE_INITIAL_RESULTS, payload: data })
   })
@@ -115,8 +115,9 @@ export const deleteCandidateSkill = (username, skill, callback) => (dispatch) =>
   })
 }
 
-export const updateCandidateGithub = (candidateId, github_url) => (dispatch) => {
-  axios.patch('/api/candidateInfo', { candidateId, github_url })
+
+export const updateCandidateGithub = (username, github_url) => (dispatch) => {
+  axios.patch('/api/candidateInfo/:username', { username, github_url })
   .catch((err) => {
     console.log(err);
   })

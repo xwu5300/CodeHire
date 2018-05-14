@@ -3,20 +3,17 @@ import { auth, provider } from '../../../firebase/index.js';
 import axios from 'axios';
 import history from '../components/history.jsx';
 
+
 export const saveCandidate = (token, fullName,username, phone, github_url) => (dispatch) => {
   console.log('auth actions save candidate')
 	axios.post('/api/registerCandidate', { token, fullName, username, phone, github_url })
-	.then((response) => {
-		dispatch({ type: SAVE_CANDIDATE, payload: response.data })
-	})
-	.catch((err) => {
-		console.log('Error saving user', err);
-	})
 }
 
-export const saveCompany = (token, companyName, username, phone, logoUrl, companyInfo) => (dispatch) => {
-  console.log('calling save company')
-  axios.post('/api/registerCompany', { token, companyName, username, phone, logoUrl, companyInfo })
+
+
+
+export const saveCompany = (companyName, username, password, email, phone, logoUrl, information) => (dispatch) => {
+  axios.post('/api/registerCompany', { companyName, username, password, email, phone, logoUrl, information })
   .then((response) => {
   	dispatch({ type: SAVE_COMPANY, payload: response.data })
   })
@@ -92,7 +89,19 @@ export const handleSignUp = (email, username, password, form, name, phone, logoU
       alert(error.message)
     }
   })
-}
+
+// export const handleLogin = (username, password) => (dispatch) => {
+// 	axios.post('/api/login', { username, password })
+// 	.then((response) => {
+// 		// console.log('HANDLE LOGIN', response);
+// 		dispatch({ type: CHECK_USER, payload: response.data })
+// 	})
+// 	.catch((err) => {
+// 		console.log('Error checking user', err);
+// 	}
+//  )
+
+// }
 
 
 

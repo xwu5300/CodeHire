@@ -1,6 +1,4 @@
 
-import { CHECK_USER, SAVE_CANDIDATE, SAVE_COMPANY } from '../constants/actionTypes';
-
 const initialState = {
   name: '',
   login_status: '',

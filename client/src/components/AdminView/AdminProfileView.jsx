@@ -7,8 +7,8 @@ class AdminProfileView extends Component {
     super();
 
     this.state = {
-      logo_url: '',
-      information: '',
+      logo_url: 'http://static1.squarespace.com/static/522a22cbe4b04681b0bff826/t/581cc65fe4fcb5a68ecd940c/1478280803080/hrhq-avatar.png?format=1000w',
+      information: 'Insert company information here',
       isTextarea: false
     }
 
@@ -20,7 +20,7 @@ class AdminProfileView extends Component {
   componentWillMount() {
     this.props.fetchCompanyInfo(localStorage.getItem('userId'), () => {
       this.setState({ logo_url: this.props.logo_url, information: this.props.company_information })
-    });
+    })
   }
 
   handleChange(e) {
@@ -41,10 +41,10 @@ class AdminProfileView extends Component {
     return (
       <div>
         <div className="ui orange four item inverted menu">
-          <div className='ui active item cursor' onClick={ () => { this.props.history.push('/admin/profile') } }><i className="user circle icon"></i>Profile</div>
-          <div className='ui item cursor' onClick={() => {this.props.history.push('/admin')}}>Dashboard</div> 
-          <div className='ui item cursor' onClick={() => this.props.history.push('/admin/challenges') }>Edit Challenges</div>
-          <div className='ui item cursor' onClick={() => {this.props.history.push('/admin/data')}}>Analytics</div> 
+          <div className='ui active item' onClick={ () => { this.props.history.push('/admin/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/admin')}}>Dashboard</div> 
+          <div className='ui item' onClick={() => this.props.history.push('/admin/challenges') }>Manage Challenges</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/admin/data')}}>Analytics</div> 
         </div>
         
         <div className='company_profile_container'>
