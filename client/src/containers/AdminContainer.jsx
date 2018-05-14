@@ -16,14 +16,6 @@ import { fetchInitialChallenge, currentCompanyCalendar, fetchCandidateInfo } fro
 
 class AdminContainer extends Component {
 
-  componentDidMount() {
-    this.props.fetchAllChallenges(this.props.user_id);
-    this.props.fetchDefaultChallenges();
-    this.props.fetchCompanySchedule(this.props.user_id);
-    this.props.fetchInitialChallenge(this.props.user_id);
-  }
-
-
   render() {
     return (
       <Switch>
@@ -69,6 +61,6 @@ const LiveCodingComponent = connect(mapStateToProps, { fetchAllChallenges, fetch
 const AdminProfileComponent = connect(mapStateToProps, { updateInfo, fetchCompanyInfo })(AdminProfileView);
 const UserResultsComponent = connect(mapStateToProps)(UserResults)
 
-const connectAdminContainer = connect(mapStateToProps, {fetchAllChallenges, fetchDefaultChallenges, fetchCompanyInfo, fetchCompanySchedule, fetchInitialChallenge })(AdminContainer);
+const connectAdminContainer = connect(mapStateToProps)(AdminContainer);
 export default withRouter(connectAdminContainer);
 
