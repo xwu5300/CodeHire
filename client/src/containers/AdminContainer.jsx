@@ -17,10 +17,10 @@ import { fetchInitialChallenge, currentCompanyCalendar, fetchCandidateInfo } fro
 class AdminContainer extends Component {
 
   componentDidMount() {
-    this.props.fetchAllChallenges();
+    this.props.fetchAllChallenges(this.props.user_id);
     this.props.fetchDefaultChallenges();
-    this.props.fetchCompanySchedule();
-    this.props.fetchInitialChallenge(2);
+    this.props.fetchCompanySchedule(this.props.user_id);
+    this.props.fetchInitialChallenge(this.props.user_id);
   }
 
 

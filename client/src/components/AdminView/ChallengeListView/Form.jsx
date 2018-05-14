@@ -87,7 +87,7 @@ class Form extends Component {
   }
 
   save() {
-    this.props.save(this.state.challenge, () => {
+    this.props.save(this.state.challenge, this.props.userId, () => {
       this.setState({
         challenge: {
           title: '',

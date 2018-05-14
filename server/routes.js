@@ -72,7 +72,7 @@ router.post('/api/registerCompany', (req, res) => {
 
 // get all challenges from 'all_challenges' table
 router.get('/api/challenges', (req, res) => {
-  let companyId = req.query.companyId || 2;
+  let companyId = req.query.companyId;
   challengeControllers.getCompanyChallenges(companyId)
   .then((data) => {
     res.send(data);
@@ -92,15 +92,10 @@ router.post('/api/challenges', (req, res) => {
   let instruction = req.body.challenge.instruction;
   let functionName = req.body.challenge.function_name;
   let params = req.body.challenge.parameters;
-  // let obj = JSON.parse(req.body.challenge.testInput)
-  // if (typeof obj === 'object'){
-  //   req.body.challenge.testInput = obj
-  // }
-  // let test = JSON.stringify(req.body.challenge.testInput)
   let testCases = req.body.test_cases || `[[${req.body.challenge.testInput}], [${req.body.challenge.testOutput}]]`;
   let examples = req.body.examples || `[[${req.body.challenge.exampleInput}], [${req.body.challenge.exampleOutput}]]` || null;
   let difficulty = req.body.challenge.difficulty || null;
-  let companyId = 2;
+  let companyId = req.body.companyId;
   challengeControllers.saveChallenge(title, instruction, functionName, params, testCases, examples, difficulty, companyId)
   .then(() => {
     res.send('Successfully saved challenge');
@@ -111,7 +106,7 @@ router.post('/api/challenges', (req, res) => {
 router.delete('/api/challenges', (req, res) => {
   let query = JSON.parse(req.query.challenge)
   let title = query.title;
-  let companyId = 2;
+  let companyId = req.query.companyId;
   challengeControllers.deleteCompanyChallenge(title, companyId)
   .then(() => {
     res.send('Successfully deleted challenge');
@@ -126,9 +121,8 @@ router.post('/api/initialChallenge', (req, res) => {
 // update initial challenge from 'intitial_challenges table'
 router.patch('/api/initialChallenge', (req, res) => {
   console.log('server route', req.body.challengeId);
-  let companyId = 2;
   if (req.body.initial === false || req.body.isInitial === true) {
-    challengeControllers.setInitialChallenge(companyId, req.body.challengeId, req.body.duration)
+    challengeControllers.setInitialChallenge(req.body.companyId, req.body.challengeId, req.body.duration)
     .then(() => {
       res.send('Updated initial challenge');
     })
@@ -136,7 +130,7 @@ router.patch('/api/initialChallenge', (req, res) => {
       console.log('Could not update initial challenge', err);
     })
   } else {
-    challengeControllers.removeInitialChallenge(companyId, req.body.challengeId)
+    challengeControllers.removeInitialChallenge(req.body.companyId, req.body.challengeId)
     .then(() => {
       res.send('Removed initial challenge');
     })
@@ -157,8 +151,7 @@ router.get('/api/initialChallenge', (req, res) => {
 
 //get selected challenge info for company
 router.get('/api/challenge', (req, res) => {
-  let companyId = 2;
-  challengeControllers.getChallengeInfo(req.query.challengeId, companyId)
+  challengeControllers.getChallengeInfo(req.query.challengeId, req.query.companyId)
   .then((data) => {
     res.send(data);
   })
@@ -216,7 +209,7 @@ router.post('/api/companyCalendar', (req, res) => {
   let time = req.body.time;
   let duration = Number(req.body.duration);
   let challengeId = req.body.challengeId;
-  let companyId = 2;
+  let companyId = req.body.companyId;
   calendarControllers.addToCompanySchedule(time, duration, challengeId, companyId)
   .then(() => {
     console.log('Successfully saved challenge to schedule');
@@ -229,10 +222,8 @@ router.post('/api/companyCalendar', (req, res) => {
 
 //fetch single company's schedule
 router.get('/api/companyCalendar', (req, res) => {
-  let companyId = 2;
-  calendarControllers.getCompanySchedule(companyId)
+  calendarControllers.getCompanySchedule(req.query.companyId)
   .then((data) => {
-    //console.log('this is the data from the company schedule', data)
     res.send(data);
   })
   .catch((err) => {

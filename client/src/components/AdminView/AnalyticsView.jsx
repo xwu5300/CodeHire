@@ -7,7 +7,12 @@ class AnalyticsView extends Component {
     super();
   } 
 
+  componentDidMount() {
+    console.log(this.props)
+  }
+
   render() {
+    console.log(this.props)
     return (
       <div>
         <div className="ui orange four item inverted menu">
@@ -19,17 +24,17 @@ class AnalyticsView extends Component {
 
         <h1>Analytics</h1>
         <h2>Candidate List</h2>
-          {this.props.candidate_list.map((candidate, i) => {
+          {this.props.candidate_list.length > 0 ? this.props.candidate_list.map((candidate, i) => {
             return (
               <div key={i}>Name: {candidate.name}
               <button onClick={() => {
-                this.props.fetchCompanyResults(2, candidate.id)
+                this.props.fetchCompanyResults(this.props.user_id, candidate.id)
                 this.props.history.push('/admin/data/results')
               }}>View Candidate Details
               </button>
               </div>
             )
-          })}
+          }) : null}
       </div>
     )
   }
