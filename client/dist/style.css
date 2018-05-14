@@ -271,8 +271,35 @@ body {
 }
 
 .company_logo {
-	width: 200px;
+	width: 150px;
 	height: auto;
+	margin-right: 50px;
+}
+
+.search_company_input {
+	margin-top: 40px;
+	margin: auto;
+}
+
+.company_list_items {
+	width: 55%;
+	display: block;
+	margin: auto;
+	padding: auto;
+}
+
+.company_item {
+	margin-bottom: 10px;
+}
+
+.company_item_header {
+	font-size: 32px;
+}
+
+.view_company_btn {
+	float: right;
+	position: relative;
+	top: 30px;
 }
 
 

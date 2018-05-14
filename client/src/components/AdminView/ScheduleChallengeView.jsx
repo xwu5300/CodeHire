@@ -6,8 +6,8 @@ class ScheduleChallengeView extends Component {
     super(props);
     this.state = {
       duration: '',
-      showForm: this.props.challenges.map((item) => false),
-      invalid: this.props.challenges.map((item) => false)
+      showForm: this.props.challenges.map((item) => true),
+      invalid: this.props.challenges.map((item) => true)
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -49,13 +49,7 @@ class ScheduleChallengeView extends Component {
     $('#calendar').calendar('popup', 'show');
   }
 
-  toggleForm(i) {
-    let newShowForm = [...this.state.showForm];
-    newShowForm[i] = !this.state.showForm[i];
-    this.setState({
-      showForm: newShowForm
-    })
-  }
+  
 
   toggleValid(i) {
     let newValidity = [...this.state.invalid];
@@ -69,14 +63,12 @@ class ScheduleChallengeView extends Component {
     return (
       <div>
       <h4>Select from your saved challenges:</h4>
+      <div className='ui two column grid'>
       {this.props.challenges.length === 0 ? 'No saved challenges to choose from' : this.props.challenges.map((item, i) => {
         return (
           <div key={item.id}>
             <div className="title">{item.title}</div>
             <div className="calendar-button">
-              <button className="ui button" onClick={() => {this.toggleForm(i)}}>
-              {this.props.isInitial ? 'Set Duration' : 'Select Date and Time'}
-              </button>
             </div>
             {!this.state.showForm[i] ? null : 
               <div className="calendar-container">
@@ -106,6 +98,7 @@ class ScheduleChallengeView extends Component {
           </div>
         )
       })}
+      </div>
         <div className="close-button">
           <button className="ui icon button" onClick={this.props.close}><i className="x icon"></i></button>
         </div>

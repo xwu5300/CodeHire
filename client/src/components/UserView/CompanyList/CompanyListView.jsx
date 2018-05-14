@@ -41,46 +41,44 @@ class CompanyListView extends Component {
   }
 
   render () {
-    console.log('in company list view',this.props)
-    // console.log('compa list view props', this.props, localStorage.getItem('userId'))
-    // console.log('compa list view candidate id', localStorage.getItem('userId'))
-    // console.log('compa list view candidate id', localStorage.getItem('companyId'))
+
     return (
       <div>
-        <div className="ui orange three item inverted menu">
-          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.name }</div>
+        <div className="ui orange three item menu">
+          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
           <div className='ui active item' onClick={() => {this.props.history.push('/user/companylist')}}>Companies</div>
         </div>
-        <div className='ui centered grid'>
-          <div className='row' style={{marginTop: '40px', marginBottom: '50px'}} >
+        
+          <div className='search_company_input' style={{marginTop: '40px', marginBottom: '70px', textAlign: 'center'}} >
             <UserSearchView updateCompanyCalendar={this.updateCompanyCalendar}/>
           </div>
-
-
+       
+       <div className='company_list_items'>
+       <div className='ui divided items'>
       {this.state.companyCalendar.length ?
       this.state.companyCalendar.map((company, i) => {
         return (
-          <div key={i}>
 
-            <div className='five wide column'>
-              <img className='company_logo' src={`${company.logo_url || 'http://dev.jobkhoji.com/assets/images/default_company_icon.png'}`} />
-
-              {company.name}
-              <div>
-                <p>Coming Live Challenge: {moment(company.time).format('MMMM Do YYYY dddd, h:mm A')}</p>
-                <p>Duration: {company.duration} Minutes</p>
+          <div className='item' key={i}>
+            <span className='company_logo'>
+              <img className='ui image' src={`${company.logo_url || 'http://dev.jobkhoji.com/assets/images/default_company_icon.png'}`} />
+            </span>
+              <div className='content'>
+                <h2 className='company_item_header'>{company.name}</h2>
+                  <div className='description'>
+                <p><b>Coming Live Challenge:</b> {moment(company.time).format('MMMM Do YYYY dddd, h:mm A')}</p>
               </div>
-              <button onClick={() => {
-                console.log('comp id comp list view', this.encodeCompanyId(company.company_id))
+              <button className='view_company_btn ui orange button' onClick={() => {
                 this.props.fetchInitialChallenge(this.encodeCompanyId(company.company_id))
-                this.props.fetchCandidateInitialResults(company.company_id, localStorage.getItem('userId'))
+                this.props.fetchCandidateInitialResults(this.encodeCompanyId(company.company_id), localStorage.getItem('userId'))
                 this.props.fetchCompanySchedule(this.encodeCompanyId(company.company_id))
                 this.props.history.push('/user/schedule');
               }}>View Company Page
               </button>
-            </div>
+              </div>
           </div>
+         
         )})
 
 
@@ -88,6 +86,7 @@ class CompanyListView extends Component {
 
       }
 
+      </div>
       </div>
       </div>
     )
