@@ -161,7 +161,8 @@ body {
 /* ------- User profile --------- */
 
 .main_profile_container {
-	margin-top: 100px;
+	margin: 100px auto;
+	width: 60%;
 }
 
 .user_skills_container {

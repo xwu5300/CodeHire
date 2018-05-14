@@ -1,5 +1,5 @@
 
-import { GET_INITIAL_CHALLENGE, GET_ALL_COMPANY_CALENDARS, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO, GET_CURRENT_COMPANY_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS } from '../constants/actionTypes';
+import { GET_INITIAL_CHALLENGE, GET_ALL_COMPANY_CALENDARS, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO, DELETE_CANDIDATE_SKILL, GET_CURRENT_COMPANY_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS } from '../constants/actionTypes';
 
 import axios from 'axios';
 import swal from 'sweetalert2';
@@ -95,8 +95,21 @@ export const fetchCandidateInitialResults = (companyId, candidateId) => (dispatc
 
 
 /* ----------- User Profile ------------ */
-export const updateCandidateSkills = (candidateId, skills) => (dispatch) => {
-  axios.patch('/api/candidateInfo', { candidateId, skills })
+
+export const updateCandidateSkills = (username, skills) => (dispatch) => {
+  axios.patch('/api/candidateInfo/:username', { username, skills })
+  .catch((err) => {
+    console.log(err);
+  })
+}
+
+export const deleteCandidateSkill = (username, skill, callback) => (dispatch) => {
+  axios.delete('/api/candidateInfo/:username', { params: { username, skill } })
+  .then((response) => {
+    if(callback) {
+      callback(response)
+    }
+  })
   .catch((err) => {
     console.log(err);
   })

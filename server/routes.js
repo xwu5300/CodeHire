@@ -37,6 +37,15 @@ router.patch('/api/candidateInfo', (req, res) => {
   })
 })
 
+router.delete('/api/candidateInfo/:username', (req, res) => {
+  profileControllers.deleteCandidateSkill(req.query.username, req.query.skill, (data) => {
+    res.send(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+})
+
 
 router.get('/api/candidateInfo', (req, res) => {
   let candidateId = jwt.decode(req.body.candidateId, secret).id;

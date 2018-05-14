@@ -14,6 +14,7 @@ class UserProfileView extends Component {
     this.handleChange = this.handleChange.bind(this);
 
     this.addSkill = this.addSkill.bind(this);
+    this.deleteSkill = this.deleteSkill.bind(this);
     this.updateGithub = this.updateGithub.bind(this);
   }
 
@@ -30,7 +31,7 @@ class UserProfileView extends Component {
   }
 
   addSkill(new_skill) {
-    if(new_skill !== '') {
+    if(new_skill !== '' && !this.state.all_skills.includes(new_skill)) {
       if(this.state.all_skills) {
         this.setState({ all_skills: [...this.state.all_skills, new_skill] })
       } else {
@@ -41,13 +42,19 @@ class UserProfileView extends Component {
     }
   }
 
+  deleteSkill(skill) {
+    this.props.deleteCandidateSkill(this.props.username, skill, (response) => {
+      this.setState({ all_skills: response.data })
+    });
+  
+  }
+
   updateGithub() {
     this.props.updateCandidateGithub(localStorage.getItem('userId'), this.state.github_url);
   }
 
 
   render() {
-    console.log('user profile prop', this.props)
     return (
       <div>
         <div className="ui orange three item inverted menu">
@@ -81,7 +88,7 @@ class UserProfileView extends Component {
                   {this.state.all_skills ? this.state.all_skills.map((skill, i) => {
                     return (
                       <div key={ i } className='item'>
-                        <i onClick={ () => this.deleteSkill(i) } className="times circle icon orange"></i>
+                        <i onClick={ () => this.deleteSkill(skill) } className="times circle icon orange"></i>
                         <div className='content skill_div'> { skill } </div>
                       </div>
                     )
