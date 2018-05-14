@@ -13,6 +13,7 @@ export const saveCandidate = (token, fullName, phone, github_url) => (dispatch) 
 }
 
 export const saveCompany = (token, companyName, phone, logoUrl, companyInfo) => (dispatch) => {
+  console.log('calling save company')
   axios.post('/api/registerCompany', { token, companyName, phone, logoUrl, companyInfo })
   .then((response) => {
   	dispatch({ type: SAVE_COMPANY, payload: response.data })
@@ -51,10 +52,11 @@ export const handleSignUp = (email, password, form, name, phone, logoUrl, github
     user.getIdToken()
       .then((token) => {
         console.log('token',token)
+        console.log('auth action', form)
       if (form === 'companyForm') {
-        saveCompany(token, name, phone, logoUrl, companyInfo)
+        dispatch(saveCompany(token, name, phone, logoUrl, companyInfo));
       } else {
-        saveCandidate(token, name, phone, githubUrl)
+        dispatch(saveCandidate(token, name, phone, githubUrl));
       }
     })
   })

@@ -62,7 +62,8 @@ router.post('/api/registerCandidate', (req, res) => {
 
 // post company register information into 'users' table
 router.post('/api/registerCompany', (req, res) => {
-  authControllers.saveCompany(req.body.companyName, req.body.token, req.body.password, req.body.email, req.body.phone, req.body.logoUrl, req.body.information, (status) => {
+  console.log('saving company')
+  authControllers.saveCompany(req.body.token, req.body.companyName, req.body.phone, req.body.logoUrl, req.body.information, (status) => {
     res.status(201).send(status);
   })
 })

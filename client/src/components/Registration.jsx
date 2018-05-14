@@ -27,7 +27,7 @@ class Registration extends Component {
   }
 
   componentDidMount() {
-    this.props.handleSignUp('test@dcats.com', 'testing');
+    this.props.handleSignUp('amy12345@uber.com', 'kjsdfhlsdf', 'companyForm', 'amy', '2948', 'url', null, 'info');
   }
 
   switchForm(value) {
