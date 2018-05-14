@@ -24,20 +24,21 @@ export const saveCompany = (token, companyName, phone, logoUrl, companyInfo) => 
 }
 
 export const handleLogin = (email, password) => (dispatch) => {
-// 	axios.post('/api/login', {username: username, password: password })
-// 	.then((response) => {
-// 		// console.log('HANDLE LOGIN', response);
-// 		dispatch({ type: CHECK_USER, payload: response.data })
-// 	})
-// 	.catch((err) => {
-// 		console.log('Error checking user', err);
-// 	}
-//  )
-
   if (auth.currentUser) {
     auth.signOut();
   } else {
     auth.signInWithEmailAndPassword(email, password)
+    .then(({user}) => {;
+      console.log(user)
+      axios.post('/api/login', {token: user.uid})
+      .then((response) => {
+        console.log('response data', response.data)
+        dispatch({ type: CHECK_USER, payload: response.data })
+      })
+      .catch((err) => {
+        console.log('Error checking user', err);
+      })
+    })
     .catch((err) => {
       if (err) {
         alert(err.message);
@@ -49,16 +50,11 @@ export const handleLogin = (email, password) => (dispatch) => {
 export const handleSignUp = (email, password, form, name, phone, logoUrl, githuburl, companyInfo, cb) => (dispatch) => {
   auth.createUserWithEmailAndPassword(email, password)
   .then(({user}) => {
-    user.getIdToken()
-      .then((token) => {
-        console.log('token',token)
-        console.log('auth action', form)
-      if (form === 'companyForm') {
-        dispatch(saveCompany(token, name, phone, logoUrl, companyInfo));
-      } else {
-        dispatch(saveCandidate(token, name, phone, githubUrl));
-      }
-    })
+    if (form === 'companyForm') {
+      dispatch(saveCompany(user.uid, name, phone, logoUrl, companyInfo));
+    } else {
+      dispatch(saveCandidate(user.uid, name, phone, githubUrl));
+    }
   })
   .then(() => {
     if (cb) {

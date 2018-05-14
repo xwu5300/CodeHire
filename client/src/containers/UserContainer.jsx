@@ -35,7 +35,7 @@ const mapStateToProps = function(state) {
   return {
     all_company_calendars: state.all_company_calendars.all_company_calendars,
     initial_challenge: state.initial_challenge.initial_challenge,
-    username: state.username.username,
+    name: state.name.name,
     user_id: state.user_id.user_id,
     candidate_information: state.candidate_information.candidate_information,
     candidate_skills: state.candidate_skills.candidate_skills,

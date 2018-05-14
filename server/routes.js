@@ -10,29 +10,30 @@ const profileControllers = require('./controllers/profiles');
 
 // get company Information
 router.get('/api/companyInfo', (req, res) => {
-  profileControllers.getCompanyInfo(req.query.token, (data) => {
+  console.log(req.query.userId)
+  profileControllers.getCompanyInfo(req.query.userId, (data) => {
     res.status(200).send(data);
   })
 })
 
 router.get('/api/candidateInfo', (req, res) => {
-  profileControllers.getCandidateInfo(req.query.user_id, (data) => {
+  profileControllers.getCandidateInfo(req.query.userId, (data) => {
     res.status(200).send(data);
   })
 })
 
 
 // update company profile information in 'users' table
-router.patch('/api/companyInfo/:token', (req, res) => {
-  profileControllers.updateCompanyInfo(req.body.token, req.body.logo_url, req.body.information)
+router.patch('/api/companyInfo', (req, res) => {
+  profileControllers.updateCompanyInfo(req.body.userId, req.body.logo_url, req.body.information)
   .catch((err) => {
     console.log(err);
   })
 })
 
 // Update Candidate Info, including skills and github URL
-router.patch('/api/candidateInfo/:token', (req, res) => {
-  profileControllers.updateCandidateInfo(req.body.token, req.body.skills, req.body.github_url)
+router.patch('/api/candidateInfo', (req, res) => {
+  profileControllers.updateCandidateInfo(req.body.userId, req.body.skills, req.body.github_url)
   .catch((err) => {
     console.log(err);
   })
@@ -41,8 +42,8 @@ router.patch('/api/candidateInfo/:token', (req, res) => {
 
 // authentication route for logging in, check 'users' table for credentials
 router.post('/api/login', (req, res) => {
-  authControllers.handleLogin(req.body.token, req.body.password, (role, id, token) => {
-    res.status(201).send([role, id, token]);
+  authControllers.handleLogin(req.body.token, (role, id, name) => {
+    res.status(201).send([role, id, name]);
   })
   .catch((err) => {
     console.log(err);

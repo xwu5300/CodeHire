@@ -33,7 +33,6 @@ class AdminContainer extends Component {
 const mapStateToProps = (state) => ({
    default_challenges: state.default_challenges.default_challenges,
    all_challenges: state.all_challenges.all_challenges,
-   username: state.username.username,
    logo_url: state.logo_url.logo_url,
    company_information: state.company_information.company_information,
    company_schedule: state.company_schedule.company_schedule,
@@ -43,6 +42,7 @@ const mapStateToProps = (state) => ({
    current_live_challenge_duration: state.current_live_challenge_duration.current_live_challenge_duration,
    current_company_calendar: state.current_company_calendar.current_company_calendar,
    user_id: state.user_id.user_id,
+   name: state.name.name,
    challenge_info: state.challenge_info.challenge_info,
    candidate_information: state.candidate_information.candidate_information,
    candidate_skills: state.candidate_skills.candidate_skills,

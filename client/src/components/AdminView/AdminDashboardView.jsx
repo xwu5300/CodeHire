@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import moment from 'moment';
 import ScheduleChallengeView from './ScheduleChallengeView.jsx';
 import Modal from 'react-modal';
@@ -69,21 +69,21 @@ class AdminDashboardView extends Component {
     return (
       <div>
         <div className="ui orange four item inverted menu">
-          <div className='ui item cursor' onClick={ () => { this.props.history.push('/admin/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
-          <div className='ui active item cursor' onClick={() => {this.props.history.push('/admin')}}>Dashboard</div> 
-          <div className='ui item cursor' onClick={() => this.editChallenges() }>Edit Challenges</div>
-          <div className='ui item cursor' onClick={() => {this.props.history.push('/admin/data')}}>Analytics</div> 
+          <div className='ui item cursor' onClick={() => { this.props.history.push('/admin/profile') }}><i className="user circle icon"></i>{this.props.name}</div>
+          <div className='ui active item cursor' onClick={() => { this.props.history.push('/admin') }}>Dashboard</div>
+          <div className='ui item cursor' onClick={() => this.editChallenges()}>Edit Challenges</div>
+          <div className='ui item cursor' onClick={() => { this.props.history.push('/admin/data') }}>Analytics</div>
         </div>
 
         <div className='ui raised padded centered container segment'>
           <div className='ui grid'>
-           
+
             <div className='row centered challenge_btns'>
               <button className='ui button cursor' type='button' onClick={this.handleClickOn}>Set Initial Challenge</button>
               <button className='ui button cursor' type='button' onClick={this.handleClickOff}>Schedule Challenge</button>
             </div>
             <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
-              <ScheduleChallengeView userId={this.props.user_id} challenges={this.props.all_challenges} close={this.closeModal} makeInitial={this.props.makeInitial} isInitial={this.props.is_initial} addToSchedule={this.props.addToCompanySchedule}/>
+              <ScheduleChallengeView userId={this.props.user_id} challenges={this.props.all_challenges} close={this.closeModal} makeInitial={this.props.makeInitial} isInitial={this.props.is_initial} addToSchedule={this.props.addToCompanySchedule} />
             </Modal>
             <table className='ui inverted table company_calendar'>
               <thead>
@@ -97,12 +97,12 @@ class AdminDashboardView extends Component {
                   <tr>
                     <td>{this.props.initial_challenge[0].title}</td>
                     <td>{this.props.initial_challenge[0].duration}</td>
-                    <td><button className='ui button' type='button' onClick={() => {this.props.makeInitial(this.props.initial_challenge[0].id, this.props.initial_challenge[0].initial, null, null, this.props.user_id)}}><i className='x icon'></i></button></td>
+                    <td><button className='ui button' type='button' onClick={() => { this.props.makeInitial(this.props.initial_challenge[0].id, this.props.initial_challenge[0].initial, null, null, this.props.user_id) }}><i className='x icon'></i></button></td>
                   </tr>
                 }
               </tbody>
             </table>
-            <br/>
+            <br />
             <table className='ui inverted table company_calendar'>
               <thead>
                 <tr>
@@ -113,23 +113,23 @@ class AdminDashboardView extends Component {
                 </tr>
               </thead>
               <tbody>
-              {this.props.company_schedule.length > 0 ? this.props.company_schedule.map((item) => {
-                return (
-                  <tr key={item.id}>
-                    <td>{item.title}</td>
-                    <td>{moment(item.time).format('MMMM Do YYYY, h:mm A')}</td>
-                    <td>{item.duration}</td>
-                    <td><button className='ui button' type='button' onClick={() => { this.viewChallenge(item.title, item.company_id, item.duration) }}>View challenge</button></td>
-                    <td><button className='ui button' type='button' onClick={()=>{this.props.deleteFromCompanySchedule(item.id, this.props.user_id)}}><i className='x icon'></i></button></td>
-                  </tr>
-                )
-              }) : <tr><td>You have no scheduled challenges at this time.</td></tr> }
+                {this.props.company_schedule.length > 0 ? this.props.company_schedule.map((item) => {
+                  return (
+                    <tr key={item.id}>
+                      <td>{item.title}</td>
+                      <td>{moment(item.time).format('MMMM Do YYYY, h:mm A')}</td>
+                      <td>{item.duration}</td>
+                      <td><button className='ui button' type='button' onClick={() => { this.viewChallenge(item.title, item.company_id, item.duration) }}>View challenge</button></td>
+                      <td><button className='ui button' type='button' onClick={() => { this.props.deleteFromCompanySchedule(item.id, this.props.user_id) }}><i className='x icon'></i></button></td>
+                    </tr>
+                  )
+                }) : <tr><td>You have no scheduled challenges at this time.</td></tr>}
               </tbody>
             </table>
           </div>
         </div>
-        </div>
-     
+      </div>
+
     )
   }
 

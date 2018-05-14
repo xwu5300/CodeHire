@@ -14,7 +14,6 @@ class UserResults extends Component {
             <div>Photo</div>
             <div>Information: {this.props.results[0].information}</div>
             <div>Skills: {this.props.results[0].candidate_skills}</div>
-            <div>Email: {this.props.results[0].email}</div>
             <div>Phone: {this.props.results[0].phone}</div>
             <br/>
             <br/>
