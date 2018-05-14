@@ -10,7 +10,7 @@ const profileControllers = require('./controllers/profiles');
 
 // get company Information
 router.get('/api/companyInfo', (req, res) => {
-  profileControllers.getCompanyInfo(req.query.username, (data) => {
+  profileControllers.getCompanyInfo(req.query.token, (data) => {
     res.status(200).send(data);
   })
 })
@@ -23,16 +23,16 @@ router.get('/api/candidateInfo', (req, res) => {
 
 
 // update company profile information in 'users' table
-router.patch('/api/companyInfo/:username', (req, res) => {
-  profileControllers.updateCompanyInfo(req.body.username, req.body.logo_url, req.body.information)
+router.patch('/api/companyInfo/:token', (req, res) => {
+  profileControllers.updateCompanyInfo(req.body.token, req.body.logo_url, req.body.information)
   .catch((err) => {
     console.log(err);
   })
 })
 
 // Update Candidate Info, including skills and github URL
-router.patch('/api/candidateInfo/:username', (req, res) => {
-  profileControllers.updateCandidateInfo(req.body.username, req.body.skills, req.body.github_url)
+router.patch('/api/candidateInfo/:token', (req, res) => {
+  profileControllers.updateCandidateInfo(req.body.token, req.body.skills, req.body.github_url)
   .catch((err) => {
     console.log(err);
   })
@@ -41,8 +41,8 @@ router.patch('/api/candidateInfo/:username', (req, res) => {
 
 // authentication route for logging in, check 'users' table for credentials
 router.post('/api/login', (req, res) => {
-  authControllers.handleLogin(req.body.username, req.body.password, (role, id, username) => {
-    res.status(201).send([role, id, username]);
+  authControllers.handleLogin(req.body.token, req.body.password, (role, id, token) => {
+    res.status(201).send([role, id, token]);
   })
   .catch((err) => {
     console.log(err);
@@ -52,7 +52,7 @@ router.post('/api/login', (req, res) => {
 
 // post candidate register info to 'users' table
 router.post('/api/registerCandidate', (req, res) => {
-  authControllers.saveCandidate(req.body.fullName, req.body.username, req.body.password, req.body.email, req.body.phone, req.body.github_url, (status) => {
+  authControllers.saveCandidate(req.body.fullName, req.body.token, req.body.password, req.body.email, req.body.phone, req.body.github_url, (status) => {
     res.status(201).send(status);
   })
   .catch((err) => {
@@ -62,7 +62,7 @@ router.post('/api/registerCandidate', (req, res) => {
 
 // post company register information into 'users' table
 router.post('/api/registerCompany', (req, res) => {
-  authControllers.saveCompany(req.body.companyName, req.body.username, req.body.password, req.body.email, req.body.phone, req.body.logoUrl, req.body.information, (status) => {
+  authControllers.saveCompany(req.body.companyName, req.body.token, req.body.password, req.body.email, req.body.phone, req.body.logoUrl, req.body.information, (status) => {
     res.status(201).send(status);
   })
 })
