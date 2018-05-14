@@ -13,6 +13,7 @@ DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   name VARCHAR(30) NOT NULL,
+  username VARCHAR(30) NOT NULL,
   phone VARCHAR(20) NULL,
   information VARCHAR(255) NULL,
   candidate_skills TEXT[] NULL,

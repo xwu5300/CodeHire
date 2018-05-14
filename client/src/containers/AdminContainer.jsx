@@ -43,6 +43,7 @@ const mapStateToProps = (state) => ({
    current_company_calendar: state.current_company_calendar.current_company_calendar,
    user_id: state.user_id.user_id,
    name: state.name.name,
+   username: state.username.username,
    challenge_info: state.challenge_info.challenge_info,
    candidate_information: state.candidate_information.candidate_information,
    candidate_skills: state.candidate_skills.candidate_skills,
