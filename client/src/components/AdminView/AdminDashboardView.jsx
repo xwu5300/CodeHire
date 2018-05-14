@@ -26,6 +26,7 @@ class AdminDashboardView extends Component {
     this.props.fetchInitialChallenge(this.props.user_id);
     this.props.fetchCandidateList(this.props.user_id);
     this.props.fetchAllChallenges(this.props.user_id);
+    this.props.fetchDefaultChallenges();
     Modal.setAppElement('body');
     console.log(this.props)
   }

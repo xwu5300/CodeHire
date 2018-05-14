@@ -7,13 +7,14 @@ class ScheduleChallengeView extends Component {
     this.state = {
       duration: '',
       showForm: this.props.challenges.map((item) => false),
-      invalid: false
+      invalid: this.props.challenges.map((item) => false)
     }
 
     this.handleClick = this.handleClick.bind(this);
     this.showCalendar = this.showCalendar.bind(this);
     this.handleDurationChange = this.handleDurationChange.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
+    this.toggleValid = this.toggleValid.bind(this);
   }
 
   componentDidMount() {
@@ -21,33 +22,21 @@ class ScheduleChallengeView extends Component {
   }
 
   handleClick(challenge, i) {
+    console.log(this.state)
     let date = $('#date').val()
     if (this.props.isInitial) {
       if (this.state.duration === '') {
-        this.setState({
-          invalid: true
-        }) 
+        this.toggleValid(i);
       } else {
-        this.setState({
-          invalid: false
-        }, () => {
-          this.props.makeInitial(challenge.id, challenge.initial, this.state.duration, this.props.isInitial, this.props.userId, this.props.close)
-        })
+        this.props.makeInitial(challenge.id, challenge.initial, this.state.duration, this.props.isInitial, this.props.userId, this.props.close);
       }
     } else {
       if (this.state.duration === '' || !date) {
-        this.setState({
-          invalid: true
-        })
+        this.toggleValid(i);
       } else {
-        this.setState({
-          invalid: false
-        }, () => {
-          this.props.addToSchedule(date, this.state.duration, challenge.id, this.props.userId, this.props.close)
-        })
+        this.props.addToSchedule(date, this.state.duration, challenge.id, this.props.userId, this.props.close);
       }
     }
-    this.toggleForm(i);
   }
 
   handleDurationChange(event) {
@@ -65,6 +54,14 @@ class ScheduleChallengeView extends Component {
     newShowForm[i] = !this.state.showForm[i];
     this.setState({
       showForm: newShowForm
+    })
+  }
+
+  toggleValid(i) {
+    let newValidity = [...this.state.invalid];
+    newValidity[i] = true;
+    this.setState({
+      invalid: newValidity
     })
   }
 
@@ -103,7 +100,7 @@ class ScheduleChallengeView extends Component {
               </div>
             }
             <button className="ui button select" onClick={() => {this.handleClick(item, i)}}>Select</button>
-            {this.state.invalid ? <div style={{color: 'red'}}>Please enter all values and try again</div> : null}
+            {this.state.invalid[i] ? <div style={{color: 'red'}}>Please enter all values and try again</div> : null}
             <div className="clear"></div>
             <br/>
           </div>

@@ -11,7 +11,6 @@ class Registration extends Component {
     this.state = {
       formView: 'company',
       companyName: '',
-      username: '',
       password: '',
       confirmPassword: '',
       email: '',
@@ -24,6 +23,11 @@ class Registration extends Component {
 
     this.switchForm = this.switchForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.resetInput = this.resetInput.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.handleSignUp('amy12345@uber.com', 'kjsdfhlsdf', 'companyForm', 'amy', '2948', 'url', null, 'info');
   }
 
   switchForm(value) {
@@ -39,11 +43,29 @@ class Registration extends Component {
   handleSubmit(e, form) {
     e.preventDefault();
     if(form === 'companyForm') {
-      this.props.saveCompany(this.state.companyName, this.state.username, this.state.password, this.state.email, this.state.phone, this.state.logoUrl, this.state.companyInfo);
+      this.props.handleSignUp(this.state.email, this.state.password, form, this.state.name, this.state.phone, this.state.logoUrl, null, this.state.companyInfo, this.resetInput);
     } else if(form === 'candidateForm') {
-      this.props.saveCandidate(this.state.fullName, this.state.username, this.state.password, this.state.email, this.state.phone, this.state.github_url);
+      this.props.handleSignUp(this.state.email, this.state.password, form, this.state.name, this.state.phone, null, this.state.github_url, null, this.resetInput);
     }
   }
+
+  resetInput() {
+    this.setState({
+      companyName: '',
+      password: '',
+      confirmPassword: '',
+      email: '',
+      phone: '',
+      logoUrl: '',
+      fullName: '',
+      companyInfo: '',
+      github_url: ''
+    })
+  }
+
+  // confirmPassword() {
+
+  // }
 
 
   render() {
@@ -61,16 +83,13 @@ class Registration extends Component {
               <input onChange={ (e) => this.handleChange(e) } value={ this.state.companyName } name='companyName' type='text' placeholder='Company Name' required />
             </div>
             <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } value={ this.state.username } name='username' type='text' placeholder='Username' required />
-            </div>
-            <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } value={ this.state.password } name='password' type='password' placeholder='Password' required />
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.password } name='password' type='password' id='password' placeholder='Password' required />
             </div>
             <div className='field'>
               <input onChange={ (e) => this.handleChange(e) } value={ this.state.confirmPassword } name='confirmPassword' type='password' placeholder='Confirm Password' required />
             </div>
             <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } value={ this.state.email } name='email' type='email' placeholder='Email' />
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.email } name='email' type='email' placeholder='Email' id='email' />
             </div>
             <div className='field'>
               <input onChange={ (e) => this.handleChange(e) } value={ this.state.phone } name='phone' type='text' placeholder='Phone #' />
@@ -90,9 +109,6 @@ class Registration extends Component {
           <form name='candidateForm' className='ui form seven wide column' onSubmit={ (e) => this.handleSubmit(e, e.target.name) } style={{ marginTop: '75px' }} >
             <div className='field'>
               <input onChange={ (e) => this.handleChange(e) } value={ this.state.fullName } name='fullName' type='text' placeholder='Full Name' required />
-            </div>
-            <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } value={ this.state.username } name='username' type='text' placeholder='Username' required />
             </div>
             <div className='field'>
               <input onChange={ (e) => this.handleChange(e) } value={ this.state.password } name='password' type='password' placeholder='Password' required />

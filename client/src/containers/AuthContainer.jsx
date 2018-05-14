@@ -3,12 +3,13 @@ import React, { Component } from 'react';
 import Login from '../components/Login.jsx';
 import Registration from '../components/Registration.jsx';
 
-import { saveCompany, saveCandidate, handleLogin } from '../actions/authActions';
+import { saveCompany, saveCandidate, handleLogin, handleSignUp } from '../actions/authActions';
 
 import {BrowserRouter as Router, Route, Link, Switch, History, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class AuthContainer extends Component {
+
   render() {
     return (
       <Switch>
@@ -24,8 +25,8 @@ const mapStateToProps = (state) => ({
   signup_status: state.signup_status.signup_status
 })
 
-const connectAuthContainer = connect(mapStateToProps, {})(AuthContainer);
-const RegistrationComponent = connect(mapStateToProps, { saveCompany, saveCandidate })(Registration);
+const connectAuthContainer = connect(mapStateToProps, {} )(AuthContainer);
+const RegistrationComponent = connect(mapStateToProps, { saveCompany, saveCandidate, handleSignUp })(Registration);
 const LoginComponent = connect(mapStateToProps, { handleLogin })(Login);
 
 export default withRouter(connectAuthContainer);
