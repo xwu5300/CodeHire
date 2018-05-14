@@ -29,10 +29,8 @@ export const handleLogin = (email, password) => (dispatch) => {
   } else {
     auth.signInWithEmailAndPassword(email, password)
     .then(({user}) => {;
-      console.log(user)
       axios.post('/api/login', {token: user.uid})
       .then((response) => {
-        console.log('response data', response.data)
         dispatch({ type: CHECK_USER, payload: response.data })
       })
       .catch((err) => {

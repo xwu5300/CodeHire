@@ -53,7 +53,7 @@ router.post('/api/login', (req, res) => {
 
 // post candidate register info to 'users' table
 router.post('/api/registerCandidate', (req, res) => {
-  authControllers.saveCandidate(req.body.fullName, req.body.token, req.body.password, req.body.email, req.body.phone, req.body.github_url, (status) => {
+  authControllers.saveCandidate(req.body.token, req.body.fullName, req.body.phone, req.body.github_url, (status) => {
     res.status(201).send(status);
   })
   .catch((err) => {

@@ -16,7 +16,7 @@ class Registration extends Component {
       email: '',
       phone: '',
       logoUrl: '',
-      fullName: '',
+      name: '',
       companyInfo: '',
       github_url: ''
     };
@@ -24,10 +24,6 @@ class Registration extends Component {
     this.switchForm = this.switchForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.resetInput = this.resetInput.bind(this);
-  }
-
-  componentDidMount() {
-    this.props.handleSignUp('amy12345@uber.com', 'kjsdfhlsdf', 'companyForm', 'amy', '2948', 'url', null, 'info');
   }
 
   switchForm(value) {
@@ -43,7 +39,7 @@ class Registration extends Component {
   handleSubmit(e, form) {
     e.preventDefault();
     if(form === 'companyForm') {
-      this.props.handleSignUp(this.state.email, this.state.password, form, this.state.name, this.state.phone, this.state.logoUrl, null, this.state.companyInfo, this.resetInput);
+      this.props.handleSignUp(this.state.email, this.state.password, form, this.state.companyName, this.state.phone, this.state.logoUrl, null, this.state.companyInfo, this.resetInput);
     } else if(form === 'candidateForm') {
       this.props.handleSignUp(this.state.email, this.state.password, form, this.state.name, this.state.phone, null, this.state.github_url, null, this.resetInput);
     }
@@ -57,7 +53,7 @@ class Registration extends Component {
       email: '',
       phone: '',
       logoUrl: '',
-      fullName: '',
+      name: '',
       companyInfo: '',
       github_url: ''
     })
@@ -103,7 +99,7 @@ class Registration extends Component {
          
           <form name='candidateForm' className='ui form seven wide column' onSubmit={ (e) => this.handleSubmit(e, e.target.name) } style={{ marginTop: '75px' }} >
             <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } value={ this.state.fullName } name='fullName' type='text' placeholder='Full Name' required />
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.name } name='name' type='text' placeholder='Full Name' required />
             </div>
             <div className='field'>
               <input onChange={ (e) => this.handleChange(e) } value={ this.state.password } name='password' type='password' placeholder='Password' required />
