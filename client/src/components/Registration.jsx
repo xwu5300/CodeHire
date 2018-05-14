@@ -63,11 +63,6 @@ class Registration extends Component {
     })
   }
 
-  // confirmPassword() {
-
-  // }
-
-
   render() {
     return (
       <div className='ui centered padded grid'>

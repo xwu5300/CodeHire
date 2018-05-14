@@ -2,9 +2,9 @@ const knex = require('../../db/index.js');
 const pg = require('pg');
 
 /* ------------ Candidate/Company Profiles ---------- */
-module.exports.updateCompanyInfo = (username, logoUrl, information) => {
+module.exports.updateCompanyInfo = (userId, logoUrl, information) => {
   return knex('users')
-  .where({ username: username })
+  .where({ id: userId })
   .update({ logo_url: logoUrl, information: information })
   .then((response) => {
     console.log('Success updating company info');
@@ -14,10 +14,10 @@ module.exports.updateCompanyInfo = (username, logoUrl, information) => {
   })
 }
 
-module.exports.getCompanyInfo = (username, callback) => {
+module.exports.getCompanyInfo = (userId, callback) => {
   return knex('users')
   .select('logo_url', 'information')
-  .where({ username: username })
+  .where({ id: userId })
   .then((data) => {
     callback(data);
   })
@@ -27,10 +27,10 @@ module.exports.getCompanyInfo = (username, callback) => {
 }
 
 
-module.exports.getCandidateInfo = (user_id, callback) => {
+module.exports.getCandidateInfo = (userId, callback) => {
   return knex('users')
-  .select('username', 'candidate_skills', 'github_url')
-  .where({ id: user_id })
+  .select('candidate_skills', 'github_url')
+  .where({ id: userId })
   .then((data) => {
     callback(data);
   })
@@ -41,7 +41,7 @@ module.exports.getCandidateInfo = (user_id, callback) => {
 
 
 // Insert skill or github_url into 'users' table
-module.exports.updateCandidateInfo = (username, skill, github_url) => {
+module.exports.updateCandidateInfo = (userId, skill, github_url) => {
   if(skill) {
     return knex('users')
         .update({
@@ -49,7 +49,7 @@ module.exports.updateCandidateInfo = (username, skill, github_url) => {
         })
   } if(github_url === '' || github_url) {
       return knex('users')
-      .where({ username: username })
+      .where({ id: userId })
       .update({ github_url: github_url })
       .catch((err) => {
         console.log(err);

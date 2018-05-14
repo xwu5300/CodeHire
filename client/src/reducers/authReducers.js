@@ -2,8 +2,8 @@
 import { CHECK_USER, SAVE_CANDIDATE, SAVE_COMPANY } from '../constants/actionTypes';
 
 const initialState = {
-  username: '',
   user_id: '',
+  name: '',
   login_status: '',
   signup_status: ''
 }
@@ -15,7 +15,7 @@ const loginStatus = (state = initialState, action) => {
       return {
         login_status: action.payload[0],
         user_id: action.payload[1],
-        username: action.payload[2]
+        name: action.payload[2]
       }
     default:
       return state;  

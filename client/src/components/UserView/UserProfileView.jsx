@@ -37,12 +37,12 @@ class UserProfileView extends Component {
         this.setState({ all_skills: [new_skill] })
       }
       
-      this.props.updateCandidateSkills(this.props.username, this.state.skill);
+      this.props.updateCandidateSkills(this.props.user_id, this.state.skill);
     }
   }
 
   updateGithub() {
-    this.props.updateCandidateGithub(this.props.username, this.state.github_url);
+    this.props.updateCandidateGithub(this.props.user_id, this.state.github_url);
   }
 
 

@@ -8,7 +8,7 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      username: '',
+      email: '',
       password: '',
       showStatus: false
     };
@@ -33,7 +33,7 @@ class Login extends Component {
     } else {
       this.setState({ showStatus: !this.state.showStatus });
     }
-    this.props.handleLogin(this.state.username, this.state.password);
+    this.props.handleLogin(this.state.email, this.state.password);
   }
 
 
@@ -50,12 +50,11 @@ class Login extends Component {
           <div className='ui centered grid'>
             <form className='ui form ten wide column' onSubmit={ (e) => this.handleSubmit(e) }>
               <div className='field'>
-                <input onChange={ (e) => this.handleChange(e) } name='username' type='text' placeholder='Username' required />
+                <input onChange={ (e) => this.handleChange(e) } name='email' type='email' placeholder='Email' required />
               </div>
               <div className='field'>
-                <input onChange={ (e) => this.handleChange(e) }name='password' type='password' placeholder='Password' required />
+                <input onChange={ (e) => this.handleChange(e) } name='password' type='password' placeholder='Password' required />
               </div>
-         
               <button className='ui green button login_btn' type='submit'>Login</button>
               <button className='ui yellow button login_btn' type='button' onClick={() => {this.props.history.push('/registration')}}>Register</button>
             </form>

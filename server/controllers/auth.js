@@ -18,7 +18,6 @@ module.exports.saveCandidate = (token, fullname, phone, github_url, callback) =>
 }
 
 module.exports.saveCompany = (token, companyName, phone, logoUrl, information, callback) => {
-  // bcrypt.hash(password, 10, (err, hash) => {
     return knex('users')
     .insert({ token: token, name: companyName, phone: phone, logo_url: logoUrl, information: information, role: 'company'})
     .then((response) => {
@@ -28,34 +27,18 @@ module.exports.saveCompany = (token, companyName, phone, logoUrl, information, c
       console.log('Error saving company', err);
       callback('Please try again')
     })
-  // })
 }
 
-module.exports.handleLogin = (token, password, callback) => {
+module.exports.handleLogin = (token,  callback) => {
+  console.log('db side', token)
   return knex('users')
-  .select('token', 'role', 'id')
   .where({ token: token })
   .then((user) => {
-    knex('users').select('password').where({ token: user[0].token })
-      .then((hashed) => {
-        bcrypt.compare(password, hashed[0].password, (err, response) => {
-          if(response === true) {
-            console.log('password matched!');
-            callback(user[0].role, user[0].id, user[0].token);
-          } else {
-            console.log('Wrong password');
-            callback('Wrong Password');
-          }
-        })
-      })
-      .catch((err) => {
-        console.log('Error matching password', err);
-      }) 
+    callback(user[0].role, user[0].id, user[0].name);
   })
   .catch((err) => {
-    console.log('token does not match');
-    callback('token Not Found');
-  })
+    console.log('Error matching password', err);
+  }) 
 }
 
 
