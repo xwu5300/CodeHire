@@ -27,10 +27,10 @@ module.exports.getCompanyInfo = (userId, callback) => {
 }
 
 
-module.exports.getCandidateInfo = (userId, callback) => {
+module.exports.getCandidateInfo = (candidateId, callback) => {
   return knex('users')
   .select('candidate_skills', 'github_url')
-  .where({ id: userId })
+  .where({ id: candidateId })
   .then((data) => {
     callback(data);
   })
@@ -41,7 +41,7 @@ module.exports.getCandidateInfo = (userId, callback) => {
 
 
 // Insert skill or github_url into 'users' table
-module.exports.updateCandidateInfo = (userId, skill, github_url) => {
+module.exports.updateCandidateInfo = (candidateId, skill, github_url) => {
   if(skill) {
     return knex('users')
         .update({
@@ -49,7 +49,7 @@ module.exports.updateCandidateInfo = (userId, skill, github_url) => {
         })
   } if(github_url === '' || github_url) {
       return knex('users')
-      .where({ id: userId })
+      .where({ id: candidateId })
       .update({ github_url: github_url })
       .catch((err) => {
         console.log(err);

@@ -44,11 +44,11 @@ class UserLiveCodingView extends Component {
   }
 
   componentDidMount() {
-     this.socket.emit('candidate enter', this.props.username, this.props.user_id, this.props.current_company_calendar);
+     this.socket.emit('candidate enter', this.props.name, this.props.user_id, this.props.current_company_calendar);
   }
 
   componentWillUnmount() {
-    this.socket.emit('candidate disconnect', this.props.username, this.props.user_id, this.props.current_company_calendar);
+    this.socket.emit('candidate disconnect', this.props.name, this.props.user_id, this.props.current_company_calendar);
   }
 
   onChange(newValue, event) {
@@ -134,7 +134,7 @@ class UserLiveCodingView extends Component {
     return (
       <div>
         <div className="ui orange three item inverted menu">
-          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
+          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.name }</div>
           <div className='ui active item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Companies</div>
         </div>
