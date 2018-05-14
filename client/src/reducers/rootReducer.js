@@ -10,6 +10,7 @@ export default combineReducers({
   login_status: authReducers.loginStatus,
   user_id: authReducers.loginStatus,
   name: authReducers.loginStatus,
+  username: authReducers.loginStatus,
   signup_status: authReducers.signupStatus,
   logo_url: adminReducers.companyInfo,
   information: adminReducers.companyInfo,

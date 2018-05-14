@@ -12,6 +12,7 @@ class Registration extends Component {
       formView: 'company',
       companyName: '',
       password: '',
+      username: '',
       confirmPassword: '',
       email: '',
       phone: '',
@@ -39,9 +40,9 @@ class Registration extends Component {
   handleSubmit(e, form) {
     e.preventDefault();
     if(form === 'companyForm') {
-      this.props.handleSignUp(this.state.email, this.state.password, form, this.state.companyName, this.state.phone, this.state.logoUrl, null, this.state.companyInfo, this.resetInput);
+      this.props.handleSignUp(this.state.email, this.state.username, this.state.password, form, this.state.companyName, this.state.phone, this.state.logoUrl, null, this.state.companyInfo, this.resetInput);
     } else if(form === 'candidateForm') {
-      this.props.handleSignUp(this.state.email, this.state.password, form, this.state.name, this.state.phone, null, this.state.github_url, null, this.resetInput);
+      this.props.handleSignUp(this.state.email, this.state.username, this.state.password, form, this.state.name, this.state.phone, null, this.state.github_url, null, this.resetInput);
     }
   }
 
@@ -49,6 +50,7 @@ class Registration extends Component {
     this.setState({
       companyName: '',
       password: '',
+      username: '',
       confirmPassword: '',
       email: '',
       phone: '',
@@ -74,13 +76,16 @@ class Registration extends Component {
               <input onChange={ (e) => this.handleChange(e) } value={ this.state.companyName } name='companyName' type='text' placeholder='Company Name' required />
             </div>
             <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } value={ this.state.password } name='password' type='password' id='password' placeholder='Password' required />
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.username } name='username' type='username' placeholder='Username' required />
+            </div>
+            <div className='field'>
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.password } name='password' type='password' placeholder='Password' required />
             </div>
             <div className='field'>
               <input onChange={ (e) => this.handleChange(e) } value={ this.state.confirmPassword } name='confirmPassword' type='password' placeholder='Confirm Password' required />
             </div>
             <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } value={ this.state.email } name='email' type='email' placeholder='Email' id='email' />
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.email } name='email' type='email' placeholder='Email' />
             </div>
             <div className='field'>
               <input onChange={ (e) => this.handleChange(e) } value={ this.state.phone } name='phone' type='text' placeholder='Phone #' />
@@ -100,6 +105,9 @@ class Registration extends Component {
           <form name='candidateForm' className='ui form seven wide column' onSubmit={ (e) => this.handleSubmit(e, e.target.name) } style={{ marginTop: '75px' }} >
             <div className='field'>
               <input onChange={ (e) => this.handleChange(e) } value={ this.state.name } name='name' type='text' placeholder='Full Name' required />
+            </div>
+            <div className='field'>
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.username } name='username' type='username' id='username' placeholder='Username' required />
             </div>
             <div className='field'>
               <input onChange={ (e) => this.handleChange(e) } value={ this.state.password } name='password' type='password' placeholder='Password' required />

@@ -42,8 +42,8 @@ router.patch('/api/candidateInfo', (req, res) => {
 
 // authentication route for logging in, check 'users' table for credentials
 router.post('/api/login', (req, res) => {
-  authControllers.handleLogin(req.body.token, (role, id, name) => {
-    res.status(201).send([role, id, name]);
+  authControllers.handleLogin(req.body.token, (role, id, name, username) => {
+    res.status(201).send([role, id, name, username]);
   })
   .catch((err) => {
     console.log(err);
@@ -53,7 +53,7 @@ router.post('/api/login', (req, res) => {
 
 // post candidate register info to 'users' table
 router.post('/api/registerCandidate', (req, res) => {
-  authControllers.saveCandidate(req.body.token, req.body.fullName, req.body.phone, req.body.github_url, (status) => {
+  authControllers.saveCandidate(req.body.token, req.body.fullName, req.body.username, req.body.phone, req.body.github_url, (status) => {
     res.status(201).send(status);
   })
   .catch((err) => {
@@ -64,7 +64,7 @@ router.post('/api/registerCandidate', (req, res) => {
 // post company register information into 'users' table
 router.post('/api/registerCompany', (req, res) => {
   console.log('saving company')
-  authControllers.saveCompany(req.body.token, req.body.companyName, req.body.phone, req.body.logoUrl, req.body.information, (status) => {
+  authControllers.saveCompany(req.body.token, req.body.companyName, req.body.username, req.body.phone, req.body.logoUrl, req.body.information, (status) => {
     res.status(201).send(status);
   })
 })

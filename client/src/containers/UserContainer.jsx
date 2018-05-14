@@ -37,6 +37,7 @@ const mapStateToProps = function(state) {
     initial_challenge: state.initial_challenge.initial_challenge,
     name: state.name.name,
     user_id: state.user_id.user_id,
+    username: state.username.username,
     candidate_information: state.candidate_information.candidate_information,
     candidate_skills: state.candidate_skills.candidate_skills,
     github_url: state.github_url.github_url,
