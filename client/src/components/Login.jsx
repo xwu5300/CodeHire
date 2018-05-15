@@ -23,39 +23,24 @@ class Login extends Component {
     });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    
-    if(this.props.login_status === 'company') {
-      this.props.history.push('/admin');
-    } else if(this.props.login_status === 'candidate') {
-      this.props.history.push('/user');
-    } else {
-      this.setState({ showStatus: !this.state.showStatus });
-    }
+  handleSubmit() {
     this.props.handleLogin(this.state.email, this.state.password);
   }
 
-
   render() {
-    // console.log('login props', this.props)
     return ( 
       <div>
-      {this.state.showStatus ?
-      <div className='login_status'>{ this.props.login_status }</div>
-      : null }
-
       <div className='login_container'>
         <div className='ui centered raised padded container segment' style={{ width: '60%', height: '300px', paddingTop: '70px' }}>
           <div className='ui centered grid'>
-            <form className='ui form ten wide column' onSubmit={ (e) => this.handleSubmit(e) }>
+            <form className='ui form ten wide column'>
               <div className='field'>
                 <input onChange={ (e) => this.handleChange(e) } name='email' type='email' placeholder='Email' required />
               </div>
               <div className='field'>
                 <input onChange={ (e) => this.handleChange(e) } name='password' type='password' placeholder='Password' required />
               </div>
-              <button className='ui green button login_btn' type='submit'>Login</button>
+              <button className='ui green button login_btn' type='button' onClick={this.handleSubmit}>Login</button>
               <button className='ui yellow button login_btn' type='button' onClick={() => {this.props.history.push('/registration')}}>Register</button>
             </form>
           </div>
