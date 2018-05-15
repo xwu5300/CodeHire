@@ -8,7 +8,6 @@ export default combineReducers({
   default_challenges: adminReducers.defaultChallenges,
   all_challenges: adminReducers.allChallenges,
   login_status: authReducers.loginStatus,
-  user_id: authReducers.loginStatus,
   name: authReducers.loginStatus,
   username: authReducers.loginStatus,
   signup_status: authReducers.signupStatus,
