@@ -17,7 +17,7 @@ class Registration extends Component {
       email: '',
       phone: '',
       logoUrl: '',
-      name: '',
+      candidateName: '',
       companyInfo: '',
       github_url: ''
     };
@@ -42,7 +42,8 @@ class Registration extends Component {
     if(form === 'companyForm') {
       this.props.handleSignUp(this.state.email, this.state.username, this.state.password, form, this.state.companyName, this.state.phone, this.state.logoUrl, null, this.state.companyInfo, this.resetInput);
     } else if(form === 'candidateForm') {
-      this.props.handleSignUp(this.state.email, this.state.username, this.state.password, form, this.state.name, this.state.phone, null, this.state.github_url, null, this.resetInput);
+      console.log('registration state', this.state.github_url)
+      this.props.handleSignUp(this.state.email, this.state.username, this.state.password, form, this.state.candidateName, this.state.phone, null, this.state.github_url, null, this.resetInput);
     }
   }
 
@@ -55,13 +56,14 @@ class Registration extends Component {
       email: '',
       phone: '',
       logoUrl: '',
-      name: '',
+      candidateName: '',
       companyInfo: '',
       github_url: ''
     })
   }
 
   render() {
+    // console.log('registration state', this.state.github_url)
     return (
       <div className='ui centered padded grid'>
         <div className='ui two buttons top' style={{ marginTop: '20px' }} >
@@ -104,7 +106,7 @@ class Registration extends Component {
          
           <form name='candidateForm' className='ui form seven wide column' onSubmit={ (e) => this.handleSubmit(e, e.target.name) } style={{ marginTop: '75px' }} >
             <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } value={ this.state.name } name='name' type='text' placeholder='Full Name' required />
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.candidateName } name='candidateName' type='text' placeholder='Full Name' required />
             </div>
             <div className='field'>
               <input onChange={ (e) => this.handleChange(e) } value={ this.state.username } name='username' type='username' id='username' placeholder='Username' required />

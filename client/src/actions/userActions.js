@@ -94,22 +94,22 @@ export const fetchCandidateInitialResults = (companyId, candidateId) => (dispatc
 
 
 /* ----------- User Profile ------------ */
-export const updateCandidateSkills = (userId, skill) => (dispatch) => {
-  axios.patch('/api/candidateInfo', { userId: userId, skills: skill })
+export const updateCandidateSkills = (candidateId, skills) => (dispatch) => {
+  axios.patch('/api/candidateInfo', { candidateId, skills })
   .catch((err) => {
     console.log(err);
   })
 }
 
-export const updateCandidateGithub = (userId, github_url) => (dispatch) => {
-  axios.patch('/api/candidateInfo', { userId: userId, github_url: github_url })
+export const updateCandidateGithub = (candidateId, github_url) => (dispatch) => {
+  axios.patch('/api/candidateInfo', { candidateId, github_url })
   .catch((err) => {
     console.log(err);
   })
 }
 
-export const fetchCandidateInfo = (userId, callback) => (dispatch) => {
-  axios.get('/api/candidateInfo', { params: { userId: userId }})
+export const fetchCandidateInfo = (candidateId, callback) => (dispatch) => {
+  axios.get('/api/candidateInfo', { params: { candidateId }})
     .then((info) => {
       dispatch({ type: GET_CANDIDATE_INFO, skills: info.data[0].candidate_skills, github_url: info.data[0].github_url })
         if(callback) {

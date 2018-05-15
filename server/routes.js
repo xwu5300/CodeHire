@@ -16,12 +16,6 @@ router.get('/api/companyInfo', (req, res) => {
   })
 })
 
-router.get('/api/candidateInfo', (req, res) => {
-  profileControllers.getCandidateInfo(req.query.userId, (data) => {
-    res.status(200).send(data);
-  })
-})
-
 
 // update company profile information in 'users' table
 router.patch('/api/companyInfo', (req, res) => {
@@ -33,9 +27,16 @@ router.patch('/api/companyInfo', (req, res) => {
 
 // Update Candidate Info, including skills and github URL
 router.patch('/api/candidateInfo', (req, res) => {
-  profileControllers.updateCandidateInfo(req.body.userId, req.body.skills, req.body.github_url)
+  profileControllers.updateCandidateInfo(req.body.candidateId, req.body.skills, req.body.github_url)
   .catch((err) => {
     console.log(err);
+  })
+})
+
+
+router.get('/api/candidateInfo', (req, res) => {
+  profileControllers.getCandidateInfo(req.query.candidateId, (data) => {
+    res.status(200).send(data);
   })
 })
 
