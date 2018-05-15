@@ -2,9 +2,9 @@ import { SAVE_COMPANY, SAVE_CANDIDATE, CHECK_USER, GET_USER } from '../constants
 import { auth } from '../../../firebase/index.js';
 import axios from 'axios';
 
-export const saveCandidate = (token, fullName, phone, github_url) => (dispatch) => {
+export const saveCandidate = (token, fullName,username, phone, github_url) => (dispatch) => {
   console.log('auth actions save candidate')
-	axios.post('/api/registerCandidate', { token, fullName, phone, github_url })
+	axios.post('/api/registerCandidate', { token, fullName, username, phone, github_url })
 	.then((response) => {
 		dispatch({ type: SAVE_CANDIDATE, payload: response.data })
 	})
@@ -46,7 +46,7 @@ export const handleLogin = (email, password) => (dispatch) => {
   }
 }
 
-export const handleSignUp = (email, password, form, name, phone, logoUrl, githubUrl, companyInfo, cb) => (dispatch) => {
+export const handleSignUp = (email, username, password, form, name, phone, logoUrl, githubUrl, companyInfo, cb) => (dispatch) => {
   auth.createUserWithEmailAndPassword(email, password)
   .then(({user}) => {
     if (form === 'companyForm') {

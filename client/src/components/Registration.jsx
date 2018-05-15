@@ -43,7 +43,7 @@ class Registration extends Component {
       this.props.handleSignUp(this.state.email, this.state.username, this.state.password, form, this.state.companyName, this.state.phone, this.state.logoUrl, null, this.state.companyInfo, this.resetInput);
     } else if(form === 'candidateForm') {
       console.log('registration state', this.state.github_url)
-      this.props.handleSignUp(this.state.email, this.state.password, form, this.state.candidateName, this.state.phone, null, this.state.github_url, null, this.resetInput);
+      this.props.handleSignUp(this.state.email, this.state.username, this.state.password, form, this.state.candidateName, this.state.phone, null, this.state.github_url, null, this.resetInput);
     }
   }
 
