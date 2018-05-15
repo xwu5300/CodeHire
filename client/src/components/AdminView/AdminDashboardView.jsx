@@ -73,7 +73,18 @@ class AdminDashboardView extends Component {
     })
   }
 
+
+
   render() {
+
+    const customStyles = {
+      content : {
+        width: '80%',
+        height: '80%',
+        margin: 'auto'
+      }
+    };
+
     return (
       <div>
         <div className="ui orange four item inverted menu">
@@ -85,12 +96,8 @@ class AdminDashboardView extends Component {
         <div className='company_dashboard_container'>
           <div className='ui raised padded container segment'>
             <div className='ui grid'>
-              <div className='row centered challenge_btns'>
-                <button className='ui button cursor' type='button' onClick={this.handleClickOn}>Set Initial Challenge</button>
-                <button className='ui button cursor' type='button' onClick={this.handleClickOff}>Schedule Challenge</button>
-              </div>
-              <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
-                <ScheduleChallengeView userId={localStorage.getItem('userId')} challenges={this.props.all_challenges} close={this.closeModal} makeInitial={this.props.makeInitial} isInitial={this.props.is_initial} addToSchedule={this.props.addToCompanySchedule}/>
+              <Modal style={ customStyles } isOpen={ this.state.modalIsOpen } onRequestClose={ this.closeModal }>
+                <ScheduleChallengeView initialChallenge={ this.props.initial_challenge } userId={ localStorage.getItem('userId')} challenges={ this.props.all_challenges } close={ this.closeModal } makeInitial={this.props.makeInitial} isInitial={this.props.is_initial} addToSchedule={this.props.addToCompanySchedule}/>
               </Modal>
               <table className='ui inverted table company_calendar'>
                 <thead>
@@ -106,7 +113,9 @@ class AdminDashboardView extends Component {
                       <td>{this.props.initial_challenge[0].duration}</td>
                       <td><button className='ui button' type='button' onClick={() => {this.props.makeInitial(this.props.initial_challenge[0].id, this.props.initial_challenge[0].initial, null, null, userId={localStorage.getItem('userId')} )}}><i className='x icon'></i></button></td>
                     </tr>
+
                   }
+                   <tr><td> <button className='ui button cursor' type='button' onClick={this.handleClickOn}>Set Initial Challenge</button></td></tr>
                 </tbody>   
               </table>
               <br/>

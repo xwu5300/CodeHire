@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Modal from 'react-modal';
 import CompanyChallenges from './ChallengeListView/CompanyChallenges.jsx';
 import DefaultChallenges from './ChallengeListView/DefaultChallenges.jsx';
+import ScheduleChallenges from './ChallengeListView/ScheduleChallenges.jsx';
 import Form from './ChallengeListView/Form.jsx';
 import { getChallengeInfo } from '../../actions/adminActions';
 
@@ -21,9 +22,9 @@ class ChallengeListView extends Component {
   }
 
   componentDidMount() {
+
     this.props.fetchAllChallenges(localStorage.getItem('userId'));
     this.props.fetchDefaultChallenges();
-    console.log(this.props)
     Modal.setAppElement('body');
   }
   openModal() {
@@ -59,6 +60,8 @@ class ChallengeListView extends Component {
 
           <CompanyChallenges openModal={ this.openModal } userId={this.props.user_id} allChallenges={this.props.all_challenges} delete={this.props.deleteChallenge} addToSchedule={this.props.addToCompanySchedule} isInitial={this.props.is_initial} makeInitial={this.props.makeInitial} getInfo={this.props.getChallengeInfo} challengeInfo={this.props.challenge_info} save={this.props.saveChallenge}/>
           <DefaultChallenges userId={this.props.user_id} defaultChallenges={this.props.default_challenges} save={this.props.saveChallenge}/>
+
+          <ScheduleChallenges />
 
         </div>
       </div>

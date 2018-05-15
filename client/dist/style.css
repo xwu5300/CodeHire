@@ -67,6 +67,11 @@ body {
   cursor: pointer;
 }
 
+/* -------- Drag N Drop --------- */
+.drag_segment {
+	max-width: 35%;
+}
+
 
 /* ----- Challenge List ------- */
 .challenge_list {

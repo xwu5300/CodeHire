@@ -4,6 +4,8 @@ import Modal from 'react-modal';
 import swal from 'sweetalert2';
 
 
+
+
 class CompanyChallenges extends Component {
   constructor(props) {
     super(props);
@@ -84,7 +86,7 @@ class CompanyChallenges extends Component {
 
   render() {
     return (
-      <div className='ui segment' style={{ overlow: 'scroll' }}>
+      <div className='ui segment drag_segment' style={{ overlow: 'scroll' }}>
         <h1>Saved Challenges</h1>
         {!this.props.challengeInfo ? null :
           <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
@@ -132,9 +134,9 @@ class CompanyChallenges extends Component {
             return (
               <div className="ui fluid orange card" key={challenge.id}>
                 <div className='content challenge_content'>
-                <div>Title: {challenge.title}</div>
-                <div>Description: {challenge.instruction}</div>
-                <div>Difficulty: {challenge.difficulty}</div>
+                <div><b>Title:</b> {challenge.title}</div>
+                <div><b>Description:</b> {challenge.instruction}</div>
+                <div><b>Difficulty:</b> {challenge.difficulty}</div>
                 <div className='saved_challenges_btns'>
                   <button className="ui icon button" onClick={() => {this.props.delete(challenge, this.props.userId)}}>
                     <i className="minus icon"></i>
@@ -150,13 +152,13 @@ class CompanyChallenges extends Component {
         })}
          <button className="input_challenge_btn ui orange basic button" onClick={ this.props.openModal }>Create new challenge</button>
       </div>
+
+
       
       
     )
   }
 }
-
-
 
 
 export default CompanyChallenges;
