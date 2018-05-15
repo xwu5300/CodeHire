@@ -13,6 +13,7 @@ const initialState = {
   current_live_challenge_duration: '',
   challenge_info: '',
   results: [],
+  username: '',
   candidate_list: []
 }
 
@@ -131,4 +132,16 @@ const candidateList = (state = initialState, action) => {
   }
 }
 
-export default { defaultChallenges, allChallenges, companyInfo, companySchedule, isInitial, currentLiveChallenge, results, candidateList, challengeInfo };
+const username = (state = initialState, action) => {
+  switch(action.type) {
+    case 'GET_USER':
+      return {
+        ...state,
+        username: action.payload
+    }
+    default:
+      return state;
+  }
+}
+
+export default { defaultChallenges, allChallenges, companyInfo, companySchedule, isInitial, currentLiveChallenge, results, candidateList, challengeInfo, username };

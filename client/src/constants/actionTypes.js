@@ -19,7 +19,7 @@ export const SAVE_CANDIDATE = 'SAVE_CANDIDATE';
 
 export const CHECK_USER = 'CHECK_USER';
 
-export const GET_USER = 'GET_USER'; //is this used?
+export const GET_USER = 'GET_USER';
 
 export const GET_COMPANY_INFO = 'GET_COMPANY_INFO';
 

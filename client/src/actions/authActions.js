@@ -32,11 +32,12 @@ export const handleLogin = (email, password) => (dispatch) => {
   auth.signInWithEmailAndPassword(email, password)
   .then(({user}) => {
     axios.post('/api/login', {token: user.uid})
-    .then((response) => {
-      dispatch({ type: CHECK_USER, payload: response.data })
-      if (response.data[0] === 'company') {
+    .then(({data}) => {
+      dispatch({ type: CHECK_USER, payload: data })
+      localStorage.setItem('userId', data[0]);
+      if (data[1].role === 'company') {
         history.push('/admin');
-      } else if (response.data[0] === 'candidate') {
+      } else if (data[1].role === 'candidate') {
         history.push('/user');
       }
     })
