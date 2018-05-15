@@ -71,7 +71,7 @@ export const handleLogin = (email, password) => (dispatch) => {
 // }
 
 
-export const handleSignUp = (email, username, password, form, name, phone, logoUrl, githuburl, companyInfo, cb) => (dispatch) => {
+export const handleSignUp = (email, username, password, form, name, phone, logoUrl, githubUrl, companyInfo, cb) => (dispatch) => {
   auth.createUserWithEmailAndPassword(email, password)
   .then(({user}) => {
     if (form === 'companyForm') {
@@ -87,7 +87,7 @@ export const handleSignUp = (email, username, password, form, name, phone, logoU
   })
   .catch((error) => {
     if(error) {
-      console.log('error for signup')
+      console.log('error for signup', error)
       alert(error.message)
     }
   })
