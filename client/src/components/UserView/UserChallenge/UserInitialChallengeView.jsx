@@ -43,9 +43,30 @@ class UserInitialChallengeView extends Component {
     })
   }
 
-  saveResults(result, newString, score, time) {
-    this.props.saveResults(result, newString, score, time, this.props.initial_challenge[0].id, this.props.initial_challenge[0].company_id, localStorage.getItem('userId'), true, this.props.initial_challenge[0].id, () => {
-      this.props.fetchCandidateInitialResults(this.props.initial_challenge[0].company_id, localStorage.getItem('userId'))
+  getExamples() {
+    let examplesS = this.props.initial_challenge[0].examples.replace(/"/g, "'")
+    let examplesD = examplesS.replace(/'/g, '"')
+    let examples = JSON.parse(examplesD)
+    let exampleInputs = examples[0].map((el)=> {
+      return JSON.stringify(el)
+    })
+    let exampleOutputs = examples[1].map((el)=> {
+      return JSON.stringify(el)
+    })
+
+    this.setState({
+      exampleInputs: exampleInputs,
+      exampleOutputs: exampleOutputs
+    })
+  }
+
+  saveResults(result, submission, score, time) {
+    let id = this.props.initial_challenge[0].id
+    let company_id = this.props.initial_challenge[0].company_id
+    let user_id = this.props.user_id
+    let initial = this.props.initial_challenge[0].initial
+    this.props.saveResults(result, submission, score, time, id, company_id, user_id, initial , id, () => {
+      this.props.fetchCandidateInitialResults(company_id, user_id)
     })
   }
 
@@ -124,15 +145,6 @@ class UserInitialChallengeView extends Component {
   }
 
   render() {
-    let examplesS = this.props.initial_challenge[0].examples.replace(/"/g, "'")
-    let examplesD = examplesS.replace(/'/g, '"')
-    let examples = JSON.parse(examplesD)
-    let exampleInput = examples[0].map((el)=> {
-      return JSON.stringify(el)
-    }).join(',')
-    let exampleOutput = examples[1].map((el)=> {
-      return JSON.stringify(el)
-    }).join(',')
     return (
       <div>
         <div className="ui orange three item inverted menu">
@@ -148,8 +160,13 @@ class UserInitialChallengeView extends Component {
         <div>
           instruction: {this.props.initial_challenge[0].instruction}
         </div>
-        <div>
-          examples: { `input: ${exampleInput}  output:${exampleOutput}`}
+        <div className="examples">
+          examples:  {this.state.exampleInputs.map((input, i) => {
+            return <div className="input" key={i}>{input}</div>
+          })}
+          {this.state.exampleOutputs.map((output, i) => {
+            return <div className="output" key={i}>{output}</div>
+          })}
         </div>
         <AceEditor
           mode="javascript"

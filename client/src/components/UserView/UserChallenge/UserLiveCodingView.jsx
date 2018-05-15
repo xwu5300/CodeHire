@@ -27,7 +27,9 @@ class UserLiveCodingView extends Component {
 
 }`,
       inChallenge: true,
-      submission: ''
+      submission: '',
+      exampleInputs: [],
+      exampleOutputs: []
     }
 
     this.socket = socketClient();
@@ -36,6 +38,7 @@ class UserLiveCodingView extends Component {
     this.saveResults = this.saveResults.bind(this)
     this.checkAnswer = this.checkAnswer.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.getExamples = this.getExamples.bind(this)
 
     this.socket.on('add char', (chars)=> {
       this.setState({
@@ -67,6 +70,24 @@ class UserLiveCodingView extends Component {
   handleTheme(e) {
     this.setState({
       theme: e.target.value
+    })
+  }
+
+
+  getExamples() {
+    let examplesS = this.props.location.challenge.examples.replace(/"/g, "'")
+    let examplesD = examplesS.replace(/'/g, '"')
+    let examples = JSON.parse(examplesD)
+    let exampleInputs = examples[0].map((el)=> {
+      return JSON.stringify(el)
+    })
+    let exampleOutputs = examples[1].map((el)=> {
+      return JSON.stringify(el)
+    })
+
+    this.setState({
+      exampleInputs: exampleInputs,
+      exampleOutputs: exampleOutputs
     })
   }
 
@@ -164,15 +185,7 @@ class UserLiveCodingView extends Component {
   }
 
   render() {
-    let examplesS = this.props.location.challenge.examples.replace(/"/g, "'")
-    let examplesD = examplesS.replace(/'/g, '"')
-    let examples = JSON.parse(examplesD)
-    let exampleInput = examples[0].map((el)=> {
-      return JSON.stringify(el)
-    }).join(',')
-    let exampleOutput = examples[1].map((el)=> {
-      return JSON.stringify(el)
-    }).join(',')
+
 
     console.log('challenge properties', this.props.location.challenge)
     return (
@@ -188,7 +201,13 @@ class UserLiveCodingView extends Component {
         <h3>Difficulty: {this.props.location.challenge.difficulty}</h3>
         <div> Instructions: {this.props.location.challenge.instruction}</div>
         <div>
-          examples: { `input: ${exampleInput} output:${exampleOutput}`}
+          examples:
+          {this.state.exampleInputs.map((input, i) => {
+            return <div className="examples" key={i}>{input}</div>
+          })}
+          {this.state.exampleOutputs.map((output, i) => {
+            return <div className="examples" key={i}>{output}</div>
+          })}
         </div>
         <div> Time Limit: { this.state.minutes + ':' + this.state.seconds }</div>
         <AceEditor

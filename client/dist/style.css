@@ -192,6 +192,18 @@ body {
 	font-size: 20px;
 }
 
+/* -------- User Coding ---------- */
+.examples {
+	display: inline
+}
+
+.examples .input {
+	margin-left: 20px
+}
+
+.examples .output {
+	margin-left: 80px
+}
 
 
 /* ------- Admin live coding ------- */
