@@ -1,5 +1,7 @@
 const router = require('express').Router();
 
+const jwt = require('jwt-simple');
+const secret = 'willchangelater'
 const challengeControllers = require('./controllers/challenges');
 const authControllers = require('./controllers/auth');
 const calendarControllers = require('./controllers/calendar');
@@ -10,8 +12,8 @@ const profileControllers = require('./controllers/profiles');
 
 // get company Information
 router.get('/api/companyInfo', (req, res) => {
-  console.log(req.query.userId)
-  profileControllers.getCompanyInfo(req.query.userId, (data) => {
+  let userId = jwt.decode(req.query.userId, secret).id;
+  profileControllers.getCompanyInfo(userId, (data) => {
     res.status(200).send(data);
   })
 })
@@ -19,7 +21,8 @@ router.get('/api/companyInfo', (req, res) => {
 
 // update company profile information in 'users' table
 router.patch('/api/companyInfo', (req, res) => {
-  profileControllers.updateCompanyInfo(req.body.userId, req.body.logo_url, req.body.information)
+  let userId = jwt.decode(req.body.userId, secret).id;
+  profileControllers.updateCompanyInfo(userId, req.body.logo_url, req.body.information)
   .catch((err) => {
     console.log(err);
   })
@@ -43,9 +46,11 @@ router.get('/api/candidateInfo', (req, res) => {
 
 // authentication route for logging in, check 'users' table for credentials
 router.post('/api/login', (req, res) => {
-  authControllers.handleLogin(req.body.token, (role, id, name, username) => {
-    console.log(role, id, name, username)
-    res.status(201).send([role, id, name, username]);
+  authControllers.handleLogin(req.body.token, (role, id, name) => {
+    let userId = {id: id};
+    let info = {role: role, name: name};
+    let idToken = jwt.encode(userId, secret);
+    res.status(201).send([idToken, info]);
   })
   .catch((err) => {
     console.log(err);
@@ -71,12 +76,20 @@ router.post('/api/registerCompany', (req, res) => {
   })
 })
 
+router.get('/api/username', (req, res) => {
+  let userId = jwt.decode(req.query.userId, secret).id;
+  authControllers.getUsername(userId)
+  .then((data) => {
+    res.send(data)
+  })
+})
+
 
 /* ---------- Challenge Routes --------- */
 
 // get all challenges from 'all_challenges' table
 router.get('/api/challenges', (req, res) => {
-  let companyId = req.query.companyId;
+  let companyId = jwt.decode(req.query.companyId, secret).id;
   challengeControllers.getCompanyChallenges(companyId)
   .then((data) => {
     res.send(data);
@@ -99,7 +112,7 @@ router.post('/api/challenges', (req, res) => {
   let testCases = req.body.test_cases || `[[${req.body.challenge.testInput}], [${req.body.challenge.testOutput}]]`;
   let examples = req.body.examples || `[[${req.body.challenge.exampleInput}], [${req.body.challenge.exampleOutput}]]` || null;
   let difficulty = req.body.challenge.difficulty || null;
-  let companyId = req.body.companyId;
+  let companyId = jwt.decode(req.body.companyId, secret).id;
   challengeControllers.saveChallenge(title, instruction, functionName, params, testCases, examples, difficulty, companyId)
   .then(() => {
     res.send('Successfully saved challenge');
@@ -110,7 +123,7 @@ router.post('/api/challenges', (req, res) => {
 router.delete('/api/challenges', (req, res) => {
   let query = JSON.parse(req.query.challenge)
   let title = query.title;
-  let companyId = req.query.companyId;
+  let companyId = jwt.decode(req.query.companyId, secret).id;
   challengeControllers.deleteCompanyChallenge(title, companyId)
   .then(() => {
     res.send('Successfully deleted challenge');
@@ -125,8 +138,9 @@ router.post('/api/initialChallenge', (req, res) => {
 // update initial challenge from 'intitial_challenges table'
 router.patch('/api/initialChallenge', (req, res) => {
   console.log('server route', req.body.challengeId);
+  let companyId = jwt.decode(req.body.companyId, secret).id;
   if (req.body.initial === false || req.body.isInitial === true) {
-    challengeControllers.setInitialChallenge(req.body.companyId, req.body.challengeId, req.body.duration)
+    challengeControllers.setInitialChallenge(companyId, req.body.challengeId, req.body.duration)
     .then(() => {
       res.send('Updated initial challenge');
     })
@@ -134,7 +148,7 @@ router.patch('/api/initialChallenge', (req, res) => {
       console.log('Could not update initial challenge', err);
     })
   } else {
-    challengeControllers.removeInitialChallenge(req.body.companyId, req.body.challengeId)
+    challengeControllers.removeInitialChallenge(companyId, req.body.challengeId)
     .then(() => {
       res.send('Removed initial challenge');
     })
@@ -146,7 +160,7 @@ router.patch('/api/initialChallenge', (req, res) => {
 
 // get initial challenge for company
 router.get('/api/initialChallenge', (req, res) => {
-  let companyId = req.query.company_id;
+  let companyId = jwt.decode(req.query.company_id, secret).id;
   challengeControllers.getInitialChallenge(companyId)
   .then((data) => {
     res.send(data);
@@ -213,7 +227,7 @@ router.post('/api/companyCalendar', (req, res) => {
   let time = req.body.time;
   let duration = Number(req.body.duration);
   let challengeId = req.body.challengeId;
-  let companyId = req.body.companyId;
+  let companyId = jwt.decode(req.body.companyId, secret).id;
   calendarControllers.addToCompanySchedule(time, duration, challengeId, companyId)
   .then(() => {
     console.log('Successfully saved challenge to schedule');
@@ -226,7 +240,8 @@ router.post('/api/companyCalendar', (req, res) => {
 
 //fetch single company's schedule
 router.get('/api/companyCalendar', (req, res) => {
-  calendarControllers.getCompanySchedule(req.query.companyId)
+  let companyId = jwt.decode(req.query.companyId, secret).id;
+  calendarControllers.getCompanySchedule(companyId)
   .then((data) => {
     res.send(data);
   })

@@ -1,4 +1,4 @@
-import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF, SET_CURRENT_LIVE_CHALLENGE, GET_CHALLENGE_INFO, GET_COMPANY_RESULTS, GET_CANDIDATE_LIST } from '../constants/actionTypes';
+import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF, SET_CURRENT_LIVE_CHALLENGE, GET_CHALLENGE_INFO, GET_COMPANY_RESULTS, GET_CANDIDATE_LIST, GET_USER } from '../constants/actionTypes';
 
 import axios from 'axios';
 import { fetchInitialChallenge } from './userActions.js';
@@ -181,3 +181,16 @@ export const fetchCandidateList = (companyId) => (dispatch) => {
   })
 }
 
+export const getUsername = (userId, cb) => (dispatch) => {
+  axios.get('/api/username', {params: { userId }})
+  .then(({data}) => {
+    console.log('username data retrieved', data[0].username)
+    dispatch({ type: GET_USER, payload: data[0].username})
+    if (cb) {
+      cb(data[0].username)
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
