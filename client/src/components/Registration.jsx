@@ -38,11 +38,11 @@ class Registration extends Component {
   }
 
   handleSubmit(e, form) {
+    console.log('submitting registration', form)
     e.preventDefault();
     if(form === 'companyForm') {
       this.props.handleSignUp(this.state.email, this.state.username, this.state.password, form, this.state.companyName, this.state.phone, this.state.logoUrl, null, this.state.companyInfo, this.resetInput);
     } else if(form === 'candidateForm') {
-      console.log('registration state', this.state.github_url)
       this.props.handleSignUp(this.state.email, this.state.username, this.state.password, form, this.state.candidateName, this.state.phone, null, this.state.github_url, null, this.resetInput);
     }
   }
@@ -63,7 +63,6 @@ class Registration extends Component {
   }
 
   render() {
-    // console.log('registration state', this.state.github_url)
     return (
       <div className='ui centered padded grid'>
         <div className='ui two buttons top' style={{ marginTop: '20px' }} >

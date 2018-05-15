@@ -44,6 +44,7 @@ router.get('/api/candidateInfo', (req, res) => {
 // authentication route for logging in, check 'users' table for credentials
 router.post('/api/login', (req, res) => {
   authControllers.handleLogin(req.body.token, (role, id, name, username) => {
+    console.log(role, id, name, username)
     res.status(201).send([role, id, name, username]);
   })
   .catch((err) => {

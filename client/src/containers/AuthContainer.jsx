@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Login from '../components/Login.jsx';
 import Registration from '../components/Registration.jsx';
 
-import { saveCompany, saveCandidate, handleLogin, handleSignUp } from '../actions/authActions';
+import { saveCompany, saveCandidate, handleLogin, handleSignUp, googleLogin } from '../actions/authActions';
 
 import {BrowserRouter as Router, Route, Link, Switch, History, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -27,6 +27,6 @@ const mapStateToProps = (state) => ({
 
 const connectAuthContainer = connect(mapStateToProps, {} )(AuthContainer);
 const RegistrationComponent = connect(mapStateToProps, { saveCompany, saveCandidate, handleSignUp })(Registration);
-const LoginComponent = connect(mapStateToProps, { handleLogin })(Login);
+const LoginComponent = connect(mapStateToProps, { handleLogin, googleLogin })(Login);
 
 export default withRouter(connectAuthContainer);
