@@ -169,13 +169,6 @@ class UserLiveCodingView extends Component {
                thatProps.history.push('/user')
           })
         }
-<<<<<<< HEAD
-        let returnToDash = () => (this.props.saveResults(isPassed, newString, score, time, this.props.initial_challenge[0].id, this.props.initial_challenge[0].company_id, localStorage.getItem('userId'), true, this.props.initial_challenge[0].id, () => {
-          this.props.history.push('/user/schedule')
-        }))
-        setTimeout(returnToDash, 750)
-=======
->>>>>>> refactored init/live, corrected redirect, delete challenge check
       }
     })
   }

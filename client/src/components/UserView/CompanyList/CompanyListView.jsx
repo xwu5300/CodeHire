@@ -41,6 +41,7 @@ class CompanyListView extends Component {
   }
 
   render () {
+    console.log('in company list view',this.props)
     // console.log('compa list view props', this.props, localStorage.getItem('userId'))
     // console.log('compa list view candidate id', localStorage.getItem('userId'))
     // console.log('compa list view candidate id', localStorage.getItem('companyId'))
@@ -62,7 +63,7 @@ class CompanyListView extends Component {
         return (
           <div key={i}>
 
-            <div className='five wide column'> 
+            <div className='five wide column'>
               <img className='company_logo' src={`${company.logo_url || 'http://dev.jobkhoji.com/assets/images/default_company_icon.png'}`} />
 
               {company.name}

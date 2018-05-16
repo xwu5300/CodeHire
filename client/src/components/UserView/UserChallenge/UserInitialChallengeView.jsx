@@ -23,12 +23,18 @@ class UserInitialChallengeView extends Component {
       theme: 'monokai',
       code: `function ${this.props.initial_challenge[0].function_name}(${this.props.initial_challenge[0].parameters}) {
 }`,
-      inChallenge: true
+      inChallenge: true,
+      submission: '',
+      exampleInputs: [],
+      exampleOutputs: []
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
+
     this.onChange = this.onChange.bind(this)
     this.handleTheme = this.handleTheme.bind(this)
+    this.getExamples = this.getExamples.bind(this)
     this.saveResults = this.saveResults.bind(this)
+    this.checkAnswer = this.checkAnswer.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   onChange(newValue, event) {
@@ -70,11 +76,8 @@ class UserInitialChallengeView extends Component {
     })
   }
 
-  handleSubmit() {
-
-    let func = this.props.initial_challenge[0].parameters
-    let reg = new RegExp(`${func}`, 'g')
-
+  checkAnswer() {
+    let params = this.props.initial_challenge[0].parameters
     let testCaseS = this.props.initial_challenge[0].test_cases.replace(/"/g, "'")
     let testCaseD = testCaseS.replace(/'/g, '"')
 
@@ -88,7 +91,8 @@ class UserInitialChallengeView extends Component {
     input = input.replace(/'/g, "")
     output = output.replace(/'/g, "")
 
-    let newString = `${this.state.code.replace(reg, `${func}`)}
+    let reg = new RegExp(`${params}`, 'g')
+    let submittedCode = `${this.state.code.replace(reg, `${params}`)}
 
     ${this.props.initial_challenge[0].function_name}(${input})
     `
@@ -102,10 +106,15 @@ class UserInitialChallengeView extends Component {
       }
     }
 
-    let answer = eval(newString)
-    console.log('my answer', answer, 'and my output', output)
-    let result = JSON.stringify(answer) === output
+    let answer = eval(submittedCode)
+    this.setState({
+      submission: submittedCode
+    })
+    return JSON.stringify(answer) === output
+  }
 
+  handleSubmit() {
+    let result = this.checkAnswer()
     let score = 90;  //hard coded
     let time = moment(Date.now()).format();
     swal({
@@ -117,12 +126,9 @@ class UserInitialChallengeView extends Component {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, submit it!'
     }).then((clickResult) => {
-
       if (clickResult.value) {
-        let isPassed = answer === output;
-        let time = moment(Date.now()).format();
-        let score;
-        this.saveResults(result, newString, score, time)
+        let submission = this.state.submission
+        this.saveResults(result, submission, score, time)
         var thatProps = this.props
         if (result === true) {
           swal(
