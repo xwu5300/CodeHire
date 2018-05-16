@@ -10,7 +10,10 @@ import ChallengeClock from '../ChallengeClock.jsx';
 
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
-
+import 'brace/theme/github';
+import 'brace/theme/twilight';
+import 'brace/theme/solarized_dark';
+import 'brace/theme/terminal';
 
 class LiveCodingView extends Component {
   constructor() {
@@ -27,19 +30,16 @@ class LiveCodingView extends Component {
     this.socket.on('active candidates', (activeCandidates) => {
       this.setState({ active_candidates: activeCandidates })
     })
-
   }
 
   componentDidMount() {
     this.socket.emit('company enter', this.props.current_company_calendar);
   }
 
-
   getProfile(userId) {
    this.props.fetchCandidateInfo(userId, () => {
     this.setState({ active_user_id: userId });
    });
-
   }
 
   render() {

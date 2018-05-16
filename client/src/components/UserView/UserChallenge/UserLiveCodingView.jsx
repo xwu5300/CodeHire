@@ -13,9 +13,6 @@ import 'brace/theme/twilight';
 import 'brace/theme/solarized_dark';
 import 'brace/theme/terminal';
 
-import 'brace/mode/javascript';
-import 'brace/theme/monokai';
-
 class UserLiveCodingView extends Component {
   constructor(props) {
     super(props);
@@ -72,7 +69,6 @@ class UserLiveCodingView extends Component {
       theme: e.target.value
     })
   }
-
 
   getExamples() {
     let examplesS = this.props.location.challenge.examples.replace(/"/g, "'")
@@ -185,9 +181,6 @@ class UserLiveCodingView extends Component {
   }
 
   render() {
-
-
-    console.log('challenge properties', this.props.location.challenge)
     return (
       <div>
         <div className="ui orange three item inverted menu">
@@ -234,8 +227,6 @@ class UserLiveCodingView extends Component {
           <option value='terminal'>Terminal</option>
         </select>
       <button onClick={this.handleSubmit}> Submit Answer </button>
-
-
       </div>
      )
   }
