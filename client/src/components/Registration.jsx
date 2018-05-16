@@ -77,7 +77,7 @@ class Registration extends Component {
               <input onChange={ (e) => this.handleChange(e) } value={ this.state.companyName } name='companyName' type='text' placeholder='Company Name' required />
             </div>
             <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } value={ this.state.username } name='username' type='username' placeholder='Username' required />
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.username } name='username' placeholder='Username' required/>
             </div>
             <div className='field'>
               <input onChange={ (e) => this.handleChange(e) } value={ this.state.password } name='password' type='password' placeholder='Password' required />
@@ -108,7 +108,7 @@ class Registration extends Component {
               <input onChange={ (e) => this.handleChange(e) } value={ this.state.candidateName } name='candidateName' type='text' placeholder='Full Name' required />
             </div>
             <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } value={ this.state.username } name='username' type='username' id='username' placeholder='Username' required />
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.username } name='username' placeholder='Username' required/>
             </div>
             <div className='field'>
               <input onChange={ (e) => this.handleChange(e) } value={ this.state.password } name='password' type='password' placeholder='Password' required />
