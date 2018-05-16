@@ -9,7 +9,7 @@ class AnalyticsView extends Component {
   } 
 
   componentDidMount() {
-    console.log(this.props)
+    this.props.fetchCandidateList(localStorage.getItem('userId'));
   }
 
   render() {

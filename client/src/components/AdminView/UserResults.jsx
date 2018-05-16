@@ -7,6 +7,7 @@ class UserResults extends Component {
   }
 
   render() {
+      console.log('user result props', this.props)
       if (this.props.results.length) {
         return (
         <div>

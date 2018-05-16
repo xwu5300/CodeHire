@@ -55,8 +55,8 @@ const mapStateToProps = (state) => ({
 
 
 const ChallengeListComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge, addToCompanySchedule, makeInitial, getChallengeInfo, getUsername })(ChallengeListView);
-const AdminDashboardComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, currentCompanyCalendar, fetchCompanySchedule, deleteFromCompanySchedule, fetchCandidateList, addToCompanySchedule, fetchInitialChallenge, getUsername })(AdminDashboardView);
-const AnalyticsComponent= connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge, fetchCompanyResults, getUsername })(AnalyticsView);
+const AdminDashboardComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, currentCompanyCalendar, fetchCompanySchedule, deleteFromCompanySchedule, addToCompanySchedule, fetchInitialChallenge, getUsername })(AdminDashboardView);
+const AnalyticsComponent= connect(mapStateToProps, { fetchCandidateList, fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge, fetchCompanyResults, getUsername })(AnalyticsView);
 const LiveCodingComponent = connect(mapStateToProps, { fetchAllChallenges, fetchDefaultChallenges, saveChallenge, deleteChallenge, fetchCandidateInfo, getUsername })(LiveCodingView);
 const AdminProfileComponent = connect(mapStateToProps, { updateInfo, fetchCompanyInfo, getUsername })(AdminProfileView);
 const UserResultsComponent = connect(mapStateToProps)(UserResults)

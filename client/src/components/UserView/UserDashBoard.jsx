@@ -9,7 +9,7 @@ class UserDashBoard extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchCandidateCalendar(this.props.user_id);
+    this.props.fetchCandidateCalendar(localStorage.getItem('userId'));
   }
 
   render() {

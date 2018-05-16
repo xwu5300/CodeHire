@@ -72,6 +72,7 @@ export const currentCompanyCalendar = (companyId, callback) => (dispatch) => {
 }
 
 export const saveResults = (isPassed, code, score, completedAt, challengeId, companyId, candidateId, initial, candidateScheduleId, cb) => (dispatch) => {
+  console.log('candidate id user action', candidateId)
   axios.post('/api/results', {isPassed, code, score, completedAt, challengeId, companyId, candidateId, initial})
   .then(() => {
     dispatch(deleteCandidateSchedule(candidateScheduleId, candidateId))

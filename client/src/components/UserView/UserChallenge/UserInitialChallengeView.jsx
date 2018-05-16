@@ -43,8 +43,8 @@ class UserInitialChallengeView extends Component {
   }
 
   saveResults(result, newString, score, time) {
-    this.props.saveResults(result, newString, score, time, this.props.initial_challenge[0].id, this.props.initial_challenge[0].company_id, this.props.user_id, true, this.props.initial_challenge[0].id, () => {
-      this.props.fetchCandidateInitialResults(this.props.initial_challenge[0].company_id, this.props.user_id)
+    this.props.saveResults(result, newString, score, time, this.props.initial_challenge[0].id, this.props.initial_challenge[0].company_id, localStorage.getItem('userId'), true, this.props.initial_challenge[0].id, () => {
+      this.props.fetchCandidateInitialResults(this.props.initial_challenge[0].company_id, localStorage.getItem('userId'))
     })
   }
 
@@ -117,7 +117,7 @@ class UserInitialChallengeView extends Component {
               thatProps.history.push('/user/schedule')
              })
         }
-        let returnToDash = () => (this.props.saveResults(isPassed, newString, score, time, this.props.initial_challenge[0].id, this.props.initial_challenge[0].company_id, this.props.user_id, true, this.props.initial_challenge[0].id, () => {
+        let returnToDash = () => (this.props.saveResults(isPassed, newString, score, time, this.props.initial_challenge[0].id, this.props.initial_challenge[0].company_id, localStorage.getItem('userId'), true, this.props.initial_challenge[0].id, () => {
           this.props.history.push('/user/schedule')
         }))
         setTimeout(returnToDash, 0)

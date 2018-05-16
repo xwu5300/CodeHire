@@ -26,7 +26,6 @@ module.exports.getCompanyResults = (companyId, candidateId) => {
   .where({'results.company_id': companyId, 'results.candidate_id' : candidateId})
   .leftJoin('users', 'results.candidate_id', 'users.id')
   .leftJoin('all_challenges', 'results.challenge_id', 'all_challenges.id')
-  .select('all_challenges.*', 'results.*', 'users.name', 'users.information', 'users.phone', 'users.email', 'users.candidate_skills', 'users.logo_url')
   .then((res) => {
     console.log('Retrieve candidate result from result table');
     return res;

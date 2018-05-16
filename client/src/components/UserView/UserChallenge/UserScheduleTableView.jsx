@@ -39,7 +39,7 @@ getCalendar(schedule, companyId, duration) {
             </button>
             <button className='ui orange button' 
             onClick={() => {
-              this.props.cancelSchedule(schedule.id, schedule.candidate_id)
+              this.props.cancelSchedule(schedule.id, localStorage.getItem('userId'))
             }}>Cancel
             </button>
           </td>
