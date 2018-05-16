@@ -8,14 +8,10 @@ import ChallengeCard from './ChallengeCard.jsx';
 
 const target = {
   drop: (props, monitor) => {
-    console.log('PRORORORORS', props);
     let challenge = monitor.getItem();
-    console.log('CHALALALENGE', challenge);
- 
-    props.addToCompanySchedule(challenge.time, challenge.duration, challenge.challengeId, challenge.companyId, () => {
+    props.addToCompanySchedule(challenge.time, challenge.duration, challenge.challengeId, localStorage.getItem('userId'), () => {
       console.log('SUCCESS');
     })
-    
   }
 }
 
@@ -31,11 +27,12 @@ function collect(connect, monitor) {
 class ScheduleChallenges extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      challenges: this.props.scheduledChallenges.map((item) => false)
+    }
   }
 
   render() {
-
     const { connectDropTarget } = this.props;
     return connectDropTarget (
       <div className='ui segment drag_segment'>
@@ -44,12 +41,14 @@ class ScheduleChallenges extends Component {
             return (
               <ChallengeCard 
                key={challenge.id}
+               index={i}
                challenge={ challenge } 
                title={ challenge.title } 
                challengeId={ challenge.challenge_id } 
                instruction={ challenge.instruction } 
                difficulty={ challenge.difficulty } 
-               userId={ challenge.company_id } 
+               userId={ this.props.userId } 
+               scheduleId={ challenge.id }
                deleteChallenge={ this.props.delete } 
                deleteFromCompanySchedule={ this.props.deleteFromCompanySchedule }
                updateChallengeDate = { this.props.updateChallengeDate }

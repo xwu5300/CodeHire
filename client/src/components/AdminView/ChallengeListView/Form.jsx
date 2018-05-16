@@ -7,6 +7,7 @@ class Form extends Component {
     this.state = {
       challenge: {
         title: '',
+        category: '',
         instruction: '',
         function_name: '',
         parameters: '',
@@ -43,6 +44,7 @@ class Form extends Component {
         on: 'blur',
         fields: {
           title: 'empty',
+          category: 'empty',
           instruction: 'empty',
           function_name: 'empty',
           parameters: 'empty',
@@ -100,6 +102,7 @@ class Form extends Component {
       this.setState({
         challenge: {
           title: '',
+          category: '',
           instruction: '',
           function_name: '',
           parameters: '',
@@ -171,6 +174,15 @@ class Form extends Component {
             <input name="title" type="text" placeholder="Two Sum" value={this.state.challenge.title} onChange={this.handleChange}/>
           </div>
           <div className="field">
+          <label>Category</label>
+            <select className="ui dropdown" name="category" value={this.state.challenge.category} onChange={this.handleChange}>
+              <option value="">Select</option>
+              <option value="algos">Algorithms</option>
+              <option value="dataStructures">Data Structures</option>
+              <option value="sysDesign">System Design</option>
+            </select>
+          </div>
+          <div className="field">
             <label>Instructions</label>
             <textarea rows="3" name="instruction" type="text" value={this.state.challenge.instruction} placeholder="Find the indicies of two items in an array that equal the target value" onChange={this.handleChange}/>
           </div>
@@ -204,9 +216,11 @@ class Form extends Component {
             <label>Difficulty</label>
             <select className="ui dropdown" name="difficulty" value={this.state.challenge.difficulty} onChange={this.handleChange}>
               <option value="">Select</option>
-              <option value="easy">Easy</option>
-              <option value="medium">Medium</option>
-              <option value="hard">Hard</option>
+              <option value="1">1 - Least Difficult</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5 - Most Difficult</option>
             </select>
           </div>
           <div className="ui error message"></div>

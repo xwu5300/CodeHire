@@ -30,8 +30,8 @@ export const handleLogin = (email, password) => (dispatch) => {
   .then(({user}) => {
     axios.post('/api/login', {token: user.uid})
     .then(({data}) => {
-      dispatch({ type: CHECK_USER, payload: data })
       localStorage.setItem('userId', data[0]);
+      dispatch({ type: CHECK_USER, payload: data })
       if (data[1].role === 'company') {
         history.push('/admin');
       } else if (data[1].role === 'candidate') {
@@ -89,6 +89,14 @@ export const handleSignUp = (email, username, password, form, name, phone, logoU
       alert(error.message)
     }
   })
+}
+
+export const handleLogout = () => (dispatch) => {
+  if (auth.currentUser) {
+    auth.signOut();
+    localStorage.removeItem('userId');
+  }
+  history.push('/login');
 }
 
 

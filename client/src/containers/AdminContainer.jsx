@@ -15,7 +15,6 @@ import { connect } from 'react-redux';
 import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, fetchCompanyResults, fetchCandidateList, getChallengeInfo, updateChallengeDate, getUsername } from '../actions/adminActions'; 
 import { fetchInitialChallenge, currentCompanyCalendar, fetchCandidateInfo } from '../actions/userActions';
 
-
 class AdminContainer extends Component {
 
   render() {

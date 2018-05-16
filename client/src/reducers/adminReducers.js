@@ -1,3 +1,5 @@
+import React from 'react';
+import { GET_DEFAULT_CHALLENGES, GET_ALL_CHALLENGES, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF, GET_COMPANY_RESULTS, GET_CANDIDATE_LIST, GET_CHALLENGE_INFO, GET_FAVORITES } from '../constants/actionTypes';
 
 const initialState = {
   default_challenges: [],
@@ -12,7 +14,8 @@ const initialState = {
   results: [],
   username: '',
   candidate_list: [],
-  challenge_id: null
+  challenge_id: null,
+  favorites: []
 }
 
 
@@ -143,4 +146,16 @@ const username = (state = initialState, action) => {
   }
 }
 
-export default { defaultChallenges, allChallenges, companyInfo, companySchedule, isInitial, currentLiveChallenge, results, candidateList, challengeInfo, username };
+const favorites = (state = initialState, action) => {
+  switch(action.type) {
+    case 'GET_FAVORITES':
+      return {
+        ...state,
+        favorites: action.payload
+      }
+    default:
+      return state;
+  }
+}
+
+export default { defaultChallenges, allChallenges, companyInfo, companySchedule, isInitial, currentLiveChallenge, results, candidateList, challengeInfo, username, favorites };
