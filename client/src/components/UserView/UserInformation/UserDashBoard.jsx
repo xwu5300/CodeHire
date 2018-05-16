@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import UserScheduleTableView from './UserChallenge/UserScheduleTableView.jsx';
+import UserScheduleTableView from '../UserChallenge/UserScheduleTableView.jsx';
 
 class UserDashBoard extends Component {
   constructor() {
@@ -30,6 +30,8 @@ class UserDashBoard extends Component {
 
         : <div>You Do Not Have Any Scheduled Challenges</div>}
         </div>
+        <br/> <br/>
+        <div></div>
       </div>
     )
   }

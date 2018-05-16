@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 
-import Dropbox from './Dropbox.jsx';
+import Dropbox from '../Dropbox.jsx';
 
 class UserProfileView extends Component {
   constructor() {
