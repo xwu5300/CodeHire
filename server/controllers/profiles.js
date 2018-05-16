@@ -59,19 +59,55 @@ module.exports.updateCandidateInfo = (username, skill, github_url) => {
     }
   }
 
-  module.exports.deleteCandidateSkill = (username, skill, callback) => {
-    return knex('users')
-      .where({ username: username })
-      .update({
-        candidate_skills: knex.raw('array_remove(candidate_skills, ?)', skill)
-      })
-      .then(() => {
-        knex('users').select('candidate_skills').where({ username: username})
-        .then((data) => {
-          callback(data[0].candidate_skills);
-        }) 
-      })
-      .catch((err) => {
-        console.log('Error deleting candidate skill', err);
-      })
+module.exports.deleteCandidateSkill = (username, skill, callback) => {
+  return knex('users')
+    .where({ username: username })
+    .update({
+      candidate_skills: knex.raw('array_remove(candidate_skills, ?)', skill)
+    })
+    .then(() => {
+      knex('users').select('candidate_skills').where({ username: username})
+      .then((data) => {
+        callback(data[0].candidate_skills);
+      }) 
+    })
+    .catch((err) => {
+      console.log('Error deleting candidate skill', err);
+    })
   }
+
+module.exports.saveToFavorites = (companyId, candidateId) => {
+  return knex('company_user')
+  .insert({company_id: companyId, user_id: candidateId})
+  .then(() => {
+    console.log('successfully saved to favorites in db');
+  })
+  .catch((err) => {
+    console.log('Error saving candidate to favorites in db', err);
+  })
+}
+
+module.exports.removeFromFavorites = (companyId, candidateId) => {
+  return knex('company_user')
+  .where({company_id: companyId, user_id: candidateId})
+  .del()
+  .then(() => {
+    console.log('successfully removed candidate from favorites in db');
+  })
+  .catch((err) => {
+    console.log('Error removing canddate from favorites in db', err);
+  })
+}
+
+module.exports.getFavorites = (companyId) => {
+  return knex('company_user')
+  .where({company_id: companyId})
+  .innerJoin('users', 'users.id', 'company_user.user_id')
+  .then((res) => {
+    console.log('Successfully retrieved saved users from db');
+    return res;
+  })
+  .catch((err) => {
+    console.log('Could not retrieve saved users from db', err);
+  })
+}

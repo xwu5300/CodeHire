@@ -21,8 +21,6 @@ class ScheduleChallengeView extends Component {
     }
   }
 
-
-
   handleClick(challenge, challengeId) {
     let date = $('#date').val();
     if (this.props.isInitial) {

@@ -118,6 +118,7 @@ router.get('/api/defaultChallenges', (req, res) => {
 
 router.post('/api/challenges', (req, res) => {
   let title = req.body.challenge.title;
+  let category = req.body.challenge.category;
   let instruction = req.body.challenge.instruction;
   let functionName = req.body.challenge.function_name;
   let params = req.body.challenge.parameters;
@@ -126,7 +127,7 @@ router.post('/api/challenges', (req, res) => {
   let difficulty = req.body.challenge.difficulty || null;
   let companyId = jwt.decode(req.body.companyId, secret).id;
   let scheduled = req.body.scheduled;
-  challengeControllers.saveChallenge(title, instruction, functionName, params, testCases, examples, difficulty, companyId, scheduled)
+  challengeControllers.saveChallenge(title, instruction, functionName, params, testCases, examples, difficulty, category, companyId, scheduled)
   .then(() => {
     res.send('Successfully saved challenge');
   })
@@ -177,8 +178,8 @@ router.get('/api/initialChallenge', (req, res) => {
 
 //get selected challenge info for company
 router.get('/api/challenge', (req, res) => {
-  let companyId = req.body.companyId;
-  challengeControllers.getChallengeInfo(req.query.challengeId, req.query.companyId)
+  let companyId = jwt.decode(req.query.companyId, secret).id;
+  challengeControllers.getChallengeInfo(req.query.challengeId, companyId)
   .then((data) => {
     res.send(data);
   })
@@ -233,12 +234,15 @@ router.get('/api/companyCalendars', (req, res) => {
 })
 // add to company Calendar
 router.post('/api/companyCalendar', (req, res) => {
-
+  console.log('look at dat body', req.body)
   let time = req.body.time;
   let duration = Number(req.body.duration);
   let challengeId = req.body.challengeId;
-  let companyId = jwt.decode(req.body.companyId, secret).id;
-
+  if (req.body.companyId === 1) {
+    let companyId = 1;
+  } else {
+    companyId = jwt.decode(req.body.companyId, secret).id;
+  }
   calendarControllers.addToCompanySchedule(time, duration, challengeId, companyId)
   .then(() => {
     console.log('Successfully saved challenge to schedule');
@@ -251,8 +255,8 @@ router.post('/api/companyCalendar', (req, res) => {
 
 //fetch single company's schedule
 router.get('/api/companyCalendar', (req, res) => {
+  console.log('get company calendar', req.query.companyId);
   let companyId = jwt.decode(req.query.companyId, secret).id;
-  console.log('routes getCompanySchedule', companyId)
   calendarControllers.getCompanySchedule(companyId)
   .then((data) => {
     res.send(data);
@@ -342,6 +346,42 @@ router.post('/api/results', (req, res) => {
     console.log('Could not save results to db');``
   })
 })
+
+/* ------- Favorites Routes -------- */
+router.get('/api/favorites', (req, res) => {
+  let companyId = jwt.decode(req.query.companyId, secret).id;
+  profileControllers.getFavorites(companyId)
+  .then((data) => {
+    console.log('Favorites retrieved. Sending favorites to client');
+    res.send(data);
+  })
+  .catch((err) => {
+    console.log('Error sending favorites to client', err);
+  })
+})
+
+router.post('/api/favorites', (req, res) => {
+  let companyId = jwt.decode(req.body.companyId, secret).id;
+  profileControllers.saveToFavorites(companyId, candidateId)
+  .then(() => {
+    console.log('User sent to favorites in db');
+  })
+  .catch((err) => {
+    console.log('Error sending favorites to db', err);
+  })
+})
+
+router.delete('/api/favorites', (req, res) => {
+  let companyId = jwt.decode(req.query.companyId, secret).id;
+  profileControllers.removeFromFavorites(companyId, candidateId)
+  .then(() => {
+    console.log('Successfully sending user to db for removal from favorites');
+  })
+  .catch((err) => {
+    console.log('Error sending user to db for removal from favorites', err);
+  })
+})
+
 
 
 module.exports = router;

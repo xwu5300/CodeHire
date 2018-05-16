@@ -68,8 +68,7 @@ class ChallengeCard extends Component {
  
   render() {
   
-  const { challenge, challengeId, userId, title, instruction, difficulty, deleteChallenge, deleteFromCompanySchedule, handleModal, connectDragSource, isDragging } = this.props;
-
+  const { challenge, challengeId, userId, scheduleId, title, instruction, difficulty, deleteChallenge, deleteFromCompanySchedule, handleModal, connectDragSource, isDragging } = this.props;
   return connectDragSource (
     <div className="ui fluid orange card">
       <div className='content challenge_content'>
@@ -104,7 +103,7 @@ class ChallengeCard extends Component {
             <i className="minus icon"></i>
           </button>
           :
-          <button className="ui icon button" onClick={() => deleteFromCompanySchedule(challengeId, userId) }>
+          <button className="ui icon button" onClick={() => deleteFromCompanySchedule(scheduleId, userId) }>
             <i className="minus icon"></i>
           </button>
         }

@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS company_schedule CASCADE;
 DROP TABLE IF EXISTS user_schedule CASCADE;
 DROP TABLE IF EXISTS all_challenges CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS company_user CASCADE;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
@@ -32,6 +33,7 @@ CREATE TABLE all_challenges (
   test_cases TEXT,
   examples TEXT,
   difficulty VARCHAR(30),
+  category VARCHAR(255),
   initial BOOLEAN NOT NULL,
   duration SMALLINT NULL,
   company_id SMALLINT REFERENCES users(id)
@@ -61,6 +63,12 @@ CREATE TABLE results (
   candidate_id SMALLINT REFERENCES users(id),
   company_id SMALLINT REFERENCES users(id),
   initial BOOLEAN NOT NULL
+);
+
+CREATE TABLE company_user (
+  id SERIAL PRIMARY KEY,
+  company_id SMALLINT REFERENCES users(id),
+  user_id SMALLINT REFERENCES users(id)
 );
 
 
