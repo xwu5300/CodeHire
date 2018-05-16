@@ -8,7 +8,9 @@ import ChallengeCard from './ChallengeCard.jsx';
 
 const target = {
   drop: (props, monitor) => {
+    console.log('PRORORORORS', props);
     let challenge = monitor.getItem();
+    console.log('CHALALALENGE', challenge);
  
     props.addToCompanySchedule(challenge.time, challenge.duration, challenge.challengeId, challenge.companyId, () => {
       console.log('SUCCESS');

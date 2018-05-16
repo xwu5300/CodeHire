@@ -12,8 +12,8 @@ export const saveCandidate = (token, fullName,username, phone, github_url) => (d
 
 
 
-export const saveCompany = (companyName, username, password, email, phone, logoUrl, information) => (dispatch) => {
-  axios.post('/api/registerCompany', { companyName, username, password, email, phone, logoUrl, information })
+export const saveCompany = (token, companyName, username, password, email, phone, logoUrl, information) => (dispatch) => {
+  axios.post('/api/registerCompany', { token, companyName, username, password, email, phone, logoUrl, information })
   .then((response) => {
   	dispatch({ type: SAVE_COMPANY, payload: response.data })
   })
@@ -89,19 +89,8 @@ export const handleSignUp = (email, username, password, form, name, phone, logoU
       alert(error.message)
     }
   })
+}
 
-// export const handleLogin = (username, password) => (dispatch) => {
-// 	axios.post('/api/login', { username, password })
-// 	.then((response) => {
-// 		// console.log('HANDLE LOGIN', response);
-// 		dispatch({ type: CHECK_USER, payload: response.data })
-// 	})
-// 	.catch((err) => {
-// 		console.log('Error checking user', err);
-// 	}
-//  )
-
-// }
 
 
 

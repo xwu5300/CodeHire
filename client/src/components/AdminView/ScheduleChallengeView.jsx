@@ -12,7 +12,6 @@ class ScheduleChallengeView extends Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.handleDurationChange = this.handleDurationChange.bind(this);
-    this.toggleForm = this.toggleForm.bind(this);
     this.toggleValid = this.toggleValid.bind(this);
   }
 
@@ -58,8 +57,7 @@ class ScheduleChallengeView extends Component {
   
 
   render() {
-
- 
+    
     const selected = {
       border: '3px solid orange',
       width: '45%',
@@ -70,12 +68,7 @@ class ScheduleChallengeView extends Component {
        width: '45%',
        height: '200px'
     }
-  
 
-
- 
-
-  render() {
     return (
       <div>
         <h4>Select from your saved challenges:</h4>
@@ -102,22 +95,14 @@ class ScheduleChallengeView extends Component {
                   </div> 
                 </div>
                 {this.state.invalid ? <div style={{color: 'red'}}>Please duration try again</div> : null}
-                <div className="ui bottom attached button" onClick={() => {this.handleClick(item, item.id)}}>Select</div>
+                <div className="ui bottom attached button" onClick={ () => this.handleClick(item, item.id) }>Select</div>
               </div>
-            }
-            <button className="ui button select" onClick={() => {this.handleClick(item, i)}}>Select</button>
-            {this.state.invalid[i] ? <div style={{color: 'red'}}>Please enter all values and try again</div> : null}
-            <div className="clear"></div>
-            <br/>
-          )
-      })}
-   
+            )
+          })}
         </div>
-      </div>
-    )
-  }
-}
-
+      </div> 
+      )}  
+    }
 
 
 export default ScheduleChallengeView;

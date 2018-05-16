@@ -111,7 +111,7 @@ class AdminDashboardView extends Component {
                     <tr>
                       <td>{this.props.initial_challenge[0].title}</td>
                       <td>{this.props.initial_challenge[0].duration}</td>
-                      <td><button className='ui button' type='button' onClick={() => {this.props.makeInitial(this.props.initial_challenge[0].id, this.props.initial_challenge[0].initial, null, null, userId={localStorage.getItem('userId')} )}}><i className='x icon'></i></button></td>
+                      <td><button className='ui button' type='button' onClick={() => {this.props.makeInitial(this.props.initial_challenge[0].id, this.props.initial_challenge[0].initial, null, null, localStorage.getItem('userId'))}}><i className='x icon'></i></button></td>
                     </tr>
 
                   }

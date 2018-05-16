@@ -76,6 +76,7 @@ export const getChallengeInfo = (challengeId, companyId, cb) => (dispatch) => {
 }
 
 export const addToCompanySchedule = (time, duration, challengeId, companyId, cb) => (dispatch) => {
+  console.log('COMPANY ID', companyId);
   axios.post('/api/companyCalendar', { time, duration, challengeId, companyId })
   .then(() => {
     console.log('add to company schedule was called')
