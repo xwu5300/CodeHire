@@ -1,11 +1,8 @@
-import React from 'react';
-import { GET_DEFAULT_CHALLENGES, GET_ALL_CHALLENGES, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF, GET_COMPANY_RESULTS, GET_CANDIDATE_LIST, GET_CHALLENGE_INFO } from '../constants/actionTypes';
-
 
 const initialState = {
   default_challenges: [],
   all_challenges: [],
-  logo_url: 'http://static1.squarespace.com/static/522a22cbe4b04681b0bff826/t/581cc65fe4fcb5a68ecd940c/1478280803080/hrhq-avatar.png?format=1000w',
+  logo_url: '',
   company_information: '',
   company_schedule: [],
   is_initial: false,
@@ -14,7 +11,8 @@ const initialState = {
   challenge_info: '',
   results: [],
   username: '',
-  candidate_list: []
+  candidate_list: [],
+  challenge_id: null
 }
 
 
@@ -131,6 +129,7 @@ const candidateList = (state = initialState, action) => {
       return state;
   }
 }
+
 
 const username = (state = initialState, action) => {
   switch(action.type) {

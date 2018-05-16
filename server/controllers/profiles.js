@@ -41,9 +41,11 @@ module.exports.getCandidateInfo = (candidateId, callback) => {
 
 
 // Insert skill or github_url into 'users' table
-module.exports.updateCandidateInfo = (candidateId, skill, github_url) => {
+
+module.exports.updateCandidateInfo = (username, skill, github_url) => {
   if(skill) {
     return knex('users')
+        .where({ username: username })
         .update({
             candidate_skills: knex.raw('array_append(candidate_skills, ?)', [skill])
         })
@@ -55,4 +57,21 @@ module.exports.updateCandidateInfo = (candidateId, skill, github_url) => {
         console.log(err);
       })
     }
+  }
+
+  module.exports.deleteCandidateSkill = (username, skill, callback) => {
+    return knex('users')
+      .where({ username: username })
+      .update({
+        candidate_skills: knex.raw('array_remove(candidate_skills, ?)', skill)
+      })
+      .then(() => {
+        knex('users').select('candidate_skills').where({ username: username})
+        .then((data) => {
+          callback(data[0].candidate_skills);
+        }) 
+      })
+      .catch((err) => {
+        console.log('Error deleting candidate skill', err);
+      })
   }

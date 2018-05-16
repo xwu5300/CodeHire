@@ -19,13 +19,26 @@ module.exports.addToCompanySchedule = (time, duration, challengeId, companyId) =
     time: time,
     duration: duration,
     challenge_id: challengeId,
-    company_id: companyId
+    company_id: companyId,
   })
   .then(() => {
     console.log('Event added to company schedule');
   })
   .catch((err) => {
     console.log('Error adding to company schedule', err);
+  })
+}
+
+module.exports.updateChallengeDate = (time, duration, challengeId, companyId) => {
+  console.log('TIMMME', time, duration, challengeId, companyId);
+  return knex('company_schedule')
+  .where({ company_id: companyId, challenge_id: challengeId })
+  .update({
+    time: time,
+    duration: duration
+  })
+  .catch((err) => {
+    console.log('Error updating challenge date', err);
   })
 }
 

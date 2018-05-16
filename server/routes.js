@@ -37,6 +37,15 @@ router.patch('/api/candidateInfo', (req, res) => {
   })
 })
 
+router.delete('/api/candidateInfo/:username', (req, res) => {
+  profileControllers.deleteCandidateSkill(req.query.username, req.query.skill, (data) => {
+    res.send(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+})
+
 
 router.get('/api/candidateInfo', (req, res) => {
   let candidateId = jwt.decode(req.body.candidateId, secret).id;
@@ -72,6 +81,7 @@ router.post('/api/registerCandidate', (req, res) => {
 
 // post company register information into 'users' table
 router.post('/api/registerCompany', (req, res) => {
+  console.log(req.body.token, req.body.companyName, req.body.username, req.body.phone, req.body.logoUrl, req.body.information);
   console.log('saving company')
   authControllers.saveCompany(req.body.token, req.body.companyName, req.body.username, req.body.phone, req.body.logoUrl, req.body.information, (status) => {
     res.status(201).send(status);
@@ -115,7 +125,8 @@ router.post('/api/challenges', (req, res) => {
   let examples = req.body.examples || `[[${req.body.challenge.exampleInput}], [${req.body.challenge.exampleOutput}]]` || null;
   let difficulty = req.body.challenge.difficulty || null;
   let companyId = jwt.decode(req.body.companyId, secret).id;
-  challengeControllers.saveChallenge(title, instruction, functionName, params, testCases, examples, difficulty, companyId)
+  let scheduled = req.body.scheduled;
+  challengeControllers.saveChallenge(title, instruction, functionName, params, testCases, examples, difficulty, companyId, scheduled)
   .then(() => {
     res.send('Successfully saved challenge');
   })
@@ -222,10 +233,12 @@ router.get('/api/companyCalendars', (req, res) => {
 })
 // add to company Calendar
 router.post('/api/companyCalendar', (req, res) => {
+
   let time = req.body.time;
   let duration = Number(req.body.duration);
   let challengeId = req.body.challengeId;
   let companyId = jwt.decode(req.body.companyId, secret).id;
+
   calendarControllers.addToCompanySchedule(time, duration, challengeId, companyId)
   .then(() => {
     console.log('Successfully saved challenge to schedule');
@@ -262,9 +275,11 @@ router.delete('/api/companyCalendar', (req, res) => {
 })
 
 // update company calendar
-router.patch('/api/companyCalendar:date', (req, res) => {
-
-
+router.patch('/api/companyCalendar/:challengeId', (req, res) => {
+  calendarControllers.updateChallengeDate(req.body.time, req.body.duration, req.body.challengeId, req.body.companyId)
+  .catch((err) => {
+    console.log(err);
+  })
 })
 
 

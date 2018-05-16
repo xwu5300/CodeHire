@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 
+import Dropbox from './Dropbox.jsx';
+
 class UserProfileView extends Component {
   constructor() {
     super();
@@ -14,6 +16,7 @@ class UserProfileView extends Component {
     this.handleChange = this.handleChange.bind(this);
 
     this.addSkill = this.addSkill.bind(this);
+    this.deleteSkill = this.deleteSkill.bind(this);
     this.updateGithub = this.updateGithub.bind(this);
   }
 
@@ -30,7 +33,7 @@ class UserProfileView extends Component {
   }
 
   addSkill(new_skill) {
-    if(new_skill !== '') {
+    if(new_skill !== '' && !this.state.all_skills.includes(new_skill)) {
       if(this.state.all_skills) {
         this.setState({ all_skills: [...this.state.all_skills, new_skill] })
       } else {
@@ -38,7 +41,15 @@ class UserProfileView extends Component {
       }
       
       this.props.updateCandidateSkills(localStorage.getItem('userId'), this.state.skill);
+      this.setState({ skill: '' })
     }
+  }
+
+  deleteSkill(skill) {
+    this.props.deleteCandidateSkill(this.props.username, skill, (response) => {
+      this.setState({ all_skills: response.data })
+    });
+  
   }
 
   updateGithub() {
@@ -47,7 +58,6 @@ class UserProfileView extends Component {
 
 
   render() {
-    console.log('user profile prop', this.props)
     return (
       <div>
         <div className="ui orange three item inverted menu">
@@ -61,10 +71,13 @@ class UserProfileView extends Component {
             <div className='ui raised container segment'>
 
             <div className='row'>
-              <div className='github_link'>
-                <i className="github icon"></i>
-                <input name='github_url' value={ this.state.github_url } onChange={ (e) => this.handleChange(e) } type='text' placeholder='github' />
-                <button onClick={ () => this.updateGithub() }>save</button>
+              <div className='ui padded raised container segment'>
+                <div className='github_link'>
+                  <i style={{ fontSize: '22px' }} className="github icon"></i>
+                  <input name='github_url' value={ this.state.github_url } onChange={ (e) => this.handleChange(e) } type='text' placeholder='github' />
+                  <button style={{ height: '35px', width:'15%', marginLeft:'5px' }} className='ui orange basic button' onClick={ () => this.updateGithub() }>save</button>
+                </div>
+                <Dropbox />
               </div>
             </div>
 
@@ -77,18 +90,18 @@ class UserProfileView extends Component {
                 </div>
 
                 <div className='row'>
+                  <h2>Skills</h2>
                   <div className='ui small horizontal list'>
                   {this.state.all_skills ? this.state.all_skills.map((skill, i) => {
                     return (
                       <div key={ i } className='item'>
-                        <i onClick={ () => this.deleteSkill(i) } className="times circle icon orange"></i>
+                        <i onClick={ () => this.deleteSkill(skill) } className="remove icon orange"></i>
                         <div className='content skill_div'> { skill } </div>
                       </div>
                     )
                   }) : null }
                   </div>
                 </div>
-
               </div>
               </div>
             </div>

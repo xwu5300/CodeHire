@@ -25,8 +25,14 @@ const mapStateToProps = (state) => ({
   signup_status: state.signup_status.signup_status
 })
 
-const connectAuthContainer = connect(mapStateToProps, {} )(AuthContainer);
-const RegistrationComponent = connect(mapStateToProps, { saveCompany, saveCandidate, handleSignUp })(Registration);
-const LoginComponent = connect(mapStateToProps, { handleLogin, googleLogin })(Login);
+
+const mapDispatchToProps = {
+  saveCompany, saveCandidate, handleLogin, googleLogin, handleSignUp
+}
+
+const connectAuthContainer = connect(mapStateToProps, {})(AuthContainer);
+const RegistrationComponent = connect(mapStateToProps, mapDispatchToProps)(Registration);
+const LoginComponent = connect(mapStateToProps, mapDispatchToProps)(Login);
+
 
 export default withRouter(connectAuthContainer);
