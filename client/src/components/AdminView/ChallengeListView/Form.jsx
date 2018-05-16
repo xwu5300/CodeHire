@@ -7,6 +7,7 @@ class Form extends Component {
     this.state = {
       challenge: {
         title: '',
+        category: '',
         instruction: '',
         function_name: '',
         parameters: '',
@@ -35,6 +36,7 @@ class Form extends Component {
         on: 'blur',
         fields: {
           title: 'empty',
+          category: 'empty',
           instruction: 'empty',
           function_name: 'empty',
           parameters: 'empty',
@@ -91,6 +93,7 @@ class Form extends Component {
       this.setState({
         challenge: {
           title: '',
+          category: '',
           instruction: '',
           function_name: '',
           parameters: '',
@@ -113,6 +116,15 @@ class Form extends Component {
           <div className="field">
             <label>Title</label>
             <input name="title" type="text" placeholder="Two Sum" value={this.state.challenge.title} onChange={this.handleChange}/>
+          </div>
+          <div className="field">
+          <label>Category</label>
+            <select className="ui dropdown" name="category" value={this.state.challenge.category} onChange={this.handleChange}>
+              <option value="">Select</option>
+              <option value="algos">Algorithms</option>
+              <option value="dataStructures">Data Structures</option>
+              <option value="sysDesign">System Design</option>
+            </select>
           </div>
           <div className="field">
             <label>Instructions</label>

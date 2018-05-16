@@ -106,6 +106,7 @@ router.get('/api/defaultChallenges', (req, res) => {
 
 router.post('/api/challenges', (req, res) => {
   let title = req.body.challenge.title;
+  let category = req.body.challenge.category;
   let instruction = req.body.challenge.instruction;
   let functionName = req.body.challenge.function_name;
   let params = req.body.challenge.parameters;
@@ -113,7 +114,7 @@ router.post('/api/challenges', (req, res) => {
   let examples = req.body.examples || `[[${req.body.challenge.exampleInput}], [${req.body.challenge.exampleOutput}]]` || null;
   let difficulty = req.body.challenge.difficulty || null;
   let companyId = jwt.decode(req.body.companyId, secret).id;
-  challengeControllers.saveChallenge(title, instruction, functionName, params, testCases, examples, difficulty, companyId)
+  challengeControllers.saveChallenge(title, instruction, functionName, params, testCases, examples, difficulty, category, companyId)
   .then(() => {
     res.send('Successfully saved challenge');
   })
@@ -137,7 +138,6 @@ router.post('/api/initialChallenge', (req, res) => {
 
 // update initial challenge from 'intitial_challenges table'
 router.patch('/api/initialChallenge', (req, res) => {
-  console.log('server route', req.body.challengeId);
   let companyId = jwt.decode(req.body.companyId, secret).id;
   if (req.body.initial === false || req.body.isInitial === true) {
     challengeControllers.setInitialChallenge(companyId, req.body.challengeId, req.body.duration)

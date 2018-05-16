@@ -8,6 +8,7 @@ class UpdateForm extends Component {
     this.state = {
       challenge: {
         title: this.props.challengeInfo.title,
+        category: this.props.challengeInfo.category,
         instruction: this.props.challengeInfo.instruction,
         function_name: this.props.challengeInfo.function_name,
         parameters: this.props.challengeInfo.parameters,
@@ -36,6 +37,7 @@ class UpdateForm extends Component {
         on: 'blur',
         fields: {
           title: 'empty',
+          category: '',
           instruction: 'empty',
           function_name: 'empty',
           parameters: 'empty',
@@ -92,6 +94,7 @@ class UpdateForm extends Component {
       this.setState({
         challenge: {
           title: '',
+          category: '',
           instruction: '',
           function_name: '',
           parameters: '',
@@ -114,6 +117,15 @@ class UpdateForm extends Component {
           <div className="field">
             <label>Title</label>
             <input name="title" type="text" value={this.state.challenge.title} onChange={this.handleChange}/>
+          </div>
+          <div className="field">
+          <label>Category</label>
+            <select className="ui dropdown" name="category" value={this.state.challenge.category} onChange={this.handleChange}>
+              <option value="">Select</option>
+              <option value="algos">Algorithms</option>
+              <option value="dataStructures">Data Structures</option>
+              <option value="sysDesign">System Design</option>
+            </select>
           </div>
           <div className="field">
             <label>Instructions</label>
