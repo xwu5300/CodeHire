@@ -54,3 +54,5 @@ export const GET_CANDIDATE_LIST = 'GET_CANDIDATE_LIST';
 export const GET_CANDIDATE_INITIAL_RESULTS = 'GET_CANDIDATE_INITIAL_RESULTS';
 /* -------- User Profile ------- */
 export const GET_CANDIDATE_INFO = 'GET_CANDIDATE_INFO';
+
+export const GET_FAVORITES = 'GET_FAVORITES';

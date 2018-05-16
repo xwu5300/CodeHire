@@ -349,7 +349,7 @@ router.post('/api/favorites', (req, res) => {
 
 router.delete('/api/favorites', (req, res) => {
   let companyId = jwt.decode(req.query.companyId, secret).id;
-  profileControllers.removeFromFavorites(companyId, candidateId);
+  profileControllers.removeFromFavorites(companyId, candidateId)
   .then(() => {
     console.log('Successfully sending user to db for removal from favorites');
   })
