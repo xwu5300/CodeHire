@@ -90,7 +90,7 @@ class UserLiveCodingView extends Component {
   saveResults(result, submission, score, time) {
     let challenge_id = this.props.location.challenge.challenge_id
     let company_id = this.props.location.challenge.company_id
-    let candidate_id = this.props.location.challenge.candidate_id
+    let candidate_id = localStorage.getItem('userId')
     let initial = this.props.location.challenge.initial
     let userSchedule_id = this.props.location.challenge.id
     this.props.saveResults(result, submission, score, time, challenge_id, company_id, candidate_id, initial, userSchedule_id, () => {

@@ -69,7 +69,7 @@ class UserInitialChallengeView extends Component {
   saveResults(result, submission, score, time) {
     let id = this.props.initial_challenge[0].id
     let company_id = this.props.initial_challenge[0].company_id
-    let user_id = this.props.user_id
+    let user_id = localStorage.getItem('userId')
     let initial = this.props.initial_challenge[0].initial
     this.props.saveResults(result, submission, score, time, id, company_id, user_id, initial , id, () => {
       this.props.fetchCandidateInitialResults(company_id, user_id)
