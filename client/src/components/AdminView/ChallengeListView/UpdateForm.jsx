@@ -37,7 +37,7 @@ class UpdateForm extends Component {
         on: 'blur',
         fields: {
           title: 'empty',
-          category: '',
+          category: 'empty',
           instruction: 'empty',
           function_name: 'empty',
           parameters: 'empty',

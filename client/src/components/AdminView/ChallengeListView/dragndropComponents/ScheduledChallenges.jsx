@@ -32,10 +32,6 @@ class ScheduleChallenges extends Component {
     }
   }
 
-  componentDidMount() {
-    console.log('mounting', this.props)
-  }
-
   render() {
     const { connectDropTarget } = this.props;
     return connectDropTarget (
@@ -45,6 +41,7 @@ class ScheduleChallenges extends Component {
             return (
               <ChallengeCard 
                key={challenge.id}
+               index={i}
                challenge={ challenge } 
                title={ challenge.title } 
                challengeId={ challenge.challenge_id } 

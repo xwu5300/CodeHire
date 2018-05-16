@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import UpdateForm from '../UpdateForm.jsx';
-import Modal from 'react-modal';
 import swal from 'sweetalert2';
 
 
@@ -17,43 +15,19 @@ class SavedChallenges extends Component {
     this.state = {
       showForm: this.props.allChallenges.map((item) => false),
       duration: 0,
-      modalIsOpen: false,
       challenge_id: null
     }
 
     this.showCalendar = this.showCalendar.bind(this);
     this.handleDurationChange = this.handleDurationChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-    this.handleModal = this.handleModal.bind(this);
     this.confirmDelete = this.confirmDelete.bind(this)
-  }
-
-  componentDidMount() {
-    Modal.setAppElement('body');
-  }
-
-  openModal(challengeId) {
-    this.setState({
-      modalIsOpen: true
-    })
-  }
-
-  closeModal() {
-    this.setState({
-      modalIsOpen: false
-    })
   }
 
   handleDurationChange(event) {
     this.setState({
       duration: event.target.value
     })
-  }
-
-  handleModal(challengeId) {
-    this.props.getInfo(challengeId, this.props.userId, this.openModal);
   }
 
   handleClick(challenge, i) {
@@ -104,10 +78,12 @@ class SavedChallenges extends Component {
               title={ challenge.title } 
               challengeId={ challenge.id } 
               instruction={ challenge.instruction } 
+              challengeInfo={ this.props.challengeInfo }
               difficulty={ challenge.difficulty } 
               userId={ this.props.userId } 
               deleteChallenge={ this.props.delete } 
-              handleModal={ this.handleModal } 
+              save={ this.props.save }
+              getInfo={ this.props.getInfo }
               scheduled={ false } />
             )
           })}
