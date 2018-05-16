@@ -13,6 +13,20 @@ module.exports.getAllCompanyCalendars = () => {
   })
 }
 
+//get all companies' list
+module.exports.getCompanyList = () => {
+  return knex.from('users')
+  .where('role', 'company')
+  .select('id', 'name','phone', 'information', 'logo_url')
+  .orderBy('name', 'asc')
+  .then((res) => {
+    return res;
+  })
+  .catch((err) => {
+    console.log('Could no retrieve company list from db', err);
+  })
+}
+
 //save challenge to company schedule
 module.exports.addToCompanySchedule = (time, duration, challengeId, companyId) => {
   return knex('company_schedule').insert({

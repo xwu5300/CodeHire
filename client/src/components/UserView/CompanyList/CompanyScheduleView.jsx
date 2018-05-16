@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import {withRouter} from 'react-router-dom';
 import socketClient from 'socket.io-client';
-import swal from 'sweetalert2'
+// import jwt from 'jwt-simple';
+// import { secret } from'../../../../../config.js'
+import swal from 'sweetalert2';
 
 import CompanyScheduleTableView from './CompanyScheduleTableView.jsx';
 
@@ -18,6 +20,12 @@ class CompanyScheduleView extends Component {
     this.updateStyle = this.updateStyle.bind(this);
   }
 
+  componentDidMount() {
+    this.props.fetchInitialChallenge(localStorage.getItem('companyId'))
+    this.props.fetchCandidateInitialResults(localStorage.getItem('companyId'), localStorage.getItem('userId'))
+    this.props.fetchCompanySchedule(localStorage.getItem('companyId'))
+  }
+
   updateStyle() {
     this.setState({
       style: {'border': '5px solid red'}
@@ -25,17 +33,14 @@ class CompanyScheduleView extends Component {
   }
 
   render() {
-    console.log('company schedue view pros', this.props)
     if (this.props.initial_challenge[0]) {
-      // const companyCalendar = this.props.all_company_calendars.filter((schedule) => {
-      //   return schedule.company_id === this.props.initial_challenge[0].company_id
-      // })
       return (
         <div>
-         <div className="ui orange three item inverted menu">
-          <div className='ui active item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.name }</div>
+          <div className="ui orange three item inverted menu">
+          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.name }</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Companies</div> 
+          <div className='ui active item' onClick={() => {this.props.history.push('/user/companylist')}}>Live Challenges</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist2')}}>Company List</div>
         </div>
         <h1>{this.props.initial_challenge[0].name}</h1> 
         <h2>{this.props.initial_challenge[0].information}</h2> 

@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import UserSearchView from './UserSearchView.jsx';
 import moment from 'moment';
 import jwt from'jwt-simple';
-import { secret } from'../../../../../config.js'
+import { secret } from'../../../../../config.js';
 
 class CompanyListView extends Component {
   constructor(props) {
@@ -37,17 +37,17 @@ class CompanyListView extends Component {
   encodeCompanyId(id) {
     let companyId = {id: id};
     let idToken = jwt.encode(companyId, secret.secret);
-    return idToken;
+    localStorage.setItem('companyId', idToken)
   }
 
   render () {
-
     return (
       <div>
         <div className="ui orange three item menu">
           <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui active item' onClick={() => {this.props.history.push('/user/companylist')}}>Companies</div>
+          <div className='ui active item' onClick={() => {this.props.history.push('/user/companylist')}}>Live Challenges</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist2')}}>Company List</div>
         </div>
         
           <div className='search_company_input' style={{marginTop: '40px', marginBottom: '70px', textAlign: 'center'}} >
@@ -69,10 +69,8 @@ class CompanyListView extends Component {
                   <div className='description'>
                 <p><b>Coming Live Challenge:</b> {moment(company.time).format('MMMM Do YYYY dddd, h:mm A')}</p>
               </div>
-              <button className='view_company_btn ui orange button' onClick={() => {
-                this.props.fetchInitialChallenge(this.encodeCompanyId(company.company_id))
-                this.props.fetchCandidateInitialResults(this.encodeCompanyId(company.company_id), localStorage.getItem('userId'))
-                this.props.fetchCompanySchedule(this.encodeCompanyId(company.company_id))
+              <button onClick={() => {
+                this.encodeCompanyId(company.company_id)
                 this.props.history.push('/user/schedule');
               }}>View Company Page
               </button>
