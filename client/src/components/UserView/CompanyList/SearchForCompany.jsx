@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class UserSearchView extends Component {
+class SearchForCompany extends Component {
   constructor() {
     super()
     this.state = {
@@ -33,4 +33,4 @@ class UserSearchView extends Component {
   }
 }
 
-export default UserSearchView;
+export default SearchForCompany;
