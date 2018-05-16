@@ -169,7 +169,8 @@ router.get('/api/initialChallenge', (req, res) => {
 
 //get selected challenge info for company
 router.get('/api/challenge', (req, res) => {
-  challengeControllers.getChallengeInfo(req.query.challengeId, req.query.companyId)
+  let companyId = jwt.decode(req.query.companyId, secret).id;
+  challengeControllers.getChallengeInfo(req.query.challengeId, companyId)
   .then((data) => {
     res.send(data);
   })

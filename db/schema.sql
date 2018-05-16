@@ -33,6 +33,7 @@ CREATE TABLE all_challenges (
   test_cases TEXT,
   examples TEXT,
   difficulty VARCHAR(30),
+  category VARCHAR(255),
   initial BOOLEAN NOT NULL,
   duration SMALLINT NULL,
   company_id SMALLINT REFERENCES users(id)

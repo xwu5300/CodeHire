@@ -159,9 +159,11 @@ class UpdateForm extends Component {
             <label>Difficulty</label>
             <select className="ui dropdown" name="difficulty" value={this.state.challenge.difficulty} onChange={this.handleChange}>
               <option value="">Select</option>
-              <option value="easy">Easy</option>
-              <option value="medium">Medium</option>
-              <option value="hard">Hard</option>
+              <option value="1">1 - Least Difficult</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5 - Most Difficult</option>
             </select>
           </div>
           <div className="ui error message"></div>
