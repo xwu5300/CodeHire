@@ -5,7 +5,7 @@ import UserLiveCodingView from '../components/UserView/UserChallenge/UserLiveCod
 import UserProfileView from '../components/UserView/UserInformation/UserProfileView.jsx';
 import ChallengeListView from '../components/UserView/CompanyList/ChallengeListView.jsx';
 import CompanyScheduleView from '../components/UserView/CompanyList/CompanyScheduleView.jsx';
-import UserDashBoard from '../components/UserView/UserDashBoard.jsx';
+import UserDashBoard from '../components/UserView/UserInformation/UserDashBoard.jsx';
 import CompanyListView from '../components/UserView/CompanyList/CompanyListView.jsx';
 
 import { Route, Switch, withRouter } from 'react-router-dom';
