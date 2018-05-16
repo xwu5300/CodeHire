@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import AceEditor from 'react-ace';
 import brace from 'brace';
 import socketClient from 'socket.io-client';
@@ -44,7 +44,7 @@ class UserInitialChallengeView extends Component {
 
   saveResults(result, newString, score, time) {
     this.props.saveResults(result, newString, score, time, this.props.initial_challenge[0].id, this.props.initial_challenge[0].company_id, localStorage.getItem('userId'), true, this.props.initial_challenge[0].id, () => {
-      this.props.fetchCandidateInitialResults(this.props.initial_challenge[0].company_id, localStorage.getItem('userId'))
+      this.props.fetchCandidateInitialResults(localStorage.getItem('companyId'), localStorage.getItem('userId'))
     })
   }
 
@@ -139,8 +139,9 @@ class UserInitialChallengeView extends Component {
       <div>
         <div className="ui orange three item inverted menu">
           <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.name }</div>
-          <div className='ui active item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Companies</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
+          <div className='ui active item' onClick={() => {this.props.history.push('/user/companylist')}}>Live Challenges</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist2')}}>Company List</div>
         </div>
         <h1>{this.props.initial_challenge[0].name}</h1>
         <h2>{this.props.initial_challenge[0].title}</h2>

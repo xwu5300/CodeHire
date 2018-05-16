@@ -1,5 +1,5 @@
 
-import { GET_INITIAL_CHALLENGE, GET_ALL_COMPANY_CALENDARS, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO, GET_CURRENT_COMPANY_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS } from '../constants/actionTypes';
+import { GET_INITIAL_CHALLENGE, GET_ALL_COMPANY_CALENDARS, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO, GET_CURRENT_COMPANY_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS, GET_COMPANY_LIST } from '../constants/actionTypes';
 
 import axios from 'axios';
 import swal from 'sweetalert2';
@@ -9,6 +9,16 @@ export const fetchAllCompanyCalendars =(cb) => (dispatch) => {
   .then(({data}) => {
     dispatch({ type: GET_ALL_COMPANY_CALENDARS, payload: data })
     cb()
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
+
+export const fetchCompanyList = () => (dispatch) => {
+  axios.get('/api/companyList')
+  .then(({data}) => {
+    dispatch({ type: GET_COMPANY_LIST, payload: data})
   })
   .catch((err) => {
     console.log(err);
@@ -62,8 +72,6 @@ export const fetchInitialChallenge = (company_id) => (dispatch) => {
   })
 }
 
-
-
 export const currentCompanyCalendar = (companyId, callback) => (dispatch) => {
   dispatch( { type: GET_CURRENT_COMPANY_CALENDAR, company_id: companyId })
   if(callback) {
@@ -72,7 +80,6 @@ export const currentCompanyCalendar = (companyId, callback) => (dispatch) => {
 }
 
 export const saveResults = (isPassed, code, score, completedAt, challengeId, companyId, candidateId, initial, candidateScheduleId, cb) => (dispatch) => {
-  console.log('candidate id user action', candidateId)
   axios.post('/api/results', {isPassed, code, score, completedAt, challengeId, companyId, candidateId, initial})
   .then(() => {
     dispatch(deleteCandidateSchedule(candidateScheduleId, candidateId))

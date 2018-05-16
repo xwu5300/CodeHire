@@ -34,7 +34,9 @@ module.exports.handleLogin = (token,  callback) => {
   return knex('users')
   .where({ token: token })
   .then((user) => {
-    callback(user[0].role, user[0].id, user[0].name);
+    if (user.length) {
+      callback(user[0].role, user[0].id, user[0].name);
+    }
   })
   .catch((err) => {
     console.log('Error matching password', err);

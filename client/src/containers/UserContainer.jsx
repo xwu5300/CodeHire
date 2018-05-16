@@ -6,17 +6,17 @@ import UserProfileView from '../components/UserView/UserProfileView.jsx';
 import CompanyListView from '../components/UserView/CompanyList/CompanyListView.jsx';
 import CompanyScheduleView from '../components/UserView/CompanyList/CompanyScheduleView.jsx';
 import UserDashBoard from '../components/UserView/UserDashBoard.jsx';
+import CompanyListView2 from '../components/UserView/CompanyList/CompanyListView2.jsx';
 
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { fetchAllCompanyCalendars, fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar, fetchCandidateInitialResults } from '../actions/userActions';
+import { fetchAllCompanyCalendars, fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList } from '../actions/userActions';
 import { fetchCompanySchedule, fetchCompanyResults } from '../actions/adminActions' ;
 
 import axios from 'axios';
 
 class UserContainer extends Component {
-
   render() {
     return (
       <Switch>
@@ -26,6 +26,7 @@ class UserContainer extends Component {
         <Route exact path='/user/challenge' component={UserInitialChallengeViewComponent}/>
         <Route exact path='/user/live' component={UserLiveCodingViewComponent}/>
         <Route exact path='/user/profile' component={UserProfileViewComponent}/>
+        <Route exact path='/user/companyList2' component={CompanyListViewComponent2}/>
       </Switch>
     );
   }
@@ -44,16 +45,18 @@ const mapStateToProps = function(state) {
     company_schedule: state.company_schedule.company_schedule,
     current_company_calendar: state.current_company_calendar.current_company_calendar,
     results: state.results.results,
-    pass_initial: state.pass_initial.pass_initial
+    pass_initial: state.pass_initial.pass_initial,
+    company_list: state.company_list.company_list
 }};
 
 const connectComponent = connect(mapStateToProps)(UserContainer); //code cleaned
 const UserDashBoardComponent = connect(mapStateToProps, { fetchCandidateCalendar, deleteCandidateSchedule, currentCompanyCalendar })(UserDashBoard);
 const CompanyListViewComponent = connect(mapStateToProps, { fetchInitialChallenge,   fetchAllCompanyCalendars, fetchCompanyResults, fetchCandidateInitialResults, fetchCompanySchedule })(CompanyListView); //code cleaned
-const CompanyScheduleViewComponent = connect(mapStateToProps, { saveCandidateCalendar })(CompanyScheduleView);
+const CompanyScheduleViewComponent = connect(mapStateToProps, { fetchInitialChallenge, saveCandidateCalendar, fetchCandidateInitialResults, fetchCompanySchedule })(CompanyScheduleView);
 const UserInitialChallengeViewComponent = connect(mapStateToProps, { saveResults, fetchCandidateInitialResults })(UserInitialChallengeView);
 const UserLiveCodingViewComponent = connect(mapStateToProps, { saveResults })(UserLiveCodingView);
 const UserProfileViewComponent = connect(mapStateToProps, { fetchCandidateInfo, updateCandidateSkills, updateCandidateGithub })(UserProfileView);
+const CompanyListViewComponent2 = connect(mapStateToProps, { fetchCompanyList })(CompanyListView2);
 
 
 const routeUserComponent = withRouter(connectComponent);

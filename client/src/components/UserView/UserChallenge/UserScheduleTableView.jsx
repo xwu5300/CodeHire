@@ -5,16 +5,15 @@ import moment from 'moment';
 class UserScheduleTableView extends Component {
   constructor() {
     super();
+
+    this.getCalendar = this.getCalendar.bind(this);
   }
-
-
 
 getCalendar(schedule, companyId, duration) {
     this.props.currentCompanyCalendar(companyId, () => {
       this.props.history.push({ pathname: '/user/live', challenge: schedule, duration: duration });
     });
   }
-
 
   render() {
     return (
