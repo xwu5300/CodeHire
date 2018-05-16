@@ -325,7 +325,7 @@ router.post('/api/results', (req, res) => {
 
 /* ------- Favorites Routes -------- */
 router.get('/api/favorites', (req, res) => {
-  let companyId = jwt.decode(companyId, secret).id;
+  let companyId = jwt.decode(req.query.companyId, secret).id;
   profileControllers.getFavorites(companyId)
   .then((data) => {
     console.log('Favorites retrieved. Sending favorites to client');
@@ -337,7 +337,7 @@ router.get('/api/favorites', (req, res) => {
 })
 
 router.post('/api/favorites', (req, res) => {
-  let companyId = jwt.decode(companyId, secret).id;
+  let companyId = jwt.decode(req.body.companyId, secret).id;
   profileControllers.saveToFavorites(companyId, candidateId)
   .then(() => {
     console.log('User sent to favorites in db');
@@ -348,7 +348,7 @@ router.post('/api/favorites', (req, res) => {
 })
 
 router.delete('/api/favorites', (req, res) => {
-  let companyId = jwt.decode(companyId, secret).id;
+  let companyId = jwt.decode(req.query.companyId, secret).id;
   profileControllers.removeFromFavorites(companyId, candidateId);
   .then(() => {
     console.log('Successfully sending user to db for removal from favorites');
