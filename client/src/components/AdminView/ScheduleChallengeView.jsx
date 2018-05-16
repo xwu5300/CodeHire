@@ -6,13 +6,15 @@ class ScheduleChallengeView extends Component {
     super(props);
     this.state = {
       duration: '',
-      invalid: false,
-      isSelected: null
+      invalid: this.props.challenges.map((item) => false),
+      isSelected: null,
+      currentlyOn: null
     }
 
     this.handleClick = this.handleClick.bind(this);
     this.handleDurationChange = this.handleDurationChange.bind(this);
     this.toggleValid = this.toggleValid.bind(this);
+    this.toggleCurrentlyOn = this.toggleCurrentlyOn.bind(this);
   }
 
   componentDidMount() {
@@ -21,20 +23,17 @@ class ScheduleChallengeView extends Component {
     }
   }
 
-  handleClick(challenge, challengeId) {
+  handleClick(challenge, challengeId, i) {
     let date = $('#date').val();
     if (this.props.isInitial) {
       if (this.state.duration === '') {
         this.setState({
-          invalid: true,
           isSelected: challengeId
+        }, () => {
+          this.toggleValid(i);
         }) 
       } else {
-        this.setState({
-          invalid: false,
-        }, () => {
-          this.props.makeInitial(challenge.id, challenge.initial, this.state.duration, this.props.isInitial, this.props.userId, this.props.close)
-        })
+        this.props.makeInitial(challenge.id, challenge.initial, this.state.duration, this.props.isInitial, this.props.userId, this.props.close);
       }
     } 
   }
@@ -52,7 +51,14 @@ class ScheduleChallengeView extends Component {
       invalid: newValidity
     })
   }
-  
+
+  toggleCurrentlyOn(id) {
+    this.setState({
+      duration: '',
+      currentlyOn: id
+    })
+  }
+
 
   render() {
     
@@ -73,7 +79,7 @@ class ScheduleChallengeView extends Component {
         <div className='ui cards'>
           {this.props.challenges.length === 0 ? 'No saved challenges to choose from' : this.props.challenges.map((item, i) => {
             return (
-              <div className='ui card' style={ this.state.isSelected === item.id && !this.state.invalid ? selected : notSelected } key={ item.id }>
+              <div className='ui card' style={ this.state.isSelected === item.id ? selected : notSelected } key={ item.id }>
                 <div className='content'>
                   <div className="title"><b>{item.title}</b></div>
                     <div className='description'>
@@ -82,8 +88,8 @@ class ScheduleChallengeView extends Component {
                       <br />
                       <b>Difficult:</b> {item.difficulty}
                     </div>  
-                  <div className="field dropdown" style={{ position: 'absolute', top: '3px', right: '3px' }}>
-                    <select className="ui dropdown" name="duration" value={this.state.duration} onChange={this.handleDurationChange}>
+                  <div className="field dropdown" style={{ position: 'absolute', top: '3px', right: '3px' }} onClick={() => {this.toggleCurrentlyOn(item.id)}}>
+                    <select className="ui dropdown" name="duration" value={this.state.currentlyOn === item.id ? this.state.duration : ""} onChange={this.handleDurationChange}>
                       <option value="">Duration (minutes)</option>
                       <option value="15">15</option>
                       <option value="30">30</option>
@@ -92,8 +98,8 @@ class ScheduleChallengeView extends Component {
                     </select>
                   </div> 
                 </div>
-                {this.state.invalid ? <div style={{color: 'red'}}>Please duration try again</div> : null}
-                <div className="ui bottom attached button" onClick={ () => this.handleClick(item, item.id) }>Select</div>
+                {this.state.invalid[i] ? <div style={{color: 'red'}}>Please select a duration</div> : null}
+                <div className="ui bottom attached button" onClick={ () => this.handleClick(item, item.id, i) }>Select</div>
               </div>
             )
           })}
