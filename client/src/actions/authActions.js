@@ -95,7 +95,10 @@ export const handleSignUp = (email, username, password, form, name, phone, logoU
 }
 
 export const handleLogout = () => (dispatch) => {
-  localStorage.removeItem('userId');
+  if (auth.currentUser) {
+    auth.signOut();
+    localStorage.removeItem('userId');
+  }
   history.push('/login');
 }
 
