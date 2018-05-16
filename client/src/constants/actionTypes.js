@@ -12,6 +12,8 @@ export const GET_INITIAL_CHALLENGE = 'GET_INITIAL_CHALLENGE';
 
 export const SET_CURRENT_LIVE_CHALLENGE = 'SET_CURRENT_LIVE_CHALLENGE';
 
+export const GET_CHALLENGE_ID = 'GET_CHALLENGE_ID';
+
 /* -------- Authentication -------- */
 export const SAVE_COMPANY = 'SAVE_COMPANY';
 

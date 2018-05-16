@@ -1,17 +1,63 @@
 import React, { Component } from 'react';
 
-class ScheduleChallenges extends Component {
+/* ------- Drag N Drop ------ */
+import { ItemTypes } from './Constants';
+import { DropTarget } from 'react-dnd';
 
+import ChallengeCard from './ChallengeCard.jsx';
+
+const target = {
+  drop: (props, monitor) => {
+    let challenge = monitor.getItem();
+ 
+    props.addToCompanySchedule(challenge.time, challenge.duration, challenge.challengeId, challenge.companyId, () => {
+      console.log('SUCCESS');
+    })
+    
+  }
+}
+
+function collect(connect, monitor) {
+  return {
+    connectDropTarget: connect.dropTarget()
+  };
+}
+
+
+@DropTarget(ItemTypes.Card, target, collect)
+
+class ScheduleChallenges extends Component {
   constructor(props) {
     super(props);
-
     this.state = {}
   }
 
   render() {
-    return (
+
+    const { connectDropTarget } = this.props;
+    return connectDropTarget (
       <div className='ui segment drag_segment'>
         <h2> Scheduled Challenges </h2>
+        { this.props.scheduledChallenges ? this.props.scheduledChallenges.map((challenge, i) => {
+            return (
+              <ChallengeCard 
+               key={challenge.id}
+               challenge={ challenge } 
+               title={ challenge.title } 
+               challengeId={ challenge.challenge_id } 
+               instruction={ challenge.instruction } 
+               difficulty={ challenge.difficulty } 
+               userId={ challenge.company_id } 
+               deleteChallenge={ this.props.delete } 
+               deleteFromCompanySchedule={ this.props.deleteFromCompanySchedule }
+               updateChallengeDate = { this.props.updateChallengeDate }
+               handleModal={ this.handleModal } 
+               scheduled={ true }
+               />
+            )
+          
+        }) : null }
+        
       </div>
     )
   }

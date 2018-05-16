@@ -2,12 +2,20 @@ import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
 import { connect } from "react-redux";
 import Modal from 'react-modal';
-import CompanyChallenges from './ChallengeListView/CompanyChallenges.jsx';
-import DefaultChallenges from './ChallengeListView/DefaultChallenges.jsx';
-import ScheduleChallenges from './ChallengeListView/ScheduleChallenges.jsx';
-import Form from './ChallengeListView/Form.jsx';
-import { getChallengeInfo } from '../../actions/adminActions';
 
+import SavedChallenges from './dragndropComponents/SavedChallenges.jsx';
+import DefaultChallenges from './dragndropComponents/DefaultChallenges.jsx';
+import ScheduledChallenges from './dragndropComponents/ScheduledChallenges.jsx';
+
+import ChallengeCard from './dragndropComponents/ChallengeCard.jsx';
+import Form from './Form.jsx';
+import { getChallengeInfo } from '../../../actions/adminActions';
+
+/* ------- Drag N Drop ------- */
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+
+@DragDropContext(HTML5Backend)
 
 
 class ChallengeListView extends Component {
@@ -40,6 +48,7 @@ class ChallengeListView extends Component {
   }
 
   render() {
+
     return (
       <div>
         <div className="ui orange four item inverted menu">
@@ -55,13 +64,9 @@ class ChallengeListView extends Component {
             </Modal>
           <div className='ui padded horizontal segments challenge_list'>
 
-          <CompanyChallenges userId={localStorage.getItem('userId')} allChallenges={this.props.all_challenges} delete={this.props.deleteChallenge} addToSchedule={this.props.addToCompanySchedule} isInitial={this.props.is_initial} makeInitial={this.props.makeInitial} getInfo={this.props.getChallengeInfo} challengeInfo={this.props.challenge_info} save={this.props.saveChallenge}/>
+          <SavedChallenges  getChallengeId={ this.props.getChallengeId } openModal={ this.openModal } userId={this.props.user_id} allChallenges={this.props.all_challenges} delete={this.props.deleteChallenge} addToCompanySchedule={this.props.addToCompanySchedule} isInitial={this.props.is_initial} makeInitial={this.props.makeInitial} getInfo={this.props.getChallengeInfo} challengeInfo={this.props.challenge_info} save={this.props.saveChallenge}/>
           <DefaultChallenges userId={localStorage.getItem('userId')} defaultChallenges={this.props.default_challenges} save={this.props.saveChallenge}/>
-
-          <CompanyChallenges openModal={ this.openModal } userId={this.props.user_id} allChallenges={this.props.all_challenges} delete={this.props.deleteChallenge} addToSchedule={this.props.addToCompanySchedule} isInitial={this.props.is_initial} makeInitial={this.props.makeInitial} getInfo={this.props.getChallengeInfo} challengeInfo={this.props.challenge_info} save={this.props.saveChallenge}/>
-          <DefaultChallenges userId={this.props.user_id} defaultChallenges={this.props.default_challenges} save={this.props.saveChallenge}/>
-
-          <ScheduleChallenges />
+          <ScheduledChallenges updateChallengeDate={ this.props.updateChallengeDate } deleteFromCompanySchedule={ this.props.deleteFromCompanySchedule } scheduledChallenges={ this.props.company_schedule } allChallenges={ this.props.all_challenges } addToCompanySchedule={ this.props.addToCompanySchedule } />
 
         </div>
       </div>
@@ -69,7 +74,12 @@ class ChallengeListView extends Component {
     )
   }
 }
+
   
 
 
 export default withRouter(ChallengeListView);
+
+
+
+          

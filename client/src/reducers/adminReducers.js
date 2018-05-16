@@ -11,7 +11,8 @@ const initialState = {
   challenge_info: '',
   results: [],
   username: '',
-  candidate_list: []
+  candidate_list: [],
+  challenge_id: null
 }
 
 
@@ -128,6 +129,7 @@ const candidateList = (state = initialState, action) => {
       return state;
   }
 }
+
 
 const username = (state = initialState, action) => {
   switch(action.type) {

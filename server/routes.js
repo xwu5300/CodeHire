@@ -124,7 +124,8 @@ router.post('/api/challenges', (req, res) => {
   let examples = req.body.examples || `[[${req.body.challenge.exampleInput}], [${req.body.challenge.exampleOutput}]]` || null;
   let difficulty = req.body.challenge.difficulty || null;
   let companyId = jwt.decode(req.body.companyId, secret).id;
-  challengeControllers.saveChallenge(title, instruction, functionName, params, testCases, examples, difficulty, companyId)
+  let scheduled = req.body.scheduled;
+  challengeControllers.saveChallenge(title, instruction, functionName, params, testCases, examples, difficulty, companyId, scheduled)
   .then(() => {
     res.send('Successfully saved challenge');
   })
@@ -231,10 +232,12 @@ router.get('/api/companyCalendars', (req, res) => {
 })
 // add to company Calendar
 router.post('/api/companyCalendar', (req, res) => {
+
   let time = req.body.time;
   let duration = Number(req.body.duration);
   let challengeId = req.body.challengeId;
   let companyId = jwt.decode(req.body.companyId, secret).id;
+
   calendarControllers.addToCompanySchedule(time, duration, challengeId, companyId)
   .then(() => {
     console.log('Successfully saved challenge to schedule');
@@ -271,9 +274,11 @@ router.delete('/api/companyCalendar', (req, res) => {
 })
 
 // update company calendar
-router.patch('/api/companyCalendar:date', (req, res) => {
-
-
+router.patch('/api/companyCalendar/:challengeId', (req, res) => {
+  calendarControllers.updateChallengeDate(req.body.time, req.body.duration, req.body.challengeId, req.body.companyId)
+  .catch((err) => {
+    console.log(err);
+  })
 })
 
 

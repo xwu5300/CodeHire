@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AdminDashboardView from '../components/AdminView/AdminDashboardView.jsx';
 import AdminProfileView from '../components/AdminView/AdminProfileView.jsx';
 import AnalyticsView from '../components/AdminView/AnalyticsView.jsx';
-import ChallengeListView from '../components/AdminView/ChallengeListView.jsx';
+import ChallengeListView from '../components/AdminView/ChallengeListView/ChallengeListView.jsx';
 import LiveCodingView from '../components/AdminView/LiveCodingView.jsx';
 import UserResults from '../components/AdminView/UserResults.jsx';
 
@@ -10,7 +10,9 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, fetchCompanyResults, fetchCandidateList, getChallengeInfo, getUsername } from '../actions/adminActions'; 
+
+
+import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, fetchCompanyResults, fetchCandidateList, getChallengeInfo, updateChallengeDate, getUsername } from '../actions/adminActions'; 
 import { fetchInitialChallenge, currentCompanyCalendar, fetchCandidateInfo } from '../actions/userActions';
 
 
@@ -48,7 +50,7 @@ const mapStateToProps = (state) => ({
    candidate_skills: state.candidate_skills.candidate_skills,
    github_url: state.github_url.github_url,
    results: state.results.results,
-   candidate_list: state.candidate_list.candidate_list
+   candidate_list: state.candidate_list.candidate_list,
 });
 
 const mapDispatchToProps = {
@@ -56,7 +58,7 @@ const mapDispatchToProps = {
   fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge,
   updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn,
   toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, 
-  fetchCompanyResults, fetchCandidateList, getChallengeInfo, getUsername
+  fetchCompanyResults, fetchCandidateList, getChallengeInfo, getUsername, updateChallengeDate
 }
 
 
@@ -66,9 +68,10 @@ const AdminDashboardComponent = connect(mapStateToProps, mapDispatchToProps)(Adm
 const AnalyticsComponent= connect(mapStateToProps, mapDispatchToProps)(AnalyticsView);
 const LiveCodingComponent = connect(mapStateToProps, mapDispatchToProps)(LiveCodingView);
 const AdminProfileComponent = connect(mapStateToProps, mapDispatchToProps)(AdminProfileView);
-
 const UserResultsComponent = connect(mapStateToProps, mapDispatchToProps)(UserResults)
 
-const connectAdminContainer = connect(mapStateToProps)(AdminContainer);
+
+const connectAdminContainer = connect(mapStateToProps, mapDispatchToProps)(AdminContainer);
+
 export default withRouter(connectAdminContainer);
 

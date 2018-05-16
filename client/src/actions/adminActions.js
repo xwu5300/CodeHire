@@ -28,7 +28,7 @@ export const fetchAllChallenges = (companyId) => (dispatch) => {
 }
 
 export const saveChallenge = (challenge, companyId, cb) => (dispatch) => {
-  axios.post('/api/challenges', { challenge, companyId })
+  axios.post('/api/challenges', { challenge, companyId, scheduled: false })
   .then(() => {
     dispatch(fetchAllChallenges(companyId));
     console.log('Saved to your challenges')
@@ -80,7 +80,6 @@ export const addToCompanySchedule = (time, duration, challengeId, companyId, cb)
   .then(() => {
     console.log('add to company schedule was called')
     dispatch(fetchCompanySchedule(companyId));
-    // console.log('Added to your upcoming challenges')
   })
   .then(() => {
     if (cb) {
@@ -91,6 +90,18 @@ export const addToCompanySchedule = (time, duration, challengeId, companyId, cb)
 		console.log('Error updating company calendar', err);
 	})
 }
+
+
+export const updateChallengeDate = (time, duration, challengeId, companyId, cb) => (dispatch) => {
+  axios.patch('/api/companyCalendar/:challengeId', { time, duration, challengeId, companyId })
+  .then((response) => {
+    console.log('RESPONSE', response);
+  })
+  .catch((err) => {
+    console.log('Error updating challenge date', err);
+  })
+}
+
 
 export const deleteFromCompanySchedule = (scheduleId, companyId) => (dispatch) => {
   axios.delete('/api/companyCalendar', {params: { scheduleId }})
