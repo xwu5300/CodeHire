@@ -43,13 +43,18 @@ export const saveChallenge = (challenge, companyId, cb) => (dispatch) => {
   })
 }
 
-export const deleteChallenge = (challenge, companyId) => (dispatch) => {
+export const deleteChallenge = (challenge, companyId, cb) => (dispatch) => {
   axios.delete('/api/challenges', {params: { challenge, companyId }})
   .then(() => {
     dispatch(fetchAllChallenges(companyId));
     dispatch(fetchCompanySchedule(companyId));
     dispatch(fetchInitialChallenge(companyId));
     console.log('Removed from your challenges');
+  })
+  .then(() => {
+    if (cb) {
+      cb()
+    }
   })
 	.catch((err) => {
 		console.log('Error deleting challenge', err);
@@ -164,7 +169,7 @@ export const fetchCompanyResults = (companyId, candidateId) => (dispatch) => {
   axios.get('/api/results', { params: { companyId, candidateId } })
   .then(({data}) => {
     dispatch({ type: GET_COMPANY_RESULTS, payload: data})
-    
+
   })
   .catch((err) => {
     console.log(err);

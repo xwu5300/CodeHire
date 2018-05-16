@@ -13,9 +13,6 @@ import 'brace/theme/twilight';
 import 'brace/theme/solarized_dark';
 import 'brace/theme/terminal';
 
-import 'brace/mode/javascript';
-import 'brace/theme/monokai';
-
 class UserLiveCodingView extends Component {
   constructor(props) {
     super(props);
@@ -25,11 +22,20 @@ class UserLiveCodingView extends Component {
       seconds: '',
       code: `function ${this.props.location.challenge.function_name}(${this.props.location.challenge.parameters}) {
 
-}` }
+}`,
+      inChallenge: true,
+      submission: '',
+      exampleInputs: [],
+      exampleOutputs: []
+    }
 
     this.socket = socketClient();
     this.onChange = this.onChange.bind(this)
+    this.handleTheme = this.handleTheme.bind(this)
+    this.saveResults = this.saveResults.bind(this)
+    this.checkAnswer = this.checkAnswer.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.getExamples = this.getExamples.bind(this)
 
     this.socket.on('add char', (chars)=> {
       this.setState({
@@ -58,10 +64,43 @@ class UserLiveCodingView extends Component {
     this.socket.emit('typing', newValue, event, localStorage.getItem('userId'));
   }
 
-  handleSubmit() {
-    let func = this.props.location.challenge.parameters
-    let reg = new RegExp(`${func}`, 'g')
+  handleTheme(e) {
+    this.setState({
+      theme: e.target.value
+    })
+  }
 
+  getExamples() {
+    let examplesS = this.props.location.challenge.examples.replace(/"/g, "'")
+    let examplesD = examplesS.replace(/'/g, '"')
+    let examples = JSON.parse(examplesD)
+    let exampleInputs = examples[0].map((el)=> {
+      return JSON.stringify(el)
+    })
+    let exampleOutputs = examples[1].map((el)=> {
+      return JSON.stringify(el)
+    })
+
+    this.setState({
+      exampleInputs: exampleInputs,
+      exampleOutputs: exampleOutputs
+    })
+  }
+
+  saveResults(result, submission, score, time) {
+    let challenge_id = this.props.location.challenge.challenge_id
+    let company_id = this.props.location.challenge.company_id
+    let candidate_id = this.props.location.challenge.candidate_id
+    let initial = this.props.location.challenge.initial
+    let userSchedule_id = this.props.location.challenge.id
+    this.props.saveResults(result, submission, score, time, challenge_id, company_id, candidate_id, initial, userSchedule_id, () => {
+      this.props.fetchCandidateInitialResults(company_id, userSchedule_id)
+      //fetch initial?
+    })
+  }
+
+  checkAnswer() {
+    let params = this.props.location.challenge.parameters
     let testCaseS = this.props.location.challenge.test_cases.replace(/"/g, "'")
     let testCaseD = testCaseS.replace(/'/g, '"')
 
@@ -75,19 +114,35 @@ class UserLiveCodingView extends Component {
     input = input.replace(/'/g, "")
     output = output.replace(/'/g, "")
 
-    let newString = `${this.state.code.replace(reg, `${func}`)}
+    let reg = new RegExp(`${params}`, 'g')
+    let submittedCode = `${this.state.code.replace(reg, `${params}`)}
 
     ${this.props.location.challenge.function_name}(${input})
     `
-    let answer = eval(newString)
+    if (this.state.inChallenge) {
+      window.onerror = () => {
+        swal(
+          'There was an error in your code',
+          'Double check your syntax and try again!',
+          'warning'
+        )
+      }
+    }
 
+    let answer = eval(submittedCode)
+    this.setState({
+      submission: submittedCode
+    })
+    return JSON.stringify(answer) === output
+  }
 
-
-    let result = JSON.stringify(answer) === output
-
+  handleSubmit() {
+    let result = this.checkAnswer()
+    let score = 90 //hardcoded
+    let time = moment(Date.now()).format()
     swal({
       title: 'Are you sure?',
-      text: "You can only submit once!!",
+      text: "You can only submit once!",
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -95,42 +150,30 @@ class UserLiveCodingView extends Component {
       confirmButtonText: 'Yes, submit it!'
     }).then((clickResult) => {
       if (clickResult.value) {
-        let isPassed = answer === output;
-        let time = moment(Date.now()).format();
-        let score;
+        let submission = this.state.submission
+        this.saveResults(result, submission, score, time)
+        let thatProps = this.props
         if (result === true) {
           swal(
-            'Success!',
-            'You answered our challenge correctly!',
-            'success'
-          )
-          score = 90;
+            {title: 'Success!',
+             text: 'You answered our challenge correctly!',
+             type: 'success'}).then(function() {
+              thatProps.history.push('/user')
+             }
+            )
         } else {
           swal(
-            'Sorry!',
-            'The answer you submitted was not correct',
-            'error'
-          )
+            {title: 'Sorry!',
+             text: 'The answer you submitted was not correct',
+             type: 'error'}).then(function() {
+               thatProps.history.push('/user')
+          })
         }
-        let returnToDash = () => (this.props.saveResults(isPassed, newString, score, time, this.props.initial_challenge[0].id, this.props.initial_challenge[0].company_id, localStorage.getItem('userId'), true, this.props.initial_challenge[0].id, () => {
-          this.props.history.push('/user/schedule')
-        }))
-        setTimeout(returnToDash, 750)
       }
     })
   }
 
   render() {
-    let examplesS = this.props.location.challenge.examples.replace(/"/g, "'")
-    let examplesD = examplesS.replace(/'/g, '"')
-    let examples = JSON.parse(examplesD)
-    let exampleInput = examples[0].map((el)=> {
-      return JSON.stringify(el)
-    }).join(',')
-    let exampleOutput = examples[1].map((el)=> {
-      return JSON.stringify(el)
-    }).join(',')
-
     return (
       <div>
         <div className="ui orange three item inverted menu">
@@ -144,7 +187,13 @@ class UserLiveCodingView extends Component {
         <h3>Difficulty: {this.props.location.challenge.difficulty}</h3>
         <div> Instructions: {this.props.location.challenge.instruction}</div>
         <div>
-          examples: { `input: ${exampleInput} output:${exampleOutput}`}
+          examples:
+          {this.state.exampleInputs.map((input, i) => {
+            return <div className="examples" key={i}>{input}</div>
+          })}
+          {this.state.exampleOutputs.map((output, i) => {
+            return <div className="examples" key={i}>{output}</div>
+          })}
         </div>
         <div> Time Limit: { this.state.minutes + ':' + this.state.seconds }</div>
         <AceEditor
@@ -171,8 +220,6 @@ class UserLiveCodingView extends Component {
           <option value='terminal'>Terminal</option>
         </select>
       <button onClick={this.handleSubmit}> Submit Answer </button>
-
-
       </div>
      )
   }

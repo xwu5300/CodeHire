@@ -59,7 +59,7 @@ body {
 
 .close-button {
   margin-top: 20%;
-  margin-left: 50% 
+  margin-left: 50%
 }
 
 .calendar-button {
@@ -192,6 +192,18 @@ body {
 	font-size: 20px;
 }
 
+/* -------- User Coding ---------- */
+.examples {
+	display: inline
+}
+
+.examples .input {
+	margin-left: 20px
+}
+
+.examples .output {
+	margin-left: 80px
+}
 
 
 /* ------- Admin live coding ------- */
@@ -237,10 +249,3 @@ body {
 	font-size: 40px;
 	float: right;
 }
-
-
-
-
-
-
-
