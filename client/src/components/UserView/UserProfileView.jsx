@@ -18,7 +18,7 @@ class UserProfileView extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchCandidateInfo(this.props.user_id, () => {
+    this.props.fetchCandidateInfo(localStorage.getItem('userId'), () => {
       this.setState({ all_skills: this.props.candidate_skills, github_url: this.props.github_url })
     });
   }
@@ -37,12 +37,12 @@ class UserProfileView extends Component {
         this.setState({ all_skills: [new_skill] })
       }
       
-      this.props.updateCandidateSkills(this.props.user_id, this.state.skill);
+      this.props.updateCandidateSkills(localStorage.getItem('userId'), this.state.skill);
     }
   }
 
   updateGithub() {
-    this.props.updateCandidateGithub(this.props.user_id, this.state.github_url);
+    this.props.updateCandidateGithub(localStorage.getItem('userId'), this.state.github_url);
   }
 
 

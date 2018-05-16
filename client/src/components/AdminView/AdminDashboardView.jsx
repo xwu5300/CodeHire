@@ -26,7 +26,6 @@ class AdminDashboardView extends Component {
   componentDidMount() {
     this.props.fetchCompanySchedule(localStorage.getItem('userId'));
     this.props.fetchInitialChallenge(localStorage.getItem('userId'));
-    // this.props.fetchCandidateList(localStorage.getItem('userId'));
     this.props.fetchAllChallenges(localStorage.getItem('userId'));
     // this.getUsername();
     Modal.setAppElement('body');

@@ -38,7 +38,6 @@ class Registration extends Component {
   }
 
   handleSubmit(e, form) {
-    console.log('submitting registration', form)
     e.preventDefault();
     if(form === 'companyForm') {
       this.props.handleSignUp(this.state.email, this.state.username, this.state.password, form, this.state.companyName, this.state.phone, this.state.logoUrl, null, this.state.companyInfo, this.resetInput);

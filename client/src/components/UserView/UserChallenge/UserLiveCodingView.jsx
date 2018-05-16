@@ -44,18 +44,18 @@ class UserLiveCodingView extends Component {
   }
 
   componentDidMount() {
-     this.socket.emit('candidate enter', this.props.name, this.props.user_id, this.props.current_company_calendar);
+     this.socket.emit('candidate enter', this.props.name, localStorage.getItem('userId'), this.props.current_company_calendar);
   }
 
   componentWillUnmount() {
-    this.socket.emit('candidate disconnect', this.props.name, this.props.user_id, this.props.current_company_calendar);
+    this.socket.emit('candidate disconnect', this.props.name, localStorage.getItem('userId'), this.props.current_company_calendar);
   }
 
   onChange(newValue, event) {
     this.setState({
       code: newValue
     }, ()=> console.log(this.state.code))
-    this.socket.emit('typing', newValue, event, this.props.user_id);
+    this.socket.emit('typing', newValue, event, localStorage.getItem('userId'));
   }
 
   handleSubmit() {
@@ -112,7 +112,7 @@ class UserLiveCodingView extends Component {
             'error'
           )
         }
-        let returnToDash = () => (this.props.saveResults(isPassed, newString, score, time, this.props.initial_challenge[0].id, this.props.initial_challenge[0].company_id, this.props.user_id, true, this.props.initial_challenge[0].id, () => {
+        let returnToDash = () => (this.props.saveResults(isPassed, newString, score, time, this.props.initial_challenge[0].id, this.props.initial_challenge[0].company_id, localStorage.getItem('userId'), true, this.props.initial_challenge[0].id, () => {
           this.props.history.push('/user/schedule')
         }))
         setTimeout(returnToDash, 750)

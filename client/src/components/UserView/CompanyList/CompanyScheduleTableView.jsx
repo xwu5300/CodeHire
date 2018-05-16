@@ -24,7 +24,7 @@ class CompanyScheduleTableView extends Component {
             <td>
               <button className='ui orange button' onClick={() =>{
                 if (this.props.passInitial) {
-                  this.props.saveCandidateCalendar(this.props.userId, schedule.id)
+                  this.props.saveCandidateCalendar(localStorage.getItem('userId'), schedule.id)
                 } else {
                   this.props.updateStyle()
                 }

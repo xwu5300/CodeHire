@@ -25,10 +25,11 @@ class CompanyScheduleView extends Component {
   }
 
   render() {
+    console.log('company schedue view pros', this.props)
     if (this.props.initial_challenge[0]) {
-      const companyCalendar = this.props.all_company_calendars.filter((schedule) => {
-        return schedule.company_id === this.props.initial_challenge[0].company_id
-      })
+      // const companyCalendar = this.props.all_company_calendars.filter((schedule) => {
+      //   return schedule.company_id === this.props.initial_challenge[0].company_id
+      // })
       return (
         <div>
          <div className="ui orange three item inverted menu">
@@ -59,8 +60,8 @@ class CompanyScheduleView extends Component {
         <br/>
         {this.props.initial_challenge[0].name}'s Live Challenge:
         <div className='schedule_container'>
-        {companyCalendar ?
-        <CompanyScheduleTableView updateStyle={this.updateStyle} userId={this.props.user_id} saveCandidateCalendar={this.props.saveCandidateCalendar} companyCalendar={companyCalendar} passInitial={this.props.pass_initial} />
+        {this.props.company_schedule.length ?
+        <CompanyScheduleTableView updateStyle={this.updateStyle} saveCandidateCalendar={this.props.saveCandidateCalendar} companyCalendar={this.props.company_schedule} passInitial={this.props.pass_initial} />
         : <div> {this.props.initial_challenge[0].name} Does Not Have Any Upcoming Live Challenge </div>
       }
 
