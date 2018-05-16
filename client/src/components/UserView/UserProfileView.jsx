@@ -61,9 +61,10 @@ class UserProfileView extends Component {
     return (
       <div>
         <div className="ui orange three item inverted menu">
-          <div className='ui active item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.name }</div>
+          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.name }</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Companies</div>
+          <div className='ui active item' onClick={() => {this.props.history.push('/user/companylist')}}>Live Challenges</div>
+          <div className='ui active item' onClick={() => {this.props.history.push('/user/companylist2')}}>Company List</div>
         </div>
 
         <div className='main_profile_container'>

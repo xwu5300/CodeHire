@@ -225,6 +225,17 @@ router.post('/api/cancelCandidateSchedule', (req, res) => {
   })
 })
 
+//get company list
+router.get('/api/companyList', (req, res) => {
+  calendarControllers.getCompanyList()
+  .then((data) => {
+    res.send(data);
+  })
+  .catch((err) => {
+    console.log('Could not retrieve company list', err);
+  })
+})
+
 // get company schedule
 router.get('/api/companyCalendars', (req, res) => {
   calendarControllers.getAllCompanyCalendars()
@@ -316,7 +327,7 @@ router.get('/api/results/candidate', (req, res) => {
 })
 
 router.get('/api/results/candidate/initial', (req, res) => {
-  let companyId = req.query.companyId;
+  let companyId = jwt.decode(req.query.companyId, secret).id;
   let candidateId = jwt.decode(req.query.candidateId, secret).id;
   resultsControllers.getCandidateInitialResults(companyId, candidateId)
   .then((data) => {
