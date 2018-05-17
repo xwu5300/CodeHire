@@ -67,6 +67,14 @@ module.exports.getCandidateInitialResults = (companyId, candidateId) => {
   })
 }
 
-module.exports.getCandidateResults = (companyId) => {
-  
+module.exports.getCandidateResults = (candidateId) => {
+  return knex('results')
+  .where('candidate_id', candidateId)
+  .then((res) => {
+    console.log('Retrieve candidate results')
+    return res;
+  })
+  .catch((err) => {
+    console.log(err);
+  })
 }

@@ -10,9 +10,11 @@ class UserDashBoard extends Component {
 
   componentDidMount() {
     this.props.fetchCandidateCalendar(localStorage.getItem('userId'));
+    this.props.fetchCandidateResults(localStorage.getItem('userId'));
   }
 
   render() {
+    console.log('user dash board props', this.props)
     return(
       <div>
         <div className="ui orange three item inverted menu">
@@ -30,8 +32,6 @@ class UserDashBoard extends Component {
 
         : <div>You Do Not Have Any Scheduled Challenges</div>}
         </div>
-        <br/> <br/>
-        <div></div>
       </div>
     )
   }
