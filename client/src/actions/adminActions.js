@@ -7,6 +7,7 @@ import { fetchInitialChallenge } from './userActions.js';
 export const fetchDefaultChallenges = () => (dispatch) => {
   axios.get('/api/defaultChallenges')
   .then(({data}) => {
+    console.log('DATAATTATA', data);
     dispatch({ type: GET_DEFAULT_CHALLENGES, payload: data })
   })
   .catch((err) => {

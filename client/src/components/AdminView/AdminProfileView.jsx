@@ -17,9 +17,16 @@ class AdminProfileView extends Component {
     this.toggleInfo = this.toggleInfo.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchCompanyInfo(localStorage.getItem('userId'), () => {
-      this.setState({ logo_url: this.props.logo_url, information: this.props.company_information })
+
+      if(this.props.logo_url) {
+        this.setState({ logo_url: this.props.logo_url });
+      }
+
+      if(this.props.company_information) {
+        this.setState({ information: this.props.company_information })
+      }
     })
   }
 

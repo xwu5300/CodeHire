@@ -7,6 +7,7 @@ import Modal from 'react-modal';
 
 export const cardSource = {
   beginDrag(props, monitor, component) {
+    console.log('HEY THTH', props)
     return {
       challengeId: props.challengeId,
       companyId: props.challenge.company_id,
@@ -33,7 +34,8 @@ class ChallengeCard extends Component {
       duration: '',
       invalid: true,
       modalIsOpen: false,
-      selected: null
+      selected: null,
+      isExpanded: false
     }
 
     this.showCalendar = this.showCalendar.bind(this);
@@ -44,11 +46,12 @@ class ChallengeCard extends Component {
     this.handleModal = this.handleModal.bind(this);
     this.toggleSelectedOn = this.toggleSelectedOn.bind(this);
     this.toggleSelectedOff = this.toggleSelectedOff.bind(this);
+
+    this.expandCard = this.expandCard.bind(this);
   }
   
   componentDidMount() {
     Modal.setAppElement('body');
-    console.log(this.props)
   }
 
   showCalendar() {
@@ -105,20 +108,53 @@ class ChallengeCard extends Component {
       duration: event.target.value
     })
   }
+
+  expandCard() {
+    this.setState({
+      isExpanded: !this.state.isExpanded
+    })
+  }
  
   render() {
-  
-  
-  const { challenge, index, challengeId, userId, scheduleId, title, instruction, difficulty, deleteChallenge, deleteFromCompanySchedule, connectDragSource, isDragging } = this.props;
-  const calendarId = this.state.selected === index ? "calendar" : "inactive";
-  return connectDragSource (
-    <div className="ui fluid orange card">
-      <div className='content challenge_content'>
-        <div><b>Title:</b> {title}</div>
-        <div><b>Description:</b> {instruction}</div>
-        <div><b>Difficulty:</b> {difficulty}</div>
 
-        {this.props.scheduled ?
+    const tab = {
+      height: '35px',
+      overflow: 'hidden',
+    }
+  
+  
+  const { column, default_challenge, scheduled, challenge, index, challengeId, userId, scheduleId, title, instruction, difficulty, deleteChallenge, deleteFromCompanySchedule, connectDragSource, isDragging } = this.props;
+  const calendarId = this.state.selected === index ? "calendar" : "inactive";
+
+  if(default_challenge) {
+    var cardColor = 'ui fluid orange card challenge_card';
+  } else if(scheduled) {
+    cardColor = 'ui fluid green card challenge_card';
+  } else {
+   cardColor = 'ui fluid black card challenge_card';
+  }
+
+
+  return connectDragSource (
+    <div className={ cardColor } style={this.state.isExpanded ? null : tab}>
+      <div className='content challenge_content'>
+        
+        <i onClick={ () => this.expandCard() } className="angle down icon expand_icon"></i>
+       
+      { this.state.isExpanded ? 
+        <div>
+          <div><b>Title:</b> {title}</div>  
+          <div><b>Description:</b> {instruction}</div>
+          <div><b>Difficulty:</b> {difficulty}</div>
+        </div>
+       :
+       <div>
+         <span style={{fontSize: '20px', position: 'relative', bottom: '5px'}}> { title } </span>
+         <span style={{position:'relative', bottom: '5px', float: 'right', marginRight: '50px'}}> <b>difficulty:</b> { difficulty }</span>
+       </div>
+     }
+
+        { scheduled ?
          <div> 
         <div className="ui calendar" id={calendarId} onMouseEnter={() => {this.toggleSelectedOn(index)}} onMouseLeave={() => {this.toggleSelectedOff(index)}}>
           <div className="ui input left icon" onClick={this.showCalendar}>
@@ -139,9 +175,6 @@ class ChallengeCard extends Component {
          : null }
 
 
-
-
-
         <div className='saved_challenges_btns'>
 
          {!this.props.scheduled ?
@@ -158,7 +191,7 @@ class ChallengeCard extends Component {
             <UpdateForm challengeInfo={this.props.challengeInfo} save={this.props.save} close={this.closeModal} userId={this.props.userId}/>
           </Modal>}
 
-          {!this.props.scheduled ? 
+          {!this.props.scheduled && !this.props.default_challenge ? 
           <button className="ui icon button" onClick={() => this.handleModal(challengeId) }>
             <i className="edit icon"></i>
           </button>

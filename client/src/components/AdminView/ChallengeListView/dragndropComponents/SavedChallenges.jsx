@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import swal from 'sweetalert2';
 
-
 import ChallengeCard from './ChallengeCard.jsx';
 
 /* ------ Drag N Drop ------- */
-
+import { ItemTypes } from './Constants';
+import { DropTarget } from 'react-dnd';
 
 
 
@@ -66,9 +66,11 @@ class SavedChallenges extends Component {
 
   render() {
 
+    const { connectDropTarget } = this.props;
+
     return (
-      <div className='ui segment drag_segment' style={{ overlow: 'scroll' }}>
-        <h1>Saved Challenges</h1>
+      <div className='ui segment drag_segment'>
+        <h1>Your Challenges</h1>
 
           {this.props.allChallenges.map((challenge, i) => {
             return (

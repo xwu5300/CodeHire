@@ -63,9 +63,9 @@ class ChallengeListView extends Component {
               <Form save={this.props.saveChallenge} close={this.closeModal} history={this.props.history} userId={localStorage.getItem('userId')}/>
             </Modal>
           <div className='ui padded horizontal segments challenge_list'>
-
-          <SavedChallenges  getChallengeId={ this.props.getChallengeId } openModal={ this.openModal } userId={localStorage.getItem('userId')} allChallenges={this.props.all_challenges} delete={this.props.deleteChallenge} addToCompanySchedule={this.props.addToCompanySchedule} isInitial={this.props.is_initial} makeInitial={this.props.makeInitial} getInfo={this.props.getChallengeInfo} challengeInfo={this.props.challenge_info} save={this.props.saveChallenge}/>
+          
           <DefaultChallenges userId={localStorage.getItem('userId')} defaultChallenges={this.props.default_challenges} save={this.props.saveChallenge}/>
+          <SavedChallenges  getChallengeId={ this.props.getChallengeId } openModal={ this.openModal } userId={localStorage.getItem('userId')} allChallenges={this.props.all_challenges} delete={this.props.deleteChallenge} addToCompanySchedule={this.props.addToCompanySchedule} isInitial={this.props.is_initial} makeInitial={this.props.makeInitial} getInfo={this.props.getChallengeInfo} challengeInfo={this.props.challenge_info} save={this.props.saveChallenge}/>
           <ScheduledChallenges userId={localStorage.getItem('userId')} updateChallengeDate={ this.props.updateChallengeDate } deleteFromCompanySchedule={ this.props.deleteFromCompanySchedule } scheduledChallenges={ this.props.company_schedule } allChallenges={ this.props.all_challenges } addToCompanySchedule={ this.props.addToCompanySchedule } />
         </div>
       </div>
