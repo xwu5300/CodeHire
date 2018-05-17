@@ -7,7 +7,6 @@ import Modal from 'react-modal';
 
 export const cardSource = {
   beginDrag(props, monitor, component) {
-    console.log('RPOOOPS', props);
     return {
       challengeId: props.challengeId,
       companyId: props.challenge.company_id,

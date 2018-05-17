@@ -6,9 +6,27 @@ import { DropTarget } from 'react-dnd';
 
 import ChallengeCard from './ChallengeCard.jsx';
 
+
+
 const target = {
-  drop: (props, monitor) => {
+
+  canDrop(props, monitor) {
+    const challenge = monitor.getItem();
+   
+    for(let i = 0; i < props.scheduledChallenges.length; i++) {
+      if(challenge.challengeId === props.scheduledChallenges[i].challenge_id) {
+        return false;
+      }
+    }
+    
+    return true;
+  },
+
+
+  drop(props, monitor) {
+
     let challenge = monitor.getItem();
+
     props.addToCompanySchedule(challenge.time, challenge.duration, challenge.challengeId, localStorage.getItem('userId'), () => {
       console.log('SUCCESS');
     })
@@ -38,6 +56,7 @@ class ScheduleChallenges extends Component {
       <div className='ui segment drag_segment'>
         <h2> Scheduled Challenges </h2>
         { this.props.scheduledChallenges ? this.props.scheduledChallenges.map((challenge, i) => {
+          console.log('item', challenge)
             return (
               <ChallengeCard 
                key={i}
