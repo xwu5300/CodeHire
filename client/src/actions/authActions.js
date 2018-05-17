@@ -10,8 +10,8 @@ export const saveCandidate = (token, fullName,username, phone, github_url) => (d
 }
 
 
-export const saveCompany = (token, companyName, username, password, email, phone, logoUrl, information) => (dispatch) => {
-  axios.post('/api/registerCompany', { token, companyName, username, password, email, phone, logoUrl, information })
+export const saveCompany = (token, companyName, username, phone, logoUrl, information) => (dispatch) => {
+  axios.post('/api/registerCompany', { token, companyName, username, phone, logoUrl, information })
   .then((response) => {
   	dispatch({ type: SAVE_COMPANY, payload: response.data })
   })

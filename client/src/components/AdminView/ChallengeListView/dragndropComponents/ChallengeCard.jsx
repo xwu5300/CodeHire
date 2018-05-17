@@ -85,10 +85,10 @@ class ChallengeCard extends Component {
     })
   }
 
-  handleClick(challenge, challengeId, companyId, i) {
+  handleClick(challenge, scheduleId) {
 
     let date = $('#date').val()
-
+    console.log(this.state.duration, date)
     if (this.state.duration === '' || !date) {
       this.setState({
         invalid: true
@@ -97,8 +97,7 @@ class ChallengeCard extends Component {
       this.setState({
         invalid: false
       }, () => {
-
-        this.props.updateChallengeDate(date, this.state.duration, challengeId, companyId, this.props.close)
+        this.props.updateChallengeDate(date, this.state.duration, scheduleId, this.props.close)
       })
     }
   }
@@ -164,7 +163,7 @@ class ChallengeCard extends Component {
             <i className="calendar icon"></i>
             <input name="date" type="text" placeholder="Date/Time" id={dateId}/>
           </div>
-          <button type='button' onClick={ () => this.handleClick(challenge, challengeId, userId) }>Set Date</button>
+          <button type='button' onClick={ () => this.handleClick(challenge, scheduleId) }>Set Date</button>
         </div>
 
         <select className="ui dropdown" name="duration" value={this.state.duration} onChange={(e) => this.handleDurationChange(e) }>

@@ -288,8 +288,8 @@ router.delete('/api/companyCalendar', (req, res) => {
 })
 
 // update company calendar
-router.patch('/api/companyCalendar/:challengeId', (req, res) => {
-  calendarControllers.updateChallengeDate(req.body.time, req.body.duration, req.body.challengeId, req.body.companyId)
+router.patch('/api/companyCalendar', (req, res) => {
+  calendarControllers.updateChallengeDate(req.body.time, req.body.duration, req.body.scheduleId)
   .catch((err) => {
     console.log(err);
   })
