@@ -1,37 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import SearchForCompany from './SearchForCompany.jsx';
+import SearchCompanySchedule from './SearchCompanySchedule.jsx';
 import moment from 'moment';
 import jwt from'jwt-simple';
 import { secret } from'../../../../../config.js';
 
-class ChallengeListView extends Component {
+class AllChallengeListView extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      companyCalendar: []
-    }
-
-    this.updateCompanyCalendar = this.updateCompanyCalendar.bind(this);
     this.encodeCompanyId = this.encodeCompanyId.bind(this);
   }
 
   componentDidMount() {
-    this.props.fetchAllCompanyCalendars(() => {
-      this.setState({
-        companyCalendar: this.props.all_company_calendars
-      })
-    })
-  }
-
-  updateCompanyCalendar(companyName) {
-    var newList = this.props.all_company_calendars.filter((schedule) => {
-      return schedule.name === companyName;
-    })
-    this.setState({
-      companyCalendar: newList
-    })
+    this.props.fetchCompanySchedule(null, '')
   }
 
   encodeCompanyId(id) {
@@ -43,21 +25,21 @@ class ChallengeListView extends Component {
   render () {
     return (
       <div>
-        <div className="ui orange three item menu">
+        <div className="ui orange four item menu">
           <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui active item' onClick={() => {this.props.history.push('/user/companylist')}}>Live Challenges</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist2')}}>Company List</div>
+          <div className='ui active item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
         </div>
         
           <div className='search_company_input' style={{marginTop: '40px', marginBottom: '70px', textAlign: 'center'}} >
-            <SearchForCompany updateCompanyCalendar={this.updateCompanyCalendar}/>
+            <SearchCompanySchedule updateCompanyCalendar={this.props.fetchCompanySchedule}/>
           </div>
        
        <div className='company_list_items'>
        <div className='ui divided items'>
-      {this.state.companyCalendar.length ?
-      this.state.companyCalendar.map((company, i) => {
+      {this.props.company_schedule.length ?
+      this.props.company_schedule.map((company, i) => {
         return (
 
           <div className='item' key={i}>
@@ -91,4 +73,4 @@ class ChallengeListView extends Component {
   }
 }
 
-export default withRouter(ChallengeListView);
+export default withRouter(AllChallengeListView);

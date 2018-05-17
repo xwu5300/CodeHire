@@ -4,10 +4,20 @@ import moment from 'moment';
 class UserResults extends Component {
   constructor() {
     super();
+
+    this.isPassed = this.isPassed.bind(this);
+    this.isInitial = this.isInitial.bind(this);
+  }
+
+  isPassed(userPassed) {
+    return userPassed ? 'Passed' : 'Failed';
+  }
+
+  isInitial(initial) {
+    return initial ? 'Initial Challenge' : ''
   }
 
   render() {
-      console.log('user result props', this.props)
       if (this.props.results.length) {
         return (
         <div>
@@ -20,17 +30,9 @@ class UserResults extends Component {
             <br/>
             <div> Challenges:
             {this.props.results.map((result, i) => {
-                let isPassed = 'Failed';
-                let isInitial = '';
-                if (result.user_passed) {
-                    isPassed = 'Passed';
-                }
-                if (result.isInitial) {
-                    isInitial = 'Initial Challenge'
-                }
                 return (
                 <div key={i}>
-                <div>Title: {result.title}    Difficulty: {result.difficulty}   {isInitial}, {isPassed}, {result.score}</div>
+                <div>Title: {result.title}    Difficulty: {result.difficulty}   {this.isInitial}, {this.isPassed}, {result.score}</div>
                 
                 <div>Instruction: {result.instruction}</div>
                 <div>Completed At: {moment(result.completed_at).format('MMMM Do YYYY dddd, h:mm A')}</div>

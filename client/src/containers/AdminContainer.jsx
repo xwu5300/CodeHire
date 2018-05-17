@@ -45,7 +45,7 @@ const mapStateToProps = (state) => ({
    name: state.name.name,
    username: state.username.username,
    challenge_info: state.challenge_info.challenge_info,
-   candidate_information: state.candidate_information.candidate_information,
+   candidate_information: state.candidate_information.candidate_information,  ///not exists ??
    candidate_skills: state.candidate_skills.candidate_skills,
    github_url: state.github_url.github_url,
    results: state.results.results,

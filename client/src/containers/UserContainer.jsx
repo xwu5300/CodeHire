@@ -3,10 +3,11 @@ import React, { Component } from 'react';
 import UserInitialChallengeView from '../components/UserView/UserChallenge/UserInitialChallengeView.jsx';
 import UserLiveCodingView from '../components/UserView/UserChallenge/UserLiveCodingView.jsx';
 import UserProfileView from '../components/UserView/UserInformation/UserProfileView.jsx';
-import ChallengeListView from '../components/UserView/CompanyList/ChallengeListView.jsx';
+import AllChallengeListView from '../components/UserView/CompanyList/AllChallengeListView.jsx';
 import CompanyScheduleView from '../components/UserView/CompanyList/CompanyScheduleView.jsx';
 import UserDashBoard from '../components/UserView/UserInformation/UserDashBoard.jsx';
 import CompanyListView from '../components/UserView/CompanyList/CompanyListView.jsx';
+import PastChallengeListView from '../components/UserView/UserInformation/PastChallengeListView.jsx';
 
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -21,12 +22,13 @@ class UserContainer extends Component {
     return (
       <Switch>
         <Route exact path='/user' component={UserDashBoardComponent}/>
-        <Route exact path='/user/companylist' component={ChallengeListViewComponent}/>
+        <Route exact path='/user/challengelist' component={AllChallengeListViewComponent}/>
         <Route exact path='/user/schedule' component={CompanyScheduleViewComponent}/>
         <Route exact path='/user/challenge' component={UserInitialChallengeViewComponent}/>
         <Route exact path='/user/live' component={UserLiveCodingViewComponent}/>
         <Route exact path='/user/profile' component={UserProfileViewComponent}/>
-        <Route exact path='/user/companyList2' component={CompanyListViewComponent}/>
+        <Route exact path='/user/companylist' component={CompanyListViewComponent}/>
+        <Route exact path='/user/pastchallenge' component={PastChallengeListViewComponent}/>
       </Switch>
     );
   }
@@ -38,7 +40,7 @@ const mapStateToProps = function(state) {
     initial_challenge: state.initial_challenge.initial_challenge,
     name: state.name.name,
     username: state.username.username,
-    candidate_information: state.candidate_information.candidate_information,
+    candidate_information: state.candidate_information.candidate_information,  //not exists??
     candidate_skills: state.candidate_skills.candidate_skills,
     github_url: state.github_url.github_url,
     candidate_calendar: state.candidate_calendar.candidate_calendar,
@@ -55,12 +57,12 @@ const mapDispatchToProps = {
 
 const connectComponent = connect(mapStateToProps)(UserContainer); //code cleaned
 const UserDashBoardComponent = connect(mapStateToProps, mapDispatchToProps)(UserDashBoard);
-const ChallengeListViewComponent = connect(mapStateToProps, mapDispatchToProps)(ChallengeListView); //code cleaned
+const AllChallengeListViewComponent = connect(mapStateToProps, mapDispatchToProps)(AllChallengeListView); //code cleaned
 const CompanyScheduleViewComponent = connect(mapStateToProps, mapDispatchToProps)(CompanyScheduleView);
 const UserInitialChallengeViewComponent = connect(mapStateToProps, mapDispatchToProps)(UserInitialChallengeView);
 const UserLiveCodingViewComponent = connect(mapStateToProps, mapDispatchToProps)(UserLiveCodingView);
 const UserProfileViewComponent = connect(mapStateToProps, mapDispatchToProps)(UserProfileView);
-const CompanyListViewComponent = connect(mapStateToProps, { fetchCompanyList })(CompanyListView);
-
+const CompanyListViewComponent = connect(mapStateToProps, mapDispatchToProps)(CompanyListView);
+const PastChallengeListViewComponent = connect(mapStateToProps, mapDispatchToProps)(PastChallengeListView);
 const routeUserComponent = withRouter(connectComponent);
 export default routeUserComponent;

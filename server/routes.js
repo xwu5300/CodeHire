@@ -48,8 +48,8 @@ router.delete('/api/candidateInfo/:username', (req, res) => {
 
 
 router.get('/api/candidateInfo', (req, res) => {
-  let candidateId = jwt.decode(req.body.candidateId, secret).id;
-  profileControllers.getCandidateInfo(req.query.candidateId, (data) => {
+  let candidateId = jwt.decode(req.query.candidateId, secret).id;
+  profileControllers.getCandidateInfo(candidateId, (data) => {
     res.status(200).send(data);
   })
 })
@@ -214,7 +214,7 @@ router.post('/api/candidateCalendar', (req, res) => {
 })
 
 // cancel user schedule
-router.post('/api/cancelCandidateSchedule', (req, res) => {
+router.delete('/api/cancelCandidateSchedule', (req, res) => {
   let candidateScheduleId = req.body.candidateScheduleId;
   calendarControllers.deleteCandidateSchedule(candidateScheduleId)
   .then(() => {
@@ -227,7 +227,10 @@ router.post('/api/cancelCandidateSchedule', (req, res) => {
 
 //get company list
 router.get('/api/companyList', (req, res) => {
-  calendarControllers.getCompanyList()
+  console.log('rroutes eq.query', req.query)
+  let companyName = req.query.companyName;
+  console.log('rroutes eq.query company name', req.query.companyName)
+  calendarControllers.getCompanyList(companyName)
   .then((data) => {
     res.send(data);
   })
@@ -241,6 +244,9 @@ router.get('/api/companyCalendars', (req, res) => {
   calendarControllers.getAllCompanyCalendars()
   .then((data) => {
     res.send(data);
+  })
+  .catch((err) => {
+    console.log('Could not retrieve all company calendars',err)
   })
 })
 // add to company Calendar
@@ -266,9 +272,14 @@ router.post('/api/companyCalendar', (req, res) => {
 
 //fetch single company's schedule
 router.get('/api/companyCalendar', (req, res) => {
-  console.log('get company calendar', req.query.companyId);
-  let companyId = jwt.decode(req.query.companyId, secret).id;
-  calendarControllers.getCompanySchedule(companyId)
+  let companyId = req.query.companyId;
+  let companyName = req.query.companyName;
+  if (req.query.companyId) {
+    companyId = jwt.decode(req.query.companyId, secret).id;
+  }
+  console.log('route company id', companyId)
+  console.log('route company name', companyName)
+  calendarControllers.getCompanySchedule(companyId, companyName)
   .then((data) => {
     res.send(data);
   })

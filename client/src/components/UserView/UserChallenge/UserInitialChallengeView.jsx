@@ -159,11 +159,11 @@ class UserInitialChallengeView extends Component {
   render() {
     return (
       <div>
-        <div className="ui orange three item inverted menu">
+        <div className="ui orange four item inverted menu">
           <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.name }</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui active item' onClick={() => {this.props.history.push('/user/companylist')}}>Live Challenges</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist2')}}>Company List</div>
+          <div className='ui active item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
         </div>
         <h1>{this.props.initial_challenge[0].name}</h1>
         <h2>{this.props.initial_challenge[0].title}</h2>

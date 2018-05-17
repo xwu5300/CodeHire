@@ -15,8 +15,8 @@ export const fetchAllCompanyCalendars = (cb) => (dispatch) => {
   })
 }
 
-export const fetchCompanyList = () => (dispatch) => {
-  axios.get('/api/companyList')
+export const fetchCompanyList = (companyName) => (dispatch) => {
+  axios.get('/api/companyList', { params: { companyName } })
   .then(({data}) => {
     dispatch({ type: GET_COMPANY_LIST, payload: data});
   })
