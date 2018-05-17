@@ -32,7 +32,7 @@ class UserResults extends Component {
             {this.props.results.map((result, i) => {
                 return (
                 <div key={i}>
-                <div>Title: {result.title}    Difficulty: {result.difficulty}   {this.isInitial}, {this.isPassed}, {result.score}</div>
+                <div>Title: {result.title}    Difficulty: {result.difficulty}   {this.isInitial(result.is_initial)}, {this.isPassed(result.user_passed)}, {result.score}</div>
                 
                 <div>Instruction: {result.instruction}</div>
                 <div>Completed At: {moment(result.completed_at).format('MMMM Do YYYY dddd, h:mm A')}</div>

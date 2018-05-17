@@ -10,7 +10,7 @@ module.exports.saveResults = (isPassed, code, score, completedAt, challengeId, c
     challenge_id: challengeId,
     company_id: companyId,
     candidate_id: candidateId,
-    initial: initial
+    is_initial: initial
   })
   .then(() => {
     console.log('Results added to results table');
@@ -54,7 +54,7 @@ module.exports.getCandidateList = (companyId) => {
 
 module.exports.getCandidateInitialResults = (companyId, candidateId) => {
   return knex('results')
-  .where({'company_id': companyId, 'candidate_id': candidateId, 'initial': true})
+  .where({'company_id': companyId, 'candidate_id': candidateId, 'is_initial': true})
   .orderBy('completed_at', 'desc')
   .limit(1)
   .select('user_passed')

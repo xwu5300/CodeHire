@@ -1,19 +1,5 @@
 const knex = require('../../db/index.js');
 
-//get all companies' calendars
-module.exports.getAllCompanyCalendars = () => {
-  return knex.from('users')
-  .innerJoin('company_schedule', 'users.id', 'company_schedule.company_id')
-  .where({})
-  .orderBy('time', 'asc')
-  .then((res) => {
-    return res;
-  })
-  .catch((err) => {
-    console.log('Could not retrieve companies schedules from db:', err);
-  })
-}
-
 //get all companies' list
 module.exports.getCompanyList = (companyName) => {
   let option = {'role': 'company'}
@@ -84,8 +70,8 @@ module.exports.getCompanySchedule = (companyId, companyName) => {
     option = {'users.id': companyId}
   }
   return knex.from('all_challenges')
+  .innerJoin('users', 'users.id', 'all_challenges.company_id')
   .innerJoin('company_schedule', 'all_challenges.id', 'company_schedule.challenge_id')
-  .innerJoin('users', 'users.id', 'company_schedule.company_id')
   .where(option)
   .orderBy('time', 'asc')
   .then((res) => {
@@ -115,6 +101,7 @@ module.exports.getCandidateCalendar = (candidateId) => {
 }
 
 module.exports.saveCandidateCalendar = (candidateId, companyScheduleId) => {
+  console.log('calendar saveCandidateCalendar', candidateId, companyScheduleId)
   return knex.select('*')
   .from('user_schedule')
   .where({
@@ -122,6 +109,7 @@ module.exports.saveCandidateCalendar = (candidateId, companyScheduleId) => {
     'candidate_id': candidateId
   })
   .then((res) => {
+    console.log('calendar saveCandidateCalendar', res)
     if (!res.length) {
       return knex('user_schedule')
       .insert({

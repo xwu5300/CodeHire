@@ -18,6 +18,7 @@ class PastChallengeView extends Component {
   }
 
   render() {
+    console.log('passchallenge view props', this.props)
     return (
       <div>
         <div> Challenges:
@@ -26,7 +27,7 @@ class PastChallengeView extends Component {
         <div key={i}>
         <div>Company: {challenge.name}</div>
         <div>Title: {challenge.title}    Difficulty: {challenge.difficulty}</div>
-        <div>{this.isInitial(challenge.initial)}, 
+        <div>{this.isInitial(challenge.is_initial)}, 
         {this.isPassed(challenge.user_passed)}, 
         {challenge.score}
         </div>

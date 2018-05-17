@@ -215,8 +215,9 @@ router.post('/api/candidateCalendar', (req, res) => {
 
 // cancel user schedule
 router.delete('/api/cancelCandidateSchedule', (req, res) => {
-  let candidateScheduleId = req.body.candidateScheduleId;
-  calendarControllers.deleteCandidateSchedule(candidateScheduleId)
+  let candidateScheduleId = req.query.candidateScheduleId;
+  let candidateId = jwt.decode(req.query.candidateId, secret).id;
+  calendarControllers.deleteCandidateSchedule(candidateScheduleId, candidateId)
   .then(() => {
     res.send('Successfully delete candidate schedule');
   })
@@ -227,9 +228,7 @@ router.delete('/api/cancelCandidateSchedule', (req, res) => {
 
 //get company list
 router.get('/api/companyList', (req, res) => {
-  console.log('rroutes eq.query', req.query)
   let companyName = req.query.companyName;
-  console.log('rroutes eq.query company name', req.query.companyName)
   calendarControllers.getCompanyList(companyName)
   .then((data) => {
     res.send(data);
@@ -239,19 +238,8 @@ router.get('/api/companyList', (req, res) => {
   })
 })
 
-// get company schedule
-router.get('/api/companyCalendars', (req, res) => {
-  calendarControllers.getAllCompanyCalendars()
-  .then((data) => {
-    res.send(data);
-  })
-  .catch((err) => {
-    console.log('Could not retrieve all company calendars',err)
-  })
-})
 // add to company Calendar
 router.post('/api/companyCalendar', (req, res) => {
-  console.log('look at dat body', req.body)
   let time = req.body.time;
   let duration = Number(req.body.duration);
   let challengeId = req.body.challengeId;
@@ -277,8 +265,6 @@ router.get('/api/companyCalendar', (req, res) => {
   if (req.query.companyId) {
     companyId = jwt.decode(req.query.companyId, secret).id;
   }
-  console.log('route company id', companyId)
-  console.log('route company name', companyName)
   calendarControllers.getCompanySchedule(companyId, companyName)
   .then((data) => {
     res.send(data);
@@ -370,7 +356,6 @@ router.get('/api/results/candidate/initial', (req, res) => {
 
 // post results to 'results' table
 router.post('/api/results', (req, res) => {
-  console.log('req.body.candidateId', req.body.candidateId)
   let companyId = req.body.companyId;
   let candidateId = jwt.decode(req.body.candidateId, secret).id;
   resultsControllers.saveResults(req.body.isPassed, req.body.code, req.body.score, req.body.completedAt, req.body.challengeId, companyId, candidateId, req.body.initial)

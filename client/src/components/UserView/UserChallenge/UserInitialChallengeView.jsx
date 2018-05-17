@@ -60,25 +60,13 @@ class UserInitialChallengeView extends Component {
       return JSON.stringify(el)
     })
   }
-  
-  saveResults(result, newString, score, time) {
-    this.props.saveResults(result, newString, score, time, this.props.initial_challenge[0].id, this.props.initial_challenge[0].company_id, localStorage.getItem('userId'), true, this.props.initial_challenge[0].id, () => {
-      this.props.fetchCandidateInitialResults(localStorage.getItem('companyId'), localStorage.getItem('userId'))
-    })
-
-    this.setState({
-      exampleInputs: exampleInputs,
-      exampleOutputs: exampleOutputs
-    })
-  }
 
   saveResults(result, submission, score, time) {
     let id = this.props.initial_challenge[0].id
     let company_id = this.props.initial_challenge[0].company_id
     let user_id = localStorage.getItem('userId')
-    let initial = this.props.initial_challenge[0].initial
-    this.props.saveResults(result, submission, score, time, id, company_id, user_id, initial , id, () => {
-      this.props.fetchCandidateInitialResults(company_id, user_id)
+    this.props.saveResults(result, submission, score, time, id, company_id, user_id, true , id, () => {
+      this.props.fetchCandidateInitialResults(localStorage.getItem('companyId'), user_id)
     })
   }
 

@@ -12,7 +12,7 @@ import PastChallengeListView from '../components/UserView/UserInformation/PastCh
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { fetchAllCompanyCalendars, fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCandidateResults } from '../actions/userActions';
+import { fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCandidateResults } from '../actions/userActions';
 import { fetchCompanySchedule, fetchCompanyResults } from '../actions/adminActions' ;
 
 import axios from 'axios';
@@ -36,7 +36,6 @@ class UserContainer extends Component {
 
 const mapStateToProps = function(state) {
   return {
-    all_company_calendars: state.all_company_calendars.all_company_calendars,
     initial_challenge: state.initial_challenge.initial_challenge,
     name: state.name.name,
     username: state.username.username,
@@ -52,7 +51,7 @@ const mapStateToProps = function(state) {
 }};
 
 const mapDispatchToProps = {
-  fetchAllCompanyCalendars, fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCompanySchedule, fetchCompanyResults, fetchCandidateResults
+   fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCompanySchedule, fetchCompanyResults, fetchCandidateResults
 }
 
 const connectComponent = connect(mapStateToProps)(UserContainer); //code cleaned
