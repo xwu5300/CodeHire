@@ -1,13 +1,13 @@
 
-import { GET_INITIAL_CHALLENGE, GET_ALL_COMPANY_CALENDARS, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO, DELETE_CANDIDATE_SKILL, GET_CURRENT_COMPANY_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS, GET_COMPANY_LIST } from '../constants/actionTypes';
+import { GET_INITIAL_CHALLENGE, GET_ALL_COMPANY_CALENDARS, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO, DELETE_CANDIDATE_SKILL, GET_CURRENT_COMPANY_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS, GET_COMPANY_LIST, GET_CANDIDATE_RESULTS } from '../constants/actionTypes';
 
 import axios from 'axios';
 import swal from 'sweetalert2';
 
-export const fetchAllCompanyCalendars =(cb) => (dispatch) => {
+export const fetchAllCompanyCalendars = (cb) => (dispatch) => {
   axios.get('/api/companyCalendars')
   .then(({data}) => {
-    dispatch({ type: GET_ALL_COMPANY_CALENDARS, payload: data })
+    dispatch({ type: GET_ALL_COMPANY_CALENDARS, payload: data });
     cb()
   })
   .catch((err) => {
@@ -18,7 +18,7 @@ export const fetchAllCompanyCalendars =(cb) => (dispatch) => {
 export const fetchCompanyList = () => (dispatch) => {
   axios.get('/api/companyList')
   .then(({data}) => {
-    dispatch({ type: GET_COMPANY_LIST, payload: data})
+    dispatch({ type: GET_COMPANY_LIST, payload: data});
   })
   .catch((err) => {
     console.log(err);
@@ -26,9 +26,9 @@ export const fetchCompanyList = () => (dispatch) => {
 }
 
 export const fetchCandidateCalendar = (candidateId) => (dispatch) => {
-  axios.get('/api/candidateCalendar', {params: {candidateId}})
+  axios.get('/api/candidateCalendar', { params: { candidateId } })
   .then(({data}) => {
-    dispatch({ type: GET_CANDIDATE_CALENDAR, payload: data })
+    dispatch({ type: GET_CANDIDATE_CALENDAR, payload: data });
   })
   .catch((err) => {
     console.log(err);
@@ -36,7 +36,7 @@ export const fetchCandidateCalendar = (candidateId) => (dispatch) => {
 }
 
 export const saveCandidateCalendar = (candidateId, companyScheduleId) => (dispatch) => {
-  axios.post('/api/candidateCalendar', {candidateId, companyScheduleId})
+  axios.post('/api/candidateCalendar', { candidateId, companyScheduleId })
   .then(({data}) => {
     if (data) {
       swal('Success!',
@@ -53,9 +53,9 @@ export const saveCandidateCalendar = (candidateId, companyScheduleId) => (dispat
 }
 
 export const deleteCandidateSchedule = (candidateScheduleId, candidateId) => (dispatch) => {
-  axios.post('/api/cancelCandidateSchedule', {candidateScheduleId, candidateId})
+  axios.post('/api/cancelCandidateSchedule', { candidateScheduleId, candidateId })
   .then(() => {
-    dispatch(fetchCandidateCalendar(candidateId))
+    dispatch(fetchCandidateCalendar(candidateId));
   })
   .catch((err) => {
     console.log(err);
@@ -63,9 +63,9 @@ export const deleteCandidateSchedule = (candidateScheduleId, candidateId) => (di
 }
 
 export const fetchInitialChallenge = (company_id) => (dispatch) => {
-  axios.get('/api/initialChallenge', {params: {company_id}})
+  axios.get('/api/initialChallenge', { params: { company_id } })
   .then(({data}) => {
-    dispatch({ type: GET_INITIAL_CHALLENGE, payload: data })
+    dispatch({ type: GET_INITIAL_CHALLENGE, payload: data });
   })
   .catch((err) => {
     console.log(err);
@@ -73,16 +73,16 @@ export const fetchInitialChallenge = (company_id) => (dispatch) => {
 }
 
 export const currentCompanyCalendar = (companyId, callback) => (dispatch) => {
-  dispatch( { type: GET_CURRENT_COMPANY_CALENDAR, company_id: companyId })
+  dispatch( { type: GET_CURRENT_COMPANY_CALENDAR, company_id: companyId });
   if(callback) {
     callback();
  }
 }
 
 export const saveResults = (isPassed, code, score, completedAt, challengeId, companyId, candidateId, initial, candidateScheduleId, cb) => (dispatch) => {
-  axios.post('/api/results', {isPassed, code, score, completedAt, challengeId, companyId, candidateId, initial})
+  axios.post('/api/results', { isPassed, code, score, completedAt, challengeId, companyId, candidateId, initial })
   .then(() => {
-    dispatch(deleteCandidateSchedule(candidateScheduleId, candidateId))
+    dispatch(deleteCandidateSchedule(candidateScheduleId, candidateId));
     cb();
   })
   .catch((err) => {
@@ -90,10 +90,20 @@ export const saveResults = (isPassed, code, score, completedAt, challengeId, com
   })
 }
 
-export const fetchCandidateInitialResults = (companyId, candidateId) => (dispatch) => {
-  axios.get('/api/results/candidate/initial', {params: { companyId, candidateId}})
+export const fetchCandidateResults = (candidateId) => (dispatch) => {
+  axios.get('/api/results/candidate', { params: { candidateId } })
   .then(({data}) => {
-    dispatch( {type: GET_CANDIDATE_INITIAL_RESULTS, payload: data })
+    dispatch({ type: GET_CANDIDATE_RESULTS, payload: data });
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
+
+export const fetchCandidateInitialResults = (companyId, candidateId) => (dispatch) => {
+  axios.get('/api/results/candidate/initial', { params: { companyId, candidateId } })
+  .then(({data}) => {
+    dispatch({ type: GET_CANDIDATE_INITIAL_RESULTS, payload: data });
   })
   .catch((err) => {
     console.log(err);

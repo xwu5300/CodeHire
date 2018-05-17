@@ -314,7 +314,7 @@ router.get('/api/results', (req, res) => {
 })
 
 //get candidate list from results table
-router.get('/api/results/candidate', (req, res) => {
+router.get('/api/results/candidateList', (req, res) => {
   let companyId = jwt.decode(req.query.companyId, secret).id;
   resultsControllers.getCandidateList(companyId)
   .then((data) => {
@@ -326,6 +326,20 @@ router.get('/api/results/candidate', (req, res) => {
   })
 })
 
+//ge candidate results
+router.get('/api/results/candidate', (req, res) => {
+  let candidateId = jwt.decode(req.query.candidateId, secret).id;
+  resultsControllers.getCandidateResults(candidateId)
+  .then((data) => {
+    console.log('Retrieve candidate results form db')
+    res.send(data)
+  })
+  .catch((err) => {
+    console.log('Could not retrieve candidate results from db', err)
+  })
+})
+
+//get candidate initial challenge's results
 router.get('/api/results/candidate/initial', (req, res) => {
   let companyId = jwt.decode(req.query.companyId, secret).id;
   let candidateId = jwt.decode(req.query.candidateId, secret).id;

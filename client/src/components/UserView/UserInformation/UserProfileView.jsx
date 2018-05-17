@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-
+import PastChallenges from './PastChallenges.jsx';
 import Dropbox from '../Dropbox.jsx';
 
 class UserProfileView extends Component {
@@ -108,6 +108,11 @@ class UserProfileView extends Component {
             </div>
           </div>
         </div>
+
+        <div>
+          <PastChallenges/>
+        </div>
+
       </div>
     )
   }
