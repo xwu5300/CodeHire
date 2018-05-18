@@ -34,10 +34,9 @@ module.exports.addToCompanySchedule = (time, duration, challengeId, companyId) =
   })
 }
 
-module.exports.updateChallengeDate = (time, duration, challengeId, companyId) => {
-  console.log('TIMMME', time, duration, challengeId, companyId);
+module.exports.updateChallengeDate = (time, duration, scheduleId) => {
   return knex('company_schedule')
-  .where({ company_id: companyId, challenge_id: challengeId })
+  .where({ id: scheduleId })
   .update({
     time: time,
     duration: duration

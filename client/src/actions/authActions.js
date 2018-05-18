@@ -2,7 +2,7 @@ import { SAVE_COMPANY, SAVE_CANDIDATE, CHECK_USER, GET_USER } from '../constants
 import { auth, provider } from '../../../firebase/index.js';
 import axios from 'axios';
 import history from '../components/history.jsx';
-
+import store from '../store.js';
 
 export const saveCandidate = (token, fullName,username, phone, github_url) => (dispatch) => {
   console.log('auth actions save candidate')
@@ -10,8 +10,8 @@ export const saveCandidate = (token, fullName,username, phone, github_url) => (d
 }
 
 
-export const saveCompany = (token, companyName, username, password, email, phone, logoUrl, information) => (dispatch) => {
-  axios.post('/api/registerCompany', { token, companyName, username, password, email, phone, logoUrl, information })
+export const saveCompany = (token, companyName, username, phone, logoUrl, information) => (dispatch) => {
+  axios.post('/api/registerCompany', { token, companyName, username, phone, logoUrl, information })
   .then((response) => {
   	dispatch({ type: SAVE_COMPANY, payload: response.data })
   })
@@ -22,6 +22,7 @@ export const saveCompany = (token, companyName, username, password, email, phone
 
 export const handleLogin = (email, password) => (dispatch) => {
   if (auth.currentUser) {
+    localStorage.removeItem('userId');
     auth.signOut();
   }
   auth.signInWithEmailAndPassword(email, password)

@@ -8,6 +8,7 @@ import CompanyScheduleView from '../components/UserView/CompanyList/CompanySched
 import UserDashBoard from '../components/UserView/UserInformation/UserDashBoard.jsx';
 import CompanyListView from '../components/UserView/CompanyList/CompanyListView.jsx';
 import PastChallengeListView from '../components/UserView/UserInformation/PastChallengeListView.jsx';
+import PrivateRoute from '../components/PrivateRoute.jsx';
 
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -21,14 +22,14 @@ class UserContainer extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path='/user' component={UserDashBoardComponent}/>
-        <Route exact path='/user/challengelist' component={AllChallengeListViewComponent}/>
-        <Route exact path='/user/schedule' component={CompanyScheduleViewComponent}/>
-        <Route exact path='/user/challenge' component={UserInitialChallengeViewComponent}/>
-        <Route exact path='/user/live' component={UserLiveCodingViewComponent}/>
-        <Route exact path='/user/profile' component={UserProfileViewComponent}/>
-        <Route exact path='/user/companylist' component={CompanyListViewComponent}/>
-        <Route exact path='/user/pastchallenge' component={PastChallengeListViewComponent}/>
+        <PrivateRoute exact path='/user' component={UserDashBoardComponent}/>
+        <PrivateRoute exact path='/user/challengelist' component={AllChallengeListViewComponent}/>
+        <PrivateRoute exact path='/user/schedule' component={CompanyScheduleViewComponent}/>
+        <PrivateRoute exact path='/user/challenge' component={UserInitialChallengeViewComponent}/>
+        <PrivateRoute exact path='/user/live' component={UserLiveCodingViewComponent}/>
+        <PrivateRoute exact path='/user/profile' component={UserProfileViewComponent}/>
+        <PrivateRoute exact path='/user/companylist' component={CompanyListViewComponent}/>
+        <PrivateRoute exact path='/user/pastchallenge' component={PastChallengeListViewComponent}/>
       </Switch>
     );
   }

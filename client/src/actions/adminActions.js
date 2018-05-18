@@ -92,8 +92,8 @@ export const addToCompanySchedule = (time, duration, challengeId, companyId, cb)
 }
 
 
-export const updateChallengeDate = (time, duration, challengeId, companyId, cb) => (dispatch) => {
-  axios.patch('/api/companyCalendar/:challengeId', { time, duration, challengeId, companyId })
+export const updateChallengeDate = (time, duration, scheduleId, cb) => (dispatch) => {
+  axios.patch('/api/companyCalendar', { time, duration, scheduleId })
   .then((response) => {
     console.log('RESPONSE', response);
   })
@@ -104,6 +104,7 @@ export const updateChallengeDate = (time, duration, challengeId, companyId, cb) 
 
 
 export const deleteFromCompanySchedule = (scheduleId, companyId) => (dispatch) => {
+  console.log('deleting', companyId)
   axios.delete('/api/companyCalendar', {params: { scheduleId }})
   .then(() => {
     dispatch(fetchCompanySchedule(companyId));

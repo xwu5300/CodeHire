@@ -8,7 +8,6 @@ import { BrowserRouter } from 'react-router-dom';
 import store from './store';
 
 
-//below: store={store}
 ReactDOM.render(
   <Provider store={store}> 
     <App />

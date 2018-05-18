@@ -43,7 +43,7 @@ CREATE TABLE company_schedule (
   id SERIAL PRIMARY KEY,
   time TIMESTAMPTZ NOT NULL,
   duration SMALLINT NOT NULL,
-  challenge_id SMALLINT REFERENCES all_challenges(id) ON DELETE CASCADE UNIQUE,
+  challenge_id SMALLINT REFERENCES all_challenges(id) ON DELETE CASCADE,
   company_id SMALLINT REFERENCES users(id)
 );
 

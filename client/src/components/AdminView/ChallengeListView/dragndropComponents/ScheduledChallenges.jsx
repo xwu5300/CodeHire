@@ -64,7 +64,7 @@ class ScheduleChallenges extends Component {
                challengeId={ challenge.challenge_id } 
                instruction={ challenge.instruction } 
                difficulty={ challenge.difficulty } 
-               userId={ challenge.company_id } 
+               userId={ this.props.userId } 
                scheduleId={ challenge.id }
                deleteChallenge={ this.props.delete } 
                deleteFromCompanySchedule={ this.props.deleteFromCompanySchedule }

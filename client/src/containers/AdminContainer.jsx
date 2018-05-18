@@ -9,8 +9,7 @@ import UserResults from '../components/AdminView/UserResults.jsx';
 import { Switch, Route, withRouter } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-
-
+import PrivateRoute from '../components/PrivateRoute.jsx';
 
 import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, fetchCompanyResults, fetchCandidateList, getChallengeInfo, updateChallengeDate, getUsername } from '../actions/adminActions'; 
 import { fetchInitialChallenge, currentCompanyCalendar, fetchCandidateInfo } from '../actions/userActions';
@@ -20,12 +19,12 @@ class AdminContainer extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path='/admin' component={ AdminDashboardComponent } />
-        <Route exact path='/admin/profile' component={ AdminProfileComponent }/>
-        <Route exact path='/admin/challenges' component={ ChallengeListComponent } />
-        <Route exact path='/admin/live' component={ LiveCodingComponent }/>
-        <Route exact path='/admin/data' component={ AnalyticsComponent }/>
-        <Route exact path='/admin/data/results' component={ UserResultsComponent }/>
+        <PrivateRoute exact path='/admin' component={ AdminDashboardComponent } />
+        <PrivateRoute exact path='/admin/profile' component={ AdminProfileComponent }/>
+        <PrivateRoute exact path='/admin/challenges' component={ ChallengeListComponent } />
+        <PrivateRoute exact path='/admin/live' component={ LiveCodingComponent }/>
+        <PrivateRoute exact path='/admin/data' component={ AnalyticsComponent }/>
+        <PrivateRoute exact path='/admin/data/results' component={ UserResultsComponent }/>
       </Switch>
     )
   }
