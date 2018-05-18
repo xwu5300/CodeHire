@@ -45,9 +45,7 @@ class AdminProfileView extends Component {
   }
   
   render() {
-    console.log(this.props.history)
     return (
-      
       <div>
         <div className="ui orange four item inverted menu">
           <div className='ui active item cursor' onClick={ () => { this.props.history.push('/admin/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>

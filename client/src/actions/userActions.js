@@ -103,17 +103,22 @@ export const fetchCandidateInitialResults = (companyId, candidateId) => (dispatc
 
 /* ----------- User Profile ------------ */
 
-export const updateCandidateSkills = (username, skills) => (dispatch) => {
-  axios.patch('/api/candidateInfo/:username', { username, skills })
+export const updateCandidateSkills = (username, skills, callback) => (dispatch) => {
+  axios.patch('/api/candidateInfo', { username, skills })
+  .then(() => {
+    callback();
+  })
   .catch((err) => {
     console.log(err);
   })
 }
 
-export const deleteCandidateSkill = (username, skill, callback) => (dispatch) => {
-  axios.delete('/api/candidateInfo/:username', { params: { username, skill } })
+export const deleteCandidateSkill = (candidateId, skill, callback) => (dispatch) => {
+  axios.delete('/api/candidateInfo', { params: { candidateId, skill } })
   .then((response) => {
+    console.log('response', response);
     if(callback) {
+
       callback(response)
     }
   })
@@ -124,7 +129,7 @@ export const deleteCandidateSkill = (username, skill, callback) => (dispatch) =>
 
 
 export const updateCandidateGithub = (username, github_url) => (dispatch) => {
-  axios.patch('/api/candidateInfo/:username', { username, github_url })
+  axios.patch('/api/candidateInfo', { username, github_url })
   .catch((err) => {
     console.log(err);
   })
@@ -133,6 +138,7 @@ export const updateCandidateGithub = (username, github_url) => (dispatch) => {
 export const fetchCandidateInfo = (candidateId, callback) => (dispatch) => {
   axios.get('/api/candidateInfo', { params: { candidateId }})
     .then((info) => {
+      console.log('infooooo', info);
       dispatch({ type: GET_CANDIDATE_INFO, skills: info.data[0].candidate_skills, github_url: info.data[0].github_url })
         if(callback) {
           callback();

@@ -30,15 +30,21 @@ router.patch('/api/companyInfo', (req, res) => {
 
 // Update Candidate Info, including skills and github URL
 router.patch('/api/candidateInfo', (req, res) => {
-  let candidateId = jwt.decode(req.body.candidateId, secret).id;
+  let candidateId = jwt.decode(req.body.username, secret).id;
+
+  console.log('skills', req.body.skills);
+
   profileControllers.updateCandidateInfo(candidateId, req.body.skills, req.body.github_url)
   .catch((err) => {
     console.log(err);
   })
 })
 
-router.delete('/api/candidateInfo/:username', (req, res) => {
-  profileControllers.deleteCandidateSkill(req.query.username, req.query.skill, (data) => {
+router.delete('/api/candidateInfo', (req, res) => {
+
+  let candidateId = jwt.decode(req.query.candidateId, secret).id;
+
+  profileControllers.deleteCandidateSkill(candidateId, req.query.skill, (data) => {
     res.send(data);
   })
   .catch((err) => {
@@ -266,8 +272,12 @@ router.get('/api/companyCalendar', (req, res) => {
   if (req.query.companyId) {
     companyId = jwt.decode(req.query.companyId, secret).id;
   }
+
+  console.log('COMAPNY ID', companyId)
+
   calendarControllers.getCompanySchedule(companyId, companyName)
   .then((data) => {
+    console.log('DATATATTAA', data);
     res.send(data);
   })
   .catch((err) => {
