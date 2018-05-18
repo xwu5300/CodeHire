@@ -80,7 +80,8 @@ class AdminDashboardView extends Component {
       content : {
         width: '80%',
         height: '80%',
-        margin: 'auto'
+        margin: 'auto',
+        overflow: 'scroll'
       }
     };
 

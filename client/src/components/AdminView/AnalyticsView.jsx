@@ -13,7 +13,6 @@ class AnalyticsView extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div>
         <div className="ui orange four item inverted menu">

@@ -67,6 +67,10 @@ body {
   cursor: pointer;
 }
 
+.initial_challenges_container {
+	overflow: scroll;
+}
+
 /* -------- Drag N Drop --------- */
 .drag_segment {
 	width: 20px;

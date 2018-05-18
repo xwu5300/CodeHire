@@ -173,7 +173,7 @@ class UserLiveCodingView extends Component {
   render() {
     return (
       <div>
-        <div className="ui orange four item inverted menu">
+        <div className="ui orange four item menu">
           <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.name }</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
           <div className='ui active item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
