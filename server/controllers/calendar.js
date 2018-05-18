@@ -1,22 +1,13 @@
 const knex = require('../../db/index.js');
 
-//get all companies' calendars
-module.exports.getAllCompanyCalendars = () => {
-  return knex.from('users')
-  .innerJoin('company_schedule', 'users.id', 'company_schedule.company_id')
-  .orderBy('time', 'asc')
-  .then((res) => {
-    return res;
-  })
-  .catch((err) => {
-    console.log('Could not retrieve companies schedules from db:', err);
-  })
-}
-
 //get all companies' list
-module.exports.getCompanyList = () => {
+module.exports.getCompanyList = (companyName) => {
+  let option = {'role': 'company'}
+  if (companyName) {
+    option = {'role': 'company', 'name': companyName}
+  }
   return knex.from('users')
-  .where('role', 'company')
+  .where(option)
   .select('id', 'name','phone', 'information', 'logo_url')
   .orderBy('name', 'asc')
   .then((res) => {
@@ -71,10 +62,17 @@ module.exports.deleteFromCompanySchedule = (scheduleId) => {
 }
 
   //get single company's schedule
-module.exports.getCompanySchedule = (companyId) => {
+module.exports.getCompanySchedule = (companyId, companyName) => {
+  let option = {}
+  if (companyName) {
+    option = {'users.name': companyName}
+  } else if (companyId) {
+    option = {'users.id': companyId}
+  }
   return knex.from('all_challenges')
+  .innerJoin('users', 'users.id', 'all_challenges.company_id')
   .innerJoin('company_schedule', 'all_challenges.id', 'company_schedule.challenge_id')
-  .where({'company_schedule.company_id': companyId})
+  .where(option)
   .orderBy('time', 'asc')
   .then((res) => {
     console.log('Successfully retrieved schedule from db');
@@ -87,14 +85,14 @@ module.exports.getCompanySchedule = (companyId) => {
 
 module.exports.getCandidateCalendar = (candidateId) => {
   return knex.from('user_schedule')
+    .where({'user_schedule.candidate_id': candidateId})
     .innerJoin('company_schedule', 'user_schedule.company_schedule_id', 'company_schedule.id')
     .innerJoin('all_challenges', 'company_schedule.challenge_id', 'all_challenges.id')
     .innerJoin('users', 'company_schedule.company_id', 'users.id')
-    .select('*', 'user_schedule.id')
-    .where({'user_schedule.candidate_id': candidateId})
+    .select('*', 'company_schedule.duration', 'user_schedule.id')
     .orderBy('time', 'asc')
     .then((res) => {
-      console.log('Candidate schedule successfully received from db');
+      console.log('Candidate schedule successfully received from db', res);
       return res;
     })
     .catch((err) => {
@@ -103,6 +101,7 @@ module.exports.getCandidateCalendar = (candidateId) => {
 }
 
 module.exports.saveCandidateCalendar = (candidateId, companyScheduleId) => {
+  // console.log('calendar saveCandidateCalendar', candidateId, companyScheduleId)
   return knex.select('*')
   .from('user_schedule')
   .where({
@@ -110,6 +109,7 @@ module.exports.saveCandidateCalendar = (candidateId, companyScheduleId) => {
     'candidate_id': candidateId
   })
   .then((res) => {
+    console.log('calendar saveCandidateCalendar', res)
     if (!res.length) {
       return knex('user_schedule')
       .insert({

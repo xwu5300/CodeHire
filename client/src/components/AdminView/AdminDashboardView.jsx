@@ -129,9 +129,9 @@ class AdminDashboardView extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {this.props.company_schedule.length > 0 ? this.props.company_schedule.map((item) => {
+                  {this.props.company_schedule.length > 0 ? this.props.company_schedule.map((item, i) => {
                     return (
-                      <tr key={item.id}>
+                      <tr key={i}>
                         <td>{item.title}</td>
                         <td>{moment(item.time).format('MMMM Do YYYY, h:mm A')}</td>
                         <td>{item.duration}</td>

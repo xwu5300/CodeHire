@@ -91,12 +91,8 @@ class UserLiveCodingView extends Component {
     let challenge_id = this.props.location.challenge.challenge_id
     let company_id = this.props.location.challenge.company_id
     let candidate_id = localStorage.getItem('userId')
-    let initial = this.props.location.challenge.initial
     let userSchedule_id = this.props.location.challenge.id
-    this.props.saveResults(result, submission, score, time, challenge_id, company_id, candidate_id, initial, userSchedule_id, () => {
-      this.props.fetchCandidateInitialResults(company_id, userSchedule_id)
-      //fetch initial?
-    })
+    this.props.saveResults(result, submission, score, time, challenge_id, company_id, candidate_id, false, userSchedule_id, () => {})
   }
 
   checkAnswer() {
@@ -176,11 +172,11 @@ class UserLiveCodingView extends Component {
   render() {
     return (
       <div>
-        <div className="ui orange three item inverted menu">
+        <div className="ui orange four item inverted menu">
           <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.name }</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui active item' onClick={() => {this.props.history.push('/user/companylist')}}>Live Challenges</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist2')}}>Company List</div>
+          <div className='ui active item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
         </div>
         <h1>{this.props.location.challenge.name}</h1>
         <br/>

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
-class SearchForCompany extends Component {
+class SearchCompany extends Component {
   constructor() {
     super()
+
     this.state = {
       input: ''
     }
@@ -21,7 +22,7 @@ class SearchForCompany extends Component {
       <div>
         <input type='text' value={this.state.input} onChange={this.updateInput} style={{width: '300px', height: '40px'}} />
         <button className='ui button' onClick={() => {
-          this.props.updateCompanyCalendar(this.state.input)
+          this.props.updateCompanyList(this.state.input)
           this.setState({
             input: ''
           })
@@ -33,4 +34,4 @@ class SearchForCompany extends Component {
   }
 }
 
-export default SearchForCompany;
+export default SearchCompany;

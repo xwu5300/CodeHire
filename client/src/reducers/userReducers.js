@@ -1,8 +1,7 @@
 import React from 'react';
-import { GET_ALL_COMPANY_CALENDARS, GET_INITIAL_CHALLENGE, GET_CANDIDATE_INFO, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS, GET_COMPANY_LIST, GET_CANDIDATE_RESULTS } from '../constants/actionTypes';
+import { GET_INITIAL_CHALLENGE, GET_CANDIDATE_INFO, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS, GET_COMPANY_LIST, GET_CANDIDATE_RESULTS } from '../constants/actionTypes';
 
 const initialState = {
-  all_company_calendars: [],
   initial_challenge: [],
   candidate_calendar: [],
   candidate_skills: [],
@@ -13,18 +12,6 @@ const initialState = {
   candidate_results: []
 }
 
-
-const allCompanyCalendars = (state = initialState, action) => {
-  switch(action.type) {
-    case 'GET_ALL_COMPANY_CALENDARS':
-      return {
-        ...state,
-        all_company_calendars: action.payload
-      }
-    default:
-      return state;
-  }
-}
 
 const companyList = (state = initialState, action) => {
   switch(action.type) {
@@ -114,5 +101,5 @@ const candidateInitialResults = (state = initialState, action) => {
 
 
 
-export default { allCompanyCalendars, initialChallenge, candidateInfo, candidateCalendar, currentCompanySchedule, candidateInitialResults, companyList, candidateResults };
+export default { initialChallenge, candidateInfo, candidateCalendar, currentCompanySchedule, candidateInitialResults, companyList, candidateResults };
 

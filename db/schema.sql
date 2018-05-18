@@ -15,7 +15,7 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   name VARCHAR(30) NOT NULL,
   username VARCHAR(30) NOT NULL,
-  phone VARCHAR(20) NULL,
+  phone VARCHAR(255) NULL,
   information VARCHAR(255) NULL,
   candidate_skills TEXT[] NULL,
   github_url VARCHAR(255) NULL,
@@ -62,7 +62,7 @@ CREATE TABLE results (
   challenge_id SMALLINT REFERENCES all_challenges(id) ON DELETE CASCADE,
   candidate_id SMALLINT REFERENCES users(id),
   company_id SMALLINT REFERENCES users(id),
-  initial BOOLEAN NOT NULL
+  is_initial BOOLEAN NOT NULL
 );
 
 CREATE TABLE company_user (
