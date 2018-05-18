@@ -1,4 +1,4 @@
-import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF, SET_CURRENT_LIVE_CHALLENGE, GET_CHALLENGE_INFO, GET_COMPANY_RESULTS, GET_CANDIDATE_LIST, GET_USER, GET_FAVORITES, SEARCH_USERS } from '../constants/actionTypes';
+import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF, SET_CURRENT_LIVE_CHALLENGE, GET_CHALLENGE_INFO, GET_COMPANY_RESULTS, GET_CANDIDATE_LIST, GET_USER, GET_FAVORITES, GET_ALL_RESULTS } from '../constants/actionTypes';
 
 import axios from 'axios';
 import { fetchInitialChallenge } from './userActions.js';
@@ -26,6 +26,17 @@ export const fetchAllChallenges = (companyId) => (dispatch) => {
 		console.log(err);
   })
 }
+
+export const fetchAllResults = () => (dispatch) => {
+  axios.get('/api/allResults')
+  .then(({data}) => {
+    dispatch({ type: GET_ALL_RESULTS, payload: data})
+  })
+  .catch((err) => {
+    console.log('Error getting all results', err)
+  })
+}
+
 
 export const saveChallenge = (challenge, companyId, cb) => (dispatch) => {
   axios.post('/api/challenges', { challenge, companyId, scheduled: false })

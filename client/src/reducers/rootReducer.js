@@ -17,7 +17,7 @@ export default combineReducers({
   company_schedule: adminReducers.companySchedule,
   is_initial: adminReducers.isInitial,
   favorites: adminReducers.favorites,
-  initial_challenge: userReducers.initialChallenge, 
+  initial_challenge: userReducers.initialChallenge,
   company_information: adminReducers.companyInfo,
   candidate_information: userReducers.candidateInfo,
   candidate_skills: userReducers.candidateInfo,
@@ -33,9 +33,5 @@ export default combineReducers({
   company_list: userReducers.companyList,
   candidate_results: userReducers.candidateResults,
   users: adminReducers.users
+  all_results: adminReducers.allResults
 })
-
-
-
-
-

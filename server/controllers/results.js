@@ -82,3 +82,14 @@ module.exports.getCandidateResults = (candidateId) => {
     console.log(err);
   })
 }
+
+module.exports.fetchAllResults = () => {
+  return knex('results')
+  .innerJoin('all_challenges', 'results.challenge_id', 'all_challenges.id')
+  .then((res) => {
+    return res;
+  })
+  .catch((err) => {
+    console.log('Error getting all results', err)
+  })
+}

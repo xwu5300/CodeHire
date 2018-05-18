@@ -6,7 +6,7 @@ class AnalyticsView extends Component {
   constructor() {
     super();
 
-  } 
+  }
 
   componentDidMount() {
     this.props.fetchCandidateList(localStorage.getItem('userId'));
@@ -17,10 +17,10 @@ class AnalyticsView extends Component {
       <div>
         <div className="ui orange five item inverted menu">
           <div className='ui item cursor' onClick={ () => { this.props.history.push('/admin/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
-          <div className='ui item cursor' onClick={() => {this.props.history.push('/admin')}}>Dashboard</div> 
+          <div className='ui item cursor' onClick={() => {this.props.history.push('/admin')}}>Dashboard</div>
           <div className='ui item cursor' onClick={() => this.props.history.push('/admin/challenges') }>Manage Challenges</div>
           <div className='ui active item cursor' onClick={() => {this.props.history.push('/admin/data')}}>Analytics</div>
-          <div className='ui item cursor' onClick={() => {this.props.history.push('/admin/hire')}}>Hire</div>  
+          <div className='ui item cursor' onClick={() => {this.props.history.push('/admin/hire')}}>Hire</div>
         </div>
 
         <h1>Analytics</h1>

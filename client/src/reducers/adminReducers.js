@@ -1,5 +1,5 @@
 import React from 'react';
-import { GET_DEFAULT_CHALLENGES, GET_ALL_CHALLENGES, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF, GET_COMPANY_RESULTS, GET_CANDIDATE_LIST, GET_CHALLENGE_INFO, GET_FAVORITES } from '../constants/actionTypes';
+import { GET_DEFAULT_CHALLENGES, GET_ALL_CHALLENGES, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF, GET_COMPANY_RESULTS, GET_CANDIDATE_LIST, GET_CHALLENGE_INFO, GET_FAVORITES, GET_ALL_RESULTS } from '../constants/actionTypes';
 
 const initialState = {
   default_challenges: [],
@@ -16,10 +16,21 @@ const initialState = {
   candidate_list: [],
   challenge_id: null,
   favorites: [],
+  all_results: [],
   users: []
 }
 
-
+const allResults = (state = initialState, action) => {
+  switch (action.type) {
+    case 'GET_ALL_RESULTS' :
+      return {
+        ...state,
+        all_results: action.payload
+      }
+    default:
+      return state;
+  }
+}
 const defaultChallenges = (state = initialState, action) => {
   switch (action.type) {
     case 'GET_DEFAULT_CHALLENGES':
@@ -39,7 +50,7 @@ const allChallenges = (state = initialState, action) => {
         ...state,
         all_challenges: action.payload
       }
-      default:
+    default:
         return state;
   }
 }
@@ -118,7 +129,7 @@ const results = (state = initialState, action) => {
         ...state,
         results: action.payload
       }
-    default: 
+    default:
       return state;
   }
 }
@@ -130,7 +141,7 @@ const candidateList = (state = initialState, action) => {
         ...state,
         candidate_list: action.payload
       }
-    default: 
+    default:
       return state;
   }
 }
@@ -172,4 +183,4 @@ const users = (state = initialState, action) => {
   }
 }
 
-export default { defaultChallenges, allChallenges, companyInfo, companySchedule, isInitial, currentLiveChallenge, results, candidateList, challengeInfo, username, favorites, users };
+export default { defaultChallenges, allChallenges, companyInfo, companySchedule, isInitial, currentLiveChallenge, results, candidateList, challengeInfo, username, favorites, users, allResults };
