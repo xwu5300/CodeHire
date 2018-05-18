@@ -15,7 +15,8 @@ const initialState = {
   username: '',
   candidate_list: [],
   challenge_id: null,
-  favorites: []
+  favorites: [],
+  users: []
 }
 
 
@@ -159,4 +160,16 @@ const favorites = (state = initialState, action) => {
   }
 }
 
-export default { defaultChallenges, allChallenges, companyInfo, companySchedule, isInitial, currentLiveChallenge, results, candidateList, challengeInfo, username, favorites };
+const users = (state = initialState, action) => {
+  switch(action.type) {
+    case 'SEARCH_USERS':
+      return {
+        ...state,
+        users: action.payload
+      }
+    default:
+      return state;
+  }
+}
+
+export default { defaultChallenges, allChallenges, companyInfo, companySchedule, isInitial, currentLiveChallenge, results, candidateList, challengeInfo, username, favorites, users };
