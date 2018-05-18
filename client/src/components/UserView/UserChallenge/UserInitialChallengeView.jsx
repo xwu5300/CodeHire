@@ -88,8 +88,8 @@ class UserInitialChallengeView extends Component {
     let reg = new RegExp(`${params}`, 'g')
     let submittedCode = `${this.state.code.replace(reg, `${params}`)}
 
-    ${this.props.initial_challenge[0].function_name}(${input})
-    `
+${this.props.initial_challenge[0].function_name}(${input})`
+
     if (this.state.inChallenge) {
       window.onerror = function(msg, url, lineNo, columnNo, error){
         swal(

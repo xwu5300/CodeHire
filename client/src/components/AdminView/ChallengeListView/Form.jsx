@@ -119,7 +119,6 @@ class Form extends Component {
 
   addTest(event){
     //find a way to get a unique value to use in place of name
-    console.log('event from add', event)
     let newTest = <div className="two fields">
       <div className="field">
         <label>Test Case - Input</label>
@@ -136,8 +135,9 @@ class Form extends Component {
     this.setState({challenge: this.state.challenge})
   }
 
-  deleteTest() {
+  deleteTest(event) {
     //only deletes for the back and not specific one clicked
+        console.log('my deleting event', event)
     this.state.challenge.testCases = this.state.challenge.testCases.slice(0, -1)
     this.setState({challenge: this.state.challenge})
   }
@@ -152,14 +152,13 @@ class Form extends Component {
         <label>Example - Output</label>
         <input name="exampleOutput" type="text" placeholder="[3, 4]" value={this.state.challenge.value} onChange={this.handleChange}/>
       </div>
-      <div className="ui icon button" style={{float: "right"}} onClick={()=> this.deleteExample()}><i className="minus icon"></i></div>
+      <div className="ui icon button" style={{float: "right"}} onClick={(event)=> this.deleteExample(event)}><i className="minus icon"></i></div>
     </div>
     this.state.challenge.exampleCases = this.state.challenge.exampleCases.concat([newExample])
     this.setState({challenge: this.state.challenge})
   }
 
   deleteExample() {
-    //only deletes for the back and not specific one clicked
     this.state.challenge.exampleCases = this.state.challenge.exampleCases.slice(0,-1)
     this.setState({challenge:this.state.challenge})
   }
@@ -201,8 +200,7 @@ class Form extends Component {
             <li>{'Example: [[1, 2, 3], {"a":"1"}]'}</li>
           </ul>
           <br/>
-          <div className="ui icon button" style={{float: "right"}} onClick={(event)=> this.addTest(event)}><i className="plus icon"></i></div>
-
+          <div className="ui icon button" style={{float: "right"}} onClick={()=> this.addTest()}><i className="plus icon"></i></div>
           {!this.state.challenge.testCases ? [] : this.state.challenge.testCases.map((test, i) => {
             return <div key={i}>{test}</div>
           })}
