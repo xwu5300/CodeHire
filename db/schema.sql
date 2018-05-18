@@ -71,7 +71,7 @@ CREATE TABLE company_user (
   user_id SMALLINT REFERENCES users(id)
 );
 
-INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('admin', 'admin', null, null, null,  null, 'company', 'vXSPnXuAzyNvIL9DLElge8erTH53');
+INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('admin', 'admin', null, null, null,  null, 'company', 'JljWLWYpiXhfLIXpDBH7aG9Opd03');
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('user1', 'user1', '123-456-7890', 'about me', 'www.github.com/github', 'http://icons.iconarchive.com/icons/danleech/simple/1024/google-icon.png', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8KKue');
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('user2', 'user2', '123-456-7890', 'about me', 'www.github.com/github', 'http://icons.iconarchive.com/icons/danleech/simple/1024/google-icon.png', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8KKue');
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('user3', 'user3', '123-456-7890', 'about me', 'www.github.com/github', 'http://icons.iconarchive.com/icons/danleech/simple/1024/google-icon.png', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8KKue');

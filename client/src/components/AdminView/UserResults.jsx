@@ -1,18 +1,28 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import * as V from 'victory';
-import { VictoryBar, VictoryChart, VictoryGroup  } from 'victory';
+import { VictoryBar, VictoryChart, VictoryGroup, VictoryLabel, VictoryAxis, VictoryTheme } from 'victory';
 
 
 class UserResults extends Component {
   constructor() {
     super();
+    this.state = {
+      currentChallenge: []
+    }
 
-  this.successRate = this.successRate.bind(this)
+    this.successRate = this.successRate.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount() {
     this.props.fetchAllResults()
+  }
+
+  handleChange(e) {
+    this.setState({
+      currentChallenge: e.target.value
+    }, ()=> console.log(this.state.currentChallenge))
   }
 
   successRate(arr) {
@@ -40,7 +50,7 @@ class UserResults extends Component {
     let CompanySuccess = this.successRate(this.props.results)
 
     let Industry = this.props.all_results.map((data) => {
-      return {x: data.category, y: IndustrySuccess[data.category]}
+      return {x: data.category, y: Math.round(IndustrySuccess[data.category]* 100) }
     }).sort((function(a,b) {
       if (a.x > b.x) {
         return 1
@@ -50,7 +60,7 @@ class UserResults extends Component {
     }))
 
     let Company = this.props.results.map((data) => {
-      return {x: data.category, y: CompanySuccess[data.category]}
+      return {x: data.category, y: CompanySuccess[data.category] * 100}
     }).sort((function(a,b) {
       if (a.x > b.x) {
         return 1
@@ -58,31 +68,79 @@ class UserResults extends Component {
         return -1
       }
     }))
-    console.log('industry map', Industry)
-    console.log('company map',  Company)
 
     return (
       <div>
-      <VictoryChart domainPadding={80}>
-        <VictoryGroup offset={20}
-          colorScale={["tomato", "blue"]}
-          animate={{
-            duration: 1500,
-            onLoad: { duration: 1000 },
-            easing: "bounce"
-          }}
-          categories={{
-            x:["Algorithms", "Data Structures",  "Design"]
-          }}
-        >
-        <VictoryBar
-          data={Industry}
-        />
-        <VictoryBar
-          data={Company}
-        />
-        </VictoryGroup>
-      </VictoryChart>
+        <select value={this.state.currentChallenge} onChange={this.handleChange}>
+          {this.props.results.map((challengeResult, i) => {
+            return <option key={i}>{challengeResult.title}</option>
+          })}
+        </select>
+        <div style={{ width: `650px`, margin: `auto`, paddingTop: '20' }}>
+        <VictoryChart domainPadding={50} padding={{ left: 70, right: 20, bottom: 50, top: 50 }}>
+            <VictoryLabel
+              text={`Average Results Per Category vs. Yours`}
+              verticalAnchor={"end"}
+              x={120}
+              y={30}
+            />
+            <VictoryAxis
+              axisLabelComponent={<VictoryLabel dy={9}/>}
+              label={"Category"}
+            />
+             <VictoryAxis
+              tickLabelComponent={<VictoryLabel x={50} />}
+              axisLabelComponent={<VictoryLabel dy={-32} />}
+              tickCount={15}
+              tickValues={[10,20,30,40,50,60,70,80,90,100]}
+              tickFormat={(p) => `${p} %`}
+              dependentAxis
+              fixLabelOverlap={true}
+              label={"Pass Percentage"}
+              style={{
+               tickLabels: {
+                 fontSize: 10,
+                 fill: "black",
+               },
+              }}
+            />
+          <VictoryGroup offset={27}
+            colorScale={["tomato", "blue"]}
+            animate={{
+              duration: 500,
+              onLoad: { duration: 500 },
+            }}
+            categories={{
+              x:["Algorithms", "Data Structures",  "Systems Design"]
+            }}
+          >
+          <VictoryBar
+            style={{
+              data: {
+                width: 25
+              },
+              labels: {
+                fontSize: 10
+              }
+            }}
+            labels={(d) => `${d.y}%`}
+            data={Industry}
+          />
+          <VictoryBar
+            style={{
+              data: {
+                width: 25
+              },
+              labels: {
+                fontSize: 10
+              }
+            }}
+            labels={(d) => `${d.y}%`}
+            data={Company}
+          />
+          </VictoryGroup>
+        </VictoryChart>
+        </div>
       </div>
     )
 //
