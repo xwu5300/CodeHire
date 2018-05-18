@@ -104,6 +104,7 @@ export const updateChallengeDate = (time, duration, scheduleId, cb) => (dispatch
 
 
 export const deleteFromCompanySchedule = (scheduleId, companyId) => (dispatch) => {
+  console.log('deleting', companyId)
   axios.delete('/api/companyCalendar', {params: { scheduleId }})
   .then(() => {
     dispatch(fetchCompanySchedule(companyId));
