@@ -6,6 +6,7 @@ import store from '../store.js';
 
 
 const redirectHomePage = (uid) => (dispatch) => {
+  console.log('auth action uid', uid)
   axios.post('/api/login', {token: uid})
   .then(({data}) => {
     localStorage.setItem('userId', data[0]);
@@ -21,18 +22,23 @@ const redirectHomePage = (uid) => (dispatch) => {
   })
 }
 
-export const saveCandidate = (token, fullName,username, phone, github_url) => (dispatch) => {
-  console.log('auth actions save candidate')
-	axios.post('/api/registerCandidate', { token, fullName, username, phone, github_url })
+export const saveCandidate = (token, fullName,username, phone, github_url, cb) => (dispatch) => {
+  axios.post('/api/registerCandidate', { token, fullName, username, phone, github_url })
+  .then(() => {
+    cb();
+  })
+  .catch((err) => {
+		console.log('Error saving candidate', err);
+	})
 }
 
-export const saveCompany = (token, companyName, username, phone, logoUrl, information) => (dispatch) => {
+export const saveCompany = (token, companyName, username, phone, logoUrl, information, cb) => (dispatch) => {
   axios.post('/api/registerCompany', { token, companyName, username, phone, logoUrl, information })
-  .then((response) => {
-  	dispatch({ type: SAVE_COMPANY, payload: response.data })
+  .then(() => {
+    cb()
   })
 	.catch((err) => {
-		console.log('Error saving user', err);
+		console.log('Error saving company', err);
 	})
 }
 
@@ -43,7 +49,7 @@ export const handleLogin = (email, password) => (dispatch) => {
   }
   auth.signInWithEmailAndPassword(email, password)
   .then(({user}) => {
-    redirectHomePage(user.uid);
+    dispatch(redirectHomePage(user.uid));
     // axios.post('/api/login', {token: user.uid})
     // .then(({data}) => {
     //   localStorage.setItem('userId', data[0]);
@@ -106,20 +112,21 @@ export const handleSignUp = (email, username, password, confirmPassword, form, n
   } else {
     auth.createUserWithEmailAndPassword(email, password)
     .then(({user}) => {
-      if (form === 'companyForm') {
-        dispatch(saveCompany(user.uid, name, username, phone, logoUrl, companyInfo));
-      } else {
-        dispatch(saveCandidate(user.uid, name, username, phone, githubUrl));
+      if (user.uid) {
+        if (form === 'companyForm') {
+          dispatch(saveCompany(user.uid, name, username, phone, logoUrl, companyInfo, function() {
+            dispatch(redirectHomePage(user.uid))
+          }));
+        } else if (form === 'candidateForm'){
+          dispatch(saveCandidate(user.uid, name, username, phone, githubUrl, function() {
+            dispatch(redirectHomePage(user.uid))
+          }));
+        }
       }
-      return user.uid
-    })
-    .then((uid) => {
-      redirectHomePage(uid)
     })
     .catch((error) => {
       if(error) {
         console.log('error for signup', error)
-        alert(error.message)
       }
     })
   }

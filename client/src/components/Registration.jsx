@@ -96,7 +96,7 @@ class Registration extends Component {
             <textarea type='text' name='companyInfo' onChange={ (e) => this.handleChange(e) } value={ this.state.companyInfo }></textarea>
             <button className='ui yellow button' type='submit'>Register</button>
             <button className='ui green button' onClick={ () => this.props.history.push('/') }>To Login</button>
-            <span>{ this.props.signup_status }</span>
+            {/* <span>{ this.props.signup_status }</span> */}
           </form>
          
         
@@ -126,7 +126,7 @@ class Registration extends Component {
             </div>
             <button className='ui yellow button' type='submit'>Register</button>
             <button className='ui green button' onClick={ () => this.props.history.push('/') } >To Login</button>
-            <span>{ this.props.signup_status }</span>
+            {/* <span>{ this.props.signup_status }</span> */}
           </form>
       }
     
