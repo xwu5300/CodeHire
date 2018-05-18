@@ -66,28 +66,47 @@ export const handleLogin = (email, password) => (dispatch) => {
 //     }
 //   })
 // }
+const validateEmail = (email) => {
+  let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}
 
+const validatePassword = (password) => {
+  return password.length >= 6;
+}
 
-export const handleSignUp = (email, username, password, form, name, phone, logoUrl, githubUrl, companyInfo, cb) => (dispatch) => {
-  auth.createUserWithEmailAndPassword(email, password)
-  .then(({user}) => {
-    if (form === 'companyForm') {
-      dispatch(saveCompany(user.uid, name, username, phone, logoUrl, companyInfo));
-    } else {
-      dispatch(saveCandidate(user.uid, name, username, phone, githubUrl));
-    }
-  })
-  .then(() => {
-    if (cb) {
-      cb();
-    }
-  })
-  .catch((error) => {
-    if(error) {
-      console.log('error for signup', error)
-      alert(error.message)
-    }
-  })
+const matchPassword = (password, confirmPassword) => {
+  return password === confirmPassword;
+}
+
+export const handleSignUp = (email, username, password, confirmPassword, form, name, phone, logoUrl, githubUrl, companyInfo, cb) => (dispatch) => {
+  if (!matchPassword(password, confirmPassword)) {
+    alert('Your password and confirmation password do not match.');
+  } else if (!validatePassword(password)) {
+    alert('Password must be at least 6 character.');
+  } else if (!validateEmail(email)) {
+    alert('Invalid email address');
+  } else {
+    auth.createUserWithEmailAndPassword(email, password)
+    .then(({user}) => {
+      if (form === 'companyForm') {
+        dispatch(saveCompany(user.uid, name, username, phone, logoUrl, companyInfo));
+      } else {
+        dispatch(saveCandidate(user.uid, name, username, phone, githubUrl));
+      }
+    })
+    .then(() => {
+      if (cb) {
+        cb();
+      }
+    })
+    .catch((error) => {
+      if(error) {
+        console.log('error for signup', error)
+        alert(error.message)
+      }
+    })
+  }
 }
 
 export const handleLogout = () => (dispatch) => {
