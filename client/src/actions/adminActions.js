@@ -244,11 +244,16 @@ export const removeFromFavorites = (companyId, candidateId) => (dispatch) => {
   })
 }
 
-export const searchUsers = (query) => (dispatch) => {
+export const searchUsers = (query, cb) => (dispatch) => {
   axios.get('/api/searchUsers', {params: { query }})
   .then(({data}) => {
     dispatch({ type: SEARCH_USERS, payload: data})
     console.log('Successfully fetching user results from server', data);
+  })
+  .then(() => {
+    if (cb) {
+      cb();
+    }
   })
   .catch((err) => {
     console.log('Error fetching user results from server', err);
