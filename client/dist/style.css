@@ -332,6 +332,17 @@ body {
   margin-left: 20px;
   width: 30%;
   margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.search-results {
+  float: left;
+  width: 40%;
+  margin-right: 50px;
+}
+
+.search-results-container {
+  margin-left: 20px;
 }
 
 

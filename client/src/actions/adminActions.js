@@ -1,4 +1,4 @@
-import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF, SET_CURRENT_LIVE_CHALLENGE, GET_CHALLENGE_INFO, GET_COMPANY_RESULTS, GET_CANDIDATE_LIST, GET_USER, GET_FAVORITES } from '../constants/actionTypes';
+import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF, SET_CURRENT_LIVE_CHALLENGE, GET_CHALLENGE_INFO, GET_COMPANY_RESULTS, GET_CANDIDATE_LIST, GET_USER, GET_FAVORITES, SEARCH_USERS } from '../constants/actionTypes';
 
 import axios from 'axios';
 import { fetchInitialChallenge } from './userActions.js';
@@ -226,6 +226,7 @@ export const saveToFavorites = (companyId, candidateId) => (dispatch) => {
   axios.post('/api/favorites', { companyId, candidateId })
   .then(() => {
     console.log('Successfully sending favorite user to server');
+    dispatch(getFavorites(companyId))
   })
   .catch((err) => {
     console.log('Error sending favorite user to server', err);
@@ -233,11 +234,23 @@ export const saveToFavorites = (companyId, candidateId) => (dispatch) => {
 }
 
 export const removeFromFavorites = (companyId, candidateId) => (dispatch) => {
-  axios.post('/api/favorites', { companyId, candidateId })
+  axios.delete('/api/favorites', {params: { companyId, candidateId }})
   .then(() => {
     console.log('Successfully sending favorite user to server for removal');
+    dispatch(getFavorites(companyId))
   })
   .catch((err) => {
     console.log('Error sending favorite user to server for removal', err);
+  })
+}
+
+export const searchUsers = (query) => (dispatch) => {
+  axios.get('/api/searchUsers', {params: { query }})
+  .then(({data}) => {
+    dispatch({ type: SEARCH_USERS, payload: data})
+    console.log('Successfully fetching user results from server', data);
+  })
+  .catch((err) => {
+    console.log('Error fetching user results from server', err);
   })
 }
