@@ -31,11 +31,11 @@ class ScheduleChallengeView extends Component {
           isSelected: challengeId
         }, () => {
           this.toggleValid(i);
-        }) 
+        })
       } else {
         this.props.makeInitial(challenge.id, challenge.initial, this.state.duration, this.props.isInitial, this.props.userId, this.props.close);
       }
-    } 
+    }
   }
 
   handleDurationChange(event) {
@@ -61,7 +61,7 @@ class ScheduleChallengeView extends Component {
 
 
   render() {
-    
+
     const selected = {
       border: '3px solid orange',
       width: '45%',
@@ -87,7 +87,7 @@ class ScheduleChallengeView extends Component {
                       <br />
                       <br />
                       <b>Difficult:</b> {item.difficulty}
-                    </div>  
+                    </div>
                   <div className="field dropdown" style={{ position: 'absolute', top: '3px', right: '3px' }} onClick={() => {this.toggleCurrentlyOn(item.id)}}>
                     <select className="ui dropdown" name="duration" value={this.state.currentlyOn === item.id ? this.state.duration : ""} onChange={this.handleDurationChange}>
                       <option value="">Duration (minutes)</option>
@@ -96,7 +96,7 @@ class ScheduleChallengeView extends Component {
                       <option value="60">60</option>
                       <option value="90">90</option>
                     </select>
-                  </div> 
+                  </div>
                 </div>
                 {this.state.invalid[i] ? <div style={{color: 'red'}}>Please select a duration</div> : null}
                 <div className="ui bottom attached button" onClick={ () => this.handleClick(item, item.id, i) }>Select</div>
@@ -104,8 +104,8 @@ class ScheduleChallengeView extends Component {
             )
           })}
         </div>
-      </div> 
-      )}  
+      </div>
+      )}
     }
 
 
