@@ -77,9 +77,9 @@ router.post('/api/login', (req, res) => {
 
 // post candidate register info to 'users' table
 router.post('/api/registerCandidate', (req, res) => {
-  authControllers.saveCandidate(req.body.token, req.body.fullName, req.body.username, req.body.phone, req.body.github_url, (status) => {
-    res.status(201).send(status);
-
+  authControllers.saveCandidate(req.body.token, req.body.fullName, req.body.username, req.body.phone, req.body.github_url)
+  .then(() => {
+    res.send()
   })
   .catch((err) => {
     console.log(err);
@@ -88,10 +88,11 @@ router.post('/api/registerCandidate', (req, res) => {
 
 // post company register information into 'users' table
 router.post('/api/registerCompany', (req, res) => {
-  console.log(req.body.token, req.body.companyName, req.body.username, req.body.phone, req.body.logoUrl, req.body.information);
+  // console.log(req.body.token, req.body.companyName, req.body.username, req.body.phone, req.body.logoUrl, req.body.information);
   console.log('saving company')
-  authControllers.saveCompany(req.body.token, req.body.companyName, req.body.username, req.body.phone, req.body.logoUrl, req.body.information, (status) => {
-    res.status(201).send(status);
+  authControllers.saveCompany(req.body.token, req.body.companyName, req.body.username, req.body.phone, req.body.logoUrl, req.body.information)
+  .then(() => {
+    res.send()
   })
 })
 
@@ -272,12 +273,8 @@ router.get('/api/companyCalendar', (req, res) => {
   if (req.query.companyId) {
     companyId = jwt.decode(req.query.companyId, secret).id;
   }
-
-  console.log('COMAPNY ID', companyId)
-
   calendarControllers.getCompanySchedule(companyId, companyName)
   .then((data) => {
-    console.log('DATATATTAA', data);
     res.send(data);
   })
   .catch((err) => {
