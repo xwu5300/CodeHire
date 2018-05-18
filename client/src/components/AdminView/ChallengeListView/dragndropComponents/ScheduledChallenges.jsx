@@ -40,7 +40,7 @@ class ScheduleChallenges extends Component {
         { this.props.scheduledChallenges ? this.props.scheduledChallenges.map((challenge, i) => {
             return (
               <ChallengeCard 
-               key={challenge.id}
+               key={i}
                index={i}
                challenge={ challenge } 
                title={ challenge.title } 

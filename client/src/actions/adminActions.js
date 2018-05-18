@@ -116,8 +116,8 @@ export const deleteFromCompanySchedule = (scheduleId, companyId) => (dispatch) =
   })
 }
 
-export const fetchCompanySchedule = (companyId) => (dispatch) => {
-  axios.get('/api/companyCalendar', {params: { companyId }})
+export const fetchCompanySchedule = (companyId, companyName) => (dispatch) => {
+  axios.get('/api/companyCalendar', {params: { companyId, companyName }})
   .then(({data}) => {
     dispatch({ type: GET_COMPANY_SCHEDULE, payload: data});
     console.log('Company schedule retrieved');
@@ -190,7 +190,7 @@ export const fetchCompanyResults = (companyId, candidateId) => (dispatch) => {
 }
 
 export const fetchCandidateList = (companyId) => (dispatch) => {
-  axios.get('/api/results/candidate', {params: { companyId }})
+  axios.get('/api/results/candidateList', {params: { companyId }})
   .then(({data}) => {
     dispatch({ type: GET_CANDIDATE_LIST, payload: data})
   })

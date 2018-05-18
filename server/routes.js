@@ -48,8 +48,8 @@ router.delete('/api/candidateInfo/:username', (req, res) => {
 
 
 router.get('/api/candidateInfo', (req, res) => {
-  let candidateId = jwt.decode(req.body.candidateId, secret).id;
-  profileControllers.getCandidateInfo(req.query.candidateId, (data) => {
+  let candidateId = jwt.decode(req.query.candidateId, secret).id;
+  profileControllers.getCandidateInfo(candidateId, (data) => {
     res.status(200).send(data);
   })
 })
@@ -214,9 +214,10 @@ router.post('/api/candidateCalendar', (req, res) => {
 })
 
 // cancel user schedule
-router.post('/api/cancelCandidateSchedule', (req, res) => {
-  let candidateScheduleId = req.body.candidateScheduleId;
-  calendarControllers.deleteCandidateSchedule(candidateScheduleId)
+router.delete('/api/cancelCandidateSchedule', (req, res) => {
+  let candidateScheduleId = req.query.candidateScheduleId;
+  let candidateId = jwt.decode(req.query.candidateId, secret).id;
+  calendarControllers.deleteCandidateSchedule(candidateScheduleId, candidateId)
   .then(() => {
     res.send('Successfully delete candidate schedule');
   })
@@ -227,7 +228,8 @@ router.post('/api/cancelCandidateSchedule', (req, res) => {
 
 //get company list
 router.get('/api/companyList', (req, res) => {
-  calendarControllers.getCompanyList()
+  let companyName = req.query.companyName;
+  calendarControllers.getCompanyList(companyName)
   .then((data) => {
     res.send(data);
   })
@@ -236,16 +238,8 @@ router.get('/api/companyList', (req, res) => {
   })
 })
 
-// get company schedule
-router.get('/api/companyCalendars', (req, res) => {
-  calendarControllers.getAllCompanyCalendars()
-  .then((data) => {
-    res.send(data);
-  })
-})
 // add to company Calendar
 router.post('/api/companyCalendar', (req, res) => {
-  console.log('look at dat body', req.body)
   let time = req.body.time;
   let duration = Number(req.body.duration);
   let challengeId = req.body.challengeId;
@@ -266,9 +260,12 @@ router.post('/api/companyCalendar', (req, res) => {
 
 //fetch single company's schedule
 router.get('/api/companyCalendar', (req, res) => {
-  console.log('get company calendar', req.query.companyId);
-  let companyId = jwt.decode(req.query.companyId, secret).id;
-  calendarControllers.getCompanySchedule(companyId)
+  let companyId = req.query.companyId;
+  let companyName = req.query.companyName;
+  if (req.query.companyId) {
+    companyId = jwt.decode(req.query.companyId, secret).id;
+  }
+  calendarControllers.getCompanySchedule(companyId, companyName)
   .then((data) => {
     res.send(data);
   })
@@ -314,7 +311,7 @@ router.get('/api/results', (req, res) => {
 })
 
 //get candidate list from results table
-router.get('/api/results/candidate', (req, res) => {
+router.get('/api/results/candidateList', (req, res) => {
   let companyId = jwt.decode(req.query.companyId, secret).id;
   resultsControllers.getCandidateList(companyId)
   .then((data) => {
@@ -326,6 +323,20 @@ router.get('/api/results/candidate', (req, res) => {
   })
 })
 
+//ge candidate results
+router.get('/api/results/candidate', (req, res) => {
+  let candidateId = jwt.decode(req.query.candidateId, secret).id;
+  resultsControllers.getCandidateResults(candidateId)
+  .then((data) => {
+    console.log('Retrieve candidate results form db')
+    res.send(data)
+  })
+  .catch((err) => {
+    console.log('Could not retrieve candidate results from db', err)
+  })
+})
+
+//get candidate initial challenge's results
 router.get('/api/results/candidate/initial', (req, res) => {
   let companyId = jwt.decode(req.query.companyId, secret).id;
   let candidateId = jwt.decode(req.query.candidateId, secret).id;
@@ -345,7 +356,6 @@ router.get('/api/results/candidate/initial', (req, res) => {
 
 // post results to 'results' table
 router.post('/api/results', (req, res) => {
-  console.log('req.body.candidateId', req.body.candidateId)
   let companyId = req.body.companyId;
   let candidateId = jwt.decode(req.body.candidateId, secret).id;
   resultsControllers.saveResults(req.body.isPassed, req.body.code, req.body.score, req.body.completedAt, req.body.challengeId, companyId, candidateId, req.body.initial)

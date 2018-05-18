@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-
+import PastChallengeListView from './PastChallengeListView.jsx';
 import Dropbox from '../Dropbox.jsx';
 
 class UserProfileView extends Component {
@@ -60,11 +60,11 @@ class UserProfileView extends Component {
   render() {
     return (
       <div>
-        <div className="ui orange three item inverted menu">
+        <div className="ui orange four item inverted menu">
           <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.name }</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui active item' onClick={() => {this.props.history.push('/user/companylist')}}>Live Challenges</div>
-          <div className='ui active item' onClick={() => {this.props.history.push('/user/companylist2')}}>Company List</div>
+          <div className='ui active item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
+          <div className='ui active item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
         </div>
 
         <div className='main_profile_container'>
@@ -108,6 +108,12 @@ class UserProfileView extends Component {
             </div>
           </div>
         </div>
+
+        <div>
+          <button onClick={() => {this.props.history.push('/user/pastchallenge')}} >Past Challenges
+          </button>
+        </div>
+
       </div>
     )
   }

@@ -27,6 +27,7 @@ getCalendar(schedule, companyId, duration) {
     </thead>
     <tbody>
         {this.props.candidateCalendar.map((schedule, i) => {
+          console.log('user duration', schedule)
         return (
         <tr key={i} >
         <td>{schedule.name}</td>
