@@ -20,9 +20,7 @@ class UserResults extends Component {
   }
 
   handleChange(e) {
-    this.setState({
-      currentChallenge: e.target.value
-    }, ()=> console.log(this.state.currentChallenge))
+    
   }
 
   successRate(arr) {
@@ -71,7 +69,7 @@ class UserResults extends Component {
 
     return (
       <div>
-        <select value={this.state.currentChallenge} onChange={this.handleChange}>
+        <select value={this.state.currentChallenge} onChange={ (e)=> this.handleChange(e)}>
           {this.props.results.map((challengeResult, i) => {
             return <option key={i}>{challengeResult.title}</option>
           })}
@@ -105,7 +103,7 @@ class UserResults extends Component {
               }}
             />
           <VictoryGroup offset={27}
-            colorScale={["tomato", "blue"]}
+            colorScale={["#C0C0C0", "Orange"]}
             animate={{
               duration: 500,
               onLoad: { duration: 500 },
