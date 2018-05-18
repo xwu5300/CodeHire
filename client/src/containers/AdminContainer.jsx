@@ -12,7 +12,7 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PrivateRoute from '../components/PrivateRoute.jsx';
 
-import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, fetchCompanyResults, fetchCandidateList, getChallengeInfo, updateChallengeDate, getUsername, searchUsers } from '../actions/adminActions'; 
+import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, fetchCompanyResults, fetchCandidateList, getChallengeInfo, updateChallengeDate, getUsername, searchUsers, saveToFavorites, getFavorites, removeFromFavorites } from '../actions/adminActions'; 
 import { fetchInitialChallenge, currentCompanyCalendar, fetchCandidateInfo } from '../actions/userActions';
 
 class AdminContainer extends Component {
@@ -52,6 +52,7 @@ const mapStateToProps = (state) => ({
    github_url: state.github_url.github_url,
    results: state.results.results,
    candidate_list: state.candidate_list.candidate_list,
+   favorites: state.favorites.favorites
 });
 
 const mapDispatchToProps = {
@@ -59,10 +60,9 @@ const mapDispatchToProps = {
   fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge,
   updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn,
   toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, 
-  fetchCompanyResults, fetchCandidateList, getChallengeInfo, getUsername, updateChallengeDate, searchUsers
+  fetchCompanyResults, fetchCandidateList, getChallengeInfo, getUsername, updateChallengeDate, searchUsers,
+  saveToFavorites, getFavorites, removeFromFavorites
 }
-
-
 
 const ChallengeListComponent = connect(mapStateToProps, mapDispatchToProps)(ChallengeListView);
 const AdminDashboardComponent = connect(mapStateToProps, mapDispatchToProps)(AdminDashboardView);

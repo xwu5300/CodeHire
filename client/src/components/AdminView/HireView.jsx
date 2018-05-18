@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import UserSearchResults from './HireView/UserSearchResults.jsx';
+import SavedUsers from './HireView/SavedUsers.jsx';
 
 
 class HireView extends Component {
@@ -15,6 +16,7 @@ class HireView extends Component {
 
   componentDidMount() {
     console.log(this.props)
+    this.props.getFavorites(localStorage.getItem('userId'));
   }
 
   handleChange(event) {
@@ -46,10 +48,11 @@ class HireView extends Component {
         <div className="search-results-container">
           <div className="search-results">
            <h4>Search Results</h4> 
-           <UserSearchResults users={this.props.users}/>
+           <UserSearchResults users={this.props.users} save={this.props.saveToFavorites}/>
           </div>
           <div className="search-results">
             <h4>Saved Users</h4>
+            <SavedUsers favorites={this.props.favorites} remove={this.props.removeFromFavorites}/>
           </div>
         </div>
 

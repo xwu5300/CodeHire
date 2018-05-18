@@ -227,6 +227,7 @@ export const saveToFavorites = (companyId, candidateId) => (dispatch) => {
   axios.post('/api/favorites', { companyId, candidateId })
   .then(() => {
     console.log('Successfully sending favorite user to server');
+    dispatch(getFavorites(companyId))
   })
   .catch((err) => {
     console.log('Error sending favorite user to server', err);
@@ -234,9 +235,10 @@ export const saveToFavorites = (companyId, candidateId) => (dispatch) => {
 }
 
 export const removeFromFavorites = (companyId, candidateId) => (dispatch) => {
-  axios.post('/api/favorites', { companyId, candidateId })
+  axios.delete('/api/favorites', {params: { companyId, candidateId }})
   .then(() => {
     console.log('Successfully sending favorite user to server for removal');
+    dispatch(getFavorites(companyId))
   })
   .catch((err) => {
     console.log('Error sending favorite user to server for removal', err);
