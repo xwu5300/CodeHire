@@ -385,7 +385,7 @@ router.get('/api/searchUsers', (req, res) => {
   profileControllers.searchUsers(req.query.query)
   .then((data) => {
     data.map((user) => {
-      user.candidate_skills = user.candidate_skills.join(', ');
+      user.candidate_skills = user.candidate_skills === null ? null : user.candidate_skills.join(', ');
     })
     console.log('Successfully fetching users from db and sending to client', data);
     res.send(data);

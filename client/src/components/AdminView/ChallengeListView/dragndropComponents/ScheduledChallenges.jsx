@@ -12,7 +12,7 @@ const target = {
 
   canDrop(props, monitor) {
     const challenge = monitor.getItem();
-   
+
     for(let i = 0; i < props.scheduledChallenges.length; i++) {
       if(challenge.challengeId === props.scheduledChallenges[i].challenge_id) {
         return false;
@@ -25,8 +25,7 @@ const target = {
 
   drop(props, monitor) {
     let challenge = monitor.getItem();
-
-    props.addToCompanySchedule(challenge.time, challenge.duration, challenge.challengeId, localStorage.getItem('userId'), () => {
+    props.addToCompanySchedule(null, challenge.duration, challenge.challengeId, localStorage.getItem('userId'), () => {
       console.log('SUCCESS');
     })
   }

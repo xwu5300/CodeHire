@@ -11,7 +11,7 @@ export const cardSource = {
       challengeId: props.challengeId,
       companyId: props.challenge.company_id,
       duration: props.challenge.duration,
-      time: '1/2/3'
+      time: null
     };
   }
 }
@@ -34,7 +34,8 @@ class ChallengeCard extends Component {
       invalid: false,
       modalIsOpen: false,
       selected: null,
-      isExpanded: false
+      isExpanded: false,
+      dragged: false
     }
 
     this.showCalendar = this.showCalendar.bind(this);

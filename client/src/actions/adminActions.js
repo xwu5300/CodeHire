@@ -118,7 +118,7 @@ export const fetchCompanySchedule = (companyId, companyName) => (dispatch) => {
   axios.get('/api/companyCalendar', {params: { companyId, companyName }})
   .then(({data}) => {
     dispatch({ type: GET_COMPANY_SCHEDULE, payload: data});
-    console.log('Company schedule retrieved', data);
+    console.log('Company schedule retrieved');
   })
   .catch((err) => {
     console.log('Error retrieving company schedule')
