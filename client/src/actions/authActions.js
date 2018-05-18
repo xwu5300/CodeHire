@@ -4,11 +4,27 @@ import axios from 'axios';
 import history from '../components/history.jsx';
 import store from '../store.js';
 
+
+const redirectHomePage = (uid) => (dispatch) => {
+  axios.post('/api/login', {token: uid})
+  .then(({data}) => {
+    localStorage.setItem('userId', data[0]);
+    dispatch({ type: CHECK_USER, payload: data })
+    if (data[1].role === 'company') {
+      history.push('/admin');
+    } else if (data[1].role === 'candidate') {
+      history.push('/user');
+    }
+  })
+  .catch((err) => {
+    console.log('Error checking user', err);
+  })
+}
+
 export const saveCandidate = (token, fullName,username, phone, github_url) => (dispatch) => {
   console.log('auth actions save candidate')
 	axios.post('/api/registerCandidate', { token, fullName, username, phone, github_url })
 }
-
 
 export const saveCompany = (token, companyName, username, phone, logoUrl, information) => (dispatch) => {
   axios.post('/api/registerCompany', { token, companyName, username, phone, logoUrl, information })
@@ -27,19 +43,20 @@ export const handleLogin = (email, password) => (dispatch) => {
   }
   auth.signInWithEmailAndPassword(email, password)
   .then(({user}) => {
-    axios.post('/api/login', {token: user.uid})
-    .then(({data}) => {
-      localStorage.setItem('userId', data[0]);
-      dispatch({ type: CHECK_USER, payload: data })
-      if (data[1].role === 'company') {
-        history.push('/admin');
-      } else if (data[1].role === 'candidate') {
-        history.push('/user');
-      }
-    })
-    .catch((err) => {
-      console.log('Error checking user', err);
-    })
+    redirectHomePage(user.uid);
+    // axios.post('/api/login', {token: user.uid})
+    // .then(({data}) => {
+    //   localStorage.setItem('userId', data[0]);
+    //   dispatch({ type: CHECK_USER, payload: data })
+    //   if (data[1].role === 'company') {
+    //     history.push('/admin');
+    //   } else if (data[1].role === 'candidate') {
+    //     history.push('/user');
+    //   }
+    // })
+    // .catch((err) => {
+    //   console.log('Error checking user', err);
+    // })
   })
   .catch((err) => {
     if (err) {
@@ -79,7 +96,7 @@ const matchPassword = (password, confirmPassword) => {
   return password === confirmPassword;
 }
 
-export const handleSignUp = (email, username, password, confirmPassword, form, name, phone, logoUrl, githubUrl, companyInfo, cb) => (dispatch) => {
+export const handleSignUp = (email, username, password, confirmPassword, form, name, phone, logoUrl, githubUrl, companyInfo) => (dispatch) => {
   if (!matchPassword(password, confirmPassword)) {
     alert('Your password and confirmation password do not match.');
   } else if (!validatePassword(password)) {
@@ -94,11 +111,10 @@ export const handleSignUp = (email, username, password, confirmPassword, form, n
       } else {
         dispatch(saveCandidate(user.uid, name, username, phone, githubUrl));
       }
+      return user.uid
     })
-    .then(() => {
-      if (cb) {
-        cb();
-      }
+    .then((uid) => {
+      redirectHomePage(uid)
     })
     .catch((error) => {
       if(error) {

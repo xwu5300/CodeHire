@@ -272,12 +272,8 @@ router.get('/api/companyCalendar', (req, res) => {
   if (req.query.companyId) {
     companyId = jwt.decode(req.query.companyId, secret).id;
   }
-
-  console.log('COMAPNY ID', companyId)
-
   calendarControllers.getCompanySchedule(companyId, companyName)
   .then((data) => {
-    console.log('DATATATTAA', data);
     res.send(data);
   })
   .catch((err) => {

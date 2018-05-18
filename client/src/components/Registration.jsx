@@ -40,9 +40,9 @@ class Registration extends Component {
   handleSubmit(e, form) {
     e.preventDefault();
     if(form === 'companyForm') {
-      this.props.handleSignUp(this.state.email, this.state.username, this.state.password, this.state.confirmPassword, form, this.state.companyName, this.state.phone, this.state.logoUrl, null, this.state.companyInfo, this.resetInput);
+      this.props.handleSignUp(this.state.email, this.state.username, this.state.password, this.state.confirmPassword, form, this.state.companyName, this.state.phone, this.state.logoUrl, null, this.state.companyInfo);
     } else if(form === 'candidateForm') {
-      this.props.handleSignUp(this.state.email, this.state.username, this.state.password, this.state.confirmPassword, form, this.state.candidateName, this.state.phone, null, this.state.github_url, null, this.resetInput);
+      this.props.handleSignUp(this.state.email, this.state.username, this.state.password, this.state.confirmPassword, form, this.state.candidateName, this.state.phone, null, this.state.github_url, null);
     }
   }
 

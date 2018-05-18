@@ -76,7 +76,7 @@ module.exports.getCompanySchedule = (companyId, companyName) => {
   .select('*', 'company_schedule.id', 'company_schedule.duration', 'company_schedule.company_id')
   .orderBy('time', 'asc')
   .then((res) => {
-    console.log('Successfully retrieved schedule from db', res);
+    console.log('Successfully retrieved schedule from db');
     return res;
   })
   .catch((err) => {
