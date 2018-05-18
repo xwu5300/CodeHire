@@ -20,7 +20,7 @@ class UserResults extends Component {
   }
 
   handleChange(e) {
-    
+    console.log(e.target.value)
   }
 
   successRate(arr) {
