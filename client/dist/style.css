@@ -326,7 +326,13 @@ body {
 }
 
 
+/* -------- Hire List View --------- */
 
+.search-container {
+  margin-left: 20px;
+  width: 30%;
+  margin-top: 30px;
+}
 
 
 

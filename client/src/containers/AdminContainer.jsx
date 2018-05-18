@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AdminDashboardView from '../components/AdminView/AdminDashboardView.jsx';
 import AdminProfileView from '../components/AdminView/AdminProfileView.jsx';
 import AnalyticsView from '../components/AdminView/AnalyticsView.jsx';
+import HireView from '../components/AdminView/HireView.jsx';
 import ChallengeListView from '../components/AdminView/ChallengeListView/ChallengeListView.jsx';
 import LiveCodingView from '../components/AdminView/LiveCodingView.jsx';
 import UserResults from '../components/AdminView/UserResults.jsx';
@@ -24,6 +25,7 @@ class AdminContainer extends Component {
         <PrivateRoute exact path='/admin/challenges' component={ ChallengeListComponent } />
         <PrivateRoute exact path='/admin/live' component={ LiveCodingComponent }/>
         <PrivateRoute exact path='/admin/data' component={ AnalyticsComponent }/>
+        <PrivateRoute exact path='/admin/hire' component={ HireView } />
         <PrivateRoute exact path='/admin/data/results' component={ UserResultsComponent }/>
       </Switch>
     )
