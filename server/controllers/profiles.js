@@ -111,3 +111,17 @@ module.exports.getFavorites = (companyId) => {
     console.log('Could not retrieve saved users from db', err);
   })
 }
+
+module.exports.searchUsers = (query) => {
+  return knex('users')
+  .where({role: 'candidate'})
+  .andWhere(knex.raw(`array[candidate_skills] && ARRAY['${query}']`))
+  .orWhere({username: query})
+  .then((res) => {
+    console.log('Successfully fetching users from db');
+    return res;
+  })
+  .catch((err) => {
+    console.log('Error fetching users from db', err);
+  })
+}

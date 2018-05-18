@@ -12,7 +12,7 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PrivateRoute from '../components/PrivateRoute.jsx';
 
-import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, fetchCompanyResults, fetchCandidateList, getChallengeInfo, updateChallengeDate, getUsername } from '../actions/adminActions'; 
+import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, fetchCompanyResults, fetchCandidateList, getChallengeInfo, updateChallengeDate, getUsername, searchUsers } from '../actions/adminActions'; 
 import { fetchInitialChallenge, currentCompanyCalendar, fetchCandidateInfo } from '../actions/userActions';
 
 class AdminContainer extends Component {
@@ -25,7 +25,7 @@ class AdminContainer extends Component {
         <PrivateRoute exact path='/admin/challenges' component={ ChallengeListComponent } />
         <PrivateRoute exact path='/admin/live' component={ LiveCodingComponent }/>
         <PrivateRoute exact path='/admin/data' component={ AnalyticsComponent }/>
-        <PrivateRoute exact path='/admin/hire' component={ HireView } />
+        <PrivateRoute exact path='/admin/hire' component={ HireComponent } />
         <PrivateRoute exact path='/admin/data/results' component={ UserResultsComponent }/>
       </Switch>
     )
@@ -45,6 +45,7 @@ const mapStateToProps = (state) => ({
    current_company_calendar: state.current_company_calendar.current_company_calendar,
    name: state.name.name,
    username: state.username.username,
+   users: state.users.users,
    challenge_info: state.challenge_info.challenge_info,
    candidate_information: state.candidate_information.candidate_information,  ///not exists ??
    candidate_skills: state.candidate_skills.candidate_skills,
@@ -58,7 +59,7 @@ const mapDispatchToProps = {
   fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge,
   updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn,
   toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, 
-  fetchCompanyResults, fetchCandidateList, getChallengeInfo, getUsername, updateChallengeDate
+  fetchCompanyResults, fetchCandidateList, getChallengeInfo, getUsername, updateChallengeDate, searchUsers
 }
 
 
@@ -69,6 +70,7 @@ const AnalyticsComponent= connect(mapStateToProps, mapDispatchToProps)(Analytics
 const LiveCodingComponent = connect(mapStateToProps, mapDispatchToProps)(LiveCodingView);
 const AdminProfileComponent = connect(mapStateToProps, mapDispatchToProps)(AdminProfileView);
 const UserResultsComponent = connect(mapStateToProps, mapDispatchToProps)(UserResults)
+const HireComponent = connect(mapStateToProps, mapDispatchToProps)(HireView);
 
 
 const connectAdminContainer = connect(mapStateToProps, mapDispatchToProps)(AdminContainer);
