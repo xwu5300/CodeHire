@@ -67,9 +67,25 @@ body {
   cursor: pointer;
 }
 
+.initial_challenges_container {
+	overflow: scroll;
+}
+
 /* -------- Drag N Drop --------- */
 .drag_segment {
-	max-width: 35%;
+	width: 20px;
+	overflow: scroll;
+}
+
+.expand_icon {
+	font-size: 22px;
+    position: absolute;
+    top: 8px;
+    right: 5px;
+}
+
+.challenge_card {
+	width: 80%;
 }
 
 
@@ -111,6 +127,8 @@ body {
 .challenge_content div {
   margin-bottom: 10px;
 }
+
+
 /* ------ Company profile ------ */
 
 .company_profile_logo {

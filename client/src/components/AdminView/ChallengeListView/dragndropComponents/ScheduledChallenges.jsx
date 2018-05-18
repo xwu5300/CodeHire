@@ -6,9 +6,26 @@ import { DropTarget } from 'react-dnd';
 
 import ChallengeCard from './ChallengeCard.jsx';
 
+
+
 const target = {
-  drop: (props, monitor) => {
+
+  canDrop(props, monitor) {
+    const challenge = monitor.getItem();
+   
+    for(let i = 0; i < props.scheduledChallenges.length; i++) {
+      if(challenge.challengeId === props.scheduledChallenges[i].challenge_id) {
+        return false;
+      }
+    }
+    
+    return true;
+  },
+
+
+  drop(props, monitor) {
     let challenge = monitor.getItem();
+
     props.addToCompanySchedule(challenge.time, challenge.duration, challenge.challengeId, localStorage.getItem('userId'), () => {
       console.log('SUCCESS');
     })
@@ -28,7 +45,7 @@ class ScheduleChallenges extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      challenges: this.props.scheduledChallenges.map((item) => false)
+      challenges: this.props.scheduledChallenges.map((item) => false),
     }
   }
 
@@ -36,7 +53,7 @@ class ScheduleChallenges extends Component {
     const { connectDropTarget } = this.props;
     return connectDropTarget (
       <div className='ui segment drag_segment'>
-        <h2> Scheduled Challenges </h2>
+        <h1> Scheduled Challenges </h1>
         { this.props.scheduledChallenges ? this.props.scheduledChallenges.map((challenge, i) => {
             return (
               <ChallengeCard 
@@ -47,7 +64,7 @@ class ScheduleChallenges extends Component {
                challengeId={ challenge.challenge_id } 
                instruction={ challenge.instruction } 
                difficulty={ challenge.difficulty } 
-               userId={ this.props.userId } 
+               userId={ challenge.company_id } 
                scheduleId={ challenge.id }
                deleteChallenge={ this.props.delete } 
                deleteFromCompanySchedule={ this.props.deleteFromCompanySchedule }
@@ -56,64 +73,10 @@ class ScheduleChallenges extends Component {
                scheduled={ true }
                />
             )
-          
         }) : null }
-        
       </div>
     )
   }
 }
 
 export default ScheduleChallenges;
-
-
-
-/*
-  {!this.props.isInitial ? 
-                  <div className="ui calendar" id="calendar" onClick={this.showCalendar}>
-                    <div className="ui input left icon">
-                      <i className="calendar icon"></i>
-                      <input name="date" type="text" placeholder="Date/Time" id="date"/>
-                    </div>
-                  </div> : null}
-
-
-
-                  showCalendar() {
-                    $('#calendar').calendar('popup', 'show');
-                  }
-
-
-                  handleClick(challenge, i) {
-                    let date = $('#date').val()
-                    if (this.props.isInitial) {
-                      if (this.state.duration === '') {
-                        this.setState({
-                          invalid: true
-                        }) 
-                      } else {
-                        this.setState({
-                          invalid: false
-                        }, () => {
-                          this.props.makeInitial(challenge.id, challenge.initial, this.state.duration, this.props.isInitial, this.props.userId, this.props.close)
-                        })
-                      }
-                    } else {
-                      if (this.state.duration === '' || !date) {
-                        this.setState({
-                          invalid: true
-                        })
-                      } else {
-                        this.setState({
-                          invalid: false
-                        }, () => {
-                          this.props.addToSchedule(date, this.state.duration, challenge.id, this.props.userId, this.props.close)
-                        })
-                      }
-                    }
-                  }
-
-
-
-
-                  */

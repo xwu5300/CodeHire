@@ -6,6 +6,8 @@ const app = express();
 const path = require('path');
 const routes = require('./routes');
 
+const jwt = require('jwt-simple');
+
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
@@ -23,8 +25,7 @@ io.sockets.on('connection', (socket)=> {
   socket.on('candidate enter', (username, userId, currentCompanyId) => {
     socket.room = 'room-' + currentCompanyId;
     socket.join(socket.room);
-    
-    
+     
     if(!companyRooms[currentCompanyId]) {
       companyRooms[currentCompanyId] = [[username, userId]];
     } else {
@@ -46,7 +47,6 @@ io.sockets.on('connection', (socket)=> {
 
   // When company enters challenge, send them all users in their room
   socket.on('company enter', (currentCompanyId) => {
-    console.log('company', currentCompanyId);
 
     socket.room = 'room-' + currentCompanyId;
     socket.join(socket.room);

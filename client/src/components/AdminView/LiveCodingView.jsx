@@ -28,6 +28,7 @@ class LiveCodingView extends Component {
     this.socket = socketClient();
 
     this.socket.on('active candidates', (activeCandidates) => {
+      console.log('activeCandidates', activeCandidates);
       this.setState({ active_candidates: activeCandidates })
     })
   }

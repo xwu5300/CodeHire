@@ -48,6 +48,7 @@ module.exports.updateChallengeDate = (time, duration, challengeId, companyId) =>
 }
 
 module.exports.deleteFromCompanySchedule = (scheduleId) => {
+
   return knex('company_schedule')
   .where({
     id: scheduleId

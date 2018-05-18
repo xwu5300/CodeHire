@@ -76,7 +76,6 @@ export const getChallengeInfo = (challengeId, companyId, cb) => (dispatch) => {
 }
 
 export const addToCompanySchedule = (time, duration, challengeId, companyId, cb) => (dispatch) => {
-  console.log('add to schedule ', time, duration, challengeId, companyId)
   axios.post('/api/companyCalendar', { time, duration, challengeId, companyId })
   .then(() => {
     console.log('add to company schedule was called')
@@ -105,7 +104,6 @@ export const updateChallengeDate = (time, duration, challengeId, companyId, cb) 
 
 
 export const deleteFromCompanySchedule = (scheduleId, companyId) => (dispatch) => {
-  console.log('this is the client side', scheduleId)
   axios.delete('/api/companyCalendar', {params: { scheduleId }})
   .then(() => {
     dispatch(fetchCompanySchedule(companyId));

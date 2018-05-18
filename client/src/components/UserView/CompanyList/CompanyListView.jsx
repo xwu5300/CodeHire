@@ -18,11 +18,11 @@ class CompanyListView extends Component {
     // console.log('comp list view props', this.props)
     return (
     <div>
-        <div className="ui orange four item inverted menu">
+        <div className="ui orange four item menu">
         <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.name }</div>
         <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-        <div className='ui active item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
-        <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
+        <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
+        <div className='ui active item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
         </div>
 
         <div className='search_company_input' style={{marginTop: '40px', marginBottom: '70px', textAlign: 'center'}} >
