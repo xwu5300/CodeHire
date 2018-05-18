@@ -59,7 +59,6 @@ class Form extends Component {
   }
 
   handleChange(event) {
-    console.log(event.target)
     this.state.challenge[event.target.name] = event.target.value;
     this.setState({challenge: this.state.challenge});
   }

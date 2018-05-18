@@ -69,13 +69,14 @@ module.exports.getCompanySchedule = (companyId, companyName) => {
   } else if (companyId) {
     option = {'users.id': companyId}
   }
-  return knex.from('all_challenges')
-  .innerJoin('users', 'users.id', 'all_challenges.company_id')
-  .innerJoin('company_schedule', 'all_challenges.id', 'company_schedule.challenge_id')
+  return knex.from('company_schedule')
+  .innerJoin('all_challenges', 'all_challenges.id', 'company_schedule.challenge_id')
+  .innerJoin('users', 'users.id', 'company_schedule.company_id')
   .where(option)
+  .select('*', 'company_schedule.id', 'company_schedule.duration')
   .orderBy('time', 'asc')
   .then((res) => {
-    console.log('Successfully retrieved schedule from db');
+    console.log('Successfully retrieved schedule from db', res);
     return res;
   })
   .catch((err) => {

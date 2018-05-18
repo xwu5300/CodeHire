@@ -51,6 +51,7 @@ class ScheduleChallenges extends Component {
 
   render() {
     const { connectDropTarget } = this.props;
+    console.log('scheduled, challenge', this.props.scheduledChallenges);
     return connectDropTarget (
       <div className='ui segment drag_segment'>
         <h1> Scheduled Challenges </h1>

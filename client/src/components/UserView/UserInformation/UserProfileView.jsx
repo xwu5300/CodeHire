@@ -22,7 +22,11 @@ class UserProfileView extends Component {
 
   componentDidMount() {
     this.props.fetchCandidateInfo(localStorage.getItem('userId'), () => {
-      this.setState({ all_skills: this.props.candidate_skills, github_url: this.props.github_url })
+      if(!this.props.candidate_skills) {
+        this.setState({ all_skills: [], github_url: ''})
+      } else {
+        this.setState({ all_skills: this.props.candidate_skills, github_url: this.props.github_url })
+      }
     });
   }
 
@@ -40,13 +44,15 @@ class UserProfileView extends Component {
         this.setState({ all_skills: [new_skill] })
       }
       
-      this.props.updateCandidateSkills(localStorage.getItem('userId'), this.state.skill);
-      this.setState({ skill: '' })
+      this.props.updateCandidateSkills(localStorage.getItem('userId'), this.state.skill, () => {
+        this.setState({ skill: '' })
+      });
+      
     }
   }
 
   deleteSkill(skill) {
-    this.props.deleteCandidateSkill(this.props.username, skill, (response) => {
+    this.props.deleteCandidateSkill(localStorage.getItem('userId'), skill, (response) => {
       this.setState({ all_skills: response.data })
     });
   
