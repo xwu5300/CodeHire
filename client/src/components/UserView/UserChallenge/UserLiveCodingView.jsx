@@ -50,6 +50,7 @@ class UserLiveCodingView extends Component {
   }
 
   componentDidMount() {
+    console.log('candidate entered live coding view', this.props.name);
      this.socket.emit('candidate enter', this.props.name, localStorage.getItem('userId'), this.props.current_company_calendar);
   }
 

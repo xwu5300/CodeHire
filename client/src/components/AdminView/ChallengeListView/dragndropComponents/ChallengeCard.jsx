@@ -7,7 +7,6 @@ import Modal from 'react-modal';
 
 export const cardSource = {
   beginDrag(props, monitor, component) {
-    console.log('HEY THTH', props)
     return {
       challengeId: props.challengeId,
       companyId: props.challenge.company_id,
@@ -32,7 +31,7 @@ class ChallengeCard extends Component {
 
     this.state = {
       duration: '',
-      invalid: true,
+      invalid: false,
       modalIsOpen: false,
       selected: null,
       isExpanded: false
@@ -98,6 +97,7 @@ class ChallengeCard extends Component {
       this.setState({
         invalid: false
       }, () => {
+
         this.props.updateChallengeDate(date, this.state.duration, challengeId, companyId, this.props.close)
       })
     }
@@ -125,6 +125,9 @@ class ChallengeCard extends Component {
   
   const { column, default_challenge, scheduled, challenge, index, challengeId, userId, scheduleId, title, instruction, difficulty, deleteChallenge, deleteFromCompanySchedule, connectDragSource, isDragging } = this.props;
   const calendarId = this.state.selected === index ? "calendar" : "inactive";
+
+  const dateId = this.state.selected === index ? "date" : "inactive";
+
 
   if(default_challenge) {
     var cardColor = 'ui fluid orange card challenge_card';
@@ -159,7 +162,7 @@ class ChallengeCard extends Component {
         <div className="ui calendar" id={calendarId} onMouseEnter={() => {this.toggleSelectedOn(index)}} onMouseLeave={() => {this.toggleSelectedOff(index)}}>
           <div className="ui input left icon" onClick={this.showCalendar}>
             <i className="calendar icon"></i>
-            <input name="date" type="text" placeholder="Date/Time" id="date"/>
+            <input name="date" type="text" placeholder="Date/Time" id={dateId}/>
           </div>
           <button type='button' onClick={ () => this.handleClick(challenge, challengeId, userId) }>Set Date</button>
         </div>
@@ -174,7 +177,7 @@ class ChallengeCard extends Component {
         </div>
          : null }
 
-
+   
         <div className='saved_challenges_btns'>
 
          {!this.props.scheduled ?

@@ -73,6 +73,7 @@ router.post('/api/login', (req, res) => {
 router.post('/api/registerCandidate', (req, res) => {
   authControllers.saveCandidate(req.body.token, req.body.fullName, req.body.username, req.body.phone, req.body.github_url, (status) => {
     res.status(201).send(status);
+
   })
   .catch((err) => {
     console.log(err);
