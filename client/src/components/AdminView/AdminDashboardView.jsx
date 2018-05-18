@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import moment from 'moment';
 import ScheduleChallengeView from './ScheduleChallengeView.jsx';
 import Modal from 'react-modal';
+import { auth } from '../../../../firebase/index.js';
 
 class AdminDashboardView extends Component {
   constructor(props) {

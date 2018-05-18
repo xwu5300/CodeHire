@@ -5,9 +5,14 @@ import UserLiveCodingView from '../components/UserView/UserChallenge/UserLiveCod
 import UserProfileView from '../components/UserView/UserInformation/UserProfileView.jsx';
 import AllChallengeListView from '../components/UserView/CompanyList/AllChallengeListView.jsx';
 import CompanyScheduleView from '../components/UserView/CompanyList/CompanyScheduleView.jsx';
+<<<<<<< HEAD
 import UserDashBoard from '../components/UserView/UserInformation/UserDashBoard.jsx';
 import CompanyListView from '../components/UserView/CompanyList/CompanyListView.jsx';
 import PastChallengeListView from '../components/UserView/UserInformation/PastChallengeListView.jsx';
+=======
+import UserDashBoard from '../components/UserView/UserDashBoard.jsx';
+import PrivateRoute from '../components/PrivateRoute.jsx';
+>>>>>>> start adding private routes
 
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
