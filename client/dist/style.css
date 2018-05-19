@@ -260,7 +260,7 @@ body {
 	margin-bottom: 10px;
 }
 
-.active_user_menu, .active_user_menu h2 {
+.active_user_menu {
 	height: 800px;
 	text-align: center;
 }

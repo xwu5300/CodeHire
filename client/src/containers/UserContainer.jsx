@@ -20,6 +20,7 @@ import axios from 'axios';
 
 class UserContainer extends Component {
   render() {
+      console.log('NAME', this.props.name, this.props.username);
     return (
       <Switch>
         <PrivateRoute exact path='/user' component={UserDashBoardComponent}/>
@@ -36,6 +37,7 @@ class UserContainer extends Component {
 }
 
 const mapStateToProps = function(state) {
+
   return {
     initial_challenge: state.initial_challenge.initial_challenge,
     name: state.name.name,

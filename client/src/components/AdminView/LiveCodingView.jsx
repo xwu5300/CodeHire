@@ -27,9 +27,8 @@ class LiveCodingView extends Component {
 
     this.socket = socketClient();
 
-    this.socket.on('active candidates', (activeCandidates) => {
-      console.log('activeCandidates', activeCandidates);
-      this.setState({ active_candidates: activeCandidates })
+    this.socket.on('active candidates', (activeCandidate) => {
+      this.setState({ active_candidates: activeCandidate })
     })
   }
 
@@ -68,11 +67,11 @@ class LiveCodingView extends Component {
 
         <div className='right floated column'>
           <div className="ui container segment active_user_menu">
-            <h2>Active Users</h2>
+            <h2>User Ids</h2>
             <ul className='active_user_list'>
               {this.state.active_candidates ? this.state.active_candidates.map((user) => {
                 return (
-                  <li style={{ cursor: 'pointer' }} onClick={ () => this.getProfile(user[1]) }><i className="circle green icon"></i>{user[0]}</li>
+                  <li style={{ cursor: 'pointer' }} onClick={ () => this.getProfile(user) }><i className="circle green icon"></i>{user}</li>
                 )
               }) : null}
             </ul>

@@ -148,7 +148,6 @@ module.exports.removeInitialChallenge = (companyId, challengeId) => {
 }
 
 module.exports.getChallengeInfo = (challengeId, companyId) => {
-  console.log(challengeId, companyId)
   return knex('all_challenges')
   .where({
     company_id: companyId,
