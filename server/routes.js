@@ -52,8 +52,14 @@ router.delete('/api/candidateInfo', (req, res) => {
 
 
 router.get('/api/candidateInfo', (req, res) => {
-  let candidateId = jwt.decode(req.query.candidateId, secret).id;
-  profileControllers.getCandidateInfo(candidateId, (data) => {
+  if(req.query.candidateId) {
+    var candidateId = jwt.decode(req.query.candidateId, secret).id;
+  } else {
+    var username = req.query.username;
+  }
+
+  profileControllers.getCandidateInfo(candidateId, username, (data) => {
+    console.log('DATTATTAAAAAAA FOR INFO', data);
     res.status(200).send(data);
   })
 })

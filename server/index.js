@@ -56,7 +56,6 @@ io.sockets.on('connection', (socket)=> {
 
 
   socket.on('candidate result', (username, result) => {
-    console.log('SERVER RESULT', username, result);
     io.sockets.emit('show result-' + username, result);
   })
 
@@ -64,10 +63,12 @@ io.sockets.on('connection', (socket)=> {
 
   // When candidate disconnects from room, remove username from company room
   socket.on('candidate disconnect', (username, currentCompanyId) => {
-    
+
+    console.log('SERVER DISCONNECT', username, currentCompanyId);
      socket.leave('room-' + currentCompanyId);
+
      if(companyRooms[currentCompanyId]) {
-     if(!companyRooms[currentCompanyId].includes(username)) {
+     if(companyRooms[currentCompanyId].includes(username)) {
        companyRooms[currentCompanyId].splice(companyRooms[currentCompanyId].indexOf(username));
      }
    }

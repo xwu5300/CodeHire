@@ -20,6 +20,7 @@ class Dropbox extends Component {
 
   success(result) {
     this.setState({
+
       file_name: result.filesUploaded[0].filename
     })
   }
