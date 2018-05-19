@@ -38,15 +38,9 @@ class AdminEditorViews extends Component {
 
   render() {
      
-    if(this.props.activeUserId !== this.props.userIndex) {
-       var display = {display: 'none'}
-    } else {
-       display = {display: 'block'}
-    }
-
     return (
       <div>
-        <div style={ display }>
+        <div>
           <AceEditor
             mode="javascript"
             theme="monokai"
@@ -65,7 +59,7 @@ class AdminEditorViews extends Component {
             tabSize: 2,
           }}/>
         </div>
-        <div style={ display }><UserProfile skills={ this.props.skills } about={ this.props.about } /></div> 
+        <div><UserProfile skills={ this.props.skills } about={ this.props.about } /></div> 
       </div>
      )
   }

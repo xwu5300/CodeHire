@@ -7,6 +7,7 @@ const path = require('path');
 const routes = require('./routes');
 
 const jwt = require('jwt-simple');
+const { secret } = require('../config.js').secret;
 
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
@@ -23,33 +24,33 @@ io.sockets.on('connection', (socket)=> {
   
   // when candidates enter liveCoding, push their username/id into respective companyId obj parameter
   socket.on('candidate enter', (username, userId, currentCompanyId) => {
+    let candidateId = jwt.decode(userId,secret).id;
+  
     socket.room = 'room-' + currentCompanyId;
     socket.join(socket.room);
      
     if(!companyRooms[currentCompanyId]) {
-      companyRooms[currentCompanyId] = [[username, userId]];
+      companyRooms[currentCompanyId] = [candidateId];
     } else {
-      if(!companyRooms[currentCompanyId].includes([username, userId])) {
-        companyRooms[currentCompanyId].push([username,userId]);
+      if(!companyRooms[currentCompanyId].includes(candidateId)) {
+        companyRooms[currentCompanyId].push(candidateId);
       }
     }
 
-     io.sockets.in(socket.room).emit('active candidates', companyRooms[currentCompanyId]);
-   
+     io.sockets.in(socket.room).emit('active candidates', companyRooms[currentCompanyId]);   
   })
 
 
   socket.on('typing', (newValue, e, userId)=> {
-    console.log(userId + ' is typing');
     io.sockets.emit('add char-' + userId, newValue);
   })
 
 
   // When company enters challenge, send them all users in their room
   socket.on('company enter', (currentCompanyId) => {
-
     socket.room = 'room-' + currentCompanyId;
     socket.join(socket.room);
+
     io.sockets.in(socket.room).emit('active candidates', companyRooms[currentCompanyId]);
   })
 
