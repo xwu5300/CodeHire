@@ -59,7 +59,7 @@ module.exports.getCandidateInitialResults = (companyId, candidateId) => {
   .limit(1)
   .select('user_passed')
   .then((res) => {
-    console.log('Retrieve candidate initial challenge result')
+    console.log('Retrieve candidate initial challenge result', res)
     return res;
   })
   .catch((err) => {
@@ -80,5 +80,16 @@ module.exports.getCandidateResults = (candidateId) => {
   })
   .catch((err) => {
     console.log(err);
+  })
+}
+
+module.exports.fetchAllResults = () => {
+  return knex('results')
+  .innerJoin('all_challenges', 'results.challenge_id', 'all_challenges.id')
+  .then((res) => {
+    return res;
+  })
+  .catch((err) => {
+    console.log('Error getting all results', err)
   })
 }

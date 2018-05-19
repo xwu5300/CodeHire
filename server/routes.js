@@ -379,6 +379,17 @@ router.post('/api/results', (req, res) => {
   })
 })
 
+router.get('/api/allResults', (req, res) => {
+  resultsControllers.fetchAllResults()
+  .then((response) => {
+    res.send(response)
+  })
+  .catch((err) => {
+    console.log('Error sending back all results', err)
+  })
+})
+
+/* ------- Favorites Routes -------- */
 /* ------- Search Users/Favorites Routes -------- */
 
 router.get('/api/searchUsers', (req, res) => {
