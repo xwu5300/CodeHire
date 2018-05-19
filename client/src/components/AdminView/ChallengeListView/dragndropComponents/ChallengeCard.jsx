@@ -30,10 +30,7 @@ class ChallengeCard extends Component {
     super(props);
 
     this.state = {
-      duration: '',
-      invalid: false,
       modalIsOpen: false,
-      selected: null,
       isExpanded: false
     }
 

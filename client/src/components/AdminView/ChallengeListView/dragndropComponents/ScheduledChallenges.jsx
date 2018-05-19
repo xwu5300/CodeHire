@@ -58,6 +58,7 @@ class ScheduleChallenges extends Component {
                updateChallengeDate = { this.props.updateChallengeDate }
                handleModal={ this.handleModal } 
                scheduled={ true }
+               getSchedule={this.props.getSchedule}
                />
             )
         }) : null }

@@ -300,6 +300,9 @@ router.delete('/api/companyCalendar', (req, res) => {
 // update company calendar
 router.patch('/api/companyCalendar', (req, res) => {
   calendarControllers.updateChallengeDate(req.body.time, req.body.duration, req.body.scheduleId)
+  .then(() => {
+    res.send();
+  })
   .catch((err) => {
     console.log(err);
   })

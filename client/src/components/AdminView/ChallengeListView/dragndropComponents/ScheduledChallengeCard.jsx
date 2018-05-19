@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 class ScheduledChallengeCard extends Component {
   constructor(props) {
@@ -7,10 +8,8 @@ class ScheduledChallengeCard extends Component {
     this.state = {
       duration: '',
       invalid: false,
-      modalIsOpen: false,
       selected: null,
-      isExpanded: false,
-      dragged: false
+      isExpanded: false
     }
 
     this.showCalendar = this.showCalendar.bind(this);
@@ -48,7 +47,7 @@ class ScheduledChallengeCard extends Component {
       this.setState({
         invalid: false
       }, () => {
-        this.props.updateChallengeDate(date, this.state.duration, scheduleId, this.props.close)
+        this.props.updateChallengeDate(date, this.state.duration, scheduleId, localStorage.getItem('userId'));
       })
     }
   }
@@ -89,7 +88,9 @@ class ScheduledChallengeCard extends Component {
         :
         <div>
           <span style={{fontSize: '20px', position: 'relative', bottom: '5px'}}> { this.props.title } </span>
-          <span style={{position:'relative', bottom: '5px', float: 'right', marginRight: '50px'}}> <b>difficulty:</b> { this.props.difficulty }</span>
+          <span style={{position:'relative', bottom: '5px', float: 'right', marginRight: '50px'}}>
+          {!this.props.challenge.time || this.props.challenge.duration === 0 ? <span><b>Status: </b><span style={{color: 'red'}}>Not Scheduled</span></span> : <span style={{color: 'green'}}>{moment(this.props.challenge.time).format('MMMM Do YYYY, h:mm A')}</span>}
+          </span>
         </div>
       }
           <div> 

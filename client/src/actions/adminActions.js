@@ -91,10 +91,10 @@ export const addToCompanySchedule = (time, duration, challengeId, companyId, cb)
 }
 
 
-export const updateChallengeDate = (time, duration, scheduleId, cb) => (dispatch) => {
+export const updateChallengeDate = (time, duration, scheduleId, companyId) => (dispatch) => {
   axios.patch('/api/companyCalendar', { time, duration, scheduleId })
-  .then((response) => {
-    console.log('RESPONSE', response);
+  .then(() => {
+    dispatch(fetchCompanySchedule(companyId));
   })
   .catch((err) => {
     console.log('Error updating challenge date', err);
