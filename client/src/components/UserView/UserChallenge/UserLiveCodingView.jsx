@@ -40,29 +40,27 @@ class UserLiveCodingView extends Component {
     this.socket.on('add char', (chars)=> {
       this.setState({
         code: chars
-      }, ()=> console.log(this.state.code))
+      })
     })
 
     this.socket.on('show time_limit', (minutes, seconds) => {
-      console.log('TIME', minutes, seconds);
       this.setState({ minutes: minutes, seconds: seconds });
     })
   }
 
   componentDidMount() {
-    console.log('candidate entered live coding view', this.props.name);
-     this.socket.emit('candidate enter', this.props.name, localStorage.getItem('userId'), this.props.current_company_calendar);
+     this.socket.emit('candidate enter', localStorage.getItem('username'), this.props.current_company_calendar);
   }
 
   componentWillUnmount() {
-    this.socket.emit('candidate disconnect', this.props.name, localStorage.getItem('userId'), this.props.current_company_calendar);
+    this.socket.emit('candidate disconnect', localStorage.getItem('username'), this.props.current_company_calendar);
   }
 
   onChange(newValue, event) {
     this.setState({
       code: newValue
     }, ()=> console.log(this.state.code))
-    this.socket.emit('typing', newValue, event, localStorage.getItem('userId'));
+    this.socket.emit('typing', newValue, localStorage.getItem('username'));
   }
 
   handleTheme(e) {
@@ -88,7 +86,11 @@ class UserLiveCodingView extends Component {
     })
   }
 
-  saveResults(companyScheduleId, result, submission, score, time) {
+
+  saveResults(result, submission, score, time) {
+
+    this.socket.emit('candidate result', localStorage.getItem('username'), result);
+    
     let challenge_id = this.props.location.challenge.challenge_id
     let company_id = this.props.location.challenge.company_id
     let candidate_id = localStorage.getItem('userId')

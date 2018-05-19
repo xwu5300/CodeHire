@@ -6,10 +6,10 @@ import store from '../store.js';
 
 
 const redirectHomePage = (uid) => (dispatch) => {
-  console.log('auth action uid', uid)
   axios.post('/api/login', {token: uid})
   .then(({data}) => {
     localStorage.setItem('userId', data[0]);
+    localStorage.setItem('username', data[1].name);
     dispatch({ type: CHECK_USER, payload: data })
     if (data[1].role === 'company') {
       history.push('/admin');
@@ -44,7 +44,7 @@ export const saveCompany = (token, companyName, username, phone, logoUrl, inform
 
 export const handleLogin = (email, password) => (dispatch) => {
   if (auth.currentUser) {
-    localStorage.removeItem('userId');
+    localStorage.removeItem('userId', 'username');
     auth.signOut();
   }
   auth.signInWithEmailAndPassword(email, password)

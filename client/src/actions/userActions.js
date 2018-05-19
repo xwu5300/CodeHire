@@ -143,8 +143,8 @@ export const updateCandidateGithub = (username, github_url) => (dispatch) => {
   })
 }
 
-export const fetchCandidateInfo = (candidateId, callback) => (dispatch) => {
-  axios.get('/api/candidateInfo', { params: { candidateId }})
+export const fetchCandidateInfo = (candidateId, username, callback) => (dispatch) => {
+  axios.get('/api/candidateInfo', { params: { candidateId, username }})
     .then((info) => {
       console.log('infooooo', info);
       dispatch({ type: GET_CANDIDATE_INFO, skills: info.data[0].candidate_skills, github_url: info.data[0].github_url })

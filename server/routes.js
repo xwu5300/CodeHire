@@ -52,8 +52,14 @@ router.delete('/api/candidateInfo', (req, res) => {
 
 
 router.get('/api/candidateInfo', (req, res) => {
-  let candidateId = jwt.decode(req.query.candidateId, secret).id;
-  profileControllers.getCandidateInfo(candidateId, (data) => {
+  if(req.query.candidateId) {
+    var candidateId = jwt.decode(req.query.candidateId, secret).id;
+  } else {
+    var username = req.query.username;
+  }
+
+  profileControllers.getCandidateInfo(candidateId, username, (data) => {
+    console.log('DATTATTAAAAAAA FOR INFO', data);
     res.status(200).send(data);
   })
 })
@@ -86,16 +92,11 @@ router.post('/api/registerCandidate', (req, res) => {
 
 // post company register information into 'users' table
 router.post('/api/registerCompany', (req, res) => {
-<<<<<<< HEAD
   // console.log(req.body.token, req.body.companyName, req.body.username, req.body.phone, req.body.logoUrl, req.body.information);
   console.log('saving company')
   authControllers.saveCompany(req.body.token, req.body.companyName, req.body.username, req.body.phone, req.body.logoUrl, req.body.information)
   .then(() => {
     res.send()
-=======
-  authControllers.saveCompany(req.body.token, req.body.companyName, req.body.username, req.body.phone, req.body.logoUrl, req.body.information, (status) => {
-    res.status(201).send(status);
->>>>>>> Fixed basic scoket.io connection bugs
   })
 })
 
@@ -249,16 +250,24 @@ router.get('/api/companyList', (req, res) => {
   })
 })
 
+
 // add to company Calendar
 router.post('/api/companyCalendar', (req, res) => {
+
+  console.log('comapny id should be 1', req.body);
+
   let time = req.body.time;
   let duration = Number(req.body.duration);
   let challengeId = req.body.challengeId;
+
+  
   if (req.body.companyId === 1) {
     let companyId = 1;
   } else {
     companyId = jwt.decode(req.body.companyId, secret).id;
   }
+
+  console.log('COMPANY ID', companyId);
   calendarControllers.addToCompanySchedule(time, duration, challengeId, companyId)
   .then(() => {
     console.log('Successfully saved challenge to schedule');
