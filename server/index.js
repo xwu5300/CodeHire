@@ -7,6 +7,7 @@ const path = require('path');
 const routes = require('./routes');
 
 const jwt = require('jwt-simple');
+const { secret } = require('../config.js').secret;
 
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
@@ -22,46 +23,54 @@ let companyRooms = {};
 io.sockets.on('connection', (socket)=> {
   
   // when candidates enter liveCoding, push their username/id into respective companyId obj parameter
-  socket.on('candidate enter', (username, userId, currentCompanyId) => {
+
+  socket.on('candidate enter', (username, currentCompanyId) => {
+  
     socket.room = 'room-' + currentCompanyId;
     socket.join(socket.room);
      
     if(!companyRooms[currentCompanyId]) {
-      companyRooms[currentCompanyId] = [[username, userId]];
+      companyRooms[currentCompanyId] = [username];
     } else {
-      if(!companyRooms[currentCompanyId].includes([username, userId])) {
-        companyRooms[currentCompanyId].push([username,userId]);
+      if(!companyRooms[currentCompanyId].includes(username)) {
+        companyRooms[currentCompanyId].push(username);
       }
     }
 
-     io.sockets.in(socket.room).emit('active candidates', companyRooms[currentCompanyId]);
-   
+     io.sockets.in(socket.room).emit('active candidates', companyRooms[currentCompanyId]);   
   })
 
 
-  socket.on('typing', (newValue, e, userId)=> {
-    console.log(userId + ' is typing');
-    io.sockets.emit('add char-' + userId, newValue);
+  socket.on('typing', (newValue, username)=> {
+    io.sockets.emit('add char-' + username, newValue);
   })
 
 
   // When company enters challenge, send them all users in their room
   socket.on('company enter', (currentCompanyId) => {
-
     socket.room = 'room-' + currentCompanyId;
     socket.join(socket.room);
+
     io.sockets.in(socket.room).emit('active candidates', companyRooms[currentCompanyId]);
   })
 
 
+
+  socket.on('candidate result', (username, result) => {
+    io.sockets.emit('show result-' + username, result);
+  })
+
+
+
   // When candidate disconnects from room, remove username from company room
-  socket.on('candidate disconnect', (username, userId, currentCompanyId) => {
-    
+  socket.on('candidate disconnect', (username, currentCompanyId) => {
+
+    console.log('SERVER DISCONNECT', username, currentCompanyId);
      socket.leave('room-' + currentCompanyId);
-     
+
      if(companyRooms[currentCompanyId]) {
-     if(!companyRooms[currentCompanyId].includes([username, userId])) {
-       companyRooms[currentCompanyId].splice(companyRooms[currentCompanyId].indexOf([username, userId]));
+     if(companyRooms[currentCompanyId].includes(username)) {
+       companyRooms[currentCompanyId].splice(companyRooms[currentCompanyId].indexOf(username));
      }
    }
       io.sockets.emit('active candidates', companyRooms[currentCompanyId]); 

@@ -246,9 +246,6 @@ body {
 
 
 /* ------- Admin live coding ------- */
-.live_coding_container {
-	background-color: black;
-}
 
 .time_limit_btn {
 	display: inline-block;
@@ -256,26 +253,13 @@ body {
 
 .live_coding_clock {
 	font-size: 22px;
-	color: white;
+	color: black;
 	margin-bottom: 10px;
 }
 
-.active_user_menu, .active_user_menu h2 {
-	height: 800px;
-	text-align: center;
-}
 
-.active_user_list {
-	list-style: none;
-}
-
-.active_user_list li {
-	font-size: 22px;
-	margin-bottom: 10px;
-}
-
-.user_profile_container {
-	height: 200px;
+.live_result_container {
+	height: 50px;
 	background-color: white;
 	color: black;
 	padding: 20px;

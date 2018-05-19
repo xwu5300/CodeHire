@@ -27,7 +27,8 @@ module.exports.getCompanyInfo = (userId, callback) => {
 }
 
 
-module.exports.getCandidateInfo = (candidateId, callback) => {
+module.exports.getCandidateInfo = (candidateId, username, callback) => {
+  if(candidateId) {
   return knex('users')
   .select('candidate_skills', 'github_url')
   .where({ id: candidateId })
@@ -37,6 +38,17 @@ module.exports.getCandidateInfo = (candidateId, callback) => {
   .catch((err) => {
     console.log('Error retrieving candidate info', err);
   })
+} else if(username) {
+  return knex('users')
+  .select('candidate_skills', 'github_url')
+  .where({ username: username })
+  .then((data) => {
+    callback(data);
+  })
+  .catch((err) => {
+    console.log('Error retrieivng candidate info by username', err);
+  })
+}
 }
 
 

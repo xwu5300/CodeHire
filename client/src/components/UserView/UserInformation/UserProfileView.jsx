@@ -21,7 +21,7 @@ class UserProfileView extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchCandidateInfo(localStorage.getItem('userId'), () => {
+    this.props.fetchCandidateInfo(localStorage.getItem('userId'), null, () => {
       if(!this.props.candidate_skills) {
         this.setState({ all_skills: [], github_url: ''})
       } else {

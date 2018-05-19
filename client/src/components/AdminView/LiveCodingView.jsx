@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import AceEditor from 'react-ace';
 import brace from 'brace';
@@ -20,16 +20,16 @@ class LiveCodingView extends Component {
     super();
     this.state = {
       active_candidates: [],
-      active_user_id: ''
+      active_user_id: '',
+      candidate_skills: []
     }
 
     this.getProfile = this.getProfile.bind(this);
 
     this.socket = socketClient();
 
-    this.socket.on('active candidates', (activeCandidates) => {
-      console.log('activeCandidates', activeCandidates);
-      this.setState({ active_candidates: activeCandidates })
+    this.socket.on('active candidates', (activeCandidate) => {
+      this.setState({ active_candidates: activeCandidate })
     })
   }
 
@@ -37,49 +37,37 @@ class LiveCodingView extends Component {
     this.socket.emit('company enter', this.props.current_company_calendar);
   }
 
-  getProfile(userId) {
-   this.props.fetchCandidateInfo(userId, () => {
-    this.setState({ active_user_id: userId });
+  getProfile(username) {
+   this.props.fetchCandidateInfo(null, username, () => {
+    this.setState({ active_user_id: username, candidate_skills: this.props.candidate_skills });
    });
   }
 
   render() {
     return (
-      <div className='ui grid padded live_coding_container'>
-        <div className='five column row'>
-          <h1 style={{ color: 'white' }} className='4 columns wide'>Live Coding - { this.props.current_live_challenge_title } </h1>
-          <div className='right floated column'>
+      <div>
+        <div style={{fontSize: '22px', marginTop: '10px', marginLeft: '10px'}}>{ this.props.current_live_challenge_title }</div>
+      <div className='ui grid padded centered'>
+
+        <div className='five column centered row' style={{ marginTop: '30px' }}>
+          <h1 className='4 columns wide'>Live Coding Challenge</h1>
+          <div style={{ marginTop: '30px' }}>
             <ChallengeClock duration={ this.props.current_live_challenge_duration } />
           </div>
         </div>
+      </div>
 
-
-      <div className='four column row'>
-          <div className='one column wide'></div>
-          <div>
+      <div className='ui container horizontal segments'>
             {this.state.active_candidates ? this.state.active_candidates.map((candidate) => {
               return (
-                <AdminEditorViews github={ this.props.github_url } skills={this.props.candidate_skills} about={ this.props.candidate_information } activeUserId={ this.state.active_user_id} userIndex={ candidate[1] } />
+                <Fragment>
+                    <AdminEditorViews github={ this.props.github_url }  username={ candidate } />
+                    <UserProfile getProfile={ this.getProfile } activeUserId={ this.state.active_user_id} activeCandidates={ this.state.active_candidates } skills={this.state.candidate_skills} about={ this.props.candidate_information } username={ candidate } />
+                </Fragment>
               );
             }) : null}
           </div>
-
-
-
-        <div className='right floated column'>
-          <div className="ui container segment active_user_menu">
-            <h2>Active Users</h2>
-            <ul className='active_user_list'>
-              {this.state.active_candidates ? this.state.active_candidates.map((user) => {
-                return (
-                  <li style={{ cursor: 'pointer' }} onClick={ () => this.getProfile(user[1]) }><i className="circle green icon"></i>{user[0]}</li>
-                )
-              }) : null}
-            </ul>
-          </div>
-        </div>
       </div>
-    </div>
   )
 }
 }

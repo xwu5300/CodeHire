@@ -32,8 +32,6 @@ router.patch('/api/companyInfo', (req, res) => {
 router.patch('/api/candidateInfo', (req, res) => {
   let candidateId = jwt.decode(req.body.username, secret).id;
 
-  console.log('skills', req.body.skills);
-
   profileControllers.updateCandidateInfo(candidateId, req.body.skills, req.body.github_url)
   .catch((err) => {
     console.log(err);
@@ -54,8 +52,14 @@ router.delete('/api/candidateInfo', (req, res) => {
 
 
 router.get('/api/candidateInfo', (req, res) => {
-  let candidateId = jwt.decode(req.query.candidateId, secret).id;
-  profileControllers.getCandidateInfo(candidateId, (data) => {
+  if(req.query.candidateId) {
+    var candidateId = jwt.decode(req.query.candidateId, secret).id;
+  } else {
+    var username = req.query.username;
+  }
+
+  profileControllers.getCandidateInfo(candidateId, username, (data) => {
+    console.log('DATTATTAAAAAAA FOR INFO', data);
     res.status(200).send(data);
   })
 })
@@ -246,16 +250,24 @@ router.get('/api/companyList', (req, res) => {
   })
 })
 
+
 // add to company Calendar
 router.post('/api/companyCalendar', (req, res) => {
+
+  console.log('comapny id should be 1', req.body);
+
   let time = req.body.time;
   let duration = Number(req.body.duration);
   let challengeId = req.body.challengeId;
+
+  
   if (req.body.companyId === 1) {
     let companyId = 1;
   } else {
     companyId = jwt.decode(req.body.companyId, secret).id;
   }
+
+  console.log('COMPANY ID', companyId);
   calendarControllers.addToCompanySchedule(time, duration, challengeId, companyId)
   .then(() => {
     console.log('Successfully saved challenge to schedule');
@@ -270,9 +282,11 @@ router.post('/api/companyCalendar', (req, res) => {
 router.get('/api/companyCalendar', (req, res) => {
   let companyId = req.query.companyId;
   let companyName = req.query.companyName;
+
   if (req.query.companyId) {
     companyId = jwt.decode(req.query.companyId, secret).id;
   }
+
   calendarControllers.getCompanySchedule(companyId, companyName)
   .then((data) => {
     res.send(data);

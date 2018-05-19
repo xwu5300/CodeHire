@@ -15,6 +15,7 @@ class CompanyListView extends Component {
   }
 
   render() {
+    console.log('COMPANY LSIT VIEW', this.props)
     // console.log('comp list view props', this.props)
     return (
     <div>

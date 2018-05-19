@@ -5,6 +5,8 @@ import { DragSource } from 'react-dnd';
 import UpdateForm from '../UpdateForm.jsx';
 import Modal from 'react-modal';
 
+var total = 0;
+
 export const cardSource = {
   beginDrag(props, monitor, component) {
     return {
