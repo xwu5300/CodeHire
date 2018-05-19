@@ -32,8 +32,6 @@ router.patch('/api/companyInfo', (req, res) => {
 router.patch('/api/candidateInfo', (req, res) => {
   let candidateId = jwt.decode(req.body.username, secret).id;
 
-  console.log('skills', req.body.skills);
-
   profileControllers.updateCandidateInfo(candidateId, req.body.skills, req.body.github_url)
   .catch((err) => {
     console.log(err);
@@ -88,11 +86,16 @@ router.post('/api/registerCandidate', (req, res) => {
 
 // post company register information into 'users' table
 router.post('/api/registerCompany', (req, res) => {
+<<<<<<< HEAD
   // console.log(req.body.token, req.body.companyName, req.body.username, req.body.phone, req.body.logoUrl, req.body.information);
   console.log('saving company')
   authControllers.saveCompany(req.body.token, req.body.companyName, req.body.username, req.body.phone, req.body.logoUrl, req.body.information)
   .then(() => {
     res.send()
+=======
+  authControllers.saveCompany(req.body.token, req.body.companyName, req.body.username, req.body.phone, req.body.logoUrl, req.body.information, (status) => {
+    res.status(201).send(status);
+>>>>>>> Fixed basic scoket.io connection bugs
   })
 })
 
@@ -270,9 +273,11 @@ router.post('/api/companyCalendar', (req, res) => {
 router.get('/api/companyCalendar', (req, res) => {
   let companyId = req.query.companyId;
   let companyName = req.query.companyName;
+
   if (req.query.companyId) {
     companyId = jwt.decode(req.query.companyId, secret).id;
   }
+
   calendarControllers.getCompanySchedule(companyId, companyName)
   .then((data) => {
     res.send(data);
