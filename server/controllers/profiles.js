@@ -79,9 +79,22 @@ module.exports.deleteCandidateSkill = (candidateId, skill, callback) => {
 
 module.exports.saveToFavorites = (companyId, candidateId) => {
   return knex('company_user')
-  .insert({company_id: companyId, user_id: candidateId})
-  .then(() => {
-    console.log('successfully saved to favorites in db');
+  .update({
+    user_id: candidateId
+  })
+  .then((res) => {
+    if (res === 0) {
+      return knex('company_user')
+      .insert({company_id: companyId, user_id: candidateId})
+      .then(() => {
+        console.log('successfully saved to favorites in db');
+      })
+      .catch((err) => {
+        console.log('Error saving candidate to favorites in db', err);
+      })
+    } else {
+      console.log('Already saved to database');
+    }
   })
   .catch((err) => {
     console.log('Error saving candidate to favorites in db', err);
@@ -126,3 +139,4 @@ module.exports.searchUsers = (query) => {
     console.log('Error fetching users from db', err);
   })
 }
+
