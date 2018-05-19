@@ -1,31 +1,33 @@
 const knex = require('../../db/index.js');
 const bcrypt = require('bcrypt');
 
-module.exports.saveCandidate = (token, name, username, phone, github_url, callback) => {
+module.exports.saveCandidate = (token, name, username, phone, github_url) => {
   // bcrypt.hash(password, 10, (err, hash) => {
     return knex('users')
     .insert({ name: name, username: username, phone: phone, github_url: github_url, role: 'candidate', token: token })
     .then((response) => {
-      callback('Candidate Registration Successful!');
+      console.log('saved candidate to db');
+      // callback('Candidate Registration Successful!');
     })
     .catch((err) => {
       console.log('Error saving candidate', err);
-      callback('Please try again');
+      // callback('Please try again');
     })
   // })
   return knex('users')
   
 }
 
-module.exports.saveCompany = (token, name, username, phone, logoUrl, information, callback) => {
+module.exports.saveCompany = (token, name, username, phone, logoUrl, information) => {
     return knex('users')
     .insert({ name: name, username: username, phone: phone, logo_url: logoUrl, information: information, role: 'company', token: token })
     .then((response) => {
-      callback('Company Registration Successful!');
+      console.log('saved company to db');
+      // callback('Company Registration Successful!');
     })
     .catch((err) => {
       console.log('Error saving company', err);
-      callback('Please try again')
+      // callback('Please try again')
     })
 }
 

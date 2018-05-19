@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
 import moment from 'moment';
@@ -134,13 +134,16 @@ class AdminDashboardView extends Component {
                 <tbody>
                   {this.props.company_schedule.length > 0 ? this.props.company_schedule.map((item, i) => {
                     return (
-                      <tr key={i}>
-                        <td>{item.title}</td>
-                        <td>{moment(item.time).format('MMMM Do YYYY, h:mm A')}</td>
-                        <td>{item.duration}</td>
-                        <td><button className='ui button' type='button' onClick={() => { this.viewChallenge(item.title, item.company_id, item.duration) }}>View challenge</button></td>
-                        <td><button className='ui button' type='button' onClick={()=>{this.props.deleteFromCompanySchedule(item.id, localStorage.getItem('userId'))}}><i className='x icon'></i></button></td>
-                      </tr>
+                      <Fragment>
+                      {!item.time || item.duration === 0 ? null : 
+                        <tr key={i}>
+                          <td>{item.title}</td>
+                          <td>{moment(item.time).format('MMMM Do YYYY, h:mm A')}</td>
+                          <td>{item.duration}</td>
+                          <td><button className='ui button' type='button' onClick={() => { this.viewChallenge(item.title, item.company_id, item.duration) }}>View challenge</button></td>
+                          <td><button className='ui button' type='button' onClick={()=>{this.props.deleteFromCompanySchedule(item.id, localStorage.getItem('userId'))}}><i className='x icon'></i></button></td>
+                        </tr> }
+                      </Fragment>
                     )
                   }) : <tr><td>You have no scheduled challenges at this time.</td></tr> }
                   </tbody>

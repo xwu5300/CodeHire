@@ -31,7 +31,6 @@ class CompanyScheduleView extends Component {
   }
 
   render() {
-    // console.log('compan sche view props',this.props)
     if (this.props.initial_challenge[0]) {
       return (
         <div>

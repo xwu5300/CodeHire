@@ -75,9 +75,9 @@ router.post('/api/login', (req, res) => {
 
 // post candidate register info to 'users' table
 router.post('/api/registerCandidate', (req, res) => {
-  authControllers.saveCandidate(req.body.token, req.body.fullName, req.body.username, req.body.phone, req.body.github_url, (status) => {
-    res.status(201).send(status);
-
+  authControllers.saveCandidate(req.body.token, req.body.fullName, req.body.username, req.body.phone, req.body.github_url)
+  .then(() => {
+    res.send()
   })
   .catch((err) => {
     console.log(err);
@@ -86,8 +86,11 @@ router.post('/api/registerCandidate', (req, res) => {
 
 // post company register information into 'users' table
 router.post('/api/registerCompany', (req, res) => {
-  authControllers.saveCompany(req.body.token, req.body.companyName, req.body.username, req.body.phone, req.body.logoUrl, req.body.information, (status) => {
-    res.status(201).send(status);
+  // console.log(req.body.token, req.body.companyName, req.body.username, req.body.phone, req.body.logoUrl, req.body.information);
+  console.log('saving company')
+  authControllers.saveCompany(req.body.token, req.body.companyName, req.body.username, req.body.phone, req.body.logoUrl, req.body.information)
+  .then(() => {
+    res.send()
   })
 })
 
@@ -294,6 +297,9 @@ router.delete('/api/companyCalendar', (req, res) => {
 // update company calendar
 router.patch('/api/companyCalendar', (req, res) => {
   calendarControllers.updateChallengeDate(req.body.time, req.body.duration, req.body.scheduleId)
+  .then(() => {
+    res.send();
+  })
   .catch((err) => {
     console.log(err);
   })
@@ -379,7 +385,7 @@ router.get('/api/searchUsers', (req, res) => {
   profileControllers.searchUsers(req.query.query)
   .then((data) => {
     data.map((user) => {
-      user.candidate_skills = user.candidate_skills.join(', ');
+      user.candidate_skills = user.candidate_skills === null ? null : user.candidate_skills.join(', ');
     })
     console.log('Successfully fetching users from db and sending to client', data);
     res.send(data);

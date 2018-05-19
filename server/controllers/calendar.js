@@ -73,7 +73,7 @@ module.exports.getCompanySchedule = (companyId, companyName) => {
   .innerJoin('all_challenges', 'all_challenges.id', 'company_schedule.challenge_id')
   .innerJoin('users', 'users.id', 'company_schedule.company_id')
   .where(option)
-  .select('*', 'company_schedule.id', 'company_schedule.duration')
+  .select('*', 'company_schedule.id', 'company_schedule.duration', 'company_schedule.company_id')
   .orderBy('time', 'asc')
   .then((res) => {
     return res;

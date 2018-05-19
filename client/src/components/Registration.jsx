@@ -40,9 +40,9 @@ class Registration extends Component {
   handleSubmit(e, form) {
     e.preventDefault();
     if(form === 'companyForm') {
-      this.props.handleSignUp(this.state.email, this.state.username, this.state.password, form, this.state.companyName, this.state.phone, this.state.logoUrl, null, this.state.companyInfo, this.resetInput);
+      this.props.handleSignUp(this.state.email, this.state.username, this.state.password, this.state.confirmPassword, form, this.state.companyName, this.state.phone, this.state.logoUrl, null, this.state.companyInfo);
     } else if(form === 'candidateForm') {
-      this.props.handleSignUp(this.state.email, this.state.username, this.state.password, form, this.state.candidateName, this.state.phone, null, this.state.github_url, null, this.resetInput);
+      this.props.handleSignUp(this.state.email, this.state.username, this.state.password, this.state.confirmPassword, form, this.state.candidateName, this.state.phone, null, this.state.github_url, null);
     }
   }
 
@@ -96,7 +96,7 @@ class Registration extends Component {
             <textarea type='text' name='companyInfo' onChange={ (e) => this.handleChange(e) } value={ this.state.companyInfo }></textarea>
             <button className='ui yellow button' type='submit'>Register</button>
             <button className='ui green button' onClick={ () => this.props.history.push('/') }>To Login</button>
-            <span>{ this.props.signup_status }</span>
+            {/* <span>{ this.props.signup_status }</span> */}
           </form>
          
         
@@ -126,7 +126,7 @@ class Registration extends Component {
             </div>
             <button className='ui yellow button' type='submit'>Register</button>
             <button className='ui green button' onClick={ () => this.props.history.push('/') } >To Login</button>
-            <span>{ this.props.signup_status }</span>
+            {/* <span>{ this.props.signup_status }</span> */}
           </form>
       }
     
