@@ -1,20 +1,38 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
 import moment from 'moment';
+import swal from 'sweetalert2';
 
 class UserScheduleTableView extends Component {
   constructor() {
     super();
 
     this.getCalendar = this.getCalendar.bind(this);
+    this.cancelSubmit = this.cancelSubmit.bind(this);
   }
 
-getCalendar(schedule, companyId, duration) {
+  getCalendar(schedule, companyId, duration) {
     this.props.currentCompanyCalendar(companyId, () => {
       this.props.history.push({ pathname: '/user/live', challenge: schedule, duration: duration });
     });
   }
 
+  cancelSubmit(id) {
+    swal({
+      text: "Delete Schedule?",
+      showCancelButton: true,
+      height: '100px',
+      width: '300px',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
+    }).then((clickResult) => {
+      if (clickResult.value) {
+        this.props.cancelSchedule(id, localStorage.getItem('userId'))
+      }
+    })
+  }
+  
   render() {
     return (
     <table className='ui inverted table'>
@@ -27,7 +45,6 @@ getCalendar(schedule, companyId, duration) {
     </thead>
     <tbody>
         {this.props.candidateCalendar.map((schedule, i) => {
-          console.log('user duration', schedule)
         return (
         <tr key={i} >
         <td>{schedule.name}</td>
@@ -39,8 +56,8 @@ getCalendar(schedule, companyId, duration) {
             </button>
             <button className='ui orange button' 
             onClick={() => {
-              this.props.cancelSchedule(schedule.id, localStorage.getItem('userId'))
-            }}>Cancel
+              this.cancelSubmit(schedule.id)
+            }}>Delete
             </button>
           </td>
         </tr>
