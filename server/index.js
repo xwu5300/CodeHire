@@ -23,17 +23,16 @@ let companyRooms = {};
 io.sockets.on('connection', (socket)=> {
   
   // when candidates enter liveCoding, push their username/id into respective companyId obj parameter
-  socket.on('candidate enter', (username, userId, currentCompanyId) => {
-    let candidateId = jwt.decode(userId,secret).id;
+  socket.on('candidate enter', (username, currentCompanyId) => {
   
     socket.room = 'room-' + currentCompanyId;
     socket.join(socket.room);
      
     if(!companyRooms[currentCompanyId]) {
-      companyRooms[currentCompanyId] = [candidateId];
+      companyRooms[currentCompanyId] = [username];
     } else {
-      if(!companyRooms[currentCompanyId].includes(candidateId)) {
-        companyRooms[currentCompanyId].push(candidateId);
+      if(!companyRooms[currentCompanyId].includes(username)) {
+        companyRooms[currentCompanyId].push(username);
       }
     }
 
@@ -41,8 +40,8 @@ io.sockets.on('connection', (socket)=> {
   })
 
 
-  socket.on('typing', (newValue, e, userId)=> {
-    io.sockets.emit('add char-' + userId, newValue);
+  socket.on('typing', (newValue, username)=> {
+    io.sockets.emit('add char-' + username, newValue);
   })
 
 
@@ -55,14 +54,21 @@ io.sockets.on('connection', (socket)=> {
   })
 
 
+
+  socket.on('candidate result', (username, result) => {
+    console.log('SERVER RESULT', username, result);
+    io.sockets.emit('show result-' + username, result);
+  })
+
+
+
   // When candidate disconnects from room, remove username from company room
-  socket.on('candidate disconnect', (username, userId, currentCompanyId) => {
+  socket.on('candidate disconnect', (username, currentCompanyId) => {
     
      socket.leave('room-' + currentCompanyId);
-     
      if(companyRooms[currentCompanyId]) {
-     if(!companyRooms[currentCompanyId].includes([username, userId])) {
-       companyRooms[currentCompanyId].splice(companyRooms[currentCompanyId].indexOf([username, userId]));
+     if(!companyRooms[currentCompanyId].includes(username)) {
+       companyRooms[currentCompanyId].splice(companyRooms[currentCompanyId].indexOf(username));
      }
    }
       io.sockets.emit('active candidates', companyRooms[currentCompanyId]); 

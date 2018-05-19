@@ -14,6 +14,7 @@ class AdminEditorViews extends Component {
     super(props);
 
     this.state = {
+      result: null,
       title: 'greeting',
       params: 'param strings',
       instructions: `Instructions: buffalo buffalo buffalo buffalo buffalo buffalo`,
@@ -22,22 +23,30 @@ class AdminEditorViews extends Component {
 }` }
 
     this.socket = socketClient();
-    
-    this.socket.on('add char-' + this.props.userIndex, (chars)=> {
+        
+    this.socket.on('add char-' + this.props.username, (chars)=> {
       this.setState({
         code: chars
-      }, ()=> console.log(this.state.code))
+      })
+    })
+
+    this.socket.on('show result-' + this.props.username, (result) => {
+      this.setState({ result: result });
     })
   }
 
   componentDidMount() {
-    console.log('CODE STATE', this.state.code);
     this.setState({ code: this.state.code })
   }
 
 
   render() {
-     
+    console.log('RESULT STATE', this.state.result);
+    if(this.state.result === true) {
+      var result = this.props.username + ' Passed Challenge';
+    } else if(this.state.result === false) {
+      result = this.props.username + ' Failed Challenge';
+    }
     return (
       <div>
         <div>
@@ -59,6 +68,7 @@ class AdminEditorViews extends Component {
             tabSize: 2,
           }}/>
         </div>
+        {this.state.result !== null ? <div className='live_result_container'>{ result }</div> : null } 
         <div><UserProfile skills={ this.props.skills } about={ this.props.about } /></div> 
       </div>
      )

@@ -244,16 +244,24 @@ router.get('/api/companyList', (req, res) => {
   })
 })
 
+
 // add to company Calendar
 router.post('/api/companyCalendar', (req, res) => {
+
+  console.log('comapny id should be 1', req.body);
+
   let time = req.body.time;
   let duration = Number(req.body.duration);
   let challengeId = req.body.challengeId;
+
+  
   if (req.body.companyId === 1) {
     let companyId = 1;
   } else {
     companyId = jwt.decode(req.body.companyId, secret).id;
   }
+
+  console.log('COMPANY ID', companyId);
   calendarControllers.addToCompanySchedule(time, duration, challengeId, companyId)
   .then(() => {
     console.log('Successfully saved challenge to schedule');

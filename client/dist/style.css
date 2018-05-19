@@ -281,6 +281,13 @@ body {
 	padding: 20px;
 }
 
+.live_result_container {
+	height: 50px;
+	background-color: white;
+	color: black;
+	padding: 20px;
+}
+
 .github_icon_livecoding {
 	font-size: 40px;
 	float: right;

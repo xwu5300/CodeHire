@@ -58,7 +58,7 @@ class LiveCodingView extends Component {
           <div>
             {this.state.active_candidates ? this.state.active_candidates.map((candidate) => {
               return (
-                <AdminEditorViews github={ this.props.github_url } skills={this.props.candidate_skills} about={ this.props.candidate_information } activeUserId={ this.state.active_user_id} userIndex={ candidate[1] } />
+                <AdminEditorViews github={ this.props.github_url } skills={this.props.candidate_skills} about={ this.props.candidate_information } activeUserId={ this.state.active_user_id} username={ candidate } />
               );
             }) : null}
           </div>
@@ -67,7 +67,7 @@ class LiveCodingView extends Component {
 
         <div className='right floated column'>
           <div className="ui container segment active_user_menu">
-            <h2>User Ids</h2>
+            <h2>Active Users</h2>
             <ul className='active_user_list'>
               {this.state.active_candidates ? this.state.active_candidates.map((user) => {
                 return (
