@@ -59,7 +59,7 @@ module.exports.getCandidateInitialResults = (companyId, candidateId) => {
   .limit(1)
   .select('user_passed')
   .then((res) => {
-    console.log('Retrieve candidate initial challenge result')
+    console.log('Retrieve candidate initial challenge result', res)
     return res;
   })
   .catch((err) => {

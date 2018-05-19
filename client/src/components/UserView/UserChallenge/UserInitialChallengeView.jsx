@@ -25,10 +25,17 @@ class UserInitialChallengeView extends Component {
 }`,
       inChallenge: true,
       submission: '',
+      submitted: false,
       exampleInputs: [],
-      exampleOutputs: []
+      exampleOutputs: [],
+      duration: this.props.initial_challenge[0].duration,
+      timeRemaining: '',
     }
 
+    this.onLoad = this.onLoad.bind(this)
+    this.startTimer = this.startTimer.bind(this)
+    this.updateTimer = this.updateTimer.bind(this)
+    this.autoSubmit = this.autoSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
     this.handleTheme = this.handleTheme.bind(this)
     this.getExamples = this.getExamples.bind(this)
@@ -37,10 +44,64 @@ class UserInitialChallengeView extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  componentDidMount() {
+  
+  }
+
+  updateTimer(display) {
+    this.setState({
+      timeRemaining: display
+    })
+  }
+
+  startTimer(duration, display) {
+    let timer = duration
+    let minutes
+    let seconds
+    let countdown = setInterval( ()=> {
+      minutes = parseInt(timer / 60, 10)
+      seconds = parseInt(timer % 60, 10);
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+
+      display = minutes + ":" + seconds;
+      this.updateTimer(display)
+
+      if (--timer <= 0 && !this.state.submitted) {
+        this.autoSubmit()
+        clearInterval(countdown)
+      }
+    }, 1000);
+  }
+
+  onLoad() {
+    console.log('loading')
+    let challengeDuration = 60 * .1
+    let display = this.state.duration
+    this.startTimer(challengeDuration, display);
+  }
+
+  autoSubmit() {
+    let id = this.props.initial_challenge[0].id
+    let company_id = this.props.initial_challenge[0].company_id
+    let user_id = localStorage.getItem('userId')
+    console.log('twice??')
+    this.props.saveResults('f', this.state.code, 90, moment(Date.now()).format(), id, company_id, user_id, true , id, () => {
+      swal(
+        {title: 'Time Ran Out',
+         text: 'The current state of your code was saved and submitted',
+         allowOutsideClick: false,
+         type: 'info'}).then(() =>{
+          this.props.history.push('/user')
+         }
+        )
+    })
+  }
+
   onChange(newValue, event) {
     this.setState({
       code: newValue
-    }, ()=> console.log(this.state.code))
+    })
   }
 
   handleTheme(e) {
@@ -121,6 +182,9 @@ ${this.props.initial_challenge[0].function_name}(${input})`
       confirmButtonText: 'Yes, submit it!'
     }).then((clickResult) => {
       if (clickResult.value) {
+        this.setState({
+          submitted: true
+        })
         let submission = this.state.submission
         this.saveResults(result, submission, score, time)
         var thatProps = this.props
@@ -161,6 +225,7 @@ ${this.props.initial_challenge[0].function_name}(${input})`
         <div>
           instruction: {this.props.initial_challenge[0].instruction}
         </div>
+        <div> time left: {this.state.timeRemaining} </div>
         <div className="examples">
           examples:  {this.state.exampleInputs.map((input, i) => {
             return <div className="input" key={i}>{input}</div>
