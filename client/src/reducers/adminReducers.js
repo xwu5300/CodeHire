@@ -57,7 +57,6 @@ const companyInfo = (state = '', action) => {
 }
 
 const companySchedule = (state = initialState, action) => {
-  console.log(' GET COMAPNY SCHEUDLE', action)
   switch(action.type) {
     case 'GET_COMPANY_SCHEDULE':
       return {

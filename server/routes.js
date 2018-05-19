@@ -334,7 +334,8 @@ router.get('/api/results/candidateList', (req, res) => {
 //ge candidate results
 router.get('/api/results/candidate', (req, res) => {
   let candidateId = jwt.decode(req.query.candidateId, secret).id;
-  resultsControllers.getCandidateResults(candidateId)
+  let companyScheduleId = req.query.companyScheduleId;
+  resultsControllers.getCandidateResults(candidateId, companyScheduleId)
   .then((data) => {
     console.log('Retrieve candidate results form db')
     res.send(data)
@@ -351,11 +352,7 @@ router.get('/api/results/candidate/initial', (req, res) => {
   resultsControllers.getCandidateInitialResults(companyId, candidateId)
   .then((data) => {
     console.log('Retrieve candidate initial result from db')
-    if (!data.length) {
-      res.send(false)
-    } else {
-      res.send(data[0].user_passed)
-    }
+    res.send(data)
   })
   .catch((err) => {
     console.log('Could not retrieve candidate initial result from db', err);
@@ -366,7 +363,7 @@ router.get('/api/results/candidate/initial', (req, res) => {
 router.post('/api/results', (req, res) => {
   let companyId = req.body.companyId;
   let candidateId = jwt.decode(req.body.candidateId, secret).id;
-  resultsControllers.saveResults(req.body.isPassed, req.body.code, req.body.score, req.body.completedAt, req.body.challengeId, companyId, candidateId, req.body.initial)
+  resultsControllers.saveResults(req.body.companyScheduleId, req.body.isPassed, req.body.code, req.body.score, req.body.completedAt, req.body.challengeId, companyId, candidateId, req.body.initial)
   .then(() => {
     console.log('Results saved to results table');
     res.send();

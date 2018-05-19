@@ -61,12 +61,12 @@ class UserInitialChallengeView extends Component {
     })
   }
 
-  saveResults(result, submission, score, time) {
+  saveResults(companyScheduleId, result, submission, score, time) {
     let id = this.props.initial_challenge[0].id
     let company_id = this.props.initial_challenge[0].company_id
     let user_id = localStorage.getItem('userId')
-    this.props.saveResults(result, submission, score, time, id, company_id, user_id, true , id, () => {
-      this.props.fetchCandidateInitialResults(localStorage.getItem('companyId'), user_id)
+    this.props.saveResults(companyScheduleId, result, submission, score, time, id, company_id, user_id, true , id, () => {
+      this.props.fetchCandidateInitialResults(localStorage.getItem('companyId'), user_id, ()=> {})
     })
   }
 
@@ -122,7 +122,7 @@ class UserInitialChallengeView extends Component {
     }).then((clickResult) => {
       if (clickResult.value) {
         let submission = this.state.submission
-        this.saveResults(result, submission, score, time)
+        this.saveResults(null, result, submission, score, time)
         var thatProps = this.props
         if (result === true) {
           swal(

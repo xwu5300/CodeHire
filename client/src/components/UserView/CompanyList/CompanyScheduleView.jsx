@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import {withRouter} from 'react-router-dom';
 import socketClient from 'socket.io-client';
 import swal from 'sweetalert2';
+import moment from 'moment';
 
 import CompanyScheduleTableView from './CompanyScheduleTableView.jsx';
 
@@ -16,12 +17,49 @@ class CompanyScheduleView extends Component {
     //this.enterChallenge = this.enterChallenge.bind(this);
     this.socket = socketClient();
     this.updateStyle = this.updateStyle.bind(this);
+    this.getTimeOut = this.getTimeOut.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.isTaken = this.isTaken.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchInitialChallenge(localStorage.getItem('companyId'))
-    this.props.fetchCandidateInitialResults(localStorage.getItem('companyId'), localStorage.getItem('userId'))
+    // this.props.fetchCandidateInitialResults(localStorage.getItem('companyId'), localStorage.getItem('userId'), () => {})
     this.props.fetchCompanySchedule(localStorage.getItem('companyId'))
+    this.props.fetchCandidateResults(localStorage.getItem('userId'), null, ()=>{});
+  }
+
+  getTimeOut(results) {
+    let currTime = moment(Date.now())
+    let timeCompleted = moment(results[0].completed_at)
+    let days = currTime.diff(timeCompleted, 'days')
+    return days;
+  }
+
+  handleClick(results) {
+    let daysLeft = 0
+    if (results.length) {
+      let days = this.getTimeOut(results)
+      daysLeft = 7 - days;
+    }
+    if (results[0] && results[0].user_passed) {
+      swal(
+        "You've Passed the Initial Challenge!",
+        "Please Schedule A Live Challenge When You Are Ready!"
+      )
+    } else if (daysLeft > 0) {
+      swal({
+        text: `You've Taken This Challenge, Please Retake After ${daysLeft} Days`
+      })
+    } else {
+      this.props.history.push('/user/challenge')
+    }
+  }
+
+  isTaken() {
+    this.props.fetchCandidateInitialResults(localStorage.getItem('companyId'), localStorage.getItem('userId'), (results) => {
+      this.handleClick(results)
+    })
   }
 
   updateStyle() {
@@ -31,6 +69,7 @@ class CompanyScheduleView extends Component {
   }
 
   render() {
+    console.log('com sched props', this.props)
     if (this.props.initial_challenge[0]) {
       return (
         <div>
@@ -48,14 +87,15 @@ class CompanyScheduleView extends Component {
         Before You Schedule Live Challenge - You Need To Pass Initial Challenge
         </h2>
         <button onClick={() => {
-          if (!this.props.pass_initial) {
-            this.props.history.push('/user/challenge')
-          } else {
-            swal(
-              "You've Passed Initial Challenge!",
-              "Please Schedule A Live Challenge When You Are Ready!"
-            )
-          }
+          // if (!this.props.pass_initial) {
+          //   this.props.history.push('/user/challenge')
+          // } else {
+          //   swal(
+          //     "You've Passed the Initial Challenge!",
+          //     "Please Schedule A Live Challenge When You Are Ready!"
+          //   )
+          // }
+          this.isTaken()
           }}>
             Take Initial Challenge</button>
           {/* <span className='ui container segment'> </span> */}
@@ -64,7 +104,7 @@ class CompanyScheduleView extends Component {
         {this.props.initial_challenge[0].name}'s Live Challenge:
         <div className='schedule_container'>
         {this.props.company_schedule.length ?
-        <CompanyScheduleTableView updateStyle={this.updateStyle} saveCandidateCalendar={this.props.saveCandidateCalendar} companyCalendar={this.props.company_schedule} passInitial={this.props.pass_initial} />
+        <CompanyScheduleTableView updateStyle={this.updateStyle} saveCandidateCalendar={this.props.saveCandidateCalendar} companyCalendar={this.props.company_schedule} passInitial={this.props.pass_initial} fetchCandidateResults={this.props.fetchCandidateResults}/>
         : <div> {this.props.initial_challenge[0].name} Does Not Have Any Upcoming Live Challenge </div>
       }
 

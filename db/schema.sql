@@ -61,6 +61,7 @@ CREATE TABLE results (
   completed_at TIMESTAMP NOT NULL,
   challenge_id SMALLINT REFERENCES all_challenges(id) ON DELETE CASCADE,
   candidate_id SMALLINT REFERENCES users(id),
+  company_schedule_id SMALLINT REFERENCES company_schedule(id) ON DELETE CASCADE,
   company_id SMALLINT REFERENCES users(id),
   is_initial BOOLEAN NOT NULL
 );

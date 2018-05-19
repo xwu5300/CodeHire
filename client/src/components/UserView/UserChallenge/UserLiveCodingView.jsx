@@ -88,12 +88,12 @@ class UserLiveCodingView extends Component {
     })
   }
 
-  saveResults(result, submission, score, time) {
+  saveResults(companyScheduleId, result, submission, score, time) {
     let challenge_id = this.props.location.challenge.challenge_id
     let company_id = this.props.location.challenge.company_id
     let candidate_id = localStorage.getItem('userId')
     let userSchedule_id = this.props.location.challenge.id
-    this.props.saveResults(result, submission, score, time, challenge_id, company_id, candidate_id, false, userSchedule_id, () => {})
+    this.props.saveResults(companyScheduleId, result, submission, score, time, challenge_id, company_id, candidate_id, false, userSchedule_id, () => {})
   }
 
   checkAnswer() {
@@ -148,7 +148,8 @@ class UserLiveCodingView extends Component {
     }).then((clickResult) => {
       if (clickResult.value) {
         let submission = this.state.submission
-        this.saveResults(result, submission, score, time)
+        let companyScheduleId = this.props.location.challenge.company_schedule_id
+        this.saveResults(companyScheduleId, result, submission, score, time)
         let thatProps = this.props
         if (result === true) {
           swal(
@@ -171,6 +172,7 @@ class UserLiveCodingView extends Component {
   }
 
   render() {
+    console.log('liuve challeng', this.props.location.challenge)
     return (
       <div>
         <div className="ui orange four item menu">
