@@ -28,12 +28,16 @@ export const saveCandidateCalendar = (candidateId, companyScheduleId) => (dispat
   axios.post('/api/candidateCalendar', { candidateId, companyScheduleId })
   .then(({data}) => {
     if (data) {
-      swal('Success!',
-        'Scheduled a Live Challenge.')
+      swal({
+        text: "Scheduled a Live Challenge.",
+        // width: '350px'
+      })
     } else {
-      swal('Sorry!',
-        "You've already scheduled this live challenge.",
-      'error')
+      swal({
+
+        text: "You've already scheduled this live challenge.",
+        // width: '350px'
+      })
     }
   })
   .catch((err) => {
@@ -69,8 +73,8 @@ export const currentCompanyCalendar = (companyId, callback) => (dispatch) => {
  }
 }
 
-export const saveResults = (isPassed, code, score, completedAt, challengeId, companyId, candidateId, initial, candidateScheduleId, cb) => (dispatch) => {
-  axios.post('/api/results', { isPassed, code, score, completedAt, challengeId, companyId, candidateId, initial })
+export const saveResults = (companyScheduleId, isPassed, code, score, completedAt, challengeId, companyId, candidateId, initial, candidateScheduleId, cb) => (dispatch) => {
+  axios.post('/api/results', { companyScheduleId, isPassed, code, score, completedAt, challengeId, companyId, candidateId, initial })
   .then(() => {
     dispatch(deleteCandidateSchedule(candidateScheduleId, candidateId));
     cb();
@@ -80,20 +84,24 @@ export const saveResults = (isPassed, code, score, completedAt, challengeId, com
   })
 }
 
-export const fetchCandidateResults = (candidateId) => (dispatch) => {
-  axios.get('/api/results/candidate', { params: { candidateId } })
+export const fetchCandidateResults = (candidateId, companyScheduleId, cb) => (dispatch) => {
+  axios.get('/api/results/candidate', { params: { candidateId, companyScheduleId } })
   .then(({data}) => {
     dispatch({ type: GET_CANDIDATE_RESULTS, payload: data });
+    cb(data)
   })
   .catch((err) => {
     console.log(err);
   })
 }
 
-export const fetchCandidateInitialResults = (companyId, candidateId) => (dispatch) => {
+export const fetchCandidateInitialResults = (companyId, candidateId, cb) => (dispatch) => {
   axios.get('/api/results/candidate/initial', { params: { companyId, candidateId } })
   .then(({data}) => {
-    dispatch({ type: GET_CANDIDATE_INITIAL_RESULTS, payload: data });
+    if (data[0] && data[0].user_passed) {
+      dispatch({ type: GET_CANDIDATE_INITIAL_RESULTS, payload: data });
+    }
+    cb(data)
   })
   .catch((err) => {
     console.log(err);

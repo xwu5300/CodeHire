@@ -1,7 +1,8 @@
 const knex = require('../../db/index.js');
 
 //saves users result to result
-module.exports.saveResults = (isPassed, code, score, completedAt, challengeId, companyId, candidateId, initial) => {
+module.exports.saveResults = (companyScheduleId, isPassed, code, score, completedAt, challengeId, companyId, candidateId, initial) => {
+  console.log('result.js', companyScheduleId )
   return knex('results').insert({
     user_passed: isPassed,
     code: code,
@@ -9,10 +10,11 @@ module.exports.saveResults = (isPassed, code, score, completedAt, challengeId, c
     completed_at: completedAt,
     challenge_id: challengeId,
     company_id: companyId,
+    company_schedule_id: companyScheduleId,
     candidate_id: candidateId,
     is_initial: initial
   })
-  .then(() => {
+  .then((data) => {
     console.log('Results added to results table');
   })
   .catch((err) => {
@@ -59,7 +61,7 @@ module.exports.getCandidateInitialResults = (companyId, candidateId) => {
   .limit(1)
   .select('user_passed')
   .then((res) => {
-    console.log('Retrieve candidate initial challenge result', res)
+    console.log('Retrieve candidate initial challenge result')
     return res;
   })
   .catch((err) => {
@@ -67,9 +69,13 @@ module.exports.getCandidateInitialResults = (companyId, candidateId) => {
   })
 }
 
-module.exports.getCandidateResults = (candidateId) => {
+module.exports.getCandidateResults = (candidateId, companyScheduleId) => {
+  let option = {'candidate_id': candidateId}
+  if (companyScheduleId) {
+    option = {'candidate_id': candidateId, 'company_schedule_id': companyScheduleId}
+  }
   return knex('results')
-  .where('candidate_id', candidateId)
+  .where(option)
   .innerJoin('users', 'users.id', 'results.company_id')
   .innerJoin('all_challenges', 'all_challenges.id', 'results.challenge_id')
   .select('results.*', 'all_challenges.*', 'users.name', 'users.information', 'users.phone', 'users.logo_url')

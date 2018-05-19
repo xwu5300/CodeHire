@@ -127,6 +127,7 @@ export const handleSignUp = (email, username, password, confirmPassword, form, n
     .catch((error) => {
       if(error) {
         console.log('error for signup', error)
+        alert(error.message)
       }
     })
   }

@@ -67,7 +67,7 @@ class UserInitialChallengeView extends Component {
       display = minutes + ":" + seconds;
       this.updateTimer(display)
 
-      if (--timer <= 0 && !this.state.submitted) {
+      if (--timer < 0 && !this.state.submitted) {
         this.autoSubmit()
         clearInterval(countdown)
       }
@@ -86,7 +86,8 @@ class UserInitialChallengeView extends Component {
     let company_id = this.props.initial_challenge[0].company_id
     let user_id = localStorage.getItem('userId')
     console.log('twice??')
-    this.props.saveResults('f', this.state.code, 90, moment(Date.now()).format(), id, company_id, user_id, true , id, () => {
+    this.props.saveResults(null, 'f', this.state.code, 90, moment(Date.now()).format(), id, company_id, user_id, true , id, () => {
+      
       swal(
         {title: 'Time Ran Out',
          text: 'The current state of your code was saved and submitted',
@@ -126,8 +127,8 @@ class UserInitialChallengeView extends Component {
     let id = this.props.initial_challenge[0].id
     let company_id = this.props.initial_challenge[0].company_id
     let user_id = localStorage.getItem('userId')
-    this.props.saveResults(result, submission, score, time, id, company_id, user_id, true , id, () => {
-      this.props.fetchCandidateInitialResults(localStorage.getItem('companyId'), user_id)
+    this.props.saveResults(null, result, submission, score, time, id, company_id, user_id, true , id, () => {
+      // this.props.fetchCandidateInitialResults(localStorage.getItem('companyId'), user_id, ()=> {})
     })
   }
 

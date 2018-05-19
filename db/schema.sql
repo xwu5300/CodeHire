@@ -17,7 +17,7 @@ CREATE TABLE users (
   username VARCHAR(30) NOT NULL,
   phone VARCHAR(20) NULL,
   information VARCHAR(255) NULL,
-  candidate_skills TEXT[] NULL,
+  candidate_skills TEXT[[]] NULL,
   github_url VARCHAR(255) NULL,
   logo_url VARCHAR(255) NULL,
   role VARCHAR(30) NULL,
@@ -61,6 +61,7 @@ CREATE TABLE results (
   completed_at TIMESTAMP NOT NULL,
   challenge_id SMALLINT REFERENCES all_challenges(id) ON DELETE CASCADE,
   candidate_id SMALLINT REFERENCES users(id),
+  company_schedule_id SMALLINT REFERENCES company_schedule(id) ON DELETE CASCADE,
   company_id SMALLINT REFERENCES users(id),
   is_initial BOOLEAN NOT NULL
 );
@@ -71,7 +72,7 @@ CREATE TABLE company_user (
   user_id SMALLINT REFERENCES users(id)
 );
 
-INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('admin', 'admin', null, null, null,  null, 'company', 'JljWLWYpiXhfLIXpDBH7aG9Opd03');
+INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('admin', 'admin', null, null, null,  null, 'admin', 'JljWLWYpiXhfLIXpDBH7aG9Opd03');
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('user1', 'user1', '123-456-7890', 'about me', 'www.github.com/github', 'http://icons.iconarchive.com/icons/danleech/simple/1024/google-icon.png', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8KKue');
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('user2', 'user2', '123-456-7890', 'about me', 'www.github.com/github', 'http://icons.iconarchive.com/icons/danleech/simple/1024/google-icon.png', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8KKue');
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('user3', 'user3', '123-456-7890', 'about me', 'www.github.com/github', 'http://icons.iconarchive.com/icons/danleech/simple/1024/google-icon.png', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8KKue');
@@ -85,11 +86,11 @@ INSERT INTO users (name, username, phone, information, github_url, logo_url, rol
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('user11', 'user11', '123-456-7890', 'about me', 'www.github.com/github', 'http://icons.iconarchive.com/icons/danleech/simple/1024/google-icon.png', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8KKue');
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('user12', 'user12', '123-456-7890', 'about me', 'www.github.com/github', 'http://icons.iconarchive.com/icons/danleech/simple/1024/google-icon.png', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8KKue');
 
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('One Sum', 'Find the sum...', 'oneSum', 'arr, target', '[]', '[]', '1', 'algorithms', false, 90, 1);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Two Sum', 'Find the sum...', 'twoSum', 'arr, target', '[]', '[]', '2', 'data structures', false, 90, 1);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Three Sum', 'Find the sum...', 'threeSum', 'arr, target', '[]', '[]', '3', 'algorithms', false, 90, 1);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Four Sum', 'Find the sum...', 'fourSum', 'arr, target', '[]', '[]', '4', 'system design', false, 90, 1);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Five Sum', 'Find the sum...', 'fiveSum', 'arr, target', '[]', '[]', '5', 'algorithms', false, 90, 1);
+INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('One Sum', 'Find the sum...', 'oneSum', 'arr, target', '[[[]]]', '[[[]]]', '1', 'algorithms', false, 90, 1);
+INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Two Sum', 'Find the sum...', 'twoSum', 'arr, target', '[[[]]]', '[[]]', '2', 'data structures', false, 90, 1);
+INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Three Sum', 'Find the sum...', 'threeSum', 'arr, target', '[[]]', '[[]]', '3', 'algorithms', false, 90, 1);
+INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Four Sum', 'Find the sum...', 'fourSum', 'arr, target', '[[]]', '[[]]', '4', 'system design', false, 90, 1);
+INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Five Sum', 'Find the sum...', 'fiveSum', 'arr, target', '[[]]', '[[]]', '5', 'algorithms', false, 90, 1);
 
 
 INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 1, 1, 1, false);
