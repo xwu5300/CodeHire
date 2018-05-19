@@ -10,7 +10,7 @@ class UserSearchResults extends Component {
   render() {
     return(
       <div>
-        {this.props.users.length === 0 ? null : this.props.users.map((user) => {
+        {this.props.users.length === 0 && this.props.searched === true ? <div>No results found. Please search again.</div> : this.props.users.map((user) => {
           return(
           <div>
             <div>Username: {user.username}</div>

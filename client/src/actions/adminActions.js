@@ -91,10 +91,10 @@ export const addToCompanySchedule = (time, duration, challengeId, companyId, cb)
 }
 
 
-export const updateChallengeDate = (time, duration, scheduleId, cb) => (dispatch) => {
+export const updateChallengeDate = (time, duration, scheduleId, companyId) => (dispatch) => {
   axios.patch('/api/companyCalendar', { time, duration, scheduleId })
-  .then((response) => {
-    console.log('RESPONSE', response);
+  .then(() => {
+    dispatch(fetchCompanySchedule(companyId));
   })
   .catch((err) => {
     console.log('Error updating challenge date', err);
@@ -118,7 +118,7 @@ export const fetchCompanySchedule = (companyId, companyName) => (dispatch) => {
   axios.get('/api/companyCalendar', {params: { companyId, companyName }})
   .then(({data}) => {
     dispatch({ type: GET_COMPANY_SCHEDULE, payload: data});
-    console.log('Company schedule retrieved', data);
+    console.log('Company schedule retrieved');
   })
   .catch((err) => {
     console.log('Error retrieving company schedule')
@@ -244,11 +244,16 @@ export const removeFromFavorites = (companyId, candidateId) => (dispatch) => {
   })
 }
 
-export const searchUsers = (query) => (dispatch) => {
+export const searchUsers = (query, cb) => (dispatch) => {
   axios.get('/api/searchUsers', {params: { query }})
   .then(({data}) => {
     dispatch({ type: SEARCH_USERS, payload: data})
     console.log('Successfully fetching user results from server', data);
+  })
+  .then(() => {
+    if (cb) {
+      cb();
+    }
   })
   .catch((err) => {
     console.log('Error fetching user results from server', err);

@@ -8,10 +8,12 @@ class HireView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: ''
+      query: '',
+      searched: false
     }
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -22,6 +24,15 @@ class HireView extends Component {
   handleChange(event) {
     this.setState({
       query: event.target.value
+    })
+  }
+
+  handleClick() {
+    this.props.searchUsers(this.state.query, () => {
+      this.setState({
+        query: '',
+        searched: true
+      })
     })
   }
 
@@ -41,14 +52,14 @@ class HireView extends Component {
           <div className="ui fluid left icon input">
             <input type="text" value={this.state.query} placeholder="Search users by username or skill..." onChange={this.handleChange}/>
             <i className="users icon"></i>
-            <div className="ui button" onClick={()=>{this.props.searchUsers(this.state.query)}}>Search</div>
+            <div className="ui button" onClick={this.handleClick}>Search</div>
           </div>
         </div>
 
         <div className="search-results-container">
           <div className="search-results">
            <h4>Search Results</h4> 
-           <UserSearchResults users={this.props.users} save={this.props.saveToFavorites}/>
+           <UserSearchResults users={this.props.users} save={this.props.saveToFavorites} searched={this.state.searched}/>
           </div>
           <div className="search-results">
             <h4>Saved Users</h4>
