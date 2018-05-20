@@ -13,7 +13,7 @@ import PrivateRoute from '../components/PrivateRoute.jsx';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCandidateResults } from '../actions/userActions';
+import { fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCandidateResults, getResume, saveResume, removeResume } from '../actions/userActions';
 import { fetchCompanySchedule, fetchCompanyResults } from '../actions/adminActions' ;
 
 import axios from 'axios';
@@ -48,11 +48,16 @@ const mapStateToProps = function(state) {
     current_company_calendar: state.current_company_calendar.current_company_calendar,
     candidate_results: state.candidate_results.candidate_results,
     pass_initial: state.pass_initial.pass_initial,
-    company_list: state.company_list.company_list
+    company_list: state.company_list.company_list,
+    resume_name: state.resume_name.resume_name,
+    resume_url: state.resume_url.resume_url
 }};
 
 const mapDispatchToProps = {
-   fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCompanySchedule, fetchCompanyResults, fetchCandidateResults
+   fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, 
+   deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, 
+   saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCompanySchedule, 
+   fetchCompanyResults, fetchCandidateResults, getResume, saveResume, removeResume
 }
 
 const connectComponent = connect(mapStateToProps)(UserContainer); //code cleaned

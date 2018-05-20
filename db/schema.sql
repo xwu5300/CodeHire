@@ -21,7 +21,9 @@ CREATE TABLE users (
   github_url VARCHAR(255) NULL,
   logo_url VARCHAR(255) NULL,
   role VARCHAR(30) NULL,
-  token TEXT NOT NULL
+  token TEXT NOT NULL,
+  resume_url TEXT NULL,
+  resume_name VARCHAR(255) NULL
 );
 
 CREATE TABLE all_challenges (

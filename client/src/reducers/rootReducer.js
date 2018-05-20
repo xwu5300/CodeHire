@@ -32,7 +32,9 @@ export default combineReducers({
   pass_initial: userReducers.candidateInitialResults,
   company_list: userReducers.companyList,
   candidate_results: userReducers.candidateResults,
-  users: adminReducers.users
+  users: adminReducers.users,
+  resume_url: userReducers.candidateResume,
+  resume_name: userReducers.candidateResume
 })
 
 

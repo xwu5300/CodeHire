@@ -140,3 +140,39 @@ module.exports.searchUsers = (query) => {
   })
 }
 
+module.exports.saveResume = (url, name, userId) => {
+  return knex('users')
+  .where({id: userId})
+  .update({resume_url: url, resume_name: name})
+  .then(() => {
+    console.log('Successfully saved resume to db');
+  })
+  .catch((err) => {
+    console.log('Unable to save resume to db', err);
+  })
+}
+
+module.exports.removeResume = (userId) => {
+  return knex('users')
+  .where({id: userId})
+  .update({resume_url: null, resume_name: null})
+  .then(() => {
+    console.log('Successfully removed resume from db');
+  })
+  .catch((err) => {
+    console.log('Unable to remove resume from db', err);
+  })
+}
+
+module.exports.getResume = (userId) => {
+  return knex('users')
+  .where({id: userId})
+  .select('resume_url', 'resume_name')
+  .then((res) => {
+    console.log('Successfully retrieved resume from db');
+    return res;
+  })
+  .catch((err) => {
+    console.log('Unable to retrieve resume from db', err);
+  })
+}

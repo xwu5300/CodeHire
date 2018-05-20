@@ -1,5 +1,5 @@
 
-import { GET_INITIAL_CHALLENGE, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO, DELETE_CANDIDATE_SKILL, GET_CURRENT_COMPANY_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS, GET_COMPANY_LIST, GET_CANDIDATE_RESULTS } from '../constants/actionTypes';
+import { GET_INITIAL_CHALLENGE, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO, DELETE_CANDIDATE_SKILL, GET_CURRENT_COMPANY_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS, GET_COMPANY_LIST, GET_CANDIDATE_RESULTS, GET_RESUME } from '../constants/actionTypes';
 
 import axios from 'axios';
 import swal from 'sweetalert2';
@@ -106,7 +106,9 @@ export const fetchCandidateInitialResults = (companyId, candidateId) => (dispatc
 export const updateCandidateSkills = (username, skills, callback) => (dispatch) => {
   axios.patch('/api/candidateInfo', { username, skills })
   .then(() => {
-    callback();
+    if (callback) {
+      callback();
+    }
   })
   .catch((err) => {
     console.log(err);
@@ -148,3 +150,36 @@ export const fetchCandidateInfo = (candidateId, callback) => (dispatch) => {
         console.log(err);
       })
   }
+
+export const saveResume = (resumeUrl, resumeName, userId) => (dispatch) => {
+  axios.post('/api/resume', { resumeUrl, resumeName, userId })
+  .then(() => {
+    dispatch(getResume(userId));
+    console.log('saved resume');
+  })
+  .catch((err) => {
+    console.log('unable to save resume', err);
+  })
+}
+
+export const removeResume = (userId) => (dispatch) => {
+  axios.delete('/api/resume', {params: { userId }})
+  .then(() => {
+    dispatch(getResume(userId));
+    console.log('removed resume');
+  })
+  .catch((err) => {
+    console.log('unable to remove resume', err);
+  })
+}
+
+export const getResume = (userId) => (dispatch) => {
+  axios.get('/api/resume', {params: {userId }})
+  .then(({data}) => {
+    dispatch({type: 'GET_RESUME', payload: data})
+    console.log('successfully retrieved resume');
+  })
+  .catch((err) => {
+    console.log('unable to retrieve resume from db', err);
+  })
+}

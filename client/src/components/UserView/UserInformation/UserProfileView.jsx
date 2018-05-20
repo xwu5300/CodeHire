@@ -28,6 +28,7 @@ class UserProfileView extends Component {
         this.setState({ all_skills: this.props.candidate_skills, github_url: this.props.github_url })
       }
     });
+    this.props.getResume(localStorage.getItem('userId'));
   }
 
   handleChange(e) {
@@ -84,16 +85,28 @@ class UserProfileView extends Component {
                   <input name='github_url' value={ this.state.github_url } onChange={ (e) => this.handleChange(e) } type='text' placeholder='github' />
                   <button style={{ height: '35px', width:'15%', marginLeft:'5px' }} className='ui orange basic button' onClick={ () => this.updateGithub() }>save</button>
                 </div>
-                <Dropbox />
+                <div style={{float: 'right', marginTop: '30px'}}><b>Resume:</b>
+                <br/>
+                {this.props.resume_name ? 
+                <div>
+                <a href={this.props.resume_url} target="_blank">{this.props.resume_name}</a> 
+                <br/>
+                <button className="ui button" onClick={() => {this.props.removeResume(localStorage.getItem('userId'))}}>Remove</button>
+                </div>
+                :  "Upload your resume"}
+                </div>
+                <Dropbox saveResume={this.props.saveResume} getResume={this.props.getResume}/>
               </div>
             </div>
+
 
             <div className='row user_skills_container'>
               <div className='ui padded raised container segment' style={{ height: '300px' }}>
 
-                <div className='row' className='user_skills_input'>
-                  <input name='skill' type='text' value={ this.state.skill } onChange={ (e) => this.handleChange(e) } />
-                  <i onClick={ () => this.addSkill(this.state.skill) } className="pencil alternate icon"></i>
+                <div className='row' className="ui right labeled left icon input user_skills_input">
+                  <i className="tags icon"></i>
+                  <input name='skill' type='text' placeholder="Add your skills" value={ this.state.skill } onChange={ (e) => this.handleChange(e) } />
+                  <a onClick={ () => this.addSkill(this.state.skill) } className="ui tag label"></a>
                 </div>
 
                 <div className='row'>
@@ -103,7 +116,7 @@ class UserProfileView extends Component {
                     return (
                       <div key={ i } className='item'>
                         <i onClick={ () => this.deleteSkill(skill) } className="remove icon orange"></i>
-                        <div className='content skill_div'> { skill } </div>
+                        <div className='ui tag label'> { skill } </div>
                       </div>
                     )
                   }) : null }
