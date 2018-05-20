@@ -4,7 +4,9 @@ import {withRouter} from 'react-router-dom';
 import socketClient from 'socket.io-client';
 import swal from 'sweetalert2';
 import moment from 'moment';
+import ReactCollapsingTable from 'react-collapsing-table';
 
+import RenderButton from './RenderButton.jsx';
 import CompanyScheduleTableView from './CompanyScheduleTableView.jsx';
 
 class CompanyScheduleView extends Component {
@@ -24,7 +26,6 @@ class CompanyScheduleView extends Component {
 
   componentDidMount() {
     this.props.fetchInitialChallenge(localStorage.getItem('companyId'))
-    // this.props.fetchCandidateInitialResults(localStorage.getItem('companyId'), localStorage.getItem('userId'), () => {})
     this.props.fetchCompanySchedule(localStorage.getItem('companyId'))
     this.props.fetchCandidateResults(localStorage.getItem('userId'), null, ()=>{});
   }
@@ -70,6 +71,14 @@ class CompanyScheduleView extends Component {
 
   render() {
     console.log('com sched props', this.props)
+    let rows = this.props.company_schedule.map((schedule, i) => ({
+      time: schedule.time,
+      duration: schedule.duration
+    }))
+    let columns = [
+      {accessor: 'time', label: 'Time', priorityLevel: 1, position: 1, CustomComponent: RenderButton},
+      {accessor: 'duration', label: 'Duration', priorityLevel: 2, position: 2, CustomComponent: RenderButton}
+    ]
     if (this.props.initial_challenge[0]) {
       return (
         <div>
@@ -87,23 +96,21 @@ class CompanyScheduleView extends Component {
         Before You Schedule Live Challenge - You Need To Pass Initial Challenge
         </h2>
         <button onClick={() => {
-          // if (!this.props.pass_initial) {
-          //   this.props.history.push('/user/challenge')
-          // } else {
-          //   swal(
-          //     "You've Passed the Initial Challenge!",
-          //     "Please Schedule A Live Challenge When You Are Ready!"
-          //   )
-          // }
           this.isTaken()
           }}>
             Take Initial Challenge</button>
-          {/* <span className='ui container segment'> </span> */}
         </div>
         <br/>
         {this.props.initial_challenge[0].name}'s Live Challenge:
         <div className='schedule_container'>
         {this.props.company_schedule.length ?
+        <ReactCollapsingTable 
+          columns={columns} 
+          rows={rows} 
+          rowSize={10} 
+          showSearch={ true }
+          showPagination={ true }
+        />
         <CompanyScheduleTableView updateStyle={this.updateStyle} saveCandidateCalendar={this.props.saveCandidateCalendar} companyCalendar={this.props.company_schedule} passInitial={this.props.pass_initial} fetchCandidateResults={this.props.fetchCandidateResults}/>
         : <div> {this.props.initial_challenge[0].name} Does Not Have Any Upcoming Live Challenge </div>
       }
