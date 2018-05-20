@@ -14,9 +14,11 @@ class UserSearchResults extends Component {
           return(
           <div>
             <div>Username: {user.username}</div>
-            <div>Skills: {user.candidate_skills}</div>
-            <div>Info: {user.information} </div>
-            <div>Github: {user.github_url}</div>
+            <div>Skills: {user.candidate_skills ? user.candidate_skills : 'None added'}</div>
+            <div>Info: {user.information ? user.information : 'None added'} </div>
+            <div>Github:  {user.github_url ? user.github_url : 'None added'}</div>
+            Resume: <a href={user.resume_url} target="_blank">{user.resume_name ? user.resume_name : 'None added'}</a>
+            <br/>
             <button className="ui button" onClick={()=>{this.props.save(localStorage.getItem('userId'), user.id)}}>Save</button>
           </div>
           )

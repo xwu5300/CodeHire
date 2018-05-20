@@ -442,6 +442,9 @@ router.get('/api/favorites', (req, res) => {
   let companyId = jwt.decode(req.query.companyId, secret).id;
   profileControllers.getFavorites(companyId)
   .then((data) => {
+    data.map((user) => {
+      user.candidate_skills = user.candidate_skills === null ? null : user.candidate_skills.join(', ');
+    })
     console.log('Favorites retrieved. Sending favorites to client');
     res.send(data);
   })

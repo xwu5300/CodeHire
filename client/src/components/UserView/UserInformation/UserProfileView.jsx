@@ -105,7 +105,7 @@ class UserProfileView extends Component {
 
                 <div className='row' className="ui right labeled left icon input user_skills_input">
                   <i className="tags icon"></i>
-                  <input name='skill' type='text' placeholder="Add your skills" value={ this.state.skill } onChange={ (e) => this.handleChange(e) } />
+                  <input name='skill' type='text' placeholder="Add your skills..." value={ this.state.skill } onChange={ (e) => this.handleChange(e) } />
                   <a onClick={ () => this.addSkill(this.state.skill) } className="ui tag label"></a>
                 </div>
 

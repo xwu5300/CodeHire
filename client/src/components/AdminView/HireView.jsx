@@ -50,7 +50,7 @@ class HireView extends Component {
        
         <div className="search-container">
           <div className="ui fluid left icon input">
-            <input type="text" value={this.state.query} placeholder="Search users by username or skill..." onChange={this.handleChange}/>
+            <input type="text" value={this.state.query} placeholder="Search by username or skill..." onChange={this.handleChange}/>
             <i className="users icon"></i>
             <div className="ui button" onClick={this.handleClick}>Search</div>
           </div>
