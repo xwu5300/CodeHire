@@ -1,5 +1,5 @@
 
-import { GET_INITIAL_CHALLENGE, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO, DELETE_CANDIDATE_SKILL, GET_CURRENT_COMPANY_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS, GET_COMPANY_LIST, GET_CANDIDATE_RESULTS } from '../constants/actionTypes';
+import { GET_INITIAL_CHALLENGE, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO, DELETE_CANDIDATE_SKILL, GET_CURRENT_COMPANY_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS, GET_COMPANY_LIST, GET_CANDIDATE_RESULTS, GET_RESUME } from '../constants/actionTypes';
 
 import axios from 'axios';
 import swal from 'sweetalert2';
@@ -111,13 +111,26 @@ export const fetchCandidateInitialResults = (companyId, candidateId, cb) => (dis
 
 /* ----------- User Profile ------------ */
 
-export const updateCandidateSkills = (username, skills, callback) => (dispatch) => {
-  axios.patch('/api/candidateInfo', { username, skills })
+export const updateCandidateSkills = (userId, skills, callback) => (dispatch) => {
+  axios.patch('/api/candidateInfo', { userId, skills })
   .then(() => {
-    callback();
+    if (callback) {
+      callback();
+    }
   })
   .catch((err) => {
     console.log(err);
+  })
+}
+
+export const updateCandidatePhoto = (userId, photo) => (dispatch) => {
+  axios.patch('/api/candidateInfo', { userId, photo })
+  .then(() => {
+    dispatch(fetchCandidateInfo(userId))
+    console.log('profile photo successfully uploaded');
+  })
+  .catch((err) => {
+    console.log('unable to upload profile photo', err);
   })
 }
 
@@ -126,7 +139,6 @@ export const deleteCandidateSkill = (candidateId, skill, callback) => (dispatch)
   .then((response) => {
     console.log('response', response);
     if(callback) {
-
       callback(response)
     }
   })
@@ -136,8 +148,11 @@ export const deleteCandidateSkill = (candidateId, skill, callback) => (dispatch)
 }
 
 
-export const updateCandidateGithub = (username, github_url) => (dispatch) => {
-  axios.patch('/api/candidateInfo', { username, github_url })
+export const updateCandidateGithub = (userId, github_url) => (dispatch) => {
+  axios.patch('/api/candidateInfo', { userId, github_url })
+  .then(() => {
+    dispatch(fetchCandidateInfo(userId))
+  })
   .catch((err) => {
     console.log(err);
   })
@@ -147,7 +162,7 @@ export const fetchCandidateInfo = (candidateId, username, callback) => (dispatch
   axios.get('/api/candidateInfo', { params: { candidateId, username }})
     .then((info) => {
       console.log('infooooo', info);
-      dispatch({ type: GET_CANDIDATE_INFO, skills: info.data[0].candidate_skills, github_url: info.data[0].github_url })
+      dispatch({ type: GET_CANDIDATE_INFO, skills: info.data[0].candidate_skills, github_url: info.data[0].github_url, photo: info.data[0].profile_photo })
         if(callback) {
           callback();
         }
@@ -156,3 +171,36 @@ export const fetchCandidateInfo = (candidateId, username, callback) => (dispatch
         console.log(err);
       })
   }
+
+export const saveResume = (resumeUrl, resumeName, userId) => (dispatch) => {
+  axios.post('/api/resume', { resumeUrl, resumeName, userId })
+  .then(() => {
+    dispatch(getResume(userId));
+    console.log('saved resume');
+  })
+  .catch((err) => {
+    console.log('unable to save resume', err);
+  })
+}
+
+export const removeResume = (userId) => (dispatch) => {
+  axios.delete('/api/resume', {params: { userId }})
+  .then(() => {
+    dispatch(getResume(userId));
+    console.log('removed resume');
+  })
+  .catch((err) => {
+    console.log('unable to remove resume', err);
+  })
+}
+
+export const getResume = (userId) => (dispatch) => {
+  axios.get('/api/resume', {params: {userId }})
+  .then(({data}) => {
+    dispatch({type: 'GET_RESUME', payload: data})
+    console.log('successfully retrieved resume');
+  })
+  .catch((err) => {
+    console.log('unable to retrieve resume from db', err);
+  })
+}

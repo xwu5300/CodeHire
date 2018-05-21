@@ -22,6 +22,7 @@ export default combineReducers({
   candidate_information: userReducers.candidateInfo,
   candidate_skills: userReducers.candidateInfo,
   github_url: userReducers.candidateInfo,
+  photo: userReducers.candidateInfo,
   candidate_calendar: userReducers.candidateCalendar,
   current_live_challenge_title: adminReducers.currentLiveChallenge,
   current_live_challenge_duration: adminReducers.currentLiveChallenge,
@@ -33,5 +34,7 @@ export default combineReducers({
   company_list: userReducers.companyList,
   candidate_results: userReducers.candidateResults,
   users: adminReducers.users,
-  all_results: adminReducers.allResults
+  all_results: adminReducers.allResults,
+  resume_url: userReducers.candidateResume,
+  resume_name: userReducers.candidateResume
 })

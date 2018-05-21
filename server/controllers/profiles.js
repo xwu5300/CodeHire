@@ -30,7 +30,7 @@ module.exports.getCompanyInfo = (userId, callback) => {
 module.exports.getCandidateInfo = (candidateId, username, callback) => {
   if(candidateId) {
   return knex('users')
-  .select('candidate_skills', 'github_url')
+  .select('candidate_skills', 'github_url', 'profile_photo')
   .where({ id: candidateId })
   .then((data) => {
     callback(data);
@@ -54,7 +54,7 @@ module.exports.getCandidateInfo = (candidateId, username, callback) => {
 
 // Insert skill or github_url into 'users' table
 
-module.exports.updateCandidateInfo = (candidateId, skill, github_url) => {
+module.exports.updateCandidateInfo = (candidateId, skill, github_url, photo) => {
   
   if(skill) {
     return knex('users')
@@ -68,6 +68,17 @@ module.exports.updateCandidateInfo = (candidateId, skill, github_url) => {
       .update({ github_url: github_url })
       .catch((err) => {
         console.log(err);
+      })
+    }
+    if (photo) {
+      return knex('users')
+      .where({ id: candidateId })
+      .update({ profile_photo: photo })
+      .then(() => {
+        console.log('updated profile photo');
+      })
+      .catch((err) => {
+        console.log('unable to upload profile photo', err);
       })
     }
   }
@@ -91,6 +102,7 @@ module.exports.deleteCandidateSkill = (candidateId, skill, callback) => {
 
 module.exports.saveToFavorites = (companyId, candidateId) => {
   return knex('company_user')
+  .where({company_id: companyId, user_id: candidateId})
   .update({
     user_id: candidateId
   })
@@ -152,3 +164,39 @@ module.exports.searchUsers = (query) => {
   })
 }
 
+module.exports.saveResume = (url, name, userId) => {
+  return knex('users')
+  .where({id: userId})
+  .update({resume_url: url, resume_name: name})
+  .then(() => {
+    console.log('Successfully saved resume to db');
+  })
+  .catch((err) => {
+    console.log('Unable to save resume to db', err);
+  })
+}
+
+module.exports.removeResume = (userId) => {
+  return knex('users')
+  .where({id: userId})
+  .update({resume_url: null, resume_name: null})
+  .then(() => {
+    console.log('Successfully removed resume from db');
+  })
+  .catch((err) => {
+    console.log('Unable to remove resume from db', err);
+  })
+}
+
+module.exports.getResume = (userId) => {
+  return knex('users')
+  .where({id: userId})
+  .select('resume_url', 'resume_name')
+  .then((res) => {
+    console.log('Successfully retrieved resume from db');
+    return res;
+  })
+  .catch((err) => {
+    console.log('Unable to retrieve resume from db', err);
+  })
+}

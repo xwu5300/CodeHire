@@ -23,6 +23,9 @@ router.get('/api/companyInfo', (req, res) => {
 router.patch('/api/companyInfo', (req, res) => {
   let userId = jwt.decode(req.body.userId, secret).id;
   profileControllers.updateCompanyInfo(userId, req.body.logo_url, req.body.information)
+  .then(() => {
+    res.send();
+  })
   .catch((err) => {
     console.log(err);
   })
@@ -30,9 +33,11 @@ router.patch('/api/companyInfo', (req, res) => {
 
 // Update Candidate Info, including skills and github URL
 router.patch('/api/candidateInfo', (req, res) => {
-  let candidateId = jwt.decode(req.body.username, secret).id;
-
-  profileControllers.updateCandidateInfo(candidateId, req.body.skills, req.body.github_url)
+  let candidateId = jwt.decode(req.body.userId, secret).id;
+  profileControllers.updateCandidateInfo(candidateId, req.body.skills, req.body.github_url, req.body.photo)
+  .then(() => {
+    res.send();
+  })
   .catch((err) => {
     console.log(err);
   })
@@ -96,7 +101,7 @@ router.post('/api/registerCompany', (req, res) => {
   console.log('saving company')
   authControllers.saveCompany(req.body.token, req.body.companyName, req.body.username, req.body.phone, req.body.logoUrl, req.body.information)
   .then(() => {
-    res.send()
+    res.send();
   })
 })
 
@@ -104,7 +109,43 @@ router.get('/api/username', (req, res) => {
   let userId = jwt.decode(req.query.userId, secret).id;
   authControllers.getUsername(userId)
   .then((data) => {
-    res.send(data)
+    res.send(data);
+  })
+})
+
+router.post('/api/resume', (req, res) => {
+  let userId = jwt.decode(req.body.userId, secret).id;
+  profileControllers.saveResume(req.body.resumeUrl, req.body.resumeName, userId)
+  .then(() => {
+    console.log('succesfully saved item to db');
+    res.send();
+  })
+  .catch((err) => {
+    console.log('Unable to save item to db', err);
+  })
+})
+
+router.get('/api/resume', (req, res) => {
+  let userId = jwt.decode(req.query.userId, secret).id;
+  profileControllers.getResume(userId)
+  .then((data) => {
+    console.log('successfully retrieved item from db. sending to client');
+    res.send(data);
+  })
+  .catch((err) => {
+    console.log('unable to retrieve item from db for client', err);
+  })
+})
+
+router.delete('/api/resume', (req, res) => {
+  let userId = jwt.decode(req.query.userId, secret).id;
+  profileControllers.removeResume(userId)
+  .then(() => {
+    console.log('successfully removed item from db');
+    res.send();
+  })
+  .catch((err) => {
+    console.log('unable to remove item from db', err);
   })
 })
 
@@ -422,6 +463,9 @@ router.get('/api/favorites', (req, res) => {
   let companyId = jwt.decode(req.query.companyId, secret).id;
   profileControllers.getFavorites(companyId)
   .then((data) => {
+    data.map((user) => {
+      user.candidate_skills = user.candidate_skills === null ? null : user.candidate_skills.join(', ');
+    })
     console.log('Favorites retrieved. Sending favorites to client');
     res.send(data);
   })

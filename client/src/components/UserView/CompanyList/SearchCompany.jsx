@@ -7,7 +7,7 @@ class SearchCompany extends Component {
     this.state = {
       input: ''
     }
-
+    this.handleKeyPress = this.handleKeyPress.bind(this);
     this.updateInput = this.updateInput.bind(this);
   }
 
@@ -17,10 +17,19 @@ class SearchCompany extends Component {
     })
   }
 
+  handleKeyPress(event) {
+    if (event.charCode === 13) {
+      this.props.updateCompanyList(this.state.input)
+      this.setState({
+        input: ''
+      })
+    }
+  }
+
   render() {
     return (
       <div>
-        <input type='text' value={this.state.input} onChange={this.updateInput} style={{width: '300px', height: '40px'}} />
+        <input type='text' value={this.state.input} onChange={this.updateInput} style={{width: '300px', height: '40px'}} onKeyPress={(e) => {this.handleKeyPress(e)}} />
         <button className='ui button' onClick={() => {
           this.props.updateCompanyList(this.state.input)
           this.setState({

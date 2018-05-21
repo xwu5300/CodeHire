@@ -64,3 +64,5 @@ export const GET_CANDIDATE_INFO = 'GET_CANDIDATE_INFO';
 export const GET_FAVORITES = 'GET_FAVORITES';
 
 export const SEARCH_USERS = 'SEARCH_USERS';
+
+export const GET_RESUME = 'GET_RESUME';

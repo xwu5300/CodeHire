@@ -14,6 +14,7 @@ class HireView extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   componentDidMount() {
@@ -36,6 +37,12 @@ class HireView extends Component {
     })
   }
 
+  handleKeyPress(event) {
+    if (event.charCode === 13) {
+      this.handleClick();
+    }
+  }
+
 
   render() {
     return(
@@ -50,7 +57,7 @@ class HireView extends Component {
        
         <div className="search-container">
           <div className="ui fluid left icon input">
-            <input type="text" value={this.state.query} placeholder="Search users by username or skill..." onChange={this.handleChange}/>
+            <input type="text" value={this.state.query} placeholder="Search by username or skill..." onChange={this.handleChange} onKeyPress={(e)=>{this.handleKeyPress(e)}}/>
             <i className="users icon"></i>
             <div className="ui button" onClick={this.handleClick}>Search</div>
           </div>
