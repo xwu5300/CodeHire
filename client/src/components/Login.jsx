@@ -15,6 +15,7 @@ class Login extends Component {
     
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   handleChange(e) {
@@ -25,6 +26,12 @@ class Login extends Component {
 
   handleSubmit() {
     this.props.handleLogin(this.state.email, this.state.password);
+  }
+
+  handleKeyPress(event) {
+    if (event.charCode === 13) {
+      this.props.handleLogin(this.state.email, this.state.password);
+    }
   }
 
   render() {
@@ -38,7 +45,7 @@ class Login extends Component {
                 <input onChange={ (e) => this.handleChange(e) } name='email' type='email' placeholder='Email' required />
               </div>
               <div className='field'>
-                <input onChange={ (e) => this.handleChange(e) } name='password' type='password' placeholder='Password' required />
+                <input onChange={ (e) => this.handleChange(e) } name='password' type='password' placeholder='Password' onKeyPress={(e) => {this.handleKeyPress(e)}} required />
               </div>
               <button className='ui green button login_btn' type='button' onClick={this.handleSubmit}>Login</button>
               <button className='ui yellow button login_btn' type='button' onClick={() => {this.props.history.push('/registration')}}>Register</button>

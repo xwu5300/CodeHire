@@ -18,6 +18,7 @@ class UserProfileView extends Component {
     this.addSkill = this.addSkill.bind(this);
     this.deleteSkill = this.deleteSkill.bind(this);
     this.updateGithub = this.updateGithub.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   componentDidMount() {
@@ -60,7 +61,14 @@ class UserProfileView extends Component {
   }
 
   updateGithub() {
+    console.log('updating')
     this.props.updateCandidateGithub(localStorage.getItem('userId'), this.state.github_url);
+  }
+
+  handleKeyPress(event, cb) {
+    if (event.charCode === 13) {
+      cb();
+    }
   }
 
 
@@ -82,7 +90,7 @@ class UserProfileView extends Component {
               <div className='ui padded raised container segment'>
                 <div className='github_link'>
                   <i style={{ fontSize: '22px' }} className="github icon"></i>
-                  <input name='github_url' value={ this.state.github_url } onChange={ (e) => this.handleChange(e) } type='text' placeholder='github' />
+                  <input name='github_url' value={ this.state.github_url } onChange={ (e) => this.handleChange(e) } type='text' placeholder='github' onKeyPress={(e)=>{this.handleKeyPress(e, this.updateGithub)}} />
                   <button style={{ height: '35px', width:'15%', marginLeft:'5px' }} className='ui orange basic button' onClick={ () => this.updateGithub() }>save</button>
                 </div>
                 <div style={{float: 'right', marginTop: '30px'}}><b>Resume:</b>
@@ -105,7 +113,7 @@ class UserProfileView extends Component {
 
                 <div className='row' className="ui right labeled left icon input user_skills_input">
                   <i className="tags icon"></i>
-                  <input name='skill' type='text' placeholder="Add your skills..." value={ this.state.skill } onChange={ (e) => this.handleChange(e) } />
+                  <input name='skill' type='text' placeholder="Add your skills..." value={ this.state.skill } onKeyPress={(e)=>{this.handleKeyPress(e, ()=>{this.addSkill(this.state.skill)})}} onChange={ (e) => this.handleChange(e) } />
                   <a onClick={ () => this.addSkill(this.state.skill) } className="ui tag label"></a>
                 </div>
 

@@ -117,52 +117,52 @@ class Form extends Component {
     })
   }
 
-  addTest(event){
-    //find a way to get a unique value to use in place of name
-    console.log('event from add', event)
-    let newTest = <div className="two fields">
-      <div className="field">
-        <label>Test Case - Input</label>
-        <input name="testInput" type="text" placeholder="[[1, 3, 6, 0, -2], 9]" value={this.state.challenge.value} onChange={this.handleChange}/>
-      </div>
-      <div className="field">
-        <label>Test Case - Output</label>
-        <input name="testOutput" type="text" placeholder="[1, 2]" value={this.state.challenge.value} onChange={this.handleChange}/>
-      </div>
-      <div className="ui icon button" style={{float: "right"}} onClick={()=> this.deleteTest()}><i className="minus icon"></i></div>
-    </div>
+  // addTest(event){
+  //   //find a way to get a unique value to use in place of name
+  //   console.log('event from add', event)
+  //   let newTest = <div className="two fields">
+  //     <div className="field">
+  //       <label>Test Case - Input</label>
+  //       <input name="testInput" type="text" placeholder="[[1, 3, 6, 0, -2], 9]" value={this.state.challenge.value} onChange={this.handleChange}/>
+  //     </div>
+  //     <div className="field">
+  //       <label>Test Case - Output</label>
+  //       <input name="testOutput" type="text" placeholder="[1, 2]" value={this.state.challenge.value} onChange={this.handleChange}/>
+  //     </div>
+  //     <div className="ui icon button" style={{float: "right"}} onClick={()=> this.deleteTest()}><i className="minus icon"></i></div>
+  //   </div>
 
-    this.state.challenge.testCases = this.state.challenge.testCases.concat([newTest])
-    this.setState({challenge: this.state.challenge})
-  }
+  //   this.state.challenge.testCases = this.state.challenge.testCases.concat([newTest])
+  //   this.setState({challenge: this.state.challenge})
+  // }
 
-  deleteTest() {
-    //only deletes for the back and not specific one clicked
-    this.state.challenge.testCases = this.state.challenge.testCases.slice(0, -1)
-    this.setState({challenge: this.state.challenge})
-  }
+  // deleteTest() {
+  //   //only deletes for the back and not specific one clicked
+  //   this.state.challenge.testCases = this.state.challenge.testCases.slice(0, -1)
+  //   this.setState({challenge: this.state.challenge})
+  // }
 
-  addExample() {
-    let newExample = <div className="two fields">
-      <div className="field">
-        <label>Example - Input</label>
-        <input name="exampleInput" type="text" placeholder="[[1, 4, -2, 6, 9], 15]" value={this.state.challenge.value} onChange={this.handleChange}/>
-      </div>
-      <div className="field">
-        <label>Example - Output</label>
-        <input name="exampleOutput" type="text" placeholder="[3, 4]" value={this.state.challenge.value} onChange={this.handleChange}/>
-      </div>
-      <div className="ui icon button" style={{float: "right"}} onClick={()=> this.deleteExample()}><i className="minus icon"></i></div>
-    </div>
-    this.state.challenge.exampleCases = this.state.challenge.exampleCases.concat([newExample])
-    this.setState({challenge: this.state.challenge})
-  }
+  // addExample() {
+  //   let newExample = <div className="two fields">
+  //     <div className="field">
+  //       <label>Example - Input</label>
+  //       <input name="exampleInput" type="text" placeholder="[[1, 4, -2, 6, 9], 15]" value={this.state.challenge.value} onChange={this.handleChange}/>
+  //     </div>
+  //     <div className="field">
+  //       <label>Example - Output</label>
+  //       <input name="exampleOutput" type="text" placeholder="[3, 4]" value={this.state.challenge.value} onChange={this.handleChange}/>
+  //     </div>
+  //     <div className="ui icon button" style={{float: "right"}} onClick={()=> this.deleteExample()}><i className="minus icon"></i></div>
+  //   </div>
+  //   this.state.challenge.exampleCases = this.state.challenge.exampleCases.concat([newExample])
+  //   this.setState({challenge: this.state.challenge})
+  // }
 
-  deleteExample() {
-    //only deletes for the back and not specific one clicked
-    this.state.challenge.exampleCases = this.state.challenge.exampleCases.slice(0,-1)
-    this.setState({challenge:this.state.challenge})
-  }
+  // deleteExample() {
+  //   //only deletes for the back and not specific one clicked
+  //   this.state.challenge.exampleCases = this.state.challenge.exampleCases.slice(0,-1)
+  //   this.setState({challenge:this.state.challenge})
+  // }
 
   render() {
     return (
@@ -239,15 +239,3 @@ class Form extends Component {
 }
 
 export default Form;
-
-
-// <div className="two fields">
-//   <div className="field">
-//     <label>Example - Input</label>
-//     <input name="exampleInput" type="text" placeholder="[[1, 4, -2, 6, 9], 15]" value={this.state.challenge.exampleInput} onChange={this.handleChange}/>
-//   </div>
-//   <div className="field">
-//     <label>Example - Output</label>
-//     <input name="exampleOutput" type="text" placeholder="[3, 4]" value={this.state.challenge.exampleOutput} onChange={this.handleChange}/>
-//   </div>
-// </div>
