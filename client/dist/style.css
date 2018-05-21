@@ -170,40 +170,86 @@ body {
 
 /* ------- User profile --------- */
 
+.user_info_container {
+	min-height: 300px;
+}
+
+.profile_pic_container{
+	width: 250px;
+	display: block;
+	margin: auto;
+	position: relative;
+	top: 10px;
+}
+
 .main_profile_container {
 	margin: 100px auto;
-	width: 60%;
+	width: 80%;
 }
 
 .user_skills_container {
-	margin-top: 100px;
 	margin-bottom: 10px;
 	height: 300px;
 }
 
 .user_skills_input {
 	float: right;
+    bottom: 40px;
 	font-size: 22px
+	box-shadow: 1px 1px 10px;
 }
 
 .user_skills_input input {
   margin-right: 10px;
-  margin-top: 50px;
-	width: 85%;
+  width: 85%;
 }
 
 .profile_header {
 	text-align: center;
 }
 
+.github_link {
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+
 .github_link input {
-	width: 60%;
+	width: 70%;
 	height: 35px;
 }
 
 .skill_div {
 	font-size: 20px;
 }
+
+.user_resume_container {
+	margin-top: 30px;
+	margin-left: 15px;
+}
+
+
+.resume_div {
+	width: 50%;
+	height: 50px;
+	font-size: 22px;
+	padding-top: 25px;
+	background-color: rgba(0,0,0,0.2);
+	border-radius: 10px;
+	text-align: center;
+	margin-bottom: 10px;
+	color: white;
+}
+
+.resume_btns {
+	display: inline-block;
+}
+
+.user_resume_container button {
+	margin-top: 10px;
+}
+
+
 
 .ui.small.horizontal.list {
   margin-top: 40px;
@@ -226,25 +272,11 @@ body {
 	margin-left: 80px
 }
 
-.user_resume_container {
-	margin-top: 15px;
-	margin-left: 25px;
+.user_liveCoding_container {
+	position: relative;
+	top: 125px;
+	width: 90%;
 }
-
-.user_resume_container button {
-	margin-top: 10px;
-}
-
-.resume_div {
-	width: 40%;
-	height: 50px;
-	border: 3px solid orange;
-	border-radius: 10px;
-	text-align: center;
-	margin-bottom: 10px;
-}
-
-
 
 
 /* ------- Admin live coding ------- */

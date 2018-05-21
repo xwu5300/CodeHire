@@ -100,7 +100,7 @@ module.exports.getInitialChallenge = (companyId) => {
 };
 
 //set initial challenge
-module.exports.setInitialChallenge = (username, companyId, challengeId, duration) => {
+module.exports.setInitialChallenge = (companyId, challengeId, duration) => {
   console.log('SET INITIAL CHALLENGE', companyId, challengeId, duration);
 
   return knex('all_challenges')
@@ -112,7 +112,6 @@ module.exports.setInitialChallenge = (username, companyId, challengeId, duration
   })
   .update({
     initial: false,
-    username: username
   })
   .then(() => {
     return knex('all_challenges')
@@ -127,7 +126,6 @@ module.exports.setInitialChallenge = (username, companyId, challengeId, duration
     .update({
       initial: true,
       duration: duration,
-      username: username
     })
     .then(() => {
       console.log('Updated initial challenge in db');
