@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { VictoryChart, VictoryAxis, VictoryTheme, VictoryGroup, VictoryScatter } from 'victory';
+import { VictoryChart, VictoryLabel, VictoryAxis, VictoryTheme, VictoryLine } from 'victory';
 
 
 class AllChallengeResults extends Component {
@@ -43,7 +43,20 @@ class AllChallengeResults extends Component {
     }, {})
 
     return (
-      <div>Graff</div>
+      <VictoryChart>
+        <VictoryLine
+        data={companyData} 
+        style={{data: {stroke: '#FF00FF', strokeWidth: 1}}}
+        
+        />
+
+        <VictoryLabel
+        text={`Average Pass Rate`}
+        verticalAnchor={"end"}
+        x={140}
+        y={30}
+        />
+      </VictoryChart>
     )
   }
 }
