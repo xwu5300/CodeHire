@@ -12,7 +12,7 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PrivateRoute from '../components/PrivateRoute.jsx';
 
-import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, fetchCompanyResults, fetchCandidateList, getChallengeInfo, updateChallengeDate, getUsername, searchUsers, saveToFavorites, getFavorites, removeFromFavorites, fetchAllResults } from '../actions/adminActions';
+import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, fetchCompanyResults, fetchCandidateList, getChallengeInfo, updateChallengeDate, getUsername, searchUsers, saveToFavorites, getFavorites, removeFromFavorites, fetchAllResults, getCompanyData } from '../actions/adminActions';
 import { fetchInitialChallenge, currentCompanyCalendar, fetchCandidateInfo } from '../actions/userActions';
 
 class AdminContainer extends Component {
@@ -63,6 +63,7 @@ const mapStateToProps = (state) => ({
    candidate_list: state.candidate_list.candidate_list,
    favorites: state.favorites.favorites,
    all_results: state.all_results.all_results,
+   company_data: state.company_data.company_data
 });
 
 const mapDispatchToProps = {
@@ -71,7 +72,7 @@ const mapDispatchToProps = {
   updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn,
   toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule,
   fetchCompanyResults, fetchCandidateList, getChallengeInfo, getUsername, updateChallengeDate, searchUsers,
-  saveToFavorites, getFavorites, removeFromFavorites, fetchAllResults
+  saveToFavorites, getFavorites, removeFromFavorites, fetchAllResults, getCompanyData
 }
 
 const ChallengeListComponent = connect(mapStateToProps, mapDispatchToProps)(ChallengeListView);
@@ -81,7 +82,6 @@ const LiveCodingComponent = connect(mapStateToProps, mapDispatchToProps)(LiveCod
 const AdminProfileComponent = connect(mapStateToProps, mapDispatchToProps)(AdminProfileView);
 const UserResultsComponent = connect(mapStateToProps, mapDispatchToProps)(UserResults)
 const HireComponent = connect(mapStateToProps, mapDispatchToProps)(HireView);
-
 
 const connectAdminContainer = connect(mapStateToProps, mapDispatchToProps)(AdminContainer);
 
