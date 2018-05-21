@@ -102,6 +102,7 @@ module.exports.deleteCandidateSkill = (candidateId, skill, callback) => {
 
 module.exports.saveToFavorites = (companyId, candidateId) => {
   return knex('company_user')
+  .where({company_id: companyId, user_id: candidateId})
   .update({
     user_id: candidateId
   })
