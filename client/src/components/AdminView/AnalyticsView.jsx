@@ -11,6 +11,8 @@ class AnalyticsView extends Component {
 
   componentDidMount() {
     this.props.fetchCandidateList(localStorage.getItem('userId'));
+    this.props.getCompanyData(localStorage.getItem('userId'));
+    this.props.fetchAllResults();
   }
 
   render() {
@@ -38,7 +40,7 @@ class AnalyticsView extends Component {
             )
           }) : null}
           <div>
-            <AllChallengeResults />
+            <AllChallengeResults getAllResults={this.props.fetchAllResults} getCompanyResults={this.props.getCompanyData} companyResults={this.props.company_data} allResults={this.props.all_results}/>
           </div>
       </div>
     )

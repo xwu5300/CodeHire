@@ -441,6 +441,17 @@ router.get('/api/allResults', (req, res) => {
   })
 })
 
+router.get('/api/companyData', (req, res) => {
+  let companyId = jwt.decode(req.query.companyId, secret).id;
+  resultsControllers.fetchCompanyData(companyId)
+  .then((data) => {
+    res.send(data);
+  })
+  .catch((err) => {
+    console.log('Error sending compant results', err);
+  })
+})
+
 /* ------- Favorites Routes -------- */
 /* ------- Search Users/Favorites Routes -------- */
 

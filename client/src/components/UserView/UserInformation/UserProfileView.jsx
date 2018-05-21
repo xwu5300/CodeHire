@@ -86,7 +86,7 @@ class UserProfileView extends Component {
             <div className="profile_photo_container">
               <div className="ui small image" >
               {!this.props.photo ? 
-                <img src="https://bit.ly/2pguvGq" alt="Empty profile photo"/> :
+                <img src="blank-profile-picture-973460_1280.png" alt="Empty profile photo"/> :
                 <img src={this.props.photo} className="responsive" style={{width: '150px', height: '150px'}}/>}
               </div>
               <br/>
