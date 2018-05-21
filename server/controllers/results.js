@@ -95,6 +95,7 @@ module.exports.fetchAllResults = () => {
   .innerJoin('all_challenges', 'results.challenge_id', 'all_challenges.id')
   .innerJoin('company_schedule', 'company_schedule.id', 'results.company_schedule_id')
   .then((res) => {
+    console.log('res in fetchalll results from reducers', res)
     return res;
   })
   .catch((err) => {

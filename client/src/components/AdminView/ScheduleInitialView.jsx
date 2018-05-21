@@ -53,7 +53,7 @@ class ScheduleInitialView extends Component {
 
   toggleCurrentlyOn(id) {
     this.setState({
-      duration: '',
+      // duration: '',
       currentlyOn: id
     })
   }
