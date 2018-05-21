@@ -74,14 +74,13 @@ class ScheduleInitialView extends Component {
        height: '200px'
     }
 
-   
-  console.log('initial challenges', this.state.initialChallenges)
+  
     return (
-
       <div>
         <h4>Select from your saved challenges:</h4>
         <div className='ui cards' style={{ marginTop: '40px' }}>
           {!this.state.initialChallenges ? 'No saved challenges to choose from' : this.state.initialChallenges.map((item, i) => {
+            console.log('ITTTEM', item);
             return (
               <div className='ui card' style={ this.state.isSelected === item.id ? selected : notSelected } key={ item.id }>
                 <div className='content'>

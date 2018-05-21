@@ -17,7 +17,7 @@ CREATE TABLE users (
   username VARCHAR(30) NOT NULL,
   phone VARCHAR(20) NULL,
   information VARCHAR(255) NULL,
-  candidate_skills TEXT[[]] NULL,
+  candidate_skills TEXT[] NULL,
   github_url VARCHAR(255) NULL,
   logo_url VARCHAR(255) NULL,
   role VARCHAR(30) NULL,

@@ -69,7 +69,6 @@ class CompanyScheduleView extends Component {
   }
 
   render() {
-    console.log('com sched props', this.props)
     if (this.props.initial_challenge[0]) {
       return (
         <div>
@@ -79,14 +78,17 @@ class CompanyScheduleView extends Component {
           <div className='ui active item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
         </div>
-        <h1>{this.props.initial_challenge[0].name}</h1> 
-        <h2>{this.props.initial_challenge[0].information}</h2> 
-        <br/>
-        <div className='ui raised very padded container segment' style={this.state.style}>
+     
+        <div className='schedule_container'>
+
+        <div className='ui raised very padded container segment l' style={this.state.style}>
+          <h1>{ this.props.company_name }</h1> 
+          <h2>{this.props.initial_challenge[0].information}</h2> 
+          <hr />
         <h2>
         Before You Schedule Live Challenge - You Need To Pass Initial Challenge
         </h2>
-        <button onClick={() => {
+        <button className='ui orange inverted button' onClick={() => {
           // if (!this.props.pass_initial) {
           //   this.props.history.push('/user/challenge')
           // } else {
@@ -100,9 +102,8 @@ class CompanyScheduleView extends Component {
             Take Initial Challenge</button>
           {/* <span className='ui container segment'> </span> */}
         </div>
-        <br/>
-        {this.props.initial_challenge[0].name}'s Live Challenge:
-        <div className='schedule_container'>
+
+
         {this.props.company_schedule.length ?
         <CompanyScheduleTableView updateStyle={this.updateStyle} saveCandidateCalendar={this.props.saveCandidateCalendar} companyCalendar={this.props.company_schedule} passInitial={this.props.pass_initial} fetchCandidateResults={this.props.fetchCandidateResults}/>
         : <div> {this.props.initial_challenge[0].name} Does Not Have Any Upcoming Live Challenge </div>

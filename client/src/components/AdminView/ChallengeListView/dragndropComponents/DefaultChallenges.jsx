@@ -14,6 +14,7 @@ class DefaultChallenges extends Component {
       <h1>Default Challenges</h1>
       <ul>
       {this.props.defaultChallenges.map((challenge) => {
+        console.log('defaultChallenges', challenge)
         return (
           <ChallengeCard 
            key={challenge.id}

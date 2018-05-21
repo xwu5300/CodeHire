@@ -13,7 +13,7 @@ import PrivateRoute from '../components/PrivateRoute.jsx';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCandidateResults, getResume, saveResume, removeResume, updateCandidatePhoto } from '../actions/userActions';
+import { viewCompanyProfile, fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCandidateResults, getResume, saveResume, removeResume, updateCandidatePhoto } from '../actions/userActions';
 import { fetchCompanySchedule, fetchCompanyResults, getUsername } from '../actions/adminActions' ;
 
 import axios from 'axios';
@@ -60,14 +60,16 @@ const mapStateToProps = function(state) {
     pass_initial: state.pass_initial.pass_initial,
     company_list: state.company_list.company_list,
     resume_name: state.resume_name.resume_name,
-    resume_url: state.resume_url.resume_url
+    resume_url: state.resume_url.resume_url,
+    company_name: state.company_name.company_name
 }};
 
 const mapDispatchToProps = {
    fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, 
    deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, 
    saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCompanySchedule, 
-   fetchCompanyResults, fetchCandidateResults, getResume, saveResume, removeResume, updateCandidatePhoto, getUsername
+   fetchCompanyResults, fetchCandidateResults, getResume, saveResume, removeResume, updateCandidatePhoto, getUsername,
+   viewCompanyProfile
 }
 
 const connectComponent = connect(mapStateToProps, mapDispatchToProps)(UserContainer); //code cleaned

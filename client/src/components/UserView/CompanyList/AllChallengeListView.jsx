@@ -41,7 +41,6 @@ class AllChallengeListView extends Component {
       {this.props.company_schedule.length ?
       this.props.company_schedule.map((company, i) => {
         return (
-
           <div className='item' key={i}>
             <span className='company_logo'>
               <img className='ui image' src={`${company.logo_url || 'http://dev.jobkhoji.com/assets/images/default_company_icon.png'}`} />
@@ -52,7 +51,8 @@ class AllChallengeListView extends Component {
                 <p><b>Coming Live Challenge:</b> {moment(company.time).format('MMMM Do YYYY dddd, h:mm A')}</p>
               </div>
               <button className='ui orange button view_company_btn' onClick={() => {
-                this.encodeCompanyId(company.company_id)
+                this.encodeCompanyId(company.company_id);
+                this.props.viewCompanyProfile(company.name);
                 this.props.history.push('/user/schedule');
               }}>View Company Page
               </button>
