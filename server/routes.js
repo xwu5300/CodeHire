@@ -33,11 +33,8 @@ router.patch('/api/companyInfo', (req, res) => {
 
 // Update Candidate Info, including skills and github URL
 router.patch('/api/candidateInfo', (req, res) => {
-  let candidateId = jwt.decode(req.body.username, secret).id;
-
-  console.log('skills', req.body.skills);
-
-  profileControllers.updateCandidateInfo(candidateId, req.body.skills, req.body.github_url)
+  let candidateId = jwt.decode(req.body.userId, secret).id;
+  profileControllers.updateCandidateInfo(candidateId, req.body.skills, req.body.github_url, req.body.photo)
   .then(() => {
     res.send();
   })

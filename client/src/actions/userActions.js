@@ -103,8 +103,8 @@ export const fetchCandidateInitialResults = (companyId, candidateId) => (dispatc
 
 /* ----------- User Profile ------------ */
 
-export const updateCandidateSkills = (username, skills, callback) => (dispatch) => {
-  axios.patch('/api/candidateInfo', { username, skills })
+export const updateCandidateSkills = (userId, skills, callback) => (dispatch) => {
+  axios.patch('/api/candidateInfo', { userId, skills })
   .then(() => {
     if (callback) {
       callback();
@@ -115,12 +115,22 @@ export const updateCandidateSkills = (username, skills, callback) => (dispatch) 
   })
 }
 
+export const updateCandidatePhoto = (userId, photo) => (dispatch) => {
+  axios.patch('/api/candidateInfo', { userId, photo })
+  .then(() => {
+    dispatch(fetchCandidateInfo(userId))
+    console.log('profile photo successfully uploaded');
+  })
+  .catch((err) => {
+    console.log('unable to upload profile photo', err);
+  })
+}
+
 export const deleteCandidateSkill = (candidateId, skill, callback) => (dispatch) => {
   axios.delete('/api/candidateInfo', { params: { candidateId, skill } })
   .then((response) => {
     console.log('response', response);
     if(callback) {
-
       callback(response)
     }
   })
@@ -130,8 +140,11 @@ export const deleteCandidateSkill = (candidateId, skill, callback) => (dispatch)
 }
 
 
-export const updateCandidateGithub = (username, github_url) => (dispatch) => {
-  axios.patch('/api/candidateInfo', { username, github_url })
+export const updateCandidateGithub = (userId, github_url) => (dispatch) => {
+  axios.patch('/api/candidateInfo', { userId, github_url })
+  .then(() => {
+    dispatch(fetchCandidateInfo(userId))
+  })
   .catch((err) => {
     console.log(err);
   })
@@ -141,7 +154,7 @@ export const fetchCandidateInfo = (candidateId, callback) => (dispatch) => {
   axios.get('/api/candidateInfo', { params: { candidateId }})
     .then((info) => {
       console.log('infooooo', info);
-      dispatch({ type: GET_CANDIDATE_INFO, skills: info.data[0].candidate_skills, github_url: info.data[0].github_url })
+      dispatch({ type: GET_CANDIDATE_INFO, skills: info.data[0].candidate_skills, github_url: info.data[0].github_url, photo: info.data[0].profile_photo })
         if(callback) {
           callback();
         }

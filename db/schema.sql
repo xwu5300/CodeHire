@@ -23,7 +23,8 @@ CREATE TABLE users (
   role VARCHAR(30) NULL,
   token TEXT NOT NULL,
   resume_url TEXT NULL,
-  resume_name VARCHAR(255) NULL
+  resume_name VARCHAR(255) NULL,
+  profile_photo TEXT NULL
 );
 
 CREATE TABLE all_challenges (

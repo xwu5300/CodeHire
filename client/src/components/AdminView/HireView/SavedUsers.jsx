@@ -15,7 +15,9 @@ class SavedUsers extends Component {
       <div>
       {this.props.favorites.length === 0 ? null : this.props.favorites.map((user) => {
         return(
-          <div>
+          <div className="ui segment">
+          {user.profile_photo ?
+            <img src={user.profile_photo} className="ui small left floated image" style={{width: '100px'}}/> : <img src='https://bit.ly/2pguvGq' style={{width: '100px'}} className="ui small left floated image"/> }
             <div>Username: {user.username}</div>
             <div>Skills: {user.candidate_skills ? user.candidate_skills : 'None added'}</div>
             <div>Info: {user.information ? user.information : 'None added'} </div>

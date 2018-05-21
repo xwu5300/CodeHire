@@ -182,7 +182,7 @@ body {
 }
 
 .user_skills_container {
-	margin-top: 30px;
+	margin-top: 100px;
 	margin-bottom: 10px;
 	height: 300px;
 }
@@ -193,7 +193,8 @@ body {
 }
 
 .user_skills_input input {
-	margin-right: 10px;
+  margin-right: 10px;
+  margin-top: 50px;
 	width: 85%;
 }
 
@@ -210,6 +211,13 @@ body {
 	font-size: 20px;
 }
 
+.ui.small.horizontal.list {
+  margin-top: 40px;
+}
+
+.profile_photo_container {
+  margin-bottom: 50px;
+}
 
 /* -------- User Coding ---------- */
 .examples {

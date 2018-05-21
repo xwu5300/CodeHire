@@ -29,7 +29,7 @@ module.exports.getCompanyInfo = (userId, callback) => {
 
 module.exports.getCandidateInfo = (candidateId, callback) => {
   return knex('users')
-  .select('candidate_skills', 'github_url')
+  .select('candidate_skills', 'github_url', 'profile_photo')
   .where({ id: candidateId })
   .then((data) => {
     callback(data);
@@ -42,7 +42,7 @@ module.exports.getCandidateInfo = (candidateId, callback) => {
 
 // Insert skill or github_url into 'users' table
 
-module.exports.updateCandidateInfo = (candidateId, skill, github_url) => {
+module.exports.updateCandidateInfo = (candidateId, skill, github_url, photo) => {
   
   if(skill) {
     return knex('users')
@@ -56,6 +56,17 @@ module.exports.updateCandidateInfo = (candidateId, skill, github_url) => {
       .update({ github_url: github_url })
       .catch((err) => {
         console.log(err);
+      })
+    }
+    if (photo) {
+      return knex('users')
+      .where({ id: candidateId })
+      .update({ profile_photo: photo })
+      .then(() => {
+        console.log('updated profile photo');
+      })
+      .catch((err) => {
+        console.log('unable to upload profile photo', err);
       })
     }
   }

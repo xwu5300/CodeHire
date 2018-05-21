@@ -24,7 +24,11 @@ class Dropbox extends Component {
     this.setState({
       fileName: result.filesUploaded[0].filename
     })
-    this.props.saveResume(result.filesUploaded[0].url, result.filesUploaded[0].filename, localStorage.getItem('userId'));
+    if (this.props.photo) {
+      this.props.savePhoto(localStorage.getItem('userId'), result.filesUploaded[0].url);
+    } else {
+      this.props.saveResume(result.filesUploaded[0].url, result.filesUploaded[0].filename, localStorage.getItem('userId'));
+    }
   }
 
 
@@ -35,9 +39,14 @@ class Dropbox extends Component {
       onSuccess={ this.success }
       onError={'onError'}
       render={({ onPick }) => (
+        !this.props.photo ?
         <div className='user_resume_container'>
           <div className='resume_div'>{ this.state.fileName }</div>
           <button onClick={onPick} className='ui orange button'>Choose File</button>
+        </div> :
+        <div>
+          <div className='photo_div'>{this.state.fileName}</div>
+          <button onClick={onPick} className="ui button">Upload Photo</button>
         </div>
       )}
     />

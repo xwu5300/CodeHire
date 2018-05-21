@@ -14,7 +14,6 @@ class UserProfileView extends Component {
     }
 
     this.handleChange = this.handleChange.bind(this);
-
     this.addSkill = this.addSkill.bind(this);
     this.deleteSkill = this.deleteSkill.bind(this);
     this.updateGithub = this.updateGithub.bind(this);
@@ -71,7 +70,6 @@ class UserProfileView extends Component {
     }
   }
 
-
   render() {
     return (
       <div>
@@ -85,9 +83,19 @@ class UserProfileView extends Component {
         <div className='main_profile_container'>
           <div className='ui padded grid'>
             <div className='ui raised container segment'>
-
+            <div className="profile_photo_container">
+              <div className="ui small image" >
+              {!this.props.photo ? 
+                <img src="https://bit.ly/2pguvGq" alt="Empty profile photo"/> :
+                <img src={this.props.photo} className="responsive" style={{width: '150px', height: '150px'}}/>}
+              </div>
+              <br/>
+              <div>
+                <Dropbox savePhoto={this.props.updateCandidatePhoto} photo={true}/>
+              </div>
+            </div>
             <div className='row'>
-              <div className='ui padded raised container segment'>
+              <div >
                 <div className='github_link'>
                   <i style={{ fontSize: '22px' }} className="github icon"></i>
                   <input name='github_url' value={ this.state.github_url } onChange={ (e) => this.handleChange(e) } type='text' placeholder='github' onKeyPress={(e)=>{this.handleKeyPress(e, this.updateGithub)}} />
@@ -103,14 +111,14 @@ class UserProfileView extends Component {
                 </div>
                 :  "Upload your resume"}
                 </div>
-                <Dropbox saveResume={this.props.saveResume} getResume={this.props.getResume}/>
+                <Dropbox saveResume={this.props.saveResume} getResume={this.props.getResume} photo={false}/>
               </div>
             </div>
 
 
             <div className='row user_skills_container'>
-              <div className='ui padded raised container segment' style={{ height: '300px' }}>
-
+              <div style={{ height: '300px' }}>
+              <h2>Skills</h2>
                 <div className='row' className="ui right labeled left icon input user_skills_input">
                   <i className="tags icon"></i>
                   <input name='skill' type='text' placeholder="Add your skills..." value={ this.state.skill } onKeyPress={(e)=>{this.handleKeyPress(e, ()=>{this.addSkill(this.state.skill)})}} onChange={ (e) => this.handleChange(e) } />
@@ -118,7 +126,7 @@ class UserProfileView extends Component {
                 </div>
 
                 <div className='row'>
-                  <h2>Skills</h2>
+                  
                   <div className='ui small horizontal list'>
                   {this.state.all_skills ? this.state.all_skills.map((skill, i) => {
                     return (
