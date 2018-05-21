@@ -21,12 +21,6 @@ import { fetchCompanySchedule, fetchCompanyResults, getUsername } from '../actio
 import axios from 'axios';
 
 class UserContainer extends Component {
-
-  componentDidMount() {
-    if(localStorage.getItem('userId') !== null && (this.props.history.location.pathname !== '/' || this.props.history.location.pathname !== '/registration')) {
-      this.props.getUsername(localStorage.getItem('userId'));
-    }
-  }
   
   render() {
     return (

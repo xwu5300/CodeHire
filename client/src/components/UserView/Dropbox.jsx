@@ -33,6 +33,7 @@ class Dropbox extends Component {
 
 
   render() {
+
   return (
     <ReactFilestack
       apikey={'A0lqArjXlRiOwVn8p9lRHz'}
@@ -40,13 +41,17 @@ class Dropbox extends Component {
       onError={'onError'}
       render={({ onPick }) => (
         !this.props.photo ?
-        <div className='user_resume_container'>
-          <div className='resume_div'>{ this.state.fileName }</div>
-          <button onClick={onPick} className='ui orange button'>Choose File</button>
+        <div className='user_resume_container' style={{ marginTop: '30px'}}>
+          <b>Resume:</b>
+          <div className='resume_div'><a href={ this.props.resume_url } target='_blank'>{ this.props.resume_name }</a></div>
+          <span className='resume_btns'>
+            <button onClick={onPick} className='ui orange button'>Choose File</button>
+            <button className="ui red button" onClick={() => {this.props.removeResume(localStorage.getItem('userId'))}}>Remove</button>
+          </span>
         </div> :
         <div>
           <div className='photo_div'>{this.state.fileName}</div>
-          <button onClick={onPick} className="ui button">Upload Photo</button>
+          <button onClick={onPick} className="ui orange inverted button" style={{ display: 'block', margin: 'auto' }}>Upload Photo</button>
         </div>
       )}
     />

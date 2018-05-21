@@ -95,7 +95,7 @@ class UserLiveCodingView extends Component {
     let company_id = localStorage.getItem('companyId')
     let candidate_id = localStorage.getItem('userId')
     let userSchedule_id = this.props.location.challenge.id
-    this.props.saveResults(companyScheduleId, result, submission, score, time, challenge_id, company_id, candidate_id, false, userSchedule_id, () => {})
+    this.props.saveResults(company_id, result, submission, score, time, challenge_id, company_id, candidate_id, false, userSchedule_id, () => {})
   }
 
   checkAnswer() {
@@ -183,45 +183,55 @@ class UserLiveCodingView extends Component {
           <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
         </div>
-        <h1>{this.props.location.challenge.name}</h1>
-        <br/>
-        <h2>Title: {this.props.location.challenge.title}</h2>
-        <h3>Difficulty: {this.props.location.challenge.difficulty}</h3>
-        <div> Instructions: {this.props.location.challenge.instruction}</div>
-        <div>
-          examples:
-          {this.state.exampleInputs.map((input, i) => {
-            return <div className="examples" key={i}>{input}</div>
-          })}
-          {this.state.exampleOutputs.map((output, i) => {
-            return <div className="examples" key={i}>{output}</div>
-          })}
-        </div>
-        <div> Time Limit: { this.state.minutes + ':' + this.state.seconds }</div>
-        <AceEditor
-          mode="javascript"
-          theme="monokai"
-          name="codehire"
-          onLoad={this.onLoad}
-          onChange={this.onChange}
-          fontSize={14}
-          showPrintMargin={true}
-          showGutter={true}
-          highlightActiveLine={true}
-          editorProps={{$blockScrolling: Infinity}}
-          value={this.state.code}
-          setOptions={{
-          showLineNumbers: true,
-          tabSize: 2,
-        }}/>
-        <select value={this.state.theme} onChange={this.handleTheme}>
-          <option value='monokai'>Monokai</option>
-          <option value='github'>Github</option>
-          <option value='twilight'>Twilight</option>
-          <option value='solarized_dark'>Solarized Dark</option>
-          <option value='terminal'>Terminal</option>
-        </select>
-      <button onClick={this.handleSubmit}> Submit Answer </button>
+
+        <div className='ui horizontal segments user_liveCoding_container' style={{ padding: '30px', margin: 'auto'}}>
+          <div classname='ui padded segment'>
+            <AceEditor
+              mode="javascript"
+              theme="monokai"
+              name="codehire"
+              onLoad={this.onLoad}
+              onChange={this.onChange}
+              fontSize={14}
+              showPrintMargin={true}
+              showGutter={true}
+              highlightActiveLine={true}
+              editorProps={{$blockScrolling: Infinity}}
+              value={this.state.code}
+              setOptions={{
+              showLineNumbers: true,
+              tabSize: 2,
+            }}/>
+            <select value={this.state.theme} onChange={this.handleTheme}>
+              <option value='monokai'>Monokai</option>
+              <option value='github'>Github</option>
+              <option value='twilight'>Twilight</option>
+              <option value='solarized_dark'>Solarized Dark</option>
+              <option value='terminal'>Terminal</option>
+            </select>
+            <button className='ui green button' style={{ float: 'right' }} onClick={this.handleSubmit}> Submit Answer </button>
+          </div>
+
+          <div className='ui padded segment' style={{ paddingLeft: '30px'}}>
+            <h1>{this.props.location.challenge.name}</h1>
+            <br/>
+            <h2>Title: {this.props.location.challenge.title}</h2>
+            <h3>Difficulty: {this.props.location.challenge.difficulty}</h3>
+            <div> Instructions: {this.props.location.challenge.instruction}</div>
+            <div>
+              examples:
+              {this.state.exampleInputs.map((input, i) => {
+                return <div className="examples" key={i}>{input}</div>
+              })}
+              {this.state.exampleOutputs.map((output, i) => {
+                return <div className="examples" key={i}>{output}</div>
+              })}
+            </div>
+            <div> Time Limit: { this.state.minutes + ':' + this.state.seconds }</div>
+            </div>
+
+        
+      </div>
       </div>
      )
   }
