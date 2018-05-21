@@ -87,7 +87,7 @@ class UserLiveCodingView extends Component {
   }
 
 
-  saveResults(result, submission, score, time) {
+  saveResults(companyScheduleId, result, submission, score, time) {
 
     this.socket.emit('candidate result', localStorage.getItem('username'), result);
     
@@ -174,13 +174,13 @@ class UserLiveCodingView extends Component {
   }
 
   render() {
-    console.log('liuve challeng', this.props.location.challenge)
+    // console.log('liuve challeng', this.props.location.challenge)
     return (
       <div>
         <div className="ui orange four item menu">
-          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.name }</div>
+          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui active item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
         </div>
         <h1>{this.props.location.challenge.name}</h1>

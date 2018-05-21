@@ -4,6 +4,17 @@ import { GET_INITIAL_CHALLENGE, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO, DELE
 import axios from 'axios';
 import swal from 'sweetalert2';
 
+export const fetchAllCompanyCalendars =(cb) => (dispatch) => {
+  axios.get('/api/companyCalendars')
+  .then(({data}) => {
+    dispatch({ type: GET_ALL_COMPANY_CALENDARS, payload: data })
+    cb()
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
+
 export const fetchCompanyList = (companyName) => (dispatch) => {
   axios.get('/api/companyList', { params: { companyName } })
   .then(({data}) => {
@@ -46,7 +57,6 @@ export const saveCandidateCalendar = (candidateId, companyScheduleId) => (dispat
 }
 
 export const deleteCandidateSchedule = (candidateScheduleId, candidateId) => (dispatch) => {
-  console.log('user action candidateId', candidateId)
   axios.delete('/api/cancelCandidateSchedule', { params: { candidateScheduleId, candidateId } })
   .then(() => {
     dispatch(fetchCandidateCalendar(candidateId));
