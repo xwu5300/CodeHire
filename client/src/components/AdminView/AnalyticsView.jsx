@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import UserResults from './UserResults.jsx';
+import AllChallengeResults from './AnalyticsView/AllChallengeResults.jsx';
 
 class AnalyticsView extends Component {
   constructor() {
@@ -36,6 +37,9 @@ class AnalyticsView extends Component {
               </div>
             )
           }) : null}
+          <div>
+            <AllChallengeResults />
+          </div>
       </div>
     )
   }
