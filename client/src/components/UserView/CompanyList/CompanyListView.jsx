@@ -19,19 +19,19 @@ class CompanyListView extends Component {
   }
 
   render() {
-    console.log('comp list view props', this.props.company_list)
+    // console.log('comp list view props', this.props.company_list)
     if (this.props.company_list.length) {
       let rows = this.props.company_list.map((company) => {
         let url = company.logo_url || 'http://dev.jobkhoji.com/assets/images/default_company_icon.png';
         return {
           id: company.id,
           logo: url,
-          company: [company.name, company.information]
+          company: {name: company.name, information: company.information}
         }
       })
       let columns = [
-        {accessor: 'logo', label: '', priorityLevel: 1, position: 1, CustomComponent: Image},
-        {accessor: 'company', label: 'Company', priorityLevel: 2, position: 2, CustomComponent: CompanyDetail},
+        {accessor: 'logo', label: '', priorityLevel: 1, position: 1, sortable: false, CustomComponent: Image},
+        {accessor: 'company', label: 'Company', priorityLevel: 2, sortable: true, position: 2, minWidth: 300, CustomComponent: CompanyDetail},
         {accessor: 'id', label: '', priorityLevel: 3, position: 3, CustomComponent: ViewCompanyPage}
       ]
 

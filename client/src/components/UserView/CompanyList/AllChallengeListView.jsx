@@ -39,10 +39,10 @@ class AllChallengeListView extends Component {
         }
       })
       let columns = [
-        {accessor: 'logo', label: '', priorityLevel: 1, position: 1, CustomComponent: Image},
-        {accessor: 'name', label: 'Company', priorityLevel: 2, position: 2},
-        {accessor: 'time', label: 'Time', priorityLevel: 3, position: 3},
-        {accessor: 'duration', label: 'Duration', priorityLevel: 4, position: 4},
+        {accessor: 'logo', label: '', priorityLevel: 1, position: 1, sortable: false, CustomComponent: Image},
+        {accessor: 'name', label: 'Company', priorityLevel: 2, position: 2, sortable: true},
+        {accessor: 'time', label: 'Time', priorityLevel: 3, position: 3, sortable: true},
+        {accessor: 'duration', label: 'Duration', priorityLevel: 4, position: 4, sortable: true},
         {accessor: 'id', label: '', priorityLevel: 5, position: 5, CustomComponent: ViewCompanyPage}
       ]
 
