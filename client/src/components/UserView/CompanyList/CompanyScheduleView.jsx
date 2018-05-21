@@ -70,7 +70,6 @@ class CompanyScheduleView extends Component {
   }
 
   render() {
-    console.log('company schedue view props',this.props)
     if (this.props.initial_challenge.length) {
       return (
         <div>
@@ -80,14 +79,17 @@ class CompanyScheduleView extends Component {
           <div className='ui active item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
         </div>
-        <h1>{this.props.initial_challenge[0].name}</h1> 
-        <h2>{this.props.initial_challenge[0].information}</h2> 
-        <br/>
-        <div className='ui raised very padded container segment' style={this.state.style}>
+     
+        <div className='schedule_container'>
+
+        <div className='ui raised very padded container segment l' style={this.state.style}>
+          <h1>{ this.props.company_name }</h1> 
+          <h2>{this.props.initial_challenge[0].information}</h2> 
+          <hr />
         <h2>
         Before You Schedule Live Challenge - You Need To Pass Initial Challenge
         </h2>
-        <button onClick={() => {
+        <button className='ui orange inverted button' onClick={() => {
           this.isTaken()
           }}>
             Take Initial Challenge</button>

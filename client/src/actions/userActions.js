@@ -1,5 +1,5 @@
 
-import { GET_INITIAL_CHALLENGE, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO, DELETE_CANDIDATE_SKILL, GET_CURRENT_COMPANY_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS, GET_COMPANY_LIST, GET_CANDIDATE_RESULTS, GET_RESUME, GET_ALL_COMPANY_CALENDARS } from '../constants/actionTypes';
+import { GET_INITIAL_CHALLENGE, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO, DELETE_CANDIDATE_SKILL, GET_CURRENT_COMPANY_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS, GET_COMPANY_LIST, GET_CANDIDATE_RESULTS, GET_RESUME, GET_COMPANY_NAME, GET_ALL_COMPANY_CALENDARS } from '../constants/actionTypes';
 
 import axios from 'axios';
 import swal from 'sweetalert2';
@@ -180,6 +180,11 @@ export const fetchCandidateInfo = (candidateId, username, callback) => (dispatch
       .catch((err) => {
         console.log(err);
       })
+  }
+
+
+  export const viewCompanyProfile = (name) => (dispatch) => {
+    dispatch({ type: GET_COMPANY_NAME, name: name })
   }
 
 export const saveResume = (resumeUrl, resumeName, userId) => (dispatch) => {

@@ -274,10 +274,15 @@ body {
 
 
 /* -------- Company List View --------- */
+
+
 .schedule_container {
+	position: relative;
+	top: 125px;
 	width: 80%;
 	margin: auto;
 }
+
 
 .company_logo {
 	width: 150px;
