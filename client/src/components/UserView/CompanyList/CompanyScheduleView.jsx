@@ -58,7 +58,6 @@ class CompanyScheduleView extends Component {
 
   isTaken() {
     this.props.fetchCandidateInitialResults(localStorage.getItem('companyId'), localStorage.getItem('userId'), (results) => {
-      console.log("company schedule viewinitial_challenge", results)
       this.handleClick(results)
     })
   }

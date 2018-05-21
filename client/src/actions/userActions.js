@@ -57,7 +57,6 @@ export const saveCandidateCalendar = (candidateId, companyScheduleId) => (dispat
 }
 
 export const deleteCandidateSchedule = (candidateScheduleId, candidateId) => (dispatch) => {
-  console.log('user action candidateId', candidateId)
   axios.delete('/api/cancelCandidateSchedule', { params: { candidateScheduleId, candidateId } })
   .then(() => {
     dispatch(fetchCandidateCalendar(candidateId));
@@ -96,7 +95,6 @@ export const saveResults = (companyScheduleId, isPassed, code, score, completedA
 }
 
 export const fetchCandidateResults = (candidateId, companyScheduleId, cb) => (dispatch) => {
-  console.log('user action candidateId', candidateId)
   axios.get('/api/results/candidate', { params: { candidateId, companyScheduleId } })
   .then(({data}) => {
     dispatch({ type: GET_CANDIDATE_RESULTS, payload: data });

@@ -22,7 +22,6 @@ class CompanyScheduleTableView extends Component {
 
   handleClick(scheduleId, results) {
     let daysLeft = 0
-    console.log('comp schedu table results ', results)
     if (results.length) {
       let days = this.getTimeOut(results)
       daysLeft = 30 - days;
@@ -39,14 +38,13 @@ class CompanyScheduleTableView extends Component {
   }
 
   isTaken(scheduleId) {
-    console.log(localStorage.getItem('userId'), scheduleId)
     this.props.fetchCandidateResults(localStorage.getItem('userId'), scheduleId, (results) => {
       this.handleClick(scheduleId, results)
     })
   }
 
   render() {
-    console.log('compan sched table view props', this.props)
+    // console.log('compan sched table view props', this.props)
     return(
       <table className='ui inverted table'>
         <thead>
