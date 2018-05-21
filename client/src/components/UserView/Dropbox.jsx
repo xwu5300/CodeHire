@@ -13,16 +13,22 @@ class Dropbox extends Component {
   constructor(props) {
     super(props);
 
-    this.state={ file_name: '' }
+    this.state = { 
+      fileName: ''
+    }
 
     this.success = this.success.bind(this);
   }
 
   success(result) {
     this.setState({
-
-      file_name: result.filesUploaded[0].filename
+      fileName: result.filesUploaded[0].filename
     })
+    if (this.props.photo) {
+      this.props.savePhoto(localStorage.getItem('userId'), result.filesUploaded[0].url);
+    } else {
+      this.props.saveResume(result.filesUploaded[0].url, result.filesUploaded[0].filename, localStorage.getItem('userId'));
+    }
   }
 
 
@@ -32,11 +38,15 @@ class Dropbox extends Component {
       apikey={'A0lqArjXlRiOwVn8p9lRHz'}
       onSuccess={ this.success }
       onError={'onError'}
-      options={ basicOptions }
       render={({ onPick }) => (
+        !this.props.photo ?
         <div className='user_resume_container'>
-          <div className='resume_div'>{ this.state.file_name }</div>
+          <div className='resume_div'>{ this.state.fileName }</div>
           <button onClick={onPick} className='ui orange button'>Choose File</button>
+        </div> :
+        <div>
+          <div className='photo_div'>{this.state.fileName}</div>
+          <button onClick={onPick} className="ui button">Upload Photo</button>
         </div>
       )}
     />

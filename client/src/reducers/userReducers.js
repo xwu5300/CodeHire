@@ -1,15 +1,18 @@
 import React from 'react';
-import { GET_INITIAL_CHALLENGE, GET_CANDIDATE_INFO, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS, GET_COMPANY_LIST, GET_CANDIDATE_RESULTS } from '../constants/actionTypes';
+import { GET_INITIAL_CHALLENGE, GET_CANDIDATE_INFO, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS, GET_COMPANY_LIST, GET_CANDIDATE_RESULTS, GET_RESUME } from '../constants/actionTypes';
 
 const initialState = {
   initial_challenge: [],
   candidate_calendar: [],
   candidate_skills: [],
   github_url: '',
+  photo: '',
   current_company_calendar: '',
   pass_initial: false,
   company_list: [],
-  candidate_results: []
+  candidate_results: [],
+  resume_url: '',
+  resume_name: ''
 }
 
 
@@ -55,7 +58,8 @@ const initialChallenge = (state = initialState, action) => {
         return {
           ...state,
           candidate_skills: action.skills,
-          github_url: action.github_url
+          github_url: action.github_url,
+          photo: action.photo
         }
       default:
         return state;
@@ -99,7 +103,20 @@ const candidateInitialResults = (state = initialState, action) => {
   }
 }
 
+const candidateResume = (state = initialState, action) => {
+  switch(action.type) {
+    case 'GET_RESUME':
+      return {
+        ...state,
+        resume_url: action.payload[0].resume_url,
+        resume_name: action.payload[0].resume_name
+      }
+    default:
+      return state;
+  }
+}
 
 
-export default { initialChallenge, candidateInfo, candidateCalendar, currentCompanySchedule, candidateInitialResults, companyList, candidateResults };
+
+export default { initialChallenge, candidateInfo, candidateCalendar, currentCompanySchedule, candidateInitialResults, companyList, candidateResults, candidateResume };
 

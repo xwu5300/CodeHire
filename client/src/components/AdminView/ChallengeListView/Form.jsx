@@ -237,15 +237,3 @@ class Form extends Component {
 }
 
 export default Form;
-
-
-// <div className="two fields">
-//   <div className="field">
-//     <label>Example - Input</label>
-//     <input name="exampleInput" type="text" placeholder="[[1, 4, -2, 6, 9], 15]" value={this.state.challenge.exampleInput} onChange={this.handleChange}/>
-//   </div>
-//   <div className="field">
-//     <label>Example - Output</label>
-//     <input name="exampleOutput" type="text" placeholder="[3, 4]" value={this.state.challenge.exampleOutput} onChange={this.handleChange}/>
-//   </div>
-// </div>
