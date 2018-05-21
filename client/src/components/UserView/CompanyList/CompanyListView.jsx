@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import UserNavBar from '../UserNavBar.jsx';
 import CompanyListTableView from './CompanyListTableView.jsx';
 import SearchCompany from './SearchCompany.jsx';
 import ViewCompanyPage from './ViewCompanyPage.jsx';
@@ -38,7 +37,12 @@ class CompanyListView extends Component {
 
       return (
         <div>
-          <UserNavBar/>
+          <div className="ui orange four item menu">
+          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
+          <div className='ui active item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
+        </div>
           <div className='search_company_input' style={{marginTop: '40px', marginBottom: '70px', textAlign: 'center'}} >
             <SearchCompany updateCompanyList={this.props.fetchCompanyList}/>
           </div>
@@ -65,7 +69,12 @@ class CompanyListView extends Component {
     } else {
       return (
       <div>
-        <UserNavBar/>
+          <div className="ui orange four item menu">
+          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
+          <div className='ui active item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
+        </div>
         <div className='search_company_input' style={{marginTop: '40px', marginBottom: '70px', textAlign: 'center'}} >
           <SearchCompany updateCompanyList={this.props.fetchCompanyList}/>
         </div>

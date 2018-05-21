@@ -5,7 +5,6 @@ import socketClient from 'socket.io-client';
 import swal from 'sweetalert2';
 import moment from 'moment';
 
-import UserNavBar from '../UserNavBar.jsx';
 import CompanyScheduleTableView from './CompanyScheduleTableView.jsx';
 
 class CompanyScheduleView extends Component {
@@ -75,7 +74,12 @@ class CompanyScheduleView extends Component {
     if (this.props.initial_challenge.length) {
       return (
         <div>
-        <UserNavBar/>
+          <div className="ui orange four item menu">
+          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
+        </div>
         <h1>{this.props.initial_challenge[0].name}</h1> 
         <h2>{this.props.initial_challenge[0].information}</h2> 
         <br/>
@@ -92,7 +96,7 @@ class CompanyScheduleView extends Component {
         <div className='schedule_container'>
         {this.props.company_schedule.length ?
    
-        <CompanyScheduleTableView updateStyle={this.updateStyle} saveCandidateCalendar={this.props.saveCandidateCalendar} companyCalendar={this.props.company_schedule} passInitial={this.props.pass_initial[0]} fetchCandidateResults={this.props.fetchCandidateResults}/>
+        <CompanyScheduleTableView updateStyle={this.updateStyle} saveCandidateCalendar={this.props.saveCandidateCalendar} companyCalendar={this.props.company_schedule} passInitial={this.props.pass_initial} fetchCandidateResults={this.props.fetchCandidateResults}/>
         : <div> {this.props.initial_challenge[0].name} Does Not Have Any Upcoming Live Challenge </div>
       }
 
@@ -101,7 +105,14 @@ class CompanyScheduleView extends Component {
         </div>
       )
     } else {
-      return <UserNavBar/>;
+      return(
+        <div className="ui orange four item menu">
+        <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
+        <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
+        <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
+        <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
+      </div>
+      );
     }
   }
 }

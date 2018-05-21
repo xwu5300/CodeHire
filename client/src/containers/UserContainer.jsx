@@ -9,7 +9,7 @@ import UserDashBoard from '../components/UserView/UserInformation/UserDashBoard.
 import CompanyListView from '../components/UserView/CompanyList/CompanyListView.jsx';
 import PastChallengeListView from '../components/UserView/UserInformation/PastChallengeListView.jsx';
 import PrivateRoute from '../components/PrivateRoute.jsx';
-import UserNavBar from'../components/UserView/UserNavBar.jsx';
+// import UserNavBar from'../components/UserView/UserNavBar.jsx';
 
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -67,6 +67,6 @@ const UserLiveCodingViewComponent = connect(mapStateToProps, mapDispatchToProps)
 const UserProfileViewComponent = connect(mapStateToProps, mapDispatchToProps)(UserProfileView);
 const CompanyListViewComponent = connect(mapStateToProps, mapDispatchToProps)(CompanyListView);
 const PastChallengeListViewComponent = connect(mapStateToProps, mapDispatchToProps)(PastChallengeListView);
-connect(mapStateToProps, mapDispatchToProps)(UserNavBar);
+// connect(mapStateToProps, mapDispatchToProps)(UserNavBar);
 const routeUserComponent = withRouter(connectComponent);
 export default routeUserComponent;

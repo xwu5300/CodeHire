@@ -7,8 +7,6 @@ import socketClient from 'socket.io-client';
 import swal from 'sweetalert2';
 import moment from 'moment';
 
-import UserNavBar from '../UserNavBar.jsx';
-
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
 import 'brace/theme/github';
@@ -214,7 +212,12 @@ ${this.props.initial_challenge[0].function_name}(${input})`
   render() {
     return (
       <div>
-        <UserNavBar/>
+          <div className="ui orange four item menu">
+          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
+        </div>
         <h1>{this.props.initial_challenge[0].name}</h1>
         <h2>{this.props.initial_challenge[0].title}</h2>
         <div>

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import Dropbox from '../Dropbox.jsx';
 
-import UserNavBar from '../UserNavBar.jsx';
 import PastChallengeListView from './PastChallengeListView.jsx';
 
 class UserProfileView extends Component {
@@ -68,7 +67,12 @@ class UserProfileView extends Component {
   render() {
     return (
       <div>
-        <UserNavBar/>
+        <div className="ui orange four item menu">
+          <div className='ui active item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
+        </div>
         <div className='main_profile_container'>
           <div className='ui padded grid'>
             <div className='ui raised container segment'>

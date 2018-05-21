@@ -6,8 +6,6 @@ import socketClient from 'socket.io-client';
 import swal from 'sweetalert2'
 import moment from 'moment';
 
-import UserNavBar from '../UserNavBar.jsx';
-
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
 import 'brace/theme/github';
@@ -177,7 +175,12 @@ class UserLiveCodingView extends Component {
     console.log('liuve challeng', this.props.location.challenge)
     return (
       <div>
-        <UserNavBar/>
+        <div className="ui orange four item menu">
+          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
+          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
+        </div>
         <h1>{this.props.location.challenge.name}</h1>
         <br/>
         <h2>Title: {this.props.location.challenge.title}</h2>
