@@ -73,14 +73,24 @@ class UserResults extends Component {
     //   }
     // }))
 
-    let DifficultySuccess = this.successRate(this.props.all_results, difficulty, "difficulty")
+    let DifficultySuccess = this.successRate(this.props.results, difficulty, "difficulty")
 
+    let Difficulty = this.props.results.map((data)=> {
+      return {x: data.difficulty, y: DifficultySuccess[data.difficulty] * 100}
+    }).sort((function(a,b) {
+      if (a.x > b.x) {
+         return 1
+       } else {
+         return -1
+       }
+    }))
+    console.log(Difficulty)
     //grey is industry
     //orange is company
     return (
       <div>
         <div style={{ width: `650px`, margin: `auto`, paddingTop: '20' }}>
-          <VictoryChart theme={VictoryTheme.material} domain={{ x: [0, 5], y: [0, 7] }}>
+          <VictoryChart theme={VictoryTheme.material} domain={{ x: [0, 5], y: [0, 100] }}>
             <VictoryLabel
                text={`Pass Rate Per Difficulty`}
                verticalAnchor={"end"}
@@ -93,12 +103,11 @@ class UserResults extends Component {
             />
             <VictoryAxis
             tickLabelComponent={<VictoryLabel x={50} />}
-            axisLabelComponent={<VictoryLabel dy={-32} />}
+            axisLabelComponent={<VictoryLabel dy={-28} />}
             tickCount={15}
             tickValues={[10,20,30,40,50,60,70,80,90,100]}
             tickFormat={(p) => `${p} %`}
             dependentAxis
-            fixLabelOverlap={true}
             label={"Pass Percentage"}
             style={{
              tickLabels: {
@@ -110,13 +119,7 @@ class UserResults extends Component {
             <VictoryScatter
               style={{ data: { fill: "#c43a31" } }}
               size={4}
-              data={[
-                { x: 1, y: 2 },
-                { x: 2, y: 3 },
-                { x: 3, y: 5 },
-                { x: 4, y: 4 },
-                { x: 5, y: 7 }
-              ]}
+              data={Difficulty}
             />
           </VictoryChart>
         </div>

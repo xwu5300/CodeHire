@@ -69,10 +69,6 @@ const companyInfo = (state = '', action) => {
 }
 
 const companySchedule = (state = initialState, action) => {
-<<<<<<< HEAD
-=======
-
->>>>>>> set up for scatterplot and extra graphs
   switch(action.type) {
     case 'GET_COMPANY_SCHEDULE':
       return {
