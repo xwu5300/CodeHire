@@ -6,11 +6,15 @@ import AllChallengeResults from './AnalyticsView/AllChallengeResults.jsx';
 class AnalyticsView extends Component {
   constructor() {
     super();
-
+    this.state = {
+      show: false
+    }
   }
 
   componentDidMount() {
     this.props.fetchCandidateList(localStorage.getItem('userId'));
+    this.props.getCompanyData(localStorage.getItem('userId'));
+    this.props.fetchAllResults();
   }
 
   render() {
@@ -38,7 +42,8 @@ class AnalyticsView extends Component {
             )
           }) : null}
           <div>
-            <AllChallengeResults />
+          <button onClick={()=>{this.setState({show: !this.state.show})}}>Show Graph</button>
+            {this.state.show ? <AllChallengeResults getAllResults={this.props.fetchAllResults} getCompanyResults={this.props.getCompanyData} companyResults={this.props.company_data} allResults={this.props.all_results}/> : null}
           </div>
       </div>
     )

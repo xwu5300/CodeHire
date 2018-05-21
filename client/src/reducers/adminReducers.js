@@ -1,5 +1,5 @@
 import React from 'react';
-import { GET_DEFAULT_CHALLENGES, GET_ALL_CHALLENGES, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF, GET_COMPANY_RESULTS, GET_CANDIDATE_LIST, GET_CHALLENGE_INFO, GET_FAVORITES, GET_ALL_RESULTS } from '../constants/actionTypes';
+import { GET_DEFAULT_CHALLENGES, GET_ALL_CHALLENGES, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF, GET_COMPANY_RESULTS, GET_CANDIDATE_LIST, GET_CHALLENGE_INFO, GET_FAVORITES, GET_ALL_RESULTS, GET_COMPANY_DATA } from '../constants/actionTypes';
 
 const initialState = {
   default_challenges: [],
@@ -17,7 +17,8 @@ const initialState = {
   challenge_id: null,
   favorites: [],
   all_results: [],
-  users: []
+  users: [],
+  company_data: []
 }
 
 const allResults = (state = initialState, action) => {
@@ -182,4 +183,16 @@ const users = (state = initialState, action) => {
   }
 }
 
-export default { defaultChallenges, allChallenges, companyInfo, companySchedule, isInitial, currentLiveChallenge, results, candidateList, challengeInfo, username, favorites, users, allResults };
+const companyData = (state = initialState, action) => {
+  switch(action.type) {
+    case 'GET_COMPANY_DATA':
+      return {
+        ...state,
+        company_data: action.payload
+      }
+    default:
+      return state;
+  }
+}
+
+export default { defaultChallenges, allChallenges, companyInfo, companySchedule, isInitial, currentLiveChallenge, results, candidateList, challengeInfo, username, favorites, users, allResults, companyData };

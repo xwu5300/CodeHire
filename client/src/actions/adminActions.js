@@ -1,4 +1,4 @@
-import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF, SET_CURRENT_LIVE_CHALLENGE, GET_CHALLENGE_INFO, GET_COMPANY_RESULTS, GET_CANDIDATE_LIST, GET_USER, GET_FAVORITES, GET_ALL_RESULTS, SEARCH_USERS } from '../constants/actionTypes';
+import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF, SET_CURRENT_LIVE_CHALLENGE, GET_CHALLENGE_INFO, GET_COMPANY_RESULTS, GET_CANDIDATE_LIST, GET_USER, GET_FAVORITES, GET_ALL_RESULTS, SEARCH_USERS, GET_COMPANY_DATA } from '../constants/actionTypes';
 
 import axios from 'axios';
 import { fetchInitialChallenge } from './userActions.js';
@@ -270,5 +270,16 @@ export const searchUsers = (query, cb) => (dispatch) => {
   })
   .catch((err) => {
     console.log('Error fetching user results from server', err);
+  })
+}
+
+export const getCompanyData = (companyId) => (dispatch) => {
+  axios.get('/api/companyData', {params: { companyId }})
+  .then(({data}) => {
+    dispatch({ type: GET_COMPANY_DATA, payload: data })
+    console.log('company data retrieved');
+  })
+  .catch((err) => {
+    console.log('Error fetching company data', err);
   })
 }

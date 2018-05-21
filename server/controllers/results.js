@@ -34,7 +34,7 @@ module.exports.getCompanyResults = (companyId, candidateId) => {
     return res;
   })
   .catch((err) => {
-    console.log(err);
+    console.log('error retrieving company results', err);
   })
 }
 
@@ -100,15 +100,16 @@ module.exports.fetchAllResults = () => {
   })
 }
 
-// module.exports.fetchCompanyResults = (companyId) => {
-//   return knex('results')
-//   .where({'companyId': companyId})
-//   .innerJoin('all_challenges', 'all_challenges.id', 'results.challenge_id')
-//   .then((res) => {
-//     return res;
-//   })
-//   .catch((err) => {
-//     console.log('Error fetching challenge results', err);
-//   })
-// }
+module.exports.fetchCompanyData = (companyId) => {
+  return knex('results')
+  .where({'results.company_id': companyId})
+  .innerJoin('all_challenges', 'all_challenges.id', 'results.challenge_id')
+  .innerJoin('company_schedule', 'company_schedule.id', 'results.company_schedule_id')
+  .then((res) => {
+    return res;
+  })
+  .catch((err) => {
+    console.log('Error fetching challenge results', err);
+  })
+}
 
