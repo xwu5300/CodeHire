@@ -105,7 +105,7 @@ class ChallengeCard extends Component {
      }
         <div className='saved_challenges_btns'>
 
-          <button className="ui icon button" onClick={() => deleteChallenge(challenge, userId) }>
+          <button className="ui icon red button" onClick={() => deleteChallenge(challenge, userId) }>
             <i class="trash icon"></i>
           </button>
           
