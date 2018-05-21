@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import PastChallengeListView from './PastChallengeListView.jsx';
 import Dropbox from '../Dropbox.jsx';
+
+import PastChallengeListView from './PastChallengeListView.jsx';
 
 class UserProfileView extends Component {
   constructor() {
@@ -79,7 +80,6 @@ class UserProfileView extends Component {
           <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
         </div>
-
         <div className='main_profile_container'>
           <div className='ui padded grid'>
             <div className='ui raised container segment'>

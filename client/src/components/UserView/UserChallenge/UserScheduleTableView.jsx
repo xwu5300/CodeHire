@@ -21,7 +21,6 @@ class UserScheduleTableView extends Component {
     swal({
       text: "Delete Schedule?",
       showCancelButton: true,
-      height: '100px',
       width: '300px',
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',

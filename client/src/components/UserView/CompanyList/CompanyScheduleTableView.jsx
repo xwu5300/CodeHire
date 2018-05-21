@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import swal from 'sweetalert2';
+import ReactCollapsingTable from 'react-collapsing-table';
 
 class CompanyScheduleTableView extends Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class CompanyScheduleTableView extends Component {
       let days = this.getTimeOut(results)
       daysLeft = 30 - days;
     }
-    if (!this.props.passInitial) {
+    if (this.props.passInitial.length && !this.props.passInitial[0].user_passed) {
       this.props.updateStyle()
     } else if (results.length && (daysLeft > 0 )) {
       swal({
@@ -43,6 +44,7 @@ class CompanyScheduleTableView extends Component {
   }
 
   render() {
+    // console.log('compan sched table view props', this.props)
     return(
       <table className='ui inverted table'>
         <thead>
@@ -64,7 +66,8 @@ class CompanyScheduleTableView extends Component {
               </button>
             </td>
           </tr>
-          )})}
+          )
+          })}
         </tbody>
         <tfoot>
           <tr>
