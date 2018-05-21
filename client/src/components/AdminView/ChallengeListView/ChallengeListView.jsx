@@ -51,19 +51,21 @@ class ChallengeListView extends Component {
 
     return (
       <div>
-        <div className="ui orange five item inverted menu">
+        <div className="ui orange five item very raised menu">
           <div className='ui item cursor' onClick={ () => { this.props.history.push('/admin/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
           <div className='ui item cursor' onClick={() => {this.props.history.push('/admin')}}>Dashboard</div> 
           <div className='ui active item cursor' onClick={() => this.props.history.push('/admin/challenges') }>Manage Challenges</div>
           <div className='ui item cursor' onClick={() => {this.props.history.push('/admin/data')}}>Analytics</div> 
           <div className='ui item cursor' onClick={() => {this.props.history.push('/admin/hire')}}>Hire</div> 
         </div>
-
+       
         <div className='challenge_list'>
           <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
             <Form save={this.props.saveChallenge} close={this.closeModal} history={this.props.history} userId={localStorage.getItem('userId')}/>
           </Modal>
-        <div className='ui padded horizontal segments challenge_list'>
+
+
+        <div className='ui padded raised horizontal segments challenge_list'>
           
           <DefaultChallenges userId={localStorage.getItem('userId')} defaultChallenges={this.props.default_challenges} save={this.props.saveChallenge}/>
           <SavedChallenges  getChallengeId={ this.props.getChallengeId } openModal={ this.openModal } userId={localStorage.getItem('userId')} allChallenges={this.props.all_challenges} delete={this.props.deleteChallenge} addToCompanySchedule={this.props.addToCompanySchedule} isInitial={this.props.is_initial} makeInitial={this.props.makeInitial} getInfo={this.props.getChallengeInfo} challengeInfo={this.props.challenge_info} save={this.props.saveChallenge}/>

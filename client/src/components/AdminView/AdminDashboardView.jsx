@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
 import moment from 'moment';
-import ScheduleChallengeView from './ScheduleChallengeView.jsx';
+import ScheduleInitialView from './ScheduleInitialView.jsx';
 import Modal from 'react-modal';
 import { auth } from '../../../../firebase/index.js';
 
@@ -88,7 +88,7 @@ class AdminDashboardView extends Component {
 
     return (
       <div>
-        <div className="ui orange five item inverted menu">
+        <div className="ui orange five item menu">
           <div className='ui item cursor' onClick={ () => { this.props.history.push('/admin/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
           <div className='ui active item cursor' onClick={() => {this.props.history.push('/admin')}}>Dashboard</div> 
           <div className='ui item cursor' onClick={() => this.editChallenges() }>Manage Challenges</div>
@@ -96,16 +96,17 @@ class AdminDashboardView extends Component {
           <div className='ui item cursor' onClick={() => {this.props.history.push('/admin/hire')}}>Hire</div> 
         </div>
         <div className='company_dashboard_container'>
-          <div className='ui raised padded container segment'>
+          <div className='ui raised very padded container segment'>
             <div className='ui grid'>
               <Modal style={ customStyles } isOpen={ this.state.modalIsOpen } onRequestClose={ this.closeModal }>
-                <ScheduleChallengeView initialChallenge={ this.props.initial_challenge } userId={ localStorage.getItem('userId')} challenges={ this.props.all_challenges } close={ this.closeModal } makeInitial={this.props.makeInitial} isInitial={this.props.is_initial} addToSchedule={this.props.addToCompanySchedule}/>
+                <ScheduleInitialView initialChallenge={ this.props.initial_challenge } userId={ localStorage.getItem('userId')} defaultChallenges={ this.props.default_challenges } challenges={ this.props.all_challenges } close={ this.closeModal } makeInitial={this.props.makeInitial} isInitial={this.props.is_initial} addToSchedule={this.props.addToCompanySchedule}/>
               </Modal>
               <table className='ui inverted table company_calendar'>
                 <thead>
                   <tr>
                     <th>Initial Challenge</th>
                     <th>Duration</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -113,14 +114,12 @@ class AdminDashboardView extends Component {
                     <tr>
                       <td>{this.props.initial_challenge[0].title}</td>
                       <td>{this.props.initial_challenge[0].duration}</td>
-                      <td><button className='ui button' type='button' onClick={() => {this.props.makeInitial(this.props.initial_challenge[0].id, this.props.initial_challenge[0].initial, null, null, localStorage.getItem('userId'))}}><i className='x icon'></i></button></td>
+                      <td><button className='ui red inverted button' type='button' onClick={() => {this.props.makeInitial(this.props.initial_challenge[0].id, this.props.initial_challenge[0].initial, null, null, localStorage.getItem('userId'))}}><i className='x icon' style={{ position: 'relative', left: '4px' }}></i></button></td>
                     </tr>
-
                   }
-                   <tr><td> <button className='ui button cursor' type='button' onClick={this.handleClickOn}>Set Initial Challenge</button></td></tr>
+                   <td> <button className='ui orange inverted button cursor' type='button' onClick={this.handleClickOn}>Set Initial Challenge</button></td>
                 </tbody>   
               </table>
-              <br/>
               
               <table className='ui inverted table company_calendar'>
                 <thead>
@@ -140,8 +139,7 @@ class AdminDashboardView extends Component {
                           <td>{item.title}</td>
                           <td>{moment(item.time).format('MMMM Do YYYY, h:mm A')}</td>
                           <td>{item.duration}</td>
-                          <td><button className='ui button' type='button' onClick={() => { this.viewChallenge(item.title, item.company_id, item.duration) }}>View challenge</button></td>
-                          <td><button className='ui button' type='button' onClick={()=>{this.props.deleteFromCompanySchedule(item.id, localStorage.getItem('userId'))}}><i className='x icon'></i></button></td>
+                          <td><button className='ui orange button view_challenge_btn' type='button' onClick={() => { this.viewChallenge(item.title, item.company_id, item.duration) }}>View challenge</button></td>
                         </tr> }
                       </Fragment>
                     )

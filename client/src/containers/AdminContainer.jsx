@@ -17,6 +17,15 @@ import { fetchInitialChallenge, currentCompanyCalendar, fetchCandidateInfo } fro
 
 class AdminContainer extends Component {
 
+  componentDidMount() {
+    
+    if(this.props.history.location.pathname !== '/' || this.props.history.location.pathname !== '/registration') {
+      this.props.getUsername(localStorage.getItem('userId'), () => {
+        console.log(this.props.name)
+      });
+  }
+  }
+
   render() {
     return (
       <Switch>

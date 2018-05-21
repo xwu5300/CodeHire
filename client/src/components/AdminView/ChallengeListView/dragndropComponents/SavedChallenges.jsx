@@ -89,12 +89,8 @@ class SavedChallenges extends Component {
               scheduled={ false } />
             )
           })}
-
-         <button className="input_challenge_btn ui orange basic button" onClick={ this.props.openModal }>Create new challenge</button>
-      </div>
-
-
-      
+          <button className="input_challenge_btn ui orange button" onClick={ this.props.openModal }>Create new challenge</button>
+      </div>  
       
     )
   }

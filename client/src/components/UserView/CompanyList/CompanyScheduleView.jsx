@@ -74,7 +74,7 @@ class CompanyScheduleView extends Component {
       return (
         <div>
           <div className="ui orange four item inverted menu">
-          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.initial_challenge[0].name }</div>
+          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
           <div className='ui active item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>

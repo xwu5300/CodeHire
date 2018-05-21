@@ -6,10 +6,16 @@ body {
 	padding: 5px;
 }
 
+#app {
+	background-color: #f2f2f2;
+	height: 100%;
+}
+
 
 /* ------ Login ----- */
 .login_container {
-	margin-top: 125px;
+	position: relative;
+	top: 125px;
 }
 
 .login_btn {
@@ -34,30 +40,6 @@ body {
 	margin-top: 100px;
 }
 
-.challenge_btns {
-	margin-top: 100px;
-}
-
-.ui.button.select {
-  float: right;
-  margin-bottom: 30px;
-}
-
-.title {
-  float: left;
-  margin-bottom: 30px;
-  font-size: 20px;
-}
-
-.clear {
-  clear: both;
-}
-
-.close-button {
-  margin-top: 20%;
-  margin-left: 50%
-}
-
 .calendar-button {
   float: left;
   margin-left: 100px;
@@ -71,9 +53,12 @@ body {
 	overflow: scroll;
 }
 
-/* -------- Drag N Drop --------- */
+.view_challenge_btn {
+	width: 100%;
+}
+
+/* -------- Drag N Drop Challenge List--------- */
 .drag_segment {
-	width: 20px;
 	overflow: scroll;
 }
 
@@ -84,12 +69,6 @@ body {
     right: 5px;
 }
 
-.challenge_card {
-	width: 80%;
-}
-
-
-/* ----- Challenge List ------- */
 .challenge_list {
 	height: 600px;
 	margin: 100px 50px;
@@ -117,7 +96,6 @@ body {
 .input_challenge_btn {
 	position: absolute;
 	bottom: 10px;
-	text-align: center;
 }
 
 .saved_challenges_btns {
@@ -128,9 +106,25 @@ body {
   margin-bottom: 10px;
 }
 
+/* ------ Initial Challenge Module ------ */
+
+.title {
+  float: left;
+  margin-bottom: 30px;
+  font-size: 20px;
+}
+
+.clear {
+  clear: both;
+}
+
+.initial_duration {
+	 position: absolute;
+	 top: 3px;
+	 right: 3px;  
+}
 
 /* ------ Company profile ------ */
-
 .company_profile_logo {
   height: 200px;
   width: auto;
@@ -307,6 +301,7 @@ body {
 	float: right;
 	position: relative;
 	top: 30px;
+	right: 50px;
 }
 
 

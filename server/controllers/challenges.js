@@ -90,6 +90,7 @@ module.exports.getInitialChallenge = (companyId) => {
   .innerJoin('all_challenges', 'users.id', 'all_challenges.company_id')
   // .innerJoin('company_schedule')
   .where({'all_challenges.company_id': companyId, 'all_challenges.initial': true})
+  .orWhere({ 'all_challenges.company_id': 1, 'all_challenges.initial': true })
   .then((res) => {
     return res;
   })
@@ -100,9 +101,13 @@ module.exports.getInitialChallenge = (companyId) => {
 
 //set initial challenge
 module.exports.setInitialChallenge = (companyId, challengeId, duration) => {
+  console.log('SET INITIAL CHALLENGE', companyId, challengeId, duration);
   return knex('all_challenges')
   .where({
-    company_id: companyId
+    company_id: companyId,
+  })
+  .orWhere({
+    company_id: 1
   })
   .update({
     initial: false
@@ -111,6 +116,10 @@ module.exports.setInitialChallenge = (companyId, challengeId, duration) => {
     return knex('all_challenges')
     .where({
       company_id: companyId,
+      id: challengeId
+    })
+    .orWhere({
+      company_id: 1,
       id: challengeId
     })
     .update({

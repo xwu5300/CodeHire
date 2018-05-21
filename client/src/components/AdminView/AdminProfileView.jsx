@@ -38,6 +38,7 @@ class AdminProfileView extends Component {
 
   handleSubmit() {
     this.props.updateInfo(localStorage.getItem('userId'), this.state.logo_url, this.state.information);
+    this.setState({ isTextarea: !this.state.isTextarea })
   }
 
   toggleInfo() {
@@ -47,7 +48,7 @@ class AdminProfileView extends Component {
   render() {
     return (
       <div>
-        <div className="ui orange five item inverted menu">
+        <div className="ui orange five item menu">
           <div className='ui active item cursor' onClick={ () => { this.props.history.push('/admin/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
           <div className='ui item cursor' onClick={() => {this.props.history.push('/admin')}}>Dashboard</div> 
           <div className='ui item cursor' onClick={() => this.props.history.push('/admin/challenges') }>Manage Challenges</div>
@@ -60,7 +61,7 @@ class AdminProfileView extends Component {
 
           <div className='ui segment' style={{ width: '60%' }}>
             <h2> About {this.props.token} </h2>
-            <i style={{ fontSize: '26px' }} onClick={ () => this.toggleInfo() } className="pencil alternate icon edit_company_info"></i>
+            <i style={{ fontSize: '24px' }} onClick={ () => this.toggleInfo() } className="pencil alternate orange icon edit_company_info"></i>
             {this.state.isTextarea ?
                <textarea onChange={ (e) => this.handleChange(e) } value={ this.state.information } className='company_profile_textarea' name='information'>{ this.state.information }</textarea>
                :
