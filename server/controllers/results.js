@@ -99,3 +99,16 @@ module.exports.fetchAllResults = () => {
     console.log('Error getting all results', err)
   })
 }
+
+// module.exports.fetchCompanyResults = (companyId) => {
+//   return knex('results')
+//   .where({'companyId': companyId})
+//   .innerJoin('all_challenges', 'all_challenges.id', 'results.challenge_id')
+//   .then((res) => {
+//     return res;
+//   })
+//   .catch((err) => {
+//     console.log('Error fetching challenge results', err);
+//   })
+// }
+

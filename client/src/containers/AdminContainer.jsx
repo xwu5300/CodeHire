@@ -82,7 +82,6 @@ const AdminProfileComponent = connect(mapStateToProps, mapDispatchToProps)(Admin
 const UserResultsComponent = connect(mapStateToProps, mapDispatchToProps)(UserResults)
 const HireComponent = connect(mapStateToProps, mapDispatchToProps)(HireView);
 
-
 const connectAdminContainer = connect(mapStateToProps, mapDispatchToProps)(AdminContainer);
 
 export default withRouter(connectAdminContainer);
