@@ -4,9 +4,8 @@ import {withRouter} from 'react-router-dom';
 import socketClient from 'socket.io-client';
 import swal from 'sweetalert2';
 import moment from 'moment';
-import ReactCollapsingTable from 'react-collapsing-table';
 
-import RenderButton from './RenderButton.jsx';
+import UserNavBar from '../UserNavBar.jsx';
 import CompanyScheduleTableView from './CompanyScheduleTableView.jsx';
 
 class CompanyScheduleView extends Component {
@@ -28,6 +27,7 @@ class CompanyScheduleView extends Component {
     this.props.fetchInitialChallenge(localStorage.getItem('companyId'))
     this.props.fetchCompanySchedule(localStorage.getItem('companyId'))
     this.props.fetchCandidateResults(localStorage.getItem('userId'), null, ()=>{});
+    this.props.fetchCandidateInitialResults(localStorage.getItem('companyId'), localStorage.getItem('userId'), () => {})
   }
 
   getTimeOut(results) {
@@ -59,6 +59,7 @@ class CompanyScheduleView extends Component {
 
   isTaken() {
     this.props.fetchCandidateInitialResults(localStorage.getItem('companyId'), localStorage.getItem('userId'), (results) => {
+      console.log("company schedule viewinitial_challenge", results)
       this.handleClick(results)
     })
   }
@@ -70,24 +71,11 @@ class CompanyScheduleView extends Component {
   }
 
   render() {
-    console.log('com sched props', this.props)
-    let rows = this.props.company_schedule.map((schedule, i) => ({
-      time: schedule.time,
-      duration: schedule.duration
-    }))
-    let columns = [
-      {accessor: 'time', label: 'Time', priorityLevel: 1, position: 1, CustomComponent: RenderButton},
-      {accessor: 'duration', label: 'Duration', priorityLevel: 2, position: 2, CustomComponent: RenderButton}
-    ]
-    if (this.props.initial_challenge[0]) {
+    // console.log('company schedue view props',this.props)
+    if (this.props.initial_challenge.length) {
       return (
         <div>
-          <div className="ui orange four item inverted menu">
-          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.initial_challenge[0].name }</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui active item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
-        </div>
+        <UserNavBar/>
         <h1>{this.props.initial_challenge[0].name}</h1> 
         <h2>{this.props.initial_challenge[0].information}</h2> 
         <br/>
@@ -101,17 +89,10 @@ class CompanyScheduleView extends Component {
             Take Initial Challenge</button>
         </div>
         <br/>
-        {this.props.initial_challenge[0].name}'s Live Challenge:
         <div className='schedule_container'>
         {this.props.company_schedule.length ?
-        <ReactCollapsingTable 
-          columns={columns} 
-          rows={rows} 
-          rowSize={10} 
-          showSearch={ true }
-          showPagination={ true }
-        />
-        <CompanyScheduleTableView updateStyle={this.updateStyle} saveCandidateCalendar={this.props.saveCandidateCalendar} companyCalendar={this.props.company_schedule} passInitial={this.props.pass_initial} fetchCandidateResults={this.props.fetchCandidateResults}/>
+   
+        <CompanyScheduleTableView updateStyle={this.updateStyle} saveCandidateCalendar={this.props.saveCandidateCalendar} companyCalendar={this.props.company_schedule} passInitial={this.props.pass_initial[0]} fetchCandidateResults={this.props.fetchCandidateResults}/>
         : <div> {this.props.initial_challenge[0].name} Does Not Have Any Upcoming Live Challenge </div>
       }
 
@@ -120,16 +101,7 @@ class CompanyScheduleView extends Component {
         </div>
       )
     } else {
-      return (
-        <div>
-          <div className="ui orange four item inverted menu">
-          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.name }</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui active item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
-        </div>
-        </div>
-      )
+      return <UserNavBar/>;
     }
   }
 }

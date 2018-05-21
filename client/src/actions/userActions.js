@@ -1,8 +1,19 @@
 
-import { GET_INITIAL_CHALLENGE, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO, DELETE_CANDIDATE_SKILL, GET_CURRENT_COMPANY_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS, GET_COMPANY_LIST, GET_CANDIDATE_RESULTS } from '../constants/actionTypes';
+import { GET_INITIAL_CHALLENGE, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO, DELETE_CANDIDATE_SKILL, GET_CURRENT_COMPANY_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS, GET_COMPANY_LIST, GET_CANDIDATE_RESULTS, GET_ALL_COMPANY_CALENDARS } from '../constants/actionTypes';
 
 import axios from 'axios';
 import swal from 'sweetalert2';
+
+export const fetchAllCompanyCalendars =(cb) => (dispatch) => {
+  axios.get('/api/companyCalendars')
+  .then(({data}) => {
+    dispatch({ type: GET_ALL_COMPANY_CALENDARS, payload: data })
+    cb()
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
 
 export const fetchCompanyList = (companyName) => (dispatch) => {
   axios.get('/api/companyList', { params: { companyName } })
@@ -85,6 +96,7 @@ export const saveResults = (companyScheduleId, isPassed, code, score, completedA
 }
 
 export const fetchCandidateResults = (candidateId, companyScheduleId, cb) => (dispatch) => {
+  console.log('user action candidateId', candidateId)
   axios.get('/api/results/candidate', { params: { candidateId, companyScheduleId } })
   .then(({data}) => {
     dispatch({ type: GET_CANDIDATE_RESULTS, payload: data });

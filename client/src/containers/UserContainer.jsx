@@ -9,6 +9,7 @@ import UserDashBoard from '../components/UserView/UserInformation/UserDashBoard.
 import CompanyListView from '../components/UserView/CompanyList/CompanyListView.jsx';
 import PastChallengeListView from '../components/UserView/UserInformation/PastChallengeListView.jsx';
 import PrivateRoute from '../components/PrivateRoute.jsx';
+import UserNavBar from'../components/UserView/UserNavBar.jsx';
 
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -21,16 +22,18 @@ import axios from 'axios';
 class UserContainer extends Component {
   render() {
     return (
-      <Switch>
-        <PrivateRoute exact path='/user' component={UserDashBoardComponent}/>
-        <PrivateRoute exact path='/user/challengelist' component={AllChallengeListViewComponent}/>
-        <PrivateRoute exact path='/user/schedule' component={CompanyScheduleViewComponent}/>
-        <PrivateRoute exact path='/user/challenge' component={UserInitialChallengeViewComponent}/>
-        <PrivateRoute exact path='/user/live' component={UserLiveCodingViewComponent}/>
-        <PrivateRoute exact path='/user/profile' component={UserProfileViewComponent}/>
-        <PrivateRoute exact path='/user/companylist' component={CompanyListViewComponent}/>
-        <PrivateRoute exact path='/user/pastchallenge' component={PastChallengeListViewComponent}/>
-      </Switch>
+      <div>
+        <Switch>
+          <PrivateRoute exact path='/user' component={UserDashBoardComponent}/>
+          <PrivateRoute exact path='/user/challengelist' component={AllChallengeListViewComponent}/>
+          <PrivateRoute exact path='/user/schedule' component={CompanyScheduleViewComponent}/>
+          <PrivateRoute exact path='/user/challenge' component={UserInitialChallengeViewComponent}/>
+          <PrivateRoute exact path='/user/live' component={UserLiveCodingViewComponent}/>
+          <PrivateRoute exact path='/user/profile' component={UserProfileViewComponent}/>
+          <PrivateRoute exact path='/user/companylist' component={CompanyListViewComponent}/>
+          <PrivateRoute exact path='/user/pastchallenge' component={PastChallengeListViewComponent}/>
+        </Switch>
+      </div>
     );
   }
 }
@@ -64,5 +67,6 @@ const UserLiveCodingViewComponent = connect(mapStateToProps, mapDispatchToProps)
 const UserProfileViewComponent = connect(mapStateToProps, mapDispatchToProps)(UserProfileView);
 const CompanyListViewComponent = connect(mapStateToProps, mapDispatchToProps)(CompanyListView);
 const PastChallengeListViewComponent = connect(mapStateToProps, mapDispatchToProps)(PastChallengeListView);
+connect(mapStateToProps, mapDispatchToProps)(UserNavBar);
 const routeUserComponent = withRouter(connectComponent);
 export default routeUserComponent;
