@@ -14,13 +14,20 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCandidateResults } from '../actions/userActions';
-import { fetchCompanySchedule, fetchCompanyResults } from '../actions/adminActions' ;
+import { fetchCompanySchedule, fetchCompanyResults, getUsername } from '../actions/adminActions' ;
 
 import axios from 'axios';
 
 class UserContainer extends Component {
+
+  componentDidMount() {
+    if(this.props.history.location.pathname !== '/' || this.props.history.location.pathname !== '/registration') {
+      this.props.getUsername(localStorage.getItem('userId'));
+    }
+  }
+  
   render() {
-      console.log('NAME', this.props.name, this.props.username);
+
     return (
       <Switch>
         <PrivateRoute exact path='/user' component={UserDashBoardComponent}/>
@@ -54,10 +61,14 @@ const mapStateToProps = function(state) {
 }};
 
 const mapDispatchToProps = {
-   fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCompanySchedule, fetchCompanyResults, fetchCandidateResults
+   fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, 
+   updateCandidateSkills, deleteCandidateSkill, updateCandidateGithub, 
+   saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar, 
+   fetchCandidateInitialResults, fetchCompanyList, fetchCompanySchedule, fetchCompanyResults, 
+   fetchCandidateResults, getUsername
 }
 
-const connectComponent = connect(mapStateToProps)(UserContainer); //code cleaned
+const connectComponent = connect(mapStateToProps, mapDispatchToProps)(UserContainer); //code cleaned
 const UserDashBoardComponent = connect(mapStateToProps, mapDispatchToProps)(UserDashBoard);
 const AllChallengeListViewComponent = connect(mapStateToProps, mapDispatchToProps)(AllChallengeListView); //code cleaned
 const CompanyScheduleViewComponent = connect(mapStateToProps, mapDispatchToProps)(CompanyScheduleView);

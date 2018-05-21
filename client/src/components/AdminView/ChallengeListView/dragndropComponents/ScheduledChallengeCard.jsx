@@ -115,7 +115,7 @@ class ScheduledChallengeCard extends Component {
           <div className='saved_challenges_btns'>
 
           <button className="ui icon button" onClick={() => this.props.deleteFromCompanySchedule(this.props.scheduleId, this.props.userId) }>
-            <i className="minus icon"></i>
+            <i class="trash icon"></i>
           </button>
           </div>
         </div>

@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 
 
-class ScheduleChallengeView extends Component {
+class ScheduleInitialView extends Component {
   constructor(props){
     super(props);
     this.state = {
       duration: '',
       invalid: this.props.challenges.map((item) => false),
       isSelected: null,
-      currentlyOn: null
+      currentlyOn: null,
+      initialChallenges: this.props.challenges.concat(this.props.defaultChallenges)
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -27,13 +28,11 @@ class ScheduleChallengeView extends Component {
     let date = $('#date').val();
     if (this.props.isInitial) {
       if (this.state.duration === '') {
-        this.setState({
-          isSelected: challengeId
-        }, () => {
           this.toggleValid(i);
-        })
       } else {
-        this.props.makeInitial(challenge.id, challenge.initial, this.state.duration, this.props.isInitial, this.props.userId, this.props.close);
+        this.props.makeInitial(challenge.id, challenge.initial, this.state.duration, this.props.isInitial, this.props.userId, this.props.close, () => {
+          this.setState({ isSelected: challengeId })
+        });
       }
     }
   }
@@ -64,20 +63,25 @@ class ScheduleChallengeView extends Component {
 
     const selected = {
       border: '3px solid orange',
+      margin: '10px auto',
       width: '45%',
       height: '200px'
     }
 
     const notSelected = {
        width: '45%',
+       margin: '10px auto',
        height: '200px'
     }
 
+   
+  console.log('initial challenges', this.state.initialChallenges)
     return (
+
       <div>
         <h4>Select from your saved challenges:</h4>
-        <div className='ui cards'>
-          {this.props.challenges.length === 0 ? 'No saved challenges to choose from' : this.props.challenges.map((item, i) => {
+        <div className='ui cards' style={{ marginTop: '40px' }}>
+          {!this.state.initialChallenges ? 'No saved challenges to choose from' : this.state.initialChallenges.map((item, i) => {
             return (
               <div className='ui card' style={ this.state.isSelected === item.id ? selected : notSelected } key={ item.id }>
                 <div className='content'>
@@ -88,7 +92,7 @@ class ScheduleChallengeView extends Component {
                       <br />
                       <b>Difficult:</b> {item.difficulty}
                     </div>
-                  <div className="field dropdown" style={{ position: 'absolute', top: '3px', right: '3px' }} onClick={() => {this.toggleCurrentlyOn(item.id)}}>
+                  <div className="field dropdown initial_duration" onClick={() => {this.toggleCurrentlyOn(item.id)}}>
                     <select className="ui dropdown" name="duration" value={this.state.currentlyOn === item.id ? this.state.duration : ""} onChange={this.handleDurationChange}>
                       <option value="">Duration (minutes)</option>
                       <option value="15">15</option>
@@ -109,4 +113,4 @@ class ScheduleChallengeView extends Component {
     }
 
 
-export default ScheduleChallengeView;
+export default ScheduleInitialView;

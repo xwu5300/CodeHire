@@ -51,7 +51,7 @@ class AllChallengeListView extends Component {
                   <div className='description'>
                 <p><b>Coming Live Challenge:</b> {moment(company.time).format('MMMM Do YYYY dddd, h:mm A')}</p>
               </div>
-              <button onClick={() => {
+              <button className='ui orange button view_company_btn' onClick={() => {
                 this.encodeCompanyId(company.company_id)
                 this.props.history.push('/user/schedule');
               }}>View Company Page

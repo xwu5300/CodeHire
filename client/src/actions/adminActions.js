@@ -211,8 +211,10 @@ export const fetchCandidateList = (companyId) => (dispatch) => {
 export const getUsername = (userId, cb) => (dispatch) => {
   axios.get('/api/username', {params: { userId }})
   .then(({data}) => {
+
     console.log('username data retrieved', data[0].username)
-    dispatch({ type: GET_USER, payload: data[0].username})
+    dispatch({ type: GET_USER, payload: data[0].username })
+    
     if (cb) {
       cb(data[0].username)
     }
