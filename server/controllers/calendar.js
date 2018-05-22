@@ -143,3 +143,19 @@ module.exports.deleteCandidateSchedule = (candidateScheduleId) => {
     console.log('Error deleting from user schedule', err);
   })
 }
+
+module.exports.getAllCompanyCalendars = (companyName) => {
+  let option = `%${companyName}%`;
+  return knex('company_schedule')
+  .whereNotNull('time')
+  .innerJoin('users', 'users.id', 'company_schedule.company_id')
+  .where('name', 'like', option)
+  .orderBy('time', 'asc')
+  .then((res) => {
+    console.log('res from calendar', option, res)
+    return res;
+  })
+  .catch((err) => {
+    console.log('Could not retrieve companies schedules from db:', err);
+  })
+}
