@@ -175,11 +175,7 @@ body {
 }
 
 .profile_pic_container{
-<<<<<<< HEAD
-	width: 250px;
-=======
 	width: 200px;
->>>>>>> tuesday_cleanup
 	display: block;
 	margin: auto;
 	position: relative;
@@ -187,13 +183,8 @@ body {
 }
 
 .main_profile_container {
-<<<<<<< HEAD
-	margin: 100px auto;
-	width: 80%;
-=======
 	margin: 50px auto;
 	width: 60%;
->>>>>>> tuesday_cleanup
 }
 
 .user_skills_container {
@@ -218,13 +209,8 @@ body {
 }
 
 .github_link {
-<<<<<<< HEAD
-  margin-top: 30px;
-  margin-bottom: 50px;
-=======
   margin-top: 50px;
   margin-bottom: 0px;
->>>>>>> tuesday_cleanup
 }
 
 
@@ -251,18 +237,11 @@ body {
 	background-color: rgba(0,0,0,0.2);
 	border-radius: 10px;
 	text-align: center;
-<<<<<<< HEAD
-	margin-bottom: 10px;
-=======
 	display: inline-block;
->>>>>>> tuesday_cleanup
 	color: white;
 }
 
-.resume_btns {
-	display: inline-block;
-<<<<<<< HEAD
-}
+
 
 .user_resume_container button {
 	margin-top: 10px;
@@ -270,7 +249,9 @@ body {
 
 
 
-=======
+.resume_btns {
+	display: inline-block;
+
 	position: relative;
 	bottom: 20px;
 	left: 10px;
@@ -278,7 +259,6 @@ body {
 }
 
 
->>>>>>> tuesday_cleanup
 .ui.small.horizontal.list {
   margin-top: 40px;
 }
@@ -386,6 +366,19 @@ body {
 	right: 50px;
 }
 
+.ui.card.cardzz: hover{
+	cursor: pointer;
+	background-color: orange;
+}
+
+
+
+.company-name {
+	font-size: 22px;
+}
+
+
+
 
 /* -------- Hire List View --------- */
 
@@ -428,6 +421,10 @@ body {
 .time {
 	text-align: center;
 	font-size: 14px;
+}
+
+.company_card: hover {
+	color: red;
 }
 
 

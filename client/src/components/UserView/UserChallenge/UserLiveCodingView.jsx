@@ -174,7 +174,6 @@ class UserLiveCodingView extends Component {
   }
 
   render() {
-    // console.log('liuve challeng', this.props.location.challenge)
     return (
       <div>
         <div className="ui orange four item menu">

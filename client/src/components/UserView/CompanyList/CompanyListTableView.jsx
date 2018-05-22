@@ -32,7 +32,7 @@ class CompanyView extends Component {
         <ReactCollapsingTable 
         columns={this.props.columns} 
         rows={this.props.rows} 
-        rowSize={5} 
+        rowSize={4} 
         // showSearch={ true }
         showPagination={ true }
         callbacks={{'info': this.viewCompanyPage}}

@@ -8,6 +8,7 @@ import { secret } from'../../../../../config.js';
 import SearchCompanySchedule from './SearchCompanySchedule.jsx';
 import CompanyChallengeTableView from './CompanyChallengeTableView.jsx';
 import ViewCompanyPage from './ViewCompanyPage.jsx';
+import UserNavBar from '../UserNavBar.jsx';
 import Image from './Image.jsx';
 import Time from './Time.jsx';
 

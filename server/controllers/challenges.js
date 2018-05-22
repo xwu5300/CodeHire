@@ -90,8 +90,6 @@ module.exports.getInitialChallenge = (companyId) => {
   return knex.from('all_challenges')
   .where({'all_challenges.company_id': companyId, 'all_challenges.initial': true})
   .innerJoin('users', 'users.id', 'all_challenges.company_id')
-  // .innerJoin('company_schedule')
-  .orWhere({ 'all_challenges.company_id': 1, 'all_challenges.initial': true })
   .select('*', 'all_challenges.id')
   .then((res) => {
     return res;

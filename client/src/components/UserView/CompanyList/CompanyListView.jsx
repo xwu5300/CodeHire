@@ -14,51 +14,51 @@ import UserNavBar from '../UserNavBar.jsx';
 class CompanyListView extends Component {
   constructor() {
     super();
+
+    this.state = {
+      indexHovered: null
+    }
+
+    this.handleHover = this.handleHover.bind(this);
   }
   
   componentDidMount() {
     this.props.fetchCompanyList('');
   }
 
-  render() {
-    // console.log('comp list view props', this.props.company_list)
-    if (this.props.company_list.length) {
-      let rows = this.props.company_list.map((company) => {
-        let url = company.logo_url || 'http://dev.jobkhoji.com/assets/images/default_company_icon.png';
-        return {
-          info: {companyId: company.id, companyName: company.name, companyInformation: company.information},
-          logo: url,
-          company: {name: company.name, information: company.information}
-        }
+  handleHover(name) {
+    
+    if(name === 'mouseOut') {
+      this.setState({
+        indexHovered: null
       })
-      let columns = [
-        {accessor: 'logo', label: '', priorityLevel: 1, position: 1, sortable: false, CustomComponent: Image},
-        {accessor: 'company', label: 'Company', priorityLevel: 2, sortable: true, position: 2, minWidth: 300, CustomComponent: CompanyDetail},
-        {accessor: 'info', label: '', priorityLevel: 3, position: 3, CustomComponent: ViewCompanyPage}
-      ]
+    }
+
+    this.setState({
+      indexHovered: name
+    })
+  }
+
+  render() {
 
       return (
         <div>
           <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
           <div className='search_company_input' style={{marginTop: '40px', marginBottom: '70px', textAlign: 'center'}} >
-            <SearchCompany updateCompanyList={this.props.fetchCompanyList}/>
+            <SearchCompany updateCompanyList={this.props.fetchCompanyList} />
           </div>
-          <CompanyListTableView rows={rows} columns={columns} />
+          <div className='ui cards centered grid'>
+            {this.props.company_list ? this.props.company_list.map((company, i) => {
+              return (
+                <CompanyDetail key={ i } handleHover={ this.handleHover } indexHovered={ this.state.indexHovered } logo={ company.logo_url ? company.logo_url : 'http://dev.jobkhoji.com/assets/images/default_company_icon.png'  } 
+                               name={ company.name } />              
+              );
+            }) : "Sorry, we weren't able to find any results" }
+            </div>
         </div>
       )
 
-    } else {
-      return (
-      <div>
-          <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
-        <div className='search_company_input' style={{marginTop: '40px', marginBottom: '70px', textAlign: 'center'}} >
-          <SearchCompany updateCompanyList={this.props.fetchCompanyList}/>
-        </div>
-        <div>Sorry, we weren't able to find any results</div>
-      </div>
-      )
-    }
-  }
-}
+    } 
+ }
 
 export default withRouter(CompanyListView);

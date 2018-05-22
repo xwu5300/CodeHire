@@ -6,6 +6,7 @@ import swal from 'sweetalert2';
 import moment from 'moment';
 
 import CompanyScheduleTableView from './CompanyScheduleTableView.jsx';
+import UserNavBar from '../UserNavBar.jsx';
 
 class CompanyScheduleView extends Component {
   constructor() {
@@ -37,7 +38,6 @@ class CompanyScheduleView extends Component {
   }
 
   handleClick(results) {
-    console.log('comp schedu view result', results)
     let daysLeft = 0
     if (results.length) {
       let days = this.getTimeOut(results)
@@ -76,7 +76,7 @@ class CompanyScheduleView extends Component {
         <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
         <div className='schedule_container'>
         <div className='ui raised very padded container segment l' style={this.state.style}>
-          <h1>{ this.props.company_name }</h1> 
+          <h1>{ this.props.initial_challenge[0].name }</h1> 
           <h2>{ this.props.initial_challenge[0].information }</h2> 
 
           <hr />
@@ -89,9 +89,7 @@ class CompanyScheduleView extends Component {
             Take Initial Challenge</button>
         </div>
 
-
-        <br/>
-        <div className='schedule_container'>
+        <div>
         {this.props.all_company_calendars.length ?
    
         <CompanyScheduleTableView updateStyle={this.updateStyle} saveCandidateCalendar={this.props.saveCandidateCalendar} companyCalendar={this.props.all_company_calendars} passInitial={this.props.pass_initial} fetchCandidateResults={this.props.fetchCandidateResults}/>
@@ -99,11 +97,11 @@ class CompanyScheduleView extends Component {
       }
 
         </div> 
-
+        </div>
        </div>
       )
     } else {
-      return(
+      return (
         null
       );
     }

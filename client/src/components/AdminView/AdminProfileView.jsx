@@ -71,7 +71,7 @@ class AdminProfileView extends Component {
           </div> 
 
         </div>
-        <button onClick={ () => this.handleSubmit() } style={{ display: 'block', margin: 'auto', width: '200px' }} className='ui orange inverted button'>Save Changes</button> 
+        <button onClick={ () => this.handleSubmit() } style={{ display: 'block', margin: 'auto', width: '200px' }} className='ui orange button'>Save Changes</button> 
         </div>
       </div>
     )

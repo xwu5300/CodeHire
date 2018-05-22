@@ -79,12 +79,16 @@ class UserProfileView extends Component {
         <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
         <div className='main_profile_container'>
         {!this.state.showHistory ?
-        <button onClick={() => { this.setState({ showHistory: true })}}>Past Challenges</button>
+          <div className="ui top attached tabular menu">
+            <div className="active item" onClick={() => this.setState({ showHistory: true })}>Past Challenges</div>
+          </div>
         :
-        <button onClick={() => { this.setState({ showHistory: false })}}>Edit Profile</button>
+          <div className="ui top attached tabular menu">
+            <div className="active item" onClick={() => this.setState({ showHistory: false })}>Edit Profile</div>
+          </div>
         }
         
-            <div className='ui container segment'>
+            <div className='ui container segment' style={{ marginTop: '-3px' }}>
               {this.state.showHistory ? 
                 <PastChallengeListView candidate_results={ this.props.candidate_results } fetchCandidateResults={ this.props.fetchCandidateResults } />
                 :
@@ -104,8 +108,7 @@ class UserProfileView extends Component {
                      <button style={{ height: '35px', width:'20%', marginLeft:'5px' }} className='ui orange button' onClick={ () => this.updateGithub() }>save</button>
                    </div>
                    
-                    
-
+                  
                   </div>
             
                   <div className='ui segment'>
@@ -132,8 +135,6 @@ class UserProfileView extends Component {
 
                     </div>
                     </div>
-
-                   
 
                     <Dropbox removeResume={ this.props.removeResume } resume_url={ this.props.resume_url } resume_name={ this.props.resume_name } saveResume={this.props.saveResume} getResume={this.props.getResume} photo={false} />
                   </div>
