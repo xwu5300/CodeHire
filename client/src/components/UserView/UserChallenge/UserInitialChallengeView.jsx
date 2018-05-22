@@ -75,7 +75,6 @@ class UserInitialChallengeView extends Component {
   }
 
   onLoad() {
-    console.log('loading')
     let challengeDuration = 60 * .1
     let display = this.state.duration
     this.startTimer(challengeDuration, display);
@@ -83,9 +82,8 @@ class UserInitialChallengeView extends Component {
 
   autoSubmit() {
     let id = this.props.initial_challenge[0].id
-    let company_id = this.props.initial_challenge[0].company_id
+    let company_id = localStorage.getItem('companyId')
     let user_id = localStorage.getItem('userId')
-    console.log('twice??')
     this.props.saveResults(null, 'f', this.state.code, 90, moment(Date.now()).format(), id, company_id, user_id, true , id, () => {
       
       swal(
@@ -125,7 +123,7 @@ class UserInitialChallengeView extends Component {
 
   saveResults(companyScheduleId, result, submission, score, time) {
     let id = this.props.initial_challenge[0].id
-    let company_id = this.props.initial_challenge[0].company_id
+    let company_id = localStorage.getItem('companyId')
     let user_id = localStorage.getItem('userId')
     this.props.saveResults(null, result, submission, score, time, id, company_id, user_id, true , id, () => {
       this.props.fetchCandidateInitialResults(localStorage.getItem('companyId'), user_id, ()=> {})

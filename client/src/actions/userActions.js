@@ -1,14 +1,13 @@
 
-import { GET_INITIAL_CHALLENGE, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO, DELETE_CANDIDATE_SKILL, GET_CURRENT_COMPANY_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS, GET_COMPANY_LIST, GET_CANDIDATE_RESULTS, GET_RESUME } from '../constants/actionTypes';
+import { GET_INITIAL_CHALLENGE, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO, DELETE_CANDIDATE_SKILL, GET_CURRENT_COMPANY_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS, GET_COMPANY_LIST, GET_CANDIDATE_RESULTS, GET_RESUME, GET_ALL_COMPANY_CALENDARS } from '../constants/actionTypes';
 
 import axios from 'axios';
 import swal from 'sweetalert2';
 
-export const fetchAllCompanyCalendars =(cb) => (dispatch) => {
-  axios.get('/api/companyCalendars')
+export const fetchAllCompanyCalendars =(companyName) => (dispatch) => {
+  axios.get('/api/companyCalendars', {params: { companyName }})
   .then(({data}) => {
     dispatch({ type: GET_ALL_COMPANY_CALENDARS, payload: data })
-    cb()
   })
   .catch((err) => {
     console.log(err);
@@ -111,6 +110,7 @@ export const fetchCandidateInitialResults = (companyId, candidateId, cb) => (dis
     if (data[0] && data[0].user_passed) {
       dispatch({ type: GET_CANDIDATE_INITIAL_RESULTS, payload: data });
     }
+    console.log('user actions',data)
     cb(data)
   })
   .catch((err) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { GET_INITIAL_CHALLENGE, GET_CANDIDATE_INFO, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS, GET_COMPANY_LIST, GET_CANDIDATE_RESULTS, GET_RESUME } from '../constants/actionTypes';
+import { GET_INITIAL_CHALLENGE, GET_CANDIDATE_INFO, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INITIAL_RESULTS, GET_COMPANY_LIST, GET_CANDIDATE_RESULTS, GET_RESUME, GET_ALL_COMPANY_CALENDARS } from '../constants/actionTypes';
 
 const initialState = {
   initial_challenge: [],
@@ -12,7 +12,8 @@ const initialState = {
   company_list: [],
   candidate_results: [],
   resume_url: '',
-  resume_name: ''
+  resume_name: '',
+  all_company_calendars: []
 }
 
 
@@ -116,7 +117,19 @@ const candidateResume = (state = initialState, action) => {
   }
 }
 
+const allCompanyCalendars = (state = initialState, action) => {
+  switch(action.type) {
+    case 'GET_ALL_COMPANY_CALENDARS':
+      return {
+        ...state,
+        all_company_calendars: action.payload
+      }
+    default:
+      return state;
+  }
+}
 
 
-export default { initialChallenge, candidateInfo, candidateCalendar, currentCompanySchedule, candidateInitialResults, companyList, candidateResults, candidateResume };
+
+export default { initialChallenge, candidateInfo, candidateCalendar, currentCompanySchedule, candidateInitialResults, companyList, candidateResults, candidateResume, allCompanyCalendars };
 
