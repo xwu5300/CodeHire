@@ -319,7 +319,7 @@ router.post('/api/companyCalendar', (req, res) => {
   let duration = Number(req.body.duration);
   let challengeId = req.body.challengeId;
 
-  
+
   if (req.body.companyId === 1) {
     let companyId = 1;
   } else {
@@ -446,17 +446,17 @@ router.post('/api/results', (req, res) => {
     res.send();
   })
   .catch((err) => {
-    console.log('Could not save results to db');``
+    console.log('Could not save results to db');
   })
 })
 
 router.get('/api/allResults', (req, res) => {
   resultsControllers.fetchAllResults()
-  .then((response) => {
-    res.send(response)
+  .then((data) => {
+    res.send(data);
   })
   .catch((err) => {
-    console.log('Error sending back all results', err)
+    console.log('Error sending back all results', err);
   })
 })
 
@@ -467,7 +467,18 @@ router.get('/api/companyData', (req, res) => {
     res.send(data);
   })
   .catch((err) => {
-    console.log('Error sending compant results', err);
+    console.log('Error sending company results', err);
+  })
+})
+
+router.get('/api/challengeData', (req, res) => {
+  let challengeId = req.query.challengeId
+  resultsControllers.fetchChallengeData(challengeId)
+  .then((data) => {
+    res.send(data);
+  })
+  .catch((err) => {
+    console.log('Error getting challenge data', err)
   })
 })
 

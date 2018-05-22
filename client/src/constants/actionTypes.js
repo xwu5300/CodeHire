@@ -63,7 +63,10 @@ export const GET_CANDIDATE_INITIAL_RESULTS = 'GET_CANDIDATE_INITIAL_RESULTS';
 
 export const GET_ALL_RESULTS = 'GET_ALL_RESULTS';
 
-export const GET_COMPANY_DATA = 'GET_COMPANY_DATA'
+export const GET_COMPANY_DATA = 'GET_COMPANY_DATA';
+
+export const GET_CHALLENGE_DATA = 'GET_CHALLENGE_DATA';
+
 /* -------- User Profile ------- */
 export const GET_CANDIDATE_INFO = 'GET_CANDIDATE_INFO';
 

@@ -76,10 +76,14 @@ CREATE TABLE company_user (
 );
 
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('admin', 'admin', null, null, null,  null, 'company', 'oEOYD25GWuWaERtmOJOg7bCrIck2');
+<<<<<<< HEAD
 
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('admin2', 'admin2', null, null, null,  null, 'company', '4ripTTcEZtQ1EAHXGpIDM4XFbz32');
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('admin3', 'admin3', null, null, null,  null, 'company', 'qiRrCg4hnFZcOpfe4lH4bSxsDgg1');
 
+=======
+INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('company2', 'company2', null, null, null,  null, 'company', 'oEOYD25GWuWaERtmOJOg7bCrIck3');
+>>>>>>> added challengeData routes, can sort by challenge and get each pass rate
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('user1', 'user1', '123-456-7890', 'about me', 'www.github.com/github', 'http://icons.iconarchive.com/icons/danleech/simple/1024/google-icon.png', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8KKue');
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('user2', 'user2', '123-456-7890', 'about me', 'www.github.com/github', 'http://icons.iconarchive.com/icons/danleech/simple/1024/google-icon.png', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8KKue');
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('user3', 'user3', '123-456-7890', 'about me', 'www.github.com/github', 'http://icons.iconarchive.com/icons/danleech/simple/1024/google-icon.png', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8KKue');
@@ -473,8 +477,16 @@ INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candi
 INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 5, 12, 1, false);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
+=======
+INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('F', 'function(str)', 90, '2018-05-23 12:35:08', 5, 12, 6, 2, false);
+INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('F', 'function(str)', 90, '2018-05-23 12:35:08', 5, 12, 6, 2, false);
+INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('T', 'function(str)', 90, '2018-05-23 12:35:08', 5, 12, 6, 2, false);
+
+
+>>>>>>> added challengeData routes, can sort by challenge and get each pass rate
 --
 >>>>>>> merged new tables
 -- User9 Sample

@@ -112,6 +112,22 @@ module.exports.fetchCompanyData = (companyId) => {
     return res;
   })
   .catch((err) => {
+    console.log('Error fetching company results', err);
+  })
+}
+<<<<<<< HEAD
+=======
+
+module.exports.fetchChallengeData = (challengeId) => {
+  return knex('results')
+  .where({'results.challenge_id': challengeId})
+  .innerJoin('all_challenges', 'all_challenges.id', 'results.challenge_id')
+  .innerJoin('company_schedule', 'company_schedule.id', 'results.company_schedule_id')
+  .then((res) => {
+    return res;
+  })
+  .catch((err) => {
     console.log('Error fetching challenge results', err);
   })
 }
+>>>>>>> added challengeData routes, can sort by challenge and get each pass rate
