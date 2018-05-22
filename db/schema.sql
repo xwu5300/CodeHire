@@ -187,11 +187,11 @@ INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candi
 
 
 
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('One Sum', 'Find the sum...', 'oneSum', 'arr, target', '[[[]]]', '[[[]]]', '1', 'algorithms', false, 60, 2);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Two Sum', 'Find the sum...', 'twoSum', 'arr, target', '[[[]]]', '[[]]', '2', 'data structures', false, 60, 2);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Three Sum', 'Find the sum...', 'threeSum', 'arr, target', '[[]]', '[[]]', '3', 'algorithms', false, 60, 2);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Four Sum', 'Find the sum...', 'fourSum', 'arr, target', '[[]]', '[[]]', '4', 'system design', false, 90, 2);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Five Sum', 'Find the sum...', 'fiveSum', 'arr, target', '[[]]', '[[]]', '5', 'algorithms', false, 60, 2);
+INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('One Sum', 'Find the sum...', 'oneSum', 'arr, target', '[[[]], [[]]]', '[[[]], [[]]]', '1', 'algorithms', false, 60, 2);
+INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Two Sum', 'Find the sum...', 'twoSum', 'arr, target', '[[[]], [[]]]', '[[[]], [[]]]', '2', 'data structures', false, 60, 2);
+INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Three Sum', 'Find the sum...', 'threeSum', 'arr, target', '[[[]], [[]]]', '[[[]], [[]]]', '3', 'algorithms', false, 60, 2);
+INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Four Sum', 'Find the sum...', 'fourSum', 'arr, target', '[[[]], [[]]]', '[[[]], [[]]]', '4', 'system design', false, 90, 2);
+INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Five Sum', 'Find the sum...', 'fiveSum', 'arr, target', '[[[]], [[]]]', '[[[]], [[]]]', '5', 'algorithms', false, 60, 2);
 
 INSERT INTO company_schedule (time, duration, challenge_id, company_id) VALUES ('2018-05-14 12:35:08', 60, 6, 2);
 INSERT INTO company_schedule (time, duration, challenge_id, company_id) VALUES ('2018-05-28 12:35:08', 60, 6, 2);
@@ -283,11 +283,11 @@ INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candi
 
 
 
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('One Sum', 'Find the sum...', 'oneSum', 'arr, target', '[[[]]]', '[[[]]]', '1', 'algorithms', false, 60, 3);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Two Sum', 'Find the sum...', 'twoSum', 'arr, target', '[[[]]]', '[[]]', '2', 'data structures', false, 60, 3);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Three Sum', 'Find the sum...', 'threeSum', 'arr, target', '[[]]', '[[]]', '3', 'algorithms', false, 60, 3);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Four Sum', 'Find the sum...', 'fourSum', 'arr, target', '[[]]', '[[]]', '4', 'system design', false, 90, 3);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Five Sum', 'Find the sum...', 'fiveSum', 'arr, target', '[[]]', '[[]]', '5', 'algorithms', false, 60, 3);
+INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('One Sum', 'Find the sum...', 'oneSum', 'arr, target', '[[[]], [[]]]', '[[[]], [[]]]', '1', 'algorithms', false, 60, 3);
+INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Two Sum', 'Find the sum...', 'twoSum', 'arr, target', '[[[]], [[]]]', '[[[]], [[]]]', '2', 'data structures', false, 60, 3);
+INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Three Sum', 'Find the sum...', 'threeSum', 'arr, target', '[[[]], [[]]]', '[[[]], [[]]]', '3', 'algorithms', false, 60, 3);
+INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Four Sum', 'Find the sum...', 'fourSum', 'arr, target', '[[[]], [[]]]', '[[[]], [[]]]', '4', 'system design', false, 90, 3);
+INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Five Sum', 'Find the sum...', 'fiveSum', 'arr, target', '[[[]], [[]]]', '[[[]], [[]]]', '5', 'algorithms', false, 60, 3);
 
 INSERT INTO company_schedule (time, duration, challenge_id, company_id) VALUES ('2018-05-17 12:35:08', 60, 11, 3);
 INSERT INTO company_schedule (time, duration, challenge_id, company_id) VALUES ('2018-05-27 12:35:08', 60, 11, 3);
