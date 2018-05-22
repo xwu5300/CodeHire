@@ -131,12 +131,12 @@ class AllChallengeResults extends Component {
             style={{data: {stroke: '#00BFFF', strokeWidth: 2}}}
             />
 
-          <VictoryLabel
-          text={`Average Pass Rate`}
-          verticalAnchor={"end"}
-          x={180}
-          y={15}
-          />
+            <VictoryLabel
+            text={`Average Pass Rate`}
+            verticalAnchor={"end"}
+            x={180}
+            y={15}
+            />
         </VictoryChart>
       </div>
     )
