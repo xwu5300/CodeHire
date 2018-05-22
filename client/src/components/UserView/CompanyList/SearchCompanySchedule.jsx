@@ -19,7 +19,7 @@ class SearchCompanySchedule extends Component {
 
   handleKeyPress(event) {
     if (event.charCode === 13) {
-      this.props.updateCompanyCalendar(null, this.state.input)
+      this.props.updateCompanyCalendar(this.state.input)
       this.setState({
         input: ''
       })
@@ -31,7 +31,7 @@ class SearchCompanySchedule extends Component {
       <div>
         <input type='text' value={this.state.input} onChange={this.updateInput} style={{width: '300px', height: '40px'}} onKeyPress={(e)=>{this.handleKeyPress(e)}} />
         <button className='ui button' onClick={() => {
-          this.props.updateCompanyCalendar(null, this.state.input)
+          this.props.updateCompanyCalendar(this.state.input)
           this.setState({
             input: ''
           })

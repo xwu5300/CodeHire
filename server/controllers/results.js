@@ -55,13 +55,14 @@ module.exports.getCandidateList = (companyId) => {
 }
 
 module.exports.getCandidateInitialResults = (companyId, candidateId) => {
+  console.log('results', companyId, candidateId)
   return knex('results')
   .where({'company_id': companyId, 'candidate_id': candidateId, 'is_initial': true})
   .orderBy('completed_at', 'desc')
   .limit(1)
   .select('user_passed')
   .then((res) => {
-    console.log('Retrieve candidate initial challenge result')
+    console.log('Retrieve candidate initial challenge result', res)
     return res;
   })
   .catch((err) => {

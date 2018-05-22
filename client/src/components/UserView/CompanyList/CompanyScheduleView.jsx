@@ -37,6 +37,7 @@ class CompanyScheduleView extends Component {
   }
 
   handleClick(results) {
+    console.log('comp schedu view result', results)
     let daysLeft = 0
     if (results.length) {
       let days = this.getTimeOut(results)

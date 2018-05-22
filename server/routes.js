@@ -279,6 +279,15 @@ router.delete('/api/cancelCandidateSchedule', (req, res) => {
   })
 })
 
+// get all company schedule
+router.get('/api/companyCalendars', (req, res) => {
+  let companyName = req.query.companyName;
+  calendarControllers.getAllCompanyCalendars(companyName)
+  .then((data) => {
+    res.send(data);
+  })
+})
+
 //get company list
 router.get('/api/companyList', (req, res) => {
   let companyName = req.query.companyName;
@@ -407,6 +416,7 @@ router.get('/api/results/candidate', (req, res) => {
 router.get('/api/results/candidate/initial', (req, res) => {
   let companyId = jwt.decode(req.query.companyId, secret).id;
   let candidateId = jwt.decode(req.query.candidateId, secret).id;
+  console.log('routes company id, candidate id', companyId, candidateId)
   resultsControllers.getCandidateInitialResults(companyId, candidateId)
   .then((data) => {
     console.log('Retrieve candidate initial result from db')
@@ -419,7 +429,7 @@ router.get('/api/results/candidate/initial', (req, res) => {
 
 // post results to 'results' table
 router.post('/api/results', (req, res) => {
-  let companyId = req.body.companyId;
+  let companyId = jwt.decode(req.body.companyId, secret).id;
   let candidateId = jwt.decode(req.body.candidateId, secret).id;
   resultsControllers.saveResults(req.body.companyScheduleId, req.body.isPassed, req.body.code, req.body.score, req.body.completedAt, req.body.challengeId, companyId, candidateId, req.body.initial)
   .then(() => {
