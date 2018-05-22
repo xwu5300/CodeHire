@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { VictoryChart, VictoryLabel, VictoryGroup,VictoryAxis, VictoryTheme, VictoryLine } from 'victory';
+import { VictoryChart, VictoryLabel, VictoryAxis, VictoryContainer, VictoryVoronoiContainer, VictoryTheme, VictoryLine, VictoryTooltip, VictoryLegend } from 'victory';
 import moment from 'moment';
 
 class AllChallengeResults extends Component {
@@ -40,7 +40,10 @@ class AllChallengeResults extends Component {
 
 
     let companyData = this.props.companyResults.map((data) => {
-      return {x: data.time, y: Math.round(successRate[data.company_schedule_id] * 100, 2)}
+      return {x: data.time, y: Math.round(successRate[data.company_schedule_id] * 100, 2), label: 
+        `Challenge: ${data.title}
+        Difficulty: ${data.difficulty}
+        Pass Rate: ${Math.round(successRate[data.company_schedule_id] * 100, 2)}%`}
       }).sort((a, b) => {
         return Date.parse(a.x) - Date.parse(b.x);
       })
@@ -73,15 +76,25 @@ class AllChallengeResults extends Component {
       return a.x - b.x;
     });
 
-    console.log(filteredAllCompanyData)
+    console.log(filteredCompanyData)
 
 
     return (
       <div className="challenge-results-graph">
-        <VictoryChart domain={{x: [0, 30], y: [0, 100]}}>
+        <VictoryChart domain={{x: [0, 30], y: [0, 100]}} animate={{onEnter: {duration: 100}}} containerComponent={
+          <VictoryVoronoiContainer/>
+        }>
+            <VictoryLegend
+            x={350} y={10}
+            style={{labels:{fontSize: 7}, padding: '50px'}}
+            orientation="vertical"
+           
+            colorScale={['#00BFFF', '#FF00FF']}
+            data={[{name: 'All Company Challenges'}, {name: "Your Challenges"}]}
+            />
 
             <VictoryAxis
-            axisLabelComponent={<VictoryLabel style={{fontSize: 12, fontWeight: 500}}/>}
+            axisLabelComponent={<VictoryLabel style={{fontSize: 12, fontWeight: 500}} />}
             label={"Time (days in month)"}
             tickCount={10}
             style={{
@@ -104,6 +117,12 @@ class AllChallengeResults extends Component {
              }}
             />
             <VictoryLine
+            labelComponent={<VictoryTooltip
+                style={{fontSize: 8}}
+                pointerLength={5}
+                flyoutStyle={{stroke: 'none', opacity: '.1'}}
+                cornerRadius={0}
+              />}
             data={filteredCompanyData} 
             style={{data: {stroke: '#FF00FF', strokeWidth: 2}}}
             />
@@ -116,7 +135,7 @@ class AllChallengeResults extends Component {
           text={`Average Pass Rate`}
           verticalAnchor={"end"}
           x={180}
-          y={30}
+          y={15}
           />
         </VictoryChart>
       </div>
