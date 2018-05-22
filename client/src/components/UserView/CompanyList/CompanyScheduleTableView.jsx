@@ -44,7 +44,7 @@ class CompanyScheduleTableView extends Component {
   }
 
   render() {
-    // console.log('compan sched table view props', this.props)
+    console.log('compan sched table view props', this.props.companyCalendar)
     return(
       <table className='ui inverted table'>
         <thead>

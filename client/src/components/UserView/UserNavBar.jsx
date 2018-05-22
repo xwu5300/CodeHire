@@ -29,7 +29,7 @@ class UserNavBar extends Component {
     render(){ 
         return (
             <div className="ui orange four item menu">
-                <div className={this.state[1]} onClick={ () => {this.updateButton('/user/profile', 1)} }><i className="user circle icon"></i>
+                <div className={this.state[1]} onClick={ () => {this.updateButton('/user/profile', 1)} }><i className="user circle icon"></i>{ localStorage.getItem('username') }
                 </div>
                 <div className={this.state[2]} onClick={() => {this.updateButton('/user', 2)}}>Calendar</div>
                 <div className={this.state[3]} onClick={() => {this.updateButton('/user/challengelist', 3)}}>Live Challenges</div>

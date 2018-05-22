@@ -8,18 +8,20 @@ class CompanyChallengeTableView extends Component {
   constructor() {
     super()
 
-    this.encodeCompanyId = this.encodeCompanyId.bind(this)
+    this.storeCompanyInfo = this.storeCompanyInfo.bind(this)
     this.viewCompanyPage = this.viewCompanyPage.bind(this);
   }
 
-  encodeCompanyId(id) {
-    let companyId = {id: id};
+  storeCompanyInfo(info) {
+    let companyId = {id: info.companyId};
+    let companyName = info.companyName;
     let idToken = jwt.encode(companyId, secret.secret);
     localStorage.setItem('companyId', idToken)
+    localStorage.setItem('companyName', companyName)
   }
 
-  viewCompanyPage(id) {
-    this.encodeCompanyId(id)
+  viewCompanyPage(info) {
+    this.storeCompanyInfo(info)
     this.props.history.push('/user/schedule');
   }
 
@@ -31,7 +33,7 @@ class CompanyChallengeTableView extends Component {
         rowSize={5} 
         // showSearch={ true }
         showPagination={ true }
-        callbacks={{'id': this.viewCompanyPage}}
+        callbacks={{'info': this.viewCompanyPage}}
       />
     )
   }
