@@ -26,7 +26,7 @@ class CompanyScheduleTableView extends Component {
       let days = this.getTimeOut(results)
       daysLeft = 30 - days;
     }
-    if (this.props.passInitial.length && !this.props.passInitial[0].user_passed) {
+    if (!this.props.passInitial) {
       this.props.updateStyle()
     } else if (results.length && (daysLeft > 0 )) {
       swal({
@@ -43,8 +43,7 @@ class CompanyScheduleTableView extends Component {
     })
   }
 
-  render() {
-    // console.log('compan sched table view props', this.props)
+  render() {  
     return(
       <table className='ui inverted table'>
         <thead>

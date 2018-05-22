@@ -8,7 +8,7 @@ body {
 
 #app {
 	background-color: #f2f2f2;
-	height: 100%;
+	height: 120%;
 }
 
 
@@ -170,40 +170,85 @@ body {
 
 /* ------- User profile --------- */
 
+.user_info_container {
+	min-height: 300px;
+}
+
+.profile_pic_container{
+	width: 200px;
+	display: block;
+	margin: auto;
+	position: relative;
+	top: 10px;
+}
+
 .main_profile_container {
-	margin: 100px auto;
+	margin: 50px auto;
 	width: 60%;
 }
 
 .user_skills_container {
-	margin-top: 100px;
 	margin-bottom: 10px;
 	height: 300px;
 }
 
 .user_skills_input {
 	float: right;
+    bottom: 40px;
 	font-size: 22px
+	box-shadow: 1px 1px 10px;
 }
 
 .user_skills_input input {
   margin-right: 10px;
-  margin-top: 50px;
-	width: 85%;
+  width: 85%;
 }
 
 .profile_header {
 	text-align: center;
 }
 
+.github_link {
+  margin-top: 50px;
+  margin-bottom: 0px;
+}
+
+
 .github_link input {
-	width: 60%;
+	width: 70%;
 	height: 35px;
 }
 
 .skill_div {
 	font-size: 20px;
 }
+
+.user_resume_container {
+	margin-top: 30px;
+	margin-left: 15px;
+}
+
+
+.resume_div {
+	width: 50%;
+	height: 50px;
+	font-size: 22px;
+	padding-top: 25px;
+	background-color: rgba(0,0,0,0.2);
+	border-radius: 10px;
+	text-align: center;
+	display: inline-block;
+	color: white;
+}
+
+.resume_btns {
+	display: inline-block;
+	position: relative;
+	bottom: 20px;
+	left: 10px;
+
+}
+
 
 .ui.small.horizontal.list {
   margin-top: 40px;
@@ -226,25 +271,11 @@ body {
 	margin-left: 80px
 }
 
-.user_resume_container {
-	margin-top: 15px;
-	margin-left: 25px;
+.user_liveCoding_container {
+	position: relative;
+	top: 125px;
+	width: 90%;
 }
-
-.user_resume_container button {
-	margin-top: 10px;
-}
-
-.resume_div {
-	width: 40%;
-	height: 50px;
-	border: 3px solid orange;
-	border-radius: 10px;
-	text-align: center;
-	margin-bottom: 10px;
-}
-
-
 
 
 /* ------- Admin live coding ------- */
@@ -273,11 +304,25 @@ body {
 }
 
 
-/* -------- Company List View --------- */
-.schedule_container {
+
+/* ------- Live Challenges Table ----- */
+.live_challenges_table {
 	width: 80%;
 	margin: auto;
 }
+
+
+
+/* -------- Company List View --------- */
+
+
+.schedule_container {
+	position: relative;
+	top: 125px;
+	width: 80%;
+	margin: auto;
+}
+
 
 .company_logo {
 	width: 150px;
@@ -331,6 +376,33 @@ body {
 .search-results-container {
   margin-left: 20px;
 }
+
+/* ------- User Past Results ------- */
+
+.history_card {
+	height: 300px;
+}
+
+.history_list  {
+	list-style: none;
+	text-align: center;
+	position: relative;
+	right: 10px;
+}
+
+.history_list li {
+	display: inline-block;
+	margin-left: 30px;
+	margin-right: 30px;
+}
+
+.time {
+	text-align: center;
+	font-size: 14px;
+}
+
+
+
 
 
 

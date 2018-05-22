@@ -26,7 +26,6 @@ class PastChallengeListView extends Component {
   }
 
   render() {
-    console.log('past challenge list view props', this.props.candidate_results)
     if (this.props.candidate_results.length) {
       let rows = this.props.candidate_results.map((result) => ({
         challenge: {
@@ -45,40 +44,17 @@ class PastChallengeListView extends Component {
       let columns = [{accessor: 'challenge', CustomComponent: UserChallenge}]
       return (
         <div>
-        <div className="ui orange four item menu">
-          <div className='ui active item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
-        </div>
         <PastChallengeTableView rows={rows} columns={columns}/>
         </div>
       )
     } else {
       return (
         <div>
-        <div className="ui orange four item menu">
-          <div className='ui active item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
-        </div>
         <div>You haven't Taken Any Challenges</div>
         </div>
       )
     }
 
-
-    // return(
-    //   <div>
-        
-    //     { 
-    //     <PastChallengeTableView challenges={this.props.candidate_results}/>
-    //     : <div>You haven't Taken Any Challenges</div>
-    //     }
-        
-    //   </div>
-    // )
   }
 }
 

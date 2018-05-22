@@ -12,7 +12,8 @@ const initialState = {
   company_list: [],
   candidate_results: [],
   resume_url: '',
-  resume_name: ''
+  resume_name: '',
+  company_name: ''
 }
 
 
@@ -116,7 +117,19 @@ const candidateResume = (state = initialState, action) => {
   }
 }
 
+const companyName = (state = initialState, action) => {
+  switch(action.type) {
+    case 'GET_COMPANY_NAME':
+      return {
+        ...state,
+        company_name: action.name
+      }
+      default: 
+      return state;
+  }
+}
 
 
-export default { initialChallenge, candidateInfo, candidateCalendar, currentCompanySchedule, candidateInitialResults, companyList, candidateResults, candidateResume };
+
+export default { companyName, initialChallenge, candidateInfo, candidateCalendar, currentCompanySchedule, candidateInitialResults, companyList, candidateResults, candidateResume };
 

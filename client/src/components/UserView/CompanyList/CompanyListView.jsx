@@ -8,6 +8,8 @@ import ViewCompanyPage from './ViewCompanyPage.jsx';
 import Image from './Image.jsx';
 import CompanyDetail from './CompanyDetail.jsx';
 
+import UserNavBar from '../UserNavBar.jsx';
+
 
 class CompanyListView extends Component {
   constructor() {
@@ -37,12 +39,7 @@ class CompanyListView extends Component {
 
       return (
         <div>
-          <div className="ui orange four item menu">
-          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
-          <div className='ui active item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
-        </div>
+          <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
           <div className='search_company_input' style={{marginTop: '40px', marginBottom: '70px', textAlign: 'center'}} >
             <SearchCompany updateCompanyList={this.props.fetchCompanyList}/>
           </div>
@@ -50,31 +47,10 @@ class CompanyListView extends Component {
         </div>
       )
 
-      // return (
-      // <div>
-      //     <div className='search_company_input' style={{marginTop: '40px', marginBottom: '70px', textAlign: 'center'}} >
-      //       <SearchCompany updateCompanyList={this.props.fetchCompanyList}/>
-      //     </div>
-      //     <div>
-      //       {this.props.company_list.map((company, i) => {
-      //         return (
-      //         <div key={i}> 
-      //             <CompanyListTableView company={company}/> 
-      //         </div>
-      //         )
-      //       })}
-      //     </div>
-      // </div>
-      // )
     } else {
       return (
       <div>
-          <div className="ui orange four item menu">
-          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
-          <div className='ui active item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
-        </div>
+          <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
         <div className='search_company_input' style={{marginTop: '40px', marginBottom: '70px', textAlign: 'center'}} >
           <SearchCompany updateCompanyList={this.props.fetchCompanyList}/>
         </div>

@@ -44,10 +44,6 @@ class UserInitialChallengeView extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentDidMount() {
-  
-  }
-
   updateTimer(display) {
     this.setState({
       timeRemaining: display
@@ -76,7 +72,7 @@ class UserInitialChallengeView extends Component {
 
   onLoad() {
     console.log('loading')
-    let challengeDuration = 60 * .1
+    let challengeDuration = 60;
     let display = this.state.duration
     this.startTimer(challengeDuration, display);
   }

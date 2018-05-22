@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import Dropbox from '../Dropbox.jsx';
 
 import PastChallengeListView from './PastChallengeListView.jsx';
+import UserNavBar from '../UserNavBar.jsx';
 
 class UserProfileView extends Component {
   constructor() {
@@ -11,7 +12,8 @@ class UserProfileView extends Component {
       information: '',
       skill: '',
       all_skills: [],
-      github_url: ''
+      github_url: '',
+      showHistory: false
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -74,79 +76,69 @@ class UserProfileView extends Component {
   render() {
     return (
       <div>
-        <div className="ui orange four item menu">
-          <div className='ui active item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
-        </div>
+        <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
         <div className='main_profile_container'>
-          <div className='ui padded grid'>
-            <div className='ui raised container segment'>
-            <div className="profile_photo_container">
-              <div className="ui small image" >
-              {!this.props.photo ? 
-                <img src="https://bit.ly/2pguvGq" alt="Empty profile photo"/> :
-                <img src={this.props.photo} className="responsive" style={{width: '150px', height: '150px'}}/>}
-              </div>
-              <br/>
-              <div>
-                <Dropbox savePhoto={this.props.updateCandidatePhoto} photo={true}/>
-              </div>
-            </div>
-            <div className='row'>
-              <div >
-                <div className='github_link'>
-                  <i style={{ fontSize: '22px' }} className="github icon"></i>
-                  <input name='github_url' value={ this.state.github_url } onChange={ (e) => this.handleChange(e) } type='text' placeholder='github' onKeyPress={(e)=>{this.handleKeyPress(e, this.updateGithub)}} />
-                  <button style={{ height: '35px', width:'15%', marginLeft:'5px' }} className='ui orange basic button' onClick={ () => this.updateGithub() }>save</button>
-                </div>
-                <div style={{float: 'right', marginTop: '30px'}}><b>Resume:</b>
-                <br/>
-                {this.props.resume_name ? 
-                <div>
-                <a href={this.props.resume_url} target="_blank">{this.props.resume_name}</a> 
-                <br/>
-                <button className="ui button" onClick={() => {this.props.removeResume(localStorage.getItem('userId'))}}>Remove</button>
-                </div>
-                :  "Upload your resume"}
-                </div>
-                <Dropbox saveResume={this.props.saveResume} getResume={this.props.getResume} photo={false}/>
-              </div>
-            </div>
+        {!this.state.showHistory ?
+        <button onClick={() => { this.setState({ showHistory: true })}}>Past Challenges</button>
+        :
+        <button onClick={() => { this.setState({ showHistory: false })}}>Edit Profile</button>
+        }
+        
+            <div className='ui container segment'>
+              {this.state.showHistory ? 
+                <PastChallengeListView candidate_results={ this.props.candidate_results } fetchCandidateResults={ this.props.fetchCandidateResults } />
+                :
+                 <Fragment>
 
-
-            <div className='row user_skills_container'>
-              <div style={{ height: '300px' }}>
-              <h2>Skills</h2>
-                <div className='row' className="ui right labeled left icon input user_skills_input">
-                  <i className="tags icon"></i>
-                  <input name='skill' type='text' placeholder="Add your skills..." value={ this.state.skill } onKeyPress={(e)=>{this.handleKeyPress(e, ()=>{this.addSkill(this.state.skill)})}} onChange={ (e) => this.handleChange(e) } />
-                  <a onClick={ () => this.addSkill(this.state.skill) } className="ui tag label"></a>
-                </div>
-
-                <div className='row'>
-                  
-                  <div className='ui small horizontal list'>
-                  {this.state.all_skills ? this.state.all_skills.map((skill, i) => {
-                    return (
-                      <div key={ i } className='item'>
-                        <i onClick={ () => this.deleteSkill(skill) } className="remove icon orange"></i>
-                        <div className='ui tag label'> { skill } </div>
-                      </div>
-                    )
-                  }) : null }
+                 <div className='ui container'>
+                   <div className="profile_pic_container">
+                     {!this.props.photo ? 
+                       <img src="https://bit.ly/2pguvGq" alt="Empty profile photo" style={{ width: '200px', height: '200px' }} /> :
+                       <img src={this.props.photo} className="responsive" style={{ width: '200px', height: '200px' }}/> }
+                       <Dropbox savePhoto={this.props.updateCandidatePhoto} photo={true}/>
+                    </div>
+                    <div className='github_link'>
+                     <i style={{ fontSize: '22px' }} className="github icon"></i>
+                     <input name='github_url' value={ this.state.github_url } onChange={ (e) => this.handleChange(e) } type='text' placeholder='github' onKeyPress={(e)=>{this.handleKeyPress(e, this.updateGithub)}} />
+                     <button style={{ height: '35px', width:'20%', marginLeft:'5px' }} className='ui orange button' onClick={ () => this.updateGithub() }>save</button>
+                   </div>
                   </div>
-                </div>
-              </div>
-              </div>
-            </div>
-          </div>
-        </div>
+            
+                  <div className='ui segment'>
+                  <div className='user_skills_container'>
+                    <div style={{ height: '300px', padding: '10px' }}>
+                    <h2>Skills</h2>
+                      <div className='row' className="ui right labeled left icon input user_skills_input">
+                        <i className="tags icon"></i>
+                        <input name='skill' type='text' placeholder="Add your skills..." value={ this.state.skill } onKeyPress={(e)=>{this.handleKeyPress(e, ()=>{this.addSkill(this.state.skill)})}} onChange={ (e) => this.handleChange(e) } />
+                        <a onClick={ () => this.addSkill(this.state.skill) } className="ui tag label"></a>
+                      </div>
+                        
+                        <div className='ui small horizontal list'>
+                        {this.state.all_skills ? this.state.all_skills.map((skill, i) => {
+                          return (
+                            <div key={ i } className='item'>
+                              <i onClick={ () => this.deleteSkill(skill) } className="remove icon orange"></i>
+                              <div className='ui tag label'> { skill } </div>
+                            </div>
+                          )
+                        }) : null }
+                        </div>
+                    
+                    </div>
+                    </div>
 
-        <div>
-          <button onClick={() => {this.props.history.push('/user/pastchallenge')}} >Past Challenges
-          </button>
+                   
+                    <Dropbox removeResume={ this.props.removeResume } resume_url={ this.props.resume_url } resume_name={ this.props.resume_name } saveResume={this.props.saveResume} getResume={this.props.getResume} photo={false} />
+                  </div>
+                  </Fragment>
+
+              }
+
+            
+            </div>
+
+          
         </div>
 
       </div>
