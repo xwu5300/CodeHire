@@ -118,6 +118,18 @@ const candidateResume = (state = initialState, action) => {
   }
 }
 
+const companyName = (state = initialState, action) => {
+  switch(action.type) {
+    case 'GET_COMPANY_NAME':
+      return {
+        ...state,
+        company_name: action.name
+      }
+      default: 
+      return state;
+  }
+}
+
 
 const allCompanyCalendars = (state = initialState, action) => {
   switch(action.type) {
@@ -142,7 +154,6 @@ const companyName = (state = initialState, action) => {
       return state;
   }
 }
-
 
 
 export default { companyName, initialChallenge, candidateInfo, candidateCalendar, currentCompanySchedule, candidateInitialResults, companyList, candidateResults, candidateResume, allCompanyCalendars };

@@ -14,7 +14,6 @@ import PrivateRoute from '../components/PrivateRoute.jsx';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-
 import { viewCompanyProfile, fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCandidateResults, getResume, saveResume, removeResume, updateCandidatePhoto, fetchAllCompanyCalendars } from '../actions/userActions';
 import { fetchCompanySchedule, fetchCompanyResults, getUsername } from '../actions/adminActions' ;
 
@@ -65,9 +64,9 @@ const mapStateToProps = function(state) {
 const mapDispatchToProps = {
    fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, 
    deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, 
-   saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, 
+   saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCompanySchedule, 
    fetchCompanyResults, fetchCandidateResults, getResume, saveResume, removeResume, updateCandidatePhoto, getUsername,
-   fetchAllCompanyCalendars, viewCompanyProfile, fetchCompanySchedule
+   viewCompanyProfile, fetchAllCompanyCalendars
 }
 
 const connectComponent = connect(mapStateToProps, mapDispatchToProps)(UserContainer); //code cleaned

@@ -76,9 +76,9 @@ CREATE TABLE company_user (
 );
 
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('admin', 'admin', null, null, null,  null, 'company', 'oEOYD25GWuWaERtmOJOg7bCrIck2');
+
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('admin2', 'admin2', null, null, null,  null, 'company', '4ripTTcEZtQ1EAHXGpIDM4XFbz32');
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('admin3', 'admin3', null, null, null,  null, 'company', 'qiRrCg4hnFZcOpfe4lH4bSxsDgg1');
-
 
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('user1', 'user1', '123-456-7890', 'about me', 'www.github.com/github', 'http://icons.iconarchive.com/icons/danleech/simple/1024/google-icon.png', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8KKue');
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('user2', 'user2', '123-456-7890', 'about me', 'www.github.com/github', 'http://icons.iconarchive.com/icons/danleech/simple/1024/google-icon.png', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8KKue');
@@ -284,8 +284,6 @@ INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candi
 
 
 
-
-
 INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('One Sum', 'Find the sum...', 'oneSum', 'arr, target', '[[[]], [[]]]', '[[[]], [[]]]', '1', 'algorithms', false, 60, 3);
 INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Two Sum', 'Find the sum...', 'twoSum', 'arr, target', '[[[]], [[]]]', '[[[]], [[]]]', '2', 'data structures', false, 60, 3);
 INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Three Sum', 'Find the sum...', 'threeSum', 'arr, target', '[[[]], [[]]]', '[[[]], [[]]]', '3', 'algorithms', false, 60, 3);
@@ -377,7 +375,8 @@ INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candi
 INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 15, 13, 18, 3, false);
 INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 15, 14, 18, 3, false);
 INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 15, 15, 18, 3, false);
-=======
+
+
 INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('One Sum', 'Find the sum...', 'oneSum', 'arr, target', '[[]]]', '[[[]]]', '1', 'algorithms', false, 90, 1);
 INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Two Sum', 'Find the sum...', 'twoSum', 'arr, target', '[[[]]]', '[[]]', '2', 'data structures', false, 90, 1);
 INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Three Sum', 'Find the sum...', 'threeSum', 'arr, target', '[[]]', '[[]]', '3', 'algorithms', false, 90, 1);

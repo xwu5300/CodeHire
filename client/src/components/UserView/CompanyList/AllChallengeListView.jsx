@@ -50,12 +50,7 @@ class AllChallengeListView extends Component {
 
       return (
         <div> 
-          <div className="ui orange four item menu">
-          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ localStorage.getItem('username') }</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui active item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
-        </div>
+          <UserNavBar getUsername={ this.props.getUsername} username={ this.props.username }/>
         <div className='search_company_input' style={{marginTop: '40px', marginBottom: '70px', textAlign: 'center'}} >
         <SearchCompanySchedule updateCompanyCalendar={this.props.fetchAllCompanyCalendars}/>
       </div>
@@ -65,12 +60,7 @@ class AllChallengeListView extends Component {
     } else {
       return (
         <div>
-          <div className="ui orange four item menu">
-          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ localStorage.getItem('username') }</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui active item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
-        </div>
+          <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
           <div className='search_company_input' style={{marginTop: '40px', marginBottom: '70px', textAlign: 'center'}} >
             <SearchCompanySchedule updateCompanyCalendar={this.props.fetchAllCompanyCalendars}/>
           </div>
@@ -78,31 +68,6 @@ class AllChallengeListView extends Component {
         </div>
       )
     }
-
-
-       <div className='company_list_items'>
-       <div className='ui divided items'>
-      {this.props.company_schedule.length ?
-      this.props.company_schedule.map((company, i) => {
-        return (
-          <div className='item' key={i}>
-            <span className='company_logo'>
-              <img className='ui image' src={`${company.logo_url || 'http://dev.jobkhoji.com/assets/images/default_company_icon.png'}`} />
-            </span>
-              <div className='content'>
-                <h2 className='company_item_header'>{company.name}</h2>
-                  <div className='description'>
-                <p><b>Coming Live Challenge:</b> {moment(company.time).format('MMMM Do YYYY dddd, h:mm A')}</p>
-              </div>
-              <button className='ui orange button view_company_btn' onClick={() => {
-                this.encodeCompanyId(company.company_id);
-                this.props.viewCompanyProfile(company.name);
-                this.props.history.push('/user/schedule');
-              }}>View Company Page
-              </button>
-              </div>
-          </div>
-
   }
 }
 

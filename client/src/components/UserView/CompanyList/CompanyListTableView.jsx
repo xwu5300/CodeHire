@@ -28,6 +28,7 @@ class CompanyView extends Component {
 
   render() {
     return (
+      <div className='ui container segment'>
         <ReactCollapsingTable 
         columns={this.props.columns} 
         rows={this.props.rows} 
@@ -36,6 +37,7 @@ class CompanyView extends Component {
         showPagination={ true }
         callbacks={{'info': this.viewCompanyPage}}
       />
+      </div>
     )
   }
 }

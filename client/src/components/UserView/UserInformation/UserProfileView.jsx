@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import Dropbox from '../Dropbox.jsx';
 
 import PastChallengeListView from './PastChallengeListView.jsx';
+import UserNavBar from '../UserNavBar.jsx';
 
 class UserProfileView extends Component {
   constructor() {
@@ -11,7 +12,8 @@ class UserProfileView extends Component {
       information: '',
       skill: '',
       all_skills: [],
-      github_url: ''
+      github_url: '',
+      showHistory: false
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -74,30 +76,36 @@ class UserProfileView extends Component {
   render() {
     return (
       <div>
-        <div className="ui orange four item menu">
-          <div className='ui active item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ localStorage.getItem('username') }</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
-        </div>
+        <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
         <div className='main_profile_container'>
-            <div className='ui raised container segment'>
+        {!this.state.showHistory ?
+        <button onClick={() => { this.setState({ showHistory: true })}}>Past Challenges</button>
+        :
+        <button onClick={() => { this.setState({ showHistory: false })}}>Edit Profile</button>
+        }
+        
+            <div className='ui container segment'>
+              {this.state.showHistory ? 
+                <PastChallengeListView candidate_results={ this.props.candidate_results } fetchCandidateResults={ this.props.fetchCandidateResults } />
+                :
+                 <Fragment>
 
-               <div className='ui horizontal segments user_info_container'>
-                 <div className='ui segment'>
+                 <div className='ui container'>
+                   <div className="profile_pic_container">
+                     {!this.props.photo ? 
+                       <img src="blank-profile-picture-973460_1280.png" alt="Empty profile photo" style={{ width: '200px', height: '200px' }} /> :
+                       <img src={this.props.photo} className="responsive" style={{ width: '200px', height: '200px' }}/> }
+                       <Dropbox savePhoto={this.props.updateCandidatePhoto} photo={true}/>
+                    </div>
+
                     <div className='github_link'>
                      <i style={{ fontSize: '22px' }} className="github icon"></i>
                      <input name='github_url' value={ this.state.github_url } onChange={ (e) => this.handleChange(e) } type='text' placeholder='github' onKeyPress={(e)=>{this.handleKeyPress(e, this.updateGithub)}} />
                      <button style={{ height: '35px', width:'20%', marginLeft:'5px' }} className='ui orange button' onClick={ () => this.updateGithub() }>save</button>
                    </div>
-                   <div className="profile_pic_container">
-                     {!this.props.photo ? 
-                       <img src="blank-profile-picture-973460_1280.png" alt="Empty profile photo" style={{ width: '250px', height: '250px' }} /> :
-                       <img src={this.props.photo} className="responsive" style={{ width: '250px', height: '250px' }}/>}
-                       <Dropbox savePhoto={this.props.updateCandidatePhoto} photo={true}/>
-                    </div>
                    
                     
+
                   </div>
             
                   <div className='ui segment'>
@@ -108,8 +116,8 @@ class UserProfileView extends Component {
                         <i className="tags icon"></i>
                         <input name='skill' type='text' placeholder="Add your skills..." value={ this.state.skill } onKeyPress={(e)=>{this.handleKeyPress(e, ()=>{this.addSkill(this.state.skill)})}} onChange={ (e) => this.handleChange(e) } />
                         <a onClick={ () => this.addSkill(this.state.skill) } className="ui tag label"></a>
+
                       </div>
-                      <div className='row'>
                         
                         <div className='ui small horizontal list'>
                         {this.state.all_skills ? this.state.all_skills.map((skill, i) => {
@@ -121,25 +129,21 @@ class UserProfileView extends Component {
                           )
                         }) : null }
                         </div>
-                      </div>
+
                     </div>
                     </div>
 
                    
-                    <Dropbox removeResume={ this.props.removeResume } resume_url={ this.props.resume_url } resume_name={ this.props.resume_name } saveResume={this.props.saveResume} getResume={this.props.getResume} photo={false}/>
-                  </div>
-                </div>
-        
 
+                    <Dropbox removeResume={ this.props.removeResume } resume_url={ this.props.resume_url } resume_name={ this.props.resume_name } saveResume={this.props.saveResume} getResume={this.props.getResume} photo={false} />
+                  </div>
+                  </Fragment>
+
+              }
 
             
             </div>
           
-        </div>
-
-        <div>
-          <button onClick={() => {this.props.history.push('/user/pastchallenge')}} >Past Challenges
-          </button>
         </div>
 
       </div>

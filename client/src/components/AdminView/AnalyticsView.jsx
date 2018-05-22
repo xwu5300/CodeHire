@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CompanyNavBar from './CompanyNavBar.jsx';
 import { connect } from "react-redux";
 import UserResults from './UserResults.jsx';
 import AllChallengeResults from './AnalyticsView/AllChallengeResults.jsx';
@@ -20,14 +21,7 @@ class AnalyticsView extends Component {
   render() {
     return (
       <div>
-        <div className="ui orange five item menu">
-          <div className='ui item cursor' onClick={ () => { this.props.history.push('/admin/profile') } }><i className="user circle icon"></i>{ localStorage.getItem('username') }</div>
-          <div className='ui item cursor' onClick={() => {this.props.history.push('/admin')}}>Dashboard</div>
-          <div className='ui item cursor' onClick={() => this.props.history.push('/admin/challenges') }>Manage Challenges</div>
-          <div className='ui active item cursor' onClick={() => {this.props.history.push('/admin/data')}}>Analytics</div>
-          <div className='ui item cursor' onClick={() => {this.props.history.push('/admin/hire')}}>Hire</div>
-        </div>
-
+        <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
         <h1>Analytics</h1>
         <h2>Candidate List</h2>
           {this.props.candidate_list.length > 0 ? this.props.candidate_list.map((candidate, i) => {
