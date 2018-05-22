@@ -150,9 +150,10 @@ module.exports.getAllCompanyCalendars = (companyName) => {
   .whereNotNull('time')
   .innerJoin('users', 'users.id', 'company_schedule.company_id')
   .where('name', 'like', option)
+  .select('*', 'company_schedule.id')
   .orderBy('time', 'asc')
   .then((res) => {
-    console.log('res from calendar', option, res)
+    console.log('res from calendar')
     return res;
   })
   .catch((err) => {

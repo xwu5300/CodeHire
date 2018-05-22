@@ -24,7 +24,7 @@ class CompanyScheduleView extends Component {
 
   componentDidMount() {
     this.props.fetchInitialChallenge(localStorage.getItem('companyId'))
-    this.props.fetchCompanySchedule(localStorage.getItem('companyId'))
+    this.props.fetchAllCompanyCalendars(localStorage.getItem('companyName'))
     this.props.fetchCandidateResults(localStorage.getItem('userId'), null, ()=>{});
     this.props.fetchCandidateInitialResults(localStorage.getItem('companyId'), localStorage.getItem('userId'), () => {})
   }
@@ -70,14 +70,14 @@ class CompanyScheduleView extends Component {
   }
 
   render() {
-    // console.log('company schedue view props',this.props)
+    console.log('company schedue view props',this.props)
     if (this.props.initial_challenge.length) {
       return (
         <div>
-          <div className="ui orange four item inverted menu">
-          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
+          <div className="ui orange four item menu">
+          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ localStorage.getItem('username') }</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
+          <div className='ui active item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
         </div>
         <h1>{this.props.initial_challenge[0].name}</h1> 
@@ -94,9 +94,9 @@ class CompanyScheduleView extends Component {
         </div>
         <br/>
         <div className='schedule_container'>
-        {this.props.company_schedule.length ?
+        {this.props.all_company_calendars.length ?
    
-        <CompanyScheduleTableView updateStyle={this.updateStyle} saveCandidateCalendar={this.props.saveCandidateCalendar} companyCalendar={this.props.company_schedule} passInitial={this.props.pass_initial} fetchCandidateResults={this.props.fetchCandidateResults}/>
+        <CompanyScheduleTableView updateStyle={this.updateStyle} saveCandidateCalendar={this.props.saveCandidateCalendar} companyCalendar={this.props.all_company_calendars} passInitial={this.props.pass_initial} fetchCandidateResults={this.props.fetchCandidateResults}/>
         : <div> {this.props.initial_challenge[0].name} Does Not Have Any Upcoming Live Challenge </div>
       }
 
@@ -106,10 +106,10 @@ class CompanyScheduleView extends Component {
       )
     } else {
       return(
-        <div className="ui orange four item inverted menu">
-        <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
+        <div className="ui orange four item menu">
+        <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ localStorage.getItem('username') }</div>
         <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-        <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
+        <div className='ui active item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
         <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
       </div>
       );

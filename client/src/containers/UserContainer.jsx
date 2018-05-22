@@ -15,7 +15,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCandidateResults, getResume, saveResume, removeResume, updateCandidatePhoto, fetchAllCompanyCalendars } from '../actions/userActions';
-import { fetchCompanySchedule, fetchCompanyResults, getUsername } from '../actions/adminActions' ;
+import { fetchCompanyResults, getUsername } from '../actions/adminActions' ;
 
 import axios from 'axios';
 
@@ -69,7 +69,7 @@ const mapStateToProps = function(state) {
 const mapDispatchToProps = {
    fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, 
    deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, 
-   saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCompanySchedule, 
+   saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, 
    fetchCompanyResults, fetchCandidateResults, getResume, saveResume, removeResume, updateCandidatePhoto, getUsername, fetchAllCompanyCalendars
 }
 

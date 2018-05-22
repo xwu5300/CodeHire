@@ -24,7 +24,7 @@ class CompanyListView extends Component {
       let rows = this.props.company_list.map((company) => {
         let url = company.logo_url || 'http://dev.jobkhoji.com/assets/images/default_company_icon.png';
         return {
-          id: company.id,
+          info: {companyId: company.id, companyName: company.name, companyInformation: company.information},
           logo: url,
           company: {name: company.name, information: company.information}
         }
@@ -32,13 +32,13 @@ class CompanyListView extends Component {
       let columns = [
         {accessor: 'logo', label: '', priorityLevel: 1, position: 1, sortable: false, CustomComponent: Image},
         {accessor: 'company', label: 'Company', priorityLevel: 2, sortable: true, position: 2, minWidth: 300, CustomComponent: CompanyDetail},
-        {accessor: 'id', label: '', priorityLevel: 3, position: 3, CustomComponent: ViewCompanyPage}
+        {accessor: 'info', label: '', priorityLevel: 3, position: 3, CustomComponent: ViewCompanyPage}
       ]
 
       return (
         <div>
           <div className="ui orange four item menu">
-          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
+          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ localStorage.getItem('username') }</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
           <div className='ui active item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
@@ -70,7 +70,7 @@ class CompanyListView extends Component {
       return (
       <div>
           <div className="ui orange four item menu">
-          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
+          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ localStorage.getItem('username') }</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
           <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
           <div className='ui active item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>

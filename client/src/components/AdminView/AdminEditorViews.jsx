@@ -25,13 +25,13 @@ class AdminEditorViews extends Component {
 
     this.socket = socketClient();
         
-    this.socket.on('add char-' + this.props.username, (chars)=> {
+    this.socket.on('add char-' + localStorage.getItem('username'), (chars)=> {
       this.setState({
         code: chars
       })
     })
 
-    this.socket.on('show result-' + this.props.username, (result) => {
+    this.socket.on('show result-' + localStorage.getItem('username'), (result) => {
       this.setState({ result: result });
     })
   }
@@ -44,9 +44,9 @@ class AdminEditorViews extends Component {
   render() {
     
     if(this.state.result === true) {
-      var result = this.props.username + ' Passed Challenge';
+      var result = localStorage.getItem('username') + ' Passed Challenge';
     } else if(this.state.result === false) {
-      result = this.props.username + ' Failed Challenge';
+      result = localStorage.getItem('username') + ' Failed Challenge';
     }
     
     return (

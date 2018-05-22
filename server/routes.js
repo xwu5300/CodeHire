@@ -292,6 +292,7 @@ router.get('/api/companyCalendars', (req, res) => {
   let companyName = req.query.companyName;
   calendarControllers.getAllCompanyCalendars(companyName)
   .then((data) => {
+    console.log('routes getAllCompanyCalendars data', data)
     res.send(data);
   })
 })

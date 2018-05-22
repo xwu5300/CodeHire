@@ -37,6 +37,7 @@ export const fetchCandidateCalendar = (candidateId) => (dispatch) => {
 export const saveCandidateCalendar = (candidateId, companyScheduleId) => (dispatch) => {
   axios.post('/api/candidateCalendar', { candidateId, companyScheduleId })
   .then(({data}) => {
+    console.log('data')
     if (data) {
       swal({
         text: "Scheduled a Live Challenge.",
@@ -44,7 +45,6 @@ export const saveCandidateCalendar = (candidateId, companyScheduleId) => (dispat
       })
     } else {
       swal({
-
         text: "You've already scheduled this live challenge.",
         // width: '350px'
       })
