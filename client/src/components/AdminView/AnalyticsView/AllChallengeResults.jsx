@@ -62,36 +62,64 @@ class AllChallengeResults extends Component {
     })
 
     filteredAllCompanyData.forEach((item) => {
-      return item.x = moment(item.x).format('MMMM Do');
+      return item.x = Number(moment(item.x).format('DD'));
     })
 
     filteredCompanyData.forEach((item) => {
-      return item.x = moment(item.x).format('MMMM Do');
+      return item.x = Number(moment(item.x).format('DD'));
     })
+//          tickValues={combinedData.map((item) =>item.x)} 
+    let combinedData = filteredAllCompanyData.concat(filteredCompanyData).sort((a, b) => {
+      return a.x - b.x;
+    });
 
     console.log(filteredAllCompanyData)
-    console.log(filteredCompanyData)
+
 
     return (
-      <VictoryChart domain={{y: [0, 100]}}>
-          <VictoryGroup>
-          <VictoryLine
-          data={filteredCompanyData} 
-          style={{data: {stroke: '#FF00FF', strokeWidth: 1}}}
-          />
+      <div className="challenge-results-graph">
+        <VictoryChart domain={{x: [0, 30], y: [0, 100]}}>
 
-          <VictoryLine
-          data={filteredAllCompanyData}
-          style={{data: {stroke: '#00BFFF', strokeWidth: 1}}}
+            <VictoryAxis
+            axisLabelComponent={<VictoryLabel style={{fontSize: 12, fontWeight: 500}}/>}
+            label={"Time (days in month)"}
+            tickCount={10}
+            style={{
+              tickLabels: {
+                fontSize: 10,
+                padding: 5
+              }
+             }}
+            />
+            <VictoryAxis 
+            tickFormat={(p) => `${p} %`}
+            dependentAxis
+            label={"Pass Rate"}
+            axisLabelComponent={<VictoryLabel dy={-10} style={{fontSize: 12, fontWeight: 500}} />}
+            style={{
+              tickLabels: {
+                fontSize: 10,
+                padding: 5
+              }
+             }}
+            />
+            <VictoryLine
+            data={filteredCompanyData} 
+            style={{data: {stroke: '#FF00FF', strokeWidth: 1}}}
+            />
+            <VictoryLine
+            data={filteredAllCompanyData}
+            style={{data: {stroke: '#00BFFF', strokeWidth: 1}}}
+            />
+
+          <VictoryLabel
+          text={`Average Pass Rate`}
+          verticalAnchor={"end"}
+          x={180}
+          y={30}
           />
-          </VictoryGroup>
-        <VictoryLabel
-        text={`Average Pass Rate`}
-        verticalAnchor={"end"}
-        x={140}
-        y={30}
-        />
-      </VictoryChart>
+        </VictoryChart>
+      </div>
     )
   }
 }
