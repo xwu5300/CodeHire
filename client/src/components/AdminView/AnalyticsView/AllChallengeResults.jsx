@@ -68,7 +68,7 @@ class AllChallengeResults extends Component {
     filteredCompanyData.forEach((item) => {
       return item.x = Number(moment(item.x).format('DD'));
     })
-//          tickValues={combinedData.map((item) =>item.x)} 
+
     let combinedData = filteredAllCompanyData.concat(filteredCompanyData).sort((a, b) => {
       return a.x - b.x;
     });
@@ -105,11 +105,11 @@ class AllChallengeResults extends Component {
             />
             <VictoryLine
             data={filteredCompanyData} 
-            style={{data: {stroke: '#FF00FF', strokeWidth: 1}}}
+            style={{data: {stroke: '#FF00FF', strokeWidth: 2}}}
             />
             <VictoryLine
             data={filteredAllCompanyData}
-            style={{data: {stroke: '#00BFFF', strokeWidth: 1}}}
+            style={{data: {stroke: '#00BFFF', strokeWidth: 2}}}
             />
 
           <VictoryLabel
