@@ -93,6 +93,7 @@ module.exports.getCandidateResults = (candidateId, companyScheduleId) => {
 module.exports.fetchAllResults = () => {
   return knex('results')
   .innerJoin('all_challenges', 'results.challenge_id', 'all_challenges.id')
+  .innerJoin('company_schedule', 'company_schedule.id', 'results.company_schedule_id')
   .then((res) => {
     return res;
   })
@@ -113,4 +114,3 @@ module.exports.fetchCompanyData = (companyId) => {
     console.log('Error fetching challenge results', err);
   })
 }
-
