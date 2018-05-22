@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import UserScheduleTableView from '../UserChallenge/UserScheduleTableView.jsx';
+import UserNavBar from '../UserNavBar.jsx';
 
 class UserDashBoard extends Component {
   constructor() {
@@ -15,15 +16,9 @@ class UserDashBoard extends Component {
   }
 
   render() {
-    // console.log('user dash board props', this.props)
     return(
       <div>
-        <div className="ui orange four item menu">
-          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ localStorage.getItem('username') }</div>
-          <div className='ui active item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
-        </div>
+        <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
         <h2 style={{ marginTop: '100px', textAlign: 'center' }}>Your Calendar</h2>
         <div className='candidate_calendar inverted ui raised container segment'>
         {this.props.candidate_calendar.length ?

@@ -13,7 +13,8 @@ const initialState = {
   candidate_results: [],
   resume_url: '',
   resume_name: '',
-  all_company_calendars: []
+  all_company_calendars: [],
+  company_name: ''
 }
 
 
@@ -117,6 +118,19 @@ const candidateResume = (state = initialState, action) => {
   }
 }
 
+const companyName = (state = initialState, action) => {
+  switch(action.type) {
+    case 'GET_COMPANY_NAME':
+      return {
+        ...state,
+        company_name: action.name
+      }
+      default: 
+      return state;
+  }
+}
+
+
 const allCompanyCalendars = (state = initialState, action) => {
   switch(action.type) {
     case 'GET_ALL_COMPANY_CALENDARS':
@@ -126,10 +140,11 @@ const allCompanyCalendars = (state = initialState, action) => {
       }
     default:
       return state;
-  }
-}
+   }
+ }
 
 
 
-export default { initialChallenge, candidateInfo, candidateCalendar, currentCompanySchedule, candidateInitialResults, companyList, candidateResults, candidateResume, allCompanyCalendars };
+export default { companyName, initialChallenge, candidateInfo, candidateCalendar, currentCompanySchedule, candidateInitialResults, companyList, candidateResults, candidateResume, allCompanyCalendars };
+
 

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+import CompanyNavBar from './CompanyNavBar.jsx';
 import { connect } from "react-redux";
 
 
@@ -48,14 +50,7 @@ class AdminProfileView extends Component {
   render() {
     return (
       <div>
-        <div className="ui orange five item menu">
-          <div className='ui active item cursor' onClick={ () => { this.props.history.push('/admin/profile') } }><i className="user circle icon"></i>{ localStorage.getItem('username') }</div>
-          <div className='ui item cursor' onClick={() => {this.props.history.push('/admin')}}>Dashboard</div> 
-          <div className='ui item cursor' onClick={() => this.props.history.push('/admin/challenges') }>Manage Challenges</div>
-          <div className='ui item cursor' onClick={() => {this.props.history.push('/admin/data')}}>Analytics</div> 
-          <div className='ui item cursor' onClick={() => {this.props.history.push('/admin/hire')}}>Hire</div> 
-        </div>
-        
+        <CompanyNavBar getUsername={ this.props.getUsername} username={ this.props.username } />
         <div className='company_profile_container'>
         <div className='ui raised container horizontal segments'>
 
@@ -76,7 +71,7 @@ class AdminProfileView extends Component {
           </div> 
 
         </div>
-        <button onClick={ () => this.handleSubmit() } style={{ display: 'block', margin: 'auto', width: '200px' }} className='ui orange inverted button'>Save Changes</button> 
+        <button onClick={ () => this.handleSubmit() } style={{ display: 'block', margin: 'auto', width: '200px' }} className='ui orange button'>Save Changes</button> 
         </div>
       </div>
     )

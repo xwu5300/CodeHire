@@ -2,7 +2,7 @@ import React from 'react';
 
 const ViewCompanyPage = ({row, accessor, CustomFunction }) => {
   return(
-    <button onClick={() => CustomFunction(row[accessor])}>
+    <button className='ui orange button' onClick={() => CustomFunction(row[accessor])}>
        View Company Page
     </button>
   )

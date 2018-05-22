@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import UserSearchResults from './HireView/UserSearchResults.jsx';
 import SavedUsers from './HireView/SavedUsers.jsx';
+import CompanyNavBar from './CompanyNavBar.jsx';
 
 
 class HireView extends Component {
@@ -47,14 +48,7 @@ class HireView extends Component {
   render() {
     return(
       <div>
-        <div className="ui orange five item menu">
-          <div className='ui item cursor' onClick={ () => { this.props.history.push('/admin/profile') } }><i className="user circle icon"></i>{ localStorage.getItem('username') }</div>
-          <div className='ui item cursor' onClick={() => {this.props.history.push('/admin')}}>Dashboard</div> 
-          <div className='ui item cursor' onClick={() => this.props.history.push('/admin/challenges') }>Manage Challenges</div>
-          <div className='ui item cursor' onClick={() => {this.props.history.push('/admin/data')}}>Analytics</div> 
-          <div className='ui active item cursor' onClick={() => {this.props.history.push('/admin/hire')}}>Hire</div> 
-        </div>
-       
+        <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
         <div className="search-container">
           <div className="ui fluid left icon input">
             <input type="text" value={this.state.query} placeholder="Search by username or skill..." onChange={this.handleChange} onKeyPress={(e)=>{this.handleKeyPress(e)}}/>

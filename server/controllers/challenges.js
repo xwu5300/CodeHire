@@ -90,8 +90,6 @@ module.exports.getInitialChallenge = (companyId) => {
   return knex.from('all_challenges')
   .where({'all_challenges.company_id': companyId, 'all_challenges.initial': true})
   .innerJoin('users', 'users.id', 'all_challenges.company_id')
-  // .innerJoin('company_schedule')
-  .orWhere({ 'all_challenges.company_id': 1, 'all_challenges.initial': true })
   .select('*', 'all_challenges.id')
   .then((res) => {
     return res;
@@ -104,6 +102,7 @@ module.exports.getInitialChallenge = (companyId) => {
 //set initial challenge
 module.exports.setInitialChallenge = (companyId, challengeId, duration) => {
   console.log('SET INITIAL CHALLENGE', companyId, challengeId, duration);
+
   return knex('all_challenges')
   .where({
     company_id: companyId,
@@ -112,7 +111,7 @@ module.exports.setInitialChallenge = (companyId, challengeId, duration) => {
     company_id: 1
   })
   .update({
-    initial: false
+    initial: false,
   })
   .then(() => {
     return knex('all_challenges')
@@ -126,7 +125,7 @@ module.exports.setInitialChallenge = (companyId, challengeId, duration) => {
     })
     .update({
       initial: true,
-      duration: duration
+      duration: duration,
     })
     .then(() => {
       console.log('Updated initial challenge in db');

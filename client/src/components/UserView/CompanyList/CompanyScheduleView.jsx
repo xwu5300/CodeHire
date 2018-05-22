@@ -6,6 +6,7 @@ import swal from 'sweetalert2';
 import moment from 'moment';
 
 import CompanyScheduleTableView from './CompanyScheduleTableView.jsx';
+import UserNavBar from '../UserNavBar.jsx';
 
 class CompanyScheduleView extends Component {
   constructor() {
@@ -37,7 +38,6 @@ class CompanyScheduleView extends Component {
   }
 
   handleClick(results) {
-    console.log('comp schedu view result', results)
     let daysLeft = 0
     if (results.length) {
       let days = this.getTimeOut(results)
@@ -69,31 +69,27 @@ class CompanyScheduleView extends Component {
     })
   }
 
-  render() {
-    console.log('company schedue view props',this.props)
+  render() { 
     if (this.props.initial_challenge.length) {
       return (
         <div>
-          <div className="ui orange four item menu">
-          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ localStorage.getItem('username') }</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui active item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
-        </div>
-        <h1>{this.props.initial_challenge[0].name}</h1> 
-        <h2>{this.props.initial_challenge[0].information}</h2> 
-        <br/>
-        <div className='ui raised very padded container segment' style={this.state.style}>
+        <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
+        <div className='schedule_container'>
+        <div className='ui raised very padded container segment l' style={this.state.style}>
+          <h1>{ this.props.initial_challenge[0].name }</h1> 
+          <h2>{ this.props.initial_challenge[0].information }</h2> 
+
+          <hr />
         <h2>
         Before You Schedule Live Challenge - You Need To Pass Initial Challenge
         </h2>
-        <button onClick={() => {
+        <button className='ui orange inverted button' onClick={() => {
           this.isTaken()
           }}>
             Take Initial Challenge</button>
         </div>
-        <br/>
-        <div className='schedule_container'>
+
+        <div>
         {this.props.all_company_calendars.length ?
    
         <CompanyScheduleTableView updateStyle={this.updateStyle} saveCandidateCalendar={this.props.saveCandidateCalendar} companyCalendar={this.props.all_company_calendars} passInitial={this.props.pass_initial} fetchCandidateResults={this.props.fetchCandidateResults}/>
@@ -101,17 +97,12 @@ class CompanyScheduleView extends Component {
       }
 
         </div> 
-
         </div>
+       </div>
       )
     } else {
-      return(
-        <div className="ui orange four item menu">
-        <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ localStorage.getItem('username') }</div>
-        <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-        <div className='ui active item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
-        <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
-      </div>
+      return (
+        null
       );
     }
   }

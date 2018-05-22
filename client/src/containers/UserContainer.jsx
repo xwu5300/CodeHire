@@ -14,18 +14,12 @@ import PrivateRoute from '../components/PrivateRoute.jsx';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCandidateResults, getResume, saveResume, removeResume, updateCandidatePhoto, fetchAllCompanyCalendars } from '../actions/userActions';
-import { fetchCompanyResults, getUsername } from '../actions/adminActions' ;
+import { viewCompanyProfile, fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCandidateResults, getResume, saveResume, removeResume, updateCandidatePhoto, fetchAllCompanyCalendars } from '../actions/userActions';
+import { fetchCompanySchedule, fetchCompanyResults, getUsername } from '../actions/adminActions' ;
 
 import axios from 'axios';
 
 class UserContainer extends Component {
-
-  componentDidMount() {
-    if(localStorage.getItem('userId') !== null && (this.props.history.location.pathname !== '/' || this.props.history.location.pathname !== '/registration')) {
-      this.props.getUsername(localStorage.getItem('userId'));
-    }
-  }
   
   render() {
     return (
@@ -63,14 +57,16 @@ const mapStateToProps = function(state) {
     company_list: state.company_list.company_list,
     resume_name: state.resume_name.resume_name,
     resume_url: state.resume_url.resume_url,
-    all_company_calendars: state.all_company_calendars.all_company_calendars
+    all_company_calendars: state.all_company_calendars.all_company_calendars,
+    company_name: state.company_name.company_name
 }};
 
 const mapDispatchToProps = {
    fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, 
    deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, 
-   saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, 
-   fetchCompanyResults, fetchCandidateResults, getResume, saveResume, removeResume, updateCandidatePhoto, getUsername, fetchAllCompanyCalendars
+   saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCompanySchedule, 
+   fetchCompanyResults, fetchCandidateResults, getResume, saveResume, removeResume, updateCandidatePhoto, getUsername,
+   viewCompanyProfile, fetchAllCompanyCalendars
 }
 
 const connectComponent = connect(mapStateToProps, mapDispatchToProps)(UserContainer); //code cleaned

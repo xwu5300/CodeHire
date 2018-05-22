@@ -44,10 +44,6 @@ class UserInitialChallengeView extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentDidMount() {
-  
-  }
-
   updateTimer(display) {
     this.setState({
       timeRemaining: display

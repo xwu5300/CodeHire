@@ -7,7 +7,6 @@ class PastChallengeTableView extends Component {
   }
 
   render() {
-    console.log('passchallenge view props', this.props)
     return (
       <ReactCollapsingTable 
       columns={this.props.columns} 
