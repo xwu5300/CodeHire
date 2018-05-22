@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { VictoryChart, VictoryLabel, VictoryAxis, VictoryTheme, VictoryLine } from 'victory';
-
+import { VictoryChart, VictoryLabel, VictoryGroup,VictoryAxis, VictoryTheme, VictoryLine } from 'victory';
+import moment from 'moment';
 
 class AllChallengeResults extends Component {
   constructor(props) {
@@ -30,33 +30,96 @@ class AllChallengeResults extends Component {
   }
 
   render() {
+
+    let otherCompanyResults = this.props.allResults.filter((result) => {
+      return result.company_id !== this.props.companyResults[0].company_id;
+    })
+
     let successRate = this.getSuccessRate(this.props.companyResults);
+    let allCompanySuccessRate = this.getSuccessRate(otherCompanyResults); //gets success rate for all companies other than your own
+
 
     let companyData = this.props.companyResults.map((data) => {
       return {x: data.time, y: Math.round(successRate[data.company_schedule_id] * 100, 2)}
       }).sort((a, b) => {
-        return a.time - b.time;
+        return Date.parse(a.x) - Date.parse(b.x);
       })
 
-    let filtered = companyData.filter((item) => {
+    let filteredCompanyData = companyData.filter((item) => {
       return !this[item.x] ? this[item.x] = true : false;
     }, {})
 
-    return (
-      <VictoryChart>
-        <VictoryLine
-        data={companyData} 
-        style={{data: {stroke: '#FF00FF', strokeWidth: 1}}}
-        
-        />
+    let allCompanyData = otherCompanyResults.map((data) => {
+      return {x: data.time, y: Math.round(allCompanySuccessRate[data.company_schedule_id] * 100, 2)}
+    }).sort((a, b) => {
+      return Date.parse(a.x) - Date.parse(b.x);
+    })
 
-        <VictoryLabel
-        text={`Average Pass Rate`}
-        verticalAnchor={"end"}
-        x={140}
-        y={30}
-        />
-      </VictoryChart>
+    let obj = {}
+
+    let filteredAllCompanyData = allCompanyData.filter((item) => {
+      return !obj[item.x] ? obj[item.x] = true : false;
+    })
+
+    filteredAllCompanyData.forEach((item) => {
+      return item.x = Number(moment(item.x).format('DD'));
+    })
+
+    filteredCompanyData.forEach((item) => {
+      return item.x = Number(moment(item.x).format('DD'));
+    })
+
+    let combinedData = filteredAllCompanyData.concat(filteredCompanyData).sort((a, b) => {
+      return a.x - b.x;
+    });
+
+    console.log(filteredAllCompanyData)
+
+
+    return (
+      <div className="challenge-results-graph">
+        <VictoryChart domain={{x: [0, 30], y: [0, 100]}}>
+
+            <VictoryAxis
+            axisLabelComponent={<VictoryLabel style={{fontSize: 12, fontWeight: 500}}/>}
+            label={"Time (days in month)"}
+            tickCount={10}
+            style={{
+              tickLabels: {
+                fontSize: 10,
+                padding: 5
+              }
+             }}
+            />
+            <VictoryAxis 
+            tickFormat={(p) => `${p} %`}
+            dependentAxis
+            label={"Pass Rate"}
+            axisLabelComponent={<VictoryLabel dy={-10} style={{fontSize: 12, fontWeight: 500}} />}
+            style={{
+              tickLabels: {
+                fontSize: 10,
+                padding: 5
+              }
+             }}
+            />
+            <VictoryLine
+            data={filteredCompanyData} 
+            style={{data: {stroke: '#FF00FF', strokeWidth: 2}}}
+            />
+            <VictoryLine
+            data={filteredAllCompanyData}
+            style={{data: {stroke: '#00BFFF', strokeWidth: 2}}}
+            />
+
+          <VictoryLabel
+          text={`Average Pass Rate`}
+          verticalAnchor={"end"}
+          x={180}
+          y={30}
+          />
+        </VictoryChart>
+      </div>
     )
   }
 }
