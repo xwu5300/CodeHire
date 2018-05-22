@@ -10,6 +10,7 @@ const redirectHomePage = (uid) => (dispatch) => {
   .then(({data}) => {
     localStorage.setItem('userId', data[0]);
     localStorage.setItem('username', data[1].name);
+    console.log('auth action localStorage.getItem', localStorage.getItem('username'))
     dispatch({ type: CHECK_USER, payload: data })
     if (data[1].role === 'company') {
       history.push('/admin');
@@ -46,6 +47,7 @@ export const handleLogin = (email, password) => (dispatch) => {
   if (auth.currentUser) {
     localStorage.removeItem('userId', 'username');
     auth.signOut();
+  
   }
   auth.signInWithEmailAndPassword(email, password)
   .then(({user}) => {

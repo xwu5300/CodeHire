@@ -89,7 +89,7 @@ class AdminDashboardView extends Component {
     return (
       <div>
         <div className="ui orange five item menu">
-          <div className='ui item cursor' onClick={ () => { this.props.history.push('/admin/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
+          <div className='ui item cursor' onClick={ () => { this.props.history.push('/admin/profile') } }><i className="user circle icon"></i>{ localStorage.getItem('username') }</div>
           <div className='ui active item cursor' onClick={() => {this.props.history.push('/admin')}}>Dashboard</div> 
           <div className='ui item cursor' onClick={() => this.editChallenges() }>Manage Challenges</div>
           <div className='ui item cursor' onClick={() => {this.props.history.push('/admin/data')}}>Analytics</div> 
