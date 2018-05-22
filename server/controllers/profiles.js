@@ -152,11 +152,11 @@ module.exports.getFavorites = (companyId) => {
 
 module.exports.searchUsers = (query) => {
   return knex('users')
-  .where({role: 'candidate'})
-  .andWhere(knex.raw(`array[candidate_skills] && ARRAY['${query}']`))
-  .orWhere({username: query})
+  .where({username: query, role: 'candidate'})
+  .orWhere(knex.raw(`array[candidate_skills] && ARRAY['${query}']`))
+  .andWhere({role: 'candidate'})
   .then((res) => {
-    console.log('Successfully fetching users from db');
+    console.log('Successfully fetching users from db', res);
     return res;
   })
   .catch((err) => {
