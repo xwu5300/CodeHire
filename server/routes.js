@@ -113,6 +113,14 @@ router.get('/api/username', (req, res) => {
   })
 })
 
+router.get('/api/auth/username', (req, res) => {
+  let username = req.query.username;
+  authControllers.getUsername(null, username)
+  .then((data) => {
+    res.send(data);
+  })
+})
+
 router.post('/api/resume', (req, res) => {
   let userId = jwt.decode(req.body.userId, secret).id;
   profileControllers.saveResume(req.body.resumeUrl, req.body.resumeName, userId)

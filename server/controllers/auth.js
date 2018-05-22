@@ -45,11 +45,17 @@ module.exports.handleLogin = (token,  callback) => {
   }) 
 }
 
-module.exports.getUsername = (userId) => {
+module.exports.getUsername = (userId, username) => {
+  let option = {id: userId}
+  if (username) {
+    option = {username: username}
+  }
+  console.log('auth.js userid username', userId, username)
   return knex('users')
   .select('username')
-  .where({id: userId})
+  .where(option)
   .then((user) => {
+    console.log('auth.js username', user)
     return user;
   })
   .catch((err) => {

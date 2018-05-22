@@ -50,19 +50,6 @@ export const handleLogin = (email, password) => (dispatch) => {
   auth.signInWithEmailAndPassword(email, password)
   .then(({user}) => {
     dispatch(redirectHomePage(user.uid));
-    // axios.post('/api/login', {token: user.uid})
-    // .then(({data}) => {
-    //   localStorage.setItem('userId', data[0]);
-    //   dispatch({ type: CHECK_USER, payload: data })
-    //   if (data[1].role === 'company') {
-    //     history.push('/admin');
-    //   } else if (data[1].role === 'candidate') {
-    //     history.push('/user');
-    //   }
-    // })
-    // .catch((err) => {
-    //   console.log('Error checking user', err);
-    // })
   })
   .catch((err) => {
     if (err) {
@@ -102,35 +89,49 @@ const matchPassword = (password, confirmPassword) => {
   return password === confirmPassword;
 }
 
+const validUsername = (username, cb) => {
+  axios.get('/api/auth/username', { params: { username } })
+  .then(({data}) => {
+    console.log('authaction data',data)
+    let isValid = data.length === 0 ? true : false
+    return cb(isValid)
+  })
+}
+
 export const handleSignUp = (email, username, password, confirmPassword, form, name, phone, logoUrl, githubUrl, companyInfo) => (dispatch) => {
-  if (!matchPassword(password, confirmPassword)) {
-    alert('Your password and confirmation password do not match.');
-  } else if (!validatePassword(password)) {
-    alert('Password must be at least 6 character.');
-  } else if (!validateEmail(email)) {
-    alert('Invalid email address');
-  } else {
-    auth.createUserWithEmailAndPassword(email, password)
-    .then(({user}) => {
-      if (user.uid) {
-        if (form === 'companyForm') {
-          dispatch(saveCompany(user.uid, name, username, phone, logoUrl, companyInfo, function() {
-            dispatch(redirectHomePage(user.uid))
-          }));
-        } else if (form === 'candidateForm'){
-          dispatch(saveCandidate(user.uid, name, username, phone, githubUrl, function() {
-            dispatch(redirectHomePage(user.uid))
-          }));
+  validUsername(username, (isValid) => {
+    if (!matchPassword(password, confirmPassword)) {
+      alert('Your password and confirmation password do not match.');
+    } else if (!validatePassword(password)) {
+      alert('Password must be at least 6 character.');
+    } else if (!validateEmail(email)) {
+      alert('Invalid email address');
+    } else if (!isValid) {
+      console.log('valie user name', isValid)
+      alert('The username is already in use by another account.')
+    } else {
+      auth.createUserWithEmailAndPassword(email, password)
+      .then(({user}) => {
+        if (user.uid) {
+          if (form === 'companyForm') {
+            dispatch(saveCompany(user.uid, name, username, phone, logoUrl, companyInfo, function() {
+              dispatch(redirectHomePage(user.uid))
+            }));
+          } else if (form === 'candidateForm'){
+            dispatch(saveCandidate(user.uid, name, username, phone, githubUrl, function() {
+              dispatch(redirectHomePage(user.uid))
+            }));
+          }
         }
-      }
-    })
-    .catch((error) => {
-      if(error) {
-        console.log('error for signup', error)
-        alert(error.message)
-      }
-    })
-  }
+      })
+      .catch((error) => {
+        if(error) {
+          console.log('error for signup', error)
+          alert(error.message)
+        }
+      })
+    }
+  })
 }
 
 export const handleLogout = () => (dispatch) => {
@@ -140,9 +141,6 @@ export const handleLogout = () => (dispatch) => {
   }
   history.push('/login');
 }
-
-
-
 
 
 
