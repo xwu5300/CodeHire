@@ -462,4 +462,3 @@ INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candi
 INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 5, 10, 1, false);
 INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 5, 11, 1, false);
 INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 5, 12, 1, false);
-

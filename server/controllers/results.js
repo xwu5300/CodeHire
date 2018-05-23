@@ -95,6 +95,7 @@ module.exports.fetchAllResults = () => {
   .innerJoin('all_challenges', 'results.challenge_id', 'all_challenges.id')
   .innerJoin('company_schedule', 'company_schedule.id', 'results.company_schedule_id')
   .then((res) => {
+    console.log('res in fetchalll results from reducers', res)
     return res;
   })
   .catch((err) => {
@@ -105,6 +106,19 @@ module.exports.fetchAllResults = () => {
 module.exports.fetchCompanyData = (companyId) => {
   return knex('results')
   .where({'results.company_id': companyId})
+  .innerJoin('all_challenges', 'all_challenges.id', 'results.challenge_id')
+  .innerJoin('company_schedule', 'company_schedule.id', 'results.company_schedule_id')
+  .then((res) => {
+    return res;
+  })
+  .catch((err) => {
+    console.log('Error fetching company results', err);
+  })
+}
+
+module.exports.fetchChallengeData = (challengeId) => {
+  return knex('results')
+  .where({'results.challenge_id': challengeId})
   .innerJoin('all_challenges', 'all_challenges.id', 'results.challenge_id')
   .innerJoin('company_schedule', 'company_schedule.id', 'results.company_schedule_id')
   .then((res) => {

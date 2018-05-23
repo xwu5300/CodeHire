@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { VictoryChart, VictoryLabel, VictoryAxis, VictoryContainer, VictoryVoronoiContainer, VictoryTheme, VictoryLine, VictoryTooltip, VictoryLegend } from 'victory';
 import moment from 'moment';
 
-class AllChallengeResults extends Component {
+class LineGraph extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+
     }
     this.getSuccessRate = this.getSuccessRate.bind(this);
   }
@@ -40,7 +40,7 @@ class AllChallengeResults extends Component {
 
 
     let companyData = this.props.companyResults.map((data) => {
-      return {x: data.time, y: Math.round(successRate[data.company_schedule_id] * 100, 2), label: 
+      return {x: data.time, y: Math.round(successRate[data.company_schedule_id] * 100, 2), label:
         `Challenge: ${data.title}
         Difficulty: ${data.difficulty}
         Pass Rate: ${Math.round(successRate[data.company_schedule_id] * 100, 2)}%`}
@@ -88,7 +88,7 @@ class AllChallengeResults extends Component {
             x={350} y={10}
             style={{labels:{fontSize: 7}, padding: '50px'}}
             orientation="vertical"
-           
+
             colorScale={['#00BFFF', '#FF00FF']}
             data={[{name: 'All Company Challenges'}, {name: "Your Challenges"}]}
             />
@@ -104,7 +104,7 @@ class AllChallengeResults extends Component {
               }
              }}
             />
-            <VictoryAxis 
+            <VictoryAxis
             tickFormat={(p) => `${p} %`}
             dependentAxis
             label={"Pass Rate"}
@@ -123,7 +123,7 @@ class AllChallengeResults extends Component {
                 flyoutStyle={{stroke: 'none', opacity: '.1'}}
                 cornerRadius={0}
               />}
-            data={filteredCompanyData} 
+            data={filteredCompanyData}
             style={{data: {stroke: '#FF00FF', strokeWidth: 2}}}
             />
             <VictoryLine
@@ -143,8 +143,4 @@ class AllChallengeResults extends Component {
   }
 }
 
-
-
-
-
-export default AllChallengeResults;
+export default LineGraph;

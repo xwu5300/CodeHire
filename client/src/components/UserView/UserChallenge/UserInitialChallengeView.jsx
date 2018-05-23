@@ -81,7 +81,7 @@ class UserInitialChallengeView extends Component {
     let company_id = localStorage.getItem('companyId')
     let user_id = localStorage.getItem('userId')
     this.props.saveResults(null, 'f', this.state.code, 90, moment(Date.now()).format(), id, company_id, user_id, true , id, () => {
-      
+
       swal(
         {title: 'Time Ran Out',
          text: 'The current state of your code was saved and submitted',
