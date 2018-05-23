@@ -78,66 +78,61 @@ class LineGraph extends Component {
 
     return (
       <div className="challenge-results-graph">
-        <VictoryChart domain={{x: [0, 30], y: [0, 100]}} animate={{onEnter: {duration: 100}}} containerComponent={
-          <VictoryVoronoiContainer/>
-        }>
-            <VictoryLegend
-            x={350} y={10}
+        <VictoryChart domainPadding={50} domain={{x: [0, 30], y: [0, 80]}} animate={{onEnter: {duration: 100}}} containerComponent={ <VictoryVoronoiContainer/> }>
+          <VictoryLegend
+            x={150} y={30}
             style={{labels:{fontSize: 7}, padding: '50px'}}
-            orientation="vertical"
-
+            centerTitle
+            orientation="horizontal"
+            gutter={20}
             colorScale={['#00BFFF', '#FF00FF']}
             data={[{name: 'All Company Challenges'}, {name: "Your Challenges"}]}
-            />
-
-            <VictoryAxis
-            axisLabelComponent={<VictoryLabel 
-            style={{
-              fontSize: 12, 
-              fontWeight: 500}} 
-            />}
+          />
+          <VictoryLabel
+            text={`Average Pass Rate`}
+            verticalAnchor={"end"}
+            x={180}
+            y={25}
+          />
+          <VictoryAxis
+            axisLabelComponent={<VictoryLabel style={{fontSize: 12, fontWeight: 500}} />}
             label={"Time (days in month)"}
-            tickCount={10}
-            style={{
-              tickLabels: {
-                fontSize: 10, 
-                padding: 5
-              }
-             }}
-            />
-            <VictoryAxis
-            tickFormat={(p) => `${p} %`}
-            dependentAxis
-            label={"Pass Rate"}
-            axisLabelComponent={<VictoryLabel dy={-10} style={{fontSize: 12, fontWeight: 500}} />}
             style={{
               tickLabels: {
                 fontSize: 10,
                 padding: 5
               }
              }}
-            />
-            <VictoryLine
-            labelComponent={<VictoryTooltip
+          />
+          <VictoryAxis
+            axisLabelComponent={<VictoryLabel dy={-10} style={{fontSize: 12, fontWeight: 500}} />}
+            tickFormat={(p) => `${p} %`}
+            dependentAxis
+            fixLabelOverlap={true}
+            label={"Pass Rate"}
+            style={{
+              tickLabels: {
+                fontSize: 10,
+                padding: 5
+              }
+            }}
+          />
+          <VictoryLine
+            labelComponent={
+              <VictoryTooltip
                 style={{fontSize: 8}}
-                pointerLength={5}
+                pointerLength={(d) => d.y = -8}
                 flyoutStyle={{stroke: 'none', opacity: '.1'}}
                 cornerRadius={0}
-              />}
+              />
+            }
             data={filteredCompanyData}
             style={{data: {stroke: '#FF00FF', strokeWidth: 2}}}
-            />
-            <VictoryLine
+          />
+          <VictoryLine
             data={filteredAllCompanyData}
             style={{data: {stroke: '#00BFFF', strokeWidth: 2}}}
-            />
-
-            <VictoryLabel
-            text={`Average Pass Rate`}
-            verticalAnchor={"end"}
-            x={180}
-            y={15}
-            />
+          />
         </VictoryChart>
       </div>
     )

@@ -49,7 +49,11 @@ class AnalyticsView extends Component {
   }
 
   render() {
+<<<<<<< HEAD
     console.log(this.props)
+=======
+    console.log('my props', this.props)
+>>>>>>> standardized and cleaned up graphs
     return (
       <div>
         <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout }/>
