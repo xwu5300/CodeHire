@@ -26,7 +26,7 @@ class AnalyticsView extends Component {
       <div>
         <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
         <h1>Analytics</h1>
-          <PastChallenges save={this.props.saveToFavorites} pastResults={this.props.past_results} pastChallenges={this.props.past_challenges} fetchPastResults={this.props.fetchPastResults}/>
+          <PastChallenges history={this.props.history} save={this.props.saveToFavorites} pastResults={this.props.past_results} pastChallenges={this.props.past_challenges} fetchPastResults={this.props.fetchPastResults}/>
           <div>
           <button onClick={()=>{this.setState({show: !this.state.show})}}>Show Graph</button>
             {this.state.show ? <AllChallengeResults getAllResults={this.props.fetchAllResults} getCompanyResults={this.props.getCompanyData} companyResults={this.props.company_data} allResults={this.props.all_results}/> : null}

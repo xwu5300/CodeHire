@@ -6,16 +6,28 @@ class PastResults extends Component {
 
   render() {
     return (
-      <div>
+      <div className="past-challenge-container">
+      <button onClick={()=>{this.props.showTable()}}>Back to Past Challenges</button>
+      <table className="ui celled table">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Status</th>
+          <th>Save to Favorites</th>
+        </tr>
+      </thead>
+      <tbody>
       {this.props.pastResults.map((item) => {
         return (
-          <div key={item.candidate_id}>
-            <div>{item.username}</div>
-            <div>{item.user_passed ? "Passed" : "Failed"}</div>
-            <button onClick={()=>{this.props.save(localStorage.getItem('userId'), item.candidate_id)}}>Save to Favorites</button>
-          </div>
+          <tr key={item.candidate_id}>
+            <td>{item.username}</td>
+            <td>{item.user_passed ? "Passed" : "Failed"}</td>
+            <td><button onClick={()=>{this.props.save(localStorage.getItem('userId'), item.candidate_id)}}><i className="ui plus icon"></i></button></td>
+          </tr>
         )
       })}
+      </tbody>
+      </table>
       </div>
     )
   }

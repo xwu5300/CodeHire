@@ -294,11 +294,16 @@ export const fetchPastSchedule = (companyId) => (dispatch) => {
   })
 }
 
-export const fetchPastResults = (scheduleId) => (dispatch) => {
+export const fetchPastResults = (scheduleId, cb) => (dispatch) => {
   axios.get('/api/pastResults', {params: { scheduleId }})
   .then(({data}) => {
     dispatch({ type: GET_PAST_RESULTS, payload: data })
     console.log('fetch past results', data)
+  })
+  .then(() => {
+    if (cb) {
+      cb();
+    }
   })
   .catch((err) => {
     console.log('Error fetching past results', err);

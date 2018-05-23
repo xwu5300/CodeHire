@@ -167,6 +167,7 @@ module.exports.fetchPastSchedule = (companyId) => {
   .leftJoin('results', 'results.company_schedule_id', 'company_schedule.id')
   .innerJoin('all_challenges', 'all_challenges.id', 'company_schedule.id')
   .select('all_challenges.*', 'company_schedule.*')
+  .orderBy('time', 'desc')
   .distinct('company_schedule.id')
   .then((res) => {
     return res;
