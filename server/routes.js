@@ -64,7 +64,6 @@ router.get('/api/candidateInfo', (req, res) => {
   }
 
   profileControllers.getCandidateInfo(candidateId, username, (data) => {
-    console.log('DATTATTAAAAAAA FOR INFO', data);
     res.status(200).send(data);
   })
 })
@@ -292,7 +291,7 @@ router.get('/api/companyCalendars', (req, res) => {
   let companyName = req.query.companyName;
   calendarControllers.getAllCompanyCalendars(companyName)
   .then((data) => {
-    console.log('routes getAllCompanyCalendars data', data)
+    console.log('routes getAllCompanyCalendars data')
     res.send(data);
   })
 })

@@ -9,7 +9,7 @@ class ScheduleInitialView extends Component {
       invalid: this.props.challenges.map((item) => false),
       isSelected: null,
       currentlyOn: null,
-      initialChallenges: this.props.challenges.concat(this.props.defaultChallenges)
+      initialChallenges: this.props.challenges
     }
 
     this.handleClick = this.handleClick.bind(this);

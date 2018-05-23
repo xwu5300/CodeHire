@@ -15,21 +15,14 @@ import Time from './Time.jsx';
 class AllChallengeListView extends Component {
   constructor(props) {
     super(props);
-    // this.encodeCompanyId = this.encodeCompanyId.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchAllCompanyCalendars('')
   }
 
-  // encodeCompanyId(id) {
-  //   let companyId = {id: id};
-  //   let idToken = jwt.encode(companyId, secret.secret);
-  //   localStorage.setItem('companyId', idToken)
-  // }
 
   render () {
-    console.log('all challenge list view props', this.props)
     if (this.props.all_company_calendars.length) {
       let rows = this.props.all_company_calendars.map((company) => {
         let url = company.logo_url || 'http://dev.jobkhoji.com/assets/images/default_company_icon.png';

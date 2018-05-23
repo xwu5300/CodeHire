@@ -39,7 +39,6 @@ export const fetchAllResults = () => (dispatch) => {
 
 
 export const saveChallenge = (challenge, companyId, cb) => (dispatch) => {
-  console.log('admin action challenge', challenge)
   axios.post('/api/challenges', { challenge, companyId, scheduled: false})
   .then(() => {
     dispatch(fetchAllChallenges(companyId));
@@ -213,7 +212,6 @@ export const getUsername = (userId, cb) => (dispatch) => {
   axios.get('/api/username', {params: { userId }})
   .then(({data}) => {
 
-    console.log('username data retrieved', data)
     dispatch({ type: GET_USER, payload: data[0].username })
     
     if (cb) {

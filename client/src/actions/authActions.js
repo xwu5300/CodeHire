@@ -109,9 +109,11 @@ export const handleSignUp = (email, username, password, confirmPassword, form, n
     } else if (!validateEmail(email)) {
       alert('Invalid email address');
     } else if (!isValid) {
-      console.log('valie user name', isValid)
       alert('The username is already in use by another account.')
-    } else {
+    } else if ((githubUrl && githubUrl.length > 255) || (logoUrl && logoUrl.length > 255)) {
+      alert('The URL is too long.')
+    }
+    else {
       auth.createUserWithEmailAndPassword(email, password)
       .then(({user}) => {
         if (user.uid) {

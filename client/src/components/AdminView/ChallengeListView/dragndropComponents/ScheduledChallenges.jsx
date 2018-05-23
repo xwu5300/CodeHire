@@ -30,7 +30,7 @@ class ScheduleChallenges extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      challenges: this.props.scheduledChallenges.map((item) => false),
+      challenges: this.props.scheduledChallenges.map((item) => false) || []
     }
   }
 
