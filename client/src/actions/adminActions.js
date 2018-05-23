@@ -212,7 +212,7 @@ export const getUsername = (userId, cb) => (dispatch) => {
   axios.get('/api/username', {params: { userId }})
   .then(({data}) => {
 
-    console.log('username data retrieved', data[0].username)
+    console.log('username data retrieved', data)
     dispatch({ type: GET_USER, payload: data[0].username })
     
     if (cb) {

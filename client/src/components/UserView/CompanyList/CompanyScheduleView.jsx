@@ -70,6 +70,7 @@ class CompanyScheduleView extends Component {
   }
 
   render() { 
+    console.log('comp sched view props', this.props)
     if (this.props.initial_challenge.length) {
       return (
         <div>
@@ -102,7 +103,7 @@ class CompanyScheduleView extends Component {
       )
     } else {
       return (
-        null
+        <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
       );
     }
   }
