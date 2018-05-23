@@ -40,7 +40,7 @@ export const fetchAllResults = () => (dispatch) => {
 
 export const saveChallenge = (challenge, companyId, cb) => (dispatch) => {
   console.log('admin action challenge', challenge)
-  axios.post('/api/challenges', { challenge, companyId, scheduled: false })
+  axios.post('/api/challenges', { challenge, companyId, scheduled: false})
   .then(() => {
     dispatch(fetchAllChallenges(companyId));
     console.log('Saved to your challenges')

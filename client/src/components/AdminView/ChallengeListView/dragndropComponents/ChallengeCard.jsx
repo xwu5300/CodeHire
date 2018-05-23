@@ -9,6 +9,7 @@ var total = 0;
 
 export const cardSource = {
   beginDrag(props, monitor, component) {
+    console.log('challenge card challenge', props.challenge)
     return {
       challengeId: props.challengeId,
       companyId: props.challenge.company_id,

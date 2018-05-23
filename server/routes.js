@@ -183,12 +183,12 @@ router.post('/api/challenges', (req, res) => {
   let instruction = req.body.challenge.instruction;
   let functionName = req.body.challenge.function_name;
   let params = req.body.challenge.parameters;
-  let testCases = req.body.test_cases || `[[${req.body.challenge.testInput}], [${req.body.challenge.testOutput}]]`;
-  let examples = req.body.examples || `[[${req.body.challenge.exampleInput}], [${req.body.challenge.exampleOutput}]]` || null;
+  let testCases = req.body.challenge.test_cases || `[[${req.body.challenge.testInput}], [${req.body.challenge.testOutput}]]`;
+  let examples = req.body.challenge.examples || `[[${req.body.challenge.exampleInput}], [${req.body.challenge.exampleOutput}]]` || null;
   let difficulty = req.body.challenge.difficulty || null;
   let companyId = jwt.decode(req.body.companyId, secret).id;
-  let scheduled = req.body.scheduled;
-  challengeControllers.saveChallenge(title, instruction, functionName, params, testCases, examples, difficulty, category, companyId, scheduled)
+  console.log('routes testcassssssssssssss',req.body.challenge)
+  challengeControllers.saveChallenge(title, instruction, functionName, params, testCases, examples, difficulty, category, companyId)
   .then(() => {
     res.send('Successfully saved challenge');
   })
