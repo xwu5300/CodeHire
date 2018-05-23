@@ -3,13 +3,12 @@ const { dbConfig } = require('../config.js');
 const knex = require('knex')({
   client: 'pg',
   connection: {
-    host : 'localhost',
-    user : dbConfig.name || 'Kevin',
-    password : dbConfig.password || 'password',
-    database : 'code_hire'
+    host : dbConfig.host,
+    port: dbConfig.port,
+    user : dbConfig.user,
+    password : dbConfig.password,
+    database : dbConfig.database
   }
 });
-
-
 
 module.exports = knex;
