@@ -5,6 +5,10 @@ import UserResults from './UserResults.jsx';
 import BarGraph from './AnalyticsView/BarGraph.jsx';
 import LineGraph from './AnalyticsView/LineGraph.jsx';
 import Scatterplot from './AnalyticsView/Scatterplot.jsx';
+<<<<<<< HEAD
+=======
+import pastResults from './AnalyticsView/PastResults.jsx';
+>>>>>>> added past challenges/results
 import PastChallenges from './AnalyticsView/PastChallenges.jsx';
 
 class AnalyticsView extends Component {
@@ -56,8 +60,13 @@ class AnalyticsView extends Component {
 >>>>>>> standardized and cleaned up graphs
     return (
       <div>
+<<<<<<< HEAD
         <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout }/>
         <h1>Analytics</h1>
+=======
+        <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
+        <h1> Analytics </h1>
+>>>>>>> added past challenges/results
         <PastChallenges history={this.props.history} save={this.props.saveToFavorites} pastResults={this.props.past_results} pastChallenges={this.props.past_challenges} fetchPastResults={this.props.fetchPastResults}/>
         <div className="ui orange five item menu">
           <div className='ui item cursor' onClick={() => this.handleClick('bar') }> Bar </div>
