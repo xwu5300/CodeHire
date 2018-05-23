@@ -5,7 +5,7 @@ import UserResults from './UserResults.jsx';
 import BarGraph from './AnalyticsView/BarGraph.jsx';
 import LineGraph from './AnalyticsView/LineGraph.jsx';
 import Scatterplot from './AnalyticsView/Scatterplot.jsx';
-import pastResults from './AnalyticsView/PastResults.jsx';
+import PastResults from './AnalyticsView/PastResults.jsx';
 import PastChallenges from './AnalyticsView/PastChallenges.jsx';
 
 
