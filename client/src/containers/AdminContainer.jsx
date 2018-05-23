@@ -17,17 +17,6 @@ import { fetchInitialChallenge, currentCompanyCalendar, fetchCandidateInfo } fro
 
 class AdminContainer extends Component {
 
-<<<<<<< HEAD
-=======
-  componentDidMount() {
-    if(this.props.history.location.pathname !== '/' || this.props.history.location.pathname !== '/registration') {
-      this.props.getUsername(localStorage.getItem('userId'), () => {
-        console.log(this.props.name)
-      });
-    }
-  }
-
->>>>>>> added challengeData routes, can sort by challenge and get each pass rate
   render() {
     return (
       <Switch>

@@ -38,10 +38,7 @@ export default combineReducers({
   resume_url: userReducers.candidateResume,
   resume_name: userReducers.candidateResume,
   company_data: adminReducers.companyData,
-<<<<<<< HEAD
   all_company_calendars: userReducers.allCompanyCalendars,
-  company_name: userReducers.companyName
-=======
+  company_name: userReducers.companyName,
   challenge_data: adminReducers.challengeData
->>>>>>> added challengeData routes, can sort by challenge and get each pass rate
 })

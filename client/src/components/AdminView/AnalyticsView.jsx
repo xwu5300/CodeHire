@@ -26,9 +26,9 @@ class AnalyticsView extends Component {
     return (
       <div>
         <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
-        <BarGraph getAllResults={this.props.fetchAllResults} getCompanyResults={this.props.getCompanyData} companyResults={this.props.company_data} allResults={this.props.all_results} fetchChallengeData={this.props.fetchChallengeData} results={this.props.results} challengeData={this.props.challenge_data}/>
+        <BarGraph companyResults={this.props.company_data} allResults={this.props.all_results} fetchChallengeData={this.props.fetchChallengeData} challenges={this.props.all_challenges} challengeData={this.props.challenge_data}/>
         <LineGraph getAllResults={this.props.fetchAllResults} getCompanyResults={this.props.getCompanyData} companyResults={this.props.company_data} allResults={this.props.all_results}/>
-        <Scatterplot getAllResults={this.props.fetchAllResults} getCompanyResults={this.props.getCompanyData} companyResults={this.props.company_data} allResults={this.props.all_results} fetchChallengeData={this.props.fetchChallengeData} results={this.props.results} challengeData={this.props.challenge_data}/>
+        <Scatterplot companyResults={this.props.company_data} allResults={this.props.all_results} fetchChallengeData={this.props.fetchChallengeData} challengeData={this.props.challenge_data}/>
       </div>
     )
   }

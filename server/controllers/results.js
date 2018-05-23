@@ -115,8 +115,6 @@ module.exports.fetchCompanyData = (companyId) => {
     console.log('Error fetching company results', err);
   })
 }
-<<<<<<< HEAD
-=======
 
 module.exports.fetchChallengeData = (challengeId) => {
   return knex('results')
@@ -130,4 +128,3 @@ module.exports.fetchChallengeData = (challengeId) => {
     console.log('Error fetching challenge results', err);
   })
 }
->>>>>>> added challengeData routes, can sort by challenge and get each pass rate
