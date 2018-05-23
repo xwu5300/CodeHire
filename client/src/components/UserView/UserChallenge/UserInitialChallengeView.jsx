@@ -71,7 +71,7 @@ class UserInitialChallengeView extends Component {
   }
 
   onLoad() {
-    let challengeDuration = 60 * .1
+    let challengeDuration = 60 * this.state.duration;
     let display = this.state.duration
     this.startTimer(challengeDuration, display);
   }

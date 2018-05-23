@@ -31,7 +31,6 @@ class CompanyDetail extends Component {
 
   viewCompanyPage(id, name) {
     this.storeCompanyInfo(id, name)
-    console.log('company detail props', this.props)
     this.props.history.push('/user/schedule');
   }
 

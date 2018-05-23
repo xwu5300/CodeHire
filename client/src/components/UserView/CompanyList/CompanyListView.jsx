@@ -39,7 +39,6 @@ class CompanyListView extends Component {
   }
 
   render() {
-    console.log('comp list view props', this.props)
     return (
       <div>
         <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } />

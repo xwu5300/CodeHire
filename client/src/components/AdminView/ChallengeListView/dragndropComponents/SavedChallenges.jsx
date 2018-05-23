@@ -7,6 +7,24 @@ import ChallengeCard from './ChallengeCard.jsx';
 import { ItemTypes } from './Constants';
 import { DropTarget } from 'react-dnd';
 
+const target = {
+
+  drop(props, monitor) {
+    let challenge = monitor.getItem();
+    console.log('save challenge challenge', challenge)
+    props.save(challenge.challenge, localStorage.getItem('userId'), () => {
+    })
+  }
+}
+
+function collect(connect, monitor) {
+  return {
+    connectDropTarget: connect.dropTarget()
+  };
+}
+
+
+@DropTarget(ItemTypes.Card, target, collect)
 
 
 class SavedChallenges extends Component {
@@ -68,7 +86,7 @@ class SavedChallenges extends Component {
 
     const { connectDropTarget } = this.props;
 
-    return (
+    return connectDropTarget(
       <div className='ui segment drag_segment'>
         <h1>Your Challenges</h1>
 

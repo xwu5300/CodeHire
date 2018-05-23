@@ -38,7 +38,7 @@ class ScheduledChallengeCard extends Component {
 
   handleClick(challenge, scheduleId) {
     let date = $('#date').val()
-    console.log(this.state.duration, date)
+    // console.log(this.state.duration, date)
     if (this.state.duration === '' || !date) {
       this.setState({
         invalid: true
@@ -115,7 +115,7 @@ class ScheduledChallengeCard extends Component {
           <div className='saved_challenges_btns'>
 
           <button className="ui red icon button" onClick={() => this.props.deleteFromCompanySchedule(this.props.scheduleId, this.props.userId) }>
-            <i class="trash icon"></i>
+            <i className="trash icon"></i>
           </button>
           </div>
         </div>

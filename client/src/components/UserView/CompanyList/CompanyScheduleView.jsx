@@ -70,7 +70,6 @@ class CompanyScheduleView extends Component {
   }
 
   render() { 
-    console.log('comp sched view props', this.props)
     if (this.props.initial_challenge.length) {
       return (
         <div>

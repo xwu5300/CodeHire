@@ -9,11 +9,13 @@ var total = 0;
 
 export const cardSource = {
   beginDrag(props, monitor, component) {
+    console.log('challenge card challenge', props.challenge)
     return {
       challengeId: props.challengeId,
       companyId: props.challenge.company_id,
       duration: props.challenge.duration,
-      time: null
+      time: null,
+      challenge: props.challenge
     };
   }
 }
@@ -106,7 +108,7 @@ class ChallengeCard extends Component {
         <div className='saved_challenges_btns'>
 
           <button className="ui icon red button" onClick={() => deleteChallenge(challenge, userId) }>
-            <i class="trash icon"></i>
+            <i className="trash icon"></i>
           </button>
           
           {!this.props.challengeInfo ? null :
