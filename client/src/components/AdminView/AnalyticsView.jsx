@@ -53,7 +53,6 @@ class AnalyticsView extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div>
         <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout }/>
@@ -73,18 +72,3 @@ class AnalyticsView extends Component {
 }
 
 export default AnalyticsView;
-
-
-// <h2>Candidate List</h2>
-// {this.props.candidate_list.length > 0 ? this.props.candidate_list.map((candidate, i) => {
-//   let candidateId = jwt.encode(companyId, secret.secret);
-//   return (
-//     <div key={i}>Name: {candidate.name}
-//     <button onClick={() => {
-//       this.props.fetchCompanyResults(localStorage.getItem('userId'), candidateId)
-//       this.props.history.push('/admin/data/results')
-//     }}>View Candidate Details
-//     </button>
-//     </div>
-//   )
-// }) : null}
