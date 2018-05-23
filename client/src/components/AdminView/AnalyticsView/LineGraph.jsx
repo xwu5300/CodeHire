@@ -40,7 +40,7 @@ class LineGraph extends Component {
 
 
     let companyData = this.props.companyResults.map((data) => {
-      return {x: data.time, y: Math.round(successRate[data.company_schedule_id] * 100, 2), label: 
+      return {x: data.time, y: Math.round(successRate[data.company_schedule_id] * 100, 2), label:
         `Challenge: ${data.title}
         Difficulty: ${data.difficulty}
         Pass Rate: ${Math.round(successRate[data.company_schedule_id] * 100, 2)}%`}
@@ -80,7 +80,6 @@ class LineGraph extends Component {
 
 
     return (
-<<<<<<< HEAD:client/src/components/AdminView/AnalyticsView/AllChallengeResults.jsx
       <div className="challenge-results-graph">
         <VictoryChart domain={{x: [0, 30], y: [0, 100]}} animate={{onEnter: {duration: 100}}} containerComponent={
           <VictoryVoronoiContainer/>
@@ -89,7 +88,7 @@ class LineGraph extends Component {
             x={350} y={10}
             style={{labels:{fontSize: 7}, padding: '50px'}}
             orientation="vertical"
-           
+
             colorScale={['#00BFFF', '#FF00FF']}
             data={[{name: 'All Company Challenges'}, {name: "Your Challenges"}]}
             />
@@ -105,7 +104,7 @@ class LineGraph extends Component {
               }
              }}
             />
-            <VictoryAxis 
+            <VictoryAxis
             tickFormat={(p) => `${p} %`}
             dependentAxis
             label={"Pass Rate"}
@@ -124,7 +123,7 @@ class LineGraph extends Component {
                 flyoutStyle={{stroke: 'none', opacity: '.1'}}
                 cornerRadius={0}
               />}
-            data={filteredCompanyData} 
+            data={filteredCompanyData}
             style={{data: {stroke: '#FF00FF', strokeWidth: 2}}}
             />
             <VictoryLine
@@ -140,22 +139,6 @@ class LineGraph extends Component {
           />
         </VictoryChart>
       </div>
-=======
-      <VictoryChart>
-        <VictoryLine
-        data={companyData}
-        style={{data: {stroke: '#FF00FF', strokeWidth: 1}}}
-
-        />
-
-        <VictoryLabel
-        text={`Average Pass Rate`}
-        verticalAnchor={"end"}
-        x={140}
-        y={30}
-        />
-      </VictoryChart>
->>>>>>> individual graph views:client/src/components/AdminView/AnalyticsView/LineGraph.jsx
     )
   }
 }
