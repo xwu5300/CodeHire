@@ -11,7 +11,6 @@ const target = {
 
   drop(props, monitor) {
     let challenge = monitor.getItem();
-    console.log('save challenge challenge', challenge)
     props.save(challenge.challenge, localStorage.getItem('userId'), () => {
     })
   }
