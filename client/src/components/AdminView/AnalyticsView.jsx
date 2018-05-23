@@ -10,8 +10,11 @@ class AnalyticsView extends Component {
   constructor() {
     super();
     this.state = {
-      show: false
+      currentGraph: '',
     }
+    this.handleClick = this.handleClick.bind(this)
+    this.changeGraph = this.changeGraph.bind(this)
+    this.renderGraph = this.renderGraph.bind(this)
   }
 
   componentDidMount() {
@@ -21,15 +24,41 @@ class AnalyticsView extends Component {
     this.props.fetchAllResults();
   }
 
+  handleClick(graph) {
+    this.changeGraph(graph)
+  }
+
+  changeGraph(option) {
+    this.setState({
+      currentGraph: option
+    }, ()=> console.log(this.state.currentGraph))
+  }
+
+  renderGraph() {
+    const {currentGraph} = this.state
+
+    if (currentGraph === 'bar') {
+      return <BarGraph companyResults={this.props.company_data} allResults={this.props.all_results} fetchChallengeData={this.props.fetchChallengeData} challenges={this.props.all_challenges} challengeData={this.props.challenge_data}/>
+    } else if (currentGraph === 'line') {
+      return <LineGraph getAllResults={this.props.fetchAllResults} getCompanyResults={this.props.getCompanyData} companyResults={this.props.company_data} allResults={this.props.all_results}/>
+    } else if (currentGraph === 'scatter') {
+      return <Scatterplot companyResults={this.props.company_data} allResults={this.props.all_results} fetchChallengeData={this.props.fetchChallengeData} challengeData={this.props.challenge_data}/>
+      }
+  }
+
   render() {
-    console.log('do i have all challenges for a company??', this.props)
     return (
       <div>
         <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
-        
-        <BarGraph companyResults={this.props.company_data} allResults={this.props.all_results} fetchChallengeData={this.props.fetchChallengeData} challenges={this.props.all_challenges} challengeData={this.props.challenge_data}/>
-        <LineGraph getAllResults={this.props.fetchAllResults} getCompanyResults={this.props.getCompanyData} companyResults={this.props.company_data} allResults={this.props.all_results}/>
-        <Scatterplot companyResults={this.props.company_data} allResults={this.props.all_results} fetchChallengeData={this.props.fetchChallengeData} challengeData={this.props.challenge_data}/>
+
+        <div className="ui orange five item menu">
+          <div className='ui item cursor' onClick={() => this.handleClick('bar') }> Bar </div>
+          <div className='ui item cursor' onClick={() => this.handleClick('line') }> Line </div>
+          <div className='ui item cursor' onClick={() => this.handleClick('scatter') }> Scatterplot </div>
+        </div>
+        <div>
+          {this.renderGraph()}
+        </div>
       </div>
     )
   }
