@@ -13,7 +13,6 @@ const target = {
   drop(props, monitor) {
     let challenge = monitor.getItem();
     props.addToCompanySchedule(null, challenge.duration, challenge.challengeId, localStorage.getItem('userId'), () => {
-      console.log('SUCCESS');
     })
   }
 }
@@ -31,13 +30,12 @@ class ScheduleChallenges extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      challenges: this.props.scheduledChallenges.map((item) => false),
+      challenges: this.props.scheduledChallenges.map((item) => false) || []
     }
   }
 
   render() {
     const { connectDropTarget } = this.props;
-    console.log('scheduled, challenge', this.props.scheduledChallenges);
     return connectDropTarget (
       <div className='ui segment drag_segment'>
         <h1> Scheduled Challenges </h1>

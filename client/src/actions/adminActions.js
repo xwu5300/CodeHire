@@ -49,9 +49,9 @@ export const fetchAllResults = () => (dispatch) => {
 
 
 export const saveChallenge = (challenge, companyId, cb) => (dispatch) => {
-  axios.post('/api/challenges', { challenge, companyId, scheduled: false })
+  axios.post('/api/challenges', { challenge, companyId, scheduled: false})
   .then(() => {
-    dispatch(fetchAll1s(companyId));
+    dispatch(fetchAllChallenges(companyId));
     console.log('Saved to your challenges')
   })
   .then(() => {
@@ -70,7 +70,6 @@ export const deleteChallenge = (challenge, companyId, cb) => (dispatch) => {
     dispatch(fetchAllChallenges(companyId));
     dispatch(fetchCompanySchedule(companyId));
     dispatch(fetchInitialChallenge(companyId));
-    console.log('Removed from your challenges');
   })
   .then(() => {
     if (cb) {
@@ -86,9 +85,8 @@ export const getChallengeInfo = (challengeId, companyId, cb) => (dispatch) => {
   axios.get('/api/challenge', {params: { challengeId, companyId }})
   .then(({data}) => {
     dispatch({type: GET_CHALLENGE_INFO, payload: data[0]});
-    console.log('retrieving challenge info', data[0]);
     if (cb) {
-      cb();
+      cb(data[0]);
     }
   })
   .catch((err) => {
@@ -128,7 +126,6 @@ export const deleteFromCompanySchedule = (scheduleId, companyId) => (dispatch) =
   axios.delete('/api/companyCalendar', {params: { scheduleId }})
   .then(() => {
     dispatch(fetchCompanySchedule(companyId));
-    console.log('Removed from your upcoming challenges');
   })
   .catch((err) => {
     console.log('Error removing from upcoming challenges', err);
@@ -139,7 +136,6 @@ export const fetchCompanySchedule = (companyId, companyName) => (dispatch) => {
   axios.get('/api/companyCalendar', {params: { companyId, companyName }})
   .then(({data}) => {
     dispatch({ type: GET_COMPANY_SCHEDULE, payload: data});
-    console.log('Company schedule retrieved');
   })
   .catch((err) => {
     console.log('Error retrieving company schedule')
@@ -161,7 +157,6 @@ export const fetchCompanyInfo = (userId, callback) => (dispatch) => {
 export const updateInfo = (userId, logo_url, information) => (dispatch) => {
   axios.patch('/api/companyInfo', { userId, logo_url, information })
   .then((response) => {
-    console.log(reponse);
   })
   .catch((err) => {
     console.log(err);
@@ -179,7 +174,6 @@ export const toggleInitialOff = () => (dispatch) => {
 export const makeInitial = (challengeId, initial, duration, isInitial, companyId, cb) => (dispatch) => {
   axios.patch('/api/initialChallenge', { challengeId, initial, duration, isInitial, companyId })
   .then(() => {
-    console.log('make initial function was called')
     dispatch(fetchInitialChallenge(companyId));
   })
   .then(() => {
@@ -222,7 +216,6 @@ export const getUsername = (userId, cb) => (dispatch) => {
   axios.get('/api/username', {params: { userId }})
   .then(({data}) => {
 
-    console.log('username data retrieved', data)
     dispatch({ type: GET_USER, payload: data[0].username })
 
     if (cb) {

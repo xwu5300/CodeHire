@@ -9,7 +9,7 @@ class ScheduleInitialView extends Component {
       invalid: this.props.challenges.map((item) => false),
       isSelected: null,
       currentlyOn: null,
-      initialChallenges: this.props.challenges.concat(this.props.defaultChallenges)
+      initialChallenges: this.props.challenges
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -80,7 +80,6 @@ class ScheduleInitialView extends Component {
         <h4>Select from your saved challenges:</h4>
         <div className='ui cards' style={{ marginTop: '40px' }}>
           {!this.state.initialChallenges ? 'No saved challenges to choose from' : this.state.initialChallenges.map((item, i) => {
-            console.log('ITTTEM', item);
             return (
               <div className='ui card' style={ this.state.isSelected === item.id ? selected : notSelected } key={ item.id }>
                 <div className='content'>
