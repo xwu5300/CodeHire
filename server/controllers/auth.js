@@ -32,12 +32,12 @@ module.exports.saveCompany = (token, name, username, phone, logoUrl, information
 }
 
 module.exports.handleLogin = (token,  callback) => {
-  console.log('db side', token)
   return knex('users')
   .where({ token: token })
   .then((user) => {
     if (user.length) {
-      callback(user[0].role, user[0].id, user[0].name);
+      console.log('HANDLE LOGIN', user);
+      callback(user[0].role, user[0].id, user[0].username);
     }
   })
   .catch((err) => {

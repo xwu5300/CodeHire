@@ -18,11 +18,14 @@ app.use(express.static(__dirname + '/../client/dist'));
 
 
 (function(){
+
 let companyRooms = {};
+let userView = {};
+
 io.sockets.on('connection', (socket)=> {
   
   // when candidates enter liveCoding, push their username/id into respective companyId obj parameter
-  socket.on('candidate enter', (username, currentCompanyId) => {
+  socket.on('candidate enter', (currentCompanyId, username) => {
     socket.room = 'room-' + currentCompanyId;
     socket.join(socket.room);
      
@@ -38,12 +41,6 @@ io.sockets.on('connection', (socket)=> {
   })
 
 
-  socket.on('typing', (newValue, username)=> {
-    console.log(newValue)
-    io.sockets.emit('add char-' + username, newValue);
-  })
-
-
   // When company enters challenge, send them all users in their room
   socket.on('company enter', (currentCompanyId) => {
     socket.room = 'room-' + currentCompanyId;
@@ -51,6 +48,21 @@ io.sockets.on('connection', (socket)=> {
 
     io.sockets.in(socket.room).emit('active candidates', companyRooms[currentCompanyId]);
   })
+
+
+  // Individual user challenge views within main company room
+  socket.on('current user view', (currentCompanyId, username) => {
+    userView[currentCompanyId] = username;
+    socket.userRoom = 'room-' + currentCompanyId + '-' + username;
+    socket.join(socket.userRoom);
+
+
+    socket.on('typing', (username, newValue) => {
+       io.sockets.emit('add character', username, newValue);
+     })
+
+  })
+
 
 
   socket.on('candidate result', (username, result) => {

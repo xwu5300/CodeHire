@@ -20,7 +20,7 @@ class LiveCodingView extends Component {
     super();
     this.state = {
       active_candidates: [],
-      active_user_id: '',
+      active_user: null,
       candidate_skills: []
     }
 
@@ -40,11 +40,27 @@ class LiveCodingView extends Component {
 
   getProfile(username) {
    this.props.fetchCandidateInfo(null, username, () => {
-    this.setState({ active_user_id: username, candidate_skills: this.props.candidate_skills });
-   });
+    this.setState({ active_user: username, candidate_skills: this.props.candidate_skills });
+   })
+
+   this.socket.emit('current user view', this.props.current_company_calendar, username);
   }
 
   render() {
+
+    if(!this.state.active_user) {
+      var containerStyle = {
+        width: '40%',
+        minHeight: '300px',
+        overflow: 'scroll',
+      }
+    } else {
+      containerStyle = {
+        width: ''
+      }
+    }
+
+    console.log('active user', this.state.active_user);
     return (
       <div>
         <div style={{fontSize: '22px', marginTop: '10px', marginLeft: '10px'}}>{ this.props.current_live_challenge_title }</div>
@@ -58,15 +74,26 @@ class LiveCodingView extends Component {
         </div>
       </div>
 
-      <div className='ui container horizontal segments'>
+      <div className={ this.state.active_user ? 'ui container horizontal segments' : 'ui container segment' } style={ containerStyle }>
             {this.state.active_candidates ? this.state.active_candidates.map((candidate) => {
               return (
                 <Fragment>
-                    <AdminEditorViews github={ this.props.github_url }  username={ candidate } />
-                    <UserProfile getProfile={ this.getProfile } activeUserId={ this.state.active_user_id} activeCandidates={ this.state.active_candidates } skills={this.state.candidate_skills} about={ this.props.candidate_information } username={ candidate } />
+                   {this.state.active_user === candidate ?
+                     <Fragment>
+                     <AdminEditorViews github={ this.props.github_url } username={ candidate } />
+                     <UserProfile getProfile={ this.getProfile } activeUser={ this.state.active_user } activeCandidates={ this.state.active_candidates } skills={this.state.candidate_skills} about={ this.props.candidate_information } username={ candidate } />
+                     </Fragment>
+                    : null }
                 </Fragment>
               );
             }) : null}
+
+              {!this.state.active_user && this.state.active_candidates ? this.state.active_candidates.map((user, i) => {
+                return (
+                    <div key={ i } onClick={ () => this.getProfile(user) } style={{ marginTop: '5px', cursor: 'pointer', backgroundColor: 'rgba(0,0,0,0.2)', paddingTop: '13px', paddingLeft: '10px', width: '100%', height: '50px' }}><i className="circle green icon"></i>{user}</div>
+                 );
+              }) : null}
+            
           </div>
       </div>
   )

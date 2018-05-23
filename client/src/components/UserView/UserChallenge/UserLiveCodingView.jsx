@@ -55,7 +55,8 @@ class UserLiveCodingView extends Component {
   }
 
   componentDidMount() {
-     this.socket.emit('candidate enter', localStorage.getItem('username'), this.props.current_company_calendar);
+     this.socket.emit('candidate enter', this.props.current_company_calendar, localStorage.getItem('username'));
+     this.socket.emit('current user view', this.props.current_company_calendar, localStorage.getItem('username'));
   }
 
   componentWillUnmount() {
@@ -65,8 +66,9 @@ class UserLiveCodingView extends Component {
   onChange(newValue, event) {
     this.setState({
       code: newValue
-    }, ()=> console.log(this.state.code))
-    this.socket.emit('typing', newValue, localStorage.getItem('username'));
+    })
+    
+    this.socket.emit('typing', localStorage.getItem('username'), newValue);
   }
 
   handleTheme(e) {

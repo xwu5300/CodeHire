@@ -9,7 +9,6 @@ import ScheduledChallengeCard from './ScheduledChallengeCard.jsx';
 
 
 const target = {
-
   drop(props, monitor) {
     let challenge = monitor.getItem();
     props.addToCompanySchedule(null, challenge.duration, challenge.challengeId, localStorage.getItem('userId'), () => {

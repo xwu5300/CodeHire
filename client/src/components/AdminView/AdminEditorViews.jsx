@@ -24,9 +24,9 @@ class AdminEditorViews extends Component {
 }` }
 
     this.socket = socketClient();
-        
-    this.socket.on('add char-' + localStorage.getItem('username'), (chars)=> {
-      console.log('CHARAS', chars);
+
+    this.socket.on('add character', (username, chars)=> {
+      console.log('CHARS', username, chars);
       this.setState({
         code: chars
       })
