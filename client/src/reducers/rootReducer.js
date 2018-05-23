@@ -40,5 +40,7 @@ export default combineReducers({
   company_data: adminReducers.companyData,
   all_company_calendars: userReducers.allCompanyCalendars,
   company_name: userReducers.companyName,
-  challenge_data: adminReducers.challengeData
+  challenge_data: adminReducers.challengeData,
+  past_challenges: adminReducers.pastChallenges,
+  past_results: adminReducers.pastResults
 })

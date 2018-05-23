@@ -91,12 +91,16 @@ class LineGraph extends Component {
             />
 
             <VictoryAxis
-            axisLabelComponent={<VictoryLabel style={{fontSize: 12, fontWeight: 500}} />}
+            axisLabelComponent={<VictoryLabel 
+            style={{
+              fontSize: 12, 
+              fontWeight: 500}} 
+            />}
             label={"Time (days in month)"}
             tickCount={10}
             style={{
               tickLabels: {
-                fontSize: 10,
+                fontSize: 10, 
                 padding: 5
               }
              }}
