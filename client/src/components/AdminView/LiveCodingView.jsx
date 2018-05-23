@@ -90,7 +90,7 @@ class LiveCodingView extends Component {
 
               {!this.state.active_user && this.state.active_candidates ? this.state.active_candidates.map((user, i) => {
                 return (
-                    <div key={ i } onClick={ () => this.getProfile(user) } style={{ marginTop: '5px', cursor: 'pointer', backgroundColor: 'rgba(0,0,0,0.2)', paddingTop: '13px', paddingLeft: '10px', width: '100%', height: '50px' }}><i className="circle green icon"></i>{user}</div>
+                    <div key={ i } className='active_user_div' onClick={ () => this.getProfile(user) }><i className="circle green icon"></i>{user}</div>
                  );
               }) : null}
             

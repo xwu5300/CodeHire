@@ -48,8 +48,8 @@ class ChallengeClock extends Component {
     return (
       <div>
         <div className='live_coding_clock'> Time Limit: { this.state.minutes + ':' + this.state.seconds }</div>
-        <button className='time_limit_btn' type='button' onClick={ () => this.startChallenge() }> Start Challenge </button>
-        <button className='time_limit_btn' type='button' onClick={ () => this.onReset() }>Reset Clock</button>
+        <button className='time_limit_btn ui green button' style={{marginTop: '10px'}} onClick={ () => this.startChallenge() }> Start Challenge </button>
+        <button className='time_limit_btn ui orange button' style={{marginTop: '10px'}}onClick={ () => this.onReset() }>Reset Clock</button>
       </div>  
     )
   }
