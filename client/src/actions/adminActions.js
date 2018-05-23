@@ -39,6 +39,7 @@ export const fetchAllResults = () => (dispatch) => {
 
 
 export const saveChallenge = (challenge, companyId, cb) => (dispatch) => {
+  console.log('admin action challenge', challenge)
   axios.post('/api/challenges', { challenge, companyId, scheduled: false })
   .then(() => {
     dispatch(fetchAllChallenges(companyId));
@@ -78,7 +79,7 @@ export const getChallengeInfo = (challengeId, companyId, cb) => (dispatch) => {
     dispatch({type: GET_CHALLENGE_INFO, payload: data[0]});
     console.log('retrieving challenge info', data[0]);
     if (cb) {
-      cb();
+      cb(data[0]);
     }
   })
   .catch((err) => {
