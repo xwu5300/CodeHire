@@ -76,9 +76,6 @@ class LineGraph extends Component {
       return a.x - b.x;
     });
 
-    console.log(filteredCompanyData)
-
-
     return (
       <div className="challenge-results-graph">
         <VictoryChart domain={{x: [0, 30], y: [0, 100]}} animate={{onEnter: {duration: 100}}} containerComponent={
