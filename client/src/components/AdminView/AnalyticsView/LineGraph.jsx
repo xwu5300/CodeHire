@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { VictoryChart, VictoryLabel, VictoryAxis, VictoryContainer, VictoryVoronoiContainer, VictoryTheme, VictoryLine, VictoryTooltip, VictoryLegend } from 'victory';
 import moment from 'moment';
 
-class AllChallengeResults extends Component {
+class LineGraph extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+
     }
     this.getSuccessRate = this.getSuccessRate.bind(this);
   }
@@ -80,6 +80,7 @@ class AllChallengeResults extends Component {
 
 
     return (
+<<<<<<< HEAD:client/src/components/AdminView/AnalyticsView/AllChallengeResults.jsx
       <div className="challenge-results-graph">
         <VictoryChart domain={{x: [0, 30], y: [0, 100]}} animate={{onEnter: {duration: 100}}} containerComponent={
           <VictoryVoronoiContainer/>
@@ -139,6 +140,22 @@ class AllChallengeResults extends Component {
           />
         </VictoryChart>
       </div>
+=======
+      <VictoryChart>
+        <VictoryLine
+        data={companyData}
+        style={{data: {stroke: '#FF00FF', strokeWidth: 1}}}
+
+        />
+
+        <VictoryLabel
+        text={`Average Pass Rate`}
+        verticalAnchor={"end"}
+        x={140}
+        y={30}
+        />
+      </VictoryChart>
+>>>>>>> individual graph views:client/src/components/AdminView/AnalyticsView/LineGraph.jsx
     )
   }
 }
@@ -147,4 +164,4 @@ class AllChallengeResults extends Component {
 
 
 
-export default AllChallengeResults;
+export default LineGraph;

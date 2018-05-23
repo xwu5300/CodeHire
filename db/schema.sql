@@ -504,6 +504,7 @@ INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candi
 >>>>>>> merged new tables
 -- User9 Sample
 
+<<<<<<< HEAD
 /* psql < db/schema.sql */
 >>>>>>> modified dummy data
 =======
@@ -520,3 +521,17 @@ INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candi
 INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('T', 'function(str)', 90, '2018-05-23 12:35:08', 6, 11, 7, 1, false);
 INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('T', 'function(str)', 90, '2018-05-23 12:35:08', 6, 12, 7, 1, false);
 >>>>>>> scatterplot shows multiple challenge pass rates
+=======
+INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('T', 'function(str)', 90, '2018-05-23 12:35:08', 6, 1, 6, 1, false);
+INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('T', 'function(str)', 90, '2018-05-23 12:35:08', 6, 2, 6, 1, false);
+INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('F', 'function(str)', 90, '2018-05-23 12:35:08', 6, 3, 6, 1, false);
+INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('F', 'function(str)', 90, '2018-05-23 12:35:08', 6, 4, 6, 1, false);
+INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('T', 'function(str)', 90, '2018-05-23 12:35:08', 6, 5, 6, 1, false);
+INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('T', 'function(str)', 90, '2018-05-23 12:35:08', 6, 6, 6, 1, false);
+INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('T', 'function(str)', 90, '2018-05-23 12:35:08', 6, 7, 6, 1, false);
+INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('F', 'function(str)', 90, '2018-05-23 12:35:08', 6, 8, 6, 1, false);
+INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('F', 'function(str)', 90, '2018-05-23 12:35:08', 6, 9, 6, 1, false);
+INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('T', 'function(str)', 90, '2018-05-23 12:35:08', 6, 10, 6, 1, false);
+INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('T', 'function(str)', 90, '2018-05-23 12:35:08', 6, 11, 6, 1, false);
+INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('T', 'function(str)', 90, '2018-05-23 12:35:08', 6, 12, 6, 1, false);
+>>>>>>> individual graph views
