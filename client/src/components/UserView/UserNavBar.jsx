@@ -10,12 +10,13 @@ class UserNavBar extends Component {
 
   render() {
    return (
-      <div className="ui orange four item menu">
+      <div className="ui orange five item menu">
           <div className={this.props.history.location.pathname === '/user/profile' ? 'ui active item' : 'ui item' } onClick={ () => {this.props.history.push('/user/profile')} }><i className="user circle icon"></i>
           { this.props.username }</div>
           <div className={this.props.history.location.pathname === '/user'? 'ui active item' : 'ui item' } onClick={() => {this.props.history.push('/user')}}>Calendar</div>
           <div className={this.props.history.location.pathname === '/user/challengelist' ? 'ui active item' : 'ui item' } onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
           <div className={this.props.history.location.pathname === '/user/companylist' ? 'ui active item' : 'ui item' } onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
+           <div className='ui item' onClick={() => this.props.handleLogout() }>Log Out</div>
       </div>
   )
  }

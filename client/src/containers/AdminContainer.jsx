@@ -14,6 +14,7 @@ import PrivateRoute from '../components/PrivateRoute.jsx';
 
 import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, fetchCompanyResults, fetchCandidateList, getChallengeInfo, updateChallengeDate, getUsername, searchUsers, saveToFavorites, getFavorites, removeFromFavorites, fetchAllResults, getCompanyData, fetchPastSchedule, fetchPastResults, fetchChallengeData } from '../actions/adminActions';
 import { fetchInitialChallenge, currentCompanyCalendar, fetchCandidateInfo } from '../actions/userActions';
+import { handleLogout } from '../actions/authActions';
 
 class AdminContainer extends Component {
 
@@ -67,7 +68,8 @@ const mapDispatchToProps = {
   toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule,
   fetchCompanyResults, fetchCandidateList, getChallengeInfo, getUsername, updateChallengeDate, searchUsers,
   saveToFavorites, getFavorites, removeFromFavorites, fetchAllResults, getCompanyData, fetchPastSchedule,
-  fetchPastResults, fetchChallengeData
+  fetchPastResults, fetchChallengeData, handleLogout
+
 }
 
 const ChallengeListComponent = connect(mapStateToProps, mapDispatchToProps)(ChallengeListView);

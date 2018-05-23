@@ -38,22 +38,23 @@ class CompanyListView extends Component {
     })
   }
 
-  render() {
-    return (
-      <div>
-        <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
-        <div className='search_company_input' style={{marginTop: '40px', marginBottom: '70px', textAlign: 'center'}} >
-          <SearchCompany updateCompanyList={this.props.fetchCompanyList} />
-        </div>
-        <div className='ui cards centered grid'>
-          {this.props.company_list ? this.props.company_list.map((company, i) => {
-            return (
-              <CompanyDetail key={ i } company={company}/>              
-            );
-          }) : "Sorry, we weren't able to find any results" }
+  render() { 
+      return (
+        <div>
+          <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout } />
+          <div className='search_company_input' style={{marginTop: '40px', marginBottom: '70px', textAlign: 'center'}} >
+            <SearchCompany updateCompanyList={this.props.fetchCompanyList} />
           </div>
-      </div>
-    )
+          <div className='ui cards centered grid'>
+            {this.props.company_list ? this.props.company_list.map((company, i) => {
+              return (
+                <CompanyDetail key={ i } id={ company.id } handleHover={ this.handleHover } indexHovered={ this.state.indexHovered } logo={ company.logo_url ? company.logo_url : 'http://dev.jobkhoji.com/assets/images/default_company_icon.png'  } 
+                               name={ company.name } />              
+              );
+            }) : "Sorry, we weren't able to find any results" }
+            </div>
+         </div>
+      )
 
     } 
  }

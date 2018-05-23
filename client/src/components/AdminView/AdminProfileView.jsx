@@ -50,7 +50,7 @@ class AdminProfileView extends Component {
   render() {
     return (
       <div>
-        <CompanyNavBar getUsername={ this.props.getUsername} username={ this.props.username } />
+        <CompanyNavBar getUsername={ this.props.getUsername} username={ this.props.username } handleLogout={ this.props.handleLogout } />
         <div className='company_profile_container'>
         <div className='ui raised container horizontal segments'>
 

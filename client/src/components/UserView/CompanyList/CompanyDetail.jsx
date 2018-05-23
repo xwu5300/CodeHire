@@ -56,21 +56,17 @@ class CompanyDetail extends Component {
   }
   
   render() {
-    let logo = this.props.company.logo_url ? this.props.company.logo_url : 'http://dev.jobkhoji.com/assets/images/default_company_icon.png';
-    let name = this.props.company.name;
-    let id = this.props.company.id;
-    let style = this.state.style;
     return (
 
     <div 
       onMouseOver={ this.handleMouseOver } 
       onMouseOut={ this.handleMouseOut }  
-      onClick={() => this.viewCompanyPage(id, name)  } 
-      className='ui card company_card' style={style}
+      onClick={() => this.viewCompanyPage(this.props.id, this.props.name)  } 
+      className='ui card company_card' style={this.state.style}
     >
-      <img src={ logo } style={{ width: '100px', height: 'auto'}}/>
+      <img src={ this.props.logo } style={{ width: '100px', height: 'auto'}}/>
       <div className='company-name'>
-        { name }
+        { this.props.name }
       </div>
     </div>
     )

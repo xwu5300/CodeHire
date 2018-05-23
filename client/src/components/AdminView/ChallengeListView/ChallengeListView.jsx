@@ -6,6 +6,7 @@ import Modal from 'react-modal';
 import SavedChallenges from './dragndropComponents/SavedChallenges.jsx';
 import DefaultChallenges from './dragndropComponents/DefaultChallenges.jsx';
 import ScheduledChallenges from './dragndropComponents/ScheduledChallenges.jsx';
+import CompanyNavBar from '../CompanyNavBar.jsx';
 
 import ChallengeCard from './dragndropComponents/ChallengeCard.jsx';
 import Form from './Form.jsx';
@@ -51,13 +52,7 @@ class ChallengeListView extends Component {
     // console.log('challenge list props', this.props)
     return (
       <div>
-        <div className="ui orange five item very raised menu">
-          <div className='ui item cursor' onClick={ () => { this.props.history.push('/admin/profile') } }><i className="user circle icon"></i>{ localStorage.getItem('username') }</div>
-          <div className='ui item cursor' onClick={() => {this.props.history.push('/admin')}}>Dashboard</div> 
-          <div className='ui active item cursor' onClick={() => this.props.history.push('/admin/challenges') }>Manage Challenges</div>
-          <div className='ui item cursor' onClick={() => {this.props.history.push('/admin/data')}}>Analytics</div> 
-          <div className='ui item cursor' onClick={() => {this.props.history.push('/admin/hire')}}>Hire</div> 
-        </div>
+        <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout } />
        
         <div className='challenge_list'>
           <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>

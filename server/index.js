@@ -17,15 +17,15 @@ app.use(parser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/../client/dist'));
 
 
+(function(){
 
 let companyRooms = {};
+let userView = {};
 
 io.sockets.on('connection', (socket)=> {
   
   // when candidates enter liveCoding, push their username/id into respective companyId obj parameter
-
-  socket.on('candidate enter', (username, currentCompanyId) => {
-  
+  socket.on('candidate enter', (currentCompanyId, username) => {
     socket.room = 'room-' + currentCompanyId;
     socket.join(socket.room);
      
@@ -41,11 +41,6 @@ io.sockets.on('connection', (socket)=> {
   })
 
 
-  socket.on('typing', (newValue, username)=> {
-    io.sockets.emit('add char-' + username, newValue);
-  })
-
-
   // When company enters challenge, send them all users in their room
   socket.on('company enter', (currentCompanyId) => {
     socket.room = 'room-' + currentCompanyId;
@@ -55,33 +50,69 @@ io.sockets.on('connection', (socket)=> {
   })
 
 
+  // Individual user challenge views within main company room
+  socket.on('current user view', (currentCompanyId, username) => {
+    userView[currentCompanyId] = username;
+    socket.userRoom = 'room-' + currentCompanyId + '-' + username;
+    socket.join(socket.userRoom);
+
+
+    socket.on('typing', (username, newValue) => {
+       io.sockets.emit('add character', username, newValue);
+     })
+
+  })
+
+
 
   socket.on('candidate result', (username, result) => {
     io.sockets.emit('show result-' + username, result);
   })
 
 
+/* ---------- Timer between company and candidate --------- */
+  let countdown;
+  let dur;
+  socket.on('send time_limit', (duration) => { 
+    dur = duration;
+    let minutes;
+    let seconds;
+    let timer = duration * 60;
+
+    countdown = setInterval(() => {
+      minutes = parseInt(timer / 60, 10)
+      seconds = parseInt(timer % 60, 10);
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+
+      timer--;
+
+      io.sockets.emit('show time_limit', minutes, seconds);
+    }, 1000);
+  })
+
+
+  socket.on('reset clock', () => {
+    clearInterval(countdown);
+    io.sockets.emit('clock was reset', dur)
+  })
+
 
   // When candidate disconnects from room, remove username from company room
   socket.on('candidate disconnect', (username, currentCompanyId) => {
+    
+    socket.leave('room-' + currentCompanyId);
 
-    console.log('SERVER DISCONNECT', username, currentCompanyId);
-     socket.leave('room-' + currentCompanyId);
+    if(companyRooms[currentCompanyId]) {
+      if(companyRooms[currentCompanyId].includes(username)) {
+        companyRooms[currentCompanyId].splice(companyRooms[currentCompanyId].indexOf(username));
+      }
+    }
 
-     if(companyRooms[currentCompanyId]) {
-     if(companyRooms[currentCompanyId].includes(username)) {
-       companyRooms[currentCompanyId].splice(companyRooms[currentCompanyId].indexOf(username));
-     }
-   }
-      io.sockets.emit('active candidates', companyRooms[currentCompanyId]); 
+    io.sockets.emit('active candidates', companyRooms[currentCompanyId]); 
   })
-
-
-  socket.on('send time_limit', (minutes, seconds) => {
-    io.sockets.in(socket.room).emit('show time_limit', minutes, seconds);
-  })
-
 })
+})();
 
 
 

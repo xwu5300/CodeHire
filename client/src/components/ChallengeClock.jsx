@@ -13,13 +13,16 @@ class ChallengeClock extends Component {
     }
 
     this.startChallenge = this.startChallenge.bind(this);
-    this.onTick = this.onTick.bind(this);
     this.onReset = this.onReset.bind(this);
 
     this.socket = socketClient();
 
     this.socket.on('show time_limit', (minutes, seconds) => {
       this.setState({ minutes: minutes, seconds: seconds });
+    })
+
+    this.socket.on('clock was reset', (duration) => {
+      this.setState({ minutes: this.props.duration, seconds: '00' })
     })
   }
 
@@ -31,41 +34,22 @@ class ChallengeClock extends Component {
 
   startChallenge() {
     this.setState({ time_running: true })
-    this.onTickCount = setInterval(this.onTick, 125);
+    this.socket.emit('send time_limit', this.props.duration);
   }
 
 
-  onTick() {
-
-    this.socket.emit('send time_limit', this.state.minutes, this.state.seconds);
-
-    if(this.state.time_running) {
-      this.setState({ seconds: this.state.seconds - 1 });
-    }
-
-    if(this.state.seconds === -1){
-      this.setState({
-        seconds: 60,
-        minutes: this.state.minutes - 1,
-      });
-    }
-  }
 
   onReset() {
-    clearInterval(this.onTick);
-    this.setState({ minutes: this.props.duration, seconds: '00', time_running: false })
+    this.socket.emit('reset clock');
   }
 
-  componentWillUnmount() {
-    clearInterval(this.onTickCount);
-  }
 
   render() {
     return (
       <div>
         <div className='live_coding_clock'> Time Limit: { this.state.minutes + ':' + this.state.seconds }</div>
-        <button className='time_limit_btn' type='button' onClick={ () => this.startChallenge() }> Start Challenge </button>
-        <button className='time_limit_btn' type='button' onClick={ () => this.onReset() }>Reset Clock</button>
+        <button className='time_limit_btn ui green button' style={{marginTop: '10px'}} onClick={ () => this.startChallenge() }> Start Challenge </button>
+        <button className='time_limit_btn ui orange button' style={{marginTop: '10px'}}onClick={ () => this.onReset() }>Reset Clock</button>
       </div>  
     )
   }

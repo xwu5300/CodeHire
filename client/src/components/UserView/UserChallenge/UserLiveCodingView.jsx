@@ -46,10 +46,17 @@ class UserLiveCodingView extends Component {
     this.socket.on('show time_limit', (minutes, seconds) => {
       this.setState({ minutes: minutes, seconds: seconds });
     })
+
+    this.socket.on('clock was reset', (duration) => {
+      console.log('DURATION', duration)
+      this.setState({ minutes: duration, seconds: '00' })
+    })
+
   }
 
   componentDidMount() {
-     this.socket.emit('candidate enter', localStorage.getItem('username'), this.props.current_company_calendar);
+     this.socket.emit('candidate enter', this.props.current_company_calendar, localStorage.getItem('username'));
+     this.socket.emit('current user view', this.props.current_company_calendar, localStorage.getItem('username'));
   }
 
   componentWillUnmount() {
@@ -59,8 +66,9 @@ class UserLiveCodingView extends Component {
   onChange(newValue, event) {
     this.setState({
       code: newValue
-    }, ()=> console.log(this.state.code))
-    this.socket.emit('typing', newValue, localStorage.getItem('username'));
+    })
+    
+    this.socket.emit('typing', localStorage.getItem('username'), newValue);
   }
 
   handleTheme(e) {
@@ -94,8 +102,8 @@ class UserLiveCodingView extends Component {
     let challenge_id = this.props.location.challenge.challenge_id
     let company_id = localStorage.getItem('companyId')
     let candidate_id = localStorage.getItem('userId')
-    let userSchedule_id = this.props.location.challenge.id
-    this.props.saveResults(company_id, result, submission, score, time, challenge_id, company_id, candidate_id, false, userSchedule_id, () => {})
+    let companySchedule_id = this.props.location.challenge.id
+    this.props.saveResults(companySchedule_id, result, submission, score, time, challenge_id, company_id, candidate_id, false, userSchedule_id, () => {})
   }
 
   checkAnswer() {

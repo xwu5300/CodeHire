@@ -11,7 +11,7 @@ class PastChallengeTableView extends Component {
       <ReactCollapsingTable 
       columns={this.props.columns} 
       rows={this.props.rows} 
-      rowSize={5} 
+      rowSize={3} 
       // showSearch={ true }
       showPagination={ true }
     />

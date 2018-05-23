@@ -16,6 +16,7 @@ import { connect } from 'react-redux';
 
 import { viewCompanyProfile, fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCandidateResults, getResume, saveResume, removeResume, updateCandidatePhoto, fetchAllCompanyCalendars } from '../actions/userActions';
 import { fetchCompanySchedule, fetchCompanyResults, getUsername } from '../actions/adminActions' ;
+import { handleLogout } from '../actions/authActions';
 
 import axios from 'axios';
 
@@ -66,7 +67,7 @@ const mapDispatchToProps = {
    deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, 
    saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCompanySchedule, 
    fetchCompanyResults, fetchCandidateResults, getResume, saveResume, removeResume, updateCandidatePhoto, getUsername,
-   viewCompanyProfile, fetchAllCompanyCalendars
+   viewCompanyProfile, fetchAllCompanyCalendars, handleLogout
 }
 
 const connectComponent = connect(mapStateToProps, mapDispatchToProps)(UserContainer); //code cleaned

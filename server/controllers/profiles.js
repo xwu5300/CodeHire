@@ -28,6 +28,7 @@ module.exports.getCompanyInfo = (userId, callback) => {
 
 
 module.exports.getCandidateInfo = (candidateId, username, callback) => {
+  console.log('jansdkjan', candidateId, username);
   if(candidateId) {
   return knex('users')
   .select('candidate_skills', 'github_url', 'profile_photo')
@@ -43,6 +44,7 @@ module.exports.getCandidateInfo = (candidateId, username, callback) => {
   .select('candidate_skills', 'github_url')
   .where({ username: username })
   .then((data) => {
+    console.log('DTATATA', data);
     callback(data);
   })
   .catch((err) => {

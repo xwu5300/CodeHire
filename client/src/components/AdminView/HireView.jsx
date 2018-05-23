@@ -48,7 +48,7 @@ class HireView extends Component {
   render() {
     return(
       <div>
-        <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
+        <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout } />
         <div className="search-container">
           <div className="ui fluid left icon input">
             <input type="text" value={this.state.query} placeholder="Search by username or skill..." onChange={this.handleChange} onKeyPress={(e)=>{this.handleKeyPress(e)}}/>
