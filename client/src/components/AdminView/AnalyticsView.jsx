@@ -54,7 +54,7 @@ class AnalyticsView extends Component {
       <div>
         <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
         <h1>Analytics</h1>
-        <PastChallenges history={this.props.history} save={this.props.saveToFavorites} pastResults={this.props.past_results} pastChallenges={this.props.past_challenges} fetchPastResults={this.props.fetchPastResults}/>
+        <PastChallenges favorites={this.props.favorites} remove={this.props.removeFromFavorites} getFavorites={this.props.getFavorites} history={this.props.history} save={this.props.saveToFavorites} pastResults={this.props.past_results} pastChallenges={this.props.past_challenges} fetchPastResults={this.props.fetchPastResults}/>
         <div className="ui orange five item menu">
           <div className='ui item cursor' onClick={() => this.handleClick('bar') }> Bar </div>
           <div className='ui item cursor' onClick={() => this.handleClick('line') }> Line </div>

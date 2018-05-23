@@ -22,7 +22,8 @@ class PastResults extends Component {
           <tr key={item.candidate_id}>
             <td>{item.username}</td>
             <td style={item.user_passed ? {color: 'green'} : {color: 'red'}} >{item.user_passed ? "Passed" : "Failed"}</td>
-            <td><button className="ui button" onClick={()=>{this.props.save(localStorage.getItem('userId'), item.candidate_id)}}><i className="ui plus icon"></i></button></td>
+            <td><i className={!this.props.favorites.includes(item.id) ? "heart outline icon cursor" : "heart icon cursor"} 
+            onClick={!this.props.favorites.includes(item.id) ? ()=>{this.props.save(localStorage.getItem('userId'), item.candidate_id)} : () => this.props.remove(localStorage.getItem('userId'), item.candidate_id)}></i></td>
           </tr>
         )
       })}

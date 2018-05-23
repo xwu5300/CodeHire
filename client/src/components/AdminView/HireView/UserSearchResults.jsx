@@ -4,13 +4,14 @@ import React, { Component } from 'react';
 class UserSearchResults extends Component {
   constructor(props) {
     super(props);
+
   }
 
 
   render() {
     return(
       <div>
-        {this.props.users.length === 0 && this.props.searched === true ? <div>No results found. Please search again.</div> : this.props.users.map((user) => {
+        {this.props.users.length === 0 ? <div>No results found. Please search again.</div> : this.props.users.map((user, i) => {
           return(
           <div className="ui segment">
             {user.profile_photo ?
@@ -19,9 +20,10 @@ class UserSearchResults extends Component {
             <div>Skills: {user.candidate_skills ? user.candidate_skills : 'None added'}</div>
             <div>Info: {user.information ? user.information : 'None added'} </div>
             <div>Github:  {user.github_url ? user.github_url : 'None added'}</div>
-            Resume: <a href={user.resume_url} target="_blank">{user.resume_name ? user.resume_name : 'None added'}</a>
+            <div>Resume: {user.resume_url ? <a href={user.resume_url} target="_blank">{user.resume_name}</a>: 'None added'}</div>
             <br/>
-            <button className="ui button" onClick={()=>{this.props.save(localStorage.getItem('userId'), user.id)}}>Save</button>
+            <i className={!this.props.favorites.includes(user.id) ? "heart outline icon search cursor" : "heart icon search cursor"} 
+            onClick={!this.props.favorites.includes(user.id) ? ()=>{this.props.save(localStorage.getItem('userId'), user.id)} : ()=>this.props.remove(localStorage.getItem('userId'), user.id)}></i>
           </div>
           )
         })}

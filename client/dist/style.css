@@ -399,6 +399,32 @@ body {
   margin-left: 20px;
 }
 
+.heart.icon {
+  color: red;
+  font-size: 25px;
+}
+
+.search {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+}
+
+.envelope.open.icon {
+  font-size: 25px;
+  position: absolute;
+  bottom: 5px;
+  right: 50px;
+}
+
+.envelope.open.outline.icon {
+  font-size: 25px;
+  position: absolute;
+  bottom: 5px;
+  right: 50px;
+}
+
+
 /* ------- User Past Results ------- */
 
 .history_card {

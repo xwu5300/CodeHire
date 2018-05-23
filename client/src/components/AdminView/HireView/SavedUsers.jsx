@@ -6,10 +6,6 @@ class SavedUsers extends Component {
     super(props);
   }
 
-  componentDidMount() {
-    console.log(this.props)
-  }
-
   render() {
     return(
       <div>
@@ -22,10 +18,10 @@ class SavedUsers extends Component {
             <div>Skills: {user.candidate_skills ? user.candidate_skills : 'None added'}</div>
             <div>Info: {user.information ? user.information : 'None added'} </div>
             <div>Github:  {user.github_url ? user.github_url : 'None added'}</div>
-            Resume: <a href={user.resume_url} target="_blank">{user.resume_name ? user.resume_name : 'None added'}</a>
+            <div>Resume: {user.resume_url ? <a href={user.resume_url} target="_blank">{user.resume_name}</a>: 'None added'}</div>
             <br/>
-            <button className="ui button" onClick={()=>this.props.remove(localStorage.getItem('userId'), user.id)}>Unsave</button>
-            <button className="ui button">Contact</button>
+            <i className={user.contacted ? "envelope open icon cursor" : "envelope open outline icon cursor"} onClick={()=>{this.props.contact(user.id, localStorage.getItem('userId'), user.contacted)}}></i>
+            <i className="heart icon search cursor" onClick={()=>this.props.remove(localStorage.getItem('userId'), user.user_id)}></i>
           </div>
         )
       })}

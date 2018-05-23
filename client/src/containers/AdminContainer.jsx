@@ -12,7 +12,7 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PrivateRoute from '../components/PrivateRoute.jsx';
 
-import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, fetchCompanyResults, fetchCandidateList, getChallengeInfo, updateChallengeDate, getUsername, searchUsers, saveToFavorites, getFavorites, removeFromFavorites, fetchAllResults, getCompanyData, fetchPastSchedule, fetchPastResults, fetchChallengeData } from '../actions/adminActions';
+import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, fetchCompanyResults, fetchCandidateList, getChallengeInfo, updateChallengeDate, getUsername, searchUsers, saveToFavorites, getFavorites, removeFromFavorites, fetchAllResults, getCompanyData, fetchPastSchedule, fetchPastResults, fetchChallengeData, contact } from '../actions/adminActions';
 import { fetchInitialChallenge, currentCompanyCalendar, fetchCandidateInfo } from '../actions/userActions';
 
 class AdminContainer extends Component {
@@ -67,7 +67,7 @@ const mapDispatchToProps = {
   toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule,
   fetchCompanyResults, fetchCandidateList, getChallengeInfo, getUsername, updateChallengeDate, searchUsers,
   saveToFavorites, getFavorites, removeFromFavorites, fetchAllResults, getCompanyData, fetchPastSchedule,
-  fetchPastResults, fetchChallengeData
+  fetchPastResults, fetchChallengeData, contact
 }
 
 const ChallengeListComponent = connect(mapStateToProps, mapDispatchToProps)(ChallengeListView);

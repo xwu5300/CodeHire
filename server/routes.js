@@ -531,7 +531,6 @@ router.get('/api/favorites', (req, res) => {
     data.map((user) => {
       user.candidate_skills = user.candidate_skills === null ? null : user.candidate_skills.join(', ');
     })
-    console.log('Favorites retrieved. Sending favorites to client');
     res.send(data);
   })
   .catch((err) => {
@@ -563,6 +562,14 @@ router.delete('/api/favorites', (req, res) => {
   })
 })
 
-
+router.patch('/api/favorites', (req, res) => {
+  profileControllers.markContacted(req.body.favoriteId, req.body.contacted)
+  .then(() => {
+    res.send();
+  })
+  .catch(() => {
+    console.log('error marking contacted', err);
+  })
+})
 
 module.exports = router;

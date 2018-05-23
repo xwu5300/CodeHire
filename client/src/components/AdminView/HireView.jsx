@@ -46,6 +46,7 @@ class HireView extends Component {
 
 
   render() {
+    console.log(this.props)
     return(
       <div>
         <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
@@ -60,11 +61,12 @@ class HireView extends Component {
         <div className="search-results-container">
           <div className="search-results">
            <h4>Search Results</h4> 
-           <UserSearchResults users={this.props.users} save={this.props.saveToFavorites} searched={this.state.searched}/>
+           {!this.state.searched ? null :
+           <UserSearchResults users={this.props.users} save={this.props.saveToFavorites} remove={this.props.removeFromFavorites} favorites={this.props.favorites.map((item) => item.user_id)}/> }
           </div>
           <div className="search-results">
             <h4>Saved Users</h4>
-            <SavedUsers favorites={this.props.favorites} remove={this.props.removeFromFavorites}/>
+            <SavedUsers contact={this.props.contact} favorites={this.props.favorites} remove={this.props.removeFromFavorites}/>
           </div>
         </div>
 
