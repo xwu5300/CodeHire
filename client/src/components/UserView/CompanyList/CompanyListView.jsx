@@ -48,7 +48,7 @@ class CompanyListView extends Component {
           <div className='ui cards centered grid'>
             {this.props.company_list ? this.props.company_list.map((company, i) => {
               return (
-                <CompanyDetail key={ i } handleHover={ this.handleHover } indexHovered={ this.state.indexHovered } logo={ company.logo_url ? company.logo_url : 'http://dev.jobkhoji.com/assets/images/default_company_icon.png'  } 
+                <CompanyDetail key={ i } id={ company.id } handleHover={ this.handleHover } indexHovered={ this.state.indexHovered } logo={ company.logo_url ? company.logo_url : 'http://dev.jobkhoji.com/assets/images/default_company_icon.png'  } 
                                name={ company.name } />              
               );
             }) : "Sorry, we weren't able to find any results" }

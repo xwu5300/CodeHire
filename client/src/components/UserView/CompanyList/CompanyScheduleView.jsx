@@ -75,7 +75,7 @@ class CompanyScheduleView extends Component {
         <div>
         <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout } />
         <div className='schedule_container'>
-        <div className='ui raised very padded container segment l' style={this.state.style}>
+        <div className='ui raised very padded container segment' style={this.state.style}>
           <h1>{ this.props.initial_challenge[0].name }</h1> 
           <h2>{ this.props.initial_challenge[0].information }</h2> 
 
