@@ -25,10 +25,23 @@ class AnalyticsView extends Component {
     console.log('do i have all challenges for a company??', this.props)
     return (
       <div>
+<<<<<<< HEAD
         <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
         <BarGraph getAllResults={this.props.fetchAllResults} getCompanyResults={this.props.getCompanyData} companyResults={this.props.company_data} allResults={this.props.all_results} fetchChallengeData={this.props.fetchChallengeData} results={this.props.results} challengeData={this.props.challenge_data}/>
         <LineGraph getAllResults={this.props.fetchAllResults} getCompanyResults={this.props.getCompanyData} companyResults={this.props.company_data} allResults={this.props.all_results}/>
         <Scatterplot getAllResults={this.props.fetchAllResults} getCompanyResults={this.props.getCompanyData} companyResults={this.props.company_data} allResults={this.props.all_results} fetchChallengeData={this.props.fetchChallengeData} results={this.props.results} challengeData={this.props.challenge_data}/>
+=======
+        <div className="ui orange five item menu">
+          <div className='ui item cursor' onClick={ () => { this.props.history.push('/admin/profile') } }><i className="user circle icon"></i>{ this.props.username }</div>
+          <div className='ui item cursor' onClick={() => {this.props.history.push('/admin')}}>Dashboard</div>
+          <div className='ui item cursor' onClick={() => this.props.history.push('/admin/challenges') }>Manage Challenges</div>
+          <div className='ui active item cursor' onClick={() => {this.props.history.push('/admin/data')}}>Analytics</div>
+          <div className='ui item cursor' onClick={() => {this.props.history.push('/admin/hire')}}>Hire</div>
+        </div>
+        <BarGraph companyResults={this.props.company_data} allResults={this.props.all_results} challenges={this.props.all_challenges} fetchChallengeData={this.props.fetchChallengeData} challengeData={this.props.challenge_data} />
+        <LineGraph getAllResults={this.props.fetchAllResults} getCompanyResults={this.props.getCompanyData} companyResults={this.props.company_data} allResults={this.props.all_results}/>
+        <Scatterplot companyResults={this.props.company_data} allResults={this.props.all_results} fetchChallengeData={this.props.fetchChallengeData} challengeData={this.props.challenge_data}/>
+>>>>>>> cleaned up props
       </div>
     )
   }
