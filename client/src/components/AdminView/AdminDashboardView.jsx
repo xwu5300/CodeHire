@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
 import moment from 'moment';
 import ScheduleInitialView from './ScheduleInitialView.jsx';
+import CompanyNavBar from './CompanyNavBar.jsx';
 import Modal from 'react-modal';
 import { auth } from '../../../../firebase/index.js';
 
@@ -19,7 +20,6 @@ class AdminDashboardView extends Component {
     this.viewChallenge = this.viewChallenge.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.editChallenges = this.editChallenges.bind(this);
     this.getUsername = this.getUsername.bind(this);
   }
 
@@ -49,10 +49,6 @@ class AdminDashboardView extends Component {
     this.openModal();
   }
 
-  editChallenges() {
-    this.props.toggleInitialOff();
-    this.props.history.push('/admin/challenges');
-  }
 
   viewChallenge(title, companyId, duration) {
     this.props.setCurrentLiveChallenge(title, duration);
@@ -88,13 +84,7 @@ class AdminDashboardView extends Component {
 
     return (
       <div>
-        <div className="ui orange five item menu">
-          <div className='ui item cursor' onClick={ () => { this.props.history.push('/admin/profile') } }><i className="user circle icon"></i>{ localStorage.getItem('username') }</div>
-          <div className='ui active item cursor' onClick={() => {this.props.history.push('/admin')}}>Dashboard</div> 
-          <div className='ui item cursor' onClick={() => this.editChallenges() }>Manage Challenges</div>
-          <div className='ui item cursor' onClick={() => {this.props.history.push('/admin/data')}}>Analytics</div> 
-          <div className='ui item cursor' onClick={() => {this.props.history.push('/admin/hire')}}>Hire</div> 
-        </div>
+        <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout } />
         <div className='company_dashboard_container'>
           <div className='ui raised very padded container segment'>
             <div className='ui grid'>

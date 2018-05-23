@@ -76,7 +76,7 @@ class UserProfileView extends Component {
   render() {
     return (
       <div>
-        <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
+        <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout } />
         <div className='main_profile_container'>
         {!this.state.showHistory ?
           <div className="ui top attached tabular menu">

@@ -142,8 +142,11 @@ export const handleLogout = () => (dispatch) => {
   if (auth.currentUser) {
     auth.signOut();
     localStorage.removeItem('userId');
+    localStorage.removeItem('username');
+    localStorage.removeItem('companyName');
+    localStorage.removeItem('companyId');
   }
-  history.push('/login');
+  history.push('/');
 }
 
 

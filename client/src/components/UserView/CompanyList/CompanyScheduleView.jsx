@@ -73,7 +73,7 @@ class CompanyScheduleView extends Component {
     if (this.props.initial_challenge.length) {
       return (
         <div>
-        <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
+        <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout } />
         <div className='schedule_container'>
         <div className='ui raised very padded container segment l' style={this.state.style}>
           <h1>{ this.props.initial_challenge[0].name }</h1> 

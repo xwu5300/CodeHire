@@ -52,7 +52,7 @@ class AnalyticsView extends Component {
     console.log(this.props)
     return (
       <div>
-        <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
+        <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout }/>
         <h1>Analytics</h1>
         <PastChallenges history={this.props.history} save={this.props.saveToFavorites} pastResults={this.props.past_results} pastChallenges={this.props.past_challenges} fetchPastResults={this.props.fetchPastResults}/>
         <div className="ui orange five item menu">

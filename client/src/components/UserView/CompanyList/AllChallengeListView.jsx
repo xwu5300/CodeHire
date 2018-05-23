@@ -44,7 +44,7 @@ class AllChallengeListView extends Component {
 
       return (
         <div> 
-          <UserNavBar getUsername={ this.props.getUsername} username={ this.props.username }/>
+          <UserNavBar getUsername={ this.props.getUsername} username={ this.props.username } handleLogout={ this.props.handleLogout }/>
         <div className='search_company_input' style={{marginTop: '40px', marginBottom: '70px', textAlign: 'center'}} >
         <SearchCompanySchedule updateCompanyCalendar={this.props.fetchAllCompanyCalendars}/>
       </div>
