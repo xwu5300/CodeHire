@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import moment from 'moment';
-import * as V from 'victory';
 import { VictoryBar, VictoryChart, VictoryGroup, VictoryLabel, VictoryAxis, VictoryTheme, VictoryScatter, VictoryTooltip, VictoryZoomContainer } from 'victory';
 
 const categories = ['algorithms', 'data structures', 'system design']
@@ -41,16 +39,16 @@ class BarGraph extends Component {
   }
 
   render() {
-    console.log('what props do i have', this.props)
     let IndustrySuccess = this.successRate(this.props.allResults, "category", categories)
     let CompanySuccess = this.successRate(this.props.companyResults, "category", categories)
+    let ChallengeSuccess = this.successRate(this.props.companyResults,  "category", categories)
 
     let Industry = this.props.allResults.map((data) => {
       let passPercent = Math.round(IndustrySuccess[data.category] * 100)
       return {x: data.category, y: passPercent}
     })
 
-    let Company = this.props.results.map((data) => {
+    let Company = this.props.companyResults.map((data) => {
       let passPercent = Math.round(CompanySuccess[data.category] * 100)
       return {x: data.category, y: passPercent}
     })
@@ -79,8 +77,8 @@ class BarGraph extends Component {
         <label>
         Select a Challenge
         <select value={this.state.currentChallenge.title} onChange={ (e)=> this.handleChange(e)}>
-          {this.props.results.map((challengeResult, i) => {
-             return <option key={i} value={challengeResult.challenge_id}>{challengeResult.title}</option>
+          {this.props.challenges.map((challengeResult, i) => {
+             return <option key={i} value={challengeResult.id}>{challengeResult.title}</option>
           })}
         </select>
         </label>

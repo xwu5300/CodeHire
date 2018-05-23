@@ -16,12 +16,13 @@ class AnalyticsView extends Component {
 
   componentDidMount() {
     this.props.fetchCandidateList(localStorage.getItem('userId'));
+    this.props.fetchAllChallenges(localStorage.getItem('userId'));
     this.props.getCompanyData(localStorage.getItem('userId'));
     this.props.fetchAllResults();
   }
 
   render() {
-    // console.log('whats my props', this.props)
+    console.log('do i have all challenges for a company??', this.props)
     return (
       <div>
         <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } />

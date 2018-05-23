@@ -160,8 +160,4 @@ class LineGraph extends Component {
   }
 }
 
-
-
-
-
 export default LineGraph;
