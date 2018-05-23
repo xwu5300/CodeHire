@@ -5,9 +5,7 @@ import UserResults from './UserResults.jsx';
 import BarGraph from './AnalyticsView/BarGraph.jsx';
 import LineGraph from './AnalyticsView/LineGraph.jsx';
 import Scatterplot from './AnalyticsView/Scatterplot.jsx';
-import jwt from'jwt-simple';
-import { secret } from'../../../../config.js';
-
+import pastResults from './AnalyticsView/PastResults.jsx';
 import PastChallenges from './AnalyticsView/PastChallenges.jsx';
 
 
@@ -58,6 +56,7 @@ class AnalyticsView extends Component {
         <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout }/>
         <h1>Analytics</h1>
         <PastChallenges fetchCandidateResults={this.props.fetchCandidateResults} candidateResults={this.props.candidate_results} favorites={this.props.favorites} remove={this.props.removeFromFavorites} getFavorites={this.props.getFavorites} history={this.props.history} save={this.props.saveToFavorites} pastResults={this.props.past_results} pastChallenges={this.props.past_challenges} fetchPastResults={this.props.fetchPastResults}/>
+
         <div className="ui orange five item menu">
           <div className='ui item cursor' onClick={() => this.handleClick('bar') }> Bar </div>
           <div className='ui item cursor' onClick={() => this.handleClick('line') }> Line </div>
