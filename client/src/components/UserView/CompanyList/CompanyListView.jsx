@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import CompanyListTableView from './CompanyListTableView.jsx';
 import SearchCompany from './SearchCompany.jsx';
 import ViewCompanyPage from './ViewCompanyPage.jsx';
 import Image from './Image.jsx';
