@@ -2,12 +2,10 @@ const knex = require('../../db/index.js');
 
 //get all companies' list
 module.exports.getCompanyList = (companyName) => {
-  let option = {'role': 'company'}
-  if (companyName) {
-    option = {'role': 'company', 'name': companyName}
-  }
+  let option = `%${companyName}%`;
   return knex.from('users')
-  .where(option)
+  .where({'role': 'company'})
+  .where('name', 'like', option)
   .select('id', 'name','phone', 'information', 'logo_url')
   .orderBy('name', 'asc')
   .then((res) => {
