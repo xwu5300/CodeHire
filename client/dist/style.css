@@ -423,7 +423,7 @@ body {
 	font-size: 14px;
 }
 
-.company_card: hover {
+.company_card:hover {
 	color: red;
 }
 
@@ -438,3 +438,7 @@ body {
   margin: auto;
 }
 
+.past-challenge-container {
+  margin-left: 30px;
+  margin-bottom: 30px;
+}

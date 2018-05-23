@@ -12,7 +12,7 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PrivateRoute from '../components/PrivateRoute.jsx';
 
-import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, fetchCompanyResults, fetchCandidateList, getChallengeInfo, updateChallengeDate, getUsername, searchUsers, saveToFavorites, getFavorites, removeFromFavorites, fetchAllResults, getCompanyData } from '../actions/adminActions';
+import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, fetchCompanyResults, fetchCandidateList, getChallengeInfo, updateChallengeDate, getUsername, searchUsers, saveToFavorites, getFavorites, removeFromFavorites, fetchAllResults, getCompanyData, fetchPastSchedule, fetchPastResults } from '../actions/adminActions';
 import { fetchInitialChallenge, currentCompanyCalendar, fetchCandidateInfo } from '../actions/userActions';
 
 class AdminContainer extends Component {
@@ -47,14 +47,16 @@ const mapStateToProps = (state) => ({
    username: state.username.username,
    users: state.users.users,
    challenge_info: state.challenge_info.challenge_info,
-   candidate_information: state.candidate_information.candidate_information,  ///not exists ??
+   candidate_information: state.candidate_information.candidate_information,  
    candidate_skills: state.candidate_skills.candidate_skills,
    github_url: state.github_url.github_url,
    results: state.results.results,
    candidate_list: state.candidate_list.candidate_list,
    favorites: state.favorites.favorites,
    all_results: state.all_results.all_results,
-   company_data: state.company_data.company_data
+   company_data: state.company_data.company_data,
+   past_challenges: state.past_challenges.past_challenges,
+   past_results: state.past_results.past_results
 });
 
 const mapDispatchToProps = {
@@ -63,7 +65,8 @@ const mapDispatchToProps = {
   updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn,
   toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule,
   fetchCompanyResults, fetchCandidateList, getChallengeInfo, getUsername, updateChallengeDate, searchUsers,
-  saveToFavorites, getFavorites, removeFromFavorites, fetchAllResults, getCompanyData
+  saveToFavorites, getFavorites, removeFromFavorites, fetchAllResults, getCompanyData, fetchPastSchedule,
+  fetchPastResults
 }
 
 const ChallengeListComponent = connect(mapStateToProps, mapDispatchToProps)(ChallengeListView);

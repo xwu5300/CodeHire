@@ -114,3 +114,15 @@ module.exports.fetchCompanyData = (companyId) => {
     console.log('Error fetching challenge results', err);
   })
 }
+
+module.exports.fetchPastResults = (scheduleId) => {
+  return knex('results')
+  .where({'results.company_schedule_id': scheduleId})
+  .innerJoin('users', 'users.id', 'results.candidate_id')
+  .then((res) => {
+    return res;
+  })
+  .catch((err) => {
+    console.log('Error fetching past results', err);
+  })
+}

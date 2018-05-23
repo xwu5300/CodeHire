@@ -76,9 +76,6 @@ class AllChallengeResults extends Component {
       return a.x - b.x;
     });
 
-    console.log(filteredCompanyData)
-
-
     return (
       <div className="challenge-results-graph">
         <VictoryChart domain={{x: [0, 30], y: [0, 100]}} animate={{onEnter: {duration: 100}}} containerComponent={
@@ -94,12 +91,16 @@ class AllChallengeResults extends Component {
             />
 
             <VictoryAxis
-            axisLabelComponent={<VictoryLabel style={{fontSize: 12, fontWeight: 500}} />}
+            axisLabelComponent={<VictoryLabel 
+            style={{
+              fontSize: 12, 
+              fontWeight: 500}} 
+            />}
             label={"Time (days in month)"}
             tickCount={10}
             style={{
               tickLabels: {
-                fontSize: 10,
+                fontSize: 10, 
                 padding: 5
               }
              }}

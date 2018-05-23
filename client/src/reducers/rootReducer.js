@@ -39,5 +39,7 @@ export default combineReducers({
   resume_name: userReducers.candidateResume,
   company_data: adminReducers.companyData,
   all_company_calendars: userReducers.allCompanyCalendars,
-  company_name: userReducers.companyName
+  company_name: userReducers.companyName,
+  past_challenges: adminReducers.pastChallenges,
+  past_results: adminReducers.pastResults
 })

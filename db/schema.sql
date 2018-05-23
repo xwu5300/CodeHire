@@ -76,7 +76,6 @@ CREATE TABLE company_user (
 );
 
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('admin', 'admin', null, null, null,  null, 'company', 'oEOYD25GWuWaERtmOJOg7bCrIck2');
-
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('admin2', 'admin2', null, null, null,  null, 'company', '4ripTTcEZtQ1EAHXGpIDM4XFbz32');
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('admin3', 'admin3', null, null, null,  null, 'company', 'qiRrCg4hnFZcOpfe4lH4bSxsDgg1');
 
@@ -375,91 +374,4 @@ INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candi
 INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 15, 13, 18, 3, false);
 INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 15, 14, 18, 3, false);
 INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 15, 15, 18, 3, false);
-
-
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('One Sum', 'Find the sum...', 'oneSum', 'arr, target', '[[]]]', '[[[]]]', '1', 'algorithms', false, 90, 1);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Two Sum', 'Find the sum...', 'twoSum', 'arr, target', '[[[]]]', '[[]]', '2', 'data structures', false, 90, 1);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Three Sum', 'Find the sum...', 'threeSum', 'arr, target', '[[]]', '[[]]', '3', 'algorithms', false, 90, 1);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Four Sum', 'Find the sum...', 'fourSum', 'arr, target', '[[]]', '[[]]', '4', 'system design', false, 90, 1);
-INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('Five Sum', 'Find the sum...', 'fiveSum', 'arr, target', '[[]]', '[[]]', '5', 'algorithms', false, 90, 1);
-
-
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 1, 1, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 1, 2, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 1, 3, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 1, 4, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 1, 5, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 1, 6, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 1, 7, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 1, 8, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 1, 9, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 1, 10, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 1, 11, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 1, 12, 1, false);
-
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-26 12:35:08', 1, 1, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-26 12:35:08', 1, 2, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-26 12:35:08', 1, 3, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-26 12:35:08', 1, 4, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-26 12:35:08', 1, 5, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-26 12:35:08', 1, 6, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-26 12:35:08', 1, 7, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-26 12:35:08', 1, 8, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-26 12:35:08', 1, 9, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-26 12:35:08', 1, 10, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-26 12:35:08', 1, 11, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-26 12:35:08', 1, 12, 1, false);
-
-
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 2, 1, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 2, 2, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 2, 3, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 2, 4, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 2, 5, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 2, 6, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 2, 7, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 2, 8, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 2, 9, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 2, 10, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 2, 11, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 2, 12, 1, false);
-
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 3, 1, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 3, 2, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 3, 3, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 3, 4, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 3, 5, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 3, 6, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 3, 7, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 3, 8, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 3, 9, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 3, 10, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 3, 11, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 3, 12, 1, false);
-
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 4, 1, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 4, 2, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 4, 3, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 4, 4, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 4, 5, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 4, 6, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 4, 7, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 4, 8, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 4, 9, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 4, 10, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 4, 11, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 4, 12, 1, false);
-
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 5, 1, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 5, 2, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 5, 3, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 5, 4, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 5, 5, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 5, 6, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 5, 7, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 5, 8, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('T', 'function(str)', 90, '2018-05-16 12:35:08', 5, 9, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 5, 10, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 5, 11, 1, false);
-INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_id, is_initial) VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 5, 12, 1, false);
 

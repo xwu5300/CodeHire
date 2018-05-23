@@ -378,6 +378,19 @@ router.patch('/api/companyCalendar', (req, res) => {
   })
 })
 
+//get past challenges
+router.get('/api/pastChallenges', (req, res) => {
+  let companyId = jwt.decode(req.query.companyId, secret).id;
+  calendarControllers.fetchPastSchedule(companyId)
+  .then((data) => {
+    console.log('this is data', data)
+    res.send(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+})
+
 
 /* ------- Results Routes -------- */
 
@@ -413,7 +426,7 @@ router.get('/api/results/candidate', (req, res) => {
   let companyScheduleId = req.query.companyScheduleId;
   resultsControllers.getCandidateResults(candidateId, companyScheduleId)
   .then((data) => {
-    console.log('Retrieve candidate results form db')
+    console.log('Retrieve candidate results from db')
     res.send(data)
   })
   .catch((err) => {
@@ -467,7 +480,18 @@ router.get('/api/companyData', (req, res) => {
     res.send(data);
   })
   .catch((err) => {
-    console.log('Error sending compant results', err);
+    console.log('Error sending company results', err);
+  })
+})
+
+router.get('/api/pastResults', (req, res) => {
+  resultsControllers.fetchPastResults(req.query.scheduleId)
+  .then((data) => {
+    console.log(data);
+    res.send(data);
+  })
+  .catch((err) => {
+    console.log('Error sending past results', err);
   })
 })
 
