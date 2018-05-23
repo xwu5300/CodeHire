@@ -46,6 +46,12 @@ class UserLiveCodingView extends Component {
     this.socket.on('show time_limit', (minutes, seconds) => {
       this.setState({ minutes: minutes, seconds: seconds });
     })
+
+    this.socket.on('clock was reset', (duration) => {
+      console.log('DURATION', duration)
+      this.setState({ minutes: duration, seconds: '00' })
+    })
+
   }
 
   componentDidMount() {
