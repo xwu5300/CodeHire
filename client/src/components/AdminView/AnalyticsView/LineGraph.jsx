@@ -91,12 +91,16 @@ class LineGraph extends Component {
             />
 
             <VictoryAxis
-            axisLabelComponent={<VictoryLabel style={{fontSize: 12, fontWeight: 500}} />}
+            axisLabelComponent={<VictoryLabel 
+            style={{
+              fontSize: 12, 
+              fontWeight: 500}} 
+            />}
             label={"Time (days in month)"}
             tickCount={10}
             style={{
               tickLabels: {
-                fontSize: 10,
+                fontSize: 10, 
                 padding: 5
               }
              }}
@@ -128,12 +132,12 @@ class LineGraph extends Component {
             style={{data: {stroke: '#00BFFF', strokeWidth: 2}}}
             />
 
-          <VictoryLabel
-          text={`Average Pass Rate`}
-          verticalAnchor={"end"}
-          x={180}
-          y={15}
-          />
+            <VictoryLabel
+            text={`Average Pass Rate`}
+            verticalAnchor={"end"}
+            x={180}
+            y={15}
+            />
         </VictoryChart>
       </div>
     )

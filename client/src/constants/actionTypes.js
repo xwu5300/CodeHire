@@ -50,6 +50,8 @@ export const GET_CURRENT_COMPANY_CALENDAR = 'GET_CURRENT_COMPANY_CALENDAR';
 
 export const GET_ALL_COMPANY_CALENDARS = 'GET_ALL_COMPANY_CALENDARS';
 
+export const GET_PAST_CHALLENGES = 'GET_PAST_CHALLENGES';
+
 /* --------- Results -------- */
 export const GET_COMPANY_RESULTS = 'GET_COMPANY_RESULTS';
 
@@ -67,6 +69,7 @@ export const GET_COMPANY_DATA = 'GET_COMPANY_DATA';
 
 export const GET_CHALLENGE_DATA = 'GET_CHALLENGE_DATA';
 
+export const GET_PAST_RESULTS = 'GET_PAST_RESULTS';
 /* -------- User Profile ------- */
 export const GET_CANDIDATE_INFO = 'GET_CANDIDATE_INFO';
 
