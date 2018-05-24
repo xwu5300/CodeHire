@@ -58,11 +58,7 @@ class AdminEditorViews extends Component {
   }
 
   componentDidMount() {
-
     let user_code = JSON.parse(localStorage.getItem('user_code'));
-
-    console.log('STATATATTAE', user_code, this.props.active_user);
-
     this.setState({ code: user_code[this.props.active_user] })
   }
 

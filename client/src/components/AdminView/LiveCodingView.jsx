@@ -28,7 +28,6 @@ class LiveCodingView extends Component {
     }
 
     this.getProfile = this.getProfile.bind(this);
-    this.onUnload = this.onUnload.bind(this);
 
     this.socket = socketClient();
 
@@ -50,18 +49,7 @@ class LiveCodingView extends Component {
 
   componentDidMount() {
     this.socket.emit('company enter', this.props.current_company_calendar);
-    // window.addEventListener('beforeunload', this.onUnload);
   } 
-
-  // componentWillUnmount() {
-  //   window.removeEventListener('beforeunload', this.onUnload);
-   
-  // }
-
-
-  onUnload() {
-    this.props.history.push('/admin');
-  }
 
 
   getProfile(username) {
