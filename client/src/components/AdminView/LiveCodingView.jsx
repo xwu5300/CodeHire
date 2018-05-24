@@ -69,22 +69,30 @@ class LiveCodingView extends Component {
 
     return (
       <div>
-        <div style={{fontSize: '22px', marginTop: '10px', marginLeft: '10px'}}>{ this.props.current_live_challenge_title }</div>
+        <div className='live_coding_title'>{ this.props.current_live_challenge_title }</div>
+     
+        <div className='live_coding_results'>  
         { this.state.candidate_results ? this.state.candidate_results.map((result) => {
             return (
-              <div>{ result[0] }{ result[1] ? ' passed challenge' : 'failed challenge' } </div>
+              <div style={ result[1] ? { color: 'green' } : { color: 'red' } }>{ result[0] }{ result[1] ? ' passed challenge' : ' failed challenge' } </div>
             )
         }) : null }
+        </div>
+     
+     
       <div className='ui grid padded centered'>
-
         <div className='five column centered row' style={{ marginTop: '30px' }}>
           <h1 className='4 columns wide'>Live Coding Challenge</h1>
           <div style={{ marginTop: '30px' }}>
             <ChallengeClock duration={ this.props.current_live_challenge_duration } />
           </div>
         </div>
+
+
       </div>
 
+     
+       
       <div className={ this.state.active_user ? 'ui container horizontal segments' : 'ui container segment' } style={ containerStyle }>
             {this.state.active_candidates ? this.state.active_candidates.map((candidate) => {
               return (
