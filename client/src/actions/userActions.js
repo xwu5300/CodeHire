@@ -38,7 +38,7 @@ export const fetchCandidateCalendar = (candidateId) => (dispatch) => {
 export const saveCandidateCalendar = (candidateId, companyScheduleId) => (dispatch) => {
   axios.post('/api/candidateCalendar', { candidateId, companyScheduleId })
   .then(({data}) => {
-    console.log('data')
+    dispatch(fetchCandidateCalendar(candidateId))
     if (data) {
       swal({
         text: "Scheduled a Live Challenge.",
@@ -111,7 +111,9 @@ export const fetchCandidateInitialResults = (companyId, candidateId, cb) => (dis
   axios.get('/api/results/candidate/initial', { params: { companyId, candidateId } })
   .then(({data}) => {
     if (data[0] && data[0].user_passed) {
-      dispatch({ type: GET_CANDIDATE_INITIAL_RESULTS, payload: data });
+      dispatch({ type: GET_CANDIDATE_INITIAL_RESULTS, payload: data[0].user_passed });
+    } else {
+      dispatch({ type: GET_CANDIDATE_INITIAL_RESULTS, payload: false});
     }
     cb(data)
   })

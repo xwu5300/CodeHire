@@ -146,7 +146,7 @@ export const fetchCompanySchedule = (companyId, companyName) => (dispatch) => {
 export const fetchCompanyInfo = (userId, callback) => (dispatch) => {
   axios.get('/api/companyInfo', { params: { userId }})
   .then((response) => {
-    dispatch({ type: GET_COMPANY_INFO, logo_url: response.data[0].logo_url, information: response.data[0].information })
+    dispatch({ type: GET_COMPANY_INFO, logo_url: response.data[0].logo_url, information: response.data[0].information, website_url: response.data[0].website_url })
     callback();
   })
   .catch((err) => {
@@ -154,8 +154,8 @@ export const fetchCompanyInfo = (userId, callback) => (dispatch) => {
   })
 }
 
-export const updateInfo = (userId, logo_url, information) => (dispatch) => {
-  axios.patch('/api/companyInfo', { userId, logo_url, information })
+export const updateInfo = (userId, logo_url, information, website_url) => (dispatch) => {
+  axios.patch('/api/companyInfo', { userId, logo_url, information, website_url })
   .then((response) => {
   })
   .catch((err) => {
