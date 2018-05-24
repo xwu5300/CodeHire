@@ -64,9 +64,8 @@ io.sockets.on('connection', (socket)=> {
   })
 
 
-
   socket.on('candidate result', (username, result) => {
-    io.sockets.emit('show result-' + username, result);
+    io.sockets.emit('show result', username, result);
   })
 
 
@@ -105,7 +104,7 @@ io.sockets.on('connection', (socket)=> {
 
     if(companyRooms[currentCompanyId]) {
       if(companyRooms[currentCompanyId].includes(username)) {
-        companyRooms[currentCompanyId].splice(companyRooms[currentCompanyId].indexOf(username));
+        companyRooms[currentCompanyId].splice(companyRooms[currentCompanyId].indexOf(username), 1);
       }
     }
 

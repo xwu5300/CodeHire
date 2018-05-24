@@ -21,7 +21,8 @@ class LiveCodingView extends Component {
     this.state = {
       active_candidates: [],
       active_user: null,
-      candidate_skills: []
+      candidate_skills: [],
+      candidate_results: []
     }
 
     this.getProfile = this.getProfile.bind(this);
@@ -30,6 +31,12 @@ class LiveCodingView extends Component {
 
     this.socket.on('active candidates', (activeCandidate) => {
       this.setState({ active_candidates: activeCandidate })
+    })
+
+    this.socket.on('show result', (username, result) => {
+
+      this.setState({ candidate_results: [...this.state.candidate_results, [username, result]] });
+      console.log('CANDIDATE RESULTS', this.state.candidate_results);
     })
 
   }
@@ -60,10 +67,14 @@ class LiveCodingView extends Component {
       }
     }
 
-    console.log('active user', this.state.active_user);
     return (
       <div>
         <div style={{fontSize: '22px', marginTop: '10px', marginLeft: '10px'}}>{ this.props.current_live_challenge_title }</div>
+        { this.state.candidate_results ? this.state.candidate_results.map((result) => {
+            return (
+              <div>{ result[0] }{ result[1] ? ' passed challenge' : 'failed challenge' } </div>
+            )
+        }) : null }
       <div className='ui grid padded centered'>
 
         <div className='five column centered row' style={{ marginTop: '30px' }}>
@@ -80,8 +91,8 @@ class LiveCodingView extends Component {
                 <Fragment>
                    {this.state.active_user === candidate ?
                      <Fragment>
-                     <AdminEditorViews github={ this.props.github_url } username={ candidate } />
-                     <UserProfile getProfile={ this.getProfile } activeUser={ this.state.active_user } activeCandidates={ this.state.active_candidates } skills={this.state.candidate_skills} about={ this.props.candidate_information } username={ candidate } />
+                       <AdminEditorViews github={ this.props.github_url } username={ candidate } active_user={ this.state.active_user }/>
+                       <UserProfile getProfile={ this.getProfile } activeUser={ this.state.active_user } activeCandidates={ this.state.active_candidates } skills={this.state.candidate_skills} about={ this.props.candidate_information } username={ candidate } />
                      </Fragment>
                     : null }
                 </Fragment>

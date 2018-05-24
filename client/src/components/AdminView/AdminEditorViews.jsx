@@ -26,19 +26,12 @@ class AdminEditorViews extends Component {
     this.socket = socketClient();
 
     this.socket.on('add character', (username, chars)=> {
-      console.log('CHARS', username, chars);
+      if(this.props.active_user === username) {
       this.setState({
         code: chars
       })
+     }
     })
-
-    this.socket.on('show result-' + localStorage.getItem('username'), (result) => {
-      this.setState({ result: result });
-    })
-  }
-
-  componentDidMount() {
-    this.setState({ code: this.state.code })
   }
 
 
