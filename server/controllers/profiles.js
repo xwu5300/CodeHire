@@ -2,10 +2,10 @@ const knex = require('../../db/index.js');
 const pg = require('pg');
 
 /* ------------ Candidate/Company Profiles ---------- */
-module.exports.updateCompanyInfo = (userId, logoUrl, information) => {
+module.exports.updateCompanyInfo = (userId, logoUrl, information, websiteUrl) => {
   return knex('users')
   .where({ id: userId })
-  .update({ logo_url: logoUrl, information: information })
+  .update({ logo_url: logoUrl, information: information, website_url: websiteUrl })
   .then((response) => {
     console.log('Success updating company info');
   })
@@ -16,7 +16,7 @@ module.exports.updateCompanyInfo = (userId, logoUrl, information) => {
 
 module.exports.getCompanyInfo = (userId, callback) => {
   return knex('users')
-  .select('logo_url', 'information')
+  .select('logo_url', 'information', 'website_url')
   .where({ id: userId })
   .then((data) => {
     callback(data);

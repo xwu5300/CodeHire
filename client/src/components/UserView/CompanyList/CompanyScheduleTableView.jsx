@@ -44,7 +44,7 @@ class CompanyScheduleTableView extends Component {
   }
 
 
-  render() {  
+  render() {
     return(
       <table className='ui inverted table'>
         <thead>

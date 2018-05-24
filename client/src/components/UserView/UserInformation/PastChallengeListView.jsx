@@ -14,7 +14,7 @@ class PastChallengeListView extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchCandidateResults(localStorage.getItem('userId'));
+    this.props.fetchCandidateResults(localStorage.getItem('userId'), null, ()=>{});
   }
     
   isPassed(userPassed) {

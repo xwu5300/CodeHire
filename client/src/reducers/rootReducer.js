@@ -42,5 +42,6 @@ export default combineReducers({
   company_name: userReducers.companyName,
   challenge_data: adminReducers.challengeData,
   past_challenges: adminReducers.pastChallenges,
-  past_results: adminReducers.pastResults
+  past_results: adminReducers.pastResults,
+  website_url: adminReducers.companyInfo
 })

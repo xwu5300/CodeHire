@@ -15,7 +15,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { viewCompanyProfile, fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCandidateResults, getResume, saveResume, removeResume, updateCandidatePhoto, fetchAllCompanyCalendars } from '../actions/userActions';
-import { fetchCompanySchedule, fetchCompanyResults, getUsername } from '../actions/adminActions' ;
+import { fetchCompanySchedule, fetchCompanyResults, getUsername, fetchCompanyInfo } from '../actions/adminActions' ;
 import { handleLogout } from '../actions/authActions';
 
 import axios from 'axios';
@@ -59,7 +59,10 @@ const mapStateToProps = function(state) {
     resume_name: state.resume_name.resume_name,
     resume_url: state.resume_url.resume_url,
     all_company_calendars: state.all_company_calendars.all_company_calendars,
-    company_name: state.company_name.company_name
+    company_name: state.company_name.company_name,
+    logo_url: state.logo_url.logo_url,
+    company_information: state.company_information.company_information,
+    website_url: state.website_url.website_url
 }};
 
 const mapDispatchToProps = {
@@ -67,7 +70,7 @@ const mapDispatchToProps = {
    deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, 
    saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCompanySchedule, 
    fetchCompanyResults, fetchCandidateResults, getResume, saveResume, removeResume, updateCandidatePhoto, getUsername,
-   viewCompanyProfile, fetchAllCompanyCalendars, handleLogout
+   viewCompanyProfile, fetchAllCompanyCalendars, handleLogout, fetchCompanyInfo
 }
 
 const connectComponent = connect(mapStateToProps, mapDispatchToProps)(UserContainer); //code cleaned

@@ -192,7 +192,7 @@ class UserLiveCodingView extends Component {
         </div>
 
         <div className='ui horizontal segments user_liveCoding_container' style={{ padding: '30px', margin: 'auto'}}>
-          <div classname='ui padded segment'>
+          <div className='ui padded segment'>
             <AceEditor
               mode="javascript"
               theme="monokai"

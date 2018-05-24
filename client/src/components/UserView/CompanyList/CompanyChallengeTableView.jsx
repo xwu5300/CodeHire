@@ -18,6 +18,8 @@ class CompanyChallengeTableView extends Component {
     let idToken = jwt.encode(companyId, secret.secret);
     localStorage.setItem('companyId', idToken)
     localStorage.setItem('companyName', companyName)
+    this.props.fetchCompanyInfo(idToken, ()=>{})
+    this.props.fetchCandidateInitialResults(idToken, localStorage.getItem('userId'), () => {})
   }
 
   viewCompanyPage(info) {
