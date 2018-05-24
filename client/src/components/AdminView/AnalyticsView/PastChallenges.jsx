@@ -46,7 +46,7 @@ class PastChallenges extends Component {
             <tr key={challenge.id}>
               <td>{challenge.title}</td>
               <td>{moment(challenge.time).format('MMMM Do YYYY, h:mm A')}</td>
-              <td><button className="ui button" onClick={()=>{this.handleClick(challenge.id)}}>See Results</button></td>
+              <td><button className="ui orange button" onClick={()=>{this.handleClick(challenge.id)}}>See Results</button></td>
             </tr>
           )
         })}
