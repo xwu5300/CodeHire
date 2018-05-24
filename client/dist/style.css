@@ -615,7 +615,7 @@ ui.menu.container.item {
 }
 
 .code:hover {
-  color: blue;
+  color: #f2711c;
   text-decoration: underline;
 }
 
@@ -634,3 +634,12 @@ ui.menu.container.item {
 	cursor: pointer;
 }
 
+.analytics-container {
+  margin: auto;
+  margin-top: 5%;
+  width: 90%;
+}
+
+.ui.active.item.cursor.bold {
+  font-weight: 800;
+}

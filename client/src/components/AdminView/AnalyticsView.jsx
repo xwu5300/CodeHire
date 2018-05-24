@@ -13,7 +13,7 @@ class AnalyticsView extends Component {
   constructor() {
     super();
     this.state = {
-      currentGraph: '',
+      currentGraph: 'past results',
     }
     this.handleClick = this.handleClick.bind(this)
     this.changeGraph = this.changeGraph.bind(this)
@@ -47,23 +47,25 @@ class AnalyticsView extends Component {
       return <LineGraph getAllResults={this.props.fetchAllResults} getCompanyResults={this.props.getCompanyData} companyResults={this.props.company_data} allResults={this.props.all_results}/>
     } else if (currentGraph === 'scatter') {
       return <Scatterplot companyResults={this.props.company_data} allResults={this.props.all_results} fetchChallengeData={this.props.fetchChallengeData} challengeData={this.props.challenge_data}/>
-      }
+    } else if (currentGraph === 'past results') {
+      return <PastChallenges fetchCandidateResults={this.props.fetchCandidateResults} candidateResults={this.props.candidate_results} favorites={this.props.favorites} remove={this.props.removeFromFavorites} getFavorites={this.props.getFavorites} history={this.props.history} save={this.props.saveToFavorites} pastResults={this.props.past_results} pastChallenges={this.props.past_challenges} fetchPastResults={this.props.fetchPastResults}/>
+    }
   }
 
   render() {
     return (
       <div>
         <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout }/>
-        <h1>Analytics</h1>
-        <PastChallenges fetchCandidateResults={this.props.fetchCandidateResults} candidateResults={this.props.candidate_results} favorites={this.props.favorites} remove={this.props.removeFromFavorites} getFavorites={this.props.getFavorites} history={this.props.history} save={this.props.saveToFavorites} pastResults={this.props.past_results} pastChallenges={this.props.past_challenges} fetchPastResults={this.props.fetchPastResults}/>
-
-        <div className="ui orange five item menu">
-          <div className='ui item cursor' onClick={() => this.handleClick('bar') }> Bar </div>
-          <div className='ui item cursor' onClick={() => this.handleClick('line') }> Line </div>
-          <div className='ui item cursor' onClick={() => this.handleClick('scatter') }> Scatterplot </div>
-        </div>
-        <div>
-          {this.renderGraph()}
+        <div className="analytics-container">
+          <div className="ui orange four item menu">
+            <div className={this.state.currentGraph === 'past results' ? 'ui active item cursor bold' : "ui item cursor"} onClick={() => this.handleClick('past results') }>Past Challenges</div>
+            <div className={this.state.currentGraph === 'bar' ? 'ui active item cursor bold' : "ui item cursor"} onClick={() => this.handleClick('bar') }>Bar</div>
+            <div className={this.state.currentGraph === 'line' ? 'ui active item cursor bold' : "ui item cursor"} onClick={() => this.handleClick('line') }>Line</div>
+            <div className={this.state.currentGraph === 'scatter' ? 'ui active item cursor bold' : "ui item cursor"} onClick={() => this.handleClick('scatter') }>Scatterplot</div>
+          </div>
+          <div>
+            {this.renderGraph()}
+          </div>
         </div>
       </div>
     )

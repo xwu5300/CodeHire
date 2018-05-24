@@ -49,7 +49,7 @@ class PastResults extends Component {
 
     return (
       <div className="past-challenge-container">
-      <button className="ui button" onClick={()=>{this.props.showTable()}}>Back to Past Challenges</button>
+      <button className="ui orange button" onClick={()=>{this.props.showTable()}}>Back to Past Challenges</button>
       <table className="ui celled table">
       <thead>
         <tr>
