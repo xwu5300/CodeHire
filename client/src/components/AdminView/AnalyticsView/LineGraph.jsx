@@ -23,9 +23,12 @@ class LineGraph extends Component {
       }
     }
     for (let key in data) {
-      successRate[key] = temp[key] / data[key];
+      if (temp[key] && data[key]) {
+        successRate[key] = temp[key] / data[key]
+      } else {
+        successRate[key] = 0
+      }
     }
-
     return successRate;
   }
 

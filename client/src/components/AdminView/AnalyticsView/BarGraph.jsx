@@ -29,7 +29,9 @@ class BarGraph extends Component {
         pass[data[category]] = pass[data[category]] + 1 || 1
       }
     }
+    console.log('pass and count', pass, count)
     for (let element of params) {
+
       let passRate
       pass[element] ? passRate = pass[element] / count[element] : 0
       results[element] = passRate || 0
@@ -72,6 +74,9 @@ class BarGraph extends Component {
         return -1
       }
     }))
+
+    console.log('industry', Industry)
+    console.log('company', Company )
 
     return (
       <div>
