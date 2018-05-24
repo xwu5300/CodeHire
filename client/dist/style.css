@@ -194,8 +194,8 @@ body {
 
 .user_skills_input {
 	float: right;
-    bottom: 40px;
-	font-size: 22px
+  bottom: 40px;
+	font-size: 22px;
 	box-shadow: 1px 1px 10px;
 }
 
@@ -213,7 +213,6 @@ body {
   margin-bottom: 0px;
 }
 
-
 .github_link input {
 	width: 70%;
 	height: 35px;
@@ -228,7 +227,6 @@ body {
 	margin-left: 15px;
 }
 
-
 .resume_div {
 	width: 50%;
 	height: 50px;
@@ -241,23 +239,16 @@ body {
 	color: white;
 }
 
-
-
 .user_resume_container button {
 	margin-top: 10px;
 }
 
-
-
 .resume_btns {
 	display: inline-block;
-
 	position: relative;
 	bottom: 20px;
 	left: 10px;
-
 }
-
 
 .ui.small.horizontal.list {
   margin-top: 40px;
@@ -366,7 +357,7 @@ body {
 	right: 50px;
 }
 
-.ui.card.cardzz: hover{
+.ui.card.cardzz:hover{
 	cursor: pointer;
 	background-color: orange;
 }
@@ -453,10 +444,6 @@ body {
 	color: red;
 }
 
-
-
-
-
 /* -------- Analytics View --------- */
 
 .challenge-results-graph {
@@ -466,4 +453,13 @@ body {
 
 .past-challenge-container {
   margin: 30px;
+}
+
+.code {
+  font-weight: 800;
+}
+
+.code:hover {
+  color: blue;
+  text-decoration: underline;
 }
