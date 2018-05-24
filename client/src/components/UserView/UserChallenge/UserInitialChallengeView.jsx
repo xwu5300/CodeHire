@@ -132,15 +132,20 @@ class UserInitialChallengeView extends Component {
     let testCaseD = testCaseS.replace(/'/g, '"')
 
     let tests = JSON.parse(testCaseD)
+
+    console.log('parsed tests', tests)
     let input = tests[0].map((el)=> {
       return JSON.stringify(el)
     }).join(',')
     let output = tests[1].map((el)=> {
       return JSON.stringify(el)
     }).join(',')
+    console.log('input', input)
+    
     input = input.replace(/'/g, "")
     output = output.replace(/'/g, "")
 
+    
     let reg = new RegExp(`${params}`, 'g')
     let submittedCode = `${this.state.code.replace(reg, `${params}`)}
 

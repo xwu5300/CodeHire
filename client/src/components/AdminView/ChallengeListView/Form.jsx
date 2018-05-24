@@ -11,13 +11,9 @@ class Form extends Component {
         instruction: '',
         function_name: '',
         parameters: '',
-        testInput: '',
-        testOutput: '',
-        exampleInput: '',
-        exampleOutput: '',
-        difficulty: '',
-        testCases: [],
-        exampleCases: []
+        testCases: [{input: "", output: ""}],
+        exampleCases: [{input: "", output: ""}],
+        difficulty: ''
       },
       invalid: false
     }
@@ -26,16 +22,16 @@ class Form extends Component {
     this.validateForm = this.validateForm.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.checkIfValid = this.checkIfValid.bind(this);
-    this.addTest = this.addTest.bind(this);
-    this.deleteTest = this.deleteTest.bind(this);
-    this.addExample = this.addExample.bind(this);
-    this.deleteExample = this.deleteExample.bind(this);
+    this.handleTestInputChange = this.handleTestInputChange.bind(this);
+    this.handleTestOutputChange = this.handleTestOutputChange.bind(this);
+    this.handleExampleInputChange = this.handleExampleInputChange.bind(this);
+    this.handleExampleOutputChange = this.handleExampleOutputChange.bind(this);
+    this.handleAddTest = this.handleAddTest.bind(this);
+    this.handleAddExample = this.handleAddExample.bind(this);
   }
 
   componentDidMount() {
     this.validateForm();
-    this.addTest()
-    this.addExample()
   }
 
   validateForm() {
@@ -60,8 +56,116 @@ class Form extends Component {
 
   handleChange(event) {
     this.state.challenge[event.target.name] = event.target.value;
-    this.setState({challenge: this.state.challenge});
+    this.setState({challenge: this.state.challenge}, ()=>{console.log(this.state)});
   }
+
+  handleTestInputChange(idx, event) {
+    let newTestInput = this.state.challenge.testCases.map((item, i) => {
+      if (i !== idx) return item;
+      return {...item, input: event.target.value};
+    })
+    this.setState({
+      challenge: {
+        title: this.state.challenge.title,
+        category: this.state.challenge.category,
+        instruction: this.state.challenge.instruction,
+        function_name: this.state.challenge.function_name,
+        parameters: this.state.challenge.parameters,
+        testCases: newTestInput,
+        exampleCases: this.state.challenge.exampleCases,
+        difficulty: this.state.challenge.difficulty
+      }
+    })
+  }
+
+  handleAddTest() {
+    this.setState({
+      challenge: {
+        title: this.state.challenge.title,
+        category: this.state.challenge.category,
+        instruction: this.state.challenge.instruction,
+        function_name: this.state.challenge.function_name,
+        parameters: this.state.challenge.parameters,
+        testCases: this.state.challenge.testCases.concat([{input: "", output: ""}]),
+        exampleCases: this.state.challenge.exampleCases,
+        difficulty: this.state.challenge.difficulty
+      }
+    })
+  }
+
+  handleTestOutputChange(idx, event) {
+    let newTestOutput = this.state.challenge.testCases.map((item, i) => {
+      if (i !== idx) return item;
+      return {...item, output: event.target.value};
+    })
+    this.setState({
+      challenge: {
+        title: this.state.challenge.title,
+        category: this.state.challenge.category,
+        instruction: this.state.challenge.instruction,
+        function_name: this.state.challenge.function_name,
+        parameters: this.state.challenge.parameters,
+        testCases: newTestOutput,
+        exampleCases: this.state.challenge.exampleCases,
+        difficulty: this.state.challenge.difficulty
+      }
+    })
+  }
+
+  handleExampleInputChange(idx, event) {
+    let newExampleInput = this.state.challenge.exampleCases.map((item, i) => {
+      if (i !== idx) return item;
+      return {...item, input: event.target.value};
+    })
+    this.setState({
+      challenge: {
+        title: this.state.challenge.title,
+        category: this.state.challenge.category,
+        instruction: this.state.challenge.instruction,
+        function_name: this.state.challenge.function_name,
+        parameters: this.state.challenge.parameters,
+        testCases: this.state.challenge.testCases,
+        exampleCases: newExampleInput,
+        difficulty: this.state.challenge.difficulty
+      }
+    })
+  }
+
+
+  handleExampleOutputChange(idx, event) {
+    let newExampleOutput = this.state.challenge.exampleCases.map((item, i) => {
+      if (i !== idx) return item;
+      return {...item, output: event.target.value};
+    })
+    this.setState({
+      challenge: {
+        title: this.state.challenge.title,
+        category: this.state.challenge.category,
+        instruction: this.state.challenge.instruction,
+        function_name: this.state.challenge.function_name,
+        parameters: this.state.challenge.parameters,
+        testCases: this.state.challenge.testCases,
+        exampleCases: newExampleOutput,
+        difficulty: this.state.challenge.difficulty
+      }
+    })
+  }
+
+  handleAddExample() {
+    this.setState({
+      challenge: {
+        title: this.state.challenge.title,
+        category: this.state.challenge.category,
+        instruction: this.state.challenge.instruction,
+        function_name: this.state.challenge.function_name,
+        parameters: this.state.challenge.parameters,
+        testCases: this.state.challenge.testCases,
+        exampleCases: this.state.challenge.exampleCases.concat([{input: "", output: ""}]),
+        difficulty: this.state.challenge.difficulty
+      }
+    })
+  }
+
 
   handleSave() {
     if ($('.ui.form').form('is valid')) {
@@ -73,10 +177,14 @@ class Form extends Component {
     event.preventDefault();
     return Promise
     .try(() => {
-      JSON.parse(this.state.challenge.testInput);
-      JSON.parse(this.state.challenge.testOutput);
-      JSON.parse(this.state.challenge.exampleInput);
-      JSON.parse(this.state.challenge.exampleOutput);
+      this.state.challenge.testCases.forEach((item) => {
+        JSON.parse(item.input);
+        JSON.parse(item.output);
+      })
+      this.state.challenge.exampleCases.forEach((item) => {
+        JSON.parse(item.input);
+        JSON.parse(item.output);
+      })
     })
     .then(() => {
       this.setState({
@@ -105,10 +213,8 @@ class Form extends Component {
           instruction: '',
           function_name: '',
           parameters: '',
-          testInput: '',
-          testOutput: '',
-          exampleInput: '',
-          exampleOutput: '',
+          testCases: [{input: "", output: ""}],
+          exampleCases: [{input: "", output: ""}],
           difficulty: ''
         }
       }, () => {
@@ -117,51 +223,53 @@ class Form extends Component {
     })
   }
 
-  addTest(event){
-    //find a way to get a unique value to use in place of name
-    let newTest = <div className="two fields">
-      <div className="field">
-        <label>Test Case - Input</label>
-        <input name="testInput" type="text" placeholder="[[1, 3, 6, 0, -2], 9]" value={this.state.challenge.value} onChange={this.handleChange}/>
-      </div>
-      <div className="field">
-        <label>Test Case - Output</label>
-        <input name="testOutput" type="text" placeholder="[1, 2]" value={this.state.challenge.value} onChange={this.handleChange}/>
-      </div>
-      <div className="ui icon button" style={{float: "right"}} onClick={()=> this.deleteTest()}><i className="minus icon"></i></div>
-    </div>
 
-    this.state.challenge.testCases = this.state.challenge.testCases.concat([newTest])
-    this.setState({challenge: this.state.challenge})
-  }
 
-  deleteTest(event) {
-    //only deletes for the back and not specific one clicked
-        console.log('my deleting event', event)
-    this.state.challenge.testCases = this.state.challenge.testCases.slice(0, -1)
-    this.setState({challenge: this.state.challenge})
-  }
+  // addTest(event){
+  //   //find a way to get a unique value to use in place of name
+  //   let newTest = <div className="two fields">
+  //     <div className="field">
+  //       <label>Test Case - Input</label>
+  //       <input name="testInput" type="text" placeholder="[[1, 3, 6, 0, -2], 9]" value={this.state.challenge.value} onChange={this.handleChange}/>
+  //     </div>
+  //     <div className="field">
+  //       <label>Test Case - Output</label>
+  //       <input name="testOutput" type="text" placeholder="[1, 2]" value={this.state.challenge.value} onChange={this.handleChange}/>
+  //     </div>
+  //     <div className="ui icon button" style={{float: "right"}} onClick={()=> this.deleteTest()}><i className="minus icon"></i></div>
+  //   </div>
 
-  addExample() {
-    let newExample = <div className="two fields">
-      <div className="field">
-        <label>Example - Input</label>
-        <input name="exampleInput" type="text" placeholder="[[1, 4, -2, 6, 9], 15]" value={this.state.challenge.value} onChange={this.handleChange}/>
-      </div>
-      <div className="field">
-        <label>Example - Output</label>
-        <input name="exampleOutput" type="text" placeholder="[3, 4]" value={this.state.challenge.value} onChange={this.handleChange}/>
-      </div>
-      <div className="ui icon button" style={{float: "right"}} onClick={(event)=> this.deleteExample(event)}><i className="minus icon"></i></div>
-    </div>
-    this.state.challenge.exampleCases = this.state.challenge.exampleCases.concat([newExample])
-    this.setState({challenge: this.state.challenge})
-  }
+  //   this.state.challenge.testCases = this.state.challenge.testCases.concat([newTest])
+  //   this.setState({challenge: this.state.challenge})
+  // }
 
-  deleteExample() {
-    this.state.challenge.exampleCases = this.state.challenge.exampleCases.slice(0,-1)
-    this.setState({challenge:this.state.challenge})
-  }
+  // deleteTest(event) {
+  //   //only deletes for the back and not specific one clicked
+  //       console.log('my deleting event', event)
+  //   this.state.challenge.testCases = this.state.challenge.testCases.slice(0, -1)
+  //   this.setState({challenge: this.state.challenge})
+  // }
+
+  // addExample() {
+  //   let newExample = <div className="two fields">
+      // <div className="field">
+      //   <label>Example - Input</label>
+      //   <input name="exampleInput" type="text" placeholder="[[1, 4, -2, 6, 9], 15]" value={this.state.challenge.value} onChange={this.handleChange}/>
+      // </div>
+      // <div className="field">
+      //   <label>Example - Output</label>
+      //   <input name="exampleOutput" type="text" placeholder="[3, 4]" value={this.state.challenge.value} onChange={this.handleChange}/>
+      // </div>
+      // <div className="ui icon button" style={{float: "right"}} onClick={(event)=> this.deleteExample(event)}><i className="minus icon"></i></div>
+  //   </div>
+  //   this.state.challenge.exampleCases = this.state.challenge.exampleCases.concat([newExample])
+  //   this.setState({challenge: this.state.challenge})
+  // }
+
+  // deleteExample() {
+  //   this.state.challenge.exampleCases = this.state.challenge.exampleCases.slice(0,-1)
+  //   this.setState({challenge:this.state.challenge})
+  // }
 
   render() {
     return (
@@ -200,15 +308,35 @@ class Form extends Component {
             <li>{'Example: [[1, 2, 3], {"a":"1"}]'}</li>
           </ul>
           <br/>
-          <div className="ui icon button" style={{float: "right"}} onClick={()=> this.addTest()}><i className="plus icon"></i></div>
-          {!this.state.challenge.testCases ? [] : this.state.challenge.testCases.map((test, i) => {
-            return <div key={i}>{test}</div>
-          })}
-          <div className="ui icon button" style={{float: "right"}} onClick={()=> this.addExample()}><i className="plus icon"></i></div>
 
-          {!this.state.challenge.exampleCases ? [] : this.state.challenge.exampleCases.map((example, i) => {
-            return <div key={i}>{example}</div>
-          } )}
+        {this.state.challenge.testCases.map((item, i) => (
+        <div className="two fields" key={i}>
+          <div className="field">
+            <label>Test Case - Input</label>
+            <input name="testInput" type="text" placeholder="[[1, 3, 6, 0, -2], 9]" value={item.input} onChange={(evt)=> {this.handleTestInputChange(i, evt)}}/>
+          </div>
+          <div className="field">
+            <label>Test Case - Output</label>
+            <input name="testOutput" type="text" placeholder="[1, 2]" value={item.output} onChange={(evt)=>{this.handleTestOutputChange(i, evt)}}/>
+          </div>
+        </div>
+        ))}
+        <div className="ui icon button" style={{float: "right"}} onClick={this.handleAddTest}><i className="plus icon"></i></div>
+
+        {this.state.challenge.exampleCases.map((item, i) => (
+        <div className="two fields" key={i}>
+          <div className="field">
+            <label>Example - Input</label>
+            <input name="exampleInput" type="text" placeholder="[[1, 4, -2, 6, 9], 15]" value={item.input} onChange={(evt)=>{this.handleExampleInputChange(i, evt)}}/>
+          </div>
+           <div className="field">
+            <label>Example - Output</label>
+            <input name="exampleOutput" type="text" placeholder="[3, 4]" value={item.output} onChange={(evt)=>{this.handleExampleOutputChange(i, evt)}}/>
+          </div>
+        </div>
+        ))}
+        <div className="ui icon button" style={{float: "right"}} onClick={()=> this.handleAddExample()}><i className="plus icon"></i></div>
+
           <div className="field">
             <label>Difficulty</label>
             <select className="ui dropdown" name="difficulty" value={this.state.challenge.difficulty} onChange={this.handleChange}>

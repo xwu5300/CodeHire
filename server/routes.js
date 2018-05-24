@@ -177,16 +177,36 @@ router.get('/api/defaultChallenges', (req, res) => {
 })
 
 router.post('/api/challenges', (req, res) => {
+  console.log(req.body.challenge)
+  if (req.body.challenge.testCases) {
+    var testCases = [[],[]];
+    req.body.challenge.testCases.forEach((item) => {
+      testCases[0].push(item.input);
+      testCases[1].push(item.output);
+    })
+    testCases = JSON.stringify(testCases);
+  } else {
+   var testCases = req.body.challenge.test_cases
+  }
+
+  if (req.body.challenge.exampleCases) {
+    var examples = [[],[]];
+    req.body.challenge.exampleCases.forEach((item) => {
+      examples[0].push(item.input);
+      examples[1].push(item.output);
+    })
+    examples = JSON.stringify(examples);
+  } else {
+   var examples = req.body.challenge.examples
+  }
+  
   let title = req.body.challenge.title;
   let category = req.body.challenge.category;
   let instruction = req.body.challenge.instruction;
   let functionName = req.body.challenge.function_name;
   let params = req.body.challenge.parameters;
-  let testCases = req.body.challenge.test_cases || `[[${req.body.challenge.testInput}], [${req.body.challenge.testOutput}]]`;
-  let examples = req.body.challenge.examples || `[[${req.body.challenge.exampleInput}], [${req.body.challenge.exampleOutput}]]` || null;
   let difficulty = req.body.challenge.difficulty || null;
   let companyId = jwt.decode(req.body.companyId, secret).id;
-  console.log('routes testcassssssssssssss',req.body.challenge)
   challengeControllers.saveChallenge(title, instruction, functionName, params, testCases, examples, difficulty, category, companyId)
   .then(() => {
     res.send('Successfully saved challenge');
