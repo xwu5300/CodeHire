@@ -11,7 +11,8 @@ class AdminProfileView extends Component {
     this.state = {
       logo_url: 'http://static1.squarespace.com/static/522a22cbe4b04681b0bff826/t/581cc65fe4fcb5a68ecd940c/1478280803080/hrhq-avatar.png?format=1000w',
       information: 'Insert company information here',
-      isTextarea: false
+      isTextarea: false,
+      website_url: ''
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -29,6 +30,10 @@ class AdminProfileView extends Component {
       if(this.props.company_information) {
         this.setState({ information: this.props.company_information })
       }
+      
+      if(this.props.website_url) {
+        this.setState({ website_url: this.props.website_url })
+      }
     })
   }
 
@@ -39,7 +44,7 @@ class AdminProfileView extends Component {
   }
 
   handleSubmit() {
-    this.props.updateInfo(localStorage.getItem('userId'), this.state.logo_url, this.state.information);
+    this.props.updateInfo(localStorage.getItem('userId'), this.state.logo_url, this.state.information, this.state.website_url);
     this.setState({ isTextarea: !this.state.isTextarea })
   }
 
@@ -62,6 +67,8 @@ class AdminProfileView extends Component {
                :
                <div className='company_profile_textarea' name='information'>{ this.state.information }</div>
             }
+
+            <input onChange={ (e) => this.handleChange(e) } value={ this.state.website_url } name='website_url' className='ui input website_input' type='text' placeholder='Web Site Url' />
             
           </div>
 

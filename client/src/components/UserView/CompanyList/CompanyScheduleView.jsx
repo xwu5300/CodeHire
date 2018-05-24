@@ -70,16 +70,19 @@ class CompanyScheduleView extends Component {
   }
 
   render() { 
-    if (this.props.initial_challenge.length) {
+    // if (this.props.initial_challenge.length) {
       return (
         <div>
         <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout } />
         <div className='schedule_container'>
         <div className='ui raised very padded container segment' style={this.state.style}>
-          <h1>{ this.props.initial_challenge[0].name }</h1> 
-          <h2>{ this.props.initial_challenge[0].information }</h2> 
-
+          <img className='company_profile_logo' src={ this.props.logo_url }/>
+          <h1>{ localStorage.getItem('companyName') }</h1> 
+          <h2>{ this.props.information }</h2> 
+          {this.props.website_url && <h2>Click <a href={ this.props.website_url } target='_blank'>here</a> for more information.</h2> }
           <hr />
+          {this.props.initial_challenge.length ?
+        <div className='initial_challenge'>
         <h2>
         Before You Schedule Live Challenge - You Need To Pass Initial Challenge
         </h2>
@@ -88,23 +91,27 @@ class CompanyScheduleView extends Component {
           }}>
             Take Initial Challenge</button>
         </div>
+        : <h2> {localStorage.getItem('companyName')} Does Not Have Any Upcoming Live Challenge </h2>    
+      }
+
+        </div>
 
         <div>
         {this.props.all_company_calendars.length ?
    
         <CompanyScheduleTableView updateStyle={this.updateStyle} saveCandidateCalendar={this.props.saveCandidateCalendar} companyCalendar={this.props.all_company_calendars} passInitial={this.props.pass_initial} fetchCompanyResults={this.props.fetchCompanyResults}/>
-        : <div> {this.props.initial_challenge[0].name} Does Not Have Any Upcoming Live Challenge </div>
+        : <h2> {localStorage.getItem('companyName')} Does Not Have Any Upcoming Live Challenge </h2>
       }
 
         </div> 
         </div>
        </div>
       )
-    } else {
-      return (
-        <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
-      );
-    }
+    // } else {
+    //   return (
+    //     <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } />
+    //   );
+    // }
   }
 }
 

@@ -49,7 +49,7 @@ class CompanyListView extends Component {
             {this.props.company_list ? this.props.company_list.map((company, i) => {
               return (
                 <CompanyDetail key={ i } id={ company.id } handleHover={ this.handleHover } indexHovered={ this.state.indexHovered } logo={ company.logo_url ? company.logo_url : 'http://dev.jobkhoji.com/assets/images/default_company_icon.png'  } 
-                               name={ company.name } />              
+                               name={ company.name } fetchCompanyInfo={ this.props.fetchCompanyInfo }/>              
               );
             }) : "Sorry, we weren't able to find any results" }
             </div>

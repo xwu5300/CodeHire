@@ -47,7 +47,7 @@ class AllChallengeListView extends Component {
         <div className='search_company_input' style={{marginTop: '40px', marginBottom: '70px', textAlign: 'center'}} >
         <SearchCompanySchedule updateCompanyCalendar={this.props.fetchAllCompanyCalendars}/>
       </div>
-        <CompanyChallengeTableView rows={rows} columns={columns} updateCompanyCalendar={this.props.fetchAllCompanyCalendars} />
+        <CompanyChallengeTableView rows={rows} columns={columns} updateCompanyCalendar={this.props.fetchAllCompanyCalendars} fetchCompanyInfo={this.props.fetchCompanyInfo}/>
         </div>
       )
     } else {

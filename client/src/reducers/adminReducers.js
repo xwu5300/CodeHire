@@ -21,7 +21,8 @@ const initialState = {
   company_data: [],
   challenge_data: [],
   past_challenges: [],
-  past_results: []
+  past_results: [],
+  website_url: '',
 }
 
 const allResults = (state = initialState, action) => {
@@ -76,7 +77,8 @@ const companyInfo = (state = '', action) => {
     case 'GET_COMPANY_INFO':
       return {
         logo_url: action.logo_url,
-        company_information: action.information
+        company_information: action.information,
+        website_url: action.website_url
       }
     default:
       return state;

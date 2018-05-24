@@ -22,7 +22,7 @@ router.get('/api/companyInfo', (req, res) => {
 // update company profile information in 'users' table
 router.patch('/api/companyInfo', (req, res) => {
   let userId = jwt.decode(req.body.userId, secret).id;
-  profileControllers.updateCompanyInfo(userId, req.body.logo_url, req.body.information)
+  profileControllers.updateCompanyInfo(userId, req.body.logo_url, req.body.information, req.body.website_url)
   .then(() => {
     res.send();
   })
@@ -186,7 +186,6 @@ router.post('/api/challenges', (req, res) => {
   let examples = req.body.challenge.examples || `[[${req.body.challenge.exampleInput}], [${req.body.challenge.exampleOutput}]]` || null;
   let difficulty = req.body.challenge.difficulty || null;
   let companyId = jwt.decode(req.body.companyId, secret).id;
-  console.log('routes testcassssssssssssss',req.body.challenge)
   challengeControllers.saveChallenge(title, instruction, functionName, params, testCases, examples, difficulty, category, companyId)
   .then(() => {
     res.send('Successfully saved challenge');
@@ -382,7 +381,6 @@ router.get('/api/pastChallenges', (req, res) => {
   let companyId = jwt.decode(req.query.companyId, secret).id;
   calendarControllers.fetchPastSchedule(companyId)
   .then((data) => {
-    console.log('this is data', data)
     res.send(data);
   })
   .catch((err) => {

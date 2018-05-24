@@ -58,7 +58,8 @@ const mapStateToProps = (state) => ({
    company_data: state.company_data.company_data,
    challenge_data: state.challenge_data.challenge_data,
    past_challenges: state.past_challenges.past_challenges,
-   past_results: state.past_results.past_results
+   past_results: state.past_results.past_results,
+   website_url: state.website_url.website_url
 });
 
 const mapDispatchToProps = {
