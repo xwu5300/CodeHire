@@ -326,6 +326,21 @@ router.delete('/api/cancelCandidateSchedule', (req, res) => {
   })
 })
 
+// check user reschedule
+router.get('/api/candidateCalendar/reschedule', (req, res) => {
+  let candidateId = jwt.decode(req.query.candidateId, secret).id;
+  let companyId = jwt.decode(req.query.companyId, secret).id;
+  let time = req.query.time;
+  calendarControllers.checkCandidateReschedule(candidateId, companyId, time)
+  .then((data) => {
+    console.log('checked candidate reschedule')
+    res.send(data)
+  })
+  .catch((err) => {
+    console.log('Could not check candidate reschedule', err)
+  })
+})
+
 // get all company schedule
 router.get('/api/companyCalendars', (req, res) => {
   let companyName = req.query.companyName;

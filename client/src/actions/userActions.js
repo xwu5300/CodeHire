@@ -66,6 +66,23 @@ export const deleteCandidateSchedule = (candidateScheduleId, candidateId) => (di
   })
 }
 
+export const checkCandidateReschedule = (candidateId, companyId, time, cb) => (dispatch) => {
+  axios.get('/api/candidateCalendar/reschedule', { params: { candidateId, companyId, time } })
+  .then(({data}) => {
+    console.log('data from userACtion', data)
+    // dispatch({ type: GET_CANDIDATE_CALENDAR, payload: data });
+    cb(data)
+  })
+  // .then(() => {
+  //   if (cb) {
+  //     cb()
+  //   }
+  // })
+  .catch((err) => {
+    console.log(err);
+  })
+}
+
 export const fetchInitialChallenge = (company_id) => (dispatch) => {
   axios.get('/api/initialChallenge', { params: { company_id } })
   .then(({data}) => {
@@ -87,7 +104,11 @@ export const saveResults = (companyScheduleId, isPassed, code, score, completedA
   axios.post('/api/results', { companyScheduleId, isPassed, code, score, completedAt, challengeId, companyId, candidateId, initial })
   .then(() => {
     dispatch(deleteCandidateSchedule(candidateScheduleId, candidateId));
-    cb();
+  })
+  .then(() => {
+    if (cb) {
+      cb();
+    }
   })
   .catch((err) => {
     console.log(err);
@@ -98,6 +119,8 @@ export const fetchCandidateResults = (candidateId, companyScheduleId, cb) => (di
   axios.get('/api/results/candidate', { params: { candidateId, companyScheduleId } })
   .then(({data}) => {
     dispatch({ type: GET_CANDIDATE_RESULTS, payload: data });
+  })
+  .then(() => {
     if (cb) {
       cb(data);
     }
