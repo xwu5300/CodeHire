@@ -261,6 +261,26 @@ router.get('/api/challenge', (req, res) => {
   let companyId = jwt.decode(req.query.companyId, secret).id;
   challengeControllers.getChallengeInfo(req.query.challengeId, companyId)
   .then((data) => {
+    data.map((item) => {
+      let arr = [];
+      JSON.parse(item.test_cases)[0].forEach((input, i) => {
+        JSON.parse(item.test_cases)[1].forEach((output, j) => {
+          if (i === j) {
+            arr.push({input: input, output: output})
+          }
+        })
+      })
+      item.test_cases = arr;
+      let arr2 = [];
+      JSON.parse(item.examples)[0].forEach((input, i) => {
+        JSON.parse(item.examples)[1].forEach((output, j) => {
+          if (i === j) {
+            arr2.push({input: input, output: output})
+          }
+        })
+      })
+      item.examples = arr2;
+    })
     res.send(data);
   })
   .catch((err) => {
@@ -487,6 +507,7 @@ router.post('/api/results', (req, res) => {
 router.get('/api/allResults', (req, res) => {
   resultsControllers.fetchAllResults()
   .then((data) => {
+    console.log('all results', data.length)
     res.send(data);
   })
   .catch((err) => {

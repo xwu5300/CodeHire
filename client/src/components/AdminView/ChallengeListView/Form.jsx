@@ -28,6 +28,8 @@ class Form extends Component {
     this.handleExampleOutputChange = this.handleExampleOutputChange.bind(this);
     this.handleAddTest = this.handleAddTest.bind(this);
     this.handleAddExample = this.handleAddExample.bind(this);
+    this.handleRemoveTest = this.handleRemoveTest.bind(this);
+    this.handleRemoveExample = this.handleRemoveExample.bind(this);
   }
 
   componentDidMount() {
@@ -166,6 +168,35 @@ class Form extends Component {
     })
   }
 
+  handleRemoveTest(idx) {
+    this.setState({
+      challenge: {
+        title: this.state.challenge.title,
+        category: this.state.challenge.category,
+        instruction: this.state.challenge.instruction,
+        function_name: this.state.challenge.function_name,
+        parameters: this.state.challenge.parameters,
+        testCases: this.state.challenge.testCases.filter((test, i) => i !== idx),
+        exampleCases: this.state.challenge.exampleCases,
+        difficulty: this.state.challenge.difficulty
+      }
+    })
+  }
+
+  handleRemoveExample(idx) {
+    this.setState({
+      challenge: {
+        title: this.state.challenge.title,
+        category: this.state.challenge.category,
+        instruction: this.state.challenge.instruction,
+        function_name: this.state.challenge.function_name,
+        parameters: this.state.challenge.parameters,
+        testCases: this.state.challenge.testCases,
+        exampleCases: this.state.challenge.exampleCases.filter((example, i) => i !== idx),
+        difficulty: this.state.challenge.difficulty
+      }
+    })
+  }
 
   handleSave() {
     if ($('.ui.form').form('is valid')) {
@@ -223,54 +254,6 @@ class Form extends Component {
     })
   }
 
-
-
-  // addTest(event){
-  //   //find a way to get a unique value to use in place of name
-  //   let newTest = <div className="two fields">
-  //     <div className="field">
-  //       <label>Test Case - Input</label>
-  //       <input name="testInput" type="text" placeholder="[[1, 3, 6, 0, -2], 9]" value={this.state.challenge.value} onChange={this.handleChange}/>
-  //     </div>
-  //     <div className="field">
-  //       <label>Test Case - Output</label>
-  //       <input name="testOutput" type="text" placeholder="[1, 2]" value={this.state.challenge.value} onChange={this.handleChange}/>
-  //     </div>
-  //     <div className="ui icon button" style={{float: "right"}} onClick={()=> this.deleteTest()}><i className="minus icon"></i></div>
-  //   </div>
-
-  //   this.state.challenge.testCases = this.state.challenge.testCases.concat([newTest])
-  //   this.setState({challenge: this.state.challenge})
-  // }
-
-  // deleteTest(event) {
-  //   //only deletes for the back and not specific one clicked
-  //       console.log('my deleting event', event)
-  //   this.state.challenge.testCases = this.state.challenge.testCases.slice(0, -1)
-  //   this.setState({challenge: this.state.challenge})
-  // }
-
-  // addExample() {
-  //   let newExample = <div className="two fields">
-      // <div className="field">
-      //   <label>Example - Input</label>
-      //   <input name="exampleInput" type="text" placeholder="[[1, 4, -2, 6, 9], 15]" value={this.state.challenge.value} onChange={this.handleChange}/>
-      // </div>
-      // <div className="field">
-      //   <label>Example - Output</label>
-      //   <input name="exampleOutput" type="text" placeholder="[3, 4]" value={this.state.challenge.value} onChange={this.handleChange}/>
-      // </div>
-      // <div className="ui icon button" style={{float: "right"}} onClick={(event)=> this.deleteExample(event)}><i className="minus icon"></i></div>
-  //   </div>
-  //   this.state.challenge.exampleCases = this.state.challenge.exampleCases.concat([newExample])
-  //   this.setState({challenge: this.state.challenge})
-  // }
-
-  // deleteExample() {
-  //   this.state.challenge.exampleCases = this.state.challenge.exampleCases.slice(0,-1)
-  //   this.setState({challenge:this.state.challenge})
-  // }
-
   render() {
     return (
       <div className="form-container">
@@ -310,32 +293,37 @@ class Form extends Component {
           <br/>
 
         {this.state.challenge.testCases.map((item, i) => (
-        <div className="two fields" key={i}>
-          <div className="field">
-            <label>Test Case - Input</label>
-            <input name="testInput" type="text" placeholder="[[1, 3, 6, 0, -2], 9]" value={item.input} onChange={(evt)=> {this.handleTestInputChange(i, evt)}}/>
+        <div>
+          <div className="two fields" key={i}>
+            <div className="field">
+              <label>Test Case - Input</label>
+              <input name="testInput" type="text" placeholder="[[1, 3, 6, 0, -2], 9]" value={item.input} onChange={(evt)=> {this.handleTestInputChange(i, evt)}}/>
+            </div>
+            <div className="field">
+              <label>Test Case - Output</label>
+              <input name="testOutput" type="text" placeholder="[1, 2]" value={item.output} onChange={(evt)=>{this.handleTestOutputChange(i, evt)}}/>
+            </div>
           </div>
-          <div className="field">
-            <label>Test Case - Output</label>
-            <input name="testOutput" type="text" placeholder="[1, 2]" value={item.output} onChange={(evt)=>{this.handleTestOutputChange(i, evt)}}/>
-          </div>
+          <div className="ui icon button" style={{float: "right"}} onClick={this.handleAddTest}><i className="plus icon"></i></div>
+          <div className="ui icon button" style={{float: "right"}} onClick={()=>{this.handleRemoveTest(i)}}><i className="minus icon"></i></div>
         </div>
         ))}
-        <div className="ui icon button" style={{float: "right"}} onClick={this.handleAddTest}><i className="plus icon"></i></div>
-
         {this.state.challenge.exampleCases.map((item, i) => (
-        <div className="two fields" key={i}>
-          <div className="field">
-            <label>Example - Input</label>
-            <input name="exampleInput" type="text" placeholder="[[1, 4, -2, 6, 9], 15]" value={item.input} onChange={(evt)=>{this.handleExampleInputChange(i, evt)}}/>
+        <div>
+          <div className="two fields" key={i}>
+            <div className="field">
+              <label>Example - Input</label>
+              <input name="exampleInput" type="text" placeholder="[[1, 4, -2, 6, 9], 15]" value={item.input} onChange={(evt)=>{this.handleExampleInputChange(i, evt)}}/>
+            </div>
+            <div className="field">
+              <label>Example - Output</label>
+              <input name="exampleOutput" type="text" placeholder="[3, 4]" value={item.output} onChange={(evt)=>{this.handleExampleOutputChange(i, evt)}}/>
+            </div>
           </div>
-           <div className="field">
-            <label>Example - Output</label>
-            <input name="exampleOutput" type="text" placeholder="[3, 4]" value={item.output} onChange={(evt)=>{this.handleExampleOutputChange(i, evt)}}/>
-          </div>
+          <div className="ui icon button" style={{float: "right"}} onClick={()=> this.handleAddExample()}><i className="plus icon"></i></div>
+          <div className="ui icon button" style={{float: "right"}} onClick={()=> this.handleRemoveExample(i)}><i className="minus icon"></i></div>
         </div>
         ))}
-        <div className="ui icon button" style={{float: "right"}} onClick={()=> this.handleAddExample()}><i className="plus icon"></i></div>
 
           <div className="field">
             <label>Difficulty</label>
