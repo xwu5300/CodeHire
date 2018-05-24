@@ -63,7 +63,7 @@ class AdminEditorViews extends Component {
             tabSize: 2,
           }}/>
 
-        {this.state.result !== null ? <div className='live_result_container'>{ result }</div> : null } 
+        { this.state.result !== null ? <div className='live_result_container'>{ result }</div> : null } 
       </div>
      )
   }

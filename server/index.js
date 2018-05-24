@@ -20,7 +20,6 @@ app.use(express.static(__dirname + '/../client/dist'));
 (function(){
 
 let companyRooms = {};
-let userView = {};
 
 io.sockets.on('connection', (socket)=> {
   
@@ -50,17 +49,11 @@ io.sockets.on('connection', (socket)=> {
   })
 
 
-  // Individual user challenge views within main company room
-  socket.on('current user view', (currentCompanyId, username) => {
-    userView[currentCompanyId] = username;
-    socket.userRoom = 'room-' + currentCompanyId + '-' + username;
-    socket.join(socket.userRoom);
-
-
-    socket.on('typing', (username, newValue) => {
-       io.sockets.emit('add character', username, newValue);
-     })
-
+  // Candidate typing
+  socket.on('typing', (username, newValue) => {
+    holdCode += newValue;
+ 
+    io.sockets.emit('add character', username, newValue);
   })
 
 
@@ -109,6 +102,7 @@ io.sockets.on('connection', (socket)=> {
     }
 
     io.sockets.emit('active candidates', companyRooms[currentCompanyId]); 
+    io.sockets.emit('reset active user', username);
   })
 })
 })();

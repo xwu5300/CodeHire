@@ -10,8 +10,8 @@ class CompanyNavBar extends Component {
   render() {
     
   return (
-      <div className="ui orange six item menu">
-          <div className={this.props.history.location.pathname === '/admin/profile' ? 'ui active item cursor' : 'ui item cursor' } onClick={ () => {this.props.history.push('/admin/profile')} }><i className="user circle icon"></i>
+      <div className="ui orange six item menu company_navbar">
+          <div className={this.props.history.location.pathname === '/admin/profile' ? 'ui active item' : 'ui item' } onClick={ () => {this.props.history.push('/admin/profile')} }><i className="user circle icon"></i>
           { this.props.username }</div>
           <div className={this.props.history.location.pathname === '/admin'? 'ui active item cursor' : 'ui item cursor' } onClick={() => {this.props.history.push('/admin')}}>Dashboard</div>
           <div className={this.props.history.location.pathname === '/admin/challenges' ? 'ui active item cursor' : 'ui item cursor' } onClick={() => {this.props.history.push('/admin/challenges')}}>Manage Challenges</div>

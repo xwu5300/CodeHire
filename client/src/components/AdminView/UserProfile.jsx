@@ -21,9 +21,9 @@ const UserProfile = ({ github, skills, activeCandidates, getProfile, activeUser 
 
         <div style={{ width: '80%', margin: 'auto', marginTop: '20px' }}>
           <h2>Active Users</h2>
-            {activeCandidates ? activeCandidates.map((user, i) => {
+            { activeCandidates ? activeCandidates.map((user, i) => {
               return (
-                <div key={ i } className='active_user_div' onClick={ () => getProfile(user) }><i className="circle green icon"></i>{user}</div>
+                <div key={ i } style={ activeUser === user ? { backgroundColor: 'black', color: 'orange' } : { backgroundColor: '' } } className='active_user_div' onClick={ () => getProfile(user) }><i className="circle green icon"></i>{user}</div>
               )
             }) : null }
         </div>

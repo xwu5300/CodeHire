@@ -435,9 +435,12 @@ ui.menu.container.item {
 }
 
 .live_coding_title {
-  font-size: 22px;
-  margin-top: 10px;
-  margin-left: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  clear: both;
 }
 
 .live_coding_results {
@@ -589,9 +592,11 @@ ui.menu.container.item {
 	font-size: 14px;
 }
 
+
 .company_card:hover {
 	color: red;
 }
+
 
 /* -------- Analytics View --------- */
 
@@ -604,6 +609,7 @@ ui.menu.container.item {
   margin: 30px;
 }
 
+
 .code {
   font-weight: 800;
 }
@@ -612,3 +618,19 @@ ui.menu.container.item {
   color: blue;
   text-decoration: underline;
 }
+
+
+/* -------- Back Navigation Button ------- */
+.arrow.icon {
+	font-size: 42px;
+	position: absolute;
+	top: 50px;
+	left: 50px;
+	cursor: pointer;
+	z-index: 1;
+}
+
+.user_navbar, .company_navbar {
+	cursor: pointer;
+}
+
