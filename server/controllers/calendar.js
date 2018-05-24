@@ -143,6 +143,24 @@ module.exports.deleteCandidateSchedule = (candidateScheduleId) => {
   })
 }
 
+module.exports.checkCandidateReschedule = (candidateId, companyId, time) => {
+  let earlyTime = moment(time).subtract(30, 'days')
+  let lateTime = moment(time).add(30, 'days')
+  return knex('user_schedule')
+  .where('candidate_id', candidateId)
+  .innerJoin('company_schedule', 'company_schedule.id', 'user_schedule.company_schedule_id')
+  .where('company_id', companyId)
+  .andWhere('time', '>', earlyTime)
+  .andWhere('time', '<', lateTime)
+  .then((res) => {
+    return res;
+    console.log('calendar.js check candidate reschedule', res)
+  })
+  .catch((err) => {
+    console.log('Could not check candidate reschedule from db', err);
+  })
+}
+
 module.exports.getAllCompanyCalendars = (companyName) => {
   let currTime = new Date();
   let option = `%${companyName}%`;

@@ -20,31 +20,39 @@ class CompanyScheduleTableView extends Component {
     return days;
   }
 
-  handleClick(scheduleId, results) {
+  handleClick(scheduleId, scheduleTime, results) {
     let daysLeft = 0
     if (results.length) {
       let days = this.getTimeOut(results)
       daysLeft = 30 - days;
     }
-    if (!this.props.passInitial) {
-      this.props.updateStyle()
-    } else if (results.length && (daysLeft > 0 )) {
-      swal({
-        text: `You've Taken A Live Challenge, Please Retake After ${daysLeft} Days`
-      })
-    } else {
-      this.props.saveCandidateCalendar(localStorage.getItem('userId'), scheduleId)
-    }
+    this.props.checkCandidateReschedule(localStorage.getItem('userId'), localStorage.getItem('companyId'), scheduleTime, (data) => {
+      if (!this.props.passInitial) {
+        this.props.updateStyle()
+      } else if (results.length && (daysLeft > 0 )) {
+        swal({
+          text: `You've Taken A Live Challenge, Please Retake After ${daysLeft} Days`
+        })
+      } else if (data.length) {
+        swal({
+          text: `You've Already Schedule A Live Challenge With In 30 Days`
+        })     
+      } else {
+        this.props.saveCandidateCalendar(localStorage.getItem('userId'), scheduleId)
+      }
+    })
   }
 
-  isTaken(scheduleId) {
+  isTaken(scheduleId, scheduleTime) {
     this.props.fetchCompanyResults(localStorage.getItem('companyId'), localStorage.getItem('userId'), (results) => {
-      this.handleClick(scheduleId, results)
+      this.handleClick(scheduleId, scheduleTime, results)
+
     })
   }
 
 
   render() {
+    console.log('company schedule taable. this.props.results', this.props.results)
     return(
       <table className='ui inverted table'>
         <thead>
@@ -61,7 +69,7 @@ class CompanyScheduleTableView extends Component {
             <td>{schedule.duration} Minutes</td>
             <td>
               <button className='ui orange button' onClick={() =>{
-                this.isTaken(schedule.id)
+                this.isTaken(schedule.id, schedule.time)
               }}>Add to Schedule
               </button>
             </td>
