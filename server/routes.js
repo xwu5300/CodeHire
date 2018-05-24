@@ -312,9 +312,6 @@ router.get('/api/companyList', (req, res) => {
 
 // add to company Calendar
 router.post('/api/companyCalendar', (req, res) => {
-
-  console.log('comapny id should be 1', req.body);
-
   let time = req.body.time;
   let duration = Number(req.body.duration);
   let challengeId = req.body.challengeId;
@@ -422,7 +419,11 @@ router.get('/api/results/candidateList', (req, res) => {
 
 //ge candidate results
 router.get('/api/results/candidate', (req, res) => {
-  let candidateId = jwt.decode(req.query.candidateId, secret).id;
+  if (!parseInt(req.query.candidateId)) {
+    let candidateId = jwt.decode(req.query.candidateId, secret).id;
+  } else {
+    candidateId = req.query.candidateId;
+  }
   let companyScheduleId = req.query.companyScheduleId;
   resultsControllers.getCandidateResults(candidateId, companyScheduleId)
   .then((data) => {

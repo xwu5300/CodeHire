@@ -46,7 +46,7 @@ class ChallengeCard extends Component {
     Modal.setAppElement('body');
   }
 
-  openModal(challengeId) {
+  openModal() {
     this.setState({
       modalIsOpen: true
     })

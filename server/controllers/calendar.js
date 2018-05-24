@@ -163,6 +163,7 @@ module.exports.fetchPastSchedule = (companyId) => {
   return knex('company_schedule')
   .where({'company_schedule.company_id': companyId})
   .leftJoin('results', 'results.company_schedule_id', 'company_schedule.id')
+  .where({'results.is_initial': false})
   .innerJoin('all_challenges', 'all_challenges.id', 'company_schedule.id')
   .select('all_challenges.*', 'company_schedule.*')
   .orderBy('time', 'desc')

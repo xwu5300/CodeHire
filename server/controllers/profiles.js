@@ -142,6 +142,7 @@ module.exports.getFavorites = (companyId) => {
   .where({company_id: companyId})
   .innerJoin('users', 'users.id', 'company_user.user_id')
   .select('*', 'company_user.id')
+  .orderBy('company_user.id', 'asc')
   .then((res) => {
     console.log('Successfully retrieved saved users from db');
     return res;

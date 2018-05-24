@@ -76,6 +76,7 @@ class AdminDashboardView extends Component {
 
 
   render() {
+    let currTime = new Date();
 
     const customStyles = {
       content : {
@@ -134,7 +135,7 @@ class AdminDashboardView extends Component {
                   {this.props.company_schedule.length > 0 ? this.props.company_schedule.map((item, i) => {
                     return (
                       <Fragment>
-                      {!item.time || item.duration === 0 ? null : 
+                      {!item.time || item.duration === 0 || moment(item.time).format() < moment(currTime).format() ? null : 
                         <tr key={i}>
                           <td>{item.title}</td>
                           <td>{moment(item.time).format('MMMM Do YYYY, h:mm A')}</td>
