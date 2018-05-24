@@ -13,6 +13,10 @@ class PastChallenges extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  componentDidMount() {
+    this.props.getFavorites(localStorage.getItem('userId'));
+  }
+
   showTable() {
     this.setState({
       showMainTable: !this.state.showMainTable
@@ -48,7 +52,7 @@ class PastChallenges extends Component {
         })}
         </tbody>
         </table>
-      </div> : <PastResults pastResults={this.props.pastResults} save={this.props.save} showTable={this.showTable}/>}
+      </div> : <PastResults fetchCandidateResults={this.props.fetchCandidateResults} candidateResults={this.props.candidateResults} remove={this.props.remove} favorites={this.props.favorites.map((item) => item.user_id)} pastResults={this.props.pastResults} save={this.props.save} showTable={this.showTable}/>}
     </div>
     )
   }

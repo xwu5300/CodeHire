@@ -143,6 +143,8 @@ module.exports.getFavorites = (companyId) => {
   return knex('company_user')
   .where({company_id: companyId})
   .innerJoin('users', 'users.id', 'company_user.user_id')
+  .select('*', 'company_user.id')
+  .orderBy('company_user.id', 'asc')
   .then((res) => {
     console.log('Successfully retrieved saved users from db');
     return res;
@@ -200,5 +202,17 @@ module.exports.getResume = (userId) => {
   })
   .catch((err) => {
     console.log('Unable to retrieve resume from db', err);
+  })
+}
+
+module.exports.markContacted = (id, contacted) => {
+  return knex('company_user')
+  .where({id: id})
+  .update({'contacted': !contacted})
+  .then(() => {
+    console.log('updated contacted');
+  })
+  .catch((err) => {
+    console.log('could not update contacted', err);
   })
 }

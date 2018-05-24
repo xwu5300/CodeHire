@@ -194,8 +194,8 @@ body {
 
 .user_skills_input {
 	float: right;
-    bottom: 40px;
-	font-size: 22px
+  bottom: 40px;
+	font-size: 22px;
 	box-shadow: 1px 1px 10px;
 }
 
@@ -213,7 +213,6 @@ body {
   margin-bottom: 0px;
 }
 
-
 .github_link input {
 	width: 70%;
 	height: 35px;
@@ -228,7 +227,6 @@ body {
 	margin-left: 15px;
 }
 
-
 .resume_div {
 	width: 50%;
 	height: 50px;
@@ -241,23 +239,16 @@ body {
 	color: white;
 }
 
-
-
 .user_resume_container button {
 	margin-top: 10px;
 }
 
-
-
 .resume_btns {
 	display: inline-block;
-
 	position: relative;
 	bottom: 20px;
 	left: 10px;
-
 }
-
 
 .ui.small.horizontal.list {
   margin-top: 40px;
@@ -374,7 +365,7 @@ body {
 	right: 50px;
 }
 
-.ui.card.cardzz: hover{
+.ui.card.cardzz:hover{
 	cursor: pointer;
 	background-color: orange;
 }
@@ -407,6 +398,32 @@ body {
   margin-left: 20px;
 }
 
+.heart.icon {
+  color: red;
+  font-size: 25px;
+}
+
+.search {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+}
+
+.envelope.open.icon {
+  font-size: 25px;
+  position: absolute;
+  bottom: 5px;
+  right: 50px;
+}
+
+.envelope.open.outline.icon {
+  font-size: 25px;
+  position: absolute;
+  bottom: 5px;
+  right: 50px;
+}
+
+
 /* ------- User Past Results ------- */
 
 .history_card {
@@ -431,9 +448,9 @@ body {
 	font-size: 14px;
 }
 
-
-
-
+.company_card:hover {
+	color: red;
+}
 
 /* -------- Analytics View --------- */
 
@@ -444,4 +461,13 @@ body {
 
 .past-challenge-container {
   margin: 30px;
+}
+
+.code {
+  font-weight: 800;
+}
+
+.code:hover {
+  color: blue;
+  text-decoration: underline;
 }

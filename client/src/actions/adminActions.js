@@ -238,11 +238,16 @@ export const getFavorites = (companyId) => (dispatch) => {
   })
 }
 
-export const saveToFavorites = (companyId, candidateId) => (dispatch) => {
+export const saveToFavorites = (companyId, candidateId, cb) => (dispatch) => {
   axios.post('/api/favorites', { companyId, candidateId })
   .then(() => {
     console.log('Successfully sending favorite user to server');
     dispatch(getFavorites(companyId))
+  })
+  .then(() => {
+    if (cb) {
+      cb();
+    }
   })
   .catch((err) => {
     console.log('Error sending favorite user to server', err);
@@ -310,5 +315,16 @@ export const fetchPastResults = (scheduleId, cb) => (dispatch) => {
   })
   .catch((err) => {
     console.log('Error fetching past results', err);
+  })
+}
+
+export const contact = (favoriteId, companyId, contacted) => (dispatch) => {
+  axios.patch('/api/favorites', { favoriteId, contacted })
+  .then(() => {
+    dispatch(getFavorites(companyId))
+    console.log('contacted');
+  })
+  .catch((err) => {
+    console.log('error marking contacted', err);
   })
 }
