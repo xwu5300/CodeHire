@@ -191,11 +191,11 @@ export const setCurrentLiveChallenge = (title, duration) => (dispatch) => {
 }
 
 
-export const fetchCompanyResults = (companyId, candidateId) => (dispatch) => {
+export const fetchCompanyResults = (companyId, candidateId, cb) => (dispatch) => {
   axios.get('/api/results', { params: { companyId, candidateId } })
   .then(({data}) => {
     dispatch({ type: GET_COMPANY_RESULTS, payload: data})
-
+    cb(data)
   })
   .catch((err) => {
     console.log(err);
@@ -215,11 +215,11 @@ export const fetchCandidateList = (companyId) => (dispatch) => {
 export const getUsername = (userId, cb) => (dispatch) => {
   axios.get('/api/username', {params: { userId }})
   .then(({data}) => {
-
-    dispatch({ type: GET_USER, payload: data[0].username })
-
-    if (cb) {
-      cb(data[0].username)
+    if (data.length) {
+      dispatch({ type: GET_USER, payload: data[0].username })
+      if (cb) {
+        cb(data[0].username)
+      }
     }
   })
   .catch((err) => {

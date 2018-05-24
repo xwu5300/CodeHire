@@ -92,7 +92,7 @@ class CompanyScheduleView extends Component {
         <div>
         {this.props.all_company_calendars.length ?
    
-        <CompanyScheduleTableView updateStyle={this.updateStyle} saveCandidateCalendar={this.props.saveCandidateCalendar} companyCalendar={this.props.all_company_calendars} passInitial={this.props.pass_initial} fetchCandidateResults={this.props.fetchCandidateResults}/>
+        <CompanyScheduleTableView updateStyle={this.updateStyle} saveCandidateCalendar={this.props.saveCandidateCalendar} companyCalendar={this.props.all_company_calendars} passInitial={this.props.pass_initial} fetchCompanyResults={this.props.fetchCompanyResults}/>
         : <div> {this.props.initial_challenge[0].name} Does Not Have Any Upcoming Live Challenge </div>
       }
 

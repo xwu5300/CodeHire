@@ -1,4 +1,5 @@
 const knex = require('../../db/index.js');
+const moment = require('moment');
 
 //get all companies' list
 module.exports.getCompanyList = (companyName) => {
@@ -143,11 +144,12 @@ module.exports.deleteCandidateSchedule = (candidateScheduleId) => {
 }
 
 module.exports.getAllCompanyCalendars = (companyName) => {
+  let currTime = new Date();
   let option = `%${companyName}%`;
   return knex('company_schedule')
-  .whereNotNull('time')
   .innerJoin('users', 'users.id', 'company_schedule.company_id')
   .where('name', 'like', option)
+  .where('time', '>', currTime)
   .select('*', 'company_schedule.id')
   .orderBy('time', 'asc')
   .then((res) => {
