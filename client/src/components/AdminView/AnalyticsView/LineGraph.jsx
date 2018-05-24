@@ -23,9 +23,12 @@ class LineGraph extends Component {
       }
     }
     for (let key in data) {
-      successRate[key] = temp[key] / data[key];
+      if (temp[key] && data[key]) {
+        successRate[key] = temp[key] / data[key];
+      } else {
+        successRate[key] = 0;
+      }
     }
-
     return successRate;
   }
 
@@ -37,7 +40,6 @@ class LineGraph extends Component {
 
     let successRate = this.getSuccessRate(this.props.companyResults);
     let allCompanySuccessRate = this.getSuccessRate(otherCompanyResults); //gets success rate for all companies other than your own
-
 
     let companyData = this.props.companyResults.map((data) => {
       return {x: data.time, y: Math.round(successRate[data.company_schedule_id] * 100, 2), label:
@@ -75,9 +77,6 @@ class LineGraph extends Component {
     let combinedData = filteredAllCompanyData.concat(filteredCompanyData).sort((a, b) => {
       return a.x - b.x;
     });
-
-    console.log(filteredAllCompanyData)
-    console.log(filteredCompanyData)
 
     return (
       <div className="challenge-results-graph">

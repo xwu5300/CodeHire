@@ -266,9 +266,9 @@ class Form extends Component {
           <label>Category</label>
             <select className="ui dropdown" name="category" value={this.state.challenge.category} onChange={this.handleChange}>
               <option value="">Select</option>
-              <option value="algos">Algorithms</option>
-              <option value="dataStructures">Data Structures</option>
-              <option value="sysDesign">System Design</option>
+              <option value="algorithms">Algorithms</option>
+              <option value="data structures">Data Structures</option>
+              <option value="system design">System Design</option>
             </select>
           </div>
           <div className="field">
