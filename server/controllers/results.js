@@ -25,7 +25,7 @@ module.exports.saveResults = (companyScheduleId, isPassed, code, score, complete
 //get company live challenge results from results table
 module.exports.getCompanyResults = (companyId, candidateId) => {
   return knex('results')
-  .where({'results.company_id': companyId, 'results.candidate_id' : candidateId})
+  .where({'results.company_id': companyId, 'results.candidate_id' : candidateId, 'is_initial': false})
   .innerJoin('users', 'results.candidate_id', 'users.id')
   .innerJoin('all_challenges', 'results.challenge_id', 'all_challenges.id')
   .select('results.*', 'all_challenges.*', 'users.name', 'users.information', 'users.phone', 'users.candidate_skills', 'users.github_url')
@@ -71,9 +71,9 @@ module.exports.getCandidateInitialResults = (companyId, candidateId) => {
 }
 
 module.exports.getCandidateResults = (candidateId, companyScheduleId) => {
-  let option = {'candidate_id': candidateId}
+  let option = {'candidate_id': candidateId, 'is_initial': false}
   if (companyScheduleId) {
-    option = {'candidate_id': candidateId, 'company_schedule_id': companyScheduleId}
+    option = {'candidate_id': candidateId, 'is_initial': false, 'company_schedule_id': companyScheduleId}
   }
   return knex('results')
   .where(option)

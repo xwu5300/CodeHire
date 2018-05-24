@@ -396,7 +396,8 @@ router.get('/api/pastChallenges', (req, res) => {
 // get results data from 'results' table
 router.get('/api/results', (req, res) => {
   let companyId = jwt.decode(req.query.companyId, secret).id;
-  resultsControllers.getCompanyResults(companyId, req.query.candidateId)
+  let candidateId = jwt.decode(req.query.candidateId, secret).id;
+  resultsControllers.getCompanyResults(companyId, candidateId)
   .then((data) => {
     console.log('Retrieve candidate result from db')
     res.send(data)

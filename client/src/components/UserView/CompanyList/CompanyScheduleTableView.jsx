@@ -30,7 +30,7 @@ class CompanyScheduleTableView extends Component {
       this.props.updateStyle()
     } else if (results.length && (daysLeft > 0 )) {
       swal({
-        text: `You've Taken This Challenge, Please Retake After ${daysLeft} Days`
+        text: `You've Taken A Live Challenge, Please Retake After ${daysLeft} Days`
       })
     } else {
       this.props.saveCandidateCalendar(localStorage.getItem('userId'), scheduleId)
@@ -38,7 +38,7 @@ class CompanyScheduleTableView extends Component {
   }
 
   isTaken(scheduleId) {
-    this.props.fetchCandidateResults(localStorage.getItem('userId'), scheduleId, (results) => {
+    this.props.fetchCompanyResults(localStorage.getItem('companyId'), localStorage.getItem('userId'), (results) => {
       this.handleClick(scheduleId, results)
     })
   }

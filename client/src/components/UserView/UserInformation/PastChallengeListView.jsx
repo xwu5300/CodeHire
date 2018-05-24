@@ -32,8 +32,7 @@ class PastChallengeListView extends Component {
         challenge: {
           name: result.name, 
           title: result.title, 
-          difficulty: result.difficulty, 
-          isInitial: this.isInitial(result.is_initial), 
+          difficulty: result.difficulty,
           isPassed: this.isPassed(result.user_passed),
           score: result.score,
           instruction: result.instruction,
