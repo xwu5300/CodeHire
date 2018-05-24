@@ -14,7 +14,7 @@ import PrivateRoute from '../components/PrivateRoute.jsx';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { viewCompanyProfile, fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCandidateResults, getResume, saveResume, removeResume, updateCandidatePhoto, fetchAllCompanyCalendars } from '../actions/userActions';
+import { viewCompanyProfile, fetchCandidateCalendar, fetchInitialChallenge, fetchCandidateInfo, updateCandidateSkills, deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCandidateResults, getResume, saveResume, removeResume, updateCandidatePhoto, fetchAllCompanyCalendars, checkCandidateReschedule } from '../actions/userActions';
 import { fetchCompanySchedule, fetchCompanyResults, getUsername, fetchCompanyInfo } from '../actions/adminActions' ;
 import { handleLogout } from '../actions/authActions';
 
@@ -70,7 +70,7 @@ const mapDispatchToProps = {
    deleteCandidateSkill, updateCandidateGithub, saveCandidateCalendar, deleteCandidateSchedule, 
    saveResults, currentCompanyCalendar, fetchCandidateInitialResults, fetchCompanyList, fetchCompanySchedule, 
    fetchCompanyResults, fetchCandidateResults, getResume, saveResume, removeResume, updateCandidatePhoto, getUsername,
-   viewCompanyProfile, fetchAllCompanyCalendars, handleLogout, fetchCompanyInfo
+   viewCompanyProfile, fetchAllCompanyCalendars, handleLogout, fetchCompanyInfo, checkCandidateReschedule
 }
 
 const connectComponent = connect(mapStateToProps, mapDispatchToProps)(UserContainer); //code cleaned

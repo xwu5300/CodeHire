@@ -7,6 +7,7 @@ import moment from 'moment';
 
 import CompanyScheduleTableView from './CompanyScheduleTableView.jsx';
 import UserNavBar from '../UserNavBar.jsx';
+// import { checkCandidateReschedule } from '../../../actions/userActions';
 
 class CompanyScheduleView extends Component {
   constructor() {
@@ -26,9 +27,11 @@ class CompanyScheduleView extends Component {
   componentDidMount() {
     this.props.fetchInitialChallenge(localStorage.getItem('companyId'))
     this.props.fetchAllCompanyCalendars(localStorage.getItem('companyName'))
-    this.props.fetchCandidateResults(localStorage.getItem('userId'), null, ()=>{});
+    this.props.fetchCandidateResults(localStorage.getItem('userId'));
+    // this.props.fetchCandidateResults(localStorage.getItem('userId'), null, ()=>{});
     this.props.fetchCandidateInitialResults(localStorage.getItem('companyId'), localStorage.getItem('userId'), (data) => {console.log('company schedule view data pass?', this.props.pass_initial)})
 
+    const time = 'May'
   }
 
   getTimeOut(results) {
@@ -101,7 +104,7 @@ class CompanyScheduleView extends Component {
         <div>
         {this.props.all_company_calendars.length ?
    
-        <CompanyScheduleTableView updateStyle={this.updateStyle} saveCandidateCalendar={this.props.saveCandidateCalendar} companyCalendar={this.props.all_company_calendars} passInitial={this.props.pass_initial} fetchCompanyResults={this.props.fetchCompanyResults} candidateCalendar={this.props.candidate_calendar}/>
+        <CompanyScheduleTableView updateStyle={this.updateStyle} saveCandidateCalendar={this.props.saveCandidateCalendar} companyCalendar={this.props.all_company_calendars} passInitial={this.props.pass_initial} fetchCompanyResults={this.props.fetchCompanyResults} candidateCalendar={this.props.candidate_calendar} checkCandidateReschedule={this.props.checkCandidateReschedule} results={this.props.results}/>
         : <h2> {localStorage.getItem('companyName')} Does Not Have Any Upcoming Live Challenge </h2>
       }
 
