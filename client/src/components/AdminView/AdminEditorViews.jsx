@@ -16,6 +16,7 @@ class AdminEditorViews extends Component {
 
     this.state = {
       result: null,
+      userCode: [],
       title: 'greeting',
       params: 'param strings',
       instructions: `Instructions: buffalo buffalo buffalo buffalo buffalo buffalo`,
@@ -24,14 +25,45 @@ class AdminEditorViews extends Component {
 }` }
 
     this.socket = socketClient();
-
+    
     this.socket.on('add character', (username, chars)=> {
+
+        this.setState({
+          userCode: [username, chars]
+        })
+
       if(this.props.active_user === username) {
-      this.setState({
-        code: chars
-      })
-     }
+        this.setState({
+          code: chars
+        })
+      }
     })
+  }
+
+    componentWillUnmount() {
+    this.socket.emit('save localStorage')
+    var old = {}
+    if (localStorage.getItem('user_code')) {
+       old = JSON.parse(localStorage.getItem('user_code'))
+    } 
+    for (var key in old) {
+      if (key === this.state.userCode[0]) {
+        old[key] = this.state.userCode[1]
+      } 
+    }
+
+    old[this.state.userCode[0]] = this.state.userCode[1]
+
+    localStorage.setItem('user_code', JSON.stringify(old));
+  }
+
+  componentDidMount() {
+
+    let user_code = JSON.parse(localStorage.getItem('user_code'));
+
+    console.log('STATATATTAE', user_code, this.props.active_user);
+
+    this.setState({ code: user_code[this.props.active_user] })
   }
 
 

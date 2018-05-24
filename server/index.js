@@ -51,8 +51,6 @@ io.sockets.on('connection', (socket)=> {
 
   // Candidate typing
   socket.on('typing', (username, newValue) => {
-    holdCode += newValue;
- 
     io.sockets.emit('add character', username, newValue);
   })
 

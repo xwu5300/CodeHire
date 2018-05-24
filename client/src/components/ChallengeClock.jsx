@@ -27,6 +27,7 @@ class ChallengeClock extends Component {
   }
 
   componentDidMount() {
+
     if(this.state.minutes === '') { 
       this.setState({ minutes: this.props.duration, seconds: '00' });
     }

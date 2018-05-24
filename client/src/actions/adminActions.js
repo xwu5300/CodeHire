@@ -27,10 +27,13 @@ export const fetchAllChallenges = (companyId) => (dispatch) => {
   })
 }
 
-export const fetchChallengeData = (challengeId) => (dispatch) => {
+export const fetchChallengeData = (challengeId, cb) => (dispatch) => {
   axios.get('/api/challengeData', {params: { challengeId }})
   .then(({data}) => {
     dispatch({ type: GET_CHALLENGE_DATA, payload: data})
+    if(cb) {
+      cb();
+    }
   })
   .catch((err) => {
     console.log('Error getting challenge data', err)
