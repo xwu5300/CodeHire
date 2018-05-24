@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Login from '../components/Login.jsx';
 import Registration from '../components/Registration.jsx';
+import LandingPage from '../components/LandingPage.jsx';
 
 import { saveCompany, saveCandidate, handleLogin, handleSignUp, googleLogin } from '../actions/authActions';
 
@@ -13,7 +14,8 @@ class AuthContainer extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path='/' component={ LoginComponent }/>
+        <Route exact path='/' component={ LandingPageComponent }/>
+        <Route exact path='/login' component={ LoginComponent }/>
         <Route exact path='/registration' component={ RegistrationComponent } />
       </Switch>
     )
@@ -33,6 +35,7 @@ const mapDispatchToProps = {
 const connectAuthContainer = connect(mapStateToProps, {})(AuthContainer);
 const RegistrationComponent = connect(mapStateToProps, mapDispatchToProps)(Registration);
 const LoginComponent = connect(mapStateToProps, mapDispatchToProps)(Login);
+const LandingPageComponent = connect(mapStateToProps, mapDispatchToProps)(LandingPage);
 
 
 export default withRouter(connectAuthContainer);
