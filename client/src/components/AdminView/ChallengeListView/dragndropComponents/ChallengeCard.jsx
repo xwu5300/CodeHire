@@ -48,7 +48,7 @@ class ChallengeCard extends Component {
     Modal.setAppElement('body');
   }
 
-  openModal(challengeId) {
+  openModal() {
     this.setState({
       modalIsOpen: true
     })
@@ -91,7 +91,7 @@ class ChallengeCard extends Component {
     <div className={ cardColor } style={this.state.isExpanded ? null : tab}>
       <div className='content challenge_content'>
         
-        <i onClick={ () => this.expandCard() } className="angle down icon expand_icon"></i>
+        <i onClick={ () => this.expandCard() } className="angle down icon expand_icon cursor"></i>
        
       { this.state.isExpanded ? 
         <div>

@@ -56,7 +56,7 @@ class AdminProfileView extends Component {
 
           <div className='ui segment' style={{ width: '60%' }}>
             <h2> About {this.props.token} </h2>
-            <i style={{ fontSize: '24px' }} onClick={ () => this.toggleInfo() } className="pencil alternate orange icon edit_company_info"></i>
+            <i style={{ fontSize: '24px' }} onClick={ () => this.toggleInfo() } className="pencil alternate orange icon edit_company_info cursor"></i>
             {this.state.isTextarea ?
                <textarea onChange={ (e) => this.handleChange(e) } value={ this.state.information } className='company_profile_textarea' name='information'>{ this.state.information }</textarea>
                :

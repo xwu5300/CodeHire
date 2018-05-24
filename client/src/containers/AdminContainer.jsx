@@ -12,8 +12,8 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PrivateRoute from '../components/PrivateRoute.jsx';
 
-import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, fetchCompanyResults, fetchCandidateList, getChallengeInfo, updateChallengeDate, getUsername, searchUsers, saveToFavorites, getFavorites, removeFromFavorites, fetchAllResults, getCompanyData, fetchPastSchedule, fetchPastResults, fetchChallengeData } from '../actions/adminActions';
-import { fetchInitialChallenge, currentCompanyCalendar, fetchCandidateInfo } from '../actions/userActions';
+import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, fetchCompanyResults, fetchCandidateList, getChallengeInfo, updateChallengeDate, getUsername, searchUsers, saveToFavorites, getFavorites, removeFromFavorites, fetchAllResults, getCompanyData, fetchPastSchedule, fetchPastResults, fetchChallengeData, contact } from '../actions/adminActions';
+import { fetchInitialChallenge, currentCompanyCalendar, fetchCandidateInfo, fetchCandidateResults } from '../actions/userActions';
 import { handleLogout } from '../actions/authActions';
 
 class AdminContainer extends Component {
@@ -58,7 +58,8 @@ const mapStateToProps = (state) => ({
    company_data: state.company_data.company_data,
    challenge_data: state.challenge_data.challenge_data,
    past_challenges: state.past_challenges.past_challenges,
-   past_results: state.past_results.past_results
+   past_results: state.past_results.past_results,
+   candidate_results: state.candidate_results.candidate_results
 });
 
 const mapDispatchToProps = {
@@ -68,8 +69,7 @@ const mapDispatchToProps = {
   toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule,
   fetchCompanyResults, fetchCandidateList, getChallengeInfo, getUsername, updateChallengeDate, searchUsers,
   saveToFavorites, getFavorites, removeFromFavorites, fetchAllResults, getCompanyData, fetchPastSchedule,
-  fetchPastResults, fetchChallengeData, handleLogout
-
+  fetchPastResults, fetchChallengeData, contact, fetchCandidateResults, handleLogout
 }
 
 const ChallengeListComponent = connect(mapStateToProps, mapDispatchToProps)(ChallengeListView);
