@@ -1,4 +1,5 @@
 const knex = require('../../db/index.js');
+const moment = require('moment');
 
 //saves users result to result
 module.exports.saveResults = (companyScheduleId, isPassed, code, score, completedAt, challengeId, companyId, candidateId, initial) => {
@@ -23,19 +24,38 @@ module.exports.saveResults = (companyScheduleId, isPassed, code, score, complete
 }
 
 //get company live challenge results from results table
-module.exports.getCompanyResults = (companyId, candidateId) => {
-  return knex('results')
-  .where({'results.company_id': companyId, 'results.candidate_id' : candidateId, 'is_initial': false})
-  .innerJoin('users', 'results.candidate_id', 'users.id')
-  .innerJoin('all_challenges', 'results.challenge_id', 'all_challenges.id')
-  .select('results.*', 'all_challenges.*', 'users.name', 'users.information', 'users.phone', 'users.candidate_skills', 'users.github_url')
-  .then((res) => {
-    console.log('Retrieve candidate result from result table');
-    return res;
-  })
-  .catch((err) => {
-    console.log('error retrieving company results', err);
-  })
+module.exports.getCompanyResults = (companyId, candidateId, time) => {
+  if (time) {
+    let earlyTime = moment(time).subtract(30, 'days')
+    let lateTime = moment(time).add(30, 'days')
+    return knex('results')
+    .where({'results.company_id': companyId, 'results.candidate_id' : candidateId, 'is_initial': false})
+    .andWhere('completed_at', '>', earlyTime)
+    .andWhere('completed_at', '<', lateTime)
+    .innerJoin('users', 'results.candidate_id', 'users.id')
+    .innerJoin('all_challenges', 'results.challenge_id', 'all_challenges.id')
+    .select('results.*', 'all_challenges.*', 'users.name', 'users.information', 'users.phone', 'users.candidate_skills', 'users.github_url')
+    .then((res) => {
+      console.log('Retrieve candidate result from result table');
+      return res;
+    })
+    .catch((err) => {
+      console.log('error retrieving company results', err);
+    })
+  } else {
+    return knex('results')
+    .where({'results.company_id': companyId, 'results.candidate_id' : candidateId, 'is_initial': false})
+    .innerJoin('users', 'results.candidate_id', 'users.id')
+    .innerJoin('all_challenges', 'results.challenge_id', 'all_challenges.id')
+    .select('results.*', 'all_challenges.*', 'users.name', 'users.information', 'users.phone', 'users.candidate_skills', 'users.github_url')
+    .then((res) => {
+      console.log('Retrieve candidate result from result table');
+      return res;
+    })
+    .catch((err) => {
+      console.log('error retrieving company results', err);
+    })
+  }
 }
 
 module.exports.getCandidateList = (companyId) => {

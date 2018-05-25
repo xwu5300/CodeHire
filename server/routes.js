@@ -400,13 +400,12 @@ router.post('/api/companyCalendar', (req, res) => {
 //fetch single company's schedule
 router.get('/api/companyCalendar', (req, res) => {
   let companyId = req.query.companyId;
-  let companyName = req.query.companyName;
 
   if (req.query.companyId) {
     companyId = jwt.decode(req.query.companyId, secret).id;
   }
 
-  calendarControllers.getCompanySchedule(companyId, companyName)
+  calendarControllers.getCompanySchedule(companyId)
   .then((data) => {
     res.send(data);
   })
@@ -455,14 +454,14 @@ router.get('/api/pastChallenges', (req, res) => {
 
 // get results data from 'results' table
 router.get('/api/results', (req, res) => {
+  let time = req.query.time
   let companyId = jwt.decode(req.query.companyId, secret).id;
   if (!parseInt(req.query.candidateId)) {
     var candidateId = jwt.decode(req.query.candidateId, secret).id;
   } else {
     var candidateId = req.query.candidateId;
   }
-  
-  resultsControllers.getCompanyResults(companyId, candidateId)
+  resultsControllers.getCompanyResults(companyId, candidateId, time)
   .then((data) => {
     console.log('Retrieve candidate result from db')
     res.send(data)
@@ -519,9 +518,10 @@ router.get('/api/results/candidate/initial', (req, res) => {
 
 // post results to 'results' table
 router.post('/api/results', (req, res) => {
+  console.log('companyId from routesssssss', req.body.companyId)
   let companyId = jwt.decode(req.body.companyId, secret).id;
   let candidateId = jwt.decode(req.body.candidateId, secret).id;
-
+    console.log('companyId from routes', companyId)
   resultsControllers.saveResults(req.body.companyScheduleId, req.body.isPassed, req.body.code, req.body.score, req.body.completedAt, req.body.challengeId, companyId, candidateId, req.body.initial)
   .then(() => {
     console.log('Results saved to results table');
