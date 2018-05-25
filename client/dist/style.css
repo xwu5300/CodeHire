@@ -3,7 +3,6 @@
 }
 
 #body {
-	padding: 5px;
 	background-color: rgba(0,0,0,0.6);
 	height: 100%;
 }
@@ -759,8 +758,6 @@ ui.menu.container.item {
 
 .user_navbar, .company_navbar {
   cursor: pointer;
-  position: absolute;
-  top: 0px;
 }
 
 .analytics-container {
