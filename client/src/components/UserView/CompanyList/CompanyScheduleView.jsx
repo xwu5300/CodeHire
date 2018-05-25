@@ -26,7 +26,7 @@ class CompanyScheduleView extends Component {
 
   componentDidMount() {
     this.props.fetchInitialChallenge(localStorage.getItem('companyId'))
-    this.props.fetchAllCompanyCalendars(localStorage.getItem('companyName'))
+    this.props.fetchAllCompanyCalendars(null, localStorage.getItem('companyId'))
     this.props.fetchCandidateResults(localStorage.getItem('userId'));
     // this.props.fetchCandidateResults(localStorage.getItem('userId'), null, ()=>{});
     this.props.fetchCandidateInitialResults(localStorage.getItem('companyId'), localStorage.getItem('userId'), (data) => {console.log('company schedule view data pass?', this.props.pass_initial)})

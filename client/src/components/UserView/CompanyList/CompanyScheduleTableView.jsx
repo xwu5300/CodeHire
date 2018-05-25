@@ -52,6 +52,7 @@ class CompanyScheduleTableView extends Component {
         </thead>
         <tbody>
           {this.props.companyCalendar.map((schedule, i) => {
+            console.log('company schduel table schedule', schedule)
             return (
             <tr key={i} >
             <td>{moment(schedule.time).format('MMMM Do YYYY dddd, h:mm A')}</td>
