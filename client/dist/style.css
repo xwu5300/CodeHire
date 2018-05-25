@@ -521,7 +521,13 @@ ui.menu.container.item {
 	background-color: orange;
 }
 
+.arrow-left {
+  cursor: pointer;
+}
 
+.arrow-right {
+  cursor: pointer;
+}
 
 .company-name {
 	font-size: 22px;
@@ -572,6 +578,10 @@ ui.menu.container.item {
   position: absolute;
   bottom: 5px;
   right: 50px;
+}
+
+.candidate-results {
+  margin-bottom: 20px;
 }
 
 

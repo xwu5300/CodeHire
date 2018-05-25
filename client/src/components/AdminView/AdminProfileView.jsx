@@ -19,6 +19,8 @@ class AdminProfileView extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleInfo = this.toggleInfo.bind(this);
+    this.updateState = this.updateState.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   componentDidMount() {
@@ -45,13 +47,29 @@ class AdminProfileView extends Component {
   }
 
   handleSubmit(logo) {
-    this.props.updateInfo(localStorage.getItem('userId'), logo, this.state.information, this.state.website_url);
-    this.setState({ isTextarea: !this.state.isTextarea })
+    let url = this.state.website_url.includes('http://') || this.state.website_url.includes('https://') ? this.state.website_url : 'http://' + this.state.website_url
+    this.props.updateInfo(localStorage.getItem('userId'), logo, this.state.information, url, this.updateState);
+    this.setState({ isTextarea: false })
   }
 
   toggleInfo() {
     this.setState({ isTextarea: !this.state.isTextarea })
   }
+
+  updateState() {
+    this.setState({
+      information: this.props.company_information,
+      logo_url: this.props.logo_url,
+      website_url: this.props.website_url
+    })
+  }
+
+  handleKeyPress(event) {
+    if (event.charCode === 13) {
+      this.handleSubmit(this.state.logo_url);
+    }
+  }
+
   
   render() {
     return (
@@ -69,7 +87,6 @@ class AdminProfileView extends Component {
                <div className='company_profile_textarea' name='information'>{ this.state.information }</div>
             }
           </div>
-
           <div className='ui segment'>
             <img className='company_profile_logo' src={ this.props.logo_url } />
             <AdminDropbox submit={this.handleSubmit}/>
@@ -77,10 +94,9 @@ class AdminProfileView extends Component {
               <div class="ui label">
                 http://
               </div>
-              <input onChange={ (e) => this.handleChange(e) } value={ this.state.website_url } name='website_url' className='ui input website_input' type='text' placeholder="mysite.com" />
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.website_url } name='website_url' className='ui input website_input' type='text' placeholder="mysite.com" onKeyPress={(evt) => {this.handleKeyPress(evt)}} />
             </div>
           </div> 
-
         </div>
         <button onClick={ () => this.handleSubmit(this.state.logo_url) } style={{ display: 'block', margin: 'auto', width: '200px' }} className='ui orange button'>Save Changes</button> 
         </div>

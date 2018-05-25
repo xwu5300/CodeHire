@@ -80,11 +80,11 @@ class UserProfileView extends Component {
         <div className='main_profile_container'>
         {!this.state.showHistory ?
           <div className="ui top attached tabular menu">
-            <div className="active item" onClick={() => this.setState({ showHistory: true })}>Past Challenges</div>
+            <div className="active item cursor" onClick={() => this.setState({ showHistory: true })}>Past Challenges</div>
           </div>
         :
           <div className="ui top attached tabular menu">
-            <div className="active item" onClick={() => this.setState({ showHistory: false })}>Edit Profile</div>
+            <div className="active item cursor" onClick={() => this.setState({ showHistory: false })}>Edit Profile</div>
           </div>
         }
         
