@@ -65,7 +65,7 @@ class LandingPage extends Component {
               HIRE ME I CODE
             </h2>
             <h3>
-              CodeHire is a platform that brings together programmers and companies in one location
+              CodeHire is a platform that brings together developers with their dream careers.
             </h3>
               <div className="ui orange huge button" onClick={() => {this.props.history.push('/registration')} }>
                  Click here to get started 
