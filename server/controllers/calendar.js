@@ -209,7 +209,7 @@ module.exports.fetchPastSchedule = (companyId) => {
   .where({'company_schedule.company_id': companyId})
   .leftJoin('results', 'results.company_schedule_id', 'company_schedule.id')
   .where({'results.is_initial': false})
-  .innerJoin('all_challenges', 'all_challenges.id', 'company_schedule.id')
+  .innerJoin('all_challenges', 'all_challenges.id', 'company_schedule.challenge_id')
   .select('all_challenges.*', 'company_schedule.*')
   .orderBy('time', 'desc')
   .distinct('company_schedule.id')
