@@ -36,6 +36,8 @@ class UserInitialChallengeView extends Component {
     this.startTimer = this.startTimer.bind(this)
     this.updateTimer = this.updateTimer.bind(this)
     this.autoSubmit = this.autoSubmit.bind(this)
+    this.checkOnTab = this.checkOnTab.bind(this)
+    this.tabOutSubmission = this.tabOutSubmission.bind(this)
     this.onChange = this.onChange.bind(this)
     this.handleTheme = this.handleTheme.bind(this)
     this.getExamples = this.getExamples.bind(this)
@@ -44,10 +46,22 @@ class UserInitialChallengeView extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  componentDidMount() {
+    this.getExamples()
+  }
   updateTimer(display) {
     this.setState({
       timeRemaining: display
     })
+  }
+
+  checkOnTab(countdown) {
+    this.setState({
+      tabHidden: document.hidden
+    }, function() {if (this.state.tabHidden) {
+      this.tabOutSubmission()
+      clearInterval(countdown)
+    }})
   }
 
   startTimer(duration, display) {
@@ -55,6 +69,7 @@ class UserInitialChallengeView extends Component {
     let minutes
     let seconds
     let countdown = setInterval( ()=> {
+      this.checkOnTab()
       minutes = parseInt(timer / 60, 10)
       seconds = parseInt(timer % 60, 10);
       minutes = minutes < 10 ? "0" + minutes : minutes;
@@ -93,6 +108,23 @@ class UserInitialChallengeView extends Component {
     })
   }
 
+  tabOutSubmission() {
+    let id = this.props.initial_challenge[0].id
+    let company_id = localStorage.getItem('companyId')
+    let user_id = localStorage.getItem('userId')
+    this.props.saveResults(null, 'f', this.state.code, 90, moment(Date.now()).format(), id, company_id, user_id, true , id, () => {
+
+      swal(
+        {title: 'You Left Your Coding View',
+         text: 'The current state of your code was saved and submitted',
+         allowOutsideClick: false,
+         type: 'info'}).then(() =>{
+          this.props.history.push('/user')
+         }
+        )
+    })
+  }
+
   onChange(newValue, event) {
     this.setState({
       code: newValue
@@ -115,6 +147,11 @@ class UserInitialChallengeView extends Component {
     let exampleOutputs = examples[1].map((el)=> {
       return JSON.stringify(el)
     })
+
+    this.setState({
+      exampleInputs : exampleInputs,
+      exampleOutputs : exampleOutputs
+    })
   }
 
   saveResults(companyScheduleId, result, submission, score, time) {
@@ -128,44 +165,45 @@ class UserInitialChallengeView extends Component {
 
   checkAnswer() {
     let params = this.props.initial_challenge[0].parameters
-    let testCaseS = this.props.initial_challenge[0].test_cases.replace(/"/g, "'")
-    let testCaseD = testCaseS.replace(/'/g, '"')
+    let testCases = JSON.parse(this.props.initial_challenge[0].test_cases)
 
-    let tests = JSON.parse(testCaseD)
-
-    console.log('parsed tests', tests)
-    let input = tests[0].map((el)=> {
-      return JSON.stringify(el)
-    }).join(',')
-    let output = tests[1].map((el)=> {
-      return JSON.stringify(el)
-    }).join(',')
-    console.log('input', input)
-    
-    input = input.replace(/'/g, "")
-    output = output.replace(/'/g, "")
-
-    
-    let reg = new RegExp(`${params}`, 'g')
-    let submittedCode = `${this.state.code.replace(reg, `${params}`)}
-
-${this.props.initial_challenge[0].function_name}(${input})`
-
-    if (this.state.inChallenge) {
-      window.onerror = function(msg, url, lineNo, columnNo, error){
-        swal(
-          'There was an error in your code',
-          'Double check your syntax and try again!',
-          'warning'
-        )
-      }
-    }
-
-    let answer = eval(submittedCode)
-    this.setState({
-      submission: submittedCode
+    let inputs = testCases[0]
+    let outputs = testCases[1].map((el)=> {
+      return JSON.parse(el)
     })
-    return JSON.stringify(answer) === output
+
+    let answerResults = inputs.map((input) => {
+      let reg = new RegExp(`${params}`, 'g')
+      input = JSON.parse(input)
+
+      let submittedCode;
+      if (params.split(',').length> 1) {
+        submittedCode = `${this.state.code.replace(reg, `${params}`)}
+
+${this.props.initial_challenge[0].function_name}('${input[0]}', '${input[1]}')`
+      } else {
+
+        submittedCode = `${this.state.code.replace(reg, `${params}`)}
+
+${this.props.initial_challenge[0].function_name}('${input}')`
+      }
+      if (this.state.inChallenge) {
+        window.onerror = function(msg, url, lineNo, columnNo, error){
+          swal(
+            'There was an error in your code',
+            'Double check your syntax and try again!',
+            'warning'
+          )
+        }
+      }
+      let answer = eval(submittedCode)
+      this.setState({
+        submission: submittedCode
+      })
+      return answer
+    })
+    console.log('answer check', JSON.stringify(answerResults) === JSON.stringify(outputs))
+    return JSON.stringify(answerResults) === JSON.stringify(outputs)
   }
 
   handleSubmit() {
@@ -212,11 +250,8 @@ ${this.props.initial_challenge[0].function_name}(${input})`
     return (
       <div>
         <i onClick={ () => this.props.history.push('/user/schedule') } className="arrow alternate circle left icon"></i>
-
           <div className='ui horizontal segments user_liveCoding_container' style={{ padding: '30px', margin: 'auto', minWidth: '900px', maxWidth: '1200px'}}>
-
             <div className='ui padded segment'>
-
               <AceEditor
                 mode="javascript"
                 theme={this.state.theme}
@@ -233,44 +268,34 @@ ${this.props.initial_challenge[0].function_name}(${input})`
                 showLineNumbers: true,
                 tabSize: 2,
               }}/>
-              <select value={this.state.theme} onChange={this.handleTheme}>
-                <option value='monokai'>Monokai</option>
-                <option value='github'>Github</option>
-                <option value='twilight'>Twilight</option>
-                <option value='solarized_dark'>Solarized Dark</option>
-                <option value='terminal'>Terminal</option>
+              <select className="ui dropdown" value={this.state.theme} onChange={this.handleTheme}>
+                <option value="monokai">Monokai</option>
+                <option value="github">Github</option>
+                <option value="twilight">Twilight</option>
+                <option value="solarized_dark">Solarized Dark</option>
+                <option value="terminal">Terminal</option>
               </select>
               <button className='ui green button' style={{ float: 'right' }} onClick={this.handleSubmit}>Submit Answer</button>
             </div>
-
             <div className='ui padded segment user_liveCoding_rightSeg'>
-
               <h1>{this.props.initial_challenge[0].name}</h1>
               <div><b>Title:</b> {this.props.initial_challenge[0].title}</div>
-              <div>
-                <b>difficulty:</b><span style={{color: '#f2711c'}}>  {this.props.initial_challenge[0].difficulty}</span>
-              </div>
-              <div>
-                <b>instruction:</b> {this.props.initial_challenge[0].instruction}
-              </div>
+              <div><b>difficulty:</b><span style={{color: '#f2711c'}}>  {this.props.initial_challenge[0].difficulty}</span></div>
+              <div><b>instruction:</b>{this.props.initial_challenge[0].instruction}</div>
               {this.state.exampleInputs.length > 0 ?
-              <div className="examples">
-                examples:  {this.state.exampleInputs.map((input, i) => {
-                  return <div className="input" key={i}>{input}</div>
-                })}
+              <h3>
+                <b>Examples:</b>
+                {this.state.exampleInputs.map((input, i) => {
+                  return <div className="examples" key={i}>{input}</div>
+                })} ,
                 {this.state.exampleOutputs.map((output, i) => {
-                  return <div className="output" key={i}>{output}</div>
+                  return <div className="examples" key={i}>{output}</div>
                 })}
-              </div>
+              </h3>
               : null }
-
-               <div className='candidate_time_limit'><span style={{color: '#f2711c'}}>Time Limit:</span>  {this.state.timeRemaining} </div>
-
-            </div>
-
+            <div className='candidate_time_limit'><span style={{color: '#f2711c'}}>Time Limit:</span>{this.state.timeRemaining} </div>
           </div>
-  
-       
+        </div>
       </div>
     )
   }

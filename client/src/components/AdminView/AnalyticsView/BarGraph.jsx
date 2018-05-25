@@ -29,19 +29,16 @@ class BarGraph extends Component {
         pass[data[category]] = pass[data[category]] + 1 || 1
       }
     }
-    console.log('pass and count', pass, count)
     for (let element of params) {
 
       let passRate
       pass[element] ? passRate = pass[element] / count[element] : 0
       results[element] = passRate || 0
     }
-
     return results
   }
 
   render() {
-    console.log('props in bar', this.props)
     let IndustrySuccess = this.successRate(this.props.allResults, "category", categories)
     let CompanySuccess = this.successRate(this.props.companyResults, "category", categories)
     let ChallengeSuccess = this.successRate(this.props.companyResults,  "category", categories)
