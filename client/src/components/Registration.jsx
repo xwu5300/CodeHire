@@ -16,9 +16,7 @@ class Registration extends Component {
       confirmPassword: '',
       email: '',
       phone: '',
-      logoUrl: '',
       candidateName: '',
-      companyInfo: '',
       github_url: ''
     };
 
@@ -54,9 +52,7 @@ class Registration extends Component {
       confirmPassword: '',
       email: '',
       phone: '',
-      logoUrl: '',
       candidateName: '',
-      companyInfo: '',
       github_url: ''
     })
   }
@@ -64,9 +60,9 @@ class Registration extends Component {
   render() {
     return (
       <div className='ui centered padded grid'>
-        <div className='ui two buttons top' style={{ marginTop: '20px' }} >
-          <button value='company' onClick={ (e) => this.switchForm(e.target.value) } className="ui active button">Company</button>
-          <button value='candidate' onClick={ (e) => this.switchForm(e.target.value) } className="ui button">Candidate</button>
+        <div className='ui two orange inverted buttons top' >
+          <button value='company' className='ui orange button' onClick={ (e) => this.switchForm(e.target.value) } className="ui button">Company</button>
+          <button value='candidate' className='ui black button' onClick={ (e) => this.switchForm(e.target.value) } className="ui button">Candidate</button>
         </div>
 
       {this.state.formView === 'company' ?
@@ -90,15 +86,13 @@ class Registration extends Component {
             <div className='field'>
               <input onChange={ (e) => this.handleChange(e) } value={ this.state.phone } name='phone' type='text' placeholder='Phone #' />
             </div>
-            <div className='field'>
-              <input onChange={ (e) => this.handleChange(e) } value={ this.state.logoUrl } name='logoUrl' type='text' placeholder='Logo URL' />
+
+            <div className='register_btn_container'>
+              <button className='ui orange button register_btn' type='submit'>Register</button>
+              <button className='ui orange inverted button register_btn' onClick={ () => this.props.history.push('/login') }>To Login</button>
             </div>
-            <textarea type='text' name='companyInfo' onChange={ (e) => this.handleChange(e) } value={ this.state.companyInfo }></textarea>
-            <button className='ui yellow button' type='submit'>Register</button>
-            <button className='ui green button' onClick={ () => this.props.history.push('/') }>To Login</button>
-            {/* <span>{ this.props.signup_status }</span> */}
-          </form>
-         
+              
+          </form>      
         
         :
          
@@ -124,9 +118,12 @@ class Registration extends Component {
             <div className='field'>
               <input onChange={ (e) => this.handleChange(e) } value={ this.state.github_url } name='github_url' type='text' placeholder='github url' />
             </div>
-            <button className='ui yellow button' type='submit'>Register</button>
-            <button className='ui green button' onClick={ () => this.props.history.push('/') } >To Login</button>
-            {/* <span>{ this.props.signup_status }</span> */}
+
+            <div className='register_btn_container'>
+              <button className='ui orange button register_btn' type='submit'>Register</button>
+              <button className='ui orange inverted button register_btn' onClick={ () => this.props.history.push('/login') } >To Login</button>
+            </div>
+            
           </form>
       }
     
