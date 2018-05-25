@@ -89,14 +89,14 @@ class CompanyScheduleView extends Component {
           {this.props.initial_challenge.length ?
         <div className='initial_challenge'>
         <h2>
-        Before You Schedule Live Challenge - You Need To Pass Initial Challenge
+        To schedule a live challenge, you must pass the Initial Challenge!
         </h2>
         <button className='ui orange inverted button' onClick={() => {
           this.isTaken()
           }}>
             Take Initial Challenge</button>
         </div>
-        : <h2> {localStorage.getItem('companyName')} Does Not Have Any Upcoming Live Challenge </h2>    
+        : <h2> {localStorage.getItem('companyName')} does not have an initial challenge at this time.  </h2>    
       }
       </div>
 
@@ -111,7 +111,7 @@ class CompanyScheduleView extends Component {
                 candidateCalendar={this.props.candidate_calendar} 
                 checkCandidateReschedule={this.props.checkCandidateReschedule} 
                 results={this.props.results} />
-              : <h2> {localStorage.getItem('companyName')} Does Not Have Any Upcoming Live Challenge </h2> }
+              : <h2> {localStorage.getItem('companyName')} does not have any upcoming challenges. Check back later. </h2> }
             </div>
         </div>
       </div>

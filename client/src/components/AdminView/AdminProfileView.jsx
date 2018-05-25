@@ -69,7 +69,6 @@ class AdminProfileView extends Component {
       this.handleSubmit(this.state.logo_url);
     }
   }
-
   
   render() {
     return (
