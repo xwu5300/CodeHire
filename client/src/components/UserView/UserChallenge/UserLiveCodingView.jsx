@@ -230,6 +230,9 @@ class UserLiveCodingView extends Component {
     return (
       <div>
         <i onClick={ () => this.props.history.push('/user') } className="arrow alternate circle left icon"></i>
+
+         <p className='leave_warning'>Please do not leave this coding view. <br /> Your code will automatically be submitted.</p>
+
         <div className='ui horizontal segments user_liveCoding_container' style={{ padding: '30px', margin: 'auto'}}>
           <div className='ui padded segment'>
             <AceEditor

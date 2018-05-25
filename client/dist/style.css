@@ -449,6 +449,8 @@ ui.menu.container.item {
 	position: relative;
 	top: 125px;
 	width: 90%;
+	min-width: 900px;
+	max-width: 1200px;
 }
 
 .candidate_time_limit {
@@ -466,6 +468,15 @@ ui.menu.container.item {
 .user_liveCoding_rightSeg div:nth-child(1), .user_liveCoding_rightSeg div:nth-child(2), .user_liveCoding_rightSeg div:nth-child(3), .user_liveCoding_rightSeg div:nth-child(4){
   margin-bottom: 30px;
   font-size: 24px;
+  line-height: 30px;
+}
+
+.leave_warning {
+	 color: white;
+	 position: absolute;
+	 top: 50px;
+	 right: 120px;
+	 font-size: 18px;
 }
 
 
@@ -505,9 +516,10 @@ ui.menu.container.item {
   font-size: 24px;
   font-weight: bold;
   position: absolute;
-  top: 15px;
-  right: 20px;
+  top: 45px;
+  right: 40px;
   clear: both;
+  color: #f2711c;
 }
 
 .live_coding_results {
@@ -539,6 +551,7 @@ ui.menu.container.item {
 	top: 75px;
 	width: 80%;
 	margin: auto;
+	margin-bottom: 40px;
 }
 
 .company_logo_container {

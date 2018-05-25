@@ -51,6 +51,10 @@ class LiveCodingView extends Component {
     this.socket.emit('company enter', this.props.current_company_calendar);
   } 
 
+  componentWillUnmount() {
+    localStorage.setItem('user_code', '');
+  }
+
 
   getProfile(username) {
    this.props.fetchCandidateInfo(null, username, () => {
@@ -93,7 +97,7 @@ class LiveCodingView extends Component {
      
         <div className='ui grid padded centered'>
           <div className='five column centered row' style={{ marginTop: '30px' }}>
-            <h1 className='4 columns wide'>Live Coding Challenge</h1>
+            <h1 className='4 columns wide' style={{ color: 'white' }}>Live Coding Challenge</h1>
               <div style={{ marginTop: '30px' }}>
                 <ChallengeClock duration={ this.props.current_live_challenge_duration } />
               </div>
