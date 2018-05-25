@@ -98,7 +98,7 @@ class UserLiveCodingView extends Component {
          type: 'info'}).then(() =>{
           this.props.history.push('/user')
          }
-        )
+       )
     })
   }
 
@@ -121,10 +121,10 @@ class UserLiveCodingView extends Component {
     let examplesD = examplesS.replace(/'/g, '"')
     let examples = JSON.parse(examplesD)
     let exampleInputs = examples[0].map((el)=> {
-      return JSON.stringify(el)
+      return (el)
     })
     let exampleOutputs = examples[1].map((el)=> {
-      return JSON.stringify(el)
+      return (el)
     })
 
     this.setState({
@@ -147,39 +147,44 @@ class UserLiveCodingView extends Component {
 
   checkAnswer() {
     let params = this.props.location.challenge.parameters
-    let testCaseS = this.props.location.challenge.test_cases.replace(/"/g, "'")
-    let testCaseD = testCaseS.replace(/'/g, '"')
+    let testCases = JSON.parse(this.props.location.challenge.test_cases)
 
-    let tests = JSON.parse(testCaseD)
-    let input = tests[0].map((el)=> {
-      return JSON.stringify(el)
-    }).join(',')
-    let output = tests[1].map((el)=> {
-      return JSON.stringify(el)
-    }).join(',')
-    input = input.replace(/'/g, "")
-    output = output.replace(/'/g, "")
-
-    let reg = new RegExp(`${params}`, 'g')
-    let submittedCode = `${this.state.code.replace(reg, `${params}`)}
-
-    ${this.props.location.challenge.function_name}(${input})
-    `
-    if (this.state.inChallenge) {
-      window.onerror = () => {
-        swal(
-          'There was an error in your code',
-          'Double check your syntax and try again!',
-          'warning'
-        )
-      }
-    }
-
-    let answer = eval(submittedCode)
-    this.setState({
-      submission: submittedCode
+    let inputs = testCases[0]
+    let outputs = testCases[1].map((el)=> {
+      return JSON.parse(el)
     })
-    return JSON.stringify(answer) === output
+
+    let answerResults = inputs.map((input) => {
+      let reg = new RegExp(`${params}`, 'g')
+      input = JSON.parse(input)
+
+      let submittedCode;
+      if (params.split(',').length> 1) {
+        submittedCode = `${this.state.code.replace(reg, `${params}`)}
+
+  ${this.props.initial_challenge[0].function_name}('${input[0]}', '${input[1]}')`
+      } else {
+
+        submittedCode = `${this.state.code.replace(reg, `${params}`)}
+
+  ${this.props.initial_challenge[0].function_name}('${input}')`
+      }
+      if (this.state.inChallenge) {
+        window.onerror = function(msg, url, lineNo, columnNo, error){
+          swal(
+            'There was an error in your code',
+            'Double check your syntax and try again!',
+            'warning'
+          )
+        }
+      }
+      let answer = eval(submittedCode)
+      this.setState({
+        submission: submittedCode
+      })
+      return answer
+    })
+    return JSON.stringify(answerResults) === JSON.stringify(outputs)
   }
 
   handleSubmit() {

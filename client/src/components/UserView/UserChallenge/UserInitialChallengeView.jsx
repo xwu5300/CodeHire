@@ -142,10 +142,10 @@ class UserInitialChallengeView extends Component {
     let examplesD = examplesS.replace(/'/g, '"')
     let examples = JSON.parse(examplesD)
     let exampleInputs = examples[0].map((el)=> {
-      return JSON.stringify(el)
+      return (el)
     })
     let exampleOutputs = examples[1].map((el)=> {
-      return JSON.stringify(el)
+      return (el)
     })
 
     this.setState({
@@ -202,7 +202,6 @@ ${this.props.initial_challenge[0].function_name}('${input}')`
       })
       return answer
     })
-    console.log('answer check', JSON.stringify(answerResults) === JSON.stringify(outputs))
     return JSON.stringify(answerResults) === JSON.stringify(outputs)
   }
 
