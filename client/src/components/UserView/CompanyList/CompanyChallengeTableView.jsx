@@ -31,7 +31,7 @@ class CompanyChallengeTableView extends Component {
 
   render() {
     return (
-       <div className='ui container segment'>
+       <div className='ui container segment' style={{ marginBottom: '40px'}}>
         <ReactCollapsingTable 
         columns={this.props.columns} 
         rows={this.props.rows} 
