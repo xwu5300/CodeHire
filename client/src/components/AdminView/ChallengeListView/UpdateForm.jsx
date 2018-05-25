@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Promise from 'bluebird';
 
 
@@ -295,7 +295,7 @@ class UpdateForm extends Component {
           <br/>
           {this.state.challenge.testCases.map((item, i) => (
             <div>
-              <div className="two fields" key={i}>
+              <div className="two fields" style={{ clear: 'both' }} key={i}>
                 <div className="field">
                   <label>Test Case - Input</label>
                   <input name="testInput" type="text" placeholder="[[1, 3, 6, 0, -2], 9]" value={item.input} onChange={(evt)=> {this.handleTestInputChange(i, evt)}}/>
@@ -305,13 +305,17 @@ class UpdateForm extends Component {
                   <input name="testOutput" type="text" placeholder="[1, 2]" value={item.output} onChange={(evt)=>{this.handleTestOutputChange(i, evt)}}/>
                 </div>
               </div>
-              <div className="ui icon button" style={{float: "right"}} onClick={this.handleAddTest}><i className="plus icon"></i></div>
-              <div className="ui icon button" style={{float: "right"}} onClick={()=>{this.handleRemoveTest(i)}}><i className="minus icon"></i></div>
+              { i === this.state.challenge.testCases.length - 1 ?
+                <Fragment>
+                  <div className="ui icon button" style={{ float: 'right'}} onClick={this.handleAddTest}><i className="plus icon"></i></div>
+                  <div className="ui icon button" style={{ float: 'right' }} onClick={()=>{this.handleRemoveTest(i)}}><i className="minus icon"></i></div>
+               </Fragment>
+              : null }
             </div>
             ))}
             {this.state.challenge.exampleCases.map((item, i) => (
             <div>
-              <div className="two fields" key={i}>
+              <div className="two fields" style={{ clear: 'both' }} key={i}>
                 <div className="field">
                   <label>Example - Input</label>
                   <input name="exampleInput" type="text" placeholder="[[1, 4, -2, 6, 9], 15]" value={item.input} onChange={(evt)=>{this.handleExampleInputChange(i, evt)}}/>
@@ -321,8 +325,12 @@ class UpdateForm extends Component {
                   <input name="exampleOutput" type="text" placeholder="[3, 4]" value={item.output} onChange={(evt)=>{this.handleExampleOutputChange(i, evt)}}/>
                 </div>
               </div>
-              <div className="ui icon button" style={{float: "right"}} onClick={()=> this.handleAddExample()}><i className="plus icon"></i></div>
-              <div className="ui icon button" style={{float: "right"}} onClick={()=> this.handleRemoveExample(i)}><i className="minus icon"></i></div>
+              { i === this.state.challenge.exampleCases.length - 1 ?
+                <Fragment>
+                  <div className="ui icon button" style={{float: "right"}} onClick={()=> this.handleAddExample()}><i className="plus icon"></i></div>
+                  <div className="ui icon button" style={{float: "right"}} onClick={()=> this.handleRemoveExample(i)}><i className="minus icon"></i></div>
+               </Fragment>
+              : null }
             </div>
             ))}
           <div className="field">
