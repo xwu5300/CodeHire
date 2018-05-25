@@ -508,6 +508,7 @@ router.get('/api/results/candidate/initial', (req, res) => {
 router.post('/api/results', (req, res) => {
   let companyId = jwt.decode(req.body.companyId, secret).id;
   let candidateId = jwt.decode(req.body.candidateId, secret).id;
+
   resultsControllers.saveResults(req.body.companyScheduleId, req.body.isPassed, req.body.code, req.body.score, req.body.completedAt, req.body.challengeId, companyId, candidateId, req.body.initial)
   .then(() => {
     console.log('Results saved to results table');

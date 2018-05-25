@@ -18,8 +18,8 @@ class UserLiveCodingView extends Component {
     super(props);
 
     this.state = {
-      minutes: '',
-      seconds: '',
+      minutes: this.props.location.duration,
+      seconds: '00',
       code: `function ${this.props.location.challenge.function_name}(${this.props.location.challenge.parameters}) {
 
 }`,
@@ -48,7 +48,6 @@ class UserLiveCodingView extends Component {
     })
 
     this.socket.on('clock was reset', (duration) => {
-      console.log('DURATION', duration)
       this.setState({ minutes: duration, seconds: '00' })
     })
 
@@ -99,10 +98,12 @@ class UserLiveCodingView extends Component {
 
     this.socket.emit('candidate result', localStorage.getItem('username'), result);
     
-    let challenge_id = this.props.location.challenge.challenge_id
-    let company_id = localStorage.getItem('companyId')
-    let candidate_id = localStorage.getItem('userId')
-    let userSchedule_id = this.props.location.challenge.id
+
+    let challenge_id = this.props.location.challenge.challenge_id;
+    let company_id = localStorage.getItem('companyId');
+    let candidate_id = localStorage.getItem('userId');
+    let userSchedule_id = this.props.location.challenge.id;
+  
     this.props.saveResults(companyScheduleId, result, submission, score, time, challenge_id, company_id, candidate_id, false, userSchedule_id, () => {})
   }
 
@@ -182,14 +183,10 @@ class UserLiveCodingView extends Component {
   }
 
   render() {
+    console.log('USR PROS', this.props);
     return (
       <div>
-        <div className="ui orange four item menu">
-          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ localStorage.getItem('username') }</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
-        </div>
+        <i onClick={ () => this.props.history.push('/user') } className="arrow alternate circle left icon"></i>
 
         <div className='ui horizontal segments user_liveCoding_container' style={{ padding: '30px', margin: 'auto'}}>
           <div className='ui padded segment'>
