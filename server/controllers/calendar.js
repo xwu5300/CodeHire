@@ -61,21 +61,27 @@ module.exports.deleteFromCompanySchedule = (scheduleId) => {
 }
 
   //get single company's schedule
-module.exports.getCompanySchedule = (companyId, companyName) => {
-  let option = {}
-  if (companyName) {
-    option = {'users.name': companyName}
-  } else if (companyId) {
-    option = {'users.id': companyId}
-  }
-  return knex.from('company_schedule')
-  .innerJoin('all_challenges', 'all_challenges.id', 'company_schedule.challenge_id')
-  .innerJoin('users', 'users.id', 'company_schedule.company_id')
-  .where(option)
-  .select('*', 'company_schedule.id', 'company_schedule.duration', 'company_schedule.company_id')
-  .orderBy('time', 'asc')
+module.exports.getCompanySchedule = (companyId) => {
+  let currTime = Date.now();
+  return knex('company_schedule')
+  .select('duration')
   .then((res) => {
-    return res;
+    let duration = res[0].duration
+    let pastTime = moment(currTime).add(duration, 'minutes')
+    return knex.from('company_schedule')
+    .innerJoin('all_challenges', 'all_challenges.id', 'company_schedule.challenge_id')
+    .innerJoin('users', 'users.id', 'company_schedule.company_id')
+    .whereNull('company_schedule.time')
+    .orWhere('company_schedule.time', '>', pastTime)
+    .andWhere({'users.id': companyId})
+    .select('*', 'company_schedule.id', 'company_schedule.duration', 'company_schedule.company_id')
+    .orderBy('time', 'asc')
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      console.log('Error retrieving schedule from db', err);
+    })
   })
   .catch((err) => {
     console.log('Error retrieving schedule from db', err);
@@ -88,7 +94,7 @@ module.exports.getCandidateCalendar = (candidateId) => {
     .innerJoin('company_schedule', 'user_schedule.company_schedule_id', 'company_schedule.id')
     .innerJoin('all_challenges', 'company_schedule.challenge_id', 'all_challenges.id')
     .innerJoin('users', 'company_schedule.company_id', 'users.id')
-    .select('*', 'company_schedule.duration', 'user_schedule.id')
+    .select('*', 'company_schedule.duration', 'user_schedule.id', 'company_schedule.company_id')
     .orderBy('time', 'asc')
     .then((res) => {
       return res;
@@ -153,8 +159,8 @@ module.exports.checkCandidateReschedule = (candidateId, companyId, time) => {
   .andWhere('time', '>', earlyTime)
   .andWhere('time', '<', lateTime)
   .then((res) => {
+    // console.log('calendar.js check candidate reschedule', res)
     return res;
-    console.log('calendar.js check candidate reschedule', res)
   })
   .catch((err) => {
     console.log('Could not check candidate reschedule from db', err);

@@ -69,6 +69,7 @@ export const saveChallenge = (challenge, companyId, cb) => (dispatch) => {
   axios.post('/api/challenges', { challenge, companyId, scheduled: false})
   .then(() => {
     dispatch(fetchAllChallenges(companyId));
+    dispatch(fetchActiveChallenges(companyId));
     console.log('Saved to your challenges')
   })
   .then(() => {
@@ -149,8 +150,8 @@ export const deleteFromCompanySchedule = (scheduleId, companyId) => (dispatch) =
   })
 }
 
-export const fetchCompanySchedule = (companyId, companyName) => (dispatch) => {
-  axios.get('/api/companyCalendar', {params: { companyId, companyName }})
+export const fetchCompanySchedule = (companyId) => (dispatch) => {
+  axios.get('/api/companyCalendar', {params: { companyId }})
   .then(({data}) => {
     dispatch({ type: GET_COMPANY_SCHEDULE, payload: data});
   })
@@ -214,8 +215,8 @@ export const setCurrentLiveChallenge = (title, duration) => (dispatch) => {
 }
 
 
-export const fetchCompanyResults = (companyId, candidateId, cb) => (dispatch) => {
-  axios.get('/api/results', { params: { companyId, candidateId } })
+export const fetchCompanyResults = (companyId, candidateId, time, cb) => (dispatch) => {
+  axios.get('/api/results', { params: { companyId, candidateId, time } })
   .then(({data}) => {
     dispatch({ type: GET_COMPANY_RESULTS, payload: data})
     if(cb) {

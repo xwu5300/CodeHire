@@ -52,7 +52,7 @@ class ChallengeListView extends Component {
   }
 
   render() {
-    console.log('challenge list props', this.props)
+    // console.log('challenge list this.props.company_schedule', this.props.company_schedule)
     return (
       <div>
         <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout } />

@@ -13,11 +13,13 @@ class CompanyChallengeTableView extends Component {
   }
 
   storeCompanyInfo(info) {
+    console.log('company challenge table view info', info)
     let companyId = {id: info.companyId};
     let companyName = info.companyName;
     let idToken = jwt.encode(companyId, secret.secret);
     localStorage.setItem('companyId', idToken)
     localStorage.setItem('companyName', companyName)
+    // localStorage.setItem('companyWeb', info)
     this.props.fetchCompanyInfo(idToken, ()=>{})
     this.props.fetchCandidateInitialResults(idToken, localStorage.getItem('userId'), () => {})
   }

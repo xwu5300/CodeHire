@@ -27,7 +27,6 @@ class AdminDashboardView extends Component {
   componentDidMount() {
     this.props.fetchCompanySchedule(localStorage.getItem('userId'));
     this.props.fetchInitialChallenge(localStorage.getItem('userId'));
-    // this.props.fetchAllChallenges(localStorage.getItem('userId'));
     Modal.setAppElement('body');
     this.props.fetchActiveChallenges(localStorage.getItem('userId'));
   }
@@ -87,7 +86,6 @@ class AdminDashboardView extends Component {
     let upcoming = this.props.company_schedule.filter((item) => {
       return !(!item.time || item.duration === 0 || moment(item.time).format() < moment(currTime).format())
     })
-
     return (
       <div>
         <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout } />
@@ -132,7 +130,6 @@ class AdminDashboardView extends Component {
                 </thead>
                 <tbody>
                   {this.props.company_schedule.length > 0 ? this.props.company_schedule.map((item, i) => {
-                    console.log('')
                     return (
                       <Fragment key={i}>
                       {!item.time || item.duration === 0 || moment(item.time).format() < moment(currTime).format() ? null : 

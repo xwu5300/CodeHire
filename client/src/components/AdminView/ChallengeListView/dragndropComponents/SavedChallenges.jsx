@@ -82,7 +82,7 @@ class SavedChallenges extends Component {
   }
 
   render() {
-
+    console.log('save challenge active cahllenge', this.props.activeChallenges)
     const { connectDropTarget } = this.props;
 
     return connectDropTarget(
