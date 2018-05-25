@@ -45,7 +45,8 @@ class AdminProfileView extends Component {
   }
 
   handleSubmit(logo) {
-    this.props.updateInfo(localStorage.getItem('userId'), logo, this.state.information, this.state.website_url);
+    let url = this.state.website_url.includes('http://') || this.state.website_url.includes('https://') ? this.state.website_url : 'http://' + this.state.website_url
+    this.props.updateInfo(localStorage.getItem('userId'), logo, this.state.information, url);
     this.setState({ isTextarea: !this.state.isTextarea })
   }
 

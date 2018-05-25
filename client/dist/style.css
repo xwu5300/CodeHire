@@ -537,7 +537,13 @@ ui.menu.container.item {
 	background-color: orange;
 }
 
+.arrow-left {
+  cursor: pointer;
+}
 
+.arrow-right {
+  cursor: pointer;
+}
 
 .company-name {
 	font-size: 22px;
