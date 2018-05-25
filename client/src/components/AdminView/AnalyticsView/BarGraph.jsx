@@ -29,22 +29,22 @@ class BarGraph extends Component {
         pass[data[category]] = pass[data[category]] + 1 || 1
       }
     }
-    console.log('pass and count', pass, count)
     for (let element of params) {
-
-      let passRate
-      pass[element] ? passRate = pass[element] / count[element] : 0
-      results[element] = passRate || 0
+      if (pass[element] && count[element]) {
+        results[element] = pass[element] / count[element]
+      } else {
+        results[element] = 0
+      }
     }
-
     return results
   }
 
   render() {
-    console.log('props in bar', this.props)
+    console.log('data props', this.props)
     let IndustrySuccess = this.successRate(this.props.allResults, "category", categories)
     let CompanySuccess = this.successRate(this.props.companyResults, "category", categories)
     let ChallengeSuccess = this.successRate(this.props.companyResults,  "category", categories)
+
 
     let Industry = this.props.allResults.map((data) => {
       let passPercent = Math.round(IndustrySuccess[data.category] * 100)
@@ -86,11 +86,11 @@ class BarGraph extends Component {
                 return <option key={i} value={challengeResult.id}>{challengeResult.title}</option>
             })}
             </select>
-          
+
         </div>
       <div className='ui container segment graph'>
         <div className="challenge-results-graph">
-          <VictoryChart domainPadding={50} domain={{y: [0, 120]}} >
+          <VictoryChart domainPadding={50} domain={{y: [0, 80]}} >
             <VictoryLegend
               x={145} y={30}
               style={{labels:{fontSize: 7}, padding: '50px'}}

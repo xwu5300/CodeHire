@@ -33,6 +33,9 @@ class UserLiveCodingView extends Component {
 
     this.socket = socketClient();
     this.onChange = this.onChange.bind(this)
+    this.checkOnTab = this.checkOnTab.bind(this)
+    this.startTimer = this.startTimer.bind(this)
+    this.tabOutSubmission = this.tabOutSubmission.bind(this)
     this.handleTheme = this.handleTheme.bind(this)
     this.saveResults = this.saveResults.bind(this)
     this.checkAnswer = this.checkAnswer.bind(this)
@@ -56,6 +59,8 @@ class UserLiveCodingView extends Component {
   }
 
   componentDidMount() {
+     this.getExamples()
+     this.startTimer()
      this.socket.emit('candidate enter', this.props.current_company_calendar, localStorage.getItem('username'));
      this.socket.emit('current user view', this.props.current_company_calendar, localStorage.getItem('username'));
   }
@@ -64,11 +69,44 @@ class UserLiveCodingView extends Component {
     this.socket.emit('candidate disconnect', localStorage.getItem('username'), this.props.current_company_calendar);
   }
 
+  checkOnTab(countdown) {
+    this.setState({
+      tabHidden: document.hidden
+    }, function() {if (this.state.tabHidden) {
+      this.tabOutSubmission()
+      clearInterval(countdown)
+    }})
+  }
+
+  startTimer() {
+    console.log('tick')
+    let countdown = setInterval( () => {
+      this.checkOnTab()
+    }, 1000)
+  }
+
+  tabOutSubmission() {
+    let id = this.props.location.challenge.id
+    let company_id = localStorage.getItem('companyId')
+    let user_id = localStorage.getItem('userId')
+    this.props.saveResults(null, 'f', this.state.code, 90, moment(Date.now()).format(), id, company_id, user_id, true , id, () => {
+
+      swal(
+        {title: 'You Left Your Coding View',
+         text: 'The current state of your code was saved and submitted',
+         allowOutsideClick: false,
+         type: 'info'}).then(() =>{
+          this.props.history.push('/user')
+         }
+        )
+    })
+  }
+
   onChange(newValue, event) {
     this.setState({
       code: newValue
     })
-    
+
     this.socket.emit('typing', localStorage.getItem('username'), newValue);
   }
 
@@ -95,7 +133,6 @@ class UserLiveCodingView extends Component {
     })
   }
 
-
   saveResults(companyScheduleId, companyId, result, submission, score, time) {
     console.log('not encode company id', companyId)
     this.socket.emit('candidate result', localStorage.getItem('username'), result);
@@ -104,7 +141,7 @@ class UserLiveCodingView extends Component {
     let challenge_id = this.props.location.challenge.challenge_id;
     let candidate_id = localStorage.getItem('userId');
     let userSchedule_id = this.props.location.challenge.id;
-  
+
     this.props.saveResults(companyScheduleId, result, submission, score, time, challenge_id, company_id, candidate_id, false, userSchedule_id, () => {})
   }
 
@@ -185,11 +222,9 @@ class UserLiveCodingView extends Component {
   }
 
   render() {
-    console.log('USR PROS', this.props.location.challenge);
     return (
       <div>
         <i onClick={ () => this.props.history.push('/user') } className="arrow alternate circle left icon"></i>
-
         <div className='ui horizontal segments user_liveCoding_container' style={{ padding: '30px', margin: 'auto'}}>
           <div className='ui padded segment'>
             <AceEditor
@@ -208,12 +243,12 @@ class UserLiveCodingView extends Component {
               showLineNumbers: true,
               tabSize: 2,
             }}/>
-            <select value={this.state.theme} onChange={this.handleTheme}>
-              <option value='monokai'>Monokai</option>
-              <option value='github'>Github</option>
-              <option value='twilight'>Twilight</option>
-              <option value='solarized_dark'>Solarized Dark</option>
-              <option value='terminal'>Terminal</option>
+            <select className="ui dropdown" value={this.state.theme} onChange={this.handleTheme}>
+              <option value="monokai">Monokai</option>
+              <option value="github">Github</option>
+              <option value="twilight">Twilight</option>
+              <option value="solarized_dark">Solarized Dark</option>
+              <option value="terminal">Terminal</option>
             </select>
             <button className='ui green button' style={{ float: 'right' }} onClick={this.handleSubmit}> Submit Answer </button>
           </div>
@@ -224,20 +259,20 @@ class UserLiveCodingView extends Component {
             <div><b>Difficulty:</b><span style={{ color: '#f2711c' }}>  {this.props.location.challenge.difficulty}</span></div>
             <div><b>Instructions:</b> {this.props.location.challenge.instruction}</div>
              {this.state.exampleInputs.length > 0 ?
-            <div>
-              examples:
+            <h3>
+              <b>Examples:</b>
               {this.state.exampleInputs.map((input, i) => {
                 return <div className="examples" key={i}>{input}</div>
-              })}
+              })} ,
               {this.state.exampleOutputs.map((output, i) => {
                 return <div className="examples" key={i}>{output}</div>
               })}
-            </div>
+            </h3>
             : null }
             <div className='candidate_time_limit'> <span style={{color: '#f2711c'}}>Time Limit:</span> { this.state.minutes + ':' + this.state.seconds }</div>
             </div>
 
-        
+
       </div>
       </div>
      )
