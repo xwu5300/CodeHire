@@ -220,3 +220,4 @@ module.exports.fetchPastSchedule = (companyId) => {
     console.log('error retrieving past challenges', err);
   })
 }
+
