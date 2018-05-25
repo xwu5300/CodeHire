@@ -74,9 +74,10 @@ class CompanyScheduleView extends Component {
   }
 
   render() { 
+
     return (
       <div>
-        <i onClick={() => this.props.history.push('/user/challengelist') } className="arrow alternate circle left icon"></i>
+        <i onClick={() => this.props.history.push('/user/companylist') } className="arrow alternate circle left icon"></i>
           <div className='schedule_container'>
             <div className='ui raised very padded container segment' style={this.state.style}>
               <img className='company_profile_logo' src={ this.props.logo_url }/>
@@ -98,17 +99,24 @@ class CompanyScheduleView extends Component {
               : <h2> {localStorage.getItem('companyName')} Does Not Have Any Upcoming Live Challenge </h2>  }
             </div>
 
+
             <div>
               {this.props.all_company_calendars.length ?
-                <CompanyScheduleTableView updateStyle={this.updateStyle} saveCandidateCalendar={this.props.saveCandidateCalendar} companyCalendar={this.props.all_company_calendars} passInitial={this.props.pass_initial} fetchCompanyResults={this.props.fetchCompanyResults} candidateCalendar={this.props.candidate_calendar} checkCandidateReschedule={this.props.checkCandidateReschedule} results={this.props.results}/>
+                <CompanyScheduleTableView updateStyle={this.updateStyle} 
+                saveCandidateCalendar={this.props.saveCandidateCalendar} 
+                companyCalendar={this.props.all_company_calendars} 
+                passInitial={this.props.pass_initial} 
+                fetchCompanyResults={this.props.fetchCompanyResults} 
+                candidateCalendar={this.props.candidate_calendar} 
+                checkCandidateReschedule={this.props.checkCandidateReschedule} 
+                results={this.props.results} />
               : <h2> {localStorage.getItem('companyName')} Does Not Have Any Upcoming Live Challenge </h2> }
             </div>
         </div>
-        </div>
-
-  
-        );
-    
+      </div>
+    );
+  }
+}
   
 
 export default withRouter(CompanyScheduleView);
