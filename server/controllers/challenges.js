@@ -52,18 +52,29 @@ module.exports.saveChallenge = (title, instruction, functionName, params, testCa
 module.exports.deleteCompanyChallenge = (title, companyId) => {
   return knex('all_challenges')
   .where({title: title, company_id: companyId})
-  .del()
+  .update('active', false)
   .then((res) => {
-    console.log('Deleted challenge from database');
+    console.log('inactive challenge from database');
   })
   .catch((err) => {
-    console.log('Unable to delete challenge from db', err);
+    console.log('Unable to inactive challenge from db', err);
   })
 };
 
 //get all company challenges
 module.exports.getCompanyChallenges = (companyId) => {
   return knex('all_challenges').where('company_id', companyId)
+  .then((res) => {
+    console.log('Company challenges successfully received from db');
+    return res;
+  })
+  .catch((err) => {
+    console.log('Could not retrieve company challenges from db:', err);
+  })
+};
+
+module.exports.getActiveChallenges = (companyId) => {
+  return knex('all_challenges').where({'company_id': companyId, 'active': true})
   .then((res) => {
     console.log('Company challenges successfully received from db');
     return res;

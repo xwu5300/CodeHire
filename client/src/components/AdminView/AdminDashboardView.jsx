@@ -27,8 +27,9 @@ class AdminDashboardView extends Component {
   componentDidMount() {
     this.props.fetchCompanySchedule(localStorage.getItem('userId'));
     this.props.fetchInitialChallenge(localStorage.getItem('userId'));
-    this.props.fetchAllChallenges(localStorage.getItem('userId'));
+    // this.props.fetchAllChallenges(localStorage.getItem('userId'));
     Modal.setAppElement('body');
+    this.props.fetchActiveChallenges(localStorage.getItem('userId'));
   }
 
   getUsername() {
@@ -90,7 +91,7 @@ class AdminDashboardView extends Component {
           <div className='ui raised very padded container segment'>
             <div className='ui grid'>
               <Modal style={ customStyles } isOpen={ this.state.modalIsOpen } onRequestClose={ this.closeModal }>
-                <ScheduleInitialView initialChallenge={ this.props.initial_challenge } userId={ localStorage.getItem('userId')} defaultChallenges={ this.props.default_challenges } challenges={ this.props.all_challenges } close={ this.closeModal } makeInitial={this.props.makeInitial} isInitial={this.props.is_initial} addToSchedule={this.props.addToCompanySchedule}/>
+                <ScheduleInitialView initialChallenge={ this.props.initial_challenge } userId={ localStorage.getItem('userId')} defaultChallenges={ this.props.default_challenges } challenges={ this.props.active_challenges } close={ this.closeModal } makeInitial={this.props.makeInitial} isInitial={this.props.is_initial} addToSchedule={this.props.addToCompanySchedule}/>
               </Modal>
               <table className='ui inverted table company_calendar'>
                 <thead>

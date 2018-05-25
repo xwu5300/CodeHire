@@ -168,6 +168,15 @@ router.get('/api/challenges', (req, res) => {
   })
 })
 
+// get all active challenges from 'all_challenges' table
+router.get('/api/challenges/active', (req, res) => {
+  let companyId = jwt.decode(req.query.companyId, secret).id;
+  challengeControllers.getActiveChallenges(companyId)
+  .then((data) => {
+    res.send(data);
+  })
+})
+
 // get default challenges from 'all_challenges' table
 router.get('/api/defaultChallenges', (req, res) => {
   challengeControllers.getDefaultChallenges()

@@ -75,7 +75,7 @@ class CompanyScheduleView extends Component {
 
   render() { 
     console.log('company schdule CandidateInitialResults', this.props.pass_initial)
-    // if (this.props.initial_challenge.length) {
+    console.log('userlive coding company id ',localStorage.getItem('companyId'))
       return (
         <div>
         <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout } />
@@ -104,7 +104,16 @@ class CompanyScheduleView extends Component {
         <div>
         {this.props.all_company_calendars.length ?
    
-        <CompanyScheduleTableView updateStyle={this.updateStyle} saveCandidateCalendar={this.props.saveCandidateCalendar} companyCalendar={this.props.all_company_calendars} passInitial={this.props.pass_initial} fetchCompanyResults={this.props.fetchCompanyResults} candidateCalendar={this.props.candidate_calendar} checkCandidateReschedule={this.props.checkCandidateReschedule} results={this.props.results}/>
+        <CompanyScheduleTableView 
+          updateStyle={this.updateStyle} 
+          saveCandidateCalendar={this.props.saveCandidateCalendar} 
+          companyCalendar={this.props.all_company_calendars} 
+          passInitial={this.props.pass_initial} 
+          fetchCompanyResults={this.props.fetchCompanyResults} 
+          candidateCalendar={this.props.candidate_calendar} 
+          checkCandidateReschedule={this.props.checkCandidateReschedule} 
+          results={this.props.results}
+        />
         : <h2> {localStorage.getItem('companyName')} Does Not Have Any Upcoming Live Challenge </h2>
       }
 
