@@ -57,19 +57,17 @@ class HireView extends Component {
             <div className="ui button" onClick={this.handleClick}>Search</div>
           </div>
         </div>
-
         <div className="search-results-container">
           <div className="search-results">
            <h4>Search Results</h4> 
            {!this.state.searched ? null :
-           <UserSearchResults users={this.props.users} save={this.props.saveToFavorites} remove={this.props.removeFromFavorites} favorites={this.props.favorites.map((item) => item.user_id)}/> }
+           <UserSearchResults results={this.props.results} fetchResults={this.props.fetchCompanyResults} users={this.props.users} save={this.props.saveToFavorites} remove={this.props.removeFromFavorites} favorites={this.props.favorites.map((item) => item.user_id)}/> }
           </div>
           <div className="search-results">
             <h4>Saved Users</h4>
-            <SavedUsers contact={this.props.contact} favorites={this.props.favorites} remove={this.props.removeFromFavorites}/>
+            <SavedUsers results={this.props.results} fetchResults={this.props.fetchCompanyResults} contact={this.props.contact} favorites={this.props.favorites} remove={this.props.removeFromFavorites}/>
           </div>
         </div>
-
       </div>
     )
   }

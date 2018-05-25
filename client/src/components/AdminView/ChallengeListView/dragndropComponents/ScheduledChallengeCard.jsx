@@ -9,7 +9,8 @@ class ScheduledChallengeCard extends Component {
       duration: '',
       invalid: false,
       selected: null,
-      isExpanded: false
+      isExpanded: false,
+      initial: true
     }
 
     this.showCalendar = this.showCalendar.bind(this);
@@ -38,8 +39,11 @@ class ScheduledChallengeCard extends Component {
 
   handleClick(challenge, scheduleId) {
     let date = $('#date').val()
-    // console.log(this.state.duration, date)
-    if (this.state.duration === '' || !date) {
+    if (this.props.initialChallenge.length === 0) {
+      this.setState({
+        initial: false
+      })
+    } else if (this.state.duration === '' || !date) {
       this.setState({
         invalid: true
       })
@@ -99,7 +103,7 @@ class ScheduledChallengeCard extends Component {
                   <i className="calendar icon"></i>
                   <input name="date" type="text" placeholder="Date/Time" id={dateId}/>
                 </div>
-                <button type='button' onClick={ () => this.handleClick(this.props.challenge, this.props.scheduleId) }>Set Date</button>
+                <button className="ui button" type='button' onClick={ () => this.handleClick(this.props.challenge, this.props.scheduleId) }>Set Date</button>
               </div>
 
               <select className="ui dropdown" name="duration" value={this.state.duration} onChange={(e) => this.handleDurationChange(e) }>
@@ -110,7 +114,10 @@ class ScheduledChallengeCard extends Component {
                 <option value="90">90</option>
               </select>
           </div>
-
+          {!this.state.initial ? 
+          <div style={{color: 'red'}}>You must have an initial challenge set in order to schedule a challenge.</div> : null}
+          {this.state.invalid ?
+            <div style={{color: 'red'}}>Please check date and duration, and try again.</div> : null}
     
           <div className='saved_challenges_btns'>
 

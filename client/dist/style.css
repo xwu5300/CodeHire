@@ -166,6 +166,25 @@ ui.menu.container.item {
 	width: 100%;
 }
 
+.welcome {
+  margin: auto;
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.welcome-message-alt {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.welcome-message {
+  font-size: 17px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
 /* -------- Drag N Drop Challenge List--------- */
 .drag_segment {
 	overflow: scroll;
@@ -257,7 +276,7 @@ ui.menu.container.item {
 }
 
 .company_profile_saveBtn {
-	margin: auto;
+  margin: auto;
 }
 
 /* Candidate Calendar */
@@ -274,7 +293,11 @@ ui.menu.container.item {
 	line-height: 25px;
 }
 
-
+.ui.labeled.input.profile {
+  position: absolute;
+  left: 16%;
+  bottom: 20px;
+}
 
 /* ------- User profile --------- */
 
@@ -498,7 +521,13 @@ ui.menu.container.item {
 	background-color: orange;
 }
 
+.arrow-left {
+  cursor: pointer;
+}
 
+.arrow-right {
+  cursor: pointer;
+}
 
 .company-name {
 	font-size: 22px;
@@ -551,6 +580,10 @@ ui.menu.container.item {
   right: 50px;
 }
 
+.candidate-results {
+  margin-bottom: 20px;
+}
+
 
 /* ------- User Past Results ------- */
 
@@ -599,7 +632,7 @@ ui.menu.container.item {
 }
 
 .code:hover {
-  color: blue;
+  color: #f2711c;
   text-decoration: underline;
 }
 
@@ -618,3 +651,12 @@ ui.menu.container.item {
 	cursor: pointer;
 }
 
+.analytics-container {
+  margin: auto;
+  margin-top: 5%;
+  width: 90%;
+}
+
+.ui.active.item.cursor.bold {
+  font-weight: 800;
+}

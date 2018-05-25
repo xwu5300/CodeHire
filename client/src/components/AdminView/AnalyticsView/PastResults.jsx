@@ -20,8 +20,6 @@ class PastResults extends Component {
   openModal() {
     this.setState({
       modalIsOpen: true
-    }, ()=> {
-      console.log(this.props)
     })
   }
 
@@ -35,9 +33,7 @@ class PastResults extends Component {
     this.props.fetchCandidateResults(candidateId, scheduleId, this.openModal);
   }
 
-
   render() {
-
     const customStyles = {
       content : {
         width: '40%',
@@ -49,7 +45,7 @@ class PastResults extends Component {
 
     return (
       <div className="past-challenge-container">
-      <button className="ui button" onClick={()=>{this.props.showTable()}}>Back to Past Challenges</button>
+      <button className="ui orange button" onClick={()=>{this.props.showTable()}}>Back to Past Challenges</button>
       <table className="ui celled table">
       <thead>
         <tr>
