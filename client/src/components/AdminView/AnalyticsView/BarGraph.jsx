@@ -75,13 +75,22 @@ class BarGraph extends Component {
       }
     }))
 
-    console.log('industry', Industry)
-    console.log('company', Company )
-
     return (
       <div>
+        <div className='bar_graph_dropdown'>
+          <label>
+            Select a Challenge
+            </label>
+            <select value={this.state.currentChallenge.title} onChange={ (e)=> this.handleChange(e)}>
+              {this.props.challenges.map((challengeResult, i) => {
+                return <option key={i} value={challengeResult.id}>{challengeResult.title}</option>
+            })}
+            </select>
+          
+        </div>
+      <div className='ui container segment graph'>
         <div className="challenge-results-graph">
-          <VictoryChart domainPadding={50} domain={{y: [0, 80]}} >
+          <VictoryChart domainPadding={50} domain={{y: [0, 120]}} >
             <VictoryLegend
               x={145} y={30}
               style={{labels:{fontSize: 7}, padding: '50px'}}
@@ -179,14 +188,7 @@ class BarGraph extends Component {
             </VictoryGroup>
           </VictoryChart>
         </div>
-        <label>
-        Select a Challenge
-        <select value={this.state.currentChallenge.title} onChange={ (e)=> this.handleChange(e)}>
-          {this.props.challenges.map((challengeResult, i) => {
-             return <option key={i} value={challengeResult.id}>{challengeResult.title}</option>
-          })}
-        </select>
-        </label>
+      </div>
       </div>
     )
   }

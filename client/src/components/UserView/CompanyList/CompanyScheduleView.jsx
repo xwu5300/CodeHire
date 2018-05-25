@@ -74,8 +74,6 @@ class CompanyScheduleView extends Component {
   }
 
   render() { 
-    console.log('company schdule CandidateInitialResults', this.props.pass_initial)
-    console.log('userlive coding company id ',localStorage.getItem('companyId'))
     return (
       <div>
         <i onClick={() => this.props.history.push('/user/companylist') } className="arrow alternate circle left icon"></i>

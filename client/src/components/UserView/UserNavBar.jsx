@@ -16,7 +16,7 @@ class UserNavBar extends Component {
           <div className={this.props.history.location.pathname === '/user'? 'ui active item' : 'ui item' } onClick={() => {this.props.history.push('/user')}}>Calendar</div>
           <div className={this.props.history.location.pathname === '/user/challengelist' ? 'ui active item' : 'ui item' } onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
           <div className={this.props.history.location.pathname === '/user/companylist' ? 'ui active item' : 'ui item' } onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
-           <div className='ui item' onClick={() => this.props.handleLogout() }>Log Out</div>
+           <div className='ui item' onClick={() => this.props.handleLogout() } style={{ color: '#f2711c' }}>Log Out</div>
       </div>
   )
  }

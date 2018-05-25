@@ -33,13 +33,14 @@ class UserScheduleTableView extends Component {
   }
   
   render() {
-    return (
+    return ( 
     <table className='ui inverted table'>
     <thead>
         <tr>
         <th>Company</th>
         <th>Time</th>
         <th>Duration</th>
+        <th></th>
         </tr>
     </thead>
     <tbody>
@@ -50,10 +51,10 @@ class UserScheduleTableView extends Component {
         <td>{moment(schedule.time).format('MMMM Do YYYY dddd, h:mm A')}</td>
         <td>{schedule.duration} Minutes</td>
         <td>
-        <button className='ui orange button' 
+        <button className='ui orange button user_sched_btn' 
             onClick={() => { this.getCalendar(schedule, schedule.company_id, schedule.duration) }}>Start
             </button>
-            <button className='ui orange button' 
+            <button className='ui red inverted button user_sched_btn' 
             onClick={() => {
               this.cancelSubmit(schedule.id)
             }}>Delete
@@ -67,8 +68,11 @@ class UserScheduleTableView extends Component {
         <tr>
         <th></th>
         <th></th>
+        <th></th>
+        <th></th>
     </tr></tfoot>
     </table>
+    
     )
   }
 }

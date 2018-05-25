@@ -37,7 +37,7 @@ class ScheduleChallenges extends Component {
     const { connectDropTarget } = this.props;
     return connectDropTarget (
       <div className='ui segment drag_segment'>
-        <h1> Scheduled Challenges </h1>
+        <h1 className='drag_column_title'> Scheduled Challenges </h1>
         { this.props.scheduledChallenges ? this.props.scheduledChallenges.slice().sort((a, b) => b.id - a.id).map((challenge, i) => {
           if (!challenge.time || challenge.duration === 0)
             return (

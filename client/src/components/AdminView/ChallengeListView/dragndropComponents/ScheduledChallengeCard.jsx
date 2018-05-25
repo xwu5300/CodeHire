@@ -71,20 +71,21 @@ class ScheduledChallengeCard extends Component {
   render() {
     const tab = {
       height: '35px',
-      overflow: 'hidden',
+      overflow: 'hidden'
     }
+
   
     const calendarId = this.state.selected === this.props.index ? "calendar" : "inactive";
     const dateId = this.state.selected === this.props.index ? "date" : "inactive";
 
     return (
-      <div className='ui fluid green card challenge_card' style={this.state.isExpanded ? null : tab}>
+      <div className='ui fluid black card challenge_card' style={this.state.isExpanded ? null : tab}>
         <div className='content challenge_content'>
           
           <i onClick={ () => this.expandCard() } className="angle down icon expand_icon cursor"></i>
         
         { this.state.isExpanded ? 
-          <div>
+          <div className='expanded_details'>
             <div><b>Title:</b> {this.props.title}</div>  
             <div><b>Description:</b> {this.props.instruction}</div>
             <div><b>Difficulty:</b> {this.props.difficulty}</div>
@@ -97,15 +98,7 @@ class ScheduledChallengeCard extends Component {
           </span>
         </div>
       }
-          <div> 
-              <div className="ui calendar" id={calendarId} onMouseEnter={() => {this.toggleSelectedOn(this.props.index)}} onMouseLeave={() => {this.toggleSelectedOff(this.props.index)}}>
-                <div className="ui input left icon" onClick={this.showCalendar}>
-                  <i className="calendar icon"></i>
-                  <input name="date" type="text" placeholder="Date/Time" id={dateId}/>
-                </div>
-                <button className="ui button" type='button' onClick={ () => this.handleClick(this.props.challenge, this.props.scheduleId) }>Set Date</button>
-              </div>
-
+          <div className='schedule_time_container'> 
               <select className="ui dropdown" name="duration" value={this.state.duration} onChange={(e) => this.handleDurationChange(e) }>
                 <option value="">Duration (minutes)</option>
                 <option value="15">15</option>
@@ -113,7 +106,15 @@ class ScheduledChallengeCard extends Component {
                 <option value="60">60</option>
                 <option value="90">90</option>
               </select>
+              <div className="ui calendar" id={calendarId} onMouseEnter={() => {this.toggleSelectedOn(this.props.index)}} onMouseLeave={() => {this.toggleSelectedOff(this.props.index)}}>
+                <div className="ui input left icon" onClick={this.showCalendar}>
+                  <i className="calendar icon"></i>
+                  <input name="date" type="text" placeholder="Date/Time" id={dateId}/>
+                </div>
+                <button className="ui button" type='button' onClick={ () => this.handleClick(this.props.challenge, this.props.scheduleId) }>Set Date</button>
+              </div>
           </div>
+
           {!this.state.initial ? 
           <div style={{color: 'red'}}>You must have an initial challenge set in order to schedule a challenge.</div> : null}
           {this.state.invalid ?

@@ -87,7 +87,7 @@ class SavedChallenges extends Component {
 
     return connectDropTarget(
       <div className='ui segment drag_segment'>
-        <h1>Your Challenges</h1>
+        <h1 className='drag_column_title'>Your Challenges</h1>
 
           {this.props.activeChallenges.map((challenge, i) => {
             return (
@@ -106,7 +106,6 @@ class SavedChallenges extends Component {
               scheduled={ false } />
             )
           })}
-          <button className="input_challenge_btn ui orange button" onClick={ this.props.openModal }>Create new challenge</button>
       </div>  
       
     )
