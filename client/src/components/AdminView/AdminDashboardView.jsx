@@ -83,10 +83,18 @@ class AdminDashboardView extends Component {
       }
     };
 
+    let upcoming = this.props.company_schedule.filter((item) => {
+      return !(!item.time || item.duration === 0 || moment(item.time).format() < moment(currTime).format())
+    })
+
     return (
       <div>
         <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout } />
         <div className='company_dashboard_container'>
+          <div className="welcome">Welcome, {localStorage.getItem('username')}!</div>
+          {upcoming.length > 0 ?
+          <div className="welcome-message-alt">You have <span style={{color: '#f2711c'}}>{upcoming.length}</span> upcoming challenges.</div> :
+          <div className="welcome-message">It looks like you don't have any challenges scheduled yet. Head over to "manage challenges" to get started.</div>}
           <div className='ui raised very padded container segment'>
             <div className='ui grid'>
               <Modal style={ customStyles } isOpen={ this.state.modalIsOpen } onRequestClose={ this.closeModal }>
@@ -108,7 +116,7 @@ class AdminDashboardView extends Component {
                       <td><button className='ui red inverted button' type='button' onClick={() => {this.props.makeInitial(this.props.initial_challenge[0].id, this.props.initial_challenge[0].initial, null, null, localStorage.getItem('userId'))}}><i className='x icon' style={{ position: 'relative', left: '4px' }}></i></button></td>
                     </tr>
                   }
-                   <td> <button className='ui orange inverted button cursor' type='button' onClick={this.handleClickOn}>Set Initial Challenge</button></td>
+                   <td><button className='ui orange inverted button cursor' type='button' onClick={this.handleClickOn}>Set Initial Challenge</button></td>
                 </tbody>   
               </table>
               
@@ -124,9 +132,9 @@ class AdminDashboardView extends Component {
                 <tbody>
                   {this.props.company_schedule.length > 0 ? this.props.company_schedule.map((item, i) => {
                     return (
-                      <Fragment>
+                      <Fragment key={i}>
                       {!item.time || item.duration === 0 || moment(item.time).format() < moment(currTime).format() ? null : 
-                        <tr key={i}>
+                        <tr>
                           <td>{item.title}</td>
                           <td>{moment(item.time).format('MMMM Do YYYY, h:mm A')}</td>
                           <td>{item.duration}</td>

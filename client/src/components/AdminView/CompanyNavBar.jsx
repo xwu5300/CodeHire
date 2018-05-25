@@ -4,7 +4,7 @@ import {withRouter, Link} from 'react-router-dom';
 class CompanyNavBar extends Component {
 
   componentDidMount() {
-      this.props.getUsername(localStorage.getItem('userId'));
+    this.props.getUsername(localStorage.getItem('userId'));
   }
   
   render() {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import CompanyNavBar from './CompanyNavBar.jsx';
 import { connect } from "react-redux";
+import AdminDropbox from './AdminDropBox.jsx';
 
 
 class AdminProfileView extends Component {
@@ -43,8 +44,8 @@ class AdminProfileView extends Component {
     })
   }
 
-  handleSubmit() {
-    this.props.updateInfo(localStorage.getItem('userId'), this.state.logo_url, this.state.information, this.state.website_url);
+  handleSubmit(logo) {
+    this.props.updateInfo(localStorage.getItem('userId'), logo, this.state.information, this.state.website_url);
     this.setState({ isTextarea: !this.state.isTextarea })
   }
 
@@ -67,18 +68,21 @@ class AdminProfileView extends Component {
                :
                <div className='company_profile_textarea' name='information'>{ this.state.information }</div>
             }
-
-            <input onChange={ (e) => this.handleChange(e) } value={ this.state.website_url } name='website_url' className='ui input website_input' type='text' placeholder='Web Site Url' />
-            
           </div>
 
           <div className='ui segment'>
-            <img className='company_profile_logo' src={ this.state.logo_url } />
-            <input onChange={ (e) => this.handleChange(e) } value={ this.state.logo_url } name='logo_url' className='ui input logo_input' type='text' placeholder='Logo Url' />
+            <img className='company_profile_logo' src={ this.props.logo_url } />
+            <AdminDropbox submit={this.handleSubmit}/>
+            <div class="ui labeled input profile">
+              <div class="ui label">
+                http://
+              </div>
+              <input onChange={ (e) => this.handleChange(e) } value={ this.state.website_url } name='website_url' className='ui input website_input' type='text' placeholder="mysite.com" />
+            </div>
           </div> 
 
         </div>
-        <button onClick={ () => this.handleSubmit() } style={{ display: 'block', margin: 'auto', width: '200px' }} className='ui orange button'>Save Changes</button> 
+        <button onClick={ () => this.handleSubmit(this.state.logo_url) } style={{ display: 'block', margin: 'auto', width: '200px' }} className='ui orange button'>Save Changes</button> 
         </div>
       </div>
     )

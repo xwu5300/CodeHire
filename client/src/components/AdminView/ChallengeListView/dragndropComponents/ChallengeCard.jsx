@@ -107,9 +107,10 @@ class ChallengeCard extends Component {
      }
         <div className='saved_challenges_btns'>
 
+        {default_challenge ? null :
           <button className="ui icon red button" onClick={() => deleteChallenge(challenge, userId) }>
             <i className="trash icon"></i>
-          </button>
+          </button>}
           
           {!this.props.challengeInfo ? null :
           <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
