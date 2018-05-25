@@ -92,7 +92,7 @@ class ScheduledChallengeCard extends Component {
           </div>
         :
         <div>
-          <span style={{fontSize: '20px', position: 'relative', bottom: '5px'}}> { this.props.title } </span>
+          <span style={{ fontSize: '20px', position: 'relative', bottom: '5px' }}> { this.props.title } </span>
           <span style={{position:'relative', bottom: '5px', float: 'right', marginRight: '50px'}}>
           {!this.props.challenge.time || this.props.challenge.duration === 0 ? <span><b>Status: </b><span style={{color: 'red'}}>Not Scheduled</span></span> : <span style={{color: 'green'}}>{moment(this.props.challenge.time).format('MMMM Do YYYY, h:mm A')}</span>}
           </span>
