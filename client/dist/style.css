@@ -668,9 +668,8 @@ ui.menu.container.item {
 }
 
 .candidate_results_date {
-	position: absolute;
-	top: 30px;
-	right: 20px;
+  float: right;
+  margin-top: 10px;
 	color: #f2711c;
 }
 

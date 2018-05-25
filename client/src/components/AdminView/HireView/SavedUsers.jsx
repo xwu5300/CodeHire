@@ -66,9 +66,8 @@ class SavedUsers extends Component {
       {this.props.results.length > 0 ?
         this.props.results.map((item, i) => (
           <div className="candidate-results" key={i}>
-            <h2>{item.name}</h2>
-            <div><b>{item.title}</b></div>
             <div className='candidate_results_date'>{moment(item.completed_at).format('MMMM Do YYYY')}</div>
+            <h2>{item.title}</h2>
             <div style={item.user_passed ? {color: 'green'} : {color: 'red'}}><b>{item.user_passed ? "Passed" : "Failed"}</b></div>
             <div>{item.code}</div>
           </div>
