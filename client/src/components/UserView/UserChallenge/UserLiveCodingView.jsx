@@ -59,11 +59,8 @@ class UserLiveCodingView extends Component {
   }
 
   componentDidMount() {
-<<<<<<< HEAD
-=======
      this.getExamples()
      this.startTimer()
->>>>>>> added tab kickout and fixed bargraph formula
      this.socket.emit('candidate enter', this.props.current_company_calendar, localStorage.getItem('username'));
      this.socket.emit('current user view', this.props.current_company_calendar, localStorage.getItem('username'));
   }
@@ -109,7 +106,7 @@ class UserLiveCodingView extends Component {
     this.setState({
       code: newValue
     })
-    
+
     this.socket.emit('typing', localStorage.getItem('username'), newValue);
   }
 
@@ -136,8 +133,6 @@ class UserLiveCodingView extends Component {
     })
   }
 
-<<<<<<< HEAD
-
   saveResults(companyScheduleId, companyId, result, submission, score, time) {
     console.log('not encode company id', companyId)
     this.socket.emit('candidate result', localStorage.getItem('username'), result);
@@ -146,15 +141,7 @@ class UserLiveCodingView extends Component {
     let challenge_id = this.props.location.challenge.challenge_id;
     let candidate_id = localStorage.getItem('userId');
     let userSchedule_id = this.props.location.challenge.id;
-  
-=======
-  saveResults(companyScheduleId, result, submission, score, time) {
-    this.socket.emit('candidate result', localStorage.getItem('username'), result);
-    let challenge_id = this.props.location.challenge.challenge_id
-    let company_id = localStorage.getItem('companyId')
-    let candidate_id = localStorage.getItem('userId')
-    let userSchedule_id = this.props.location.challenge.id
->>>>>>> added tab kickout and fixed bargraph formula
+
     this.props.saveResults(companyScheduleId, result, submission, score, time, challenge_id, company_id, candidate_id, false, userSchedule_id, () => {})
   }
 
@@ -235,10 +222,6 @@ class UserLiveCodingView extends Component {
   }
 
   render() {
-<<<<<<< HEAD
-    console.log('USR PROS', this.props.location.challenge);
-=======
->>>>>>> added tab kickout and fixed bargraph formula
     return (
       <div>
         <i onClick={ () => this.props.history.push('/user') } className="arrow alternate circle left icon"></i>
@@ -289,7 +272,7 @@ class UserLiveCodingView extends Component {
             <div className='candidate_time_limit'> <span style={{color: '#f2711c'}}>Time Limit:</span> { this.state.minutes + ':' + this.state.seconds }</div>
             </div>
 
-        
+
       </div>
       </div>
      )
