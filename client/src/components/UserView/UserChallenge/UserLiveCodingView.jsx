@@ -98,7 +98,7 @@ class UserLiveCodingView extends Component {
          type: 'info'}).then(() =>{
           this.props.history.push('/user')
          }
-        )
+       )
     })
   }
 
@@ -121,10 +121,10 @@ class UserLiveCodingView extends Component {
     let examplesD = examplesS.replace(/'/g, '"')
     let examples = JSON.parse(examplesD)
     let exampleInputs = examples[0].map((el)=> {
-      return JSON.stringify(el)
+      return (el)
     })
     let exampleOutputs = examples[1].map((el)=> {
-      return JSON.stringify(el)
+      return (el)
     })
 
     this.setState({
