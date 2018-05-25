@@ -61,30 +61,10 @@ module.exports.deleteFromCompanySchedule = (scheduleId) => {
 }
 
   //get single company's schedule
-<<<<<<< HEAD
-module.exports.getCompanySchedule = (companyId) => {
-  let currTime = Date.now();
-  return knex('company_schedule')
-  .select('duration')
-  .then((res) => {
-    let duration = res[0].duration
-    let pastTime = moment(currTime).add(duration, 'minutes')
-    return knex.from('company_schedule')
-    .innerJoin('all_challenges', 'all_challenges.id', 'company_schedule.challenge_id')
-    .innerJoin('users', 'users.id', 'company_schedule.company_id')
-    .select('*')
-    .whereNull('company_schedule.time')
-    .andWhere({'company_schedule.company_id': companyId})
-    .orWhere('company_schedule.time', '>', pastTime)
-    .andWhere({'company_schedule.company_id': companyId})
-    .select('*', 'company_schedule.id', 'company_schedule.duration', 'company_schedule.company_id')
-    .orderBy('time', 'asc')
-=======
   module.exports.getCompanySchedule = (companyId) => {
     let currTime = Date.now();
     return knex('company_schedule')
     .select('duration')
->>>>>>> style updates
     .then((res) => {
       let duration = res[0].duration
       let pastTime = moment(currTime).add(duration, 'minutes')

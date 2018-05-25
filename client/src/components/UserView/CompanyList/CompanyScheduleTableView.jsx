@@ -41,11 +41,12 @@ class CompanyScheduleTableView extends Component {
 
   render() {
     return(
-      <table className='ui inverted table'>
+      <table className='ui attached segement table'>
         <thead>
           <tr>
             <th>Time</th>
             <th>Duration</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -66,6 +67,7 @@ class CompanyScheduleTableView extends Component {
         </tbody>
         <tfoot>
           <tr>
+          <th></th>
           <th></th>
           <th></th>
         </tr></tfoot>

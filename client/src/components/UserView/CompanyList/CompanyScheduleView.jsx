@@ -25,7 +25,8 @@ class CompanyScheduleView extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchInitialChallenge(localStorage.getItem('companyId'))
+    this.props.fetchInitialChallenge(localStorage.getItem('companyId'));
+    this.props.fetchCompanyInfo(localStorage.getItem('companyId'));
     this.props.fetchAllCompanyCalendars(null, localStorage.getItem('companyId'))
     this.props.fetchCandidateResults(localStorage.getItem('userId'));
     // this.props.fetchCandidateResults(localStorage.getItem('userId'), null, ()=>{});
@@ -74,14 +75,15 @@ class CompanyScheduleView extends Component {
   }
 
   render() { 
+    console.log(this.props)
     return (
       <div>
         <i onClick={() => this.props.history.push('/user/companylist') } className="arrow alternate circle left icon"></i>
           <div className='schedule_container'>
-            <div className='ui raised very padded container segment' style={this.state.style}>
-              <img className='company_profile_logo' src={ this.props.logo_url }/>
-              <h1>{ localStorage.getItem('companyName') }</h1> 
-              <h2>{ this.props.information }</h2> 
+            <div className='ui top attached segment' style={this.state.style}>
+              {this.props.logo_url ? <img className='company_profile_logo' src={ this.props.logo_url }/> : null }
+              <h1 style={{textAlign: 'center'}}>{ localStorage.getItem('companyName') }</h1> 
+              <h2 style={{textAlign: 'center'}}>{ this.props.company_information }</h2> 
                 {this.props.website_url && <h2>Click <a href={ this.props.website_url } target='_blank'>here</a> for more information.</h2> }
                 <hr />
           {this.props.initial_challenge.length ?
@@ -94,7 +96,7 @@ class CompanyScheduleView extends Component {
           }}>
             Take Initial Challenge</button>
         </div>
-        : <h2> {localStorage.getItem('companyName')} does not have an initial challenge at this time.  </h2>    
+        :  <h4> {localStorage.getItem('companyName')} does not have an initial challenge at this time.  </h4>    
       }
       </div>
 
@@ -109,7 +111,7 @@ class CompanyScheduleView extends Component {
                 candidateCalendar={this.props.candidate_calendar} 
                 checkCandidateReschedule={this.props.checkCandidateReschedule} 
                 results={this.props.results} />
-              : <h2> {localStorage.getItem('companyName')} does not have any upcoming challenges. Check back later. </h2> }
+              : <div className="ui attached segment"><h4> {localStorage.getItem('companyName')} does not have any upcoming challenges. Check back later. </h4></div> }
             </div>
         </div>
       </div>

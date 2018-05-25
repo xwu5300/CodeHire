@@ -285,11 +285,11 @@ ui.menu.container.item {
 
 /* ------ Company profile ------ */
 .company_profile_logo {
-  height: 200px;
+  height: 150px;
   width: auto;
-  margin-bottom: 100px;
   display: block;
   margin: 40px auto;
+  margin-bottom: 20px;
 }
 
 .company_profile_container {
@@ -360,13 +360,13 @@ ui.menu.container.item {
 
 .user_skills_container {
 	margin-bottom: 10px;
-	height: 300px;
+	height: 200px;
 	overflow-y: scroll;
 }
 
 .user_skills_input {
 	float: right;
-    bottom: 40px;
+  bottom: 40px;
 	font-size: 22px;
 	box-shadow: 1px 1px 10px;
 }
@@ -410,8 +410,6 @@ ui.menu.container.item {
 	display: inline-block;
 	color: white;
 }
-
-
 
 .resume_btns {
 	display: inline-block;
