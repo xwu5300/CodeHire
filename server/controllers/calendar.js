@@ -71,9 +71,11 @@ module.exports.getCompanySchedule = (companyId) => {
     return knex.from('company_schedule')
     .innerJoin('all_challenges', 'all_challenges.id', 'company_schedule.challenge_id')
     .innerJoin('users', 'users.id', 'company_schedule.company_id')
+    .select('*')
     .whereNull('company_schedule.time')
+    .andWhere({'company_schedule.company_id': companyId})
     .orWhere('company_schedule.time', '>', pastTime)
-    .andWhere({'users.id': companyId})
+    .andWhere({'company_schedule.company_id': companyId})
     .select('*', 'company_schedule.id', 'company_schedule.duration', 'company_schedule.company_id')
     .orderBy('time', 'asc')
     .then((res) => {
@@ -167,22 +169,39 @@ module.exports.checkCandidateReschedule = (candidateId, companyId, time) => {
   })
 }
 
-module.exports.getAllCompanyCalendars = (companyName) => {
+module.exports.getAllCompanyCalendars = (companyName, companyId) => {
+  console.log('calendar company Id', companyId)
   let currTime = new Date();
-  let option = `%${companyName}%`;
-  return knex('company_schedule')
-  .innerJoin('users', 'users.id', 'company_schedule.company_id')
-  .where('name', 'like', option)
-  .where('time', '>', currTime)
-  .select('*', 'company_schedule.id')
-  .orderBy('time', 'asc')
-  .then((res) => {
-    console.log('res from calendar')
-    return res;
-  })
-  .catch((err) => {
-    console.log('Could not retrieve companies schedules from db:', err);
-  })
+  if (!companyId) {
+    let option = `%${companyName}%`;
+    return knex('company_schedule')
+    .innerJoin('users', 'users.id', 'company_schedule.company_id')
+    .where('name', 'like', option)
+    .where('time', '>', currTime)
+    .select('*', 'company_schedule.id')
+    .orderBy('time', 'asc')
+    .then((res) => {
+      console.log('res from calendar')
+      return res;
+    })
+    .catch((err) => {
+      console.log('Could not retrieve companies schedules from db:', err);
+    })
+  } else {
+    return knex('company_schedule')
+    .innerJoin('users', 'users.id', 'company_schedule.company_id')
+    .where('company_schedule.company_id', companyId)
+    .where('time', '>', currTime)
+    .select('*', 'company_schedule.id')
+    .orderBy('time', 'asc')
+    .then((res) => {
+      console.log('res from calendar')
+      return res;
+    })
+    .catch((err) => {
+      console.log('Could not retrieve companies schedules from db:', err);
+    })
+  }
 }
 
 module.exports.fetchPastSchedule = (companyId) => {

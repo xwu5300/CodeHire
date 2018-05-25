@@ -5,8 +5,9 @@ import { GET_INITIAL_CHALLENGE, GET_CANDIDATE_CALENDAR, GET_CANDIDATE_INFO, DELE
 import axios from 'axios';
 import swal from 'sweetalert2';
 
-export const fetchAllCompanyCalendars =(companyName) => (dispatch) => {
-  axios.get('/api/companyCalendars', {params: { companyName }})
+export const fetchAllCompanyCalendars =(companyName, companyId) => (dispatch) => {
+  console.log('user action company id', companyId)
+  axios.get('/api/companyCalendars', {params: { companyName, companyId }})
   .then(({data}) => {
     dispatch({ type: GET_ALL_COMPANY_CALENDARS, payload: data })
   })

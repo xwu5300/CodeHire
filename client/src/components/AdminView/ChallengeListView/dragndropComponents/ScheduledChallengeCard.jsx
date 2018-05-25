@@ -39,11 +39,17 @@ class ScheduledChallengeCard extends Component {
 
   handleClick(challenge, scheduleId) {
     let date = $('#date').val()
+    let scheduleTime = moment($('#date')).format('MMMM Do YYYY, h:mm:ss a')
+    let currTime = moment(Date.now()).format('MMMM Do YYYY, h:mm:ss a')
+
+    console.log('time sssssss?', date,currTime)
+    console.log('time sssssss greateer?', date < currTime)
     if (this.props.initialChallenge.length === 0) {
       this.setState({
         initial: false
       })
-    } else if (this.state.duration === '' || !date) {
+    } else if (this.state.duration === '' || date < currTime ) {
+      console.log('schedule challenge care. invalid', this.state.duration, date < currTime)
       this.setState({
         invalid: true
       })
@@ -77,7 +83,6 @@ class ScheduledChallengeCard extends Component {
   
     const calendarId = this.state.selected === this.props.index ? "calendar" : "inactive";
     const dateId = this.state.selected === this.props.index ? "date" : "inactive";
-
     return (
       <div className='ui fluid black card challenge_card' style={this.state.isExpanded ? null : tab}>
         <div className='content challenge_content'>
@@ -118,7 +123,7 @@ class ScheduledChallengeCard extends Component {
           {!this.state.initial ? 
           <div style={{color: 'red'}}>You must have an initial challenge set in order to schedule a challenge.</div> : null}
           {this.state.invalid ?
-            <div style={{color: 'red'}}>Please check date and duration, and try again.</div> : null}
+            <div style={{color: 'red', position: 'absolute', bottom: '0'}}>Please check date and duration, and try again.</div> : null} }
     
           <div className='saved_challenges_btns'>
 

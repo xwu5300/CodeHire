@@ -39,6 +39,7 @@ class AnalyticsView extends Component {
   }
 
   renderGraph() {
+    console.log('admin analytice view props',this.props)
     const {currentGraph} = this.state
 
     if (currentGraph === 'bar') {
