@@ -34,22 +34,29 @@ class LineGraph extends Component {
 
   render() {
 
-    let otherCompanyResults = this.props.allResults.filter((result) => {
-      return result.company_id !== this.props.companyResults[0].company_id;
-    })
+    if (this.props.companyResults.length > 0) {
+      var otherCompanyResults = this.props.allResults.filter((result) => {
+        return result.company_id !== this.props.companyResults[0].company_id;
+      })
+    } else {
+      var otherCompanyResults = this.props.allResults || [];
+    }
 
     let successRate = this.getSuccessRate(this.props.companyResults);
     let allCompanySuccessRate = this.getSuccessRate(otherCompanyResults); //gets success rate for all companies other than your own
 
-
-    let companyData = this.props.companyResults.map((data) => {
-      return {x: data.time, y: Math.round(successRate[data.company_schedule_id] * 100, 2), label:
-        `Challenge: ${data.title}
-        Difficulty: ${data.difficulty}
-        Pass Rate: ${Math.round(successRate[data.company_schedule_id] * 100, 2)}%`}
-      }).sort((a, b) => {
-        return Date.parse(a.x) - Date.parse(b.x);
-      })
+    if (this.props.companyResults.length > 0) {
+      var companyData = this.props.companyResults.map((data) => {
+        return {x: data.time, y: Math.round(successRate[data.company_schedule_id] * 100, 2), label:
+          `Challenge: ${data.title}
+          Difficulty: ${data.difficulty}
+          Pass Rate: ${Math.round(successRate[data.company_schedule_id] * 100, 2)}%`}
+        }).sort((a, b) => {
+          return Date.parse(a.x) - Date.parse(b.x);
+        })
+    } else {
+      var companyData = [];
+    }
 
     let filteredCompanyData = companyData.filter((item) => {
       return !this[item.x] ? this[item.x] = true : false;
@@ -81,7 +88,7 @@ class LineGraph extends Component {
 
     return (
       <div className="challenge-results-graph">
-        <VictoryChart domainPadding={50} domain={{x: [0, 30], y: [0, 80]}} animate={{onEnter: {duration: 100}}} containerComponent={ <VictoryVoronoiContainer/> }>
+        <VictoryChart domainPadding={50} domain={{x: [0, 30], y: [0, 80]}} animate={{delay: 0}} containerComponent={ <VictoryVoronoiContainer/> }>
           <VictoryLegend
             x={150} y={30}
             style={{labels:{fontSize: 7}, padding: '50px'}}
