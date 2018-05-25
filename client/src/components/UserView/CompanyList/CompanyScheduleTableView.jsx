@@ -7,31 +7,32 @@ class CompanyScheduleTableView extends Component {
   constructor(props) {
     super(props);
 
-    this.getTimeOut = this.getTimeOut.bind(this);
+    // this.getTimeOut = this.getTimeOut.bind(this);
     this.isTaken = this.isTaken.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
   // change function name later
-  getTimeOut(results) {
-    let currTime = moment(Date.now())
-    let timeCompleted = moment(results[0].completed_at)
-    let days = currTime.diff(timeCompleted, 'days')
-    return days;
-  }
+  // getTimeOut(results) {
+  //   let currTime = moment(Date.now())
+  //   let timeCompleted = moment(results[0].completed_at)
+  //   let days = currTime.diff(timeCompleted, 'days')
+  //   return days;
+  // }
 
   handleClick(scheduleId, scheduleTime, results) {
-    let daysLeft = 0
-    if (results.length) {
-      let days = this.getTimeOut(results)
-      daysLeft = 30 - days;
-    }
+    // let daysLeft = 0
+    // if (results.length) {
+    //   let days = this.getTimeOut(results)
+    //   daysLeft = 30 - days;
+    // }
     this.props.checkCandidateReschedule(localStorage.getItem('userId'), localStorage.getItem('companyId'), scheduleTime, (data) => {
+      console.log('company schedule data.length', data)
       if (!this.props.passInitial) {
         this.props.updateStyle()
-      } else if (results.length && (daysLeft > 0 )) {
+      } else if (results.length) {
         swal({
-          text: `You've Taken A Live Challenge, Please Retake After ${daysLeft} Days`
+          text: `You've Taken A Live Challenge With In 30 Days`
         })
       } else if (data.length) {
         swal({
@@ -47,9 +48,8 @@ class CompanyScheduleTableView extends Component {
   }
 
   isTaken(scheduleId, scheduleTime) {
-    this.props.fetchCompanyResults(localStorage.getItem('companyId'), localStorage.getItem('userId'), (results) => {
+    this.props.fetchCompanyResults(localStorage.getItem('companyId'), localStorage.getItem('userId'), scheduleTime, (results) => {
       this.handleClick(scheduleId, scheduleTime, results)
-
     })
   }
 

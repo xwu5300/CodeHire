@@ -5,6 +5,8 @@ import brace from 'brace';
 import socketClient from 'socket.io-client';
 import swal from 'sweetalert2'
 import moment from 'moment';
+import jwt from'jwt-simple';
+import { secret } from'../../../../../config.js';
 
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
@@ -94,13 +96,12 @@ class UserLiveCodingView extends Component {
   }
 
 
-  saveResults(companyScheduleId, result, submission, score, time) {
-
+  saveResults(companyScheduleId, companyId, result, submission, score, time) {
+    console.log('not encode company id', companyId)
     this.socket.emit('candidate result', localStorage.getItem('username'), result);
-    
-
+    let idToken = {id: companyId};
+    let company_id = jwt.encode(idToken, secret.secret);
     let challenge_id = this.props.location.challenge.challenge_id;
-    let company_id = localStorage.getItem('companyId');
     let candidate_id = localStorage.getItem('userId');
     let userSchedule_id = this.props.location.challenge.id;
   
@@ -158,9 +159,10 @@ class UserLiveCodingView extends Component {
       confirmButtonText: 'Yes, submit it!'
     }).then((clickResult) => {
       if (clickResult.value) {
-        let submission = this.state.submission
-        let companyScheduleId = this.props.location.challenge.company_schedule_id
-        this.saveResults(companyScheduleId, result, submission, score, time)
+        let submission = this.state.submission;
+        let companyScheduleId = this.props.location.challenge.company_schedule_id;
+        let companyId = this.props.location.challenge.company_id;
+        this.saveResults(companyScheduleId, companyId, result, submission, score, time)
         let thatProps = this.props
         if (result === true) {
           swal(
@@ -183,7 +185,7 @@ class UserLiveCodingView extends Component {
   }
 
   render() {
-    console.log('USR PROS', this.props);
+    console.log('USR PROS', this.props.location.challenge);
     return (
       <div>
         <i onClick={ () => this.props.history.push('/user') } className="arrow alternate circle left icon"></i>

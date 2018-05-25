@@ -1,4 +1,5 @@
 const knex = require('../../db/index.js');
+const moment = require('moment');
 
 //saves users result to result
 module.exports.saveResults = (companyScheduleId, isPassed, code, score, completedAt, challengeId, companyId, candidateId, initial) => {
@@ -23,9 +24,13 @@ module.exports.saveResults = (companyScheduleId, isPassed, code, score, complete
 }
 
 //get company live challenge results from results table
-module.exports.getCompanyResults = (companyId, candidateId) => {
+module.exports.getCompanyResults = (companyId, candidateId, time) => {
+  let earlyTime = moment(time).subtract(30, 'days')
+  let lateTime = moment(time).add(30, 'days')
   return knex('results')
   .where({'results.company_id': companyId, 'results.candidate_id' : candidateId, 'is_initial': false})
+  .andWhere('completed_at', '>', earlyTime)
+  .andWhere('completed_at', '<', lateTime)
   .innerJoin('users', 'results.candidate_id', 'users.id')
   .innerJoin('all_challenges', 'results.challenge_id', 'all_challenges.id')
   .select('results.*', 'all_challenges.*', 'users.name', 'users.information', 'users.phone', 'users.candidate_skills', 'users.github_url')
@@ -79,7 +84,7 @@ module.exports.getCandidateResults = (candidateId, companyScheduleId) => {
   .where(option)
   .innerJoin('users', 'users.id', 'results.company_id')
   .innerJoin('all_challenges', 'all_challenges.id', 'results.challenge_id')
-  .select('results.*', 'all_challenges.*', 'users.name', 'users.information', 'users.phone', 'users.logo_url')
+  .select('results.*', 'results.company_id', 'all_challenges.*', 'users.name', 'users.information', 'users.phone', 'users.logo_url')
   .orderBy('results.completed_at', 'desc')
   .then((res) => {
     console.log('Retrieve candidate results')

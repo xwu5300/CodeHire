@@ -23,6 +23,7 @@ const initialState = {
   past_challenges: [],
   past_results: [],
   website_url: '',
+  active_challenges: [],
 }
 
 const allResults = (state = initialState, action) => {

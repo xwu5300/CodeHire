@@ -15,6 +15,7 @@ class UserScheduleTableView extends Component {
     this.props.currentCompanyCalendar(companyId, () => {
       this.props.history.push({ pathname: '/user/live', challenge: schedule, duration: duration });
     });
+    console.log('user schedule table schedule', schedule)
   }
 
   cancelSubmit(id) {

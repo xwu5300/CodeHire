@@ -83,7 +83,7 @@ class AdminDashboardView extends Component {
         overflow: 'scroll'
       }
     };
-
+    console.log('admin dashbord view this.props.company_schedule', this.props.company_schedule)
     return (
       <div>
         <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout } />
@@ -124,6 +124,7 @@ class AdminDashboardView extends Component {
                 </thead>
                 <tbody>
                   {this.props.company_schedule.length > 0 ? this.props.company_schedule.map((item, i) => {
+                    console.log('admin dashbord view this.props.company map item', item)
                     return (
                       <Fragment>
                       {!item.time || item.duration === 0 || moment(item.time).format() < moment(currTime).format() ? null : 
