@@ -60,7 +60,7 @@ class AdminProfileView extends Component {
         <div className='company_profile_container'>
         <div className='ui raised container horizontal segments'>
 
-          <div className='ui segment' style={{ width: '60%' }}>
+          <div className='ui segment' style={{ width: '50%' }}>
             <h2> About {this.props.token} </h2>
             <i style={{ fontSize: '24px' }} onClick={ () => this.toggleInfo() } className="pencil alternate orange icon edit_company_info cursor"></i>
             {this.state.isTextarea ?
