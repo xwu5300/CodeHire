@@ -249,8 +249,20 @@ ${this.props.initial_challenge[0].function_name}('${input}')`
     return (
       <div>
         <i onClick={ () => this.props.history.push('/user/schedule') } className="arrow alternate circle left icon"></i>
-          <div className='ui horizontal segments user_liveCoding_container' style={{ padding: '30px', margin: 'auto', minWidth: '900px', maxWidth: '1200px'}}>
+
+         <p className='leave_warning'>Please do not leave this coding view. <br /> Your code will automatically be submitted.</p>
+
+          <div className='ui horizontal segments user_liveCoding_container' style={{ padding: '30px', margin: 'auto' }}>
             <div className='ui padded segment'>
+
+            <select value={this.state.theme} onChange={this.handleTheme}>
+              <option value='monokai'>Monokai</option>
+              <option value='github'>Github</option>
+              <option value='twilight'>Twilight</option>
+              <option value='solarized_dark'>Solarized Dark</option>
+              <option value='terminal'>Terminal</option>
+            </select>
+
               <AceEditor
                 mode="javascript"
                 theme={this.state.theme}
@@ -267,16 +279,12 @@ ${this.props.initial_challenge[0].function_name}('${input}')`
                 showLineNumbers: true,
                 tabSize: 2,
               }}/>
-              <select className="ui dropdown" value={this.state.theme} onChange={this.handleTheme}>
-                <option value="monokai">Monokai</option>
-                <option value="github">Github</option>
-                <option value="twilight">Twilight</option>
-                <option value="solarized_dark">Solarized Dark</option>
-                <option value="terminal">Terminal</option>
-              </select>
-              <button className='ui green button' style={{ float: 'right' }} onClick={this.handleSubmit}>Submit Answer</button>
+              
+              <button className='ui green button' style={{ display: 'block', margin: 'auto', width: '40%', position: 'relative', right: '25px', top: '5px' }} onClick={this.handleSubmit}>Submit Answer</button>
             </div>
-            <div className='ui padded segment user_liveCoding_rightSeg'>
+
+
+            <div className='ui padded segment user_liveCoding_rightSeg' style={{ maxWidth: '40%'}}>
               <h1>{this.props.initial_challenge[0].name}</h1>
               <div><b>Title:</b> {this.props.initial_challenge[0].title}</div>
               <div><b>difficulty:</b><span style={{color: '#f2711c'}}>  {this.props.initial_challenge[0].difficulty}</span></div>

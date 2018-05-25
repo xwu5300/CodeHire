@@ -313,8 +313,9 @@ ui.menu.container.item {
 }
 
 .candidate_calendar {
-	height: 300px;
+	min-height: 300px;
 	margin-top: 100px;
+	margin-bottom: 40px;
 }
 
 .company_profile_textarea {
@@ -415,7 +416,6 @@ ui.menu.container.item {
 .resume_btns {
 	display: inline-block;
 	position: relative;
-	bottom: 20px;
 	left: 10px;
 	top: 0;
 }
@@ -449,6 +449,8 @@ ui.menu.container.item {
 	position: relative;
 	top: 125px;
 	width: 90%;
+	min-width: 900px;
+	max-width: 1200px;
 }
 
 .candidate_time_limit {
@@ -466,6 +468,15 @@ ui.menu.container.item {
 .user_liveCoding_rightSeg div:nth-child(1), .user_liveCoding_rightSeg div:nth-child(2), .user_liveCoding_rightSeg div:nth-child(3), .user_liveCoding_rightSeg div:nth-child(4){
   margin-bottom: 30px;
   font-size: 24px;
+  line-height: 30px;
+}
+
+.leave_warning {
+	 color: white;
+	 position: absolute;
+	 top: 50px;
+	 right: 120px;
+	 font-size: 18px;
 }
 
 
@@ -505,21 +516,19 @@ ui.menu.container.item {
   font-size: 24px;
   font-weight: bold;
   position: absolute;
-  top: 15px;
-  right: 20px;
+  top: 45px;
+  right: 40px;
   clear: both;
+  color: #f2711c;
 }
 
 .live_coding_results {
 	height: 150px;
 	width: 25%;
-	top: 100px;
-	left: 100px;
-	background-color: transparent;
-	position: absolute;
+	background-color: white;
+
 	padding: 5px;
 	margin-bottom: 5px;
-	overflow: scroll;
 }
 
 
@@ -539,12 +548,15 @@ ui.menu.container.item {
 	top: 75px;
 	width: 80%;
 	margin: auto;
+	margin-bottom: 40px;
 }
 
 .company_logo_container {
 	margin-bottom: 20px;
 	margin-top: -10px;
 	height: 175px;
+	width: 200px;
+	padding-left: 30px;
 }
 
 
@@ -556,9 +568,6 @@ ui.menu.container.item {
 	margin-bottom: -25px;
 }
 
-.view_company_btn {
-	display: block;
-}
 
 .search_company_input {
 	margin-top: 40px;
@@ -580,11 +589,12 @@ ui.menu.container.item {
 	font-size: 32px;
 }
 
+
 .view_company_btn {
-	float: right;
+	margin: auto;
 	position: relative;
 	top: 30px;
-	right: 50px;
+	width: 100%;
 }
 
 .ui.card.cardzz:hover{

@@ -230,6 +230,9 @@ class UserLiveCodingView extends Component {
     return (
       <div>
         <i onClick={ () => this.props.history.push('/user') } className="arrow alternate circle left icon"></i>
+
+         <p className='leave_warning'>Please do not leave this coding view. <br /> Your code will automatically be submitted.</p>
+
         <div className='ui horizontal segments user_liveCoding_container' style={{ padding: '30px', margin: 'auto'}}>
           <div className='ui padded segment'>
             <AceEditor
@@ -255,7 +258,7 @@ class UserLiveCodingView extends Component {
               <option value="solarized_dark">Solarized Dark</option>
               <option value="terminal">Terminal</option>
             </select>
-            <button className='ui green button' style={{ float: 'right' }} onClick={this.handleSubmit}> Submit Answer </button>
+            <button className='ui green button' style={{ display: 'block', margin: 'auto', width: '40%', position: 'relative', right: '30px', top: '5px' }} onClick={this.handleSubmit}> Submit Answer </button>
           </div>
 
           <div className='ui padded segment user_liveCoding_rightSeg' style={{ paddingLeft: '30px'}}>

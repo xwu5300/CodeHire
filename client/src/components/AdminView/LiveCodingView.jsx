@@ -51,6 +51,10 @@ class LiveCodingView extends Component {
     this.socket.emit('company enter', this.props.current_company_calendar);
   } 
 
+  componentWillUnmount() {
+    localStorage.setItem('user_code', '');
+  }
+
 
   getProfile(username) {
    this.props.fetchCandidateInfo(null, username, () => {
@@ -82,18 +86,18 @@ class LiveCodingView extends Component {
 
         <div className='live_coding_title'>{ this.props.current_live_challenge_title }</div>
      
-        <div className='live_coding_results'>  
+          
           { this.state.candidate_results ? this.state.candidate_results.map((result) => {
             return (
-              <div style={ result[1] ? { color: 'green' } : { color: 'red' } }>{ result[0] }{ result[1] ? ' passed challenge' : ' failed challenge' } </div>
+              <div style={ result[1] ? { color: 'green', fontSize: '22px' } : { color: 'red', fontSize: '22px' } }>{ result[0] }{ result[1] ? ' passed challenge' : ' failed challenge' } </div>
             )
           }) : null }
-        </div>
+        
      
      
         <div className='ui grid padded centered'>
           <div className='five column centered row' style={{ marginTop: '30px' }}>
-            <h1 className='4 columns wide'>Live Coding Challenge</h1>
+            <h1 className='4 columns wide' style={{ color: 'white' }}>Live Coding Challenge</h1>
               <div style={{ marginTop: '30px' }}>
                 <ChallengeClock duration={ this.props.current_live_challenge_duration } />
               </div>

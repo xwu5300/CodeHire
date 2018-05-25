@@ -124,12 +124,10 @@ class UserProfileView extends Component {
 
                       </div>
                         
-                        <div className='ui grid' style={{ marginBottom: '10px', width: '100%' }}>
+                        <div className='ui horizontal list' style={{ marginBottom: '10px', width: '100%' }}>
                         {this.state.all_skills ? this.state.all_skills.map((skill, i) => {
                           return (
-                            <div key={ i } className='three wide column'>
-                              <div className='ui tag label'>{ skill }<i onClick={ () => this.deleteSkill(skill) } style={{ fontSize: '18px', position: 'absolute', top: '4px', left: '-7px', zIndex: '1'}} className="remove icon orange cursor"></i></div> 
-                            </div>
+                            <div key={ i } style={{ margin: '15px' }} className='ui tag label'>{ skill }<i onClick={ () => this.deleteSkill(skill) } style={{ fontSize: '18px', position: 'absolute', top: '4px', left: '-7px', zIndex: '1'}} className="remove icon orange cursor"></i></div> 
                           )
                         }) : null }
                         </div>

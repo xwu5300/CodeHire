@@ -44,7 +44,7 @@ class CompanyListView extends Component {
           <div className='search_company_input' style={{marginTop: '40px', marginBottom: '70px', textAlign: 'center'}} >
             <SearchCompany updateCompanyList={this.props.fetchCompanyList} />
           </div>
-          <div className='ui cards centered grid'>
+          <div className='ui cards centered grid' style={{ marginBottom: '40px'}}>
             {this.props.company_list ? this.props.company_list.map((company, i) => {
               return (
                 <CompanyDetail key={ i } id={ company.id } handleHover={ this.handleHover } indexHovered={ this.state.indexHovered } logo={ company.logo_url ? company.logo_url : 'http://dev.jobkhoji.com/assets/images/default_company_icon.png'  } 

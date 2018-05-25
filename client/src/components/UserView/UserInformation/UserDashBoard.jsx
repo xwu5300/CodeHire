@@ -22,7 +22,7 @@ class UserDashBoard extends Component {
     return(
       <div>
         <UserNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout } />
-        <div className='ui container segment' style={{ marginTop: '100px', paddingTop: '50px'}}>
+        <div className='ui container segment' style={{ marginTop: '100px', paddingTop: '50px' }}>
 
         <h2 className='welcome'>Welcome, {this.props.username}!</h2>
 
