@@ -13,8 +13,6 @@ class CompanyScheduleTableView extends Component {
 
   handleClick(scheduleId, scheduleTime, results) {
     this.props.checkCandidateReschedule(localStorage.getItem('userId'), localStorage.getItem('companyId'), scheduleTime, (data) => {
-      console.log('company schedule result.length', results)
-      console.log('company schedule data.length', data)
       if (!this.props.passInitial) {
         this.props.updateStyle()
       } else if (results.length) {
@@ -52,7 +50,6 @@ class CompanyScheduleTableView extends Component {
         </thead>
         <tbody>
           {this.props.companyCalendar.map((schedule, i) => {
-            console.log('company schduel table schedule', schedule)
             return (
             <tr key={i} >
             <td>{moment(schedule.time).format('MMMM Do YYYY dddd, h:mm A')}</td>
