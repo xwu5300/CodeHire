@@ -202,7 +202,6 @@ ${this.props.initial_challenge[0].function_name}('${input}')`
       })
       return answer
     })
-    console.log('answer check', JSON.stringify(answerResults) === JSON.stringify(outputs))
     return JSON.stringify(answerResults) === JSON.stringify(outputs)
   }
 
