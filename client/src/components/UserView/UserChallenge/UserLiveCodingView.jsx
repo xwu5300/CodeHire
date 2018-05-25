@@ -216,12 +216,12 @@ class UserLiveCodingView extends Component {
             <button className='ui green button' style={{ float: 'right' }} onClick={this.handleSubmit}> Submit Answer </button>
           </div>
 
-          <div className='ui padded segment' style={{ paddingLeft: '30px'}}>
+          <div className='ui padded segment user_liveCoding_rightSeg' style={{ paddingLeft: '30px'}}>
             <h1>{this.props.location.challenge.name}</h1>
-            <br/>
-            <h2>Title: {this.props.location.challenge.title}</h2>
-            <h3>Difficulty: {this.props.location.challenge.difficulty}</h3>
-            <div> Instructions: {this.props.location.challenge.instruction}</div>
+            <div><b>Title:</b> {this.props.location.challenge.title}</div>
+            <div><b>Difficulty:</b><span style={{ color: '#f2711c' }}>  {this.props.location.challenge.difficulty}</span></div>
+            <div><b>Instructions:</b> {this.props.location.challenge.instruction}</div>
+             {this.state.exampleInputs.length > 0 ?
             <div>
               examples:
               {this.state.exampleInputs.map((input, i) => {
@@ -231,7 +231,8 @@ class UserLiveCodingView extends Component {
                 return <div className="examples" key={i}>{output}</div>
               })}
             </div>
-            <div> Time Limit: { this.state.minutes + ':' + this.state.seconds }</div>
+            : null }
+            <div className='candidate_time_limit'> <span style={{color: '#f2711c'}}>Time Limit:</span> { this.state.minutes + ':' + this.state.seconds }</div>
             </div>
 
         

@@ -99,7 +99,7 @@ class AdminProfileView extends Component {
             </div>
           </div> 
         </div>
-        <button onClick={ () => this.handleSubmit(this.state.logo_url) } style={{ display: 'block', margin: 'auto', width: '200px' }} className='ui orange button'>Save Changes</button> 
+        <button onClick={ () => this.handleSubmit(this.state.logo_url) } style={{ display: 'block', margin: 'auto', width: '300px', height: '50px' }} className='ui orange button'>Save Changes</button> 
         </div>
       </div>
     )

@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import SearchCompany from './SearchCompany.jsx';
-import ViewCompanyPage from './ViewCompanyPage.jsx';
 import Image from './Image.jsx';
 import CompanyDetail from './CompanyDetail.jsx';
 

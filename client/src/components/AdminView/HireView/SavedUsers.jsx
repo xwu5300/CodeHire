@@ -43,7 +43,9 @@ class SavedUsers extends Component {
       <div>
       {this.props.favorites.length === 0 ? null : this.props.favorites.map((user, i) => {
         return(
-          <div className="ui segment" key={i}>
+          <div className='row' style={{ marginBottom: '10px'}}>
+          <div className='column'>
+          <div className="ui segment hire_card" key={i}>
           {user.profile_photo ?
             <img src={user.profile_photo} className="ui small left floated image" style={{width: '100px'}}/> : <img src="profilePic.jpg"  style={{width: '100px'}} className="ui small left floated image"/> }
             <div>Username: {user.username}</div>
@@ -56,14 +58,17 @@ class SavedUsers extends Component {
             <i className={user.contacted ? "envelope open icon cursor" : "envelope open outline icon cursor"} onClick={()=>{this.props.contact(user.id, localStorage.getItem('userId'), user.contacted)}}></i>
             <i className="heart icon search cursor" onClick={()=>this.props.remove(localStorage.getItem('userId'), user.user_id)}></i>
           </div>
+          </div>
+          </div>
         )
       })}
       <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} style={customStyles}>
       {this.props.results.length > 0 ?
         this.props.results.map((item, i) => (
           <div className="candidate-results" key={i}>
+            <h2>{item.name}</h2>
             <div><b>{item.title}</b></div>
-            <div>{moment(item.completed_at).format('MMMM Do YYYY')}</div>
+            <div className='candidate_results_date'>{moment(item.completed_at).format('MMMM Do YYYY')}</div>
             <div style={item.user_passed ? {color: 'green'} : {color: 'red'}}><b>{item.user_passed ? "Passed" : "Failed"}</b></div>
             <div>{item.code}</div>
           </div>

@@ -61,7 +61,7 @@ class Scatterplot extends Component {
       }
     )
     return (
-      <div>
+      <div className='ui container segment graph'>
         <div className="challenge-results-graph">
           <VictoryChart domainPadding={50} domain={{ x: [0, 5], y: [0, 80] }} >
             <VictoryLabel

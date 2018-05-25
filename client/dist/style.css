@@ -12,7 +12,6 @@ body {
 }
 
 
-
 /* ------- Headers ------- */
 .page_header {
 	font-size: 42px;
@@ -311,6 +310,11 @@ ui.menu.container.item {
 }
 
 /* -------- Candidate Calendar -------- */
+
+.candidate_sched_container {
+	margin-top: 100px;
+}
+
 .candidate_calendar {
 	height: 300px;
 	margin-top: 100px;
@@ -330,6 +334,11 @@ ui.menu.container.item {
   position: absolute;
   left: 5%;
   bottom: 20px;
+}
+
+/* ------ User Schedule ----- */
+.user_sched_btn {
+	width: 40%;
 }
 
 /* ------- User profile --------- */
@@ -354,11 +363,12 @@ ui.menu.container.item {
 .user_skills_container {
 	margin-bottom: 10px;
 	height: 300px;
+	overflow-y: scroll;
 }
 
 .user_skills_input {
 	float: right;
-  bottom: 40px;
+    bottom: 40px;
 	font-size: 22px;
 	box-shadow: 1px 1px 10px;
 }
@@ -395,7 +405,7 @@ ui.menu.container.item {
 	width: 50%;
 	height: 50px;
 	font-size: 22px;
-	padding-top: 25px;
+	padding-top: 15px;
 	background-color: rgba(0,0,0,0.2);
 	border-radius: 10px;
 	text-align: center;
@@ -403,9 +413,7 @@ ui.menu.container.item {
 	color: white;
 }
 
-.user_resume_container button {
-	margin-top: 10px;
-}
+
 
 .resume_btns {
 	display: inline-block;
@@ -420,6 +428,10 @@ ui.menu.container.item {
 
 .profile_photo_container {
   margin-bottom: 50px;
+}
+
+.ui.input.github {
+	width: 75%;
 }
 
 /* -------- User Coding ---------- */
@@ -439,6 +451,23 @@ ui.menu.container.item {
 	position: relative;
 	top: 125px;
 	width: 90%;
+}
+
+.candidate_time_limit {
+	text-align: center;
+	font-size: 32px;
+	position: absolute;
+	bottom: 20px;
+}
+
+.user_liveCoding_rightSeg h1 {
+	margin-bottom: 50px;
+	font-size: 38px;
+}
+
+.user_liveCoding_rightSeg div:nth-child(1), .user_liveCoding_rightSeg div:nth-child(2), .user_liveCoding_rightSeg div:nth-child(3), .user_liveCoding_rightSeg div:nth-child(4){
+  margin-bottom: 30px;
+  font-size: 24px;
 }
 
 
@@ -507,19 +536,30 @@ ui.menu.container.item {
 
 /* -------- Company List View --------- */
 
-
 .schedule_container {
 	position: relative;
-	top: 125px;
+	top: 75px;
 	width: 80%;
 	margin: auto;
+}
+
+.company_logo_container {
+	margin-bottom: 20px;
+	margin-top: -10px;
+	height: 175px;
 }
 
 
 .company_logo {
 	width: 150px;
 	height: auto;
-	margin-right: 50px;
+	display: block;
+	margin: auto;
+	margin-bottom: -25px;
+}
+
+.view_company_btn {
+	display: block;
 }
 
 .search_company_input {
@@ -585,7 +625,7 @@ ui.menu.container.item {
 }
 
 .search-results-container {
-  margin-left: 20px;
+  margin-left: auto;
 }
 
 .heart.icon {
@@ -617,6 +657,26 @@ ui.menu.container.item {
   margin-bottom: 20px;
 }
 
+.hire_header {
+	font-size: 28px;
+}
+
+.hire_card {
+	text-align: left;
+}
+
+.candidate-results > div {
+	margin-bottom: 10px;
+}
+
+.candidate_results_date {
+	position: absolute;
+	top: 30px;
+	right: 20px;
+	color: #f2711c;
+}
+
+
 
 /* ------- User Past Results ------- */
 
@@ -640,11 +700,7 @@ ui.menu.container.item {
 .time {
 	text-align: center;
 	font-size: 14px;
-}
-
-
-.company_card:hover {
-	color: red;
+	color: #f2711c;
 }
 
 
@@ -669,15 +725,38 @@ ui.menu.container.item {
   text-decoration: underline;
 }
 
+.bar_graph_dropdown {
+	display: block;
+	text-align: center;
+	color: ;
+	margin: 30px auto;
+}
+
+.bar_graph_dropdown select {
+	width: 20%;
+	display: block;
+	margin: 20px auto;
+}
+
+.bar_graph_dropdown label {
+	color: #f2711c;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.ui.container.segment.graph {
+	padding: 40px;
+}
 
 /* -------- Back Navigation Button ------- */
 .arrow.icon {
-	font-size: 42px;
+	font-size: 52px;
 	position: absolute;
 	top: 50px;
 	left: 50px;
 	cursor: pointer;
 	z-index: 1;
+	color: #f2711c;
 }
 
 .user_navbar, .company_navbar {

@@ -34,7 +34,6 @@ class CompanyChallengeTableView extends Component {
         columns={this.props.columns} 
         rows={this.props.rows} 
         rowSize={4} 
-        // showSearch={ true }
         showPagination={ true }
         callbacks={{'info': this.viewCompanyPage}}
       />

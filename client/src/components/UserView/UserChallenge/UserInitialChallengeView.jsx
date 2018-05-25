@@ -211,53 +211,66 @@ ${this.props.initial_challenge[0].function_name}(${input})`
   render() {
     return (
       <div>
-          <div className="ui orange four item menu">
-          <div className='ui item' onClick={ () => { this.props.history.push('/user/profile') } }><i className="user circle icon"></i>{ localStorage.getItem('username') }</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user')}}>Calendar</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/challengelist')}}>Live Challenges</div>
-          <div className='ui item' onClick={() => {this.props.history.push('/user/companylist')}}>Company List</div>
-        </div>
-        <h1>{this.props.initial_challenge[0].name}</h1>
-        <h2>{this.props.initial_challenge[0].title}</h2>
-        <div>
-          difficulty: {this.props.initial_challenge[0].difficulty}
-        </div>
-        <div>
-          instruction: {this.props.initial_challenge[0].instruction}
-        </div>
-        <div> time left: {this.state.timeRemaining} </div>
-        <div className="examples">
-          examples:  {this.state.exampleInputs.map((input, i) => {
-            return <div className="input" key={i}>{input}</div>
-          })}
-          {this.state.exampleOutputs.map((output, i) => {
-            return <div className="output" key={i}>{output}</div>
-          })}
-        </div>
-        <AceEditor
-          mode="javascript"
-          theme={this.state.theme}
-          name="codehire"
-          onLoad={this.onLoad}
-          onChange={this.onChange}
-          fontSize={14}
-          showPrintMargin={true}
-          showGutter={true}
-          highlightActiveLine={true}
-          editorProps={{$blockScrolling: Infinity}}
-          value={this.state.code}
-          setOptions={{
-          showLineNumbers: true,
-          tabSize: 2,
-        }}/>
-        <select value={this.state.theme} onChange={this.handleTheme}>
-          <option value='monokai'>Monokai</option>
-          <option value='github'>Github</option>
-          <option value='twilight'>Twilight</option>
-          <option value='solarized_dark'>Solarized Dark</option>
-          <option value='terminal'>Terminal</option>
-        </select>
-        <button onClick={this.handleSubmit}> Submit Answer </button>
+        <i onClick={ () => this.props.history.push('/user/schedule') } className="arrow alternate circle left icon"></i>
+
+          <div className='ui horizontal segments user_liveCoding_container' style={{ padding: '30px', margin: 'auto', minWidth: '900px', maxWidth: '1200px'}}>
+
+            <div className='ui padded segment'>
+
+              <AceEditor
+                mode="javascript"
+                theme={this.state.theme}
+                name="codehire"
+                onLoad={this.onLoad}
+                onChange={this.onChange}
+                fontSize={14}
+                showPrintMargin={true}
+                showGutter={true}
+                highlightActiveLine={true}
+                editorProps={{$blockScrolling: Infinity}}
+                value={this.state.code}
+                setOptions={{
+                showLineNumbers: true,
+                tabSize: 2,
+              }}/>
+              <select value={this.state.theme} onChange={this.handleTheme}>
+                <option value='monokai'>Monokai</option>
+                <option value='github'>Github</option>
+                <option value='twilight'>Twilight</option>
+                <option value='solarized_dark'>Solarized Dark</option>
+                <option value='terminal'>Terminal</option>
+              </select>
+              <button className='ui green button' style={{ float: 'right' }} onClick={this.handleSubmit}>Submit Answer</button>
+            </div>
+
+            <div className='ui padded segment user_liveCoding_rightSeg'>
+
+              <h1>{this.props.initial_challenge[0].name}</h1>
+              <div><b>Title:</b> {this.props.initial_challenge[0].title}</div>
+              <div>
+                <b>difficulty:</b><span style={{color: '#f2711c'}}>  {this.props.initial_challenge[0].difficulty}</span>
+              </div>
+              <div>
+                <b>instruction:</b> {this.props.initial_challenge[0].instruction}
+              </div>
+              {this.state.exampleInputs.length > 0 ?
+              <div className="examples">
+                examples:  {this.state.exampleInputs.map((input, i) => {
+                  return <div className="input" key={i}>{input}</div>
+                })}
+                {this.state.exampleOutputs.map((output, i) => {
+                  return <div className="output" key={i}>{output}</div>
+                })}
+              </div>
+              : null }
+
+               <div className='candidate_time_limit'><span style={{color: '#f2711c'}}>Time Limit:</span>  {this.state.timeRemaining} </div>
+
+            </div>
+
+          </div>
+  
+       
       </div>
     )
   }

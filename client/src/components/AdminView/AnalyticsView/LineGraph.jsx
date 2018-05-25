@@ -87,8 +87,9 @@ class LineGraph extends Component {
     });
 
     return (
+      <div className='ui container segment graph'> 
       <div className="challenge-results-graph">
-        <VictoryChart domainPadding={50} domain={{x: [0, 30], y: [0, 80]}} animate={{delay: 0}} containerComponent={ <VictoryVoronoiContainer/> }>
+        <VictoryChart domainPadding={50} domain={{x: [0, 30], y: [0, 100]}} animate={{delay: 0}} containerComponent={ <VictoryVoronoiContainer/> }>
           <VictoryLegend
             x={150} y={30}
             style={{labels:{fontSize: 7}, padding: '50px'}}
@@ -144,6 +145,7 @@ class LineGraph extends Component {
             style={{data: {stroke: '#00BFFF', strokeWidth: 2}}}
           />
         </VictoryChart>
+      </div>
       </div>
     )
   }

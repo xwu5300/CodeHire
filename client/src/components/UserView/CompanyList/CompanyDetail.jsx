@@ -41,7 +41,8 @@ class CompanyDetail extends Component {
       style: {
         width: '25%',
         height: '200px',
-        backgroundColor: 'orange', 
+        border: '5px solid #f2711c', 
+        color: '#f2711c',
         cursor: 'pointer'
       }
     })
@@ -64,7 +65,7 @@ class CompanyDetail extends Component {
       onMouseOver={ this.handleMouseOver } 
       onMouseOut={ this.handleMouseOut }  
       onClick={() => this.viewCompanyPage(this.props.id, this.props.name)  } 
-      className='ui card company_card' style={this.state.style}
+      className='ui card' style={this.state.style}
     >
       <img src={ this.props.logo } style={{ width: '100px', height: 'auto'}}/>
       <div className='company-name'>

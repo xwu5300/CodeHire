@@ -103,8 +103,8 @@ class UserProfileView extends Component {
 
                     <div className='github_link'>
                      <i style={{ fontSize: '22px' }} className="github icon"></i>
-                     <div className="ui input">
-                      <input name='github_url' value={ this.state.github_url } onChange={ (e) => this.handleChange(e) } type='text' placeholder='github' onKeyPress={(e)=>{this.handleKeyPress(e, this.updateGithub)}} placeholder="Github handle" />
+                     <div className="ui input github">
+                      <input name='github_url' value={ this.state.github_url } onChange={ (e) => this.handleChange(e) } type='text' onKeyPress={(e)=>{this.handleKeyPress(e, this.updateGithub)}} placeholder="Github handle" />
                      </div>
                      <button style={{ height: '35px', width:'20%', marginLeft:'5px' }} className='ui orange button' onClick={ () => this.updateGithub() }>save</button>
                    </div>
@@ -123,12 +123,12 @@ class UserProfileView extends Component {
 
                       </div>
                         
-                        <div className='ui small horizontal list'>
+                        <div className='ui padded grid' style={{ marginBottom: '10px', width: '100%' }}>
                         {this.state.all_skills ? this.state.all_skills.map((skill, i) => {
                           return (
-                            <div key={ i } className='item'>
+                            <div key={ i } className='three wide column'>
                               <i onClick={ () => this.deleteSkill(skill) } className="remove icon orange cursor"></i>
-                              <div className='ui tag label'> { skill } </div>
+                              <div className='ui tag label'>{ skill }</div> 
                             </div>
                           )
                         }) : null }
