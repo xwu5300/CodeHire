@@ -96,7 +96,7 @@ class UserProfileView extends Component {
                  <div className='ui container'>
                    <div className="profile_pic_container">
                      {!this.props.photo ? 
-                       <img src="profilePic.jpg" alt="Empty profile photo" style={{ width: '200px', height: '200px' }} /> :
+                       <img src="img/profilePic.jpg" alt="Empty profile photo" style={{ width: '200px', height: '200px' }} /> :
                        <img src={this.props.photo} className="responsive" style={{ width: '200px', height: '200px' }}/> }
                        <Dropbox savePhoto={this.props.updateCandidatePhoto} photo={true}/>
                     </div>

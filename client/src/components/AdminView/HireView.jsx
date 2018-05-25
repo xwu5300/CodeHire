@@ -59,13 +59,21 @@ class HireView extends Component {
         </div>
         <div className="ui two column grid centered" style={{ marginTop: '50px'}}>
           <div className="search-results">
-           <h4 className='hire_header'>Search Results</h4> 
-           {!this.state.searched ? null :
-           <UserSearchResults results={this.props.results} fetchResults={this.props.fetchCompanyResults} users={this.props.users} save={this.props.saveToFavorites} remove={this.props.removeFromFavorites} favorites={this.props.favorites.map((item) => item.user_id)}/> }
+          <div className="ui top attached header">
+            <h4 className='hire_header'>Search Results</h4> 
+            </div>
+            {!this.state.searched ? <div className="ui attached segment">Search users to get started.</div> :
+            <div className="scroll">
+              <UserSearchResults results={this.props.results} fetchResults={this.props.fetchCompanyResults} users={this.props.users} save={this.props.saveToFavorites} remove={this.props.removeFromFavorites} favorites={this.props.favorites.map((item) => item.user_id)}/> 
+            </div>}
           </div>
-          <div className="search-results">
-            <h4 className='hire_header'>Saved Users</h4>
-            <SavedUsers results={this.props.results} fetchResults={this.props.fetchCompanyResults} contact={this.props.contact} favorites={this.props.favorites} remove={this.props.removeFromFavorites}/>
+            <div className="search-results">
+              <div className="ui top attached header">
+              <h4 className='hire_header'>Saved Users</h4>
+            </div>
+            <div className="scroll">
+              <SavedUsers results={this.props.results} fetchResults={this.props.fetchCompanyResults} contact={this.props.contact} favorites={this.props.favorites} remove={this.props.removeFromFavorites}/>
+            </div>
           </div>
         </div>
       </div>

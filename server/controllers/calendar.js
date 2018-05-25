@@ -61,34 +61,34 @@ module.exports.deleteFromCompanySchedule = (scheduleId) => {
 }
 
   //get single company's schedule
-module.exports.getCompanySchedule = (companyId) => {
-  let currTime = Date.now();
-  return knex('company_schedule')
-  .select('duration')
-  .then((res) => {
-    let duration = res[0].duration
-    let pastTime = moment(currTime).add(duration, 'minutes')
-    return knex.from('company_schedule')
-    .innerJoin('all_challenges', 'all_challenges.id', 'company_schedule.challenge_id')
-    .innerJoin('users', 'users.id', 'company_schedule.company_id')
-    .select('*')
-    .whereNull('company_schedule.time')
-    .andWhere({'company_schedule.company_id': companyId})
-    .orWhere('company_schedule.time', '>', pastTime)
-    .andWhere({'company_schedule.company_id': companyId})
-    .select('*', 'company_schedule.id', 'company_schedule.duration', 'company_schedule.company_id')
-    .orderBy('time', 'asc')
+  module.exports.getCompanySchedule = (companyId) => {
+    let currTime = Date.now();
+    return knex('company_schedule')
+    .select('duration')
     .then((res) => {
-      return res;
+      let duration = res[0].duration
+      let pastTime = moment(currTime).add(duration, 'minutes')
+      return knex.from('company_schedule')
+      .innerJoin('all_challenges', 'all_challenges.id', 'company_schedule.challenge_id')
+      .innerJoin('users', 'users.id', 'company_schedule.company_id')
+      .select('*')
+      .whereNull('company_schedule.time')
+      .andWhere({'company_schedule.company_id': companyId})
+      .orWhere('company_schedule.time', '>', pastTime)
+      .andWhere({'company_schedule.company_id': companyId})
+      .select('*', 'company_schedule.id', 'company_schedule.duration', 'company_schedule.company_id')
+      .orderBy('time', 'asc')
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        console.log('Error retrieving schedule from db', err);
+      })
     })
     .catch((err) => {
       console.log('Error retrieving schedule from db', err);
     })
-  })
-  .catch((err) => {
-    console.log('Error retrieving schedule from db', err);
-  })
-}
+  }
 
 module.exports.getCandidateCalendar = (candidateId) => {
   return knex.from('user_schedule')
@@ -209,7 +209,7 @@ module.exports.fetchPastSchedule = (companyId) => {
   .where({'company_schedule.company_id': companyId})
   .leftJoin('results', 'results.company_schedule_id', 'company_schedule.id')
   .where({'results.is_initial': false})
-  .innerJoin('all_challenges', 'all_challenges.id', 'company_schedule.id')
+  .innerJoin('all_challenges', 'all_challenges.id', 'company_schedule.challenge_id')
   .select('all_challenges.*', 'company_schedule.*')
   .orderBy('time', 'desc')
   .distinct('company_schedule.id')

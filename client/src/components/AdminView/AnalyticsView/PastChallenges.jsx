@@ -41,7 +41,11 @@ class PastChallenges extends Component {
           </tr>
         </thead>
         <tbody>
-        {this.props.pastChallenges.length === 0 ? null : this.props.pastChallenges.map((challenge, i) => {
+        {this.props.pastChallenges.length === 0 ?
+          <tr>
+            <td>You can see past challenge results once a scheduled challenge is completed.</td>
+          </tr>
+          : this.props.pastChallenges.map((challenge, i) => {
           return (
             <tr key={challenge.id}>
               <td>{challenge.title}</td>

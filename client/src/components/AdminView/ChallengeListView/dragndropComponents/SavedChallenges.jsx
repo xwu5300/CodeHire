@@ -88,8 +88,9 @@ class SavedChallenges extends Component {
     return connectDropTarget(
       <div className='ui segment drag_segment'>
         <h1 className='drag_column_title'>Your Challenges</h1>
-
-          {this.props.activeChallenges.map((challenge, i) => {
+          {this.props.activeChallenges.length === 0 ? 
+            <div>Create a new challenge or drag one from the default list to get started.</div> :
+            this.props.activeChallenges.map((challenge, i) => {
             return (
               <ChallengeCard 
               key={challenge.id}
