@@ -71,9 +71,11 @@ module.exports.getCompanySchedule = (companyId) => {
     return knex.from('company_schedule')
     .innerJoin('all_challenges', 'all_challenges.id', 'company_schedule.challenge_id')
     .innerJoin('users', 'users.id', 'company_schedule.company_id')
+    .select('*')
     .whereNull('company_schedule.time')
+    .andWhere({'company_schedule.company_id': companyId})
     .orWhere('company_schedule.time', '>', pastTime)
-    .andWhere({'users.id': companyId})
+    .andWhere({'company_schedule.company_id': companyId})
     .select('*', 'company_schedule.id', 'company_schedule.duration', 'company_schedule.company_id')
     .orderBy('time', 'asc')
     .then((res) => {
