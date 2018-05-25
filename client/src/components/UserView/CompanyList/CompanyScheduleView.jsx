@@ -75,7 +75,6 @@ class CompanyScheduleView extends Component {
   }
 
   render() { 
-    console.log(this.props)
     return (
       <div>
         <i onClick={() => this.props.history.push('/user/companylist') } className="arrow alternate circle left icon"></i>
