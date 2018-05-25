@@ -166,6 +166,25 @@ ui.menu.container.item {
 	width: 100%;
 }
 
+.welcome {
+  margin: auto;
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.welcome-message-alt {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.welcome-message {
+  font-size: 17px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
 /* -------- Drag N Drop Challenge List--------- */
 .drag_segment {
 	overflow: scroll;
@@ -274,7 +293,11 @@ ui.menu.container.item {
 	line-height: 25px;
 }
 
-
+.ui.labeled.input.profile {
+  position: absolute;
+  right: 50px;
+  bottom: 20px;
+}
 
 /* ------- User profile --------- */
 

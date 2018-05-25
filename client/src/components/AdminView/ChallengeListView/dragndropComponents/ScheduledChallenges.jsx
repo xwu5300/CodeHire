@@ -57,6 +57,7 @@ class ScheduleChallenges extends Component {
                handleModal={ this.handleModal } 
                scheduled={ true }
                getSchedule={this.props.getSchedule}
+               initialChallenge={this.props.initialChallenge}
                />
             )
         }) : null }
@@ -80,6 +81,7 @@ class ScheduleChallenges extends Component {
                handleModal={ this.handleModal } 
                scheduled={ true }
                getSchedule={this.props.getSchedule}
+               initialChallenge={this.props.initialChallenge}
                />
             )
         }) : null }

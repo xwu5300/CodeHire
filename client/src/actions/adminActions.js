@@ -173,7 +173,8 @@ export const fetchCompanyInfo = (userId, callback) => (dispatch) => {
 
 export const updateInfo = (userId, logo_url, information, website_url) => (dispatch) => {
   axios.patch('/api/companyInfo', { userId, logo_url, information, website_url })
-  .then((response) => {
+  .then(() => {
+    dispatch(fetchCompanyInfo(userId));
   })
   .catch((err) => {
     console.log(err);
