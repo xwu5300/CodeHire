@@ -620,10 +620,9 @@ ui.menu.container.item {
 /* -------- Hire List View --------- */
 
 .search-container {
-  margin-left: 20px;
+  margin-left: 7%;
   width: 30%;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 50px;
 }
 
 .search-results {
@@ -666,7 +665,8 @@ ui.menu.container.item {
 }
 
 .hire_header {
-	font-size: 28px;
+  font-size: 28px;
+  color: #f2711c;
 }
 
 .hire_card {
@@ -683,6 +683,10 @@ ui.menu.container.item {
 	color: #f2711c;
 }
 
+.scroll {
+  max-height: 75%;
+  overflow-y: scroll;
+}
 
 
 /* ------- User Past Results ------- */

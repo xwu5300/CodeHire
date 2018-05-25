@@ -40,13 +40,13 @@ class UserSearchResults extends Component {
     };
     return(
       <div>
-        {this.props.users.length === 0 ? <div>No results found. Please search again.</div> : this.props.users.map((user, i) => {
+        {this.props.users.length === 0 ? <div className="ui attached segment">No results found. Please search again.</div> : this.props.users.map((user, i) => {
           return (
-          <div className='row' style={{ marginBottom: '10px' }}>
-           <div className='column'>
+          <div className='row ui attached segment'>
+          <div className='column'>
           <div className="ui segment hire_card">
             {user.profile_photo ?
-            <img src={user.profile_photo} className="ui small left floated image" style={{width: '100px'}}/> : <img src="profilePic.jpg" style={{width: '100px'}} className="ui small left floated image"/> }
+            <img src={user.profile_photo} className="ui small left floated image" style={{width: '100px'}}/> : <img src="img/profilePic.jpg" style={{width: '100px'}} className="ui small left floated image"/> }
             <div>Username: {user.username}</div>
             <div>Skills: {user.candidate_skills ? user.candidate_skills : 'None added'}</div>
             <div>Info: {user.information ? user.information : 'None added'} </div>

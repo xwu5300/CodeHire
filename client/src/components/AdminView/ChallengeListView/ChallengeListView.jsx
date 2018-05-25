@@ -63,7 +63,7 @@ class ChallengeListView extends Component {
             <Form save={this.props.saveChallenge} close={this.closeModal} history={this.props.history} userId={localStorage.getItem('userId')}/>
           </Modal>
            <button style={{ display: 'block', margin: 'auto', marginBottom: '50px' }} className="input_challenge_btn ui centered orange button" onClick={ this.openModal }>Create new challenge</button>
-        <div className='ui padded raised horizontal segments challenge_list'>
+          <div className='ui padded raised horizontal segments challenge_list'>
           <DefaultChallenges userId={localStorage.getItem('userId')} defaultChallenges={this.props.default_challenges} save={this.props.saveChallenge} getInfo={this.props.getChallengeInfo} />
           <SavedChallenges  getChallengeId={ this.props.getChallengeId } openModal={ this.openModal } userId={localStorage.getItem('userId')} activeChallenges={this.props.active_challenges} delete={this.props.deleteChallenge} addToCompanySchedule={this.props.addToCompanySchedule} isInitial={this.props.is_initial} makeInitial={this.props.makeInitial} getInfo={this.props.getChallengeInfo} challengeInfo={this.props.challenge_info} save={this.props.saveChallenge} fetchActiveChallenges={this.props.fetchActiveChallenges}/>
           <ScheduledChallenges initialChallenge={this.props.initial_challenge} getSchedule={this.props.fetchCompanySchedule} userId={localStorage.getItem('userId')} updateChallengeDate={ this.props.updateChallengeDate } deleteFromCompanySchedule={ this.props.deleteFromCompanySchedule } scheduledChallenges={ this.props.company_schedule } addToCompanySchedule={ this.props.addToCompanySchedule } />

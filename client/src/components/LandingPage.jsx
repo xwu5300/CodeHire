@@ -97,7 +97,7 @@ class LandingPage extends Component {
         <div className='column'>
           <div className='ui fluid card landing_page_card'>
             <div className='ui small image'>
-              <img src='http://albanyrideshare.info/wp-content/uploads/2016/07/uber-logo.jpg' />
+              <img src='https://d1a3f4spazzrp4.cloudfront.net/uber-com/1.3.8/d1a3f4spazzrp4.cloudfront.net/images/uber-serp-logo-f6e7549c89.jpg' />
             </div>
           </div>
         </div>
