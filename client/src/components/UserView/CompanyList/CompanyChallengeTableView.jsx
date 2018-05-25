@@ -35,7 +35,7 @@ class CompanyChallengeTableView extends Component {
         <ReactCollapsingTable 
         columns={this.props.columns} 
         rows={this.props.rows} 
-        rowSize={4} 
+        rowSize={6} 
         showPagination={ true }
         callbacks={{'info': this.viewCompanyPage}}
       />

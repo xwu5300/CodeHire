@@ -31,6 +31,7 @@ class ChallengeListView extends Component {
   }
 
   componentDidMount() {
+    console.log('user id ', localStorage.getItem('userId'))
     this.props.fetchAllChallenges(localStorage.getItem('userId'));
     this.props.fetchActiveChallenges(localStorage.getItem('userId'));
     this.props.fetchDefaultChallenges();
@@ -52,7 +53,7 @@ class ChallengeListView extends Component {
   }
 
   render() {
-    // console.log('challenge list this.props.company_schedule', this.props.company_schedule)
+    console.log('challenge list this.props.company_schedule', this.props.company_schedule)
     return (
       <div>
         <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout } />

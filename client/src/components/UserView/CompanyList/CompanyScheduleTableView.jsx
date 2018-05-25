@@ -6,26 +6,12 @@ import ReactCollapsingTable from 'react-collapsing-table';
 class CompanyScheduleTableView extends Component {
   constructor(props) {
     super(props);
-
-    // this.getTimeOut = this.getTimeOut.bind(this);
+    
     this.isTaken = this.isTaken.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
-  // change function name later
-  // getTimeOut(results) {
-  //   let currTime = moment(Date.now())
-  //   let timeCompleted = moment(results[0].completed_at)
-  //   let days = currTime.diff(timeCompleted, 'days')
-  //   return days;
-  // }
-
   handleClick(scheduleId, scheduleTime, results) {
-    // let daysLeft = 0
-    // if (results.length) {
-    //   let days = this.getTimeOut(results)
-    //   daysLeft = 30 - days;
-    // }
     this.props.checkCandidateReschedule(localStorage.getItem('userId'), localStorage.getItem('companyId'), scheduleTime, (data) => {
       console.log('company schedule result.length', results)
       console.log('company schedule data.length', data)
@@ -66,6 +52,7 @@ class CompanyScheduleTableView extends Component {
         </thead>
         <tbody>
           {this.props.companyCalendar.map((schedule, i) => {
+            console.log('company schduel table schedule', schedule)
             return (
             <tr key={i} >
             <td>{moment(schedule.time).format('MMMM Do YYYY dddd, h:mm A')}</td>

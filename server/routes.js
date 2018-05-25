@@ -353,7 +353,11 @@ router.get('/api/candidateCalendar/reschedule', (req, res) => {
 // get all company schedule
 router.get('/api/companyCalendars', (req, res) => {
   let companyName = req.query.companyName;
-  calendarControllers.getAllCompanyCalendars(companyName)
+  let companyId = req.query.companyId;
+  if (companyId) {
+    companyId = jwt.decode(req.query.companyId, secret).id;
+  }
+  calendarControllers.getAllCompanyCalendars(companyName, companyId)
   .then((data) => {
     console.log('routes getAllCompanyCalendars data')
     res.send(data);
