@@ -28,7 +28,7 @@ class UserDashBoard extends Component {
 
         {this.props.candidate_calendar.length > 0 ?
         <div className="welcome-message-alt">You have scheduled <span style={{color: '#f2711c'}}><b>{this.props.candidate_calendar.length}</b></span> challenges.</div> :
-        <div className="welcome-message">It looks like you don't have any challenges scheduled yet. Head over to "manage challenges" to get started.</div>}
+        <div className="welcome-message">It looks like you don't have any challenges scheduled yet. Head over to "live challenges" to search companies and get started.</div>}
 
           <div className='candidate_calendar inverted ui raised container segment'>
             {this.props.candidate_calendar.length ?

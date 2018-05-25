@@ -93,7 +93,7 @@ class AdminDashboardView extends Component {
           <div className='ui raised very padded container segment'>
             <div className="welcome">Welcome, {localStorage.getItem('username')}!</div>
             {upcoming.length > 0 ?
-            <div className="welcome-message-alt">You have <span style={{color: '#f2711c'}}><b>{upcoming.length}</b></span> upcoming challenges.</div> :
+            <div className="welcome-message-alt">You have <span style={{color: '#f2711c'}}><b>{upcoming.length}</b></span> upcoming {upcoming.length === 1 ? "challenge." : "challenges."}</div> :
             <div className="welcome-message">It looks like you don't have any challenges scheduled yet. Head over to "manage challenges" to get started.</div>}
             <div className='ui grid'>
               <Modal style={ customStyles } isOpen={ this.state.modalIsOpen } onRequestClose={ this.closeModal }>
@@ -112,7 +112,7 @@ class AdminDashboardView extends Component {
                     <tr>
                       <td>{this.props.initial_challenge[0].title}</td>
                       <td>{this.props.initial_challenge[0].duration}</td>
-                      <td><button className='ui red inverted button' type='button' onClick={() => {this.props.makeInitial(this.props.initial_challenge[0].id, this.props.initial_challenge[0].initial, null, null, localStorage.getItem('userId'))}}><i className='x icon' style={{ position: 'relative', left: '4px' }}></i></button></td>
+                      <td><button className='ui orange inverted button' type='button' onClick={() => {this.props.makeInitial(this.props.initial_challenge[0].id, this.props.initial_challenge[0].initial, null, null, localStorage.getItem('userId'))}}><i className='x icon' style={{ position: 'relative', left: '4px' }}></i></button></td>
                     </tr>
                   }
                    <td><button className='ui orange inverted button cursor' type='button' onClick={this.handleClickOn}>Set Initial Challenge</button></td>

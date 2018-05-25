@@ -26,7 +26,7 @@ class UserSearchResults extends Component {
   }
 
   handleModal(companyId, userId) {
-    this.props.fetchResults(companyId, userId, this.openModal);
+    this.props.fetchResults(companyId, userId, null, this.openModal);
   }
 
   render() {
