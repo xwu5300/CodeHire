@@ -102,7 +102,7 @@ class ChallengeCard extends Component {
        :
        <div>
          <span style={{fontSize: '20px', position: 'relative', bottom: '5px'}}> { title } </span>
-         <span style={{position:'relative', bottom: '5px', float: 'right', marginRight: '50px'}}> <b>difficulty:</b> <span style={{ color: '#f2711c', fontWeight: 'bold' }}>  { difficulty }</span></span>
+         <span style={{position:'relative', bottom: '5px', float: 'right', marginRight: '50px'}}> <b>Difficulty:</b> <span style={{ color: '#f2711c', fontWeight: 'bold' }}>  { difficulty }</span></span>
        </div>
      }
         <div className='saved_challenges_btns'>
