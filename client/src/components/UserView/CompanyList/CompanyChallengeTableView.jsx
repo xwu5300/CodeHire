@@ -20,7 +20,7 @@ class CompanyChallengeTableView extends Component {
     localStorage.setItem('companyId', idToken)
     localStorage.setItem('companyName', companyName)
     // localStorage.setItem('companyWeb', info)
-    this.updateCompanyCalendar(null, idToken)
+    this.props.updateCompanyCalendar(null, idToken)
     this.props.fetchCompanyInfo(idToken, ()=>{})
     this.props.fetchCandidateInitialResults(idToken, localStorage.getItem('userId'), () => {})
   }
