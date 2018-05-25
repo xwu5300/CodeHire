@@ -86,13 +86,13 @@ class LiveCodingView extends Component {
 
         <div className='live_coding_title'>{ this.props.current_live_challenge_title }</div>
      
-        <div className='live_coding_results'>  
+          
           { this.state.candidate_results ? this.state.candidate_results.map((result) => {
             return (
-              <div style={ result[1] ? { color: 'green' } : { color: 'red' } }>{ result[0] }{ result[1] ? ' passed challenge' : ' failed challenge' } </div>
+              <div style={ result[1] ? { color: 'green', fontSize: '22px' } : { color: 'red', fontSize: '22px' } }>{ result[0] }{ result[1] ? ' passed challenge' : ' failed challenge' } </div>
             )
           }) : null }
-        </div>
+        
      
      
         <div className='ui grid padded centered'>

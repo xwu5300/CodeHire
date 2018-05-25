@@ -254,6 +254,15 @@ ${this.props.initial_challenge[0].function_name}('${input}')`
 
           <div className='ui horizontal segments user_liveCoding_container' style={{ padding: '30px', margin: 'auto' }}>
             <div className='ui padded segment'>
+
+            <select value={this.state.theme} onChange={this.handleTheme}>
+              <option value='monokai'>Monokai</option>
+              <option value='github'>Github</option>
+              <option value='twilight'>Twilight</option>
+              <option value='solarized_dark'>Solarized Dark</option>
+              <option value='terminal'>Terminal</option>
+            </select>
+
               <AceEditor
                 mode="javascript"
                 theme={this.state.theme}
@@ -270,14 +279,8 @@ ${this.props.initial_challenge[0].function_name}('${input}')`
                 showLineNumbers: true,
                 tabSize: 2,
               }}/>
-              <select className="ui dropdown" value={this.state.theme} onChange={this.handleTheme}>
-                <option value="monokai">Monokai</option>
-                <option value="github">Github</option>
-                <option value="twilight">Twilight</option>
-                <option value="solarized_dark">Solarized Dark</option>
-                <option value="terminal">Terminal</option>
-              </select>
-              <button className='ui green button' style={{ float: 'right' }} onClick={this.handleSubmit}>Submit Answer</button>
+              
+              <button className='ui green button' style={{ display: 'block', margin: 'auto', width: '40%', position: 'relative', right: '25px', top: '5px' }} onClick={this.handleSubmit}>Submit Answer</button>
             </div>
 
 

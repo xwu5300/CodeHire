@@ -46,9 +46,9 @@ class UserScheduleTableView extends Component {
     </thead>
     <tbody>
         {this.props.candidateCalendar.map((schedule, i) => {
-        return (
-        <tr key={i} >
-        <td>{schedule.name}</td>
+          return (
+            <tr key={i} >
+            <td>{schedule.name}</td>
         <td>{moment(schedule.time).format('MMMM Do YYYY dddd, h:mm A')}</td>
         <td>{schedule.duration} Minutes</td>
         <td>
