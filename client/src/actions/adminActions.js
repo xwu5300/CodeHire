@@ -160,21 +160,26 @@ export const fetchCompanySchedule = (companyId, companyName) => (dispatch) => {
 }
 
 
-export const fetchCompanyInfo = (userId, callback) => (dispatch) => {
+export const fetchCompanyInfo = (userId, cb) => (dispatch) => {
   axios.get('/api/companyInfo', { params: { userId }})
   .then((response) => {
     dispatch({ type: GET_COMPANY_INFO, logo_url: response.data[0].logo_url, information: response.data[0].information, website_url: response.data[0].website_url })
-    callback();
+  })
+  .then(() => {
+    console.log('lol', cb)
+    if (cb) {
+      cb();
+    }
   })
   .catch((err) => {
     console.log(err);
   })
 }
 
-export const updateInfo = (userId, logo_url, information, website_url) => (dispatch) => {
+export const updateInfo = (userId, logo_url, information, website_url, cb) => (dispatch) => {
   axios.patch('/api/companyInfo', { userId, logo_url, information, website_url })
   .then(() => {
-    dispatch(fetchCompanyInfo(userId));
+    dispatch(fetchCompanyInfo(userId, cb));
   })
   .catch((err) => {
     console.log(err);
