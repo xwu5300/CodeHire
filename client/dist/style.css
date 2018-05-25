@@ -292,7 +292,7 @@ ui.menu.container.item {
 }
 
 .company_profile_saveBtn {
-	margin: auto;
+  margin: auto;
 }
 
 /* Candidate Calendar */
@@ -311,7 +311,7 @@ ui.menu.container.item {
 
 .ui.labeled.input.profile {
   position: absolute;
-  right: 50px;
+  left: 16%;
   bottom: 20px;
 }
 
