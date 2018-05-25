@@ -29,15 +29,17 @@ class SearchCompany extends Component {
   render() {
     return (
       <div>
-        <input type='text' value={this.state.input} onChange={this.updateInput} style={{width: '300px', height: '40px'}} onKeyPress={(e) => {this.handleKeyPress(e)}} />
-        <button className='ui button' onClick={() => {
-          this.props.updateCompanyList(this.state.input)
-          this.setState({
-            input: ''
-          })
-        }}>
-        Search Company
-        </button>
+        <div className="ui action input">
+          <input type='text' value={this.state.input} onChange={this.updateInput} style={{width: '300px', height: '40px'}} onKeyPress={(e) => {this.handleKeyPress(e)}} placeholder="Search..." />
+          <button className='ui button' onClick={() => {
+            this.props.updateCompanyList(this.state.input)
+            this.setState({
+              input: ''
+            })
+          }}>
+          Search Company
+          </button>
+        </div>
       </div>
     )
   }

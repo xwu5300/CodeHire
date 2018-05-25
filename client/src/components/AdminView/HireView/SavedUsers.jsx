@@ -38,7 +38,7 @@ class SavedUsers extends Component {
         overflow: 'scroll'
       }
     };
-    console.log(this.props)
+
     return(
       <div>
       {this.props.favorites.length === 0 ? null : this.props.favorites.map((user, i) => {
@@ -49,7 +49,7 @@ class SavedUsers extends Component {
             <div>Username: {user.username}</div>
             <div>Skills: {user.candidate_skills ? user.candidate_skills : 'None added'}</div>
             <div>Info: {user.information ? user.information : 'None added'} </div>
-            <div>Github:  {user.github_url ? user.github_url : 'None added'}</div>
+            <div>Github: {user.github_url ? user.github_url.includes('github.com') ? <a href={'http://' + user.github_url} target='_blank'>{user.github_url}</a> : <a href={'http://www.github.com/' + user.github_url} target='_blank'>www.github.com/{user.github_url}</a> : 'None added'}</div>
             <div>Resume: {user.resume_url ? <a href={user.resume_url} target="_blank">{user.resume_name}</a>: 'None added'}</div>
             <a className="cursor" onClick={()=>{this.handleModal(localStorage.getItem('userId'), user.user_id)}}>Past Challenge Results</a>
             <br/>
