@@ -218,7 +218,9 @@ export const fetchCompanyResults = (companyId, candidateId, cb) => (dispatch) =>
   axios.get('/api/results', { params: { companyId, candidateId } })
   .then(({data}) => {
     dispatch({ type: GET_COMPANY_RESULTS, payload: data})
-    cb(data)
+    if(cb) {
+      cb(data);
+    }
   })
   .catch((err) => {
     console.log(err);

@@ -180,21 +180,21 @@ export const updateCandidateGithub = (userId, github_url) => (dispatch) => {
 
 export const fetchCandidateInfo = (candidateId, username, callback) => (dispatch) => {
   axios.get('/api/candidateInfo', { params: { candidateId, username }})
-    .then((info) => {
-      dispatch({ type: GET_CANDIDATE_INFO, skills: info.data[0].candidate_skills, github_url: info.data[0].github_url, photo: info.data[0].profile_photo })
-        if(callback) {
-          callback();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+  .then((info) => {
+    dispatch({ type: GET_CANDIDATE_INFO, skills: info.data[0].candidate_skills, github_url: info.data[0].github_url, photo: info.data[0].profile_photo })
+      if(callback) {
+        callback();
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 
 
-  export const viewCompanyProfile = (name) => (dispatch) => {
-    dispatch({ type: GET_COMPANY_NAME, name: name })
-  }
+export const viewCompanyProfile = (name) => (dispatch) => {
+  dispatch({ type: GET_COMPANY_NAME, name: name })
+}
 
 export const saveResume = (resumeUrl, resumeName, userId) => (dispatch) => {
   axios.post('/api/resume', { resumeUrl, resumeName, userId })

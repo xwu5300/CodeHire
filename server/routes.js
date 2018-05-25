@@ -456,7 +456,12 @@ router.get('/api/pastChallenges', (req, res) => {
 // get results data from 'results' table
 router.get('/api/results', (req, res) => {
   let companyId = jwt.decode(req.query.companyId, secret).id;
-  let candidateId = jwt.decode(req.query.candidateId, secret).id;
+  if (!parseInt(req.query.candidateId)) {
+    var candidateId = jwt.decode(req.query.candidateId, secret).id;
+  } else {
+    var candidateId = req.query.candidateId;
+  }
+  
   resultsControllers.getCompanyResults(companyId, candidateId)
   .then((data) => {
     console.log('Retrieve candidate result from db')
@@ -486,7 +491,6 @@ router.get('/api/results/candidate', (req, res) => {
   if (!parseInt(req.query.candidateId)) {
     candidateId = jwt.decode(req.query.candidateId, secret).id;
   }
-  console.log('routes fetchCandidateResults candidateid', candidateId)
   let companyScheduleId = req.query.companyScheduleId;
   resultsControllers.getCandidateResults(candidateId, companyScheduleId)
   .then((data) => {

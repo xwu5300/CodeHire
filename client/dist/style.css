@@ -596,6 +596,10 @@ ui.menu.container.item {
   right: 50px;
 }
 
+.candidate-results {
+  margin-bottom: 20px;
+}
+
 
 /* ------- User Past Results ------- */
 
