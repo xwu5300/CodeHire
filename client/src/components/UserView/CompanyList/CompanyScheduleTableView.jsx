@@ -39,6 +39,9 @@ class CompanyScheduleTableView extends Component {
         })     
       } else {
         this.props.saveCandidateCalendar(localStorage.getItem('userId'), scheduleId)
+        swal({
+          text: "Scheduled a Live Challenge."
+        })
       }
     })
   }
@@ -52,7 +55,6 @@ class CompanyScheduleTableView extends Component {
 
 
   render() {
-    console.log('company schedule taable. this.props.results', this.props.results)
     return(
       <table className='ui inverted table'>
         <thead>

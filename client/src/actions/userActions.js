@@ -39,17 +39,6 @@ export const saveCandidateCalendar = (candidateId, companyScheduleId) => (dispat
   axios.post('/api/candidateCalendar', { candidateId, companyScheduleId })
   .then(({data}) => {
     dispatch(fetchCandidateCalendar(candidateId))
-    if (data) {
-      swal({
-        text: "Scheduled a Live Challenge.",
-        // width: '350px'
-      })
-    } else {
-      swal({
-        text: "You've already scheduled this live challenge.",
-        // width: '350px'
-      })
-    }
   })
   .catch((err) => {
     console.log(err);
@@ -70,14 +59,8 @@ export const checkCandidateReschedule = (candidateId, companyId, time, cb) => (d
   axios.get('/api/candidateCalendar/reschedule', { params: { candidateId, companyId, time } })
   .then(({data}) => {
     console.log('data from userACtion', data)
-    // dispatch({ type: GET_CANDIDATE_CALENDAR, payload: data });
     cb(data)
   })
-  // .then(() => {
-  //   if (cb) {
-  //     cb()
-  //   }
-  // })
   .catch((err) => {
     console.log(err);
   })

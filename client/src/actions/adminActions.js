@@ -1,4 +1,4 @@
-import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF, SET_CURRENT_LIVE_CHALLENGE, GET_CHALLENGE_INFO, GET_COMPANY_RESULTS, GET_CANDIDATE_LIST, GET_USER, GET_FAVORITES, GET_ALL_RESULTS, SEARCH_USERS, GET_COMPANY_DATA, GET_PAST_CHALLENGES, GET_PAST_RESULTS, GET_CHALLENGE_DATA } from '../constants/actionTypes';
+import { DELETE_CHALLENGE, GET_ALL_CHALLENGES, GET_DEFAULT_CHALLENGES, SAVE_CHALLENGE, GET_COMPANY_INFO, GET_COMPANY_SCHEDULE, TOGGLE_INITIAL_ON, TOGGLE_INITIAL_OFF, SET_CURRENT_LIVE_CHALLENGE, GET_CHALLENGE_INFO, GET_COMPANY_RESULTS, GET_CANDIDATE_LIST, GET_USER, GET_FAVORITES, GET_ALL_RESULTS, SEARCH_USERS, GET_COMPANY_DATA, GET_PAST_CHALLENGES, GET_PAST_RESULTS, GET_CHALLENGE_DATA, GET_ACTIVE_CHALLENGES } from '../constants/actionTypes';
 
 import axios from 'axios';
 import { fetchInitialChallenge } from './userActions.js';
@@ -27,7 +27,21 @@ export const fetchAllChallenges = (companyId) => (dispatch) => {
   })
 }
 
-export const fetchChallengeData = (challengeId, cb) => (dispatch) => {
+export const fetchActiveChallenges = (companyId) => (dispatch) => {
+  axios.get('/api/challenges/active', {params: { companyId }})
+	.then(({data}) => {
+    console.log('fetch active admin action data ', data)
+    // data.sort((a, b) => {
+    //   return a.id - b.id;
+    // })
+    dispatch({ type: GET_ACTIVE_CHALLENGES, payload: data })
+	})
+	.catch((err) => {
+		console.log(err);
+  })
+}
+
+export const fetchChallengeData = (challengeId) => (dispatch) => {
   axios.get('/api/challengeData', {params: { challengeId }})
   .then(({data}) => {
     dispatch({ type: GET_CHALLENGE_DATA, payload: data})
@@ -70,7 +84,7 @@ export const saveChallenge = (challenge, companyId, cb) => (dispatch) => {
 export const deleteChallenge = (challenge, companyId, cb) => (dispatch) => {
   axios.delete('/api/challenges', {params: { challenge, companyId }})
   .then(() => {
-    dispatch(fetchAllChallenges(companyId));
+    dispatch(fetchActiveChallenges(companyId));
     dispatch(fetchCompanySchedule(companyId));
     dispatch(fetchInitialChallenge(companyId));
   })

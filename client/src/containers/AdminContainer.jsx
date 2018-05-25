@@ -12,7 +12,7 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PrivateRoute from '../components/PrivateRoute.jsx';
 
-import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, fetchCompanyResults, fetchCandidateList, getChallengeInfo, updateChallengeDate, getUsername, searchUsers, saveToFavorites, getFavorites, removeFromFavorites, fetchAllResults, getCompanyData, fetchPastSchedule, fetchPastResults, fetchChallengeData, contact } from '../actions/adminActions';
+import { fetchDefaultChallenges, fetchAllChallenges, saveChallenge, deleteChallenge, updateInfo, fetchCompanyInfo, addToCompanySchedule, fetchCompanySchedule, toggleInitialOn, toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule, fetchCompanyResults, fetchCandidateList, getChallengeInfo, updateChallengeDate, getUsername, searchUsers, saveToFavorites, getFavorites, removeFromFavorites, fetchAllResults, getCompanyData, fetchPastSchedule, fetchPastResults, fetchChallengeData, contact, fetchActiveChallenges } from '../actions/adminActions';
 import { fetchInitialChallenge, currentCompanyCalendar, fetchCandidateInfo, fetchCandidateResults } from '../actions/userActions';
 import { handleLogout } from '../actions/authActions';
 
@@ -61,6 +61,7 @@ const mapStateToProps = (state) => ({
    past_results: state.past_results.past_results,
    candidate_results: state.candidate_results.candidate_results,
    website_url: state.website_url.website_url,
+   active_challenges: state.active_challenges.active_challenges,
 });
 
 const mapDispatchToProps = {
@@ -70,7 +71,7 @@ const mapDispatchToProps = {
   toggleInitialOff, makeInitial, setCurrentLiveChallenge, deleteFromCompanySchedule,
   fetchCompanyResults, fetchCandidateList, getChallengeInfo, getUsername, updateChallengeDate, searchUsers,
   saveToFavorites, getFavorites, removeFromFavorites, fetchAllResults, getCompanyData, fetchPastSchedule,
-  fetchPastResults, fetchChallengeData, contact, fetchCandidateResults, handleLogout
+  fetchPastResults, fetchChallengeData, contact, fetchCandidateResults, handleLogout, fetchActiveChallenges
 }
 
 const ChallengeListComponent = connect(mapStateToProps, mapDispatchToProps)(ChallengeListView);

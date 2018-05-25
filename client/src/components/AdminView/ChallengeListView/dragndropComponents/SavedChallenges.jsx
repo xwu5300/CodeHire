@@ -30,7 +30,7 @@ class SavedChallenges extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showForm: this.props.allChallenges.map((item) => false),
+      showForm: this.props.activeChallenges.map((item) => false),
       duration: 0,
       challenge_id: null
     }
@@ -89,7 +89,7 @@ class SavedChallenges extends Component {
       <div className='ui segment drag_segment'>
         <h1>Your Challenges</h1>
 
-          {this.props.allChallenges.map((challenge, i) => {
+          {this.props.activeChallenges.map((challenge, i) => {
             return (
               <ChallengeCard 
               key={challenge.id}

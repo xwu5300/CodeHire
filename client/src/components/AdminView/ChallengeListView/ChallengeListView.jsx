@@ -32,9 +32,11 @@ class ChallengeListView extends Component {
 
   componentDidMount() {
     this.props.fetchAllChallenges(localStorage.getItem('userId'));
+    this.props.fetchActiveChallenges(localStorage.getItem('userId'));
     this.props.fetchDefaultChallenges();
     this.props.fetchCompanySchedule(localStorage.getItem('userId'));
     Modal.setAppElement('body');
+
   }
   openModal() {
     this.setState({
@@ -63,8 +65,8 @@ class ChallengeListView extends Component {
         <div className='ui padded raised horizontal segments challenge_list'>
           
           <DefaultChallenges userId={localStorage.getItem('userId')} defaultChallenges={this.props.default_challenges} save={this.props.saveChallenge} getInfo={this.props.getChallengeInfo} />
-          <SavedChallenges  getChallengeId={ this.props.getChallengeId } openModal={ this.openModal } userId={localStorage.getItem('userId')} allChallenges={this.props.all_challenges} delete={this.props.deleteChallenge} addToCompanySchedule={this.props.addToCompanySchedule} isInitial={this.props.is_initial} makeInitial={this.props.makeInitial} getInfo={this.props.getChallengeInfo} challengeInfo={this.props.challenge_info} save={this.props.saveChallenge}/>
-          <ScheduledChallenges getSchedule={this.props.fetchCompanySchedule} userId={localStorage.getItem('userId')} updateChallengeDate={ this.props.updateChallengeDate } deleteFromCompanySchedule={ this.props.deleteFromCompanySchedule } scheduledChallenges={ this.props.company_schedule } allChallenges={ this.props.all_challenges } addToCompanySchedule={ this.props.addToCompanySchedule } />
+          <SavedChallenges  getChallengeId={ this.props.getChallengeId } openModal={ this.openModal } userId={localStorage.getItem('userId')} activeChallenges={this.props.active_challenges} delete={this.props.deleteChallenge} addToCompanySchedule={this.props.addToCompanySchedule} isInitial={this.props.is_initial} makeInitial={this.props.makeInitial} getInfo={this.props.getChallengeInfo} challengeInfo={this.props.challenge_info} save={this.props.saveChallenge} fetchActiveChallenges={this.props.fetchActiveChallenges}/>
+          <ScheduledChallenges getSchedule={this.props.fetchCompanySchedule} userId={localStorage.getItem('userId')} updateChallengeDate={ this.props.updateChallengeDate } deleteFromCompanySchedule={ this.props.deleteFromCompanySchedule } scheduledChallenges={ this.props.company_schedule } addToCompanySchedule={ this.props.addToCompanySchedule } />
         </div>
       </div>
     </div>

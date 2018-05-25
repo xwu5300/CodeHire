@@ -72,6 +72,18 @@ const allChallenges = (state = initialState, action) => {
   }
 }
 
+const activeChallenges = (state = initialState, action) => {
+  switch(action.type) {
+    case 'GET_ACTIVE_CHALLENGES':
+      return {
+        ...state,
+        active_challenges: action.payload
+      }
+    default:
+        return state;
+  }
+}
+
 const companyInfo = (state = '', action) => {
   switch(action.type) {
     case 'GET_COMPANY_INFO':
@@ -237,4 +249,4 @@ const pastResults = (state = initialState, action) => {
 }
 
 
-export default { defaultChallenges, allChallenges, companyInfo, companySchedule, isInitial, currentLiveChallenge, results, candidateList, challengeInfo, username, favorites, users, allResults, companyData, pastChallenges, pastResults, challengeData };
+export default { defaultChallenges, allChallenges, companyInfo, companySchedule, isInitial, currentLiveChallenge, results, candidateList, challengeInfo, username, favorites, users, allResults, companyData, pastChallenges, pastResults, challengeData, activeChallenges };

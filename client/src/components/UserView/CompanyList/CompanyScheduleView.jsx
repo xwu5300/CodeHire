@@ -74,7 +74,8 @@ class CompanyScheduleView extends Component {
   }
 
   render() { 
-
+    console.log('company schdule CandidateInitialResults', this.props.pass_initial)
+    console.log('userlive coding company id ',localStorage.getItem('companyId'))
     return (
       <div>
         <i onClick={() => this.props.history.push('/user/companylist') } className="arrow alternate circle left icon"></i>
@@ -85,19 +86,19 @@ class CompanyScheduleView extends Component {
               <h2>{ this.props.information }</h2> 
                 {this.props.website_url && <h2>Click <a href={ this.props.website_url } target='_blank'>here</a> for more information.</h2> }
                 <hr />
-
-              {this.props.initial_challenge.length ?
-                <div className='initial_challenge'>
-                  <h2>
-                    Before You Schedule Live Challenge - You Need To Pass Initial Challenge
-                  </h2>
-                  <button className='ui orange inverted button' onClick={() => {
-                    this.isTaken()
-                  }}>
-                  Take Initial Challenge</button>
-                </div>
-              : <h2> {localStorage.getItem('companyName')} Does Not Have Any Upcoming Live Challenge </h2>  }
-            </div>
+          {this.props.initial_challenge.length ?
+        <div className='initial_challenge'>
+        <h2>
+        Before You Schedule Live Challenge - You Need To Pass Initial Challenge
+        </h2>
+        <button className='ui orange inverted button' onClick={() => {
+          this.isTaken()
+          }}>
+            Take Initial Challenge</button>
+        </div>
+        : <h2> {localStorage.getItem('companyName')} Does Not Have Any Upcoming Live Challenge </h2>    
+      }
+      </div>
 
 
             <div>
