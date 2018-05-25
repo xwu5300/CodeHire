@@ -1,8 +1,6 @@
 const knex = require('../../db/index.js');
-const bcrypt = require('bcrypt');
 
 module.exports.saveCandidate = (token, name, username, phone, github_url) => {
-  // bcrypt.hash(password, 10, (err, hash) => {
     return knex('users')
     .insert({ name: name, username: username, phone: phone, github_url: github_url, role: 'candidate', token: token })
     .then((response) => {

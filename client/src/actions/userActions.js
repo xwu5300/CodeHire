@@ -102,8 +102,6 @@ export const fetchCandidateResults = (candidateId, companyScheduleId, cb) => (di
   axios.get('/api/results/candidate', { params: { candidateId, companyScheduleId } })
   .then(({data}) => {
     dispatch({ type: GET_CANDIDATE_RESULTS, payload: data });
-  })
-  .then(() => {
     if (cb) {
       cb(data);
     }
