@@ -62,14 +62,12 @@ class ScheduleInitialView extends Component {
   render() {
 
     const selected = {
-      border: '3px solid orange',
+      border: '4px solid #f2711c',
       margin: '10px auto',
-      width: '45%',
       height: '200px'
     }
 
     const notSelected = {
-       width: '45%',
        margin: '10px auto',
        height: '200px'
     }
@@ -77,21 +75,22 @@ class ScheduleInitialView extends Component {
   
     return (
       <div>
-        <h4>Select from your saved challenges:</h4>
-        <div className='ui cards' style={{ marginTop: '40px' }}>
+        <h3>Select from your saved challenges:</h3>
+        <div className='ui three column padded grid'>
           {!this.state.initialChallenges ? 'No saved challenges to choose from' : this.state.initialChallenges.map((item, i) => {
             return (
-              <div className='ui card' style={ this.state.isSelected === item.id ? selected : notSelected } key={ item.id }>
+              <div className='column'>
+              <div className='ui fluid card initial_challenge_card' style={ this.state.isSelected === item.id ? selected : notSelected } key={ item.id }>
                 <div className='content'>
                   <div className="title"><b>{item.title}</b></div>
                     <div className='description'>
                       <b>Description:</b> {item.instruction}
                       <br />
                       <br />
-                      <b>Difficult:</b> {item.difficulty}
+                      <b>Difficulty:</b> {item.difficulty}
                     </div>
-                  <div className="field dropdown initial_duration" onClick={() => {this.toggleCurrentlyOn(item.id)}}>
-                    <select className="ui dropdown" name="duration" value={this.state.currentlyOn === item.id ? this.state.duration : ""} onChange={this.handleDurationChange}>
+                  <div className="initial_duration" onClick={() => {this.toggleCurrentlyOn(item.id)}}>
+                    <select name="duration" value={this.state.currentlyOn === item.id ? this.state.duration : ""} onChange={this.handleDurationChange}>
                       <option value="">Duration (minutes)</option>
                       <option value="15">15</option>
                       <option value="30">30</option>
@@ -101,7 +100,9 @@ class ScheduleInitialView extends Component {
                   </div>
                 </div>
                 {this.state.invalid[i] ? <div style={{color: 'red'}}>Please select a duration</div> : null}
-                <div className="ui bottom attached button" onClick={ () => this.handleClick(item, item.id, i) }>Select</div>
+                
+              </div>
+              <div className="ui bottom attached orange button" onClick={ () => this.handleClick(item, item.id, i) }>Select</div>
               </div>
             )
           })}

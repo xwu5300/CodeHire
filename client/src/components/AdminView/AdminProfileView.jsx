@@ -11,7 +11,7 @@ class AdminProfileView extends Component {
 
     this.state = {
       logo_url: 'http://static1.squarespace.com/static/522a22cbe4b04681b0bff826/t/581cc65fe4fcb5a68ecd940c/1478280803080/hrhq-avatar.png?format=1000w',
-      information: 'Insert company information here',
+      information: '',
       isTextarea: false,
       website_url: ''
     }
@@ -32,6 +32,8 @@ class AdminProfileView extends Component {
 
       if(this.props.company_information) {
         this.setState({ information: this.props.company_information })
+      } else {
+        this.setState({ information: 'Insert company information here' })
       }
       
       if(this.props.website_url) {
@@ -78,8 +80,8 @@ class AdminProfileView extends Component {
         <div className='ui raised container horizontal segments'>
 
           <div className='ui segment' style={{ width: '50%' }}>
-            <h2> About {this.props.token} </h2>
-            <i style={{ fontSize: '24px' }} onClick={ () => this.toggleInfo() } className="pencil alternate orange icon edit_company_info cursor"></i>
+            <h2 className='page_header'> About {this.props.token} </h2>
+            <button className='ui orange inverted button' onClick={ () => this.toggleInfo() }>edit info</button>
             {this.state.isTextarea ?
                <textarea onChange={ (e) => this.handleChange(e) } value={ this.state.information } className='company_profile_textarea' name='information'>{ this.state.information }</textarea>
                :

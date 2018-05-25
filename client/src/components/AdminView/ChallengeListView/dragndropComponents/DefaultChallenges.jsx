@@ -11,7 +11,7 @@ class DefaultChallenges extends Component {
   render() {
     return (
       <div className='ui segment drag_segment'>
-      <h1>Default Challenges</h1>
+      <h1 className='drag_column_title'>Default Challenges</h1>
       <ul>
       {this.props.defaultChallenges.map((challenge) => {
         return (

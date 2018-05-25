@@ -74,16 +74,16 @@ class ChallengeCard extends Component {
 
     const tab = {
       height: '35px',
-      overflow: 'hidden',
+      overflow: 'hidden'
     }
   
   
   const { column, default_challenge, challenge, index, challengeId, userId, title, instruction, difficulty, deleteChallenge, connectDragSource, isDragging } = this.props;
 
   if(default_challenge) {
-    var cardColor = 'ui fluid orange card challenge_card';
+    var cardColor = 'ui fluid black card challenge_card';
   } else {
-    cardColor = 'ui fluid black card challenge_card';
+    cardColor = 'ui fluid orange card challenge_card';
   }
 
 
@@ -102,7 +102,7 @@ class ChallengeCard extends Component {
        :
        <div>
          <span style={{fontSize: '20px', position: 'relative', bottom: '5px'}}> { title } </span>
-         <span style={{position:'relative', bottom: '5px', float: 'right', marginRight: '50px'}}> <b>difficulty:</b> { difficulty }</span>
+         <span style={{position:'relative', bottom: '5px', float: 'right', marginRight: '50px'}}> <b>difficulty:</b> <span style={{ color: '#f2711c', fontWeight: 'bold' }}>  { difficulty }</span></span>
        </div>
      }
         <div className='saved_challenges_btns'>

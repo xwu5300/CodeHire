@@ -77,8 +77,8 @@ class AdminDashboardView extends Component {
 
     const customStyles = {
       content : {
-        width: '80%',
-        height: '80%',
+        width: '85%',
+        height: '85%',
         margin: 'auto',
         overflow: 'scroll'
       }
@@ -92,11 +92,11 @@ class AdminDashboardView extends Component {
       <div>
         <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout } />
         <div className='company_dashboard_container'>
-          <div className="welcome">Welcome, {localStorage.getItem('username')}!</div>
-          {upcoming.length > 0 ?
-          <div className="welcome-message-alt">You have <span style={{color: '#f2711c'}}>{upcoming.length}</span> upcoming challenges.</div> :
-          <div className="welcome-message">It looks like you don't have any challenges scheduled yet. Head over to "manage challenges" to get started.</div>}
           <div className='ui raised very padded container segment'>
+            <div className="welcome">Welcome, {localStorage.getItem('username')}!</div>
+            {upcoming.length > 0 ?
+            <div className="welcome-message-alt">You have <span style={{color: '#f2711c'}}><b>{upcoming.length}</b></span> upcoming challenges.</div> :
+            <div className="welcome-message">It looks like you don't have any challenges scheduled yet. Head over to "manage challenges" to get started.</div>}
             <div className='ui grid'>
               <Modal style={ customStyles } isOpen={ this.state.modalIsOpen } onRequestClose={ this.closeModal }>
                 <ScheduleInitialView initialChallenge={ this.props.initial_challenge } userId={ localStorage.getItem('userId')} defaultChallenges={ this.props.default_challenges } challenges={ this.props.active_challenges } close={ this.closeModal } makeInitial={this.props.makeInitial} isInitial={this.props.is_initial} addToSchedule={this.props.addToCompanySchedule}/>
@@ -132,6 +132,7 @@ class AdminDashboardView extends Component {
                 </thead>
                 <tbody>
                   {this.props.company_schedule.length > 0 ? this.props.company_schedule.map((item, i) => {
+                    console.log('')
                     return (
                       <Fragment key={i}>
                       {!item.time || item.duration === 0 || moment(item.time).format() < moment(currTime).format() ? null : 
