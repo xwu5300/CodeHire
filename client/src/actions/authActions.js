@@ -1,5 +1,5 @@
 import { SAVE_COMPANY, SAVE_CANDIDATE, CHECK_USER, GET_USER } from '../constants/actionTypes';
-import { auth, provider } from '../../../firebase/index.js';
+import { auth } from '../../../firebase/index.js';
 import axios from 'axios';
 import history from '../components/history.jsx';
 import store from '../store.js';

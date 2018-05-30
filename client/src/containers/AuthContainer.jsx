@@ -4,7 +4,7 @@ import Login from '../components/Login.jsx';
 import Registration from '../components/Registration.jsx';
 import LandingPage from '../components/LandingPage.jsx';
 
-import { saveCompany, saveCandidate, handleLogin, handleSignUp, googleLogin } from '../actions/authActions';
+import { saveCompany, saveCandidate, handleLogin, handleSignUp } from '../actions/authActions';
 
 import {BrowserRouter as Router, Route, Link, Switch, History, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -29,7 +29,7 @@ const mapStateToProps = (state) => ({
 
 
 const mapDispatchToProps = {
-  saveCompany, saveCandidate, handleLogin, googleLogin, handleSignUp
+  saveCompany, saveCandidate, handleLogin, handleSignUp
 }
 
 const connectAuthContainer = connect(mapStateToProps, {})(AuthContainer);

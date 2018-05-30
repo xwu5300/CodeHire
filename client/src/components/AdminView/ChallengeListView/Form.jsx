@@ -226,7 +226,6 @@ class Form extends Component {
     })
     .catch((err) =>{
       if (err) {
-        console.log('there was an error', err)
         this.setState({
           invalid: true
         })
@@ -293,7 +292,7 @@ class Form extends Component {
           <br/>
 
         {this.state.challenge.testCases.map((item, i) => (
-        <div>
+        <div key={i}>
           <div className="two fields" style={{ clear: 'both'}}key={i}>
             <div className="field">
               <label>Test Case - Input</label>
@@ -313,7 +312,7 @@ class Form extends Component {
         </div>
         ))}
         {this.state.challenge.exampleCases.map((item, i) => (
-        <div>
+        <div key={i}>
           <div className="two fields" style={{ clear: 'both'}} key={i}>
             <div className="field">
               <label>Example - Input</label>
@@ -346,7 +345,7 @@ class Form extends Component {
             </select>
           </div>
           <div className="ui error message"></div>
-          {this.state.invalid ? <div style={{color: 'red', fontWeight: 'strong'}}>Either your tests or examples are not in the correct format. Please update and re-sbumit.</div> : null}
+          {this.state.invalid ? <div style={{color: 'red', fontWeight: 'strong'}}>Either your tests or examples are not in the correct format. Please update and re-submit.</div> : null}
           <div className="actions">
           <div className="two fluid ui buttons">
             <button className="ui cancel red basic button" onClick={() => {this.props.close()}}>

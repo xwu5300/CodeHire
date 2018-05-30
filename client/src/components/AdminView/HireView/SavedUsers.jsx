@@ -13,6 +13,10 @@ class SavedUsers extends Component {
     this.handleModal = this.handleModal.bind(this);
   }
 
+  componentDidMount(){
+    Modal.setAppElement('body');
+  }
+
   openModal() {
     this.setState({
       modalIsOpen: true
@@ -43,9 +47,9 @@ class SavedUsers extends Component {
       <div>
       {this.props.favorites.length === 0 ? <div className="ui attached segment" >You do not have any saved users. Search users to save to favorites.</div> : this.props.favorites.map((user, i) => {
         return(
-          <div className='row ui attached segment'>
+          <div className='row ui attached segment' key={i}>
           <div className='column scroll'>
-          <div className="ui segment hire_card" key={i}>
+          <div className="ui segment hire_card">
           {user.profile_photo ?
             <img src={user.profile_photo} className="ui small left floated image" style={{width: '100px'}}/> : <img src="img/profilePic.jpg"  style={{width: '100px'}} className="ui small left floated image"/> }
             <div>Username: {user.username}</div>

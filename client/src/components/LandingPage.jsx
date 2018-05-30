@@ -15,9 +15,14 @@ class LandingPage extends Component {
     this.state = {
       currentScrollHeight: .0001
     }
+    this.onScroll = this.onScroll.bind(this);
   }
 
   componentDidMount () {
+    this.onScroll();
+  }
+
+  onScroll() {
     window.onscroll = () => {
       this.setState({
         currentScrollHeight: window.scrollY

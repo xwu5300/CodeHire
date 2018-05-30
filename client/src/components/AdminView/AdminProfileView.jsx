@@ -91,8 +91,8 @@ class AdminProfileView extends Component {
           <div className='ui segment'>
             <img className='company_profile_logo' src={ this.props.logo_url } />
             <AdminDropbox submit={this.handleSubmit}/>
-            <div class="ui labeled input profile">
-              <div class="ui label">
+            <div className="ui labeled input profile">
+              <div className="ui label">
                 http://
               </div>
               <input onChange={ (e) => this.handleChange(e) } value={ this.state.website_url } name='website_url' className='ui input website_input' type='text' placeholder="mysite.com" onKeyPress={(evt) => {this.handleKeyPress(evt)}} />

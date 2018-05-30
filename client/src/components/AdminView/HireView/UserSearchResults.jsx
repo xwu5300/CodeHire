@@ -13,6 +13,10 @@ class UserSearchResults extends Component {
     this.handleModal = this.handleModal.bind(this);
   }
 
+  componentDidMount(){
+    Modal.setAppElement('body');
+  }
+
   openModal() {
     this.setState({
       modalIsOpen: true
@@ -42,7 +46,7 @@ class UserSearchResults extends Component {
       <div>
         {this.props.users.length === 0 ? <div className="ui attached segment">No results found. Please search again.</div> : this.props.users.map((user, i) => {
           return (
-          <div className='row ui attached segment'>
+          <div className='row ui attached segment' key={i}>
           <div className='column'>
           <div className="ui segment hire_card">
             {user.profile_photo ?
