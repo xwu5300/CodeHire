@@ -8,42 +8,97 @@
 }
 
 
+/* -------- All elements --------- */
+
+.landing_page_name, .landing_page_companies, .register_btn, .welcome,
+.drag_column_title, .profile_header, .resume_div, .candidate_time_limit, 
+.time, .bar_graph_dropdown, .history_list  {
+ 	text-align: center;
+ }
+
+.ui.small.image, .register_btn, .welcome, .form-container,
+.company_profile_saveBtn, .profile_pic_container, .live_challenges_table,
+.schedule_container, .company_logo, .search_company_input, .company_list_items, 
+.view_company_btn, .challenge-results-graph, .analytics-container {
+ 	margin: auto;
+  }
+
+
+ .login_container, .login_btn, .register_btn_container, .schedule_time_container,
+ .profile_pic_container, .resume_btns, .user_liveCoding_container, .schedule_container,
+ .view_company_btn, .history_list, .landing_page_companies  {
+ 	position: relative;
+ } 
+
+ .expand_icon, .initial_duration, .ui.labeled.input.profile, .candidate_time_limit,
+ .leave_warning, .live_coding_title, .search, .envelope.open.icon, 
+ .envelope.open.outline.icon, .arrow.icon {
+ 	position: absolute;
+ } 
+
+ .cursor:hover, .active_user_div, .ui.card.cardzz:hover, .arrow-left, .arrow-right,
+ .arrow.icon, .user_navbar, .company_navbar {
+ 	cursor: pointer;
+ } 
+
+ .ui.small.image, .company_profile_logo, .profile_pic_container, .company_logo,
+ .company_list_items, .bar_graph_dropdown, .bar_graph_dropdown select {
+ 	display: block;
+ } 
+
+ .resume_btns, .register_btn, .resume_div, .time_limit_btn, .history_list li {
+ 	display: inline-block;
+ }  
+
+ .live_coding_title, .footer_logo, .hire_header, .candidate_results_date,
+ .time, .code:hover, .bar_graph_dropdown label, .arrow.icon {
+ 	color: #f2711c;
+ }     
+
+
+
 /* ------- Headers ------- */
 .page_header {
 	font-size: 42px;
 	margin-bottom: 70px;
 }
 
+
 /* ------ LandingPage ----- */
+
+
+.our_clients {
+	margin-left: 25%;
+	margin-right: 25%;
+	font-size: 22px;
+}
+
+.clients_header {
+	font-weight: bold ;
+	font-size: 42px;
+	margin-bottom: 20px;
+}
+
+.about_us_container {
+	margin-top: 150px;
+}
 
 .landing_page_card {
 	height: 200px;
 	width: 50px;
 }
 
-.landing_page_name {
-	text-align: center;
-}
 
 .landing_page_companies {
-	text-align: center;
-	position: relative;
 	top: 50px;
 }
 
-.footer.segment {
-	padding-top: 20px;
-}
 
 .footer_logo {
-	color: #f2711c;
 	margin-left: 20px;
+	font-size: 22px;
 }
 
-.ui.small.image {
-	display: block;
-	margin: auto;
-}
 
 .landing_page_image {
 	width: 50px;
@@ -74,7 +129,7 @@
 
 .footer.segment {
 	padding: 5em 0em;
-	height: 100px;
+	height: 50px;
 }
 
 
@@ -106,13 +161,11 @@ ui.menu.container.item {
 
 /* ------ Login ----- */
 .login_container {
-	position: relative;
 	top: 125px;
 }
 
 .login_btn {
 	width: 40%;
-	position: relative;
 	left: 40px;
 	top: 20px;
 
@@ -123,21 +176,16 @@ ui.menu.container.item {
 	color: white;
 	height: 50px;
 	width: 100%;
-	text-align: center;
 	padding-top: 15px;
 }
 
 .register_btn_container {
-	position: relative;
 	left: 50px;
 	top: 20px;
 }
 
 .register_btn {
 	width: 40%;
-	display: inline-block;
-	margin: auto;
-	text-align: center;
 }
 
 
@@ -145,18 +193,15 @@ ui.menu.container.item {
 
 /* ------ Admin Dashboard -------- */
 .company_dashboard_container {
-  margin-top: 100px;
-  margin-bottom: 40px;
+ 	margin-top: 100px;
+	margin-bottom: 40px;
 }
 
 .calendar-button {
-  float: left;
-  margin-left: 100px;
+	float: left;
+	margin-left: 100px;
 }
 
-.cursor:hover {
-  cursor: pointer;
-}
 
 .initial_challenges_container {
 	overflow: scroll;
@@ -167,30 +212,28 @@ ui.menu.container.item {
 }
 
 .welcome {
-  margin: auto;
-  font-size: 42px;
-  text-align: center;
-  margin-bottom: 30px;
-  margin-top: 20px;
+	font-size: 42px;
+	text-align: center;
+	margin-bottom: 30px;
+	margin-top: 20px;
 }
 
 .welcome-message-alt {
-  font-size: 20px;
-  text-align: center;
-  margin-bottom: 60px;
+	font-size: 20px;
+	text-align: center;
+	margin-bottom: 60px;
 }
 
 .welcome-message {
-  font-size: 17px;
-  text-align: center;
-  margin-bottom: 100px;
+	font-size: 17px;
+	text-align: center;
+	margin-bottom: 100px;
 }
 
 /* -------- Drag N Drop Challenge List--------- */
 
 .drag_column_title {
 	margin-bottom: 30px;
-	text-align: center;
 }
 
 .drag_segment {
@@ -200,7 +243,6 @@ ui.menu.container.item {
 
 .expand_icon {
 	font-size: 22px;
-    position: absolute;
     top: 8px;
     right: 5px;
 }
@@ -211,28 +253,27 @@ ui.menu.container.item {
 }
 
 .form-container {
-  width: 70%;
-  padding: 20px;
-  margin: auto;
+	width: 70%;
+	padding: 20px;
 }
 
 .calendar-container {
-  margin-top: 10px;
-  margin-bottom: 20px;
+	margin-top: 10px;
+	margin-bottom: 20px;
 }
 
 .field .dropdown {
-  margin-top: 10px;
+	margin-top: 10px;
 }
 
 .ui.button.home {
-  float: right;
-  margin-right: 30px;
+	float: right;
+	margin-right: 30px;
 }
 
 .input_challenge_btn {
-  width: 30%;
-  height: 50px;
+	width: 30%;
+	height: 50px;
 }
 
 .saved_challenges_btns {
@@ -240,11 +281,10 @@ ui.menu.container.item {
 }
 
 .challenge_content div {
-  margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 .schedule_time_container {
-	position: relative;
 	top: 40px;
 }
 
@@ -259,17 +299,16 @@ ui.menu.container.item {
 /* ------ Initial Challenge Module ------ */
 
 .title {
-  float: left;
-  margin-bottom: 30px;
-  font-size: 20px;
+	float: left;
+	margin-bottom: 30px;
+ 	font-size: 20px;
 }
 
 .clear {
-  clear: both;
+	clear: both;
 }
 
 .initial_duration {
-	 position: absolute;
 	 top: 5px;
 	 right: 5px;
 }
@@ -280,16 +319,15 @@ ui.menu.container.item {
 }
 
 .ui.bottom.attached.orange.button {
-  margin-top: -10px;
+	margin-top: -10px;
 }
 
 /* ------ Company profile ------ */
 .company_profile_logo {
-  height: 150px;
-  width: auto;
-  display: block;
-  margin: 40px auto;
-  margin-bottom: 20px;
+	height: 150px;
+	width: auto;
+	margin: 40px auto;
+	margin-bottom: 20px;
 }
 
 .company_profile_container {
@@ -302,9 +340,6 @@ ui.menu.container.item {
 	width: 100%;
 }
 
-.company_profile_saveBtn {
-  margin: auto;
-}
 
 /* -------- Candidate Calendar -------- */
 
@@ -329,9 +364,8 @@ ui.menu.container.item {
 
 .ui.labeled.input.profile {
 	width: 90%;
-  position: absolute;
-  left: 5%;
-  bottom: 20px;
+	left: 5%;
+	bottom: 20px;
 }
 
 /* ------ User Schedule ----- */
@@ -345,11 +379,8 @@ ui.menu.container.item {
 	min-height: 300px;
 }
 
-.profile_pic_container{
+.profile_pic_container {
 	width: 200px;
-	display: block;
-	margin: auto;
-	position: relative;
 	top: 10px;
 }
 
@@ -366,24 +397,21 @@ ui.menu.container.item {
 
 .user_skills_input {
 	float: right;
-  bottom: 40px;
+    bottom: 40px;
 	font-size: 22px;
 	box-shadow: 1px 1px 10px;
 }
 
 .user_skills_input input {
-  margin-right: 10px;
-  width: 85%;
+	margin-right: 10px;
+	width: 85%;
 }
 
-.profile_header {
-	text-align: center;
-}
 
 .github_link {
-  margin-top: 50px;
-  margin-bottom: 0px;
-  margin-left: 135px;
+	margin-top: 50px;
+	margin-bottom: 0px;
+	margin-left: 135px;
 }
 
 .github_link input {
@@ -406,24 +434,20 @@ ui.menu.container.item {
 	padding-top: 15px;
 	background-color: rgba(0,0,0,0.2);
 	border-radius: 10px;
-	text-align: center;
-	display: inline-block;
 	color: white;
 }
 
 .resume_btns {
-	display: inline-block;
-	position: relative;
 	left: 10px;
 	top: 0;
 }
 
 .ui.small.horizontal.list {
-  margin-top: 40px;
+	`margin-top: 40px;
 }
 
 .profile_photo_container {
-  margin-bottom: 50px;
+	margin-bottom: 50px;
 }
 
 .ui.input.github {
@@ -444,7 +468,6 @@ ui.menu.container.item {
 }
 
 .user_liveCoding_container {
-	position: relative;
 	top: 125px;
 	width: 90%;
 	min-width: 900px;
@@ -452,9 +475,7 @@ ui.menu.container.item {
 }
 
 .candidate_time_limit {
-	text-align: center;
 	font-size: 32px;
-	position: absolute;
 	bottom: 20px;
 }
 
@@ -464,14 +485,13 @@ ui.menu.container.item {
 }
 
 .user_liveCoding_rightSeg div:nth-child(1), .user_liveCoding_rightSeg div:nth-child(2), .user_liveCoding_rightSeg div:nth-child(3), .user_liveCoding_rightSeg div:nth-child(4){
-  margin-bottom: 30px;
-  font-size: 24px;
-  line-height: 30px;
+	margin-bottom: 30px;
+	font-size: 24px;
+	line-height: 30px;
 }
 
 .leave_warning {
 	 color: white;
-	 position: absolute;
 	 top: 50px;
 	 right: 120px;
 	 font-size: 18px;
@@ -481,7 +501,6 @@ ui.menu.container.item {
 /* ------- Admin live coding ------- */
 
 .time_limit_btn {
-	display: inline-block;
 	margin-top: 20px;
 }
 
@@ -499,83 +518,64 @@ ui.menu.container.item {
 	padding: 20px;
 }
 
-
 .active_user_div {
 	margin-top: 5px;
 	padding-left: 10px;
 	padding-top: 13px;
-	cursor: pointer;
 	background-color: rgba(0,0,0,0.2);
 	width: 100%;
 	height: 50px;
 }
 
 .live_coding_title {
-  font-size: 24px;
-  font-weight: bold;
-  position: absolute;
-  top: 45px;
-  right: 40px;
-  clear: both;
-  color: #f2711c;
+	font-size: 24px;
+	font-weight: bold;
+	top: 45px;
+	right: 40px;
+	clear: both;
 }
 
 .live_coding_results {
 	height: 150px;
 	width: 25%;
 	background-color: white;
-
 	padding: 5px;
 	margin-bottom: 5px;
 }
 
-
-
 /* ------- Live Challenges Table ----- */
 .live_challenges_table {
 	width: 80%;
-	margin: auto;
 }
-
-
 
 /* -------- Company List View --------- */
 
 .schedule_container {
-	position: relative;
 	top: 75px;
 	width: 80%;
-	margin: auto;
 	margin-bottom: 40px;
 }
 
 .company_logo_container {
 	margin-bottom: 20px;
-	margin-top: -10px;
+	margin-top: 15px;
 	height: 175px;
 	width: 200px;
 	padding-left: 30px;
 }
 
-
 .company_logo {
 	width: 150px;
 	height: auto;
-	display: block;
-	margin: auto;
 	margin-bottom: -25px;
 }
 
-
 .search_company_input {
 	margin-top: 40px;
-	margin: auto;
 }
 
 .company_list_items {
 	width: 55%;
-	display: block;
-	margin: auto;
 	padding: auto;
 }
 
@@ -587,84 +587,66 @@ ui.menu.container.item {
 	font-size: 32px;
 }
 
-
 .view_company_btn {
-	margin: auto;
-	position: relative;
 	top: 30px;
 	width: 100%;
 }
 
-.ui.card.cardzz:hover{
-	cursor: pointer;
+.ui.card.cardzz:hover {
 	background-color: orange;
-}
-
-.arrow-left {
-  cursor: pointer;
-}
-
-.arrow-right {
-  cursor: pointer;
 }
 
 .company-name {
 	font-size: 22px;
 }
 
-
-
-
 /* -------- Hire List View --------- */
 
 .search-container {
-  margin-left: 7%;
-  width: 30%;
-  margin-top: 50px;
+	margin-left: 7%;
+	width: 30%;
+	margin-top: 50px;
 }
 
 .search-results {
-  float: left;
-  width: 40%;
-  margin-right: 50px;
+	float: left;
+	width: 40%;
+	margin-right: 50px;
+	min-height: 600px;
 }
 
 .search-results-container {
-  margin-left: auto;
+	margin-left: auto;
 }
 
 .heart.icon {
-  color: red;
-  font-size: 25px;
+	color: red;
+	font-size: 25px;
 }
 
 .search {
-  position: absolute;
-  bottom: 5px;
-  right: 10px;
+	bottom: 5px;
+	right: 10px;
 }
 
 .envelope.open.icon {
-  font-size: 25px;
-  position: absolute;
-  bottom: 5px;
-  right: 50px;
+	font-size: 25px;
+	bottom: 5px;
+	right: 50px;
 }
 
 .envelope.open.outline.icon {
-  font-size: 25px;
-  position: absolute;
-  bottom: 5px;
-  right: 50px;
+	font-size: 25px;
+	bottom: 5px;
+  	right: 50px;
 }
 
 .candidate-results {
-  margin-bottom: 20px;
+  	margin-bottom: 20px;
 }
 
 .hire_header {
-  font-size: 28px;
-  color: #f2711c;
+  	font-size: 28px;
 }
 
 .hire_card {
@@ -676,16 +658,14 @@ ui.menu.container.item {
 }
 
 .candidate_results_date {
-  float: right;
-  margin-top: 10px;
-	color: #f2711c;
+  	float: right;
+  	margin-top: 10px;
 }
 
 .scroll {
-  max-height: 75%;
-  overflow-y: scroll;
+  	max-height: 75%;
+  	overflow-y: scroll;
 }
-
 
 /* ------- User Past Results ------- */
 
@@ -695,60 +675,46 @@ ui.menu.container.item {
 
 .history_list  {
 	list-style: none;
-	text-align: center;
-	position: relative;
 	right: 10px;
 }
 
 .history_list li {
-	display: inline-block;
 	margin-left: 30px;
 	margin-right: 30px;
 }
 
 .time {
-	text-align: center;
 	font-size: 14px;
-	color: #f2711c;
 }
-
 
 /* -------- Analytics View --------- */
 
 .challenge-results-graph {
-  width: 800px;
-  margin: auto;
+  	width: 800px;
 }
 
 .past-challenge-container {
-  margin: 30px;
+  	margin: 30px;
 }
 
-
 .code {
-  font-weight: 800;
+  	font-weight: 800;
 }
 
 .code:hover {
-  color: #f2711c;
-  text-decoration: underline;
+  	text-decoration: underline;
 }
 
 .bar_graph_dropdown {
-	display: block;
-	text-align: center;
-	color: ;
 	margin: 30px auto;
 }
 
 .bar_graph_dropdown select {
 	width: 20%;
-	display: block;
 	margin: 20px auto;
 }
 
 .bar_graph_dropdown label {
-	color: #f2711c;
 	font-size: 28px;
 	font-weight: bold;
 }
@@ -760,24 +726,16 @@ ui.menu.container.item {
 /* -------- Back Navigation Button ------- */
 .arrow.icon {
 	font-size: 52px;
-	position: absolute;
 	top: 50px;
 	left: 50px;
-	cursor: pointer;
 	z-index: 1;
-	color: #f2711c;
-}
-
-.user_navbar, .company_navbar {
-  cursor: pointer;
 }
 
 .analytics-container {
-  margin: auto;
-  margin-top: 5%;
-  width: 90%;
+	margin-top: 5%;
+ 	width: 90%;
 }
 
 .ui.active.item.cursor.bold {
-  font-weight: 800;
+  	font-weight: 800;
 }
