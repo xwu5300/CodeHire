@@ -45,14 +45,14 @@ class CompanyListView extends Component {
             <SearchCompany updateCompanyList={this.props.fetchCompanyList} />
           </div>
           <div className='ui cards centered grid' style={{ marginBottom: '40px'}}>
-            {this.props.company_list ? this.props.company_list.map((company, i) => {
+            {this.props.company_list.length > 0 ? this.props.company_list.map((company, i) => {
               return (
                 <CompanyDetail key={ i } id={ company.id } handleHover={ this.handleHover } indexHovered={ this.state.indexHovered } logo={ company.logo_url ? company.logo_url : 'http://dev.jobkhoji.com/assets/images/default_company_icon.png'  } 
                                name={ company.name } fetchCompanyInfo={ this.props.fetchCompanyInfo } fetchCandidateInitialResults={this.props.fetchCandidateInitialResults}
                                
                 />              
               );
-            }) : "Sorry, we weren't able to find any results" }
+            }) : <div style={{color: 'white', textAlign: 'center', fontSize: '18px'}}>Sorry, we weren't able to find any results.</div>}
             </div>
          </div>
       )

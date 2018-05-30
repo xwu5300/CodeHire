@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
-    "production-mode": "pm2 start server/index.js",
+    "production-mode": "webpack --mode production && pm2 start server/index.js",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
     "build": "webpack --mode production"

@@ -39,7 +39,7 @@ class Dropbox extends Component {
     <ReactFilestack
       apikey={'A0lqArjXlRiOwVn8p9lRHz'}
       onSuccess={ this.success }
-      onError={'onError'}
+      onError={()=>{}}
       render={({ onPick }) => (
         !this.props.photo ?
 

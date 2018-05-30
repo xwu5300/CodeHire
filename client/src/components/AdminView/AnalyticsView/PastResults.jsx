@@ -14,7 +14,7 @@ class PastResults extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
+    Modal.setAppElement('body');
   }
 
   openModal() {
@@ -56,9 +56,9 @@ class PastResults extends Component {
         </tr>
       </thead>
       <tbody>
-      {this.props.pastResults.map((item) => {
+      {this.props.pastResults.map((item, i) => {
         return (
-          <tr key={item.candidate_id}>
+          <tr key={i}>
             <td>{item.username}</td>
             <td style={item.user_passed ? {color: 'green'} : {color: 'red'}} >{item.user_passed ? "Passed" : "Failed"}</td>
             <td className="code cursor" onClick={()=> {this.handleModal(item.candidate_id, item.company_schedule_id)}}>View Code</td>

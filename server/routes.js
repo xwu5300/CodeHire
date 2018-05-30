@@ -271,6 +271,7 @@ router.get('/api/challenge', (req, res) => {
   challengeControllers.getChallengeInfo(req.query.challengeId, companyId)
   .then((data) => {
     data.map((item) => {
+      console.log(item.test_cases)
       let arr = [];
       JSON.parse(item.test_cases)[0].forEach((input, i) => {
         JSON.parse(item.test_cases)[1].forEach((output, j) => {

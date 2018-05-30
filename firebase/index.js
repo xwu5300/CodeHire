@@ -1,4 +1,5 @@
-import * as firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import { firebaseConfig } from '../config.js'
 
 if (!firebase.apps.length) {
@@ -6,6 +7,5 @@ if (!firebase.apps.length) {
 }
 
 export const auth = firebase.auth();
-export const provider = new firebase.auth.GoogleAuthProvider();
 
 export default firebase;

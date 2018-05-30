@@ -115,7 +115,11 @@ class AdminDashboardView extends Component {
                       <td><button className='ui orange inverted button' type='button' onClick={() => {this.props.makeInitial(this.props.initial_challenge[0].id, this.props.initial_challenge[0].initial, null, null, localStorage.getItem('userId'))}}><i className='x icon' style={{ position: 'relative', left: '4px' }}></i></button></td>
                     </tr>
                   }
-                   <td><button className='ui orange inverted button cursor' type='button' onClick={this.handleClickOn}>Set Initial Challenge</button></td>
+                  <tr>
+                  <td><button className='ui orange inverted button cursor' type='button' onClick={this.handleClickOn}>Set Initial Challenge</button></td>
+                  <td></td>
+                  <td></td>
+                  </tr>
                 </tbody>   
               </table>
               

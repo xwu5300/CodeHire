@@ -44,23 +44,28 @@ class UserInitialChallengeView extends Component {
     this.saveResults = this.saveResults.bind(this)
     this.checkAnswer = this.checkAnswer.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.countdown = null;
   }
 
   componentDidMount() {
     this.getExamples()
   }
+
+  componentWillUnmount() {
+    clearInterval(this.countdown);
+  }
+  
   updateTimer(display) {
     this.setState({
       timeRemaining: display
     })
   }
 
-  checkOnTab(countdown) {
+  checkOnTab() {
     this.setState({
       tabHidden: document.hidden
     }, function() {if (this.state.tabHidden) {
-      this.tabOutSubmission()
-      clearInterval(countdown)
+      this.tabOutSubmission();
     }})
   }
 
@@ -68,8 +73,8 @@ class UserInitialChallengeView extends Component {
     let timer = duration
     let minutes
     let seconds
-    let countdown = setInterval( ()=> {
-      this.checkOnTab()
+    this.countdown = setInterval( ()=> {
+      this.checkOnTab();
       minutes = parseInt(timer / 60, 10)
       seconds = parseInt(timer % 60, 10);
       minutes = minutes < 10 ? "0" + minutes : minutes;
@@ -80,7 +85,7 @@ class UserInitialChallengeView extends Component {
 
       if (--timer < 0 && !this.state.submitted) {
         this.autoSubmit()
-        clearInterval(countdown)
+        clearInterval(this.countdown)
       }
     }, 1000);
   }

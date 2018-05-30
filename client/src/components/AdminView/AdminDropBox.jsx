@@ -22,7 +22,7 @@ class AdminDropbox extends Component {
     <ReactFilestack
       apikey={'A0lqArjXlRiOwVn8p9lRHz'}
       onSuccess={ this.success }
-      onError={console.log('')}
+      onError={() => {}}
       render={({ onPick }) => (
         <div>
           <button onClick={onPick} className="ui orange inverted button" style={{ display: 'block', margin: 'auto' }}>Upload Company Logo</button>
