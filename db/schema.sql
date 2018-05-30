@@ -24,7 +24,8 @@ CREATE TABLE users (
   token TEXT NOT NULL,
   resume_url TEXT NULL,
   resume_name VARCHAR(255) NULL,
-  profile_photo TEXT NULL
+  profile_photo TEXT NULL,
+  website_url TEXT NULL
 );
 
 CREATE TABLE all_challenges (
@@ -39,7 +40,8 @@ CREATE TABLE all_challenges (
   category VARCHAR(255),
   initial BOOLEAN NOT NULL,
   duration SMALLINT NULL,
-  company_id SMALLINT REFERENCES users(id)
+  company_id SMALLINT REFERENCES users(id),
+  active BOOLEAN
 );
 
 CREATE TABLE company_schedule (
@@ -72,7 +74,8 @@ CREATE TABLE results (
 CREATE TABLE company_user (
   id SERIAL PRIMARY KEY,
   company_id SMALLINT REFERENCES users(id),
-  user_id SMALLINT REFERENCES users(id)
+  user_id SMALLINT REFERENCES users(id),
+  contacted BOOLEAN
 );
 
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('admin', 'admin', null, null, null,  null, 'company', 'oEOYD25GWuWaERtmOJOg7bCrIck2');
@@ -90,7 +93,7 @@ INSERT INTO users (name, username, phone, information, github_url, logo_url, rol
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('user9', 'user9', '123-456-7890', 'about me', 'www.github.com/github', 'http://icons.iconarchive.com/icons/danleech/simple/1024/google-icon.png', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8KKue');
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('user10', 'user10', '123-456-7890', 'about me', 'www.github.com/github', 'http://icons.iconarchive.com/icons/danleech/simple/1024/google-icon.png', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8KKue');
 INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('user11', 'user11', '123-456-7890', 'about me', 'www.github.com/github', 'http://icons.iconarchive.com/icons/danleech/simple/1024/google-icon.png', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8KKue');
-INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('user12', 'user12', '123-456-7890', 'about me', 'www.github.com/github', 'http://icons.iconarchive.com/icons/danleech/simple/1024/google-icon.png', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8KKue');
+INSERT INTO users (name, username, phone, information, github_url, logo_url, role, token) VALUES ('user12', 'user12', '123-456-7890', 'about me', 'www.github.com/github', 'http://icons.iconarchive.com/icons/danleech/simple/1024/google-icon.png', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8KKue', 'https://cdn.filestackcontent.com/bEUm1loET0RuFxvp0aHZ');
 
 
 INSERT INTO all_challenges (title, instruction, function_name, parameters, test_cases, examples, difficulty, category, initial, duration, company_id) VALUES ('One Sum', 'Find the sum...', 'oneSum', 'arr, target', '[[[]], [[]]]', '[[[]], [[]]]', '1', 'algorithms', false, 90, 1);
@@ -374,4 +377,27 @@ INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candi
 INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 15, 13, 18, 3, false);
 INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 15, 14, 18, 3, false);
 INSERT INTO results (user_passed, code, score, completed_at, challenge_id, candidate_id, company_schedule_id, company_id, is_initial)  VALUES ('F', 'function(str)', 90, '2018-05-16 12:35:08', 15, 15, 18, 3, false);
+
+
+
+
+
+
+
+
+INSERT INTO users (name, username, phone, information, github_url, logo_url, profile_photo, role, token) VALUES ('Brian Fang', 'BrianFang', '123-456-7890', 'about me', 'www.github.com/github', 'https://cdn.filestackcontent.com/Pi4tLMSHRLiQkbi1r3NE', 'https://cdn.filestackcontent.com/Pi4tLMSHRLiQkbi1r3NE', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8');
+INSERT INTO users (name, username, phone, information, github_url, logo_url, profile_photo,role, token) VALUES ('David Baek', 'DavidBaek', '123-456-7890', 'about me', 'www.github.com/github', 'https://cdn.filestackcontent.com/rJ4CKih0SB2ur68iC9cq', 'https://cdn.filestackcontent.com/rJ4CKih0SB2ur68iC9cq', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8');
+INSERT INTO users (name, username, phone, information, github_url, logo_url, profile_photo,role, token) VALUES ('Heidi Poon', 'HeidiPoon', '123-456-7890', 'about me', 'www.github.com/github', 'https://cdn.filestackcontent.com/n3OC3qCOS2qchvu9ra3Q','https://cdn.filestackcontent.com/n3OC3qCOS2qchvu9ra3Q', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8');
+INSERT INTO users (name, username, phone, information, github_url, logo_url, profile_photo,role, token) VALUES ('Joseph Martin', 'JosephMartin', '123-456-7890', 'about me', 'www.github.com/github', 'https://cdn.filestackcontent.com/OdgIq6uaRjmPqApoJxug','https://cdn.filestackcontent.com/OdgIq6uaRjmPqApoJxug', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8');
+INSERT INTO users (name, username, phone, information, github_url, logo_url, profile_photo,role, token) VALUES ('Jun Yoo', 'JunYoo', '123-456-7890', 'about me', 'www.github.com/github', 'https://cdn.filestackcontent.com/kuMVmSTRRFKpcAtaaAnJ','https://cdn.filestackcontent.com/kuMVmSTRRFKpcAtaaAnJ', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8');
+INSERT INTO users (name, username, phone, information, github_url, logo_url, profile_photo, role, token) VALUES ('Bill Domanick', 'BillDomanick', '123-456-7890', 'about me', 'www.github.com/github', 'https://cdn.filestackcontent.com/R4FqKXDYQ52QfzDNz7gk', 'https://cdn.filestackcontent.com/R4FqKXDYQ52QfzDNz7gk', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8');
+INSERT INTO users (name, username, phone, information, github_url, logo_url, profile_photo,role, token) VALUES ('Pedro Barquinha', 'PedroBarquinha', '123-456-7890', 'about me', 'www.github.com/github', 'https://cdn.filestackcontent.com/jtTcYHmGTniMMR2TpC1p', 'https://cdn.filestackcontent.com/jtTcYHmGTniMMR2TpC1p','candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8');
+INSERT INTO users (name, username, phone, information, github_url, logo_url, profile_photo,role, token) VALUES ('Rahul Krish', 'RahulKrish', '123-456-7890', 'about me', 'www.github.com/github', 'https://cdn.filestackcontent.com/b3JGz36QdqT5AVkJLxWb','https://cdn.filestackcontent.com/b3JGz36QdqT5AVkJLxWb', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8');
+INSERT INTO users (name, username, phone, information, github_url, logo_url, profile_photo,role, token) VALUES ('Ryan Schabel', 'RyanSchabel', '123-456-7890', 'about me', 'www.github.com/github', 'https://cdn.filestackcontent.com/q109ydGKTdm9avbcBALU','https://cdn.filestackcontent.com/q109ydGKTdm9avbcBALU', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8');
+INSERT INTO users (name, username, phone, information, github_url, logo_url, profile_photo,role, token) VALUES ('Tom Wagner', 'TomWagner', '123-456-7890', 'about me', 'www.github.com/github', 'https://cdn.filestackcontent.com/Vyu4QmRZRAm3wXI5N7MY', 'https://cdn.filestackcontent.com/Vyu4QmRZRAm3wXI5N7MY','candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8');
+INSERT INTO users (name, username, phone, information, github_url, logo_url, profile_photo,role, token) VALUES ('Ian Pradhan', 'IanPradhan', '123-456-7890', 'about me', 'www.github.com/github', 'https://cdn.filestackcontent.com/AvHJaFQCRAeMe52sgMoh','https://cdn.filestackcontent.com/AvHJaFQCRAeMe52sgMoh', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8');
+INSERT INTO users (name, username, phone, information, github_url, logo_url, profile_photo,role, token) VALUES ('Wei Gao', 'WeiGao', '123-456-7890', 'about me', 'www.github.com/github', 'https://cdn.filestackcontent.com/0RhZgbJVRTW9ORAOpNNZ','https://cdn.filestackcontent.com/0RhZgbJVRTW9ORAOpNNZ', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8');
+INSERT INTO users (name, username, phone, information, github_url, logo_url, profile_photo,role, token) VALUES ('Brian Lee', 'BrianLee', '123-456-7890', 'about me', 'www.github.com/github', 'https://cdn.filestackcontent.com/dfMoBYdWQrKX0dxYoqQc', 'https://cdn.filestackcontent.com/dfMoBYdWQrKX0dxYoqQc', 'candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8');
+INSERT INTO users (name, username, phone, information, github_url, logo_url, profile_photo,role, token) VALUES ('Andrew Lee Lee', 'AndrewLee', '123-456-7890', 'about me', 'www.github.com/github', 'https://cdn.filestackcontent.com/bEUm1loET0RuFxvp0aHZ','https://cdn.filestackcontent.com/bEUm1loET0RuFxvp0aHZ','candidate', '$2b$10$rkynvuV5iRNEuoQ9ylWPpuFWdp9PdAPtXfOgJM37cgf3iwGW8'
+ );
 
