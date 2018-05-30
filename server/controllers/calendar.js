@@ -3,10 +3,10 @@ const moment = require('moment');
 
 //get all companies' list
 module.exports.getCompanyList = (companyName) => {
-  let option = `%${companyName}%`;
+  // let option = `%${companyName}%`;
   return knex.from('users')
   .where({'role': 'company'})
-  .where('name', 'like', option)
+  .where(knex.raw(`name ~* '${companyName}'`))
   .select('id', 'name','phone', 'information', 'logo_url')
   .orderBy('name', 'asc')
   .then((res) => {
@@ -173,10 +173,10 @@ module.exports.getAllCompanyCalendars = (companyName, companyId) => {
   console.log('calendar company Id', companyId)
   let currTime = new Date();
   if (!companyId) {
-    let option = `%${companyName}%`;
+    // let option = `%${companyName}%`;
     return knex('company_schedule')
     .innerJoin('users', 'users.id', 'company_schedule.company_id')
-    .where('name', 'like', option)
+    .where(knex.raw(`name ~* '${companyName}'`))
     .where('time', '>', currTime)
     .select('*', 'company_schedule.id')
     .orderBy('time', 'asc')
