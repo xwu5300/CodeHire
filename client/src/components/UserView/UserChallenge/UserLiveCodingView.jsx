@@ -41,6 +41,7 @@ class UserLiveCodingView extends Component {
     this.checkAnswer = this.checkAnswer.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.getExamples = this.getExamples.bind(this)
+    this.countdown = null;
 
     this.socket.on('add char', (chars)=> {
       this.setState({
@@ -67,20 +68,21 @@ class UserLiveCodingView extends Component {
 
   componentWillUnmount() {
     this.socket.emit('candidate disconnect', localStorage.getItem('username'), this.props.current_company_calendar);
+    clearInterval(this.countdown);
   }
 
-  checkOnTab(countdown) {
+  checkOnTab() {
     this.setState({
       tabHidden: document.hidden
     }, function() {if (this.state.tabHidden) {
       this.tabOutSubmission()
-      clearInterval(countdown)
+      clearInterval()
     }})
   }
 
   startTimer() {
     console.log('tick')
-    let countdown = setInterval( () => {
+    this.countdown = setInterval( () => {
       this.checkOnTab()
     }, 1000)
   }

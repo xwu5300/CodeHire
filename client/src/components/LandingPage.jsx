@@ -22,6 +22,10 @@ class LandingPage extends Component {
     this.onScroll();
   }
 
+  componentWillUnmount() {
+    window.onscroll = null;
+  }
+
   onScroll() {
     window.onscroll = () => {
       this.setState({
