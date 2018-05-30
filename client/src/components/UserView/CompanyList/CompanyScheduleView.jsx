@@ -34,8 +34,7 @@ class CompanyScheduleView extends Component {
       })
     })
     this.props.fetchCandidateResults(localStorage.getItem('userId'));
-    // this.props.fetchCandidateResults(localStorage.getItem('userId'), null, ()=>{});
-    this.props.fetchCandidateInitialResults(localStorage.getItem('companyId'), localStorage.getItem('userId'), (data) => {console.log('company schedule view data pass?', this.props.pass_initial)})
+    this.props.fetchCandidateInitialResults(localStorage.getItem('companyId'), localStorage.getItem('userId'), (data) => {})
 
     const time = 'May'
   }

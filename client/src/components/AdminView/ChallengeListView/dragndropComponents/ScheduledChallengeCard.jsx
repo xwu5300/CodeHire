@@ -39,19 +39,17 @@ class ScheduledChallengeCard extends Component {
 
   handleClick(challenge, scheduleId) {
     let date = $('#date').val()
-    let scheduleTime = moment($('#date')).format('MMMM Do YYYY, h:mm:ss a')
-    let currTime = moment(Date.now()).format('MMMM Do YYYY, h:mm:ss a')
+    let scheduleTime = moment($('#date').val())
+    let currTime = moment(Date.now())
+    let diff = currTime.diff(scheduleTime, 'minutes')
 
-    console.log('time sssssss?', date,currTime)
-    console.log('time sssssss greateer?', date < currTime)
     if (this.props.initialChallenge.length === 0) {
       this.setState({
         initial: false
       })
-    } else if (this.state.duration === '' || date < currTime ) {
-      console.log('schedule challenge care. invalid', this.state.duration, date < currTime)
+    } else if (this.state.duration === '' || !(diff < 0) ) {
       this.setState({
-        invalid: true
+        invalid: true 
       })
     } else {
       this.setState({
