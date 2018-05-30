@@ -73,7 +73,7 @@ class CompanyScheduleView extends Component {
 
   updateStyle() {
     this.setState({
-      style: {'border': '5px solid red'}
+      style: {'border': '5px solid red', padding: '15px'}
     })
   }
 
@@ -82,14 +82,14 @@ class CompanyScheduleView extends Component {
       <div>
         <i onClick={() => this.props.history.push('/user/companylist') } className="arrow alternate circle left icon"></i>
           <div className='schedule_container'>
-            <div className='ui top attached segment' style={this.state.style}>
+            <div className='ui top attached segment'>
               {this.props.logo_url ? <img className='company_profile_logo' src={ this.props.logo_url }/> : null }
               <h1 style={{textAlign: 'center'}}>{ localStorage.getItem('companyName') }</h1> 
               <h2 style={{textAlign: 'center'}}>{ this.props.company_information }</h2> 
                 {this.props.website_url && <h2>Click <a href={ this.props.website_url } target='_blank'>here</a> for more information.</h2> }
                 <hr />
           {this.props.initial_challenge.length ?
-        <div className='initial_challenge'>
+        <div className='initial_challenge' style={this.state.style}>
         <h2>
         To schedule a live challenge, you must pass the Initial Challenge!
         </h2>

@@ -55,7 +55,7 @@ class AllChallengeListView extends Component {
           <div className='search_company_input' style={{marginTop: '40px', marginBottom: '70px', textAlign: 'center'}} >
             <SearchCompanySchedule updateCompanyCalendar={this.props.fetchAllCompanyCalendars}/>
           </div>
-          <div>Sorry, we weren't able to find any results</div>
+          <div style={{color: 'white', textAlign: 'center', fontSize: '18px'}}>Sorry, we weren't able to find any results.</div>
         </div>
       )
     }
