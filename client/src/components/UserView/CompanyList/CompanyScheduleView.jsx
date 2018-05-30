@@ -14,7 +14,8 @@ class CompanyScheduleView extends Component {
     super()
     
     this.state = {
-      style: {}
+      style: {},
+      challenges: []
     }
     //this.enterChallenge = this.enterChallenge.bind(this);
     this.socket = socketClient();
@@ -25,9 +26,13 @@ class CompanyScheduleView extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchInitialChallenge(localStorage.getItem('companyId'));
-    this.props.fetchCompanyInfo(localStorage.getItem('companyId'));
-    this.props.fetchAllCompanyCalendars(null, localStorage.getItem('companyId'))
+
+    this.props.fetchInitialChallenge(localStorage.getItem('companyId'))
+    this.props.fetchAllCompanyCalendars(null, localStorage.getItem('companyId'),() => {
+      this.setState({
+        challenges: this.props.all_company_calendars
+      })
+    })
     this.props.fetchCandidateResults(localStorage.getItem('userId'));
     // this.props.fetchCandidateResults(localStorage.getItem('userId'), null, ()=>{});
     this.props.fetchCandidateInitialResults(localStorage.getItem('companyId'), localStorage.getItem('userId'), (data) => {console.log('company schedule view data pass?', this.props.pass_initial)})
@@ -101,7 +106,7 @@ class CompanyScheduleView extends Component {
 
 
             <div>
-              {this.props.all_company_calendars.length ?
+              {this.state.challenges.length ?
                 <CompanyScheduleTableView updateStyle={this.updateStyle} 
                 saveCandidateCalendar={this.props.saveCandidateCalendar} 
                 companyCalendar={this.props.all_company_calendars} 
