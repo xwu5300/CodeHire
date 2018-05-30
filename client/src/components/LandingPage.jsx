@@ -61,13 +61,13 @@ class LandingPage extends Component {
             <h1 className="ui inverted header">
               CODEHIRE
             </h1>
-            <h2>
+            <h2 style={{ color: '#f2711c' }}>
               HIRE ME I CODE
             </h2>
             <h3>
               CodeHire is a platform that brings developers together with their dream careers.
             </h3>
-              <div className="ui orange huge button" onClick={() => {this.props.history.push('/registration')} }>
+              <div style={{ marginTop: '30px' }} className="ui orange huge button" onClick={() => {this.props.history.push('/registration')} }>
                  Click here to get started 
               </div>
           </div>

@@ -439,7 +439,7 @@ ui.menu.container.item {
 
 .resume_btns {
 	left: 10px;
-	top: 0;
+	bottom: 20px;
 }
 
 .ui.small.horizontal.list {
