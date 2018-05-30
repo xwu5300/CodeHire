@@ -25,7 +25,7 @@ class CompanyScheduleView extends Component {
     this.isTaken = this.isTaken.bind(this);
   }
 
-  componentDidMount() {e
+  componentDidMount() {
     this.props.fetchInitialChallenge(localStorage.getItem('companyId'))
     this.props.fetchAllCompanyCalendars(null, localStorage.getItem('companyId'),() => {
       this.setState({
