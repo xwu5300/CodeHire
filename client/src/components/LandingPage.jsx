@@ -130,9 +130,14 @@ class LandingPage extends Component {
 
       
       <div className="ui vertical segment landing_page_companies">
+<<<<<<< HEAD
         <div className="clients_header"> Our Clients </div>
           <p className='our_clients'> 10,000 companies are providing candidates with a multitude of challenges on our platform.
               As a candidate, pass a company's intitial challenge and compete against others to score an interview. </p>
+=======
+        <div className="ui huge header">A Variety of Top Tier Companies</div>
+          <p> We offer a variety of top tier tech companies to provide candidates with a variety of challenges. </p>
+>>>>>>> merge
       </div>
    
     </div>
