@@ -79,7 +79,7 @@ class ScheduleInitialView extends Component {
         <div className='ui three column padded grid'>
           {!this.state.initialChallenges ? 'No saved challenges to choose from' : this.state.initialChallenges.map((item, i) => {
             return (
-              <div className='column'>
+              <div className='column' key={i}>
               <div className='ui fluid card initial_challenge_card' style={ this.state.isSelected === item.id ? selected : notSelected } key={ item.id }>
                 <div className='content'>
                   <div className="title"><b>{item.title}</b></div>
