@@ -61,13 +61,13 @@ class LandingPage extends Component {
             <h1 className="ui inverted header">
               CODEHIRE
             </h1>
-            <h2>
+            <h2 style={{ color: '#f2711c' }}>
               HIRE ME I CODE
             </h2>
             <h3>
               CodeHire is a platform that brings developers together with their dream careers.
             </h3>
-              <div className="ui orange huge button" onClick={() => {this.props.history.push('/registration')} }>
+              <div style={{ marginTop: '30px' }} className="ui orange huge button" onClick={() => {this.props.history.push('/registration')} }>
                  Click here to get started 
               </div>
           </div>
@@ -75,7 +75,7 @@ class LandingPage extends Component {
 
 
 
-    <div className="ui container segment" style={{ width: '100%', height: '700px'}}>
+    <div className="ui container segment" style={{ width: '100%', height: '750px' }}>
       <div className='ui three column padded grid'>
 
         <div className='column'>
@@ -129,16 +129,17 @@ class LandingPage extends Component {
       </div>
 
       
-      <div class="ui vertical segment landing_page_companies">
-        <div class="ui huge header">A Variety of Top Tier Companies</div>
-          <p> We offer a variety of top tier tech companies to provide candidates with a variety of challenges. </p>
+      <div className="ui vertical segment landing_page_companies">
+        <div className="clients_header"> Our Clients </div>
+          <p className='our_clients'> 10,000 companies are providing candidates with a multitude of challenges on our platform.
+              As a candidate, pass a company's intitial challenge and compete against others to score an offer. </p>
       </div>
    
     </div>
 
-    <div className='ui four column padded grid'>
+    <div className='ui four column padded grid' style={{ padding: '20px 0'}}>
       <div className='column'>
-        <div className='ui fluid card landing_page_card'>
+        <div className='ui fluid card landing_page_card' style={{ height: '300px' }}>
           <div className='ui small image'>
             <img src='https://ca.slack-edge.com/T2SUXDE72-U9J2Z9HJ8-1bd962248a50-1024' />
           </div>
@@ -149,7 +150,7 @@ class LandingPage extends Component {
       </div>
 
       <div className='column'>
-        <div className='ui fluid card landing_page_card'>
+        <div className='ui fluid card landing_page_card' style={{ height: '300px' }}>
           <div className='ui small image'>
             <img src='https://ca.slack-edge.com/T2SUXDE72-U9HPJAQLT-aee606327989-1024' />
           </div>
@@ -160,7 +161,7 @@ class LandingPage extends Component {
       </div>
 
       <div className='column'>
-        <div className='ui fluid card landing_page_card'>
+        <div className='ui fluid card landing_page_card' style={{ height: '300px' }}>
           <div className='ui small image'>
             <img src='https://ca.slack-edge.com/T2SUXDE72-U9H5FJH1N-f0fb6e017566-1024' />
           </div>
@@ -171,7 +172,7 @@ class LandingPage extends Component {
       </div>
 
       <div className='column'>
-        <div className='ui fluid card landing_page_card'>
+        <div className='ui fluid card landing_page_card' style={{ height: '300px' }}>
           <div className='ui small image'>
             <img src='https://ca.slack-edge.com/T2SUXDE72-U9HRNUDPE-b4f0e5be4ac9-1024' />
           </div>
