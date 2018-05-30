@@ -155,7 +155,7 @@ module.exports.getFavorites = (companyId) => {
 
 module.exports.searchUsers = (query) => {
   return knex('users')
-  .where({username: query, role: 'candidate'})
+  .where(knex.raw(`username ~* '${query}' AND role = 'candidate'`))
   .orWhere(knex.raw(`array[candidate_skills] && ARRAY['${query}']`))
   .andWhere({role: 'candidate'})
   .then((res) => {
