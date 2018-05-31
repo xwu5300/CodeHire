@@ -76,7 +76,6 @@ class UserLiveCodingView extends Component {
       tabHidden: document.hidden
     }, function() {if (this.state.tabHidden) {
       this.tabOutSubmission()
-      clearInterval()
     }})
   }
 

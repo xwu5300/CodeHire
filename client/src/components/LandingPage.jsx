@@ -142,51 +142,56 @@ class LandingPage extends Component {
         <div className="clients_header"> Our Clients </div>
           <p className='our_clients'> 10,000 companies are providing candidates with a multitude of challenges on our platform.
               As a candidate, pass a company's intitial challenge and compete against others to score an interview. </p>
-      </div>
+        </div>
+
    
     </div>
 
     <div className='ui four column padded grid' style={{ padding: '20px 0'}}>
       <div className='column'>
-        <div className='ui fluid card landing_page_card' style={{ height: '300px' }}>
+        <div className='ui fluid card landing_page_card' style={{ height: '300px', padding: '5% 10%' }}>
           <div className='ui small image'>
             <img src='https://ca.slack-edge.com/T2SUXDE72-U9J2Z9HJ8-1bd962248a50-1024' />
           </div>
           <div className='content'>
             <h3 className='landing_page_name'>Amy San Felipe</h3>
+            <p>Built company React components and user authentication.</p>
           </div>
         </div>
       </div>
 
       <div className='column'>
-        <div className='ui fluid card landing_page_card' style={{ height: '300px' }}>
+        <div className='ui fluid card landing_page_card' style={{ height: '300px', padding: '5% 10%' }}>
           <div className='ui small image'>
             <img src='https://ca.slack-edge.com/T2SUXDE72-U9HPJAQLT-aee606327989-1024' />
           </div>
           <div className='content'>
             <h3 className='landing_page_name'>Kevin Wang</h3> 
+            <p>Created testing/functionality for challenge text editors.</p>
           </div>
         </div>
       </div>
 
       <div className='column'>
-        <div className='ui fluid card landing_page_card' style={{ height: '300px' }}>
+        <div className='ui fluid card landing_page_card' style={{ height: '300px', padding: '5% 10%'  }}>
           <div className='ui small image'>
             <img src='https://ca.slack-edge.com/T2SUXDE72-U9H5FJH1N-f0fb6e017566-1024' />
           </div>
           <div className='content'>
             <h3 className='landing_page_name'>Vanessa Wu</h3>
+            <p>Built candidate React components and in charge of deployment.</p>
           </div>
         </div>
       </div>
 
       <div className='column'>
-        <div className='ui fluid card landing_page_card' style={{ height: '300px' }}>
+        <div className='ui fluid card landing_page_card' style={{ height: '300px', padding: '5% 10%' }}>
           <div className='ui small image'>
             <img src='https://ca.slack-edge.com/T2SUXDE72-U9HRNUDPE-b4f0e5be4ac9-1024' />
           </div>
           <div className='content'>
             <h3 className='landing_page_name'>William Kimak</h3>
+            <p>Responsible for live coding features and react-dragndrop.</p>
           </div>
         </div>
       </div>

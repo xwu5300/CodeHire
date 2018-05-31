@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactCollapsingTable from 'react-collapsing-table';
 
+
 class PastChallengeTableView extends Component {
   constructor() {
     super()
