@@ -162,6 +162,3 @@ class CompanyChallenges extends Component {
 
 
 export default CompanyChallenges;
-
-
-

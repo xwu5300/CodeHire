@@ -12,7 +12,6 @@ class PastChallengeTableView extends Component {
       columns={this.props.columns} 
       rows={this.props.rows} 
       rowSize={3} 
-      // showSearch={ true }
       showPagination={ true }
     />
     )

@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import swal from 'sweetalert2';
-
-import ChallengeCard from './ChallengeCard.jsx';
-
-/* ------ Drag N Drop ------- */
 import { ItemTypes } from './Constants';
 import { DropTarget } from 'react-dnd';
+import ChallengeCard from './ChallengeCard.jsx';
 
 const target = {
 
@@ -22,9 +19,7 @@ function collect(connect, monitor) {
   };
 }
 
-
 @DropTarget(ItemTypes.Card, target, collect)
-
 
 class SavedChallenges extends Component {
   constructor(props) {
@@ -52,7 +47,6 @@ class SavedChallenges extends Component {
     this.toggleForm(i);
   }
 
-
   toggleForm(i) {
     let newShowForm = [...this.state.showForm];
     newShowForm[i] = !this.state.showForm[i];
@@ -76,15 +70,12 @@ class SavedChallenges extends Component {
     })
   }
 
-
   showCalendar() {
     $('#calendar').calendar('popup', 'show');
   }
 
   render() {
-    console.log('save challenge active cahllenge', this.props.activeChallenges)
     const { connectDropTarget } = this.props;
-
     return connectDropTarget(
       <div className='ui segment drag_segment'>
         <h1 className='drag_column_title'>Your Challenges</h1>

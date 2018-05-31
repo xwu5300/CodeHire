@@ -212,7 +212,7 @@ ${this.props.initial_challenge[0].function_name}('${input}')`
 
   handleSubmit() {
     let result = this.checkAnswer()
-    let score = 90;  //hard coded
+    let score = 90;
     let time = moment(Date.now()).format();
     swal({
       title: 'Are you sure?',

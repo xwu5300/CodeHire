@@ -9,9 +9,7 @@ export const fetchDefaultChallenges = () => (dispatch) => {
   .then(({data}) => {
     dispatch({ type: GET_DEFAULT_CHALLENGES, payload: data })
   })
-  .catch((err) => {
-    console.log(err);
-  })
+  .catch((err) => {})
 }
 
 export const fetchAllChallenges = (companyId) => (dispatch) => {
@@ -22,23 +20,15 @@ export const fetchAllChallenges = (companyId) => (dispatch) => {
     })
     dispatch({ type: GET_ALL_CHALLENGES, payload: data })
 	})
-	.catch((err) => {
-		console.log(err);
-  })
+	.catch((err) => {})
 }
 
 export const fetchActiveChallenges = (companyId) => (dispatch) => {
   axios.get('/api/challenges/active', {params: { companyId }})
 	.then(({data}) => {
-    console.log('fetch active admin action data ', data)
-    // data.sort((a, b) => {
-    //   return a.id - b.id;
-    // })
     dispatch({ type: GET_ACTIVE_CHALLENGES, payload: data })
 	})
-	.catch((err) => {
-		console.log(err);
-  })
+	.catch((err) => {})
 }
 
 export const fetchChallengeData = (challengeId, cb) => (dispatch) => {
@@ -49,9 +39,7 @@ export const fetchChallengeData = (challengeId, cb) => (dispatch) => {
       cb();
     }
   })
-  .catch((err) => {
-    console.log('Error getting challenge data', err)
-  })
+  .catch((err) => {})
 }
 
 export const fetchAllResults = () => (dispatch) => {
@@ -59,9 +47,7 @@ export const fetchAllResults = () => (dispatch) => {
   .then(({data}) => {
     dispatch({ type: GET_ALL_RESULTS, payload: data})
   })
-  .catch((err) => {
-    console.log('Error getting all results', err)
-  })
+  .catch((err) => {})
 }
 
 
@@ -70,16 +56,13 @@ export const saveChallenge = (challenge, companyId, cb) => (dispatch) => {
   .then(() => {
     dispatch(fetchAllChallenges(companyId));
     dispatch(fetchActiveChallenges(companyId));
-    console.log('Saved to your challenges')
   })
   .then(() => {
     if (cb) {
       cb();
     }
   })
-  .catch((err) => {
-  	console.log('Error saving challenge', err);
-  })
+  .catch((err) => {})
 }
 
 export const deleteChallenge = (challenge, companyId, cb) => (dispatch) => {
@@ -94,9 +77,7 @@ export const deleteChallenge = (challenge, companyId, cb) => (dispatch) => {
       cb()
     }
   })
-	.catch((err) => {
-		console.log('Error deleting challenge', err);
-	})
+	.catch((err) => {})
 }
 
 export const getChallengeInfo = (challengeId, companyId, cb) => (dispatch) => {
@@ -107,9 +88,7 @@ export const getChallengeInfo = (challengeId, companyId, cb) => (dispatch) => {
       cb(data[0]);
     }
   })
-  .catch((err) => {
-    console.log('Error retrieving challenge info', err);
-  })
+  .catch((err) => {})
 }
 
 export const addToCompanySchedule = (time, duration, challengeId, companyId, cb) => (dispatch) => {
@@ -122,9 +101,7 @@ export const addToCompanySchedule = (time, duration, challengeId, companyId, cb)
       cb();
     }
   })
-	.catch((err) => {
-		console.log('Error updating company calendar', err);
-	})
+	.catch((err) => {})
 }
 
 
@@ -133,21 +110,16 @@ export const updateChallengeDate = (time, duration, scheduleId, companyId) => (d
   .then(() => {
     dispatch(fetchCompanySchedule(companyId));
   })
-  .catch((err) => {
-    console.log('Error updating challenge date', err);
-  })
+  .catch((err) => {})
 }
 
 
 export const deleteFromCompanySchedule = (scheduleId, companyId) => (dispatch) => {
-  console.log('deleting', companyId)
   axios.delete('/api/companyCalendar', {params: { scheduleId }})
   .then(() => {
     dispatch(fetchCompanySchedule(companyId));
   })
-  .catch((err) => {
-    console.log('Error removing from upcoming challenges', err);
-  })
+  .catch((err) => {})
 }
 
 export const fetchCompanySchedule = (companyId) => (dispatch) => {
@@ -155,9 +127,7 @@ export const fetchCompanySchedule = (companyId) => (dispatch) => {
   .then(({data}) => {
     dispatch({ type: GET_COMPANY_SCHEDULE, payload: data});
   })
-  .catch((err) => {
-    console.log('Error retrieving company schedule')
-  })
+  .catch((err) => {})
 }
 
 
@@ -167,14 +137,11 @@ export const fetchCompanyInfo = (userId, cb) => (dispatch) => {
     dispatch({ type: GET_COMPANY_INFO, logo_url: response.data[0].logo_url, information: response.data[0].information, website_url: response.data[0].website_url })
   })
   .then(() => {
-    console.log('lol', cb)
     if (cb) {
       cb();
     }
   })
-  .catch((err) => {
-    console.log(err);
-  })
+  .catch((err) => {})
 }
 
 export const updateInfo = (userId, logo_url, information, website_url, cb) => (dispatch) => {
@@ -182,9 +149,7 @@ export const updateInfo = (userId, logo_url, information, website_url, cb) => (d
   .then(() => {
     dispatch(fetchCompanyInfo(userId, cb));
   })
-  .catch((err) => {
-    console.log(err);
-  })
+  .catch((err) => {})
 }
 
 export const toggleInitialOn = () => (dispatch) => {
@@ -205,9 +170,7 @@ export const makeInitial = (challengeId, initial, duration, isInitial, companyId
       cb();
     }
   })
-  .catch((err) => {
-    console.log(err);
-  })
+  .catch((err) => {})
 }
 
 export const setCurrentLiveChallenge = (title, duration) => (dispatch) => {
@@ -223,9 +186,7 @@ export const fetchCompanyResults = (companyId, candidateId, time, cb) => (dispat
       cb(data);
     }
   })
-  .catch((err) => {
-    console.log(err);
-  })
+  .catch((err) => {})
 }
 
 export const fetchCandidateList = (companyId) => (dispatch) => {
@@ -233,9 +194,7 @@ export const fetchCandidateList = (companyId) => (dispatch) => {
   .then(({data}) => {
     dispatch({ type: GET_CANDIDATE_LIST, payload: data})
   })
-  .catch((err) => {
-    console.log(err);
-  })
+  .catch((err) => {})
 }
 
 export const getUsername = (userId, cb) => (dispatch) => {
@@ -248,26 +207,21 @@ export const getUsername = (userId, cb) => (dispatch) => {
       }
     }
   })
-  .catch((err) => {
-    console.log(err);
-  })
+  .catch((err) => {})
 }
 
 export const getFavorites = (companyId) => (dispatch) => {
   axios.get('/api/favorites', {params: { companyId }})
   .then(({data}) => {
     dispatch({ type: GET_FAVORITES, payload: data })
-    console.log('Favorites successfully received on client side', data);
   })
   .catch((err) => {
-    console.log('Unable to retrieve favorites on client side', err);
   })
 }
 
 export const saveToFavorites = (companyId, candidateId, cb) => (dispatch) => {
   axios.post('/api/favorites', { companyId, candidateId })
   .then(() => {
-    console.log('Successfully sending favorite user to server');
     dispatch(getFavorites(companyId))
   })
   .then(() => {
@@ -275,47 +229,36 @@ export const saveToFavorites = (companyId, candidateId, cb) => (dispatch) => {
       cb();
     }
   })
-  .catch((err) => {
-    console.log('Error sending favorite user to server', err);
-  })
+  .catch((err) => {})
 }
 
 export const removeFromFavorites = (companyId, candidateId) => (dispatch) => {
   axios.delete('/api/favorites', {params: { companyId, candidateId }})
   .then(() => {
-    console.log('Successfully sending favorite user to server for removal');
     dispatch(getFavorites(companyId))
   })
-  .catch((err) => {
-    console.log('Error sending favorite user to server for removal', err);
-  })
+  .catch((err) => {})
 }
 
 export const searchUsers = (query, cb) => (dispatch) => {
   axios.get('/api/searchUsers', {params: { query }})
   .then(({data}) => {
     dispatch({ type: SEARCH_USERS, payload: data})
-    console.log('Successfully fetching user results from server', data);
   })
   .then(() => {
     if (cb) {
       cb();
     }
   })
-  .catch((err) => {
-    console.log('Error fetching user results from server', err);
-  })
+  .catch((err) => {})
 }
 
 export const getCompanyData = (companyId) => (dispatch) => {
   axios.get('/api/companyData', {params: { companyId }})
   .then(({data}) => {
     dispatch({ type: GET_COMPANY_DATA, payload: data })
-    console.log('company data retrieved');
   })
-  .catch((err) => {
-    console.log('Error fetching company data', err);
-  })
+  .catch((err) => {})
 }
 
 export const fetchPastSchedule = (companyId) => (dispatch) => {
@@ -323,34 +266,26 @@ export const fetchPastSchedule = (companyId) => (dispatch) => {
   .then(({data}) => {
     dispatch({ type: GET_PAST_CHALLENGES, payload: data})
   })
-  .catch((err) => {
-    console.log('Error fetching past challenges', err);
-  })
+  .catch((err) => {})
 }
 
 export const fetchPastResults = (scheduleId, cb) => (dispatch) => {
   axios.get('/api/pastResults', {params: { scheduleId }})
   .then(({data}) => {
     dispatch({ type: GET_PAST_RESULTS, payload: data })
-    console.log('fetch past results', data)
   })
   .then(() => {
     if (cb) {
       cb();
     }
   })
-  .catch((err) => {
-    console.log('Error fetching past results', err);
-  })
+  .catch((err) => {})
 }
 
 export const contact = (favoriteId, companyId, contacted) => (dispatch) => {
   axios.patch('/api/favorites', { favoriteId, contacted })
   .then(() => {
     dispatch(getFavorites(companyId))
-    console.log('contacted');
   })
-  .catch((err) => {
-    console.log('error marking contacted', err);
-  })
+  .catch((err) => {})
 }

@@ -43,7 +43,6 @@ module.exports.getCandidateInfo = (candidateId, username, callback) => {
   .select('candidate_skills', 'github_url')
   .where({ username: username })
   .then((data) => {
-    console.log('DTATATA', data);
     callback(data);
   })
   .catch((err) => {
@@ -159,7 +158,7 @@ module.exports.searchUsers = (query) => {
   .orWhere(knex.raw(`array[candidate_skills] && ARRAY['${query}']`))
   .andWhere({role: 'candidate'})
   .then((res) => {
-    console.log('Successfully fetching users from db', res);
+    console.log('Successfully fetching users from db');
     return res;
   })
   .catch((err) => {

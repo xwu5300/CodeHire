@@ -7,7 +7,6 @@ import moment from 'moment';
 
 import CompanyScheduleTableView from './CompanyScheduleTableView.jsx';
 import UserNavBar from '../UserNavBar.jsx';
-// import { checkCandidateReschedule } from '../../../actions/userActions';
 
 class CompanyScheduleView extends Component {
   constructor() {
@@ -17,7 +16,6 @@ class CompanyScheduleView extends Component {
       style: {},
       challenges: []
     }
-    //this.enterChallenge = this.enterChallenge.bind(this);
     this.socket = socketClient();
     this.updateStyle = this.updateStyle.bind(this);
     this.getTimeOut = this.getTimeOut.bind(this);
