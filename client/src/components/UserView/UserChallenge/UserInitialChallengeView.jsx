@@ -44,6 +44,7 @@ class UserInitialChallengeView extends Component {
     this.saveResults = this.saveResults.bind(this)
     this.checkAnswer = this.checkAnswer.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+
     this.countdown = null;
   }
 
@@ -65,8 +66,14 @@ class UserInitialChallengeView extends Component {
     this.setState({
       tabHidden: document.hidden
     }, function() {if (this.state.tabHidden) {
+
       this.tabOutSubmission();
+
     }})
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.countdown);
   }
 
   startTimer(duration, display) {
@@ -74,7 +81,9 @@ class UserInitialChallengeView extends Component {
     let minutes
     let seconds
     this.countdown = setInterval( ()=> {
+
       this.checkOnTab();
+
       minutes = parseInt(timer / 60, 10)
       seconds = parseInt(timer % 60, 10);
       minutes = minutes < 10 ? "0" + minutes : minutes;
