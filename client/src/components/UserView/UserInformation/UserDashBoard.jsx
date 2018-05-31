@@ -13,7 +13,6 @@ class UserDashBoard extends Component {
 
   componentDidMount() {
     this.props.fetchCandidateCalendar(localStorage.getItem('userId'));
-    // this.props.fetchCandidateResults(localStorage.getItem('userId'), null, ()=>{});
     this.props.fetchCandidateResults(localStorage.getItem('userId'));
   }
 

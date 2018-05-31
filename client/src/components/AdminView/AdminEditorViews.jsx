@@ -3,10 +3,7 @@ import { connect } from "react-redux";
 import AceEditor from 'react-ace';
 import brace from 'brace';
 import socketClient from 'socket.io-client';
-
 import UserProfile from './UserProfile.jsx';
-
-
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
 

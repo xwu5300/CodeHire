@@ -11,8 +11,6 @@ import CompanyNavBar from '../CompanyNavBar.jsx';
 import ChallengeCard from './dragndropComponents/ChallengeCard.jsx';
 import Form from './Form.jsx';
 import { getChallengeInfo } from '../../../actions/adminActions';
-
-/* ------- Drag N Drop ------- */
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
@@ -31,7 +29,6 @@ class ChallengeListView extends Component {
   }
 
   componentDidMount() {
-    console.log('user id ', localStorage.getItem('userId'))
     this.props.fetchAllChallenges(localStorage.getItem('userId'));
     this.props.fetchActiveChallenges(localStorage.getItem('userId'));
     this.props.fetchDefaultChallenges();
@@ -53,7 +50,6 @@ class ChallengeListView extends Component {
   }
 
   render() {
-    console.log('challenge list this.props.company_schedule', this.props.company_schedule)
     return (
       <div>
         <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout } />
@@ -73,9 +69,6 @@ class ChallengeListView extends Component {
     )
   }
 }
-
-  
-
 
 export default withRouter(ChallengeListView);
 

@@ -40,7 +40,6 @@ class BarGraph extends Component {
   }
 
   render() {
-    console.log('data props', this.props)
     let IndustrySuccess = this.successRate(this.props.allResults, "category", categories)
     let CompanySuccess = this.successRate(this.props.companyResults, "category", categories)
     let ChallengeSuccess = this.successRate(this.props.companyResults,  "category", categories)

@@ -35,11 +35,10 @@ class AnalyticsView extends Component {
   changeGraph(option) {
     this.setState({
       currentGraph: option
-    }, ()=> console.log(this.state.currentGraph))
+    })
   }
 
   renderGraph() {
-    console.log('admin analytice view props',this.props)
     const {currentGraph} = this.state
 
     if (currentGraph === 'bar') {

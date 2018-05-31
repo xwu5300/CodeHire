@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
-
-/* ------- Drag N Drop ------ */
 import { ItemTypes } from './Constants';
 import { DropTarget } from 'react-dnd';
-
 import ScheduledChallengeCard from './ScheduledChallengeCard.jsx';
-
-
 
 const target = {
   drop(props, monitor) {
@@ -21,7 +16,6 @@ function collect(connect, monitor) {
     connectDropTarget: connect.dropTarget()
   };
 }
-
 
 @DropTarget(ItemTypes.Card, target, collect)
 

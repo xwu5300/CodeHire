@@ -9,7 +9,6 @@ import UserDashBoard from '../components/UserView/UserInformation/UserDashBoard.
 import CompanyListView from '../components/UserView/CompanyList/CompanyListView.jsx';
 import PastChallengeListView from '../components/UserView/UserInformation/PastChallengeListView.jsx';
 import PrivateRoute from '../components/PrivateRoute.jsx';
-// import UserNavBar from'../components/UserView/UserNavBar.jsx';
 
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -46,7 +45,7 @@ const mapStateToProps = function(state) {
     initial_challenge: state.initial_challenge.initial_challenge,
     name: state.name.name,
     username: state.username.username,
-    candidate_information: state.candidate_information.candidate_information,  //not exists??
+    candidate_information: state.candidate_information.candidate_information,
     candidate_skills: state.candidate_skills.candidate_skills,
     github_url: state.github_url.github_url,
     photo: state.photo.photo,
@@ -72,15 +71,14 @@ const mapDispatchToProps = {
    viewCompanyProfile, fetchAllCompanyCalendars, handleLogout, fetchCompanyInfo, checkCandidateReschedule
 }
 
-const connectComponent = connect(mapStateToProps, mapDispatchToProps)(UserContainer); //code cleaned
+const connectComponent = connect(mapStateToProps, mapDispatchToProps)(UserContainer);
 const UserDashBoardComponent = connect(mapStateToProps, mapDispatchToProps)(UserDashBoard);
-const AllChallengeListViewComponent = connect(mapStateToProps, mapDispatchToProps)(AllChallengeListView); //code cleaned
+const AllChallengeListViewComponent = connect(mapStateToProps, mapDispatchToProps)(AllChallengeListView);
 const CompanyScheduleViewComponent = connect(mapStateToProps, mapDispatchToProps)(CompanyScheduleView);
 const UserInitialChallengeViewComponent = connect(mapStateToProps, mapDispatchToProps)(UserInitialChallengeView);
 const UserLiveCodingViewComponent = connect(mapStateToProps, mapDispatchToProps)(UserLiveCodingView);
 const UserProfileViewComponent = connect(mapStateToProps, mapDispatchToProps)(UserProfileView);
 const CompanyListViewComponent = connect(mapStateToProps, mapDispatchToProps)(CompanyListView);
 const PastChallengeListViewComponent = connect(mapStateToProps, mapDispatchToProps)(PastChallengeListView);
-// connect(mapStateToProps, mapDispatchToProps)(UserNavBar);
 const routeUserComponent = withRouter(connectComponent);
 export default routeUserComponent;

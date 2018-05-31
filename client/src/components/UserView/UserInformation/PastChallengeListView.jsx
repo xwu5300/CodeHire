@@ -14,7 +14,6 @@ class PastChallengeListView extends Component {
   }
 
   componentDidMount() {
-    // this.props.fetchCandidateResults(localStorage.getItem('userId'), null, ()=>{});
     this.props.fetchCandidateResults(localStorage.getItem('userId'));
   }
     
@@ -27,7 +26,6 @@ class PastChallengeListView extends Component {
   }
 
   render() {
-    console.log('USER HISTORY',this.props)
     if (this.props.candidate_results.length) {
       let rows = this.props.candidate_results.map((result) => ({
         challenge: {

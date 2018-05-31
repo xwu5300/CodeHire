@@ -35,7 +35,6 @@ class UpdateForm extends Component {
 
   componentDidMount() {
     this.validateForm();
-    console.log(this.state)
   }
 
   validateForm() {
