@@ -7,7 +7,6 @@ class DefaultChallenges extends Component {
     super();
   }
 
-
   render() {
     return (
       <div className='ui segment drag_segment'>
@@ -39,10 +38,5 @@ class DefaultChallenges extends Component {
     )
   }
 }
-
-
-
-
-
 
 export default DefaultChallenges;

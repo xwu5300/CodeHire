@@ -3,30 +3,16 @@ const knex = require('../../db/index.js');
 module.exports.saveCandidate = (token, name, username, phone, github_url) => {
     return knex('users')
     .insert({ name: name, username: username, phone: phone, github_url: github_url, role: 'candidate', token: token })
-    .then((response) => {
-      console.log('saved candidate to db');
-      // callback('Candidate Registration Successful!');
-    })
-    .catch((err) => {
-      console.log('Error saving candidate', err);
-      // callback('Please try again');
-    })
-  // })
-  return knex('users')
+    .then((response) => {})
+    .catch((err) => {})
   
 }
 
 module.exports.saveCompany = (token, name, username, phone, logoUrl, information) => {
     return knex('users')
     .insert({ name: name, username: username, phone: phone, logo_url: logoUrl, information: information, role: 'company', token: token })
-    .then((response) => {
-      console.log('saved company to db');
-      // callback('Company Registration Successful!');
-    })
-    .catch((err) => {
-      console.log('Error saving company', err);
-      // callback('Please try again')
-    })
+    .then((response) => {})
+    .catch((err) => {})
 }
 
 module.exports.handleLogin = (token,  callback) => {
@@ -34,13 +20,10 @@ module.exports.handleLogin = (token,  callback) => {
   .where({ token: token })
   .then((user) => {
     if (user.length) {
-      console.log('HANDLE LOGIN', user);
       callback(user[0].role, user[0].id, user[0].username);
     }
   })
-  .catch((err) => {
-    console.log('Error matching password', err);
-  }) 
+  .catch((err) => {}) 
 }
 
 module.exports.getUsername = (userId, username) => {
@@ -54,9 +37,7 @@ module.exports.getUsername = (userId, username) => {
   .then((user) => {
     return user;
   })
-  .catch((err) => {
-    console.log(err);
-  })
+  .catch((err) => {})
 }
 
 

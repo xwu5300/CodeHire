@@ -25,9 +25,7 @@ module.exports.addToCompanySchedule = (time, duration, challengeId, companyId) =
     challenge_id: challengeId,
     company_id: companyId,
   })
-  .then(() => {
-    console.log('Event added to company schedule');
-  })
+  .then(() => {})
   .catch((err) => {
     console.log('Error adding to company schedule', err);
   })
@@ -107,7 +105,6 @@ module.exports.getCandidateCalendar = (candidateId) => {
 }
 
 module.exports.saveCandidateCalendar = (candidateId, companyScheduleId) => {
-  // console.log('calendar saveCandidateCalendar', candidateId, companyScheduleId)
   return knex.select('*')
   .from('user_schedule')
   .where({
@@ -115,7 +112,6 @@ module.exports.saveCandidateCalendar = (candidateId, companyScheduleId) => {
     'candidate_id': candidateId
   })
   .then((res) => {
-    console.log('calendar saveCandidateCalendar', res)
     if (!res.length) {
       return knex('user_schedule')
       .insert({
@@ -161,7 +157,6 @@ module.exports.checkCandidateReschedule = (candidateId, companyId, time) => {
   .andWhere('time', '>', earlyTime)
   .andWhere('time', '<', lateTime)
   .then((res) => {
-    // console.log('calendar.js check candidate reschedule', res)
     return res;
   })
   .catch((err) => {
@@ -170,7 +165,6 @@ module.exports.checkCandidateReschedule = (candidateId, companyId, time) => {
 }
 
 module.exports.getAllCompanyCalendars = (companyName, companyId) => {
-  console.log('calendar company Id', companyId)
   let currTime = new Date();
   if (!companyId) {
     let option = `%${companyName}%`;

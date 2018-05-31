@@ -13,10 +13,6 @@ class PastResults extends Component {
     this.handleModal = this.handleModal.bind(this);
   }
 
-  componentDidMount() {
-    console.log(this.props)
-  }
-
   openModal() {
     this.setState({
       modalIsOpen: true

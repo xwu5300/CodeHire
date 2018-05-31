@@ -79,7 +79,6 @@ class UserLiveCodingView extends Component {
   }
 
   startTimer() {
-    console.log('tick')
     let countdown = setInterval( () => {
       this.checkOnTab()
     }, 1000)
@@ -134,7 +133,6 @@ class UserLiveCodingView extends Component {
   }
 
   saveResults(companyScheduleId, companyId, result, submission, score, time) {
-    console.log('not encode company id', companyId)
     this.socket.emit('candidate result', localStorage.getItem('username'), result);
     let idToken = {id: companyId};
     let company_id = jwt.encode(idToken, secret.secret);

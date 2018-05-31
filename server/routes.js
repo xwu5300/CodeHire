@@ -96,8 +96,6 @@ router.post('/api/registerCandidate', (req, res) => {
 
 // post company register information into 'users' table
 router.post('/api/registerCompany', (req, res) => {
-  // console.log(req.body.token, req.body.companyName, req.body.username, req.body.phone, req.body.logoUrl, req.body.information);
-  console.log('saving company')
   authControllers.saveCompany(req.body.token, req.body.companyName, req.body.username, req.body.phone, req.body.logoUrl, req.body.information)
   .then(() => {
     res.send();
@@ -186,7 +184,6 @@ router.get('/api/defaultChallenges', (req, res) => {
 })
 
 router.post('/api/challenges', (req, res) => {
-  console.log(req.body.challenge)
   if (req.body.challenge.testCases) {
     var testCases = [[],[]];
     req.body.challenge.testCases.forEach((item) => {
@@ -390,7 +387,6 @@ router.post('/api/companyCalendar', (req, res) => {
     companyId = jwt.decode(req.body.companyId, secret).id;
   }
 
-  console.log('COMPANY ID', companyId);
   calendarControllers.addToCompanySchedule(time, duration, challengeId, companyId)
   .then(() => {
     console.log('Successfully saved challenge to schedule');
@@ -509,7 +505,6 @@ router.get('/api/results/candidate', (req, res) => {
 router.get('/api/results/candidate/initial', (req, res) => {
   let companyId = jwt.decode(req.query.companyId, secret).id;
   let candidateId = jwt.decode(req.query.candidateId, secret).id;
-  console.log('routes company id, candidate id', companyId, candidateId)
   resultsControllers.getCandidateInitialResults(companyId, candidateId)
   .then((data) => {
     console.log('Retrieve candidate initial result from db')
@@ -522,10 +517,8 @@ router.get('/api/results/candidate/initial', (req, res) => {
 
 // post results to 'results' table
 router.post('/api/results', (req, res) => {
-  console.log('companyId from routesssssss', req.body.companyId)
   let companyId = jwt.decode(req.body.companyId, secret).id;
   let candidateId = jwt.decode(req.body.candidateId, secret).id;
-    console.log('companyId from routes', companyId)
   resultsControllers.saveResults(req.body.companyScheduleId, req.body.isPassed, req.body.code, req.body.score, req.body.completedAt, req.body.challengeId, companyId, candidateId, req.body.initial)
   .then(() => {
     console.log('Results saved to results table');
@@ -539,7 +532,6 @@ router.post('/api/results', (req, res) => {
 router.get('/api/allResults', (req, res) => {
   resultsControllers.fetchAllResults()
   .then((data) => {
-    console.log('all results', data.length)
     res.send(data);
   })
   .catch((err) => {
@@ -572,7 +564,6 @@ router.get('/api/challengeData', (req, res) => {
 router.get('/api/pastResults', (req, res) => {
   resultsControllers.fetchPastResults(req.query.scheduleId)
   .then((data) => {
-    console.log(data);
     res.send(data);
   })
   .catch((err) => {
@@ -589,7 +580,6 @@ router.get('/api/searchUsers', (req, res) => {
     data.map((user) => {
       user.candidate_skills = user.candidate_skills === null ? null : user.candidate_skills.join(', ');
     })
-    console.log('Successfully fetching users from db and sending to client', data);
     res.send(data);
   })
   .catch((err) => {

@@ -19,7 +19,6 @@ class HireView extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
     this.props.getFavorites(localStorage.getItem('userId'));
   }
 
@@ -46,7 +45,6 @@ class HireView extends Component {
 
 
   render() {
-    console.log(this.props)
     return(
       <div>
         <CompanyNavBar getUsername={ this.props.getUsername } username={ this.props.username } handleLogout={ this.props.handleLogout } />

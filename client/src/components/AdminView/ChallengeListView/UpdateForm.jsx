@@ -35,7 +35,6 @@ class UpdateForm extends Component {
 
   componentDidMount() {
     this.validateForm();
-    console.log(this.state)
   }
 
   validateForm() {
@@ -228,7 +227,6 @@ class UpdateForm extends Component {
     })
     .catch((err) =>{
       if (err) {
-        console.log('there was an error', err)
         this.setState({
           invalid: true
         })

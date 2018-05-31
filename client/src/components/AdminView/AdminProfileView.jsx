@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-
 import CompanyNavBar from './CompanyNavBar.jsx';
 import { connect } from "react-redux";
 import AdminDropbox from './AdminDropBox.jsx';
-
 
 class AdminProfileView extends Component {
   constructor() {
@@ -105,6 +103,5 @@ class AdminProfileView extends Component {
     )
   }
 }
-
 
 export default AdminProfileView;

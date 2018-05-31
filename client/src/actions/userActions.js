@@ -6,7 +6,6 @@ import axios from 'axios';
 import swal from 'sweetalert2';
 
 export const fetchAllCompanyCalendars =(companyName, companyId, cb) => (dispatch) => {
-  console.log('user action company id', companyId)
   axios.get('/api/companyCalendars', {params: { companyName, companyId }})
   .then(({data}) => {
     dispatch({ type: GET_ALL_COMPANY_CALENDARS, payload: data })
@@ -14,9 +13,7 @@ export const fetchAllCompanyCalendars =(companyName, companyId, cb) => (dispatch
       cb()
     }
   })
-  .catch((err) => {
-    console.log(err);
-  })
+  .catch((err) => {})
 }
 
 export const fetchCompanyList = (companyName) => (dispatch) => {
@@ -24,9 +21,7 @@ export const fetchCompanyList = (companyName) => (dispatch) => {
   .then(({data}) => {
     dispatch({ type: GET_COMPANY_LIST, payload: data});
   })
-  .catch((err) => {
-    console.log(err);
-  })
+  .catch((err) => {})
 }
 
 export const fetchCandidateCalendar = (candidateId) => (dispatch) => {
@@ -34,9 +29,7 @@ export const fetchCandidateCalendar = (candidateId) => (dispatch) => {
   .then(({data}) => {
     dispatch({ type: GET_CANDIDATE_CALENDAR, payload: data });
   })
-  .catch((err) => {
-    console.log(err);
-  })
+  .catch((err) => {})
 }
 
 export const saveCandidateCalendar = (candidateId, companyScheduleId) => (dispatch) => {
@@ -44,9 +37,7 @@ export const saveCandidateCalendar = (candidateId, companyScheduleId) => (dispat
   .then(({data}) => {
     dispatch(fetchCandidateCalendar(candidateId))
   })
-  .catch((err) => {
-    console.log(err);
-  })
+  .catch((err) => {})
 }
 
 export const deleteCandidateSchedule = (candidateScheduleId, candidateId) => (dispatch) => {
@@ -54,20 +45,15 @@ export const deleteCandidateSchedule = (candidateScheduleId, candidateId) => (di
   .then(() => {
     dispatch(fetchCandidateCalendar(candidateId));
   })
-  .catch((err) => {
-    console.log(err);
-  })
+  .catch((err) => {})
 }
 
 export const checkCandidateReschedule = (candidateId, companyId, time, cb) => (dispatch) => {
   axios.get('/api/candidateCalendar/reschedule', { params: { candidateId, companyId, time } })
   .then(({data}) => {
-    console.log('data from userACtion', data)
     cb(data)
   })
-  .catch((err) => {
-    console.log(err);
-  })
+  .catch((err) => {})
 }
 
 export const fetchInitialChallenge = (company_id) => (dispatch) => {
@@ -75,9 +61,7 @@ export const fetchInitialChallenge = (company_id) => (dispatch) => {
   .then(({data}) => {
     dispatch({ type: GET_INITIAL_CHALLENGE, payload: data });
   })
-  .catch((err) => {
-    console.log(err);
-  })
+  .catch((err) => {})
 }
 
 export const currentCompanyCalendar = (companyId, callback) => (dispatch) => {
@@ -88,7 +72,6 @@ export const currentCompanyCalendar = (companyId, callback) => (dispatch) => {
 }
 
 export const saveResults = (companyScheduleId, isPassed, code, score, completedAt, challengeId, companyId, candidateId, initial, candidateScheduleId, cb) => (dispatch) => {
-  console.log(' user action company id', companyId)
   axios.post('/api/results', { companyScheduleId, isPassed, code, score, completedAt, challengeId, companyId, candidateId, initial })
   .then(() => {
     dispatch(deleteCandidateSchedule(candidateScheduleId, candidateId));
@@ -99,9 +82,7 @@ export const saveResults = (companyScheduleId, isPassed, code, score, completedA
       cb();
     }
   })
-  .catch((err) => {
-    console.log(err);
-  })
+  .catch((err) => {})
 }
 
 export const fetchCandidateResults = (candidateId, companyScheduleId, cb) => (dispatch) => {
@@ -112,9 +93,7 @@ export const fetchCandidateResults = (candidateId, companyScheduleId, cb) => (di
       cb(data);
     }
   })
-  .catch((err) => {
-    console.log(err);
-  })
+  .catch((err) => {})
 }
 
 export const fetchCandidateInitialResults = (companyId, candidateId, cb) => (dispatch) => {
@@ -127,9 +106,7 @@ export const fetchCandidateInitialResults = (companyId, candidateId, cb) => (dis
     }
     cb(data)
   })
-  .catch((err) => {
-    console.log(err);
-  })
+  .catch((err) => {})
 }
 
 
@@ -142,33 +119,25 @@ export const updateCandidateSkills = (userId, skills, callback) => (dispatch) =>
       callback();
     }
   })
-  .catch((err) => {
-    console.log(err);
-  })
+  .catch((err) => {})
 }
 
 export const updateCandidatePhoto = (userId, photo) => (dispatch) => {
   axios.patch('/api/candidateInfo', { userId, photo })
   .then(() => {
     dispatch(fetchCandidateInfo(userId))
-    console.log('profile photo successfully uploaded');
   })
-  .catch((err) => {
-    console.log('unable to upload profile photo', err);
-  })
+  .catch((err) => {})
 }
 
 export const deleteCandidateSkill = (candidateId, skill, callback) => (dispatch) => {
   axios.delete('/api/candidateInfo', { params: { candidateId, skill } })
   .then((response) => {
-    console.log('response', response);
     if(callback) {
       callback(response)
     }
   })
-  .catch((err) => {
-    console.log(err);
-  })
+  .catch((err) => {})
 }
 
 
@@ -177,9 +146,7 @@ export const updateCandidateGithub = (userId, github_url) => (dispatch) => {
   .then(() => {
     dispatch(fetchCandidateInfo(userId))
   })
-  .catch((err) => {
-    console.log(err);
-  })
+  .catch((err) => {})
 }
 
 export const fetchCandidateInfo = (candidateId, username, callback) => (dispatch) => {
@@ -190,9 +157,7 @@ export const fetchCandidateInfo = (candidateId, username, callback) => (dispatch
         callback();
       }
     })
-    .catch((err) => {
-      console.log(err);
-    })
+    .catch((err) => {})
   }
 
 
@@ -204,31 +169,22 @@ export const saveResume = (resumeUrl, resumeName, userId) => (dispatch) => {
   axios.post('/api/resume', { resumeUrl, resumeName, userId })
   .then(() => {
     dispatch(getResume(userId));
-    console.log('saved resume');
   })
-  .catch((err) => {
-    console.log('unable to save resume', err);
-  })
+  .catch((err) => {})
 }
 
 export const removeResume = (userId) => (dispatch) => {
   axios.delete('/api/resume', {params: { userId }})
   .then(() => {
     dispatch(getResume(userId));
-    console.log('removed resume');
   })
-  .catch((err) => {
-    console.log('unable to remove resume', err);
-  })
+  .catch((err) => {})
 }
 
 export const getResume = (userId) => (dispatch) => {
   axios.get('/api/resume', {params: {userId }})
   .then(({data}) => {
     dispatch({type: 'GET_RESUME', payload: data})
-    console.log('successfully retrieved resume');
   })
-  .catch((err) => {
-    console.log('unable to retrieve resume from db', err);
-  })
+  .catch((err) => {})
 }

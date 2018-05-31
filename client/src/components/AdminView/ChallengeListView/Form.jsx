@@ -58,7 +58,7 @@ class Form extends Component {
 
   handleChange(event) {
     this.state.challenge[event.target.name] = event.target.value;
-    this.setState({challenge: this.state.challenge}, ()=>{console.log(this.state)});
+    this.setState({challenge: this.state.challenge});
   }
 
   handleTestInputChange(idx, event) {
@@ -226,7 +226,6 @@ class Form extends Component {
     })
     .catch((err) =>{
       if (err) {
-        console.log('there was an error', err)
         this.setState({
           invalid: true
         })

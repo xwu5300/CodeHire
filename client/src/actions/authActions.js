@@ -10,7 +10,6 @@ const redirectHomePage = (uid) => (dispatch) => {
   .then(({data}) => {
     localStorage.setItem('userId', data[0]);
     localStorage.setItem('username', data[1].name);
-    console.log('auth action localStorage.getItem', localStorage.getItem('username'))
     dispatch({ type: CHECK_USER, payload: data })
     if (data[1].role === 'company') {
       history.push('/admin');
@@ -18,9 +17,7 @@ const redirectHomePage = (uid) => (dispatch) => {
       history.push('/user');
     }
   })
-  .catch((err) => {
-    console.log('Error checking user', err);
-  })
+  .catch((err) => {})
 }
 
 export const saveCandidate = (token, fullName,username, phone, github_url, cb) => (dispatch) => {
@@ -28,9 +25,7 @@ export const saveCandidate = (token, fullName,username, phone, github_url, cb) =
   .then(() => {
     cb();
   })
-  .catch((err) => {
-		console.log('Error saving candidate', err);
-	})
+  .catch((err) => {})
 }
 
 export const saveCompany = (token, companyName, username, phone, logoUrl, information, cb) => (dispatch) => {
@@ -38,16 +33,13 @@ export const saveCompany = (token, companyName, username, phone, logoUrl, inform
   .then(() => {
     cb()
   })
-	.catch((err) => {
-		console.log('Error saving company', err);
-	})
+	.catch((err) => {})
 }
 
 export const handleLogin = (email, password) => (dispatch) => {
   if (auth.currentUser) {
     localStorage.removeItem('userId', 'username');
     auth.signOut();
-  
   }
   auth.signInWithEmailAndPassword(email, password)
   .then(({user}) => {
@@ -60,24 +52,6 @@ export const handleLogin = (email, password) => (dispatch) => {
   })
 }
 
-// export const googleLogin = () => (dispatch) => {
-//   auth.signInWithPopup(provider)
-//   .then(({user}) => {
-//     axios.post('/api/login', {token: user.uid})
-//     .then((response) => {
-//       console.log(response.data)
-//       dispatch({ type: CHECK_USER, payload: response.data })
-//     })
-//     .catch((err) => {
-//       console.log('Error checking user', err);
-//     })
-//   })
-//   .catch((err) => {
-//     if (err) {
-//       alert(err.message);
-//     }
-//   })
-// }
 const validateEmail = (email) => {
   let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
@@ -94,7 +68,6 @@ const matchPassword = (password, confirmPassword) => {
 const validUsername = (username, cb) => {
   axios.get('/api/auth/username', { params: { username } })
   .then(({data}) => {
-    console.log('authaction data',data)
     let isValid = data.length === 0 ? true : false
     return cb(isValid)
   })
@@ -130,7 +103,6 @@ export const handleSignUp = (email, username, password, confirmPassword, form, n
       })
       .catch((error) => {
         if(error) {
-          console.log('error for signup', error)
           alert(error.message)
         }
       })
