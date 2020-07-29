@@ -1,0 +1,741 @@
+* {
+	box-sizing: border-box;
+}
+
+#body {
+	background-color: rgba(0,0,0,0.6);
+	height: 100%;
+}
+
+
+/* -------- All elements --------- */
+
+.landing_page_name, .landing_page_companies, .register_btn, .welcome,
+.drag_column_title, .profile_header, .resume_div, .candidate_time_limit, 
+.time, .bar_graph_dropdown, .history_list  {
+ 	text-align: center;
+ }
+
+.ui.small.image, .register_btn, .welcome, .form-container,
+.company_profile_saveBtn, .profile_pic_container, .live_challenges_table,
+.schedule_container, .company_logo, .search_company_input, .company_list_items, 
+.view_company_btn, .challenge-results-graph, .analytics-container {
+ 	margin: auto;
+  }
+
+
+ .login_container, .login_btn, .register_btn_container, .schedule_time_container,
+ .profile_pic_container, .resume_btns, .user_liveCoding_container, .schedule_container,
+ .view_company_btn, .history_list, .landing_page_companies  {
+ 	position: relative;
+ } 
+
+ .expand_icon, .initial_duration, .ui.labeled.input.profile, .candidate_time_limit,
+ .leave_warning, .live_coding_title, .search, .envelope.open.icon, 
+ .envelope.open.outline.icon, .arrow.icon {
+ 	position: absolute;
+ } 
+
+ .cursor:hover, .active_user_div, .ui.card.cardzz:hover, .arrow-left, .arrow-right,
+ .arrow.icon, .user_navbar, .company_navbar {
+ 	cursor: pointer;
+ } 
+
+ .ui.small.image, .company_profile_logo, .profile_pic_container, .company_logo,
+ .company_list_items, .bar_graph_dropdown, .bar_graph_dropdown select {
+ 	display: block;
+ } 
+
+ .resume_btns, .register_btn, .resume_div, .time_limit_btn, .history_list li {
+ 	display: inline-block;
+ }  
+
+ .live_coding_title, .footer_logo, .hire_header, .candidate_results_date,
+ .time, .code:hover, .bar_graph_dropdown label, .arrow.icon {
+ 	color: #f2711c;
+ }     
+
+
+
+/* ------- Headers ------- */
+.page_header {
+	font-size: 42px;
+	margin-bottom: 70px;
+}
+
+
+/* ------ LandingPage ----- */
+
+
+.our_clients {
+	margin-left: 25%;
+	margin-right: 25%;
+	font-size: 22px;
+}
+
+.clients_header {
+	font-weight: bold ;
+	font-size: 42px;
+	margin-bottom: 20px;
+}
+
+.about_us_container {
+	margin-top: 150px;
+}
+
+.landing_page_card {
+	height: 200px;
+	width: 50px;
+}
+
+
+.landing_page_companies {
+	top: 50px;
+}
+
+
+.footer_logo {
+	margin-left: 20px;
+	font-size: 22px;
+}
+
+
+.landing_page_image {
+	width: 50px;
+}
+
+.masthead.segment {
+	min-height: 600px;
+	padding: 1em 0em;
+}
+.masthead .logo.item img {
+	margin-right: 1em;
+}
+.masthead .ui.menu .ui.button {
+	margin-left: 0.5em;
+}
+
+.masthead h1.ui.header {
+	margin-top: 1.5em;
+	margin-bottom: 0em;
+	font-size: 4em;
+	font-weight: normal;
+}
+
+.masthead h2 {
+	font-size: 1.7em;
+	font-weight: normal;
+}
+
+.footer.segment {
+	padding: 5em 0em;
+	height: 50px;
+}
+
+
+.introduction {
+    height: 500px;
+    background-color: rgb(228, 224, 224);
+    background-image: -webkit-linear-gradient(30deg, rgb(228, 224, 224)  20%, white 50%);
+}
+
+
+.introTitle {
+    padding-bottom: 5px;
+    border-bottom: 1px grey solid;
+}
+
+.introduction > .team > .card {
+    width: 150px;
+}
+
+.inverted.vertical.masthead.center.aligned.segment {
+	background:linear-gradient( rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6) ),url('../img/codeeditor.jpg'), center no-repeat;
+	background-size: 100% 100%;
+}
+
+ui.menu.container.item {
+	font-size: 30px;
+}
+
+
+/* ------ Login ----- */
+.login_container {
+	top: 125px;
+}
+
+.login_btn {
+	width: 40%;
+	left: 40px;
+	top: 20px;
+
+}
+
+.login_status {
+	background-color: rgba(200,0,0,0.8);
+	color: white;
+	height: 50px;
+	width: 100%;
+	padding-top: 15px;
+}
+
+.register_btn_container {
+	left: 50px;
+	top: 20px;
+}
+
+.register_btn {
+	width: 40%;
+}
+
+
+
+
+/* ------ Admin Dashboard -------- */
+.company_dashboard_container {
+ 	margin-top: 100px;
+	margin-bottom: 40px;
+}
+
+.calendar-button {
+	float: left;
+	margin-left: 100px;
+}
+
+
+.initial_challenges_container {
+	overflow: scroll;
+}
+
+.view_challenge_btn {
+	width: 100%;
+}
+
+.welcome {
+	font-size: 42px;
+	text-align: center;
+	margin-bottom: 30px;
+	margin-top: 20px;
+}
+
+.welcome-message-alt {
+	font-size: 20px;
+	text-align: center;
+	margin-bottom: 60px;
+}
+
+.welcome-message {
+	font-size: 17px;
+	text-align: center;
+	margin-bottom: 100px;
+}
+
+/* -------- Drag N Drop Challenge List--------- */
+
+.drag_column_title {
+	margin-bottom: 30px;
+}
+
+.drag_segment {
+	overflow: scroll;
+	max-width: 33%;
+}
+
+.expand_icon {
+	font-size: 22px;
+    top: 8px;
+    right: 5px;
+}
+
+.challenge_list {
+	height: 600px;
+	margin: 70px 50px;
+}
+
+.form-container {
+	width: 70%;
+	padding: 20px;
+}
+
+.calendar-container {
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.field .dropdown {
+	margin-top: 10px;
+}
+
+.ui.button.home {
+	float: right;
+	margin-right: 30px;
+}
+
+.input_challenge_btn {
+	width: 30%;
+	height: 50px;
+}
+
+.saved_challenges_btns {
+	float: right;
+}
+
+.challenge_content div {
+	margin-bottom: 10px;
+}
+
+.schedule_time_container {
+	top: 40px;
+}
+
+.schedule_time_container select {
+	margin-bottom: 15px;
+}
+
+.expanded_details {
+	margin-bottom: 10px;
+}
+
+/* ------ Initial Challenge Module ------ */
+
+.title {
+	float: left;
+	margin-bottom: 30px;
+ 	font-size: 20px;
+}
+
+.clear {
+	clear: both;
+}
+
+.initial_duration {
+	 top: 5px;
+	 right: 5px;
+}
+
+.initial_challenge_card {
+	width: 30%;
+	overflow-y: scroll;
+}
+
+.ui.bottom.attached.orange.button {
+	margin-top: -10px;
+}
+
+/* ------ Company profile ------ */
+.company_profile_logo {
+	height: 150px;
+	width: auto;
+	margin: 40px auto;
+	margin-bottom: 20px;
+}
+
+.company_profile_container {
+	height: 500px;
+	margin-top: 100px;
+}
+
+
+.logo_input {
+	width: 100%;
+}
+
+
+/* -------- Candidate Calendar -------- */
+
+.candidate_sched_container {
+	margin-top: 100px;
+}
+
+.candidate_calendar {
+	min-height: 300px;
+	margin-top: 100px;
+	margin-bottom: 40px;
+}
+
+.company_profile_textarea {
+	width: 100%;
+	height: 300px;
+	margin-top: 20px;
+	font-size: 20px;
+	line-height: 25px;
+	padding: 10px;
+}
+
+.ui.labeled.input.profile {
+	width: 90%;
+	left: 5%;
+	bottom: 20px;
+}
+
+/* ------ User Schedule ----- */
+.user_sched_btn {
+	width: 40%;
+}
+
+/* ------- User profile --------- */
+
+.user_info_container {
+	min-height: 300px;
+}
+
+.profile_pic_container {
+	width: 200px;
+	top: 10px;
+}
+
+.main_profile_container {
+	margin: 50px auto;
+	width: 60%;
+}
+
+.user_skills_container {
+	margin-bottom: 10px;
+	height: 200px;
+	overflow-y: scroll;
+}
+
+.user_skills_input {
+	float: right;
+    bottom: 40px;
+	font-size: 22px;
+	box-shadow: 1px 1px 10px;
+}
+
+.user_skills_input input {
+	margin-right: 10px;
+	width: 85%;
+}
+
+
+.github_link {
+	margin-top: 50px;
+	margin-bottom: 0px;
+	margin-left: 135px;
+}
+
+.github_link input {
+	height: 35px;
+}
+
+.skill_div {
+	font-size: 20px;
+}
+
+.user_resume_container {
+	margin-top: 30px;
+	margin-left: 15px;
+}
+
+.resume_div {
+	width: 50%;
+	height: 50px;
+	font-size: 22px;
+	padding-top: 15px;
+	background-color: rgba(0,0,0,0.2);
+	border-radius: 10px;
+	color: white;
+}
+
+.resume_btns {
+	left: 10px;
+	bottom: 20px;
+}
+
+.ui.small.horizontal.list {
+	`margin-top: 40px;
+}
+
+.profile_photo_container {
+	margin-bottom: 50px;
+}
+
+.ui.input.github {
+	width: 75%;
+}
+
+/* -------- User Coding ---------- */
+.examples {
+	display: inline
+}
+
+.examples .input {
+	margin-left: 20px
+}
+
+.examples .output {
+	margin-left: 80px
+}
+
+.user_liveCoding_container {
+	top: 125px;
+	width: 90%;
+	min-width: 900px;
+	max-width: 1200px;
+}
+
+.candidate_time_limit {
+	font-size: 32px;
+	bottom: 20px;
+}
+
+.user_liveCoding_rightSeg h1 {
+	margin-bottom: 50px;
+	font-size: 38px;
+}
+
+.user_liveCoding_rightSeg div:nth-child(1), .user_liveCoding_rightSeg div:nth-child(2), .user_liveCoding_rightSeg div:nth-child(3), .user_liveCoding_rightSeg div:nth-child(4){
+	margin-bottom: 30px;
+	font-size: 24px;
+	line-height: 30px;
+}
+
+.leave_warning {
+	 color: white;
+	 top: 50px;
+	 right: 120px;
+	 font-size: 18px;
+}
+
+
+/* ------- Admin live coding ------- */
+
+.time_limit_btn {
+	margin-top: 20px;
+}
+
+.live_coding_clock {
+	font-size: 22px;
+	color: black;
+	margin-bottom: 10px;
+}
+
+
+.live_result_container {
+	height: 50px;
+	background-color: white;
+	color: black;
+	padding: 20px;
+}
+
+.active_user_div {
+	margin-top: 5px;
+	padding-left: 10px;
+	padding-top: 13px;
+	background-color: rgba(0,0,0,0.2);
+	width: 100%;
+	height: 50px;
+}
+
+.live_coding_title {
+	font-size: 24px;
+	font-weight: bold;
+	top: 45px;
+	right: 40px;
+	clear: both;
+}
+
+.live_coding_results {
+	height: 150px;
+	width: 25%;
+	background-color: white;
+	padding: 5px;
+	margin-bottom: 5px;
+}
+
+/* ------- Live Challenges Table ----- */
+.live_challenges_table {
+	width: 80%;
+}
+
+/* -------- Company List View --------- */
+
+.schedule_container {
+	top: 75px;
+	width: 80%;
+	margin-bottom: 40px;
+}
+
+.company_logo_container {
+	margin-bottom: 20px;
+	margin-top: 15px;
+	height: 175px;
+	width: 200px;
+	padding-left: 30px;
+}
+
+.company_logo {
+	width: 150px;
+	height: auto;
+	margin-bottom: -25px;
+}
+
+.search_company_input {
+	margin-top: 40px;
+}
+
+.company_list_items {
+	width: 55%;
+	padding: auto;
+}
+
+.company_item {
+	margin-bottom: 10px;
+}
+
+.company_item_header {
+	font-size: 32px;
+}
+
+.view_company_btn {
+	top: 30px;
+	width: 100%;
+}
+
+.ui.card.cardzz:hover {
+	background-color: orange;
+}
+
+.company-name {
+	font-size: 22px;
+}
+
+/* -------- Hire List View --------- */
+
+.search-container {
+	margin-left: 7%;
+	width: 30%;
+	margin-top: 50px;
+}
+
+.search-results {
+	float: left;
+	width: 40%;
+	margin-right: 50px;
+	min-height: 600px;
+}
+
+.search-results-container {
+	margin-left: auto;
+}
+
+.heart.icon {
+	color: red;
+	font-size: 25px;
+}
+
+.search {
+	bottom: 5px;
+	right: 10px;
+}
+
+.envelope.open.icon {
+	font-size: 25px;
+	bottom: 5px;
+	right: 50px;
+}
+
+.envelope.open.outline.icon {
+	font-size: 25px;
+	bottom: 5px;
+  	right: 50px;
+}
+
+.candidate-results {
+  	margin-bottom: 20px;
+}
+
+.hire_header {
+  	font-size: 28px;
+}
+
+.hire_card {
+	text-align: left;
+}
+
+.candidate-results > div {
+	margin-bottom: 10px;
+}
+
+.candidate_results_date {
+  	float: right;
+  	margin-top: 10px;
+}
+
+.scroll {
+  	max-height: 75%;
+  	overflow-y: scroll;
+}
+
+/* ------- User Past Results ------- */
+
+.history_card {
+	height: 300px;
+}
+
+.history_list  {
+	list-style: none;
+	right: 10px;
+}
+
+.history_list li {
+	margin-left: 30px;
+	margin-right: 30px;
+}
+
+.time {
+	font-size: 14px;
+}
+
+/* -------- Analytics View --------- */
+
+.challenge-results-graph {
+  	width: 800px;
+}
+
+.past-challenge-container {
+  	margin: 30px;
+}
+
+.code {
+  	font-weight: 800;
+}
+
+.code:hover {
+  	text-decoration: underline;
+}
+
+.bar_graph_dropdown {
+	margin: 30px auto;
+}
+
+.bar_graph_dropdown select {
+	width: 20%;
+	margin: 20px auto;
+}
+
+.bar_graph_dropdown label {
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.ui.container.segment.graph {
+	padding: 40px;
+}
+
+/* -------- Back Navigation Button ------- */
+.arrow.icon {
+	font-size: 52px;
+	top: 50px;
+	left: 50px;
+	z-index: 1;
+}
+
+.analytics-container {
+	margin-top: 5%;
+ 	width: 90%;
+}
+
+.ui.active.item.cursor.bold {
+  	font-weight: 800;
+}
